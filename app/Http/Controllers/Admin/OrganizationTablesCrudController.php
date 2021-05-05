@@ -5,9 +5,11 @@ namespace App\Http\Controllers\Admin;
 use App\Domain\Contracts\OrganizationContract;
 use App\Domain\Contracts\OrganizationTablesContract;
 use App\Http\Requests\OrganizationTablesRequest;
+use App\Models\OrganizationTables;
 use Backpack\CRUD\app\Http\Controllers\CrudController;
 use Backpack\CRUD\app\Library\CrudPanel\CrudPanelFacade as CRUD;
 use App\Domain\Repositories\Organization\OrganizationRepositoryEloquent as OrganizationRepository;
+use Illuminate\Http\Request;
 
 class OrganizationTablesCrudController extends CrudController
 {

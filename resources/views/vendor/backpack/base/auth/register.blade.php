@@ -72,7 +72,7 @@
             <div class="text-center"><a href="{{ route('backpack.auth.login') }}">{{ trans('backpack::base.login') }}</a></div>
         </div>
         <script>
-            $("#phone").mask("+79999999999");
+            $("#phone").mask("79999999999");
         </script>
     </div>
 @endsection

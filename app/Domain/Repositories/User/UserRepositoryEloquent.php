@@ -5,6 +5,7 @@ namespace App\Domain\Repositories\User;
 
 use App\Domain\Contracts\UserContract;
 use App\Models\User;
+use Illuminate\Support\Str;
 
 class UserRepositoryEloquent implements UserRepositoryInterface
 {
@@ -15,7 +16,8 @@ class UserRepositoryEloquent implements UserRepositoryInterface
             UserContract::NAME      =>  $data[UserContract::NAME],
             UserContract::PHONE     =>  $data[UserContract::PHONE],
             UserContract::CODE      =>  rand(100000,999999),
-            UserContract::PASSWORD  =>  bcrypt($data[UserContract::PASSWORD]),
+            UserContract::PASSWORD  =>  $data[UserContract::PASSWORD],
+            UserContract::API_TOKEN =>  Str::random(60)
         ]);
     }
 
@@ -24,5 +26,20 @@ class UserRepositoryEloquent implements UserRepositoryInterface
         $user   =   backpack_user();
         $user->phone_verified_at    =   date('Y-m-d G:i:s');
         return $user->save();
+    }
+
+    public function getById(int $id)
+    {
+        return User::where(UserContract::ID,$id)->first();
+    }
+
+    public function getByPhoneAndPassword($phone,$password)
+    {
+        return User::where([[UserContract::PHONE,$phone],[UserContract::PASSWORD,bcrypt($password)]])->first();
+    }
+
+    public function getByApiToken(string $token)
+    {
+        return User::where(UserContract::API_TOKEN,$token)->first();
     }
 }

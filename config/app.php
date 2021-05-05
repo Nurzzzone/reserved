@@ -166,6 +166,11 @@ return [
          * Package Service Providers...
          */
 
+        App\Providers\OrganizationServiceProvider::class,
+        App\Providers\CategoryServiceProvider::class,
+        App\Providers\CountryServiceProvider::class,
+        App\Providers\BookingServiceProvider::class,
+
         /*
          * Application Service Providers...
          */

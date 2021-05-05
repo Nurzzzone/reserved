@@ -26,4 +26,19 @@ class UserService extends BaseService
         }
         return false;
     }
+
+    public function getById(int $id)
+    {
+        return $this->userRepository->getById($id);
+    }
+
+    public function getByApiToken(string $token)
+    {
+        return $this->userRepository->getByApiToken($token);
+    }
+
+    public function getByPhoneAndPassword($phone,$password)
+    {
+        return $this->userRepository->getByPhoneAndPassword($phone,$password);
+    }
 }

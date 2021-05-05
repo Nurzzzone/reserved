@@ -37,12 +37,17 @@ class Organization extends Model
         return $this->belongsTo(Category::class);
     }
 
+    public function images()
+    {
+        return $this->hasMany(OrganizationImage::class);
+    }
+
     public function getStatusAttribute($value)
     {
         return OrganizationContract::TRANSLATE[$value];
     }
 
-    public function getStartMondayAttribute($value)
+    public function getMondayAttribute($value)
     {
         if ($this->attributes[OrganizationContract::START_MONDAY] === $this->attributes[OrganizationContract::END_MONDAY]) {
             return OrganizationContract::TRANSLATE['ALL_DAY'];

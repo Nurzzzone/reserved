@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Domain\Contracts\OrganizationTablesContract;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use App\Domain\Contracts\BookingContract;
@@ -26,4 +27,10 @@ class Booking extends Model
     {
         return $this->belongsTo(Organization::class);
     }
+
+    public function organizationTables()
+    {
+        return $this->hasOne(OrganizationTables::class,OrganizationTablesContract::ID,BookingContract::ORGANIZATION_TABLE_ID);
+    }
+
 }

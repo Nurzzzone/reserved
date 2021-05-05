@@ -50,7 +50,7 @@
 		  </form>
 	</div>
     <script>
-        $("#phone").mask("+79999999999");
+        $("#phone").mask("79999999999");
     </script>
 </div>
 @endsection

@@ -17,6 +17,11 @@ class User extends Authenticatable
     protected $hidden   =   UserContract::HIDDEN;
     protected $casts    =   UserContract::CASTS;
 
+    public function setPasswordAttribute($value)
+    {
+        $this->attributes[UserContract::PASSWORD] = bcrypt($value);
+    }
+
     public function getStatusAttribute($value)
     {
         return UserContract::TRANSLATE[$value];

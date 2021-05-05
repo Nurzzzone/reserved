@@ -6,6 +6,7 @@ use App\Http\Controllers\Admin\Auth\LoginController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\Admin\OrganizationCrudController;
 use App\Http\Controllers\Admin\UserCrudController;
+use App\Http\Controllers\Admin\OrganizationTablesCrudController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -19,6 +20,8 @@ use App\Http\Controllers\Admin\UserCrudController;
 
 Route::get('users',[UserCrudController::class, 'list']);
 Route::get('organization',[OrganizationCrudController::class, 'list']);
+Route::get('organizationTables',[OrganizationTablesCrudController::class, 'list']);
+Route::get('organizationTables/{id}',[OrganizationTablesCrudController::class, 'getByOrganizationId']);
 
 Route::get('/', function () {
     return view('welcome');

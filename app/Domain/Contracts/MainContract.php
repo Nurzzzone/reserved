@@ -47,6 +47,9 @@ class MainContract
     const FRIDAY    =   'friday';
     const SATURDAY  =   'saturday';
     const SUNDAY    =   'sunday';
+    const START     =   'start';
+    const END       =   'end';
+    const IMAGES    =   'images';
 
     const ON        =   'on';
     const OFF       =   'off';
@@ -68,6 +71,7 @@ class MainContract
     ];
 
     const STATUSES_BOOKING  =   [
+        self::CHECKING,
         self::ENABLED,
         self::DISABLED,
         self::CANCELED,
@@ -82,6 +86,7 @@ class MainContract
         self::DELETED
     ];
 
+    const API_TOKEN     =   'api_token';
     const SETTINGS      =   'settings';
     const DESCRIPTION   =   'description';
     const DESCRIPTION_KZ    =   'description_kz';
@@ -102,6 +107,8 @@ class MainContract
     const ROLE_ID           =   'role_id';
     const COUNTRY_ID        =   'country_id';
     const CATEGORY_ID       =   'category_id';
+
+    const ORGANIZATION_TABLE_ID =   'organization_table_id';
 
     const START_MONDAY      =   'start_monday';
     const START_TUESDAY     =   'start_tuesday';

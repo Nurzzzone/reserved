@@ -35,8 +35,6 @@ class RegisterController extends BackpackRegisterController
 
     protected function create(array $data)
     {
-        $user_model_fqn =   config('backpack.base.user_model_fqn');
-        $user           =   new $user_model_fqn();
         $user           =   $this->userService->create($data);
         $this->smsService->sendCode($user->phone,$user->code);
         return $user;

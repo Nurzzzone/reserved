@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Domain\Contracts\BookingContract;
 use App\Domain\Contracts\OrganizationContract;
+use App\Domain\Contracts\OrganizationTablesContract;
 use App\Domain\Contracts\UserContract;
 use App\Http\Requests\BookingRequest;
 use Backpack\CRUD\app\Http\Controllers\CrudController;
@@ -37,9 +38,13 @@ class BookingCrudController extends CrudController
             ->entity('user')->model('App\Models\User')->attribute(UserContract::NAME);
         CRUD::column(BookingContract::ORGANIZATION_ID)->type('select')->label('Организация')
             ->entity('organization')->model('App\Models\Organization')->attribute(OrganizationContract::TITLE);
-        CRUD::column('phone')->label('Номер телефона');
-        CRUD::column('comment')->label('Комментарии');
-        CRUD::column('status')->label('Статус');
+        CRUD::column(BookingContract::ORGANIZATION_TABLE_ID)->type('select')->label('Номер стола')
+            ->entity('organizationTables')->model('App\Models\OrganizationTables')->attribute(OrganizationTablesContract::TITLE);
+        CRUD::column(BookingContract::START)->label('Начало');
+        CRUD::column(BookingContract::END)->label('Конец');
+        CRUD::column(BookingContract::PHONE)->label('Номер телефона');
+        CRUD::column(BookingContract::COMMENT)->label('Комментарии');
+        CRUD::column(BookingContract::STATUS)->label('Статус');
     }
 
     protected function setupListOperation()
@@ -51,9 +56,12 @@ class BookingCrudController extends CrudController
             ->entity('user')->model('App\Models\User')->attribute(UserContract::NAME);
         CRUD::column(BookingContract::ORGANIZATION_ID)->type('select')->label('Организация')
             ->entity('organization')->model('App\Models\Organization')->attribute(OrganizationContract::TITLE);
-        CRUD::column('phone')->label('Номер телефона');
-        CRUD::column('comment')->label('Комментарии');
-        CRUD::column('status')->label('Статус');
+        CRUD::column(BookingContract::PHONE)->label('Номер телефона');
+        CRUD::column(BookingContract::ORGANIZATION_TABLE_ID)->type('select')->label('Номер стола')
+            ->entity('organizationTables')->model('App\Models\OrganizationTables')->attribute(OrganizationTablesContract::TITLE);
+        CRUD::column(BookingContract::START)->label('Начало');
+        CRUD::column(BookingContract::END)->label('Конец');
+        CRUD::column(BookingContract::STATUS)->label('Статус');
     }
 
     protected function setupCreateOperation()
@@ -82,11 +90,17 @@ class BookingCrudController extends CrudController
             'data_source'   =>  url('organization')
         ]);
 
-        CRUD::field('phone')->label('Телефон номер');
+        CRUD::field(BookingContract::ORGANIZATION_TABLE_ID)->type('number')->label('ID стола');
 
-        CRUD::field('comment')->label('Комментарии');
+        CRUD::field(BookingContract::START)->type('time')->label('Начало');
+        CRUD::field(BookingContract::END)->type('time')->label('Конец');
+
+        CRUD::field(BookingContract::PHONE)->label('Телефон номер');
+
+        CRUD::field(BookingContract::COMMENT)->label('Комментарии');
         CRUD::field(BookingContract::STATUS)->type('select_from_array')
             ->label('Статус')->options([
+                BookingContract::CHECKING    =>  BookingContract::TRANSLATE[BookingContract::CHECKING],
                 BookingContract::ENABLED    =>  BookingContract::TRANSLATE[BookingContract::ENABLED],
                 BookingContract::DISABLED   =>  BookingContract::TRANSLATE[BookingContract::DISABLED],
                 BookingContract::CANCELED   =>  BookingContract::TRANSLATE[BookingContract::CANCELED],

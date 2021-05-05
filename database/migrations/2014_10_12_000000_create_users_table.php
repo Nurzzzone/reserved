@@ -32,6 +32,9 @@ class CreateUsersTable extends Migration
             $table->timestamp(UserContract::EMAIL_VERIFIED_AT)
                 ->nullable();
             $table->string(UserContract::PASSWORD);
+            $table->string(UserContract::API_TOKEN)->unique()
+                ->nullable()
+                ->default(null);
             $table->rememberToken();
             $table->softDeletes();
             $table->timestamps();

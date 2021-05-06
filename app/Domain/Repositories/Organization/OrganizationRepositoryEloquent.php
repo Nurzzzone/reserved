@@ -9,7 +9,7 @@ use App\Models\Organization;
 class OrganizationRepositoryEloquent implements OrganizationRepositoryInterface
 {
 
-    private $take   =   10;
+    private $take   =   15;
 
     public function getIdsByUserId(int $userId)
     {
@@ -32,5 +32,10 @@ class OrganizationRepositoryEloquent implements OrganizationRepositoryInterface
     public function getById($id)
     {
         return Organization::with('user','category','images')->where(OrganizationContract::ID,$id)->first();
+    }
+
+    public function getByIds($ids)
+    {
+        return Organization::with('user','category','images')->whereIn(OrganizationContract::ID,$ids)->get();
     }
 }

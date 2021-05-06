@@ -29,4 +29,9 @@ class OrganizationService extends BaseService
     {
         return $this->organizationRepository->getById($id);
     }
+
+    public function getByIds(array $ids)
+    {
+        return $this->organizationRepository->getByIds($ids);
+    }
 }

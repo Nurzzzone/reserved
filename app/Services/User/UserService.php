@@ -19,12 +19,9 @@ class UserService extends BaseService
         return $this->userRepository->create($data);
     }
 
-    public function verifyCode(int $code):bool
+    public function smsVerify($phone,$code)
     {
-        if ((int) backpack_user()->code === $code) {
-            return $this->userRepository->updatePhoneVerifiedAt();
-        }
-        return false;
+        return $this->userRepository->smsVerify($phone,$code);
     }
 
     public function getById(int $id)

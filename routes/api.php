@@ -6,6 +6,7 @@ use App\Http\Controllers\Api\OrganizationController;
 use App\Http\Controllers\Api\UserController;
 use App\Http\Controllers\Api\CategoryController;
 use App\Http\Controllers\Api\CountryController;
+use App\Http\Controllers\Api\OrganizationCityController;
 use App\Http\Controllers\Api\BookingController;
 
 Route::post('/add/booking/',[BookingController::class,'add']);
@@ -19,7 +20,9 @@ Route::get('/countries',[CountryController::class,'list']);
 Route::get('/organizations',[OrganizationController::class,'list']);
 Route::get('/organizations/{search}',[OrganizationController::class,'search']);
 Route::get('/organization/{id}',[OrganizationController::class,'getById']);
+Route::get('/city/organizations/{id}/',[OrganizationCityController::class,'getByCityId']);
 
+Route::get('/sms/{phone}/{code}',[UserController::class,'smsVerify']);
 Route::get('/login/{phone}/{password}',[UserController::class,'login']);
 Route::get('/register',[UserController::class,'register']);
 

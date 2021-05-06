@@ -42,6 +42,11 @@ class Organization extends Model
         return $this->hasMany(OrganizationImage::class);
     }
 
+    public function organizationCity()
+    {
+        return $this->hasOne(OrganizationCity::class);
+    }
+
     public function getStatusAttribute($value)
     {
         return OrganizationContract::TRANSLATE[$value];

@@ -29,6 +29,15 @@ class UserController extends Controller
         return response(['message'  =>  'Пользователь не найден'],404);
     }
 
+    public function smsVerify($phone,$code)
+    {
+        $user   =   $this->userService->smsVerify($phone,$code);
+        if ($user) {
+            return new UserResource($user);
+        }
+        return response(['message'  =>  'incorrect code'],400);
+    }
+
     public function token($token)
     {
         $user   =   $this->userService->getByApiToken($token);

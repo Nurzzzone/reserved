@@ -7,6 +7,7 @@ use App\Domain\Contracts\OrganizationContract;
 use App\Domain\Contracts\OrganizationTablesContract;
 use App\Domain\Contracts\UserContract;
 use App\Http\Requests\BookingRequest;
+use App\Services\Api\ApiService;
 use Backpack\CRUD\app\Http\Controllers\CrudController;
 use Backpack\CRUD\app\Library\CrudPanel\CrudPanelFacade as CRUD;
 use App\Models\Booking;
@@ -15,7 +16,7 @@ use App\Domain\Repositories\Organization\OrganizationRepositoryEloquent as Organ
 class BookingCrudController extends CrudController
 {
     use \Backpack\CRUD\app\Http\Controllers\Operations\ListOperation;
-    use \Backpack\CRUD\app\Http\Controllers\Operations\CreateOperation;
+    use \Backpack\CRUD\app\Http\Controllers\Operations\CreateOperation { store as traitStore; }
     use \Backpack\CRUD\app\Http\Controllers\Operations\UpdateOperation;
     use \Backpack\CRUD\app\Http\Controllers\Operations\ShowOperation;
     public $organizationsId;
@@ -31,6 +32,18 @@ class BookingCrudController extends CrudController
         }
     }
 
+    public function store(ApiService $apiService)
+    {
+        $response = $this->traitStore();
+        $parameter  =   (array) $this->crud->getRequest()->request;
+        foreach ($parameter as &$param) {
+            $parameter  =   $param;
+            break;
+        }
+        $apiService->booking($parameter);
+        return $response;
+    }
+
     protected function setupShowOperation()
     {
         $this->crud->set('show.setFromDb', false);
@@ -39,7 +52,7 @@ class BookingCrudController extends CrudController
         CRUD::column(BookingContract::ORGANIZATION_ID)->type('select')->label('Организация')
             ->entity('organization')->model('App\Models\Organization')->attribute(OrganizationContract::TITLE);
         CRUD::column(BookingContract::ORGANIZATION_TABLE_ID)->type('select')->label('Номер стола')
-            ->entity('organizationTables')->model('App\Models\OrganizationTables')->attribute(OrganizationTablesContract::TITLE);
+            ->entity('organizationTables')->model('App\Models\OrganizationTables')->attribute(OrganizationTablesContract::NAME);
         CRUD::column(BookingContract::START)->label('Начало');
         CRUD::column(BookingContract::END)->label('Конец');
         CRUD::column(BookingContract::PHONE)->label('Номер телефона');
@@ -58,7 +71,7 @@ class BookingCrudController extends CrudController
             ->entity('organization')->model('App\Models\Organization')->attribute(OrganizationContract::TITLE);
         CRUD::column(BookingContract::PHONE)->label('Номер телефона');
         CRUD::column(BookingContract::ORGANIZATION_TABLE_ID)->type('select')->label('Номер стола')
-            ->entity('organizationTables')->model('App\Models\OrganizationTables')->attribute(OrganizationTablesContract::TITLE);
+            ->entity('organizationTables')->model('App\Models\OrganizationTables')->attribute(OrganizationTablesContract::NAME);
         CRUD::column(BookingContract::START)->label('Начало');
         CRUD::column(BookingContract::END)->label('Конец');
         CRUD::column(BookingContract::STATUS)->label('Статус');
@@ -86,7 +99,7 @@ class BookingCrudController extends CrudController
             'entity'        => 'organization',
             'placeholder'   => '',
             'minimum_input_length'  => '',
-            'attribute'     => OrganizationContract::TITLE,
+            'attribute'     => OrganizationContract::NAME,
             'data_source'   =>  url('organization')
         ]);
 

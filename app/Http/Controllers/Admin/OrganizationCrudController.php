@@ -13,11 +13,14 @@ use App\Models\Organization;
 use App\Domain\Repositories\Organization\OrganizationRepositoryEloquent as OrganizationRepository;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use App\Services\Api\ApiService;
+use App\Services\Organization\OrganizationService;
+use App\Events\OrganizationProcessed;
 
 class OrganizationCrudController extends CrudController
 {
     use \Backpack\CRUD\app\Http\Controllers\Operations\ListOperation;
-    use \Backpack\CRUD\app\Http\Controllers\Operations\CreateOperation;
+    use \Backpack\CRUD\app\Http\Controllers\Operations\CreateOperation { store as traitStore; }
     use \Backpack\CRUD\app\Http\Controllers\Operations\UpdateOperation;
     use \Backpack\CRUD\app\Http\Controllers\Operations\ShowOperation;
 
@@ -32,6 +35,39 @@ class OrganizationCrudController extends CrudController
         }
     }
 
+    public function store(ApiService $apiService, OrganizationService $organizationService)
+    {
+        $this->crud->addField(['type' => 'hidden', 'name' => OrganizationContract::IIKO_ORGANIZATION_ID]);
+        $this->crud->addField(['type' => 'hidden', 'name' => OrganizationContract::TITLE]);
+        $this->crud->addField(['type' => 'hidden', 'name' => OrganizationContract::ADDRESS]);
+        $this->crud->addField(['type' => 'hidden', 'name' => OrganizationContract::EMAIL]);
+        $this->crud->addField(['type' => 'hidden', 'name' => OrganizationContract::PHONE]);
+        $this->crud->addField(['type' => 'hidden', 'name' => OrganizationContract::WEBSITE]);
+
+        $data           =   (array) $this->crud->getRequest()->request;
+        foreach ($data as &$param) {
+            $data  =   $param;
+            break;
+        }
+
+        $organizations  =   $apiService->getOrganizationId($data[OrganizationContract::API_ID],$data[OrganizationContract::API_SECRET]);
+
+        if (sizeof($organizations)>0) {
+
+            $this->crud->getRequest()->request->add([OrganizationContract::IIKO_ORGANIZATION_ID    =>  $organizations[OrganizationContract::ID]]);
+            $this->crud->getRequest()->request->add([OrganizationContract::TITLE    =>  $organizations[OrganizationContract::NAME]]);
+            $this->crud->getRequest()->request->add([OrganizationContract::ADDRESS  =>  $organizations[OrganizationContract::ADDRESS]]);
+            $this->crud->getRequest()->request->add([OrganizationContract::EMAIL  =>  $organizations['contact'][OrganizationContract::EMAIL]]);
+            $this->crud->getRequest()->request->add([OrganizationContract::PHONE  =>  $organizations['contact'][OrganizationContract::PHONE]]);
+            $this->crud->getRequest()->request->add([OrganizationContract::WEBSITE  =>  $organizations[OrganizationContract::WEBSITE]]);
+
+        }
+
+        $store  =   $this->traitStore();
+        event(new OrganizationProcessed($organizationService->getById($this->crud->getCurrentEntry()->id)));
+        return $store;
+    }
+
     protected function setupShowOperation()
     {
         $this->crud->set('show.setFromDb', false);
@@ -39,12 +75,14 @@ class OrganizationCrudController extends CrudController
             ->entity('user')->model('App\Models\User')->attribute(UserContract::NAME);
         CRUD::column(OrganizationContract::CATEGORY_ID)->type('select')->label('Категория')
             ->entity('category')->model('App\Models\Category')->attribute(CategoryContract::TITLE);
-
         CRUD::column(OrganizationContract::TITLE)->label('Название');
         CRUD::column(OrganizationContract::RATING)->label('Реитинг');
         CRUD::column(OrganizationContract::ADDRESS)->label('Адрес');
+        CRUD::column(OrganizationContract::EMAIL)->label('Эл.почта');
+        CRUD::column(OrganizationContract::PHONE)->label('Телефон номер');
+        CRUD::column(OrganizationContract::WEBSITE)->label('Веб-сайт');
         CRUD::column(OrganizationContract::STATUS)->label('Статус');
-        CRUD::column(OrganizationContract::START_MONDAY)->type('string')->label('Понедельник');
+        CRUD::column(OrganizationContract::START_MONDAY)->label('Понедельник');
         CRUD::column(OrganizationContract::TUESDAY)->label('Вторник');
         CRUD::column(OrganizationContract::WEDNESDAY)->label('Среда');
         CRUD::column(OrganizationContract::THURSDAY)->label('Четверг');
@@ -85,8 +123,38 @@ class OrganizationCrudController extends CrudController
             CRUD::field(OrganizationContract::DESCRIPTION)->type('textarea')->label('Описание');
             CRUD::field(OrganizationContract::DESCRIPTION_KZ)->type('textarea')->label('Описание на казахском');
             CRUD::field(OrganizationContract::DESCRIPTION_EN)->type('textarea')->label('Описание на англииском');
+            CRUD::field(OrganizationContract::ADDRESS)->label('Адресс');
+            CRUD::field(OrganizationContract::ADDRESS_KZ)->label('Адресс на казахском');
+            CRUD::field(OrganizationContract::ADDRESS_EN)->label('Адресс на англииском');
+
+            CRUD::field(OrganizationContract::EMAIL)->label('Эл.почта');
+            CRUD::field(OrganizationContract::PHONE)->label('Телефон номер');
+            CRUD::field(OrganizationContract::WEBSITE)->label('Веб-сайт');
 
             CRUD::field(OrganizationContract::PRICE)->label('Цена');
+
+            CRUD::field(OrganizationContract::TABLES)->label('Количество столов');
+
+            CRUD::field(OrganizationContract::START_MONDAY)->type('time')->label('Понедельник начало');
+            CRUD::field(OrganizationContract::END_MONDAY)->type('time')->label('Понедельник конец');
+
+            CRUD::field(OrganizationContract::START_TUESDAY)->type('time')->label('Вторник начало');
+            CRUD::field(OrganizationContract::END_TUESDAY)->type('time')->label('Вторник конец');
+
+            CRUD::field(OrganizationContract::START_WEDNESDAY)->type('time')->label('Среда начало');
+            CRUD::field(OrganizationContract::END_WEDNESDAY)->type('time')->label('Среда конец');
+
+            CRUD::field(OrganizationContract::START_THURSDAY)->type('time')->label('Четверг начало');
+            CRUD::field(OrganizationContract::END_THURSDAY)->type('time')->label('Четверг конец');
+
+            CRUD::field(OrganizationContract::START_FRIDAY)->type('time')->label('Пятница начало');
+            CRUD::field(OrganizationContract::END_FRIDAY)->type('time')->label('Пятница конец');
+
+            CRUD::field(OrganizationContract::START_SATURDAY)->type('time')->label('Суббота начало');
+            CRUD::field(OrganizationContract::END_SATURDAY)->type('time')->label('Суббота конец');
+
+            CRUD::field(OrganizationContract::START_SUNDAY)->type('time')->label('Воскресенье начало');
+            CRUD::field(OrganizationContract::END_SUNDAY)->type('time')->label('Воскресенье конец');
 
         } else {
             $this->crud->addField([
@@ -118,49 +186,6 @@ class OrganizationCrudController extends CrudController
             CRUD::field(OrganizationContract::API_SECRET)->label('IIKO API SECRET')->attributes([
                 'required'  =>  'required'
             ]);
-
-            CRUD::field(OrganizationContract::TITLE)->label('Название')->attributes([
-                'required'  =>  'required'
-            ]);
-            CRUD::field(OrganizationContract::TITLE_KZ)->label('Название на казахском');
-            CRUD::field(OrganizationContract::TITLE_EN)->label('Название на англииском');
-
-            CRUD::field(OrganizationContract::IMAGE)->label('Логотип')->type('image')->attributes([
-                'accept'    =>  'image/png, image/jpeg, image/jpg'
-            ]);
-
-            CRUD::field(OrganizationContract::DESCRIPTION)->type('textarea')->label('Описание');
-            CRUD::field(OrganizationContract::DESCRIPTION_KZ)->type('textarea')->label('Описание на казахском');
-            CRUD::field(OrganizationContract::DESCRIPTION_EN)->type('textarea')->label('Описание на англииском');
-
-            CRUD::field(OrganizationContract::ADDRESS)->label('Адресс');
-            CRUD::field(OrganizationContract::ADDRESS_KZ)->label('Адресс на казахском');
-            CRUD::field(OrganizationContract::ADDRESS_EN)->label('Адресс на англииском');
-
-            CRUD::field(OrganizationContract::PRICE)->label('Цена');
-
-            CRUD::field(OrganizationContract::TABLES)->label('Количество столов');
-
-            CRUD::field(OrganizationContract::START_MONDAY)->type('time')->label('Понедельник начало');
-            CRUD::field(OrganizationContract::END_MONDAY)->type('time')->label('Понедельник конец');
-
-            CRUD::field(OrganizationContract::START_TUESDAY)->type('time')->label('Вторник начало');
-            CRUD::field(OrganizationContract::END_TUESDAY)->type('time')->label('Вторник конец');
-
-            CRUD::field(OrganizationContract::START_WEDNESDAY)->type('time')->label('Среда начало');
-            CRUD::field(OrganizationContract::END_WEDNESDAY)->type('time')->label('Среда конец');
-
-            CRUD::field(OrganizationContract::START_THURSDAY)->type('time')->label('Четверг начало');
-            CRUD::field(OrganizationContract::END_THURSDAY)->type('time')->label('Четверг конец');
-
-            CRUD::field(OrganizationContract::START_FRIDAY)->type('time')->label('Пятница начало');
-            CRUD::field(OrganizationContract::END_FRIDAY)->type('time')->label('Пятница конец');
-
-            CRUD::field(OrganizationContract::START_SATURDAY)->type('time')->label('Суббота начало');
-            CRUD::field(OrganizationContract::END_SATURDAY)->type('time')->label('Суббота конец');
-
-            CRUD::field(OrganizationContract::START_SUNDAY)->type('time')->label('Воскресенье начало');
-            CRUD::field(OrganizationContract::END_SUNDAY)->type('time')->label('Воскресенье конец');
 
             CRUD::field(OrganizationContract::STATUS)->type('select_from_array')
                 ->label('Статус')->options([

@@ -9,6 +9,7 @@ use Carbon\Carbon;
 class MainContract
 {
     const ID        =   'id';
+    const KEY       =   'key';
     const PARENT_ID =   'parent_id';
     const ORDER     =   'order';
     const NAME      =   'name';
@@ -50,6 +51,7 @@ class MainContract
     const START     =   'start';
     const END       =   'end';
     const IMAGES    =   'images';
+    const WEBSITE   =   'website';
 
     const ON        =   'on';
     const OFF       =   'off';
@@ -155,6 +157,8 @@ class MainContract
         'NOT_SPECIFIED'     =>  '',
         'ALL_DAY'           =>  'Круглостуочно'
     ];
+
+    const IIKO_ORGANIZATION_ID  =   'iiko_organization_id';
 
     public static function getCheck($value)
     {

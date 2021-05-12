@@ -14,10 +14,8 @@ use Illuminate\Http\Request;
 class OrganizationTablesCrudController extends CrudController
 {
     use \Backpack\CRUD\app\Http\Controllers\Operations\ListOperation;
-    use \Backpack\CRUD\app\Http\Controllers\Operations\CreateOperation;
     use \Backpack\CRUD\app\Http\Controllers\Operations\UpdateOperation;
     use \Backpack\CRUD\app\Http\Controllers\Operations\ShowOperation;
-    use \Backpack\CRUD\app\Http\Controllers\Operations\ReorderOperation;
     public $organizationsId;
 
     protected function setupReorderOperation()
@@ -43,7 +41,8 @@ class OrganizationTablesCrudController extends CrudController
         $this->crud->set('show.setFromDb', false);
         CRUD::column(OrganizationTablesContract::ORGANIZATION_ID)->type('select')->label('Организация')
             ->entity('organization')->model('App\Models\Organization')->attribute(OrganizationContract::TITLE);
-        CRUD::column(OrganizationTablesContract::TITLE)->label('Название стола');
+        CRUD::column(OrganizationTablesContract::KEY)->label('ID');
+        CRUD::column(OrganizationTablesContract::NAME)->label('Название стола');
         CRUD::column(OrganizationTablesContract::LIMIT)->type('number')->label('Лимит');
         CRUD::column(OrganizationTablesContract::STATUS)->label('Статус');
     }
@@ -52,7 +51,7 @@ class OrganizationTablesCrudController extends CrudController
     {
         CRUD::column(OrganizationTablesContract::ORGANIZATION_ID)->type('select')->label('Организация')
             ->entity('organization')->model('App\Models\Organization')->attribute(OrganizationContract::TITLE);
-        CRUD::column(OrganizationTablesContract::TITLE)->type('number')->label('Номер стола');
+        CRUD::column(OrganizationTablesContract::NAME)->label('Номер стола');
         CRUD::column(OrganizationTablesContract::LIMIT)->type('number')->label('Лимит');
         CRUD::column(OrganizationTablesContract::STATUS)->label('Статус');
     }
@@ -60,18 +59,6 @@ class OrganizationTablesCrudController extends CrudController
     protected function setupCreateOperation()
     {
         CRUD::setValidation(OrganizationTablesRequest::class);
-        $this->crud->addField([
-            'label'         => 'Организация',
-            'type'          => 'select2_from_ajax',
-            'name'          => OrganizationTablesContract::ORGANIZATION_ID,
-            'entity'        => 'organization',
-            'placeholder'   => '',
-            'minimum_input_length'  => '',
-            'attribute'     => OrganizationContract::TITLE,
-            'data_source'   =>  url('api/organization')
-        ]);
-        CRUD::field(OrganizationTablesContract::TITLE)->type('number')->label('Номер стола');
-        CRUD::field(OrganizationTablesContract::LIMIT)->type('number')->label('Лимит');
 
         CRUD::field(OrganizationTablesContract::STATUS)->type('select_from_array')
             ->label('Статус')->options([

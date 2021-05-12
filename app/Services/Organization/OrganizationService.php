@@ -34,4 +34,9 @@ class OrganizationService extends BaseService
     {
         return $this->organizationRepository->getByIds($ids);
     }
+
+    public function getByCategoryId(int $id, int $paginate)
+    {
+        return $this->organizationRepository->getByCategoryId($id,$paginate);
+    }
 }

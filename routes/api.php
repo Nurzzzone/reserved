@@ -21,6 +21,7 @@ Route::get('/organizations',[OrganizationController::class,'list']);
 Route::get('/organizations/{search}',[OrganizationController::class,'search']);
 Route::get('/organization/{id}',[OrganizationController::class,'getById']);
 Route::get('/city/organizations/{id}/',[OrganizationCityController::class,'getByCityId']);
+Route::get('/category/organizations/{id}',[OrganizationController::class,'getByCategoryId']);
 
 Route::get('/sms/{phone}/{code}',[UserController::class,'smsVerify']);
 Route::get('/login/{phone}/{password}',[UserController::class,'login']);

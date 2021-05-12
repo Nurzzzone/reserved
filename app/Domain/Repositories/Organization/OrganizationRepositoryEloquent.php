@@ -38,4 +38,9 @@ class OrganizationRepositoryEloquent implements OrganizationRepositoryInterface
     {
         return Organization::with('user','category','images')->whereIn(OrganizationContract::ID,$ids)->get();
     }
+
+    public function getByCategoryId($id, $paginate)
+    {
+        return Organization::with('user','category','images')->where(OrganizationContract::CATEGORY_ID,$id)->skip(--$paginate * $this->take)->take($this->take)->get();
+    }
 }

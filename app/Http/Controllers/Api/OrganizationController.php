@@ -35,6 +35,14 @@ class OrganizationController extends Controller
         return new OrganizationCollection($this->organizationService->search($search,$this->paginate));
     }
 
+    public function getByCategoryId($id, Request $request)
+    {
+        if ($request->has('paginate')) {
+            $this->paginate =   (int)$request->input('paginate');
+        }
+        return new OrganizationCollection($this->organizationService->getByCategoryId($id,$this->paginate));
+    }
+
     public function getById($id)
     {
         $organization   =   $this->organizationService->getById($id);

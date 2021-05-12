@@ -1049,6 +1049,94 @@
 }
                 </div>',
             ]],
+            ['type' =>  'card', 'class'   => 'card bg-primary text-white', 'content'   =>  [
+                'header' => 'Поиск организации по категории', // optional
+                'body'   => '<b>Запрос GET</b><br>
+                https://'.$_SERVER['HTTP_HOST'].'/api/category/organizations/{id}<br>
+                <b>Параметры</b><br>
+                <span class="text-dark">{id}</span> ID категории<br>
+                <span class="text-dark">?paginate=1</span> в одном запросе 15 результата<br>
+                <hr>
+                <button class="btn btn-sm btn-success mt-2" type="button" data-toggle="collapse" data-target="#api-17" aria-expanded="false" aria-controls="api-17">Ответ 200</button>
+                <div class="collapse mt-2" id="api-17" style="font-size: 10px; line-height: 1; white-space: pre;">
+{
+    "data": [
+        {
+            "id": 1,
+            "rating": null,
+            "image": null,
+            "title": "Opetit",
+            "title_kz": null,
+            "title_en": null,
+            "description": null,
+            "description_kz": null,
+            "description_en": null,
+            "address": null,
+            "address_kz": null,
+            "address_en": null,
+            "price": null,
+            "tables": null,
+            "monday": {
+                "start": "11:18:00",
+                "end": "11:18:00"
+            },
+            "tuesday": {
+                "start": "11:19:00",
+                "end": "11:19:00"
+            },
+            "wednesday": {
+                "start": "11:19:00",
+                "end": "11:19:00"
+            },
+            "thursday": {
+                "start": "11:19:00",
+                "end": "11:19:00"
+            },
+            "friday": {
+                "start": "11:19:00",
+                "end": "11:19:00"
+            },
+            "saturday": {
+                "start": "11:19:00",
+                "end": "11:19:00"
+            },
+            "sunday": {
+                "start": "11:19:00",
+                "end": "11:19:00"
+            },
+            "status": "Включен",
+            "user_id": {
+                "id": 1,
+                "blocked": "Активный",
+                "name": "Ersa",
+                "avatar": null,
+                "phone": "77784139424",
+                "phone_verified_at": "Подтвержден (22 часа назад)",
+                "email": null,
+                "email_verified_at": "Не подтвержден",
+                "api_token": "qwerty01"
+            },
+            "category_id": {
+                "id": 1,
+                "title": "Ресторан",
+                "title_kz": "Мейрамхана",
+                "title_en": "Restaurant"
+            },
+            "images": [
+                {
+                    "id": 1,
+                    "image": "uploads/34cb86ef60c03c0a24c11a906580a7ec.jpg"
+                },
+                {
+                    "id": 2,
+                    "image": "uploads/77f1cf5e6e11b08ccbe9b043260b27cf.jpg"
+                }
+            ]
+        }
+    ]
+}
+                </div>',
+            ]],
         ]
     ];
 @endphp

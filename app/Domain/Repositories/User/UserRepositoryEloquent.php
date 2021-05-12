@@ -33,10 +33,9 @@ class UserRepositoryEloquent implements UserRepositoryInterface
         return User::where(UserContract::ID,$id)->first();
     }
 
-    public function getByPhoneAndPassword($phone,$password)
+    public function getByPhoneAndPassword($phone)
     {
-        exit(bcrypt($password));
-        return User::where([[UserContract::PHONE,$phone],[UserContract::PASSWORD,bcrypt($password)]])->first();
+        return User::where(UserContract::PHONE,$phone)->first();
     }
 
     public function getByApiToken(string $token)

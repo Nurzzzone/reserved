@@ -8,6 +8,7 @@ use Illuminate\Http\Request;
 use App\Services\User\UserService;
 use App\Services\Sms\SmsService;
 use App\Http\Resources\UserResource;
+use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 
 class UserController extends Controller
@@ -49,8 +50,8 @@ class UserController extends Controller
 
     public function login(string $phone, string $password)
     {
-        $user   =   $this->userService->getByPhoneAndPassword($phone,$password);
-        if ($user) {
+        $user   =   $this->userService->getByPhoneAndPassword($phone);
+        if ($user && Hash::check($password,$user->password)) {
             return new UserResource($user);
         }
         return response(['message'  =>  'incorrect phone or password'],401);

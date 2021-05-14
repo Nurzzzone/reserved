@@ -52,6 +52,7 @@ class BookingController extends Controller
             BookingContract::ORGANIZATION_TABLE_ID  =>  'required|exists:App\Models\OrganizationTables,id',
             BookingContract::START  =>  'required|string',
             BookingContract::END    =>  'required|string',
+            BookingContract::DATE   =>  'required|date',
             BookingContract::PHONE  =>  'nullable|string',
             BookingContract::COMMENT    =>  'nullable|text',
             BookingContract::STATUS =>  'required|string'
@@ -68,6 +69,8 @@ class BookingController extends Controller
                 $message    =   $validator->messages()->first(BookingContract::START);
             } elseif ($validator->messages()->first(BookingContract::END)) {
                 $message    =   $validator->messages()->first(BookingContract::END);
+            } elseif ($validator->messages()->first(BookingContract::DATE)) {
+                $message    =   $validator->messages()->first(BookingContract::DATE);
             } elseif ($validator->messages()->first(BookingContract::PHONE)) {
                 $message    =   $validator->messages()->first(BookingContract::PHONE);
             } elseif ($validator->messages()->first(BookingContract::COMMENT)) {

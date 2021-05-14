@@ -55,6 +55,7 @@ class BookingCrudController extends CrudController
             ->entity('organizationTables')->model('App\Models\OrganizationTables')->attribute(OrganizationTablesContract::NAME);
         CRUD::column(BookingContract::START)->label('Начало');
         CRUD::column(BookingContract::END)->label('Конец');
+        CRUD::column(BookingContract::DATE)->label('Дата');
         CRUD::column(BookingContract::PHONE)->label('Номер телефона');
         CRUD::column(BookingContract::COMMENT)->label('Комментарии');
         CRUD::column(BookingContract::STATUS)->label('Статус');
@@ -66,14 +67,13 @@ class BookingCrudController extends CrudController
             $this->crud->addClause('whereIn', BookingContract::ORGANIZATION_ID,$this->organizationsId);
         }
         CRUD::column(BookingContract::USER_ID)->type('select')->label('Пользователь')
-            ->entity('user')->model('App\Models\User')->attribute(UserContract::NAME);
-        CRUD::column(BookingContract::ORGANIZATION_ID)->type('select')->label('Организация')
-            ->entity('organization')->model('App\Models\Organization')->attribute(OrganizationContract::TITLE);
+            ->entity('user')->model('App\Models\User')->attribute(UserContract::PHONE);
         CRUD::column(BookingContract::PHONE)->label('Номер телефона');
         CRUD::column(BookingContract::ORGANIZATION_TABLE_ID)->type('select')->label('Номер стола')
             ->entity('organizationTables')->model('App\Models\OrganizationTables')->attribute(OrganizationTablesContract::NAME);
         CRUD::column(BookingContract::START)->label('Начало');
         CRUD::column(BookingContract::END)->label('Конец');
+        CRUD::column(BookingContract::DATE)->label('Дата');
         CRUD::column(BookingContract::STATUS)->label('Статус');
     }
 
@@ -107,6 +107,7 @@ class BookingCrudController extends CrudController
 
         CRUD::field(BookingContract::START)->type('time')->label('Начало');
         CRUD::field(BookingContract::END)->type('time')->label('Конец');
+        CRUD::field(BookingContract::DATE)->type('date')->label('дата');
 
         CRUD::field(BookingContract::PHONE)->label('Телефон номер');
 

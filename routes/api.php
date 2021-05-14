@@ -11,7 +11,7 @@ use App\Http\Controllers\Api\BookingController;
 use App\Http\Controllers\Api\ReviewController;
 
 Route::prefix('review')->group(function () {
-    Route::post('/create/{id}',[ReviewController::class,'create']);
+    Route::post('/create/',[ReviewController::class,'create']);
     Route::post('/update/{id}',[ReviewController::class,'update']);
     Route::get('/delete/{id}',[ReviewController::class,'delete']);
     Route::get('/list/organization/{id}',[ReviewController::class,'getByOrganizationId']);

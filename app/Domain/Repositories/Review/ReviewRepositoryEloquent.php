@@ -48,7 +48,7 @@ class ReviewRepositoryEloquent implements ReviewRepositoryInterface
 
     public function getById($id)
     {
-        return Review::with('organization','user')->where(ReviewContract::USER_ID,$id)->first();
+        return Review::with('organization','user')->where(ReviewContract::ID,$id)->first();
     }
 
     public function sumRating($id)

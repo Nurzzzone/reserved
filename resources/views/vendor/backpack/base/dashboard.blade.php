@@ -18,6 +18,7 @@
                     <span class="text-dark">organization_table_id</span> ID стола<br>
                     <span class="text-dark">start</span> Начало бронирования (21:00:00)<br>
                     <span class="text-dark">end</span> Конец бронирования (21:00:00)<br>
+                    <span class="text-dark">date</span> Дата бронирования (Y-m-d)<br>
                     <span class="text-dark">status</span> Статус - CHECKING (На проверке)<br>
                     <b>Не объязательные параметры</b><br>
                     <span class="text-dark">phone</span> Номер телефона (77784443322)<br>
@@ -38,6 +39,7 @@
                 "organization_table_id": "1",
                 "start": "21:00:00",
                 "end": "23:00:00",
+                "date": "2021-06-03",
                 "phone": null,
                 "comment": null,
                 "status": "На проверке",
@@ -1144,93 +1146,1489 @@ $widgets['before_content'][] = [
         'type'    => 'div',
         'class'   => 'row',
         'content' => [ // widgets
-            ['type' =>  'card', 'class'   => 'card bg-primary text-white', 'content'   =>  [
+            ['type' =>  'card', 'class'   => 'card bg-warning text-white', 'content'   =>  [
             'header' => 'Оставить отзыв', // optional
             'body'   => '<b>Запрос POST</b><br>
-            https://'.$_SERVER['HTTP_HOST'].'/api/review/{id}<br>
+            https://'.$_SERVER['HTTP_HOST'].'/api/review/create<br>
             <b>POST параметры</b><br>
-            <span class="text-dark">user_id</span> ID пользователя<br>
             <span class="text-dark">organization_id</span> ID организации<br>
+            <span class="text-dark">user_id</span> ID пользователя<br>
             <span class="text-dark">rating</span> рейтинг (1-5)<br>
             <span class="text-dark">comment</span> Комментарии<br>
             <hr>
-            <button class="btn btn-sm btn-success mt-2" type="button" data-toggle="collapse" data-target="#api-1" aria-expanded="false" aria-controls="api-1">Ответ 200</button>
-            <div class="collapse mt-2" id="api-1" style="font-size: 10px; line-height: 1;">
-                <div>{</div>
-                <div class="ml-1">data: [</div>
-                <div class="ml-2">{</div>
-                <div class="ml-3">id: <b>1</b>,</div>
-                <div class="ml-3">rating: null,</div>
-                <div class="ml-3">image: null,</div>
-                <div class="ml-3">title: <b>"Opetit"</b>,</div>
-                <div class="ml-3">title_kz: null,</div>
-                <div class="ml-3">title_en: null,</div>
-                <div class="ml-3">description: null,</div>
-                <div class="ml-3">description_kz: null,</div>
-                <div class="ml-3">description_en: null,</div>
-                <div class="ml-3">address: null,</div>
-                <div class="ml-3">address_kz: null,</div>
-                <div class="ml-3">address_en: null,</div>
-                <div class="ml-3">price: null,</div>
-                <div class="ml-3">tables: null,</div>
-                <div class="ml-3">monday: {</div>
-                <div class="ml-4">start: <b>"11:18:00"</b>,</div>
-                <div class="ml-4">end: <b>"11:18:00"</b>,</div>
-                <div class="ml-3">},</div>
-                <div class="ml-3">tuesday: {</div>
-                <div class="ml-4">start: <b>"11:18:00"</b>,</div>
-                <div class="ml-4">end: <b>"11:18:00"</b>,</div>
-                <div class="ml-3">},</div>
-                <div class="ml-3">wednesday: {</div>
-                <div class="ml-4">start: <b>"11:18:00"</b>,</div>
-                <div class="ml-4">end: <b>"11:18:00"</b>,</div>
-                <div class="ml-3">},</div>
-                <div class="ml-3">thursday: {</div>
-                <div class="ml-4">start: <b>"11:18:00"</b>,</div>
-                <div class="ml-4">end: <b>"11:18:00"</b>,</div>
-                <div class="ml-3">},</div>
-                <div class="ml-3">friday: {</div>
-                <div class="ml-4">start: <b>"11:18:00"</b>,</div>
-                <div class="ml-4">end: <b>"11:18:00"</b>,</div>
-                <div class="ml-3">},</div>
-                <div class="ml-3">saturday: {</div>
-                <div class="ml-4">start: <b>"11:18:00"</b>,</div>
-                <div class="ml-4">end: <b>"11:18:00"</b>,</div>
-                <div class="ml-3">},</div>
-                <div class="ml-3">sunday: {</div>
-                <div class="ml-4">start: <b>"11:18:00"</b>,</div>
-                <div class="ml-4">end: <b>"11:18:00"</b>,</div>
-                <div class="ml-3">},</div>
-                <div class="ml-3">status: <b>"Включен"</b>,</div>
-                <div class="ml-3">user_id: {</div>
-                <div class="ml-4">id: <b>1</b>,</div>
-                <div class="ml-4">blocked: <b>"Активный"</b>,</div>
-                <div class="ml-4">name: <b>"Ersa"</b>,</div>
-                <div class="ml-4">avatar: null,</div>
-                <div class="ml-4">phone: <b>"77784443322"</b>,</div>
-                <div class="ml-4">phone_verified_at: <b>"Подтвержден (4 дня назад)"</b>,</div>
-                <div class="ml-4">email: null,</div>
-                <div class="ml-4">email_verified_at: <b>"Не подтвержден"</b>,</div>
-                <div class="ml-3">},</div>
-                <div class="ml-3">category_id: {</div>
-                <div class="ml-4">id: <b>1</b>,</div>
-                <div class="ml-4">title: <b>"Ресторан"</b>,</div>
-                <div class="ml-4">title_kz: <b>"Мейрамхана"</b>,</div>
-                <div class="ml-4">title_en: <b>"Restaurant"</b>,</b>,</div>
-                <div class="ml-3">},</div>
-                <div class="ml-3">images: [</div>
-                <div class="ml-4">{</div>
-                <div class="ml-5">id: <b>1</b>,</div>
-                <div class="ml-5">image: <b>"uploads/34cb86ef60c03c0a24c11a906580a7ec.jpg"</b>,</div>
-                <div class="ml-4">},</div>
-
-                <div class="ml-5">id: <b>2</b>,</div>
-                <div class="ml-5">image: <b>"uploads/77f1cf5e6e11b08ccbe9b043260b27cf.jpg"</b>,</div>
-                <div class="ml-4">},</div>
-                <div class="ml-3">],</div>
-                <div class="ml-2">},</div>
-                <div class="ml-1">]</div>
-                <div>}</div>
+            <button class="btn btn-sm btn-success mt-2" type="button" data-toggle="collapse" data-target="#api-20" aria-expanded="false" aria-controls="api-20">Ответ 200</button>
+            <div class="collapse mt-2" id="api-20" style="font-size: 10px; line-height: 1; white-space: pre;">
+                {
+    "data": {
+        "id": 22,
+        "organization": {
+            "id": 1,
+            "rating": null,
+            "image": null,
+            "title": "Opetit",
+            "title_kz": null,
+            "title_en": null,
+            "description": null,
+            "description_kz": null,
+            "description_en": null,
+            "address": "Байтурсынова 16",
+            "address_kz": null,
+            "address_en": null,
+            "price": null,
+            "tables": null,
+            "monday": {
+                "start": "00:00:00",
+                "end": "00:00:00"
+            },
+            "tuesday": {
+                "start": "00:00:00",
+                "end": "00:00:00"
+            },
+            "wednesday": {
+                "start": "00:00:00",
+                "end": "00:00:00"
+            },
+            "thursday": {
+                "start": "00:00:00",
+                "end": "00:00:00"
+            },
+            "friday": {
+                "start": "00:00:00",
+                "end": "00:00:00"
+            },
+            "saturday": {
+                "start": "00:00:00",
+                "end": "00:00:00"
+            },
+            "sunday": {
+                "start": "00:00:00",
+                "end": "00:00:00"
+            },
+            "status": "Включен",
+            "user_id": {
+                "id": 1,
+                "blocked": "Активный",
+                "name": "Ersa",
+                "avatar": null,
+                "phone": "77784139424",
+                "phone_verified_at": "Подтвержден (1 неделю назад)",
+                "email": null,
+                "email_verified_at": "Не подтвержден",
+                "api_token": "qwerty01"
+            },
+            "category_id": {
+                "id": 1,
+                "title": "Ресторан",
+                "title_kz": "Мейрамхана",
+                "title_en": "Restaurant"
+            },
+            "images": [
+                {
+                    "id": 1,
+                    "image": "uploads/34cb86ef60c03c0a24c11a906580a7ec.jpg"
+                },
+                {
+                    "id": 2,
+                    "image": "uploads/77f1cf5e6e11b08ccbe9b043260b27cf.jpg"
+                }
+            ]
+        },
+        "user": {
+            "id": 1,
+            "blocked": "Активный",
+            "name": "Ersa",
+            "avatar": null,
+            "phone": "77784139424",
+            "phone_verified_at": "Подтвержден (1 неделю назад)",
+            "email": null,
+            "email_verified_at": "Не подтвержден",
+            "api_token": "qwerty01"
+        },
+        "rating": 5,
+        "comment": "test comment",
+        "status": "На проверке"
+    }
+}
+            </div>',
+        ]
+        ],
+        ['type' =>  'card', 'class'   => 'card bg-warning text-white', 'content'   =>  [
+            'header' => 'Редактировать отзыв по ID', // optional
+            'body'   => '<b>Запрос POST</b><br>
+            https://'.$_SERVER['HTTP_HOST'].'/api/review/update/{id}<br>
+            <b>Параметры</b><br>
+            <span class="text-dark">{id}</span> ID отзыва<br>
+            <b>POST параметры</b><br>
+            <span class="text-dark">rating</span> рейтинг (1-5)<br>
+            <span class="text-dark">comment</span> Комментарии<br>
+            <hr>
+            <button class="btn btn-sm btn-success mt-2" type="button" data-toggle="collapse" data-target="#api-21" aria-expanded="false" aria-controls="api-21">Ответ 200</button>
+            <div class="collapse mt-2" id="api-21" style="font-size: 10px; line-height: 1; white-space: pre;">
+                {
+    "data": {
+        "id": 22,
+        "organization": {
+            "id": 1,
+            "rating": null,
+            "image": null,
+            "title": "Opetit",
+            "title_kz": null,
+            "title_en": null,
+            "description": null,
+            "description_kz": null,
+            "description_en": null,
+            "address": "Байтурсынова 16",
+            "address_kz": null,
+            "address_en": null,
+            "price": null,
+            "tables": null,
+            "monday": {
+                "start": "00:00:00",
+                "end": "00:00:00"
+            },
+            "tuesday": {
+                "start": "00:00:00",
+                "end": "00:00:00"
+            },
+            "wednesday": {
+                "start": "00:00:00",
+                "end": "00:00:00"
+            },
+            "thursday": {
+                "start": "00:00:00",
+                "end": "00:00:00"
+            },
+            "friday": {
+                "start": "00:00:00",
+                "end": "00:00:00"
+            },
+            "saturday": {
+                "start": "00:00:00",
+                "end": "00:00:00"
+            },
+            "sunday": {
+                "start": "00:00:00",
+                "end": "00:00:00"
+            },
+            "status": "Включен",
+            "user_id": {
+                "id": 1,
+                "blocked": "Активный",
+                "name": "Ersa",
+                "avatar": null,
+                "phone": "77784139424",
+                "phone_verified_at": "Подтвержден (1 неделю назад)",
+                "email": null,
+                "email_verified_at": "Не подтвержден",
+                "api_token": "qwerty01"
+            },
+            "category_id": {
+                "id": 1,
+                "title": "Ресторан",
+                "title_kz": "Мейрамхана",
+                "title_en": "Restaurant"
+            },
+            "images": [
+                {
+                    "id": 1,
+                    "image": "uploads/34cb86ef60c03c0a24c11a906580a7ec.jpg"
+                },
+                {
+                    "id": 2,
+                    "image": "uploads/77f1cf5e6e11b08ccbe9b043260b27cf.jpg"
+                }
+            ]
+        },
+        "user": {
+            "id": 1,
+            "blocked": "Активный",
+            "name": "Ersa",
+            "avatar": null,
+            "phone": "77784139424",
+            "phone_verified_at": "Подтвержден (1 неделю назад)",
+            "email": null,
+            "email_verified_at": "Не подтвержден",
+            "api_token": "qwerty01"
+        },
+        "rating": 5,
+        "comment": "test comment",
+        "status": "На проверке"
+    }
+}
+            </div>',
+        ]
+        ],
+        ['type' =>  'card', 'class'   => 'card bg-warning text-white', 'content'   =>  [
+            'header' => 'Удалить отзыв по ID', // optional
+            'body'   => '<b>Запрос GET</b><br>
+            https://'.$_SERVER['HTTP_HOST'].'/api/review/update/{id}<br>
+            <b>Параметры</b><br>
+            <span class="text-dark">{id}</span> ID отзыва<br>
+            <hr>
+            <button class="btn btn-sm btn-success mt-2" type="button" data-toggle="collapse" data-target="#api-22" aria-expanded="false" aria-controls="api-22">Ответ 200</button>
+            <div class="collapse mt-2" id="api-22" style="font-size: 10px; line-height: 1; white-space: pre;">
+            </div>',
+        ]
+        ],
+        ['type' =>  'card', 'class'   => 'card bg-warning text-white', 'content'   =>  [
+            'header' => 'Получить все отзывы по ID организации', // optional
+            'body'   => '<b>Запрос GET</b><br>
+            https://'.$_SERVER['HTTP_HOST'].'/api/review/list/organization/{id}<br>
+            <b>Параметры</b><br>
+            <span class="text-dark">{id}</span> ID организации<br>
+            <b>Дополнительные параметры</b><br>
+            <span class="text-dark">?paginate=1</span> в одном запросе 15 результата<br>
+            <hr>
+            <button class="btn btn-sm btn-success mt-2" type="button" data-toggle="collapse" data-target="#api-23" aria-expanded="false" aria-controls="api-23">Ответ 200</button>
+            <div class="collapse mt-2" id="api-23" style="font-size: 10px; line-height: 1; white-space: pre;">
+            {
+    "data": [
+        {
+            "id": 16,
+            "organization": {
+                "id": 1,
+                "rating": null,
+                "image": null,
+                "title": "Opetit",
+                "title_kz": null,
+                "title_en": null,
+                "description": null,
+                "description_kz": null,
+                "description_en": null,
+                "address": "Байтурсынова 16",
+                "address_kz": null,
+                "address_en": null,
+                "price": null,
+                "tables": null,
+                "monday": {
+                    "start": "00:00:00",
+                    "end": "00:00:00"
+                },
+                "tuesday": {
+                    "start": "00:00:00",
+                    "end": "00:00:00"
+                },
+                "wednesday": {
+                    "start": "00:00:00",
+                    "end": "00:00:00"
+                },
+                "thursday": {
+                    "start": "00:00:00",
+                    "end": "00:00:00"
+                },
+                "friday": {
+                    "start": "00:00:00",
+                    "end": "00:00:00"
+                },
+                "saturday": {
+                    "start": "00:00:00",
+                    "end": "00:00:00"
+                },
+                "sunday": {
+                    "start": "00:00:00",
+                    "end": "00:00:00"
+                },
+                "status": "Включен",
+                "user_id": {
+                    "id": 1,
+                    "blocked": "Активный",
+                    "name": "Ersa",
+                    "avatar": null,
+                    "phone": "77784139424",
+                    "phone_verified_at": "Подтвержден (1 неделю назад)",
+                    "email": null,
+                    "email_verified_at": "Не подтвержден",
+                    "api_token": "qwerty01"
+                },
+                "category_id": {
+                    "id": 1,
+                    "title": "Ресторан",
+                    "title_kz": "Мейрамхана",
+                    "title_en": "Restaurant"
+                },
+                "images": [
+                    {
+                        "id": 1,
+                        "image": "uploads/34cb86ef60c03c0a24c11a906580a7ec.jpg"
+                    },
+                    {
+                        "id": 2,
+                        "image": "uploads/77f1cf5e6e11b08ccbe9b043260b27cf.jpg"
+                    }
+                ]
+            },
+            "user": {
+                "id": 1,
+                "blocked": "Активный",
+                "name": "Ersa",
+                "avatar": null,
+                "phone": "77784139424",
+                "phone_verified_at": "Подтвержден (1 неделю назад)",
+                "email": null,
+                "email_verified_at": "Не подтвержден",
+                "api_token": "qwerty01"
+            },
+            "rating": 3,
+            "comment": "hello world",
+            "status": "На проверке"
+        },
+        {
+            "id": 17,
+            "organization": {
+                "id": 1,
+                "rating": null,
+                "image": null,
+                "title": "Opetit",
+                "title_kz": null,
+                "title_en": null,
+                "description": null,
+                "description_kz": null,
+                "description_en": null,
+                "address": "Байтурсынова 16",
+                "address_kz": null,
+                "address_en": null,
+                "price": null,
+                "tables": null,
+                "monday": {
+                    "start": "00:00:00",
+                    "end": "00:00:00"
+                },
+                "tuesday": {
+                    "start": "00:00:00",
+                    "end": "00:00:00"
+                },
+                "wednesday": {
+                    "start": "00:00:00",
+                    "end": "00:00:00"
+                },
+                "thursday": {
+                    "start": "00:00:00",
+                    "end": "00:00:00"
+                },
+                "friday": {
+                    "start": "00:00:00",
+                    "end": "00:00:00"
+                },
+                "saturday": {
+                    "start": "00:00:00",
+                    "end": "00:00:00"
+                },
+                "sunday": {
+                    "start": "00:00:00",
+                    "end": "00:00:00"
+                },
+                "status": "Включен",
+                "user_id": {
+                    "id": 1,
+                    "blocked": "Активный",
+                    "name": "Ersa",
+                    "avatar": null,
+                    "phone": "77784139424",
+                    "phone_verified_at": "Подтвержден (1 неделю назад)",
+                    "email": null,
+                    "email_verified_at": "Не подтвержден",
+                    "api_token": "qwerty01"
+                },
+                "category_id": {
+                    "id": 1,
+                    "title": "Ресторан",
+                    "title_kz": "Мейрамхана",
+                    "title_en": "Restaurant"
+                },
+                "images": [
+                    {
+                        "id": 1,
+                        "image": "uploads/34cb86ef60c03c0a24c11a906580a7ec.jpg"
+                    },
+                    {
+                        "id": 2,
+                        "image": "uploads/77f1cf5e6e11b08ccbe9b043260b27cf.jpg"
+                    }
+                ]
+            },
+            "user": {
+                "id": 1,
+                "blocked": "Активный",
+                "name": "Ersa",
+                "avatar": null,
+                "phone": "77784139424",
+                "phone_verified_at": "Подтвержден (1 неделю назад)",
+                "email": null,
+                "email_verified_at": "Не подтвержден",
+                "api_token": "qwerty01"
+            },
+            "rating": 3,
+            "comment": "hello world",
+            "status": "На проверке"
+        },
+        {
+            "id": 18,
+            "organization": {
+                "id": 1,
+                "rating": null,
+                "image": null,
+                "title": "Opetit",
+                "title_kz": null,
+                "title_en": null,
+                "description": null,
+                "description_kz": null,
+                "description_en": null,
+                "address": "Байтурсынова 16",
+                "address_kz": null,
+                "address_en": null,
+                "price": null,
+                "tables": null,
+                "monday": {
+                    "start": "00:00:00",
+                    "end": "00:00:00"
+                },
+                "tuesday": {
+                    "start": "00:00:00",
+                    "end": "00:00:00"
+                },
+                "wednesday": {
+                    "start": "00:00:00",
+                    "end": "00:00:00"
+                },
+                "thursday": {
+                    "start": "00:00:00",
+                    "end": "00:00:00"
+                },
+                "friday": {
+                    "start": "00:00:00",
+                    "end": "00:00:00"
+                },
+                "saturday": {
+                    "start": "00:00:00",
+                    "end": "00:00:00"
+                },
+                "sunday": {
+                    "start": "00:00:00",
+                    "end": "00:00:00"
+                },
+                "status": "Включен",
+                "user_id": {
+                    "id": 1,
+                    "blocked": "Активный",
+                    "name": "Ersa",
+                    "avatar": null,
+                    "phone": "77784139424",
+                    "phone_verified_at": "Подтвержден (1 неделю назад)",
+                    "email": null,
+                    "email_verified_at": "Не подтвержден",
+                    "api_token": "qwerty01"
+                },
+                "category_id": {
+                    "id": 1,
+                    "title": "Ресторан",
+                    "title_kz": "Мейрамхана",
+                    "title_en": "Restaurant"
+                },
+                "images": [
+                    {
+                        "id": 1,
+                        "image": "uploads/34cb86ef60c03c0a24c11a906580a7ec.jpg"
+                    },
+                    {
+                        "id": 2,
+                        "image": "uploads/77f1cf5e6e11b08ccbe9b043260b27cf.jpg"
+                    }
+                ]
+            },
+            "user": null,
+            "rating": 5,
+            "comment": "test comment",
+            "status": "На проверке"
+        },
+        {
+            "id": 19,
+            "organization": {
+                "id": 1,
+                "rating": null,
+                "image": null,
+                "title": "Opetit",
+                "title_kz": null,
+                "title_en": null,
+                "description": null,
+                "description_kz": null,
+                "description_en": null,
+                "address": "Байтурсынова 16",
+                "address_kz": null,
+                "address_en": null,
+                "price": null,
+                "tables": null,
+                "monday": {
+                    "start": "00:00:00",
+                    "end": "00:00:00"
+                },
+                "tuesday": {
+                    "start": "00:00:00",
+                    "end": "00:00:00"
+                },
+                "wednesday": {
+                    "start": "00:00:00",
+                    "end": "00:00:00"
+                },
+                "thursday": {
+                    "start": "00:00:00",
+                    "end": "00:00:00"
+                },
+                "friday": {
+                    "start": "00:00:00",
+                    "end": "00:00:00"
+                },
+                "saturday": {
+                    "start": "00:00:00",
+                    "end": "00:00:00"
+                },
+                "sunday": {
+                    "start": "00:00:00",
+                    "end": "00:00:00"
+                },
+                "status": "Включен",
+                "user_id": {
+                    "id": 1,
+                    "blocked": "Активный",
+                    "name": "Ersa",
+                    "avatar": null,
+                    "phone": "77784139424",
+                    "phone_verified_at": "Подтвержден (1 неделю назад)",
+                    "email": null,
+                    "email_verified_at": "Не подтвержден",
+                    "api_token": "qwerty01"
+                },
+                "category_id": {
+                    "id": 1,
+                    "title": "Ресторан",
+                    "title_kz": "Мейрамхана",
+                    "title_en": "Restaurant"
+                },
+                "images": [
+                    {
+                        "id": 1,
+                        "image": "uploads/34cb86ef60c03c0a24c11a906580a7ec.jpg"
+                    },
+                    {
+                        "id": 2,
+                        "image": "uploads/77f1cf5e6e11b08ccbe9b043260b27cf.jpg"
+                    }
+                ]
+            },
+            "user": {
+                "id": 1,
+                "blocked": "Активный",
+                "name": "Ersa",
+                "avatar": null,
+                "phone": "77784139424",
+                "phone_verified_at": "Подтвержден (1 неделю назад)",
+                "email": null,
+                "email_verified_at": "Не подтвержден",
+                "api_token": "qwerty01"
+            },
+            "rating": 5,
+            "comment": "test comment",
+            "status": "На проверке"
+        },
+        {
+            "id": 20,
+            "organization": {
+                "id": 1,
+                "rating": null,
+                "image": null,
+                "title": "Opetit",
+                "title_kz": null,
+                "title_en": null,
+                "description": null,
+                "description_kz": null,
+                "description_en": null,
+                "address": "Байтурсынова 16",
+                "address_kz": null,
+                "address_en": null,
+                "price": null,
+                "tables": null,
+                "monday": {
+                    "start": "00:00:00",
+                    "end": "00:00:00"
+                },
+                "tuesday": {
+                    "start": "00:00:00",
+                    "end": "00:00:00"
+                },
+                "wednesday": {
+                    "start": "00:00:00",
+                    "end": "00:00:00"
+                },
+                "thursday": {
+                    "start": "00:00:00",
+                    "end": "00:00:00"
+                },
+                "friday": {
+                    "start": "00:00:00",
+                    "end": "00:00:00"
+                },
+                "saturday": {
+                    "start": "00:00:00",
+                    "end": "00:00:00"
+                },
+                "sunday": {
+                    "start": "00:00:00",
+                    "end": "00:00:00"
+                },
+                "status": "Включен",
+                "user_id": {
+                    "id": 1,
+                    "blocked": "Активный",
+                    "name": "Ersa",
+                    "avatar": null,
+                    "phone": "77784139424",
+                    "phone_verified_at": "Подтвержден (1 неделю назад)",
+                    "email": null,
+                    "email_verified_at": "Не подтвержден",
+                    "api_token": "qwerty01"
+                },
+                "category_id": {
+                    "id": 1,
+                    "title": "Ресторан",
+                    "title_kz": "Мейрамхана",
+                    "title_en": "Restaurant"
+                },
+                "images": [
+                    {
+                        "id": 1,
+                        "image": "uploads/34cb86ef60c03c0a24c11a906580a7ec.jpg"
+                    },
+                    {
+                        "id": 2,
+                        "image": "uploads/77f1cf5e6e11b08ccbe9b043260b27cf.jpg"
+                    }
+                ]
+            },
+            "user": {
+                "id": 1,
+                "blocked": "Активный",
+                "name": "Ersa",
+                "avatar": null,
+                "phone": "77784139424",
+                "phone_verified_at": "Подтвержден (1 неделю назад)",
+                "email": null,
+                "email_verified_at": "Не подтвержден",
+                "api_token": "qwerty01"
+            },
+            "rating": 5,
+            "comment": "test comment",
+            "status": "На проверке"
+        },
+        {
+            "id": 21,
+            "organization": {
+                "id": 1,
+                "rating": null,
+                "image": null,
+                "title": "Opetit",
+                "title_kz": null,
+                "title_en": null,
+                "description": null,
+                "description_kz": null,
+                "description_en": null,
+                "address": "Байтурсынова 16",
+                "address_kz": null,
+                "address_en": null,
+                "price": null,
+                "tables": null,
+                "monday": {
+                    "start": "00:00:00",
+                    "end": "00:00:00"
+                },
+                "tuesday": {
+                    "start": "00:00:00",
+                    "end": "00:00:00"
+                },
+                "wednesday": {
+                    "start": "00:00:00",
+                    "end": "00:00:00"
+                },
+                "thursday": {
+                    "start": "00:00:00",
+                    "end": "00:00:00"
+                },
+                "friday": {
+                    "start": "00:00:00",
+                    "end": "00:00:00"
+                },
+                "saturday": {
+                    "start": "00:00:00",
+                    "end": "00:00:00"
+                },
+                "sunday": {
+                    "start": "00:00:00",
+                    "end": "00:00:00"
+                },
+                "status": "Включен",
+                "user_id": {
+                    "id": 1,
+                    "blocked": "Активный",
+                    "name": "Ersa",
+                    "avatar": null,
+                    "phone": "77784139424",
+                    "phone_verified_at": "Подтвержден (1 неделю назад)",
+                    "email": null,
+                    "email_verified_at": "Не подтвержден",
+                    "api_token": "qwerty01"
+                },
+                "category_id": {
+                    "id": 1,
+                    "title": "Ресторан",
+                    "title_kz": "Мейрамхана",
+                    "title_en": "Restaurant"
+                },
+                "images": [
+                    {
+                        "id": 1,
+                        "image": "uploads/34cb86ef60c03c0a24c11a906580a7ec.jpg"
+                    },
+                    {
+                        "id": 2,
+                        "image": "uploads/77f1cf5e6e11b08ccbe9b043260b27cf.jpg"
+                    }
+                ]
+            },
+            "user": {
+                "id": 1,
+                "blocked": "Активный",
+                "name": "Ersa",
+                "avatar": null,
+                "phone": "77784139424",
+                "phone_verified_at": "Подтвержден (1 неделю назад)",
+                "email": null,
+                "email_verified_at": "Не подтвержден",
+                "api_token": "qwerty01"
+            },
+            "rating": 5,
+            "comment": "test comment",
+            "status": "На проверке"
+        },
+        {
+            "id": 22,
+            "organization": {
+                "id": 1,
+                "rating": null,
+                "image": null,
+                "title": "Opetit",
+                "title_kz": null,
+                "title_en": null,
+                "description": null,
+                "description_kz": null,
+                "description_en": null,
+                "address": "Байтурсынова 16",
+                "address_kz": null,
+                "address_en": null,
+                "price": null,
+                "tables": null,
+                "monday": {
+                    "start": "00:00:00",
+                    "end": "00:00:00"
+                },
+                "tuesday": {
+                    "start": "00:00:00",
+                    "end": "00:00:00"
+                },
+                "wednesday": {
+                    "start": "00:00:00",
+                    "end": "00:00:00"
+                },
+                "thursday": {
+                    "start": "00:00:00",
+                    "end": "00:00:00"
+                },
+                "friday": {
+                    "start": "00:00:00",
+                    "end": "00:00:00"
+                },
+                "saturday": {
+                    "start": "00:00:00",
+                    "end": "00:00:00"
+                },
+                "sunday": {
+                    "start": "00:00:00",
+                    "end": "00:00:00"
+                },
+                "status": "Включен",
+                "user_id": {
+                    "id": 1,
+                    "blocked": "Активный",
+                    "name": "Ersa",
+                    "avatar": null,
+                    "phone": "77784139424",
+                    "phone_verified_at": "Подтвержден (1 неделю назад)",
+                    "email": null,
+                    "email_verified_at": "Не подтвержден",
+                    "api_token": "qwerty01"
+                },
+                "category_id": {
+                    "id": 1,
+                    "title": "Ресторан",
+                    "title_kz": "Мейрамхана",
+                    "title_en": "Restaurant"
+                },
+                "images": [
+                    {
+                        "id": 1,
+                        "image": "uploads/34cb86ef60c03c0a24c11a906580a7ec.jpg"
+                    },
+                    {
+                        "id": 2,
+                        "image": "uploads/77f1cf5e6e11b08ccbe9b043260b27cf.jpg"
+                    }
+                ]
+            },
+            "user": {
+                "id": 1,
+                "blocked": "Активный",
+                "name": "Ersa",
+                "avatar": null,
+                "phone": "77784139424",
+                "phone_verified_at": "Подтвержден (1 неделю назад)",
+                "email": null,
+                "email_verified_at": "Не подтвержден",
+                "api_token": "qwerty01"
+            },
+            "rating": 5,
+            "comment": "test comment",
+            "status": "На проверке"
+        }
+    ]
+}
+            </div>',
+        ]
+        ],
+        ['type' =>  'card', 'class'   => 'card bg-warning text-white', 'content'   =>  [
+            'header' => 'Получить все отзывы по ID пользователя', // optional
+            'body'   => '<b>Запрос GET</b><br>
+            https://'.$_SERVER['HTTP_HOST'].'/api/review/list/user/{id}<br>
+            <b>Параметры</b><br>
+            <span class="text-dark">{id}</span> ID пользователя<br>
+            <b>Дополнительные параметры</b><br>
+            <span class="text-dark">?paginate=1</span> в одном запросе 15 результата<br>
+            <hr>
+            <button class="btn btn-sm btn-success mt-2" type="button" data-toggle="collapse" data-target="#api-24" aria-expanded="false" aria-controls="api-24">Ответ 200</button>
+            <div class="collapse mt-2" id="api-24" style="font-size: 10px; line-height: 1; white-space: pre;">
+            {
+    "data": [
+        {
+            "id": 16,
+            "organization": {
+                "id": 1,
+                "rating": null,
+                "image": null,
+                "title": "Opetit",
+                "title_kz": null,
+                "title_en": null,
+                "description": null,
+                "description_kz": null,
+                "description_en": null,
+                "address": "Байтурсынова 16",
+                "address_kz": null,
+                "address_en": null,
+                "price": null,
+                "tables": null,
+                "monday": {
+                    "start": "00:00:00",
+                    "end": "00:00:00"
+                },
+                "tuesday": {
+                    "start": "00:00:00",
+                    "end": "00:00:00"
+                },
+                "wednesday": {
+                    "start": "00:00:00",
+                    "end": "00:00:00"
+                },
+                "thursday": {
+                    "start": "00:00:00",
+                    "end": "00:00:00"
+                },
+                "friday": {
+                    "start": "00:00:00",
+                    "end": "00:00:00"
+                },
+                "saturday": {
+                    "start": "00:00:00",
+                    "end": "00:00:00"
+                },
+                "sunday": {
+                    "start": "00:00:00",
+                    "end": "00:00:00"
+                },
+                "status": "Включен",
+                "user_id": {
+                    "id": 1,
+                    "blocked": "Активный",
+                    "name": "Ersa",
+                    "avatar": null,
+                    "phone": "77784139424",
+                    "phone_verified_at": "Подтвержден (1 неделю назад)",
+                    "email": null,
+                    "email_verified_at": "Не подтвержден",
+                    "api_token": "qwerty01"
+                },
+                "category_id": {
+                    "id": 1,
+                    "title": "Ресторан",
+                    "title_kz": "Мейрамхана",
+                    "title_en": "Restaurant"
+                },
+                "images": [
+                    {
+                        "id": 1,
+                        "image": "uploads/34cb86ef60c03c0a24c11a906580a7ec.jpg"
+                    },
+                    {
+                        "id": 2,
+                        "image": "uploads/77f1cf5e6e11b08ccbe9b043260b27cf.jpg"
+                    }
+                ]
+            },
+            "user": {
+                "id": 1,
+                "blocked": "Активный",
+                "name": "Ersa",
+                "avatar": null,
+                "phone": "77784139424",
+                "phone_verified_at": "Подтвержден (1 неделю назад)",
+                "email": null,
+                "email_verified_at": "Не подтвержден",
+                "api_token": "qwerty01"
+            },
+            "rating": 3,
+            "comment": "hello world",
+            "status": "На проверке"
+        },
+        {
+            "id": 17,
+            "organization": {
+                "id": 1,
+                "rating": null,
+                "image": null,
+                "title": "Opetit",
+                "title_kz": null,
+                "title_en": null,
+                "description": null,
+                "description_kz": null,
+                "description_en": null,
+                "address": "Байтурсынова 16",
+                "address_kz": null,
+                "address_en": null,
+                "price": null,
+                "tables": null,
+                "monday": {
+                    "start": "00:00:00",
+                    "end": "00:00:00"
+                },
+                "tuesday": {
+                    "start": "00:00:00",
+                    "end": "00:00:00"
+                },
+                "wednesday": {
+                    "start": "00:00:00",
+                    "end": "00:00:00"
+                },
+                "thursday": {
+                    "start": "00:00:00",
+                    "end": "00:00:00"
+                },
+                "friday": {
+                    "start": "00:00:00",
+                    "end": "00:00:00"
+                },
+                "saturday": {
+                    "start": "00:00:00",
+                    "end": "00:00:00"
+                },
+                "sunday": {
+                    "start": "00:00:00",
+                    "end": "00:00:00"
+                },
+                "status": "Включен",
+                "user_id": {
+                    "id": 1,
+                    "blocked": "Активный",
+                    "name": "Ersa",
+                    "avatar": null,
+                    "phone": "77784139424",
+                    "phone_verified_at": "Подтвержден (1 неделю назад)",
+                    "email": null,
+                    "email_verified_at": "Не подтвержден",
+                    "api_token": "qwerty01"
+                },
+                "category_id": {
+                    "id": 1,
+                    "title": "Ресторан",
+                    "title_kz": "Мейрамхана",
+                    "title_en": "Restaurant"
+                },
+                "images": [
+                    {
+                        "id": 1,
+                        "image": "uploads/34cb86ef60c03c0a24c11a906580a7ec.jpg"
+                    },
+                    {
+                        "id": 2,
+                        "image": "uploads/77f1cf5e6e11b08ccbe9b043260b27cf.jpg"
+                    }
+                ]
+            },
+            "user": {
+                "id": 1,
+                "blocked": "Активный",
+                "name": "Ersa",
+                "avatar": null,
+                "phone": "77784139424",
+                "phone_verified_at": "Подтвержден (1 неделю назад)",
+                "email": null,
+                "email_verified_at": "Не подтвержден",
+                "api_token": "qwerty01"
+            },
+            "rating": 3,
+            "comment": "hello world",
+            "status": "На проверке"
+        },
+        {
+            "id": 18,
+            "organization": {
+                "id": 1,
+                "rating": null,
+                "image": null,
+                "title": "Opetit",
+                "title_kz": null,
+                "title_en": null,
+                "description": null,
+                "description_kz": null,
+                "description_en": null,
+                "address": "Байтурсынова 16",
+                "address_kz": null,
+                "address_en": null,
+                "price": null,
+                "tables": null,
+                "monday": {
+                    "start": "00:00:00",
+                    "end": "00:00:00"
+                },
+                "tuesday": {
+                    "start": "00:00:00",
+                    "end": "00:00:00"
+                },
+                "wednesday": {
+                    "start": "00:00:00",
+                    "end": "00:00:00"
+                },
+                "thursday": {
+                    "start": "00:00:00",
+                    "end": "00:00:00"
+                },
+                "friday": {
+                    "start": "00:00:00",
+                    "end": "00:00:00"
+                },
+                "saturday": {
+                    "start": "00:00:00",
+                    "end": "00:00:00"
+                },
+                "sunday": {
+                    "start": "00:00:00",
+                    "end": "00:00:00"
+                },
+                "status": "Включен",
+                "user_id": {
+                    "id": 1,
+                    "blocked": "Активный",
+                    "name": "Ersa",
+                    "avatar": null,
+                    "phone": "77784139424",
+                    "phone_verified_at": "Подтвержден (1 неделю назад)",
+                    "email": null,
+                    "email_verified_at": "Не подтвержден",
+                    "api_token": "qwerty01"
+                },
+                "category_id": {
+                    "id": 1,
+                    "title": "Ресторан",
+                    "title_kz": "Мейрамхана",
+                    "title_en": "Restaurant"
+                },
+                "images": [
+                    {
+                        "id": 1,
+                        "image": "uploads/34cb86ef60c03c0a24c11a906580a7ec.jpg"
+                    },
+                    {
+                        "id": 2,
+                        "image": "uploads/77f1cf5e6e11b08ccbe9b043260b27cf.jpg"
+                    }
+                ]
+            },
+            "user": null,
+            "rating": 5,
+            "comment": "test comment",
+            "status": "На проверке"
+        },
+        {
+            "id": 19,
+            "organization": {
+                "id": 1,
+                "rating": null,
+                "image": null,
+                "title": "Opetit",
+                "title_kz": null,
+                "title_en": null,
+                "description": null,
+                "description_kz": null,
+                "description_en": null,
+                "address": "Байтурсынова 16",
+                "address_kz": null,
+                "address_en": null,
+                "price": null,
+                "tables": null,
+                "monday": {
+                    "start": "00:00:00",
+                    "end": "00:00:00"
+                },
+                "tuesday": {
+                    "start": "00:00:00",
+                    "end": "00:00:00"
+                },
+                "wednesday": {
+                    "start": "00:00:00",
+                    "end": "00:00:00"
+                },
+                "thursday": {
+                    "start": "00:00:00",
+                    "end": "00:00:00"
+                },
+                "friday": {
+                    "start": "00:00:00",
+                    "end": "00:00:00"
+                },
+                "saturday": {
+                    "start": "00:00:00",
+                    "end": "00:00:00"
+                },
+                "sunday": {
+                    "start": "00:00:00",
+                    "end": "00:00:00"
+                },
+                "status": "Включен",
+                "user_id": {
+                    "id": 1,
+                    "blocked": "Активный",
+                    "name": "Ersa",
+                    "avatar": null,
+                    "phone": "77784139424",
+                    "phone_verified_at": "Подтвержден (1 неделю назад)",
+                    "email": null,
+                    "email_verified_at": "Не подтвержден",
+                    "api_token": "qwerty01"
+                },
+                "category_id": {
+                    "id": 1,
+                    "title": "Ресторан",
+                    "title_kz": "Мейрамхана",
+                    "title_en": "Restaurant"
+                },
+                "images": [
+                    {
+                        "id": 1,
+                        "image": "uploads/34cb86ef60c03c0a24c11a906580a7ec.jpg"
+                    },
+                    {
+                        "id": 2,
+                        "image": "uploads/77f1cf5e6e11b08ccbe9b043260b27cf.jpg"
+                    }
+                ]
+            },
+            "user": {
+                "id": 1,
+                "blocked": "Активный",
+                "name": "Ersa",
+                "avatar": null,
+                "phone": "77784139424",
+                "phone_verified_at": "Подтвержден (1 неделю назад)",
+                "email": null,
+                "email_verified_at": "Не подтвержден",
+                "api_token": "qwerty01"
+            },
+            "rating": 5,
+            "comment": "test comment",
+            "status": "На проверке"
+        },
+        {
+            "id": 20,
+            "organization": {
+                "id": 1,
+                "rating": null,
+                "image": null,
+                "title": "Opetit",
+                "title_kz": null,
+                "title_en": null,
+                "description": null,
+                "description_kz": null,
+                "description_en": null,
+                "address": "Байтурсынова 16",
+                "address_kz": null,
+                "address_en": null,
+                "price": null,
+                "tables": null,
+                "monday": {
+                    "start": "00:00:00",
+                    "end": "00:00:00"
+                },
+                "tuesday": {
+                    "start": "00:00:00",
+                    "end": "00:00:00"
+                },
+                "wednesday": {
+                    "start": "00:00:00",
+                    "end": "00:00:00"
+                },
+                "thursday": {
+                    "start": "00:00:00",
+                    "end": "00:00:00"
+                },
+                "friday": {
+                    "start": "00:00:00",
+                    "end": "00:00:00"
+                },
+                "saturday": {
+                    "start": "00:00:00",
+                    "end": "00:00:00"
+                },
+                "sunday": {
+                    "start": "00:00:00",
+                    "end": "00:00:00"
+                },
+                "status": "Включен",
+                "user_id": {
+                    "id": 1,
+                    "blocked": "Активный",
+                    "name": "Ersa",
+                    "avatar": null,
+                    "phone": "77784139424",
+                    "phone_verified_at": "Подтвержден (1 неделю назад)",
+                    "email": null,
+                    "email_verified_at": "Не подтвержден",
+                    "api_token": "qwerty01"
+                },
+                "category_id": {
+                    "id": 1,
+                    "title": "Ресторан",
+                    "title_kz": "Мейрамхана",
+                    "title_en": "Restaurant"
+                },
+                "images": [
+                    {
+                        "id": 1,
+                        "image": "uploads/34cb86ef60c03c0a24c11a906580a7ec.jpg"
+                    },
+                    {
+                        "id": 2,
+                        "image": "uploads/77f1cf5e6e11b08ccbe9b043260b27cf.jpg"
+                    }
+                ]
+            },
+            "user": {
+                "id": 1,
+                "blocked": "Активный",
+                "name": "Ersa",
+                "avatar": null,
+                "phone": "77784139424",
+                "phone_verified_at": "Подтвержден (1 неделю назад)",
+                "email": null,
+                "email_verified_at": "Не подтвержден",
+                "api_token": "qwerty01"
+            },
+            "rating": 5,
+            "comment": "test comment",
+            "status": "На проверке"
+        },
+        {
+            "id": 21,
+            "organization": {
+                "id": 1,
+                "rating": null,
+                "image": null,
+                "title": "Opetit",
+                "title_kz": null,
+                "title_en": null,
+                "description": null,
+                "description_kz": null,
+                "description_en": null,
+                "address": "Байтурсынова 16",
+                "address_kz": null,
+                "address_en": null,
+                "price": null,
+                "tables": null,
+                "monday": {
+                    "start": "00:00:00",
+                    "end": "00:00:00"
+                },
+                "tuesday": {
+                    "start": "00:00:00",
+                    "end": "00:00:00"
+                },
+                "wednesday": {
+                    "start": "00:00:00",
+                    "end": "00:00:00"
+                },
+                "thursday": {
+                    "start": "00:00:00",
+                    "end": "00:00:00"
+                },
+                "friday": {
+                    "start": "00:00:00",
+                    "end": "00:00:00"
+                },
+                "saturday": {
+                    "start": "00:00:00",
+                    "end": "00:00:00"
+                },
+                "sunday": {
+                    "start": "00:00:00",
+                    "end": "00:00:00"
+                },
+                "status": "Включен",
+                "user_id": {
+                    "id": 1,
+                    "blocked": "Активный",
+                    "name": "Ersa",
+                    "avatar": null,
+                    "phone": "77784139424",
+                    "phone_verified_at": "Подтвержден (1 неделю назад)",
+                    "email": null,
+                    "email_verified_at": "Не подтвержден",
+                    "api_token": "qwerty01"
+                },
+                "category_id": {
+                    "id": 1,
+                    "title": "Ресторан",
+                    "title_kz": "Мейрамхана",
+                    "title_en": "Restaurant"
+                },
+                "images": [
+                    {
+                        "id": 1,
+                        "image": "uploads/34cb86ef60c03c0a24c11a906580a7ec.jpg"
+                    },
+                    {
+                        "id": 2,
+                        "image": "uploads/77f1cf5e6e11b08ccbe9b043260b27cf.jpg"
+                    }
+                ]
+            },
+            "user": {
+                "id": 1,
+                "blocked": "Активный",
+                "name": "Ersa",
+                "avatar": null,
+                "phone": "77784139424",
+                "phone_verified_at": "Подтвержден (1 неделю назад)",
+                "email": null,
+                "email_verified_at": "Не подтвержден",
+                "api_token": "qwerty01"
+            },
+            "rating": 5,
+            "comment": "test comment",
+            "status": "На проверке"
+        },
+        {
+            "id": 22,
+            "organization": {
+                "id": 1,
+                "rating": null,
+                "image": null,
+                "title": "Opetit",
+                "title_kz": null,
+                "title_en": null,
+                "description": null,
+                "description_kz": null,
+                "description_en": null,
+                "address": "Байтурсынова 16",
+                "address_kz": null,
+                "address_en": null,
+                "price": null,
+                "tables": null,
+                "monday": {
+                    "start": "00:00:00",
+                    "end": "00:00:00"
+                },
+                "tuesday": {
+                    "start": "00:00:00",
+                    "end": "00:00:00"
+                },
+                "wednesday": {
+                    "start": "00:00:00",
+                    "end": "00:00:00"
+                },
+                "thursday": {
+                    "start": "00:00:00",
+                    "end": "00:00:00"
+                },
+                "friday": {
+                    "start": "00:00:00",
+                    "end": "00:00:00"
+                },
+                "saturday": {
+                    "start": "00:00:00",
+                    "end": "00:00:00"
+                },
+                "sunday": {
+                    "start": "00:00:00",
+                    "end": "00:00:00"
+                },
+                "status": "Включен",
+                "user_id": {
+                    "id": 1,
+                    "blocked": "Активный",
+                    "name": "Ersa",
+                    "avatar": null,
+                    "phone": "77784139424",
+                    "phone_verified_at": "Подтвержден (1 неделю назад)",
+                    "email": null,
+                    "email_verified_at": "Не подтвержден",
+                    "api_token": "qwerty01"
+                },
+                "category_id": {
+                    "id": 1,
+                    "title": "Ресторан",
+                    "title_kz": "Мейрамхана",
+                    "title_en": "Restaurant"
+                },
+                "images": [
+                    {
+                        "id": 1,
+                        "image": "uploads/34cb86ef60c03c0a24c11a906580a7ec.jpg"
+                    },
+                    {
+                        "id": 2,
+                        "image": "uploads/77f1cf5e6e11b08ccbe9b043260b27cf.jpg"
+                    }
+                ]
+            },
+            "user": {
+                "id": 1,
+                "blocked": "Активный",
+                "name": "Ersa",
+                "avatar": null,
+                "phone": "77784139424",
+                "phone_verified_at": "Подтвержден (1 неделю назад)",
+                "email": null,
+                "email_verified_at": "Не подтвержден",
+                "api_token": "qwerty01"
+            },
+            "rating": 5,
+            "comment": "test comment",
+            "status": "На проверке"
+        }
+    ]
+}
             </div>',
         ]
         ],

@@ -25,6 +25,7 @@ Route::get('/tables/{id}',[BookingController::class,'tables']);
 
 Route::get('/categories',[CategoryController::class,'list']);
 Route::get('/countries',[CountryController::class,'list']);
+Route::get('/organization/section/{id}',[OrganizationController::class,'getSectionsById']);
 
 Route::get('/organizations',[OrganizationController::class,'list']);
 Route::get('/organizations/{search}',[OrganizationController::class,'search']);

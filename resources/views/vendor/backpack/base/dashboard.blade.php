@@ -514,6 +514,61 @@
                     </div>',
                 ]
             ],
+            [
+                'type' => 'card',
+                'class' => 'card bg-warning text-white',
+                'content' => [
+                    'header' => 'Список помещении и столов организации',
+                    'body'   => '<b>Запрос GET</b><br>
+                    https://'.$_SERVER['HTTP_HOST'].'/api/organization/section/{id}<br>
+                    <b>Долнительные параметры</b><br>
+                    <span class="text-dark">{id}</span> ID организации<br>
+                    <hr>
+                    <button class="btn btn-sm btn-primary mt-2" type="button" data-toggle="collapse" data-target="#api-25" aria-expanded="false" aria-controls="api-25">Ответ 200</button>
+                    <div class="collapse mt-2" id="api-25" style="font-size: 10px; line-height: 1; white-space: pre;">
+                    {
+data: [
+{
+id: 1,
+name: "Зал",
+limit: 0,
+status: "Включен",
+organization_tables: [
+{
+id: 1,
+organization_id: 1,
+organization_table_id: 1,
+limit: 2,
+status: "ENABLED",
+},
+{
+id: 2,
+organization_id: 1,
+organization_table_id: 1,
+limit: 4,
+status: "ENABLED",
+},
+],
+},
+{
+id: 2,
+name: "Бар",
+limit: 0,
+status: "Включен",
+organization_tables: [ ],
+},
+{
+id: 3,
+name: "Кухня",
+limit: 0,
+status: "Включен",
+organization_tables: [ ],
+},
+]
+}
+                    </div>',
+                ]
+            ],
         ]
     ];
 

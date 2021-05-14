@@ -12,9 +12,10 @@ class OrganizationTablesResource extends JsonResource
     {
         return [
             OrganizationTablesContract::ID  =>  $this->id,
-            OrganizationTablesContract::TITLE   =>  $this->title,
+            OrganizationTablesContract::NAME   =>  $this->name,
             OrganizationTablesContract::LIMIT   =>  $this->limit,
-            OrganizationTablesContract::STATUS  =>  $this->status
+            OrganizationTablesContract::STATUS  =>  $this->status,
+            OrganizationTablesContract::ORGANIZATION_TABLES =>  new OrganizationTableListCollection($this->organizationTables)
         ];
     }
 }

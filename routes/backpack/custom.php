@@ -24,4 +24,5 @@ Route::group([
     Route::crud('review', 'ReviewCrudController');
     Route::crud('organizationimage', 'OrganizationImageCrudController');
     Route::crud('organizationtables', 'OrganizationTablesCrudController');
+    Route::crud('organizationtablelist', 'OrganizationTableListCrudController');
 }); // this should be the absolute last line of this file

@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Domain\Contracts\OrganizationTableListContract;
 use App\Domain\Contracts\OrganizationTablesContract;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
@@ -21,5 +22,10 @@ class OrganizationTables extends Model
     public function getStatusAttribute($value)
     {
         return OrganizationTablesContract::TRANSLATE[$value];
+    }
+
+    public function organizationTables()
+    {
+        return $this->hasMany(OrganizationTableList::class,OrganizationTableListContract::ORGANIZATION_TABLE_ID,OrganizationTablesContract::ID)->where(OrganizationTableListContract::STATUS,OrganizationTableListContract::ENABLED);
     }
 }

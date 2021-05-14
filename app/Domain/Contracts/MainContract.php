@@ -111,8 +111,6 @@ class MainContract
     const COUNTRY_ID        =   'country_id';
     const CATEGORY_ID       =   'category_id';
 
-    const ORGANIZATION_TABLE_ID =   'organization_table_id';
-
     const START_MONDAY      =   'start_monday';
     const START_TUESDAY     =   'start_tuesday';
     const START_WEDNESDAY   =   'start_wednesday';
@@ -159,6 +157,9 @@ class MainContract
         'ALL_DAY'           =>  'Круглостуочно'
     ];
 
+
+    const ORGANIZATION_TABLE_ID =   'organization_table_id';
+    const ORGANIZATION_TABLES   =   'organization_tables';
     const IIKO_ORGANIZATION_ID  =   'iiko_organization_id';
 
     public static function getCheck($value)

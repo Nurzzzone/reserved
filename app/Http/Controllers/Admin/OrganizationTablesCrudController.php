@@ -42,7 +42,7 @@ class OrganizationTablesCrudController extends CrudController
         CRUD::column(OrganizationTablesContract::ORGANIZATION_ID)->type('select')->label('Организация')
             ->entity('organization')->model('App\Models\Organization')->attribute(OrganizationContract::TITLE);
         CRUD::column(OrganizationTablesContract::KEY)->label('ID');
-        CRUD::column(OrganizationTablesContract::NAME)->label('Название стола');
+        CRUD::column(OrganizationTablesContract::NAME)->label('Название секции');
         CRUD::column(OrganizationTablesContract::LIMIT)->type('number')->label('Лимит');
         CRUD::column(OrganizationTablesContract::STATUS)->label('Статус');
     }
@@ -51,7 +51,7 @@ class OrganizationTablesCrudController extends CrudController
     {
         CRUD::column(OrganizationTablesContract::ORGANIZATION_ID)->type('select')->label('Организация')
             ->entity('organization')->model('App\Models\Organization')->attribute(OrganizationContract::TITLE);
-        CRUD::column(OrganizationTablesContract::NAME)->label('Номер стола');
+        CRUD::column(OrganizationTablesContract::NAME)->label('Номер секции');
         CRUD::column(OrganizationTablesContract::LIMIT)->type('number')->label('Лимит');
         CRUD::column(OrganizationTablesContract::STATUS)->label('Статус');
     }

@@ -98,6 +98,7 @@ class MainContract
     const ADDRESS_KZ    =   'address_kz';
     const ADDRESS_EN    =   'address_en';
     const API_SECRET    =   'api_secret';
+    const ORGANIZATION  =   'organization';
 
     const PHONE_VERIFIED_AT =   'phone_verified_at';
     const REMEMBER_TOKEN    =   'remember_token';

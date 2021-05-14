@@ -26,7 +26,7 @@ abstract class BaseService
         return $this->repo->find($id);
     }
 
-    public function update($id, array $input)
+    public function update(int $id, array $input)
     {
         return $this->repo->update($id, $input);
     }

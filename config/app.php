@@ -173,7 +173,7 @@ return [
         App\Providers\CountryServiceProvider::class,
         App\Providers\CityServiceProvider::class,
         App\Providers\BookingServiceProvider::class,
-
+        App\Providers\ReviewRepositoryProvider::class,
 
         /*
          * Application Service Providers...

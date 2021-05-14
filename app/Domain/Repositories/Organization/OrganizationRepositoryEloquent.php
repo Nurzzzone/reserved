@@ -43,4 +43,11 @@ class OrganizationRepositoryEloquent implements OrganizationRepositoryInterface
     {
         return Organization::with('user','category','images')->where(OrganizationContract::CATEGORY_ID,$id)->skip(--$paginate * $this->take)->take($this->take)->get();
     }
+
+    public function updateRating($id,$rating)
+    {
+        return Organization::where(OrganizationContract::ID,$id)->update([
+            OrganizationContract::RATING    =>  $rating
+        ]);
+    }
 }

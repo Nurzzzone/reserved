@@ -8,6 +8,15 @@ use App\Http\Controllers\Api\CategoryController;
 use App\Http\Controllers\Api\CountryController;
 use App\Http\Controllers\Api\OrganizationCityController;
 use App\Http\Controllers\Api\BookingController;
+use App\Http\Controllers\Api\ReviewController;
+
+Route::prefix('review')->group(function () {
+    Route::post('/create/{id}',[ReviewController::class,'create']);
+    Route::post('/update/{id}',[ReviewController::class,'update']);
+    Route::get('/delete/{id}',[ReviewController::class,'delete']);
+    Route::get('/list/organization/{id}',[ReviewController::class,'getByOrganizationId']);
+    Route::get('/list/user/{id}',[ReviewController::class,'getByUserId']);
+});
 
 Route::post('/add/booking/',[BookingController::class,'add']);
 Route::get('/organization/booking/{id}',[BookingController::class,'getByOrganizationId']);

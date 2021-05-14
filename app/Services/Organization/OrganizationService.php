@@ -5,14 +5,23 @@ namespace App\Services\Organization;
 
 use App\Services\BaseService;
 use App\Domain\Repositories\Organization\OrganizationRepositoryInterface;
+use App\Domain\Repositories\Review\ReviewRepositoryInterface;
 
 class OrganizationService extends BaseService
 {
     protected $organizationRepository;
+    protected $reviewRepository;
 
-    public function __construct(OrganizationRepositoryInterface $organizationRepository)
+    public function __construct(OrganizationRepositoryInterface $organizationRepository, ReviewRepositoryInterface $reviewRepository)
     {
         $this->organizationRepository   =   $organizationRepository;
+        $this->reviewRepository         =   $reviewRepository;
+    }
+
+    public function updateRating($id):void
+    {
+        $average    =   $this->reviewRepository->sumRating($id);
+        $this->organizationRepository->updateRating($id,$average);
     }
 
     public function list(int $paginate)

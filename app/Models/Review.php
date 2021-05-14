@@ -12,6 +12,9 @@ class Review extends Model
     use HasFactory;
 
     protected $fillable =   ReviewContract::FILLABLE;
+    /**
+     * @var mixed
+     */
 
     public function getStatusAttribute($value)
     {

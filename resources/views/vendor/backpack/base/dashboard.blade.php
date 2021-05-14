@@ -1139,6 +1139,103 @@
             ]],
         ]
     ];
+
+$widgets['before_content'][] = [
+        'type'    => 'div',
+        'class'   => 'row',
+        'content' => [ // widgets
+            ['type' =>  'card', 'class'   => 'card bg-primary text-white', 'content'   =>  [
+            'header' => 'Оставить отзыв', // optional
+            'body'   => '<b>Запрос POST</b><br>
+            https://'.$_SERVER['HTTP_HOST'].'/api/review/{id}<br>
+            <b>POST параметры</b><br>
+            <span class="text-dark">user_id</span> ID пользователя<br>
+            <span class="text-dark">organization_id</span> ID организации<br>
+            <span class="text-dark">rating</span> рейтинг (1-5)<br>
+            <span class="text-dark">comment</span> Комментарии<br>
+            <hr>
+            <button class="btn btn-sm btn-success mt-2" type="button" data-toggle="collapse" data-target="#api-1" aria-expanded="false" aria-controls="api-1">Ответ 200</button>
+            <div class="collapse mt-2" id="api-1" style="font-size: 10px; line-height: 1;">
+                <div>{</div>
+                <div class="ml-1">data: [</div>
+                <div class="ml-2">{</div>
+                <div class="ml-3">id: <b>1</b>,</div>
+                <div class="ml-3">rating: null,</div>
+                <div class="ml-3">image: null,</div>
+                <div class="ml-3">title: <b>"Opetit"</b>,</div>
+                <div class="ml-3">title_kz: null,</div>
+                <div class="ml-3">title_en: null,</div>
+                <div class="ml-3">description: null,</div>
+                <div class="ml-3">description_kz: null,</div>
+                <div class="ml-3">description_en: null,</div>
+                <div class="ml-3">address: null,</div>
+                <div class="ml-3">address_kz: null,</div>
+                <div class="ml-3">address_en: null,</div>
+                <div class="ml-3">price: null,</div>
+                <div class="ml-3">tables: null,</div>
+                <div class="ml-3">monday: {</div>
+                <div class="ml-4">start: <b>"11:18:00"</b>,</div>
+                <div class="ml-4">end: <b>"11:18:00"</b>,</div>
+                <div class="ml-3">},</div>
+                <div class="ml-3">tuesday: {</div>
+                <div class="ml-4">start: <b>"11:18:00"</b>,</div>
+                <div class="ml-4">end: <b>"11:18:00"</b>,</div>
+                <div class="ml-3">},</div>
+                <div class="ml-3">wednesday: {</div>
+                <div class="ml-4">start: <b>"11:18:00"</b>,</div>
+                <div class="ml-4">end: <b>"11:18:00"</b>,</div>
+                <div class="ml-3">},</div>
+                <div class="ml-3">thursday: {</div>
+                <div class="ml-4">start: <b>"11:18:00"</b>,</div>
+                <div class="ml-4">end: <b>"11:18:00"</b>,</div>
+                <div class="ml-3">},</div>
+                <div class="ml-3">friday: {</div>
+                <div class="ml-4">start: <b>"11:18:00"</b>,</div>
+                <div class="ml-4">end: <b>"11:18:00"</b>,</div>
+                <div class="ml-3">},</div>
+                <div class="ml-3">saturday: {</div>
+                <div class="ml-4">start: <b>"11:18:00"</b>,</div>
+                <div class="ml-4">end: <b>"11:18:00"</b>,</div>
+                <div class="ml-3">},</div>
+                <div class="ml-3">sunday: {</div>
+                <div class="ml-4">start: <b>"11:18:00"</b>,</div>
+                <div class="ml-4">end: <b>"11:18:00"</b>,</div>
+                <div class="ml-3">},</div>
+                <div class="ml-3">status: <b>"Включен"</b>,</div>
+                <div class="ml-3">user_id: {</div>
+                <div class="ml-4">id: <b>1</b>,</div>
+                <div class="ml-4">blocked: <b>"Активный"</b>,</div>
+                <div class="ml-4">name: <b>"Ersa"</b>,</div>
+                <div class="ml-4">avatar: null,</div>
+                <div class="ml-4">phone: <b>"77784443322"</b>,</div>
+                <div class="ml-4">phone_verified_at: <b>"Подтвержден (4 дня назад)"</b>,</div>
+                <div class="ml-4">email: null,</div>
+                <div class="ml-4">email_verified_at: <b>"Не подтвержден"</b>,</div>
+                <div class="ml-3">},</div>
+                <div class="ml-3">category_id: {</div>
+                <div class="ml-4">id: <b>1</b>,</div>
+                <div class="ml-4">title: <b>"Ресторан"</b>,</div>
+                <div class="ml-4">title_kz: <b>"Мейрамхана"</b>,</div>
+                <div class="ml-4">title_en: <b>"Restaurant"</b>,</b>,</div>
+                <div class="ml-3">},</div>
+                <div class="ml-3">images: [</div>
+                <div class="ml-4">{</div>
+                <div class="ml-5">id: <b>1</b>,</div>
+                <div class="ml-5">image: <b>"uploads/34cb86ef60c03c0a24c11a906580a7ec.jpg"</b>,</div>
+                <div class="ml-4">},</div>
+
+                <div class="ml-5">id: <b>2</b>,</div>
+                <div class="ml-5">image: <b>"uploads/77f1cf5e6e11b08ccbe9b043260b27cf.jpg"</b>,</div>
+                <div class="ml-4">},</div>
+                <div class="ml-3">],</div>
+                <div class="ml-2">},</div>
+                <div class="ml-1">]</div>
+                <div>}</div>
+            </div>',
+        ]
+        ],
+        ]
+    ];
 @endphp
 
 @section('content')

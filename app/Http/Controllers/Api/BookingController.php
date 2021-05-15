@@ -48,13 +48,13 @@ class BookingController extends Controller
     {
         $validator = Validator::make($request->all(), [
             BookingContract::USER_ID    =>  'required|exists:App\Models\User,id',
-            BookingContract::ORGANIZATION_ID    =>  'required|exists:App\Models\Organization,id',
-            BookingContract::ORGANIZATION_TABLE_ID  =>  'required|exists:App\Models\OrganizationTables,id',
+            BookingContract::ORGANIZATION_ID    =>  'required',
+            BookingContract::ORGANIZATION_TABLE_ID  =>  'required|exists:App\Models\OrganizationTableList,id',
             BookingContract::START  =>  'required|string',
             BookingContract::END    =>  'required|string',
             BookingContract::DATE   =>  'required|date',
             BookingContract::PHONE  =>  'nullable|string',
-            BookingContract::COMMENT    =>  'nullable|text',
+            BookingContract::COMMENT    =>  'nullable|string',
             BookingContract::STATUS =>  'required|string'
         ]);
         if ($validator->fails()) {

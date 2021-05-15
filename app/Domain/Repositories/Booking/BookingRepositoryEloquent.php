@@ -44,6 +44,7 @@ class BookingRepositoryEloquent implements BookingRepositoryInterface
             BookingContract::ORGANIZATION_TABLE_ID  =>  $data[BookingContract::ORGANIZATION_TABLE_ID],
             BookingContract::START  =>  $data[BookingContract::START],
             BookingContract::END    =>  $data[BookingContract::END],
+            BookingContract::DATE   =>  $data[BookingContract::DATE],
             BookingContract::PHONE  =>  array_key_exists(BookingContract::PHONE,$data)?$data[BookingContract::PHONE]:null,
             BookingContract::COMMENT    =>  array_key_exists(BookingContract::COMMENT,$data)?$data[BookingContract::COMMENT]:null,
             BookingContract::STATUS     =>  $data[BookingContract::STATUS],

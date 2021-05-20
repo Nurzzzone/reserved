@@ -4,48 +4,52 @@ namespace App\Http\Controllers\Api;
 
 use App\Domain\Contracts\BookingContract;
 use App\Http\Controllers\Controller;
-use App\Http\Requests\BookingRequest;
-use App\Http\Resources\BookingResource;
+
 use Illuminate\Http\Request;
-use App\Services\Booking\BookingService;
-use App\Http\Resources\BookingCollection;
 use Illuminate\Support\Facades\Validator;
+
+use App\Http\Resources\BookingResource;
+use App\Http\Resources\BookingCollection;
+
+use App\Services\Booking\BookingService;
+use App\Services\Payment\PaymentService;
+use App\Services\Organization\OrganizationService;
 
 class BookingController extends Controller
 {
     protected $bookingService;
+    protected $paymentService;
+    protected $organizationService;
     protected $paginate =   1;
-    public function __construct(BookingService $bookingService)
-    {
+
+    public function __construct(BookingService $bookingService, PaymentService $paymentService, OrganizationService $organizationService) {
         $this->bookingService   =   $bookingService;
+        $this->paymentService   =   $paymentService;
+        $this->organizationService  =   $organizationService;
     }
 
-    public function getByUserId($id, Request $request)
-    {
-        if ($request->has('paginate')) {
-            $this->paginate =   (int)$request->input('paginate');
+    public function getByUserId($id, Request $request) {
+        if ($request->has(BookingContract::PAGINATE)) {
+            $this->paginate =   (int)$request->input(BookingContract::PAGINATE);
         }
         return new BookingCollection($this->bookingService->getByUserId($id,$this->paginate));
     }
 
-    public function tables($id, Request $request)
-    {
-        if ($request->has('paginate')) {
-            $this->paginate =   (int)$request->input('paginate');
+    public function tables($id, Request $request) {
+        if ($request->has(BookingContract::PAGINATE)) {
+            $this->paginate =   (int)$request->input(BookingContract::PAGINATE);
         }
         return new BookingCollection($this->bookingService->getByTableId($id,$this->paginate));
     }
 
-    public function getByOrganizationId($id, Request $request)
-    {
-        if ($request->has('paginate')) {
-            $this->paginate =   (int)$request->input('paginate');
+    public function getByOrganizationId($id, Request $request) {
+        if ($request->has(BookingContract::PAGINATE)) {
+            $this->paginate =   (int)$request->input(BookingContract::PAGINATE);
         }
         return new BookingCollection($this->bookingService->getByOrganizationId($id,$this->paginate));
     }
 
-    public function add(Request $request)
-    {
+    public function add(Request $request) {
         $validator = Validator::make($request->all(), [
             BookingContract::USER_ID    =>  'required|exists:App\Models\User,id',
             BookingContract::ORGANIZATION_ID    =>  'required',
@@ -55,7 +59,8 @@ class BookingController extends Controller
             BookingContract::DATE   =>  'required|date',
             BookingContract::PHONE  =>  'nullable|string',
             BookingContract::COMMENT    =>  'nullable|string',
-            BookingContract::STATUS =>  'required|string'
+            BookingContract::STATUS =>  'required|string',
+            BookingContract::CARD_ID    =>  'required|string'
         ]);
         if ($validator->fails()) {
             $message    =   '';
@@ -77,9 +82,15 @@ class BookingController extends Controller
                 $message    =   $validator->messages()->first(BookingContract::COMMENT);
             } elseif ($validator->messages()->first(BookingContract::STATUS)) {
                 $message    =   $validator->messages()->first(BookingContract::STATUS);
+            } elseif ($validator->messages()->first(BookingContract::CARD_ID)) {
+                $message    =   $validator->messages()->first(BookingContract::CARD_ID);
             }
             return response(['message'  =>  $message],400);
         }
-        return new BookingResource($this->bookingService->create($request->all()));
+        $booking            =   $this->bookingService->create($request->all());
+        $organization       =   $this->organizationService->getById($booking->organization_id);
+        return (new BookingResource($booking))->additional([
+            BookingContract::URL    =>  $this->paymentService->url($booking->id,$organization->price,$organization->title,$request->input(BookingContract::CARD_ID))
+        ]);
     }
 }

@@ -19,7 +19,8 @@ class BookingResource extends JsonResource
             BookingContract::PHONE =>  $this->phone,
             BookingContract::COMMENT  =>  $this->comment,
             BookingContract::STATUS  =>  $this->status,
-            BookingContract::CREATED_AT =>  $this->created_at
+            BookingContract::CREATED_AT =>  $this->created_at,
+            BookingContract::URL    =>  $this->payment
         ];
     }
 }

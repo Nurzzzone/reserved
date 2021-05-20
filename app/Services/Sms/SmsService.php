@@ -4,39 +4,45 @@
 namespace App\Services\Sms;
 
 use App\Services\BaseService;
+use App\Helpers\Curl\Curl;
 
 class SmsService extends BaseService
 {
 
-    protected $login    =   'sms_api';
-    protected $password =   'Qwerty000';
+    protected $login    =   'amantur7';
+    protected $password =   'qwerty00';
     protected $url      =   'https://smsc.kz/sys/send.php';
     protected $code;
     protected $userPassword;
     protected $userPhone;
+    protected $curl;
 
-
-    public function sendCode(string $phone, int $code)
-    {
-        $this->code =   $code;
-        $ch =   curl_init();
-        curl_setopt($ch, CURLOPT_URL, $this->url.'?'.$this->getParameters($phone));
-        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-        $exec   =   curl_exec($ch);
-        curl_close($ch);
-        return $exec;
+    public function __construct(Curl $curl) {
+        $this->curl =   $curl;
     }
 
-    public function sendUser(string $phone, string $password)
-    {
+    public function sendBooking(string $phone, string $detail, string $link) {
+        return $this->curl->get($this->url.'?'.$this->getPaymentParameters($phone,$detail,$link));
+    }
+
+    public function sendCode(string $phone, int $code) {
+        $this->code =   $code;
+        return $this->curl->get($this->url.'?'.$this->getParameters($phone));
+    }
+
+    public function sendUser(string $phone, string $password) {
         $this->userPhone    =   $phone;
         $this->userPassword =   $password;
-        $ch =   curl_init();
-        curl_setopt($ch, CURLOPT_URL, $this->url.'?'.$this->getUserParameters($phone));
-        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-        $exec   =   curl_exec($ch);
-        curl_close($ch);
-        return $exec;
+        return $this->curl->get($this->url.'?'.$this->getUserParameters($phone));
+    }
+
+    public function getPaymentParameters($phone,$detail,$link) {
+        return http_build_query([
+            'login'     =>  $this->login,
+            'psw'       =>  $this->password,
+            'phones'    =>  $phone,
+            'mes'       =>  $this->messagePayment($detail,$link)
+        ]);
     }
 
     public function getUserParameters(string $phone):string
@@ -49,13 +55,7 @@ class SmsService extends BaseService
         ]);
     }
 
-    public function messageUser():string
-    {
-        return 'Дбро пожаловать в reserved.kz\n Ваш логин: '.$this->userPhone.'\n Ваш пароль: '.$this->userPassword;
-    }
-
-    public function getParameters(string $phone):string
-    {
+    public function getParameters(string $phone):string {
         return http_build_query([
             'login'     =>  $this->login,
             'psw'       =>  $this->password,
@@ -64,8 +64,15 @@ class SmsService extends BaseService
         ]);
     }
 
-    public function message():string
-    {
+    public function messagePayment($detail,$link):string {
+        return 'Вы забронировали стол в '.$detail.', для подтверждения бронирование пройдите по этой ссылке '.$link;
+    }
+
+    public function messageUser():string {
+        return 'Добро пожаловать в reserved.kz\n Ваш логин: '.$this->userPhone.'\n Ваш пароль: '.$this->userPassword;
+    }
+
+    public function message():string {
         return 'Ваш код: '.$this->code.' для подтверждения регистрации';
     }
 

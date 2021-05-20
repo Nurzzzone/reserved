@@ -201,10 +201,9 @@ class OrganizationCrudController extends CrudController
         $this->setupCreateOperation();
     }
 
-    public function list(Request $request)
-    {
-        $search_term = $request->input('q');
-        if ($search_term) {
+    public function list(Request $request) {
+        if ($request->has('q')) {
+            $search_term = $request->input('q');
             if (backpack_user()->role === OrganizationContract::TRANSLATE[OrganizationContract::MODERATOR]) {
                 $results = Organization::where([
                     [OrganizationContract::TITLE, 'LIKE', '%'.$search_term.'%'],

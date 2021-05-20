@@ -9,6 +9,17 @@ use App\Http\Controllers\Api\CountryController;
 use App\Http\Controllers\Api\OrganizationCityController;
 use App\Http\Controllers\Api\BookingController;
 use App\Http\Controllers\Api\ReviewController;
+use App\Http\Controllers\Api\PaymentController;
+
+Route::prefix('payment')->group(function() {
+    Route::get('/card/add/{id}',[PaymentController::class,'cardAdd']);
+    Route::get('/card/list/{id}',[PaymentController::class,'cardList']);
+    Route::post('/result',[PaymentController::class,'result']);
+    Route::get('/post',[PaymentController::class,'post']);
+    Route::get('/check',[PaymentController::class,'check']);
+    Route::get('/success',[PaymentController::class,'success']);
+    Route::get('/failure',[PaymentController::class,'failure']);
+});
 
 Route::prefix('review')->group(function () {
     Route::post('/create/',[ReviewController::class,'create']);

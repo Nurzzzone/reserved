@@ -52,6 +52,20 @@ class MainContract
     const END       =   'end';
     const IMAGES    =   'images';
     const WEBSITE   =   'website';
+    const VALUE     =   'value';
+    const URL       =   'url';
+    const PG_AMOUNT =   'pg_amount';
+    const PG_SALT   =   'pg_salt';
+    const POST      =   'POST';
+    const GET       =   'GET';
+    const PG_PARAM1 =   'pg_param1';
+    const PG_PARAM2 =   'pg_param2';
+    const PG_PARAM3 =   'pg_param3';
+    const COUNT     =   'count';
+    const TAX_TYPE  =   'tax_type';
+    const PG_SIG    =   'pg_sig';
+    const PAGINATE  =   'paginate';
+    const CARD_ID   =   'card_id';
 
     const ON        =   'on';
     const OFF       =   'off';
@@ -88,18 +102,45 @@ class MainContract
         self::DELETED
     ];
 
+    const PG_PAYMENT_ID =   'pg_payment_id';
+    const PG_CARD_ID    =   'pg_card_id';
+    const PG_BACK_LINK  =   'pg_back_link';
+    const PG_POST_LINK  =   'pg_post_link';
+    const PG_USER_ID    =   'pg_user_id';
+    const PG_USER_PHONE =   'pg_user_phone';
+    const PG_LIFETIME   =   'pg_lifetime';
+    const PG_ORDER_ID   =   'pg_order_id';
+    const EXPIRATION    =   'expiration';
+    const BOOKING_ID    =   'booking_id';
     const API_TOKEN     =   'api_token';
     const SETTINGS      =   'settings';
     const DESCRIPTION   =   'description';
-    const DESCRIPTION_KZ    =   'description_kz';
-    const DESCRIPTION_EN    =   'description_en';
+    const PG_SITE_URL   =   'pg_site_url';
     const MINIMAL_PRICE =   'minimal_price';
     const IS_AVAILABLE  =   'is_available';
     const ADDRESS_KZ    =   'address_kz';
     const ADDRESS_EN    =   'address_en';
     const API_SECRET    =   'api_secret';
     const ORGANIZATION  =   'organization';
+    const PG_CURRENCY   =   'pg_currency';
+    const PG_CHECK_URL  =   'pg_check_url';
+    const PG_RESULT_URL =   'pg_result_url';
+    const PG_STATE_URL  =   'pg_state_url';
+    const PG_USER_IP    =   'pg_user_ip';
+    const REMOTE_ADDR   =   'REMOTE_ADDR';
+    const PG_LANGUAGE   =   'PG_LANGUAGE';
 
+    const PG_REDIRECT_URL   =   'pg_redirect_url';
+    const PG_TESTING_MODE   =   'pg_testing_mode';
+    const PG_PAYMENT_SYSTEM =   'pg_payment_system';
+    const DESCRIPTION_KZ    =   'description_kz';
+    const DESCRIPTION_EN    =   'description_en';
+    const PG_FAILURE_URL    =   'pg_failure_url';
+    const PG_SUCCESS_URL    =   'pg_success_url';
+    const PG_REQUEST_METHOD =   'pg_request_method';
+    const PG_PAYMENT_ROUTE  =   'pg_payment_route';
+    const PG_DESCRIPTION    =   'pg_description';
+    const PG_MERCHANT_ID    =   'pg_merchant_id';
     const PHONE_VERIFIED_AT =   'phone_verified_at';
     const REMEMBER_TOKEN    =   'remember_token';
     const EMAIL_VERIFIED_AT =   'email_verified_at';
@@ -157,10 +198,18 @@ class MainContract
         'ALL_DAY'           =>  'Круглостуочно'
     ];
 
-
+    const PG_RECURRING_START    =   'pg_recurring_start';
+    const PG_USER_CONTACT_EMAIL =   'pg_user_contact_email';
+    const PG_STATE_URL_METHOD   =   'pg_state_url_method';
     const ORGANIZATION_TABLE_ID =   'organization_table_id';
     const ORGANIZATION_TABLES   =   'organization_tables';
     const IIKO_ORGANIZATION_ID  =   'iiko_organization_id';
+    const PG_POSTPONE_PAYMENT   =   'pg_postpone_payment';
+    const PG_RECURRING_LIFETIME =   'pg_recurring_lifetime';
+    const PG_RECEIPT_POSITIONS  =   'pg_receipt_positions';
+
+    const PG_SUCCESS_URL_METHODS    =   'pg_success_url_methods';
+    const PG_FAILURE_URL_METHODS    =   'pg_failure_url_methods';
 
     public static function getCheck($value)
     {

@@ -4,14 +4,20 @@ namespace App\Http\Controllers\Admin;
 
 use App\Domain\Contracts\BookingContract;
 use App\Domain\Contracts\OrganizationContract;
+use App\Domain\Contracts\OrganizationTableListContract;
 use App\Domain\Contracts\OrganizationTablesContract;
 use App\Domain\Contracts\UserContract;
 use App\Http\Requests\BookingRequest;
-use App\Services\Api\ApiService;
+
 use Backpack\CRUD\app\Http\Controllers\CrudController;
 use Backpack\CRUD\app\Library\CrudPanel\CrudPanelFacade as CRUD;
 use App\Models\Booking;
 use App\Domain\Repositories\Organization\OrganizationRepositoryEloquent as OrganizationRepository;
+
+use App\Services\Api\ApiService;
+use App\Services\Organization\OrganizationService;
+
+use App\Jobs\BookingPayment;
 
 class BookingCrudController extends CrudController
 {
@@ -34,13 +40,20 @@ class BookingCrudController extends CrudController
 
     public function store(ApiService $apiService)
     {
-        $response = $this->traitStore();
+        $response   =   $this->traitStore();
         $parameter  =   (array) $this->crud->getRequest()->request;
         foreach ($parameter as &$param) {
             $parameter  =   $param;
             break;
         }
-        $apiService->booking($parameter);
+        //$apiService->booking($parameter);
+
+        BookingPayment::dispatch([
+            $this->crud->entry->id,
+            $parameter[BookingContract::ORGANIZATION_ID],
+            $parameter[BookingContract::USER_ID]
+        ]);
+
         return $response;
     }
 
@@ -82,7 +95,7 @@ class BookingCrudController extends CrudController
         CRUD::setValidation(BookingRequest::class);
 
         $this->crud->addField([
-            'label'         => 'Имя',
+            'label'         => 'Номер телефона',
             'type'          => 'select2_from_ajax',
             'name'          => BookingContract::USER_ID,
             'entity'        => 'user',
@@ -93,17 +106,30 @@ class BookingCrudController extends CrudController
         ]);
 
         $this->crud->addField([
-            'label'         => 'Организация',
+            'label'         => 'Заведение',
             'type'          => 'select2_from_ajax',
             'name'          => BookingContract::ORGANIZATION_ID,
             'entity'        => 'organization',
             'placeholder'   => '',
             'minimum_input_length'  => '',
-            'attribute'     => OrganizationContract::NAME,
+            'attribute'     => OrganizationContract::TITLE,
             'data_source'   =>  url('organization')
         ]);
 
-        CRUD::field(BookingContract::ORGANIZATION_TABLE_ID)->type('number')->label('ID стола');
+        $this->crud->addField([
+            'label' =>  'Стол',
+            'type'  =>  'select2_from_ajax',
+            'name'  =>  BookingContract::ORGANIZATION_TABLE_ID,
+            'entity'    =>  'organizationTables',
+            'attribute' =>  OrganizationTableListContract::TITLE,
+            'data_source'   =>  url('tables'),
+            'placeholder'   =>  'Выберите заведение',
+            'minimum_input_length' => 0,
+            'dependencies'  => ['organization'],
+            'include_all_form_fields' => true,
+        ]);
+
+        //CRUD::field(BookingContract::ORGANIZATION_TABLE_ID)->type('number')->label('ID стола');
 
         CRUD::field(BookingContract::START)->type('time')->label('Начало');
         CRUD::field(BookingContract::END)->type('time')->label('Конец');

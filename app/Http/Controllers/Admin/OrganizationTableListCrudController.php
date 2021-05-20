@@ -7,8 +7,11 @@ use App\Domain\Contracts\OrganizationTableListContract;
 use App\Domain\Contracts\OrganizationTablesContract;
 use App\Domain\Repositories\Organization\OrganizationRepositoryEloquent as OrganizationRepository;
 use App\Http\Requests\OrganizationTableListRequest;
+use App\Models\OrganizationTableList;
+use App\Models\OrganizationTables;
 use Backpack\CRUD\app\Http\Controllers\CrudController;
 use Backpack\CRUD\app\Library\CrudPanel\CrudPanelFacade as CRUD;
+use Illuminate\Http\Request;
 
 class OrganizationTableListCrudController extends CrudController
 {
@@ -63,8 +66,18 @@ class OrganizationTableListCrudController extends CrudController
             ]);
     }
 
-    protected function setupUpdateOperation()
-    {
+    protected function setupUpdateOperation() {
         $this->setupCreateOperation();
+    }
+
+    public function list(Request $request) {
+        if ($request->has('form')) {
+            $form   =   $request->input('form');
+            $organization   =   $form[2][OrganizationTableListContract::VALUE];
+            if ($organization) {
+                return OrganizationTableList::where(OrganizationTableListContract::ORGANIZATION_ID,$organization)->paginate(10);
+            }
+        }
+        return [];
     }
 }

@@ -12,13 +12,18 @@ use App\Http\Controllers\Api\ReviewController;
 use App\Http\Controllers\Api\PaymentController;
 
 Route::prefix('payment')->group(function() {
+
     Route::get('/card/add/{id}',[PaymentController::class,'cardAdd']);
     Route::get('/card/list/{id}',[PaymentController::class,'cardList']);
-    Route::get('/result',[PaymentController::class,'result']);
-    Route::get('/post',[PaymentController::class,'post']);
-    Route::get('/check',[PaymentController::class,'check']);
+
+    Route::post('/result',[PaymentController::class,'result']);
+
     Route::get('/success',[PaymentController::class,'success']);
     Route::get('/failure',[PaymentController::class,'failure']);
+
+    Route::get('/post',[PaymentController::class,'post']);
+    Route::get('/check',[PaymentController::class,'check']);
+
 });
 
 Route::prefix('review')->group(function () {

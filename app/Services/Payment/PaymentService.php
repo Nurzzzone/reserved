@@ -175,6 +175,7 @@ class PaymentService
         \App\Models\Test::create([
             'test'  =>  'res'.json_encode($data)
         ]);
+        return 'result';
     }
 
     public function post($data) {

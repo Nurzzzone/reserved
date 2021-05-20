@@ -66,6 +66,8 @@ class MainContract
     const PG_SIG    =   'pg_sig';
     const PAGINATE  =   'paginate';
     const CARD_ID   =   'card_id';
+    const PG_RESULT =   'pg_result';
+    const PAYED     =   'payed';
 
     const ON        =   'on';
     const OFF       =   'off';
@@ -83,6 +85,12 @@ class MainContract
 
     const STATUSES  =   [
         self::ENABLED,
+        self::DISABLED
+    ];
+
+    const PAYMENT_STATUSES  =   [
+        self::ENABLED,
+        self::PAYED,
         self::DISABLED
     ];
 

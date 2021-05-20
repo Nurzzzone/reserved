@@ -4,13 +4,17 @@ namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+
 use App\Services\Payment\PaymentService;
+use App\Services\Booking\BookingService;
 
 class PaymentController extends Controller
 {
     protected $paymentService;
-    public function __construct(PaymentService $paymentService) {
+    protected $bookingService;
+    public function __construct(PaymentService $paymentService, BookingService $bookingService) {
         $this->paymentService   =   $paymentService;
+        $this->bookingService   =   $bookingService;
     }
 
     public function cardAdd($id) {
@@ -21,8 +25,9 @@ class PaymentController extends Controller
         return $this->paymentService->cardList($id);
     }
 
-    public function result(Request $request) {
-        return $this->paymentService->result($request->all());
+    public function result(Request $request):void {
+        $this->paymentService->result($request->all());
+        $this->bookingService->result($request->all());
     }
 
     public function post(Request $request) {

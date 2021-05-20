@@ -172,11 +172,14 @@ class PaymentService
     }
 
 
-    public function result($data) {
-        \App\Models\Test::create([
-            'test'  =>  'res'.json_encode($data)
-        ]);
-        return 'result';
+    public function result($data):void {
+        if (array_key_exists(PaymentContract::PG_RESULT,$data)) {
+            if ((int) $data[PaymentContract::PG_RESULT] === 1) {
+                $this->paymentRepository->success($data[PaymentContract::PG_ORDER_ID]);
+            } else {
+                $this->paymentRepository->failure($data[PaymentContract::PG_ORDER_ID]);
+            }
+        }
     }
 
     public function post($data) {
@@ -188,16 +191,10 @@ class PaymentService
     }
 
     public function success($data) {
-        \App\Models\Test::create([
-            'test'  =>  'success'.json_encode($data)
-        ]);
         return 'success';
     }
 
     public function failure($data) {
-        \App\Models\Test::create([
-            'test'  =>  'failure'.json_encode($data)
-        ]);
         return 'failure';
     }
 }

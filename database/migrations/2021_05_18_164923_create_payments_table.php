@@ -21,7 +21,7 @@ class CreatePaymentsTable extends Migration
             $table->unsignedBigInteger(PaymentContract::PG_PAYMENT_ID)->nullable()->unqiue();
             $table->string(PaymentContract::PG_REDIRECT_URL)->nullable();
             $table->string(PaymentContract::PG_SIG)->nullable();
-            $table->enum(PaymentContract::STATUS,PaymentContract::STATUSES)->default(PaymentContract::ENABLED);
+            $table->enum(PaymentContract::STATUS,PaymentContract::PAYMENT_STATUSES)->default(PaymentContract::ENABLED);
             $table->timestamps();
         });
     }

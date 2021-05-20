@@ -12,7 +12,7 @@ class PaymentService
     protected $paymentRepository;
     protected $curl;
     const ID    =   538109;
-    const SITE  =   'https://reserved.org.kz';
+    const SITE  =   'http://reserved.org.kz';
     const URL   =   'https://api.paybox.money';
     const PHONE =   '+77021366697';
     const EMAIL =   'antechnology@bk.ru';
@@ -187,14 +187,14 @@ class PaymentService
 
     public function success($data) {
         \App\Models\Test::create([
-            'test'  =>  json_encode($data)
+            'test'  =>  'success'.json_encode($data)
         ]);
         return 'success';
     }
 
     public function failure($data) {
         \App\Models\Test::create([
-            'test'  =>  json_encode($data)
+            'test'  =>  'failure'.json_encode($data)
         ]);
         return 'failure';
     }

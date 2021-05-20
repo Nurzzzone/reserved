@@ -14,7 +14,7 @@ use App\Http\Controllers\Api\PaymentController;
 Route::prefix('payment')->group(function() {
     Route::get('/card/add/{id}',[PaymentController::class,'cardAdd']);
     Route::get('/card/list/{id}',[PaymentController::class,'cardList']);
-    Route::post('/result',[PaymentController::class,'result']);
+    Route::get('/result',[PaymentController::class,'result']);
     Route::get('/post',[PaymentController::class,'post']);
     Route::get('/check',[PaymentController::class,'check']);
     Route::get('/success',[PaymentController::class,'success']);

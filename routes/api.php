@@ -16,7 +16,7 @@ Route::prefix('payment')->group(function() {
     Route::get('/card/add/{id}',[PaymentController::class,'cardAdd']);
     Route::get('/card/list/{id}',[PaymentController::class,'cardList']);
 
-    Route::post('/result',[PaymentController::class,'result']);
+    Route::get('/result',[PaymentController::class,'result']);
 
     Route::get('/success',[PaymentController::class,'success']);
     Route::get('/failure',[PaymentController::class,'failure']);

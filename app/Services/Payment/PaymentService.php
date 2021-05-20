@@ -68,10 +68,11 @@ class PaymentService
             PaymentContract::PG_SALT        =>  rand(100000,999999),
             PaymentContract::PG_USER_ID     =>  $userId,
             PaymentContract::PG_RESULT_URL  =>  self::RESULT_URL,
-            //PaymentContract::PG_SUCCESS_URL =>  self::SUCCESS_URL,
-            //PaymentContract::PG_FAILURE_URL =>  self::FAILURE_URL,
-            //PaymentContract::PG_SUCCESS_URL_METHODS => PaymentContract::GET,
-            //PaymentContract::PG_FAILURE_URL_METHODS => PaymentContract::GET,
+            PaymentContract::PG_REQUEST_METHOD  =>  PaymentContract::GET,
+            PaymentContract::PG_SUCCESS_URL =>  self::SUCCESS_URL,
+            PaymentContract::PG_FAILURE_URL =>  self::FAILURE_URL,
+            PaymentContract::PG_SUCCESS_URL_METHODS => PaymentContract::GET,
+            PaymentContract::PG_FAILURE_URL_METHODS => PaymentContract::GET,
             PaymentContract::PG_USER_PHONE  =>  $phone
         ]));
         return json_decode(json_encode(simplexml_load_string($xml)),true);

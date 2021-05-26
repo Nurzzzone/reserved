@@ -68,6 +68,7 @@ class MainContract
     const CARD_ID   =   'card_id';
     const PG_RESULT =   'pg_result';
     const PAYED     =   'payed';
+    const API_KEY   =   'api_key';
 
     const ON        =   'on';
     const OFF       =   'off';

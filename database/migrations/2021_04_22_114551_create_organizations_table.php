@@ -16,6 +16,7 @@ class CreateOrganizationsTable extends Migration
             $table->bigInteger(OrganizationContract::CATEGORY_ID);
             $table->string(OrganizationContract::IIKO_ORGANIZATION_ID)->nullable();
             $table->bigInteger(OrganizationContract::IIKO_ID)->nullable();
+            $table->string(OrganizationContract::API_KEY)->nullable();
             $table->string(OrganizationContract::API_ID)->nullable();
             $table->string(OrganizationContract::API_SECRET)->nullable();
             $table->string(OrganizationContract::TITLE)->nullable();

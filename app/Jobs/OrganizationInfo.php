@@ -2,6 +2,7 @@
 
 namespace App\Jobs;
 
+use App\Events\OrganizationProcessed;
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldBeUnique;
 use Illuminate\Contracts\Queue\ShouldQueue;
@@ -30,6 +31,6 @@ class OrganizationInfo implements ShouldQueue
      */
     public function handle()
     {
-
+        event(new OrganizationProcessed($this->data));
     }
 }

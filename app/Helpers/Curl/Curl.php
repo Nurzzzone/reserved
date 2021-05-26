@@ -28,4 +28,25 @@ class Curl
         return $exec;
     }
 
+    public function postToken($url,$token = '', $data = [], $status = true) {
+        $curl   =   curl_init();
+        if ($token !== '') {
+            curl_setopt($curl, CURLOPT_HTTPHEADER, ['Content-Type: application/json' , 'Authorization: Bearer '.$token]);
+        } else {
+            curl_setopt($curl, CURLOPT_HTTPHEADER, ['Content-Type: application/json']);
+        }
+        curl_setopt($curl,CURLOPT_URL,$url);
+        curl_setopt($curl,CURLOPT_RETURNTRANSFER,true);
+        curl_setopt($curl,CURLOPT_POST, true);
+        if (sizeof($data) > 0) {
+            if ($status) {
+                curl_setopt($curl, CURLOPT_POSTFIELDS, http_build_query($data));
+            } else {
+                curl_setopt($curl, CURLOPT_POSTFIELDS, json_encode($data));
+            }
+        }
+        $out = curl_exec($curl);
+        curl_close($curl);
+        return $out;
+    }
 }

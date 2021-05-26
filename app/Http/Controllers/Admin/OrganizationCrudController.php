@@ -6,16 +6,13 @@ use App\Domain\Contracts\CategoryContract;
 use App\Domain\Contracts\OrganizationContract;
 use App\Domain\Contracts\UserContract;
 use App\Http\Requests\OrganizationRequest;
-use App\Models\User;
 use Backpack\CRUD\app\Http\Controllers\CrudController;
 use Backpack\CRUD\app\Library\CrudPanel\CrudPanelFacade as CRUD;
 use App\Models\Organization;
-use App\Domain\Repositories\Organization\OrganizationRepositoryEloquent as OrganizationRepository;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
+
 use App\Services\Api\ApiService;
 use App\Services\Organization\OrganizationService;
-use App\Events\OrganizationProcessed;
 
 use App\Jobs\OrganizationInfo;
 
@@ -67,8 +64,8 @@ class OrganizationCrudController extends CrudController
 
         $store  =   $this->traitStore();
 
-        OrganizationInfo::dispatch();
-        event(new OrganizationProcessed($organizationService->getById($this->crud->getCurrentEntry()->id)));
+        OrganizationInfo::dispatch($organizationService->getById($this->crud->getCurrentEntry()->id));
+
         return $store;
     }
 
@@ -184,6 +181,11 @@ class OrganizationCrudController extends CrudController
             CRUD::field(OrganizationContract::IIKO_ID)->label('IIKO ID')->attributes([
                 'required'  =>  'required'
             ]);
+
+            CRUD::field(OrganizationContract::API_KEY)->label('IIKO API KEY')->attributes([
+                'required'  =>  'required'
+            ]);
+
             CRUD::field(OrganizationContract::API_ID)->label('IIKO API ID')->attributes([
                 'required'  =>  'required'
             ]);

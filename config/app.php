@@ -184,7 +184,8 @@ return [
         App\Providers\EventServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
 
-        App\Providers\Repositories\PaymentRepositoryProvider::class
+        App\Providers\Repositories\PaymentRepositoryProvider::class,
+        App\Providers\Repositories\OrganizationTableListRepositoryProvider::class,
     ],
 
     /*

@@ -17,6 +17,8 @@ use App\Services\Api\ApiService;
 use App\Services\Organization\OrganizationService;
 use App\Events\OrganizationProcessed;
 
+use App\Jobs\OrganizationInfo;
+
 class OrganizationCrudController extends CrudController
 {
     use \Backpack\CRUD\app\Http\Controllers\Operations\ListOperation;
@@ -64,6 +66,8 @@ class OrganizationCrudController extends CrudController
         }
 
         $store  =   $this->traitStore();
+
+        OrganizationInfo::dispatch();
         event(new OrganizationProcessed($organizationService->getById($this->crud->getCurrentEntry()->id)));
         return $store;
     }

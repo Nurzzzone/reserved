@@ -50,4 +50,11 @@ class OrganizationRepositoryEloquent implements OrganizationRepositoryInterface
             OrganizationContract::RATING    =>  $rating
         ]);
     }
+
+    public function getByUserId(int $id) {
+        return Organization::where([
+            OrganizationContract::USER_ID   =>  $id,
+            OrganizationContract::STATUS    =>  OrganizationContract::ENABLED
+        ])->get();
+    }
 }

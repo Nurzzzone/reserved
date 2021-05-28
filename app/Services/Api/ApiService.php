@@ -136,7 +136,7 @@ class ApiService extends BaseService
         $token  =   json_decode($this->curl->postToken(self::AUTH,'',[
             'apiLogin'  =>  $key
         ],false),true);
-        if (sizeof($token) > 0) {
+        if (array_key_exists('token',$token)) {
             return $token['token'];
         }
         return [];

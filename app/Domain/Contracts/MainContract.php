@@ -69,6 +69,8 @@ class MainContract
     const PG_RESULT =   'pg_result';
     const PAYED     =   'payed';
     const API_KEY   =   'api_key';
+    const TIMEZONE  =   'timezone';
+    const UTC       =   'utc';
 
     const ON        =   'on';
     const OFF       =   'off';
@@ -219,6 +221,8 @@ class MainContract
 
     const PG_SUCCESS_URL_METHODS    =   'pg_success_url_methods';
     const PG_FAILURE_URL_METHODS    =   'pg_failure_url_methods';
+
+    const ORGANIZATION_TABLE_LIST_ID    =   'organization_table_list_id';
 
     public static function getCheck($value)
     {

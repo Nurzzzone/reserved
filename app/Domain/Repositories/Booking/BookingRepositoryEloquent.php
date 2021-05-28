@@ -30,7 +30,7 @@ class BookingRepositoryEloquent implements BookingRepositoryInterface
     public function getByTableId($id,$paginate)
     {
         return Booking::with('organizationTables','organization')
-            ->where(BookingContract::ORGANIZATION_TABLE_ID,$id)
+            ->where(BookingContract::ORGANIZATION_TABLE_LIST_ID,$id)
             ->orderBy(BookingContract::ID,'desc')
             ->skip(--$paginate*$this->take)
             ->take($this->take)->get();
@@ -41,25 +41,31 @@ class BookingRepositoryEloquent implements BookingRepositoryInterface
         return Booking::create([
             BookingContract::USER_ID    =>  $data[BookingContract::USER_ID],
             BookingContract::ORGANIZATION_ID    =>  $data[BookingContract::ORGANIZATION_ID],
-            BookingContract::ORGANIZATION_TABLE_ID  =>  $data[BookingContract::ORGANIZATION_TABLE_ID],
+            BookingContract::ORGANIZATION_TABLE_LIST_ID  =>  $data[BookingContract::ORGANIZATION_TABLE_LIST_ID],
             BookingContract::START  =>  $data[BookingContract::START],
             BookingContract::END    =>  $data[BookingContract::END],
             BookingContract::DATE   =>  $data[BookingContract::DATE],
-            BookingContract::PHONE  =>  array_key_exists(BookingContract::PHONE,$data)?$data[BookingContract::PHONE]:null,
             BookingContract::COMMENT    =>  array_key_exists(BookingContract::COMMENT,$data)?$data[BookingContract::COMMENT]:null,
             BookingContract::STATUS     =>  $data[BookingContract::STATUS],
         ]);
     }
 
     public function success($id):void {
-        Booking::where(BookingContract::ID,$id)->update([
+        Booking::with('organization')->where(BookingContract::ID,$id)->update([
             BookingContract::STATUS =>  BookingContract::ENABLED
         ]);
     }
 
     public function failure($id):void {
-        Booking::where(BookingContract::ID,$id)->update([
+        Booking::with('organization')->where(BookingContract::ID,$id)->update([
             BookingContract::STATUS =>  BookingContract::CANCELED
         ]);
+    }
+
+    public function getLastByTableId($id,$date) {
+        return Booking::with('organization')->where([
+            [BookingContract::ORGANIZATION_TABLE_LIST_ID,$id],
+            [BookingContract::DATE,$date]
+        ])->orderBy(BookingContract::ID,'desc')->first();
     }
 }

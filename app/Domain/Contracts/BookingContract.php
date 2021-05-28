@@ -11,11 +11,10 @@ class BookingContract extends MainContract
     const FILLABLE  =   [
         self::USER_ID,
         self::ORGANIZATION_ID,
-        self::ORGANIZATION_TABLE_ID,
+        self::ORGANIZATION_TABLE_LIST_ID,
         self::START,
         self::END,
         self::DATE,
-        self::PHONE,
         self::COMMENT,
         self::STATUS
     ];

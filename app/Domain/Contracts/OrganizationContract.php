@@ -28,10 +28,10 @@ class OrganizationContract extends MainContract
         self::ADDRESS_KZ,
         self::ADDRESS_EN,
         self::PRICE,
+        self::TIMEZONE,
         self::EMAIL,
         self::PHONE,
         self::WEBSITE,
-
         self::TABLES,
 
         self::START_MONDAY,

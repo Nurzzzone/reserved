@@ -40,7 +40,6 @@ class BookingPayment implements ShouldQueue
                     PaymentContract::PG_SIG =>  $payment[PaymentContract::PG_SIG],
                     PaymentContract::STATUS =>  PaymentContract::ENABLED
                 ]);
-
                 $smsService->sendBooking($user->phone,$organization->title,$payment[PaymentContract::PG_REDIRECT_URL]);
             }
         } catch (\Exception $e) {

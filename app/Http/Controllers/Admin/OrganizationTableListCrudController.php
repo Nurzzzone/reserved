@@ -73,7 +73,12 @@ class OrganizationTableListCrudController extends CrudController
     public function list(Request $request) {
         if ($request->has('form')) {
             $form   =   $request->input('form');
-            $organization   =   $form[3][OrganizationTableListContract::VALUE];
+            $organization   =   '';
+            foreach ($form as &$value) {
+                if ($value[OrganizationTableListContract::NAME] === 'organization_id') {
+                    $organization   =   $value[OrganizationTableListContract::VALUE];
+                }
+            }
             if ($organization) {
                 return OrganizationTableList::where(OrganizationTableListContract::ORGANIZATION_ID,$organization)->paginate(10);
             }

@@ -31,6 +31,7 @@ class CreateOrganizationsTable extends Migration
             $table->string(OrganizationContract::ADDRESS_KZ)->nullable();
             $table->string(OrganizationContract::ADDRESS_EN)->nullable();
             $table->string(OrganizationContract::PRICE)->nullable();
+            $table->string(OrganizationContract::TIMEZONE)->nullable();
             $table->string(OrganizationContract::EMAIL)->nullable();
             $table->string(OrganizationContract::PHONE)->nullable();
             $table->string(OrganizationContract::WEBSITE)->nullable();

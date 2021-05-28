@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Domain\Contracts\BookingContract;
 use App\Domain\Contracts\CategoryContract;
 use App\Domain\Contracts\OrganizationContract;
 use App\Domain\Contracts\UserContract;
@@ -158,6 +159,13 @@ class OrganizationCrudController extends CrudController
             CRUD::field(OrganizationContract::END_SUNDAY)->type('time')->label('Воскресенье конец');
 
         } else {
+
+            $this->crud->addField([
+                'id'    =>  BookingContract::TIMEZONE,
+                'name'  =>  BookingContract::TIMEZONE,
+                'type'  =>  'hidden',
+            ]);
+
             $this->crud->addField([
                 'label'                 => 'ID пользователя',
                 'type'                  => 'select2_from_ajax',

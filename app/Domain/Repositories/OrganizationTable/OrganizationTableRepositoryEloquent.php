@@ -17,4 +17,11 @@ class OrganizationTableRepositoryEloquent implements OrganizationTableRepository
             OrganizationTablesContract::LIMIT           =>  $limit
         ]);
     }
+
+    public function getByOrganizationId($id) {
+        return OrganizationTables::where([
+            [OrganizationTablesContract::ORGANIZATION_ID,$id],
+            [OrganizationTablesContract::STATUS,OrganizationTablesContract::ENABLED]
+        ])->get();
+    }
 }

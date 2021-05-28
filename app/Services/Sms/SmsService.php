@@ -9,8 +9,8 @@ use App\Helpers\Curl\Curl;
 class SmsService extends BaseService
 {
 
-    protected $login    =   'amantur7';
-    protected $password =   'qwerty00';
+    protected $login    =   'An-technology';
+    protected $password =   'ygABGazD55XJ4NcesmBo';
     protected $url      =   'https://smsc.kz/sys/send.php';
     protected $code;
     protected $userPassword;
@@ -65,7 +65,7 @@ class SmsService extends BaseService
     }
 
     public function messagePayment($detail,$link):string {
-        return 'Вы забронировали стол в '.$detail.', для подтверждения бронирование пройдите по этой ссылке '.$link;
+        return 'Оплатите бронирование '.$link;
     }
 
     public function messageUser():string {

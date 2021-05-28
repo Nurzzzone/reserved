@@ -1,5 +1,6 @@
 @extends(backpack_view('blank'))
 
+@if(backpack_auth()->user()->role === 'Администратор')
 @php
     $widgets['before_content'][] = [
         'type'    => 'div',
@@ -2690,6 +2691,58 @@ $widgets['before_content'][] = [
         ]
     ];
 @endphp
-
 @section('content')
 @endsection
+@else
+@section('content')
+    @foreach($organizations->getByUserId(backpack_auth()->user()->id) as &$organization)
+        <div class="row">
+            @foreach($sections->getByOrganizationId($organization->id) as & $section)
+                <div class="col-12 pt-4">
+                    <table class="table bg-white table-hover">
+                        <thead class="bg-primary text-white">
+                            <tr>
+                                <th scope="col">{{$section->name}} <span class="text-secondary">{{$organization->title}}</span></th>
+                                <th scope="col">Название</th>
+                                <th scope="col">Лимит</th>
+                                <th scope="col">Статус</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                        @foreach($tables->getByTableId($section->id) as &$table)
+                            <tr data-table="{{$table->id}}">
+                                <td scope="row">{{$table->id}}</td>
+                                <td>{{$table->title}}</td>
+                                <td>{{$table->limit}}</td>
+                                <td>{!!$booking->status($table->id)!!}</td>
+                            </tr>
+                        @endforeach
+                        </tbody>
+                    </table>
+                </div>
+            @endforeach
+        </div>
+    @endforeach
+    <script>
+        $(document).ready(function() {
+            function load() {
+                setTimeout(function () {
+                    $.ajax({
+                        url: "booking/status/",
+                        type: "GET",
+                        success: function (result) {
+                            let size    =   result.length;
+                            for (let i=0;i<size;i++) {
+                                let item    =   $("[data-table='"+result[i].id+"']").find('td').eq(3);
+                                item.html(result[i].status);
+                            }
+                        },
+                        complete: load
+                    });
+                }, 1101);
+            }
+            load();
+        });
+    </script>
+@endsection
+@endif

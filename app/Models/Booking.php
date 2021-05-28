@@ -20,6 +20,8 @@ class Booking extends Model
     public function getStartAttribute($value) {
         $start  =   new \DateTime($this->date.' '.$value, new \DateTimeZone(BookingContract::UTC));
         $start->setTimezone(new \DateTimeZone($this->organization->timezone));
+//        echo $start->format('H:i');
+//        die();
         return $start->format('H:i');
     }
 

@@ -21,7 +21,7 @@ class PaymentService
     const INIT  =   'init_payment.php';
 
     const STATUS    =   'get_status.php';
-    const MAIN_URL  =   self::URL.'/'.self::INIT;
+    const MAIN_URL  =   'https://api.paybox.money/init_payment.php';
     const PAY_URL   =   self::URL.'/'.self::STATUS;
 
     const CARD_ADD  =   self::URL.'/v1/merchant/'.self::ID.'/cardstorage/add';
@@ -59,20 +59,19 @@ class PaymentService
         return self::MAIN_URL.'?'.http_build_query($this->params($id, $price, $description, $userId, $cardId));
     }
 
-    public function urlAdmin($id, $price, $description, $userId, $phone) {
+    public function urlAdmin($id, $price, $description, $phone) {
         $xml    =   $this->curl->post(self::MAIN_URL,$this->signature([
             PaymentContract::PG_ORDER_ID    =>  $id,
             PaymentContract::PG_MERCHANT_ID =>  self::ID,
             PaymentContract::PG_AMOUNT      =>  $price,
             PaymentContract::PG_DESCRIPTION =>  $description,
             PaymentContract::PG_SALT        =>  rand(100000,999999),
-            PaymentContract::PG_USER_ID     =>  $userId,
             PaymentContract::PG_RESULT_URL  =>  self::RESULT_URL,
             PaymentContract::PG_REQUEST_METHOD  =>  PaymentContract::GET,
             PaymentContract::PG_SUCCESS_URL =>  self::SUCCESS_URL,
+            PaymentContract::PG_SUCCESS_URL_METHOD  => PaymentContract::GET,
             PaymentContract::PG_FAILURE_URL =>  self::FAILURE_URL,
-            PaymentContract::PG_SUCCESS_URL_METHODS => PaymentContract::GET,
-            PaymentContract::PG_FAILURE_URL_METHODS => PaymentContract::GET,
+            PaymentContract::PG_FAILURE_URL_METHOD  => PaymentContract::GET,
             PaymentContract::PG_USER_PHONE  =>  $phone
         ]));
         return json_decode(json_encode(simplexml_load_string($xml)),true);
@@ -129,8 +128,8 @@ class PaymentService
             //PaymentContract::PG_REQUEST_METHOD  =>  PaymentContract::POST,
             //PaymentContract::PG_PAYMENT_SYSTEM  =>  self::PAYMENT_SYSTEM,
 
-            PaymentContract::PG_SUCCESS_URL_METHODS =>  PaymentContract::GET,
-            PaymentContract::PG_FAILURE_URL_METHODS =>  PaymentContract::GET,
+            PaymentContract::PG_SUCCESS_URL_METHOD  =>  PaymentContract::GET,
+            PaymentContract::PG_FAILURE_URL_METHOD  =>  PaymentContract::GET,
             //PaymentContract::PG_STATE_URL_METHOD    =>  PaymentContract::GET,
             PaymentContract::PG_USER_CONTACT_EMAIL  =>  self::EMAIL,
             //PaymentContract::PG_POSTPONE_PAYMENT    =>  0,
@@ -148,12 +147,12 @@ class PaymentService
     }
 
     public function signature($request) {
-        //$request = $this->makeFlatParamsArray($request);
-        ksort($request);
-        array_unshift($request, self::INIT);
-        array_push($request, self::KEY);
-        $request[PaymentContract::PG_SIG] = md5(implode(';', $request));
-        unset($request[0], $request[1]);
+        $requestForSignature    =   $request;
+        $requestForSignature = $this->makeFlatParamsArray($requestForSignature);
+        ksort($requestForSignature);
+        array_unshift($requestForSignature, self::INIT);
+        array_push($requestForSignature, self::KEY);
+        $request[PaymentContract::PG_SIG] = md5(implode(';', $requestForSignature));
         return $request;
     }
 

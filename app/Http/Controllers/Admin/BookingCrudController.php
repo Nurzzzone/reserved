@@ -26,7 +26,7 @@ class BookingCrudController extends CrudController
 {
     use \Backpack\CRUD\app\Http\Controllers\Operations\ListOperation;
     use \Backpack\CRUD\app\Http\Controllers\Operations\CreateOperation { store as traitStore; }
-    use \Backpack\CRUD\app\Http\Controllers\Operations\UpdateOperation;
+    use \Backpack\CRUD\app\Http\Controllers\Operations\UpdateOperation { update as traitUpdate; }
     use \Backpack\CRUD\app\Http\Controllers\Operations\ShowOperation;
     public $organizationsId;
 
@@ -59,6 +59,7 @@ class BookingCrudController extends CrudController
         }
         $start  =   new \DateTime($parameter[BookingContract::DATE].' '.$parameter[BookingContract::START].':00', new \DateTimeZone($parameter[BookingContract::TIMEZONE]));
         $end    =   new \DateTime($parameter[BookingContract::DATE].' '.$parameter[BookingContract::END].':00', new \DateTimeZone($parameter[BookingContract::TIMEZONE]));
+
         $start->setTimezone(new \DateTimeZone(BookingContract::UTC));
         $end->setTimezone(new \DateTimeZone(BookingContract::UTC));
 
@@ -72,11 +73,7 @@ class BookingCrudController extends CrudController
         $this->crud->getRequest()->request->add([BookingContract::END    =>  $end->format('H:i')]);
 
         $response   =   $this->traitStore();
-        $parameter  =   (array) $this->crud->getRequest()->request;
-        foreach ($parameter as &$param) {
-            $parameter  =   $param;
-            break;
-        }
+
         //$apiService->booking($parameter);
         BookingPayment::dispatch([
             $this->crud->entry->id,
@@ -84,6 +81,34 @@ class BookingCrudController extends CrudController
             $parameter[BookingContract::USER_ID]
         ]);
 
+        return $response;
+    }
+
+    public function update() {
+
+        $parameter  =   (array) $this->crud->getRequest()->request;
+        foreach ($parameter as &$param) {
+            $parameter  =   $param;
+            break;
+        }
+
+        $start  =   new \DateTime($parameter[BookingContract::DATE].' '.$parameter[BookingContract::START].':00', new \DateTimeZone($parameter[BookingContract::TIMEZONE]));
+        $end    =   new \DateTime($parameter[BookingContract::DATE].' '.$parameter[BookingContract::END].':00', new \DateTimeZone($parameter[BookingContract::TIMEZONE]));
+
+        $start->setTimezone(new \DateTimeZone(BookingContract::UTC));
+        $end->setTimezone(new \DateTimeZone(BookingContract::UTC));
+
+        $this->crud->removeField(BookingContract::START);
+        $this->crud->removeField(BookingContract::END);
+
+        $this->crud->addField(['type' => 'hidden', 'name' => BookingContract::START]);
+        $this->crud->addField(['type' => 'hidden', 'name' => BookingContract::END]);
+
+        $this->crud->getRequest()->request->add([BookingContract::START  =>  $start->format('H:i')]);
+        $this->crud->getRequest()->request->add([BookingContract::END    =>  $end->format('H:i')]);
+
+        $response = $this->traitUpdate();
+        // do something after save
         return $response;
     }
 
@@ -183,8 +208,8 @@ class BookingCrudController extends CrudController
 
         //CRUD::field(BookingContract::ORGANIZATION_TABLE_ID)->type('number')->label('ID стола');
 
-        CRUD::field(BookingContract::START)->type('time')->value(date('h:i'))->label('Начало');
-        CRUD::field(BookingContract::END)->type('time')->value(date('h:i'))->label('Конец');
+        CRUD::field(BookingContract::START)->type('time')->value(date('H:i'))->label('Начало');
+        CRUD::field(BookingContract::END)->type('time')->value(date('H:i'))->label('Конец');
         CRUD::field(BookingContract::DATE)->type('date')->label('дата');
 
         CRUD::field(BookingContract::COMMENT)->label('Комментарии');

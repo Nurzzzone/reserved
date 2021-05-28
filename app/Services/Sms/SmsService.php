@@ -4,11 +4,14 @@
 namespace App\Services\Sms;
 
 use App\Services\BaseService;
+
+use App\Domain\Repositories\Link\LinkRepositoryInterface;
+
 use App\Helpers\Curl\Curl;
 
 class SmsService extends BaseService
 {
-
+    protected $link     =   'https://reserved.org.kz';
     protected $login    =   'An-technology';
     protected $password =   'ygABGazD55XJ4NcesmBo';
     protected $url      =   'https://smsc.kz/sys/send.php';
@@ -16,9 +19,11 @@ class SmsService extends BaseService
     protected $userPassword;
     protected $userPhone;
     protected $curl;
+    protected $linkRepository;
 
-    public function __construct(Curl $curl) {
-        $this->curl =   $curl;
+    public function __construct(Curl $curl, LinkRepositoryInterface $linkRepository) {
+        $this->curl             =   $curl;
+        $this->linkRepository   =   $linkRepository;
     }
 
     public function sendBooking(string $phone, string $detail, string $link) {
@@ -65,7 +70,8 @@ class SmsService extends BaseService
     }
 
     public function messagePayment($detail,$link):string {
-        return 'Оплатите бронирование '.$link;
+        $url    =   $this->linkRepository->create($link);
+        return 'Оплатите бронирование '.$this->link.'/lk/'.$url->id;
     }
 
     public function messageUser():string {

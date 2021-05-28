@@ -70,7 +70,7 @@ class MainContract
     const PAYED     =   'payed';
     const API_KEY   =   'api_key';
     const TIMEZONE  =   'timezone';
-    const UTC       =   'utc';
+    const UTC       =   'UTC';
 
     const ON        =   'on';
     const OFF       =   'off';
@@ -219,8 +219,8 @@ class MainContract
     const PG_RECURRING_LIFETIME =   'pg_recurring_lifetime';
     const PG_RECEIPT_POSITIONS  =   'pg_receipt_positions';
 
-    const PG_SUCCESS_URL_METHODS    =   'pg_success_url_methods';
-    const PG_FAILURE_URL_METHODS    =   'pg_failure_url_methods';
+    const PG_SUCCESS_URL_METHOD     =   'pg_success_url_method';
+    const PG_FAILURE_URL_METHOD     =   'pg_failure_url_method';
 
     const ORGANIZATION_TABLE_LIST_ID    =   'organization_table_list_id';
 

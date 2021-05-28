@@ -29,7 +29,8 @@ class BookingPayment implements ShouldQueue
 
         $organization   =   $organizationService->getById($this->data[1]);
         $user           =   $userService->getById($this->data[2]);
-        $payment        =   $paymentService->urlAdmin($this->data[0],$organization->price,$organization->title,$this->data[2],$user->phone);
+        $payment        =   $paymentService->urlAdmin($this->data[0],$organization->price,$organization->title,$user->phone);
+
         try {
             if (sizeof($payment)>0 && array_key_exists(PaymentContract::PG_REDIRECT_URL,$payment)) {
                 $paymentService->create([

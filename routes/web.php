@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\MainController;
+use App\Http\Controllers\LinkController;
 
 use App\Http\Controllers\Admin\Auth\RegisterController;
 use App\Http\Controllers\Admin\Auth\LoginController;
@@ -29,6 +30,7 @@ Route::get('tables/{id}',[OrganizationTableListCrudController::class,'getBySecti
 Route::get('organization',[OrganizationCrudController::class, 'list']);
 Route::get('organizationTables',[OrganizationTablesCrudController::class, 'list']);
 Route::get('organizationTables/{id}',[OrganizationTablesCrudController::class, 'getByOrganizationId']);
+Route::get('lk/{id}',[LinkController::class, 'link']);
 
 Route::get('/', function () {
     return view('welcome');

@@ -14,4 +14,16 @@ class LinkRepositoryEloquent implements LinkRepositoryInterface {
             LinkContract::EXPIRATION    =>  date("Y-m-d H:i:s", strtotime("+1 hours"))
         ]);
     }
+
+    public function getById($id) {
+        $link   =   Link::where([
+            [LinkContract::ID,$id],
+            [LinkContract::STATUS,LinkContract::ENABLED]
+        ])->first();
+        if ($link) {
+            $link->status   =   LinkContract::DISABLED;
+            $link->save();
+        }
+        return $link;
+    }
 }

@@ -27,8 +27,7 @@ class CheckIfAdmin
      *
      * @return bool [description]
      */
-    private function checkIfUserIsAdmin($user)
-    {
+    private function checkIfUserIsAdmin($user) {
         if ($user->role === UserContract::TRANSLATE[UserContract::ADMINISTRATOR] || $user->role === UserContract::TRANSLATE[UserContract::MODERATOR]) {
             return true;
         }// return ($user->is_admin == 1);

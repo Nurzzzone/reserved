@@ -24,6 +24,7 @@ return [
     'sms_code'              => 'Смс код',
     'access_restricted'     => 'Доступ ограничен',
     'you_are_blocked'       => 'Вы были заблокированы администратором',
+    'you_are_permission'    => 'У вас нет досутпа',
     'verify_phone'          => 'Подтвердите номер телефона',
     'verify_code'           => 'Подтвердить код',
     'incorrect_code'        => 'Неправильный код',

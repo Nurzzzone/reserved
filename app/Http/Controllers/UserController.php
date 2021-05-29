@@ -13,27 +13,25 @@ class UserController extends Controller
     protected $home =   'admin/dashboard';
     protected $userService;
 
-    public function __construct(UserService $userService)
-    {
+    public function __construct(UserService $userService) {
         $this->userService  =   $userService;
     }
-
 
     public function phoneVerify()
     {
         return view('phone_verify');
     }
 
-    public function blockedUser()
-    {
+    public function blockedUser() {
         return view('blocked_user');
     }
 
-    public function checkPhoneCode(SmsCodeRequest $request)
-    {
-        $code   =   $request->input(UserContract::CODE);
-        $userId =   backpack_user()->id;
-        if ($this->userService->verifyCode($code)) {
+    public function restrictedUser() {
+        return view('restricted_user');
+    }
+
+    public function checkPhoneCode(SmsCodeRequest $request) {
+        if ($this->userService->verifyCode($request->input(UserContract::CODE))) {
             return redirect($this->home);
         } else {
             throw ValidationException::withMessages([

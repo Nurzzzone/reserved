@@ -38,7 +38,8 @@ class Kernel extends HttpKernel
             \App\Http\Middleware\VerifyCsrfToken::class,
             \Illuminate\Routing\Middleware\SubstituteBindings::class,
             \App\Http\Middleware\SmsVerify::class,
-            \App\Http\Middleware\BlockedUser::class
+            \App\Http\Middleware\BlockedUser::class,
+            \App\Http\Middleware\Administrator::class,
         ],
         'api' => [
             'throttle:api',
@@ -53,7 +54,8 @@ class Kernel extends HttpKernel
             \App\Http\Middleware\VerifyCsrfToken::class,
             \Illuminate\Routing\Middleware\SubstituteBindings::class,
             \App\Http\Middleware\SmsVerify::class,
-            \App\Http\Middleware\BlockedUser::class
+            \App\Http\Middleware\BlockedUser::class,
+
         ]
     ];
 

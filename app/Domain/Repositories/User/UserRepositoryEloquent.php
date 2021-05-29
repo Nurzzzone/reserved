@@ -21,8 +21,7 @@ class UserRepositoryEloquent implements UserRepositoryInterface
         ]);
     }
 
-    public function updatePhoneVerifiedAt()
-    {
+    public function updatePhoneVerifiedAt() {
         $user   =   backpack_user();
         $user->phone_verified_at    =   date('Y-m-d G:i:s');
         return $user->save();

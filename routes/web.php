@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\Artisan;
 
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\MainController;
@@ -34,6 +35,11 @@ Route::get('lk/{id}',[LinkController::class, 'link']);
 
 Route::get('/', function () {
     return view('welcome');
+});
+
+Route::get('/queue', function() {
+    Artisan::call('queue:word');
+    dd('queue work');
 });
 
 Route::get('exit',[LoginController::class, 'logout'])->name('exit');

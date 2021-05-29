@@ -10,6 +10,7 @@ use App\Domain\Repositories\User\UserRepositoryInterface;
 use App\Domain\Repositories\Organization\OrganizationRepositoryInterface;
 use App\Domain\Repositories\OrganizationTable\OrganizationTableRepositoryInterface;
 use App\Domain\Repositories\OrganizationTableList\OrganizationTableListRepositoryInterface;
+use App\Domain\Repositories\Booking\BookingRepositoryInterface;
 
 use App\Helpers\Curl\Curl;
 
@@ -28,41 +29,80 @@ class ApiService extends BaseService
     const ORGANIZATIONS =   'https://api-ru.iiko.services/api/1/organizations';
     const TERMINALS     =   'https://api-ru.iiko.services/api/1/terminal_groups';
     const SECTIONS      =   'https://api-ru.iiko.services/api/1/reserve/available_restaurant_sections';
+    const RESERVE       =   'https://api-ru.iiko.services/api/1/reserve/create';
 
     public $token;
     protected $userRepository;
     protected $organizationRepository;
     protected $organizationTableRepository;
     protected $organizationTableListRepository;
+    protected $bookingRepository;
     protected $curl;
 
-    public function __construct(UserRepositoryInterface $userRepository, OrganizationRepositoryInterface $organizationRepository, OrganizationTableRepositoryInterface $organizationTableRepository, Curl $curl, OrganizationTableListRepositoryInterface $organizationTableListRepository)
+    public function __construct(UserRepositoryInterface $userRepository, OrganizationRepositoryInterface $organizationRepository, OrganizationTableRepositoryInterface $organizationTableRepository, Curl $curl, OrganizationTableListRepositoryInterface $organizationTableListRepository, BookingRepositoryInterface $bookingRepository)
     {
         $this->userRepository               =   $userRepository;
         $this->organizationRepository       =   $organizationRepository;
         $this->organizationTableRepository  =   $organizationTableRepository;
         $this->organizationTableListRepository  =   $organizationTableListRepository;
+        $this->bookingRepository            =   $bookingRepository;
         $this->curl                         =   $curl;
     }
 
-    public function getOrganizationId(string $id,string $secret)
-    {
+    public function getOrganizationId(string $id,string $secret) {
         return $this->getOrganizations($this->getToken($id,$secret));
     }
 
-    public function booking($data)
-    {
-        $organization   =   $this->organizationRepository->getById($data[BookingContract::ORGANIZATION_ID]);
-        $token          =   $this->getToken($organization->api_id,$organization->api_secret);
+    public function booking($id) {
+        $booking    =   $this->bookingRepository->getById($id);
+        $token      =   $this->getSessionToken($booking->organization->api_key);
+        $reserve    =   $this->reserve($token,$booking);
     }
 
-    public function createOrder()
-    {
+    public function reserve($token,$booking) {
+        $arr            =   [];
+        $organizations  =   $this->getOrganizationList($token,$booking->organization->iiko_organization_id);
+        $user           =   $this->userRepository->getById($booking->user_id);
+        $reserve        =   $this->curl->postToken(self::RESERVE,$token,[
+            'organizationId'    =>  $organizations[0],
+            'customer'          =>  [
+                'id'        =>  $user->id,
+                'gender'    =>  'NotSpecified'
+            ],
+            'phone'             =>  $user->phone,
+            'guestsCount'       =>  $booking->organizationTables->limit,
+            'durationInMinutes' =>  0,
+            'tableIds'  =>  [
+                $booking->organizationTables->key
+            ],
+            'estimatedStartTime'    =>  date('Y-m-d H:i:s.u', $booking->date.' '.$booking->start)
+        ],true);
+        /*
+         public function getOrganizationList($token,$id):array {
+        $arr            =   [];
+        $organizations  =   json_decode($this->curl->postToken(self::ORGANIZATIONS,$token,[
+            "organizationIds"   =>  [
+                $id
+            ],
+            "returnAdditionalInfo"  =>  false,
+            "includeDisabled"   =>  false
+        ],false),true);
+        if (array_key_exists('organizations',$organizations)) {
+            foreach ($organizations['organizations'] as &$value) {
+                $arr[]  =   $value['id'];
+            }
+        }
+        return $arr;
+    }
+         */
+        return $arr;
+    }
+
+    public function createOrder() {
         $url    =   self::URL_ORDER.'?access_token='.$this->token.'&request_timeout=15';
     }
 
-    public function getRooms($data)
-    {
+    public function getRooms($data) {
         $token          =   $this->getSessionToken($data->api_key);
         $organizations  =   $this->getOrganizationList($token,$data->iiko_organization_id);
         $terminals      =   $this->getTerminalList($token,$organizations);

@@ -74,7 +74,6 @@ class BookingCrudController extends CrudController
 
         $response   =   $this->traitStore();
 
-        //$apiService->booking($parameter);
         BookingPayment::dispatch([
             $this->crud->entry->id,
             $parameter[BookingContract::ORGANIZATION_ID],

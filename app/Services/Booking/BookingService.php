@@ -3,9 +3,12 @@
 
 namespace App\Services\Booking;
 
-use App\Domain\Contracts\BookingContract;
 use App\Services\BaseService;
+
 use App\Domain\Repositories\Booking\BookingRepositoryInterface;
+
+use App\Domain\Contracts\BookingContract;
+
 use http\Env\Request;
 
 class BookingService extends BaseService
@@ -32,14 +35,16 @@ class BookingService extends BaseService
         return $this->bookingRepository->create($data);
     }
 
-    public function result($data):void {
+    public function result($data):bool {
         if (array_key_exists(BookingContract::PG_RESULT,$data)) {
             if ((int) $data[BookingContract::PG_RESULT] === 1) {
                 $this->bookingRepository->success($data[BookingContract::PG_ORDER_ID]);
+                return true;
             } else {
                 $this->bookingRepository->failure($data[BookingContract::PG_ORDER_ID]);
             }
         }
+        return false;
     }
 
     public function statusCheck($id) {

@@ -7,14 +7,19 @@ use Illuminate\Http\Request;
 
 use App\Services\Payment\PaymentService;
 use App\Services\Booking\BookingService;
+use App\Services\Api\ApiService;
+
+use App\Domain\Contracts\BookingContract;
 
 class PaymentController extends Controller
 {
     protected $paymentService;
     protected $bookingService;
-    public function __construct(PaymentService $paymentService, BookingService $bookingService) {
+    protected $apiService;
+    public function __construct(PaymentService $paymentService, BookingService $bookingService, ApiService $apiService) {
         $this->paymentService   =   $paymentService;
         $this->bookingService   =   $bookingService;
+        $this->apiService       =   $apiService;
     }
 
     public function cardAdd($id) {
@@ -27,7 +32,9 @@ class PaymentController extends Controller
 
     public function result(Request $request):void {
         $this->paymentService->result($request->all());
-        $this->bookingService->result($request->all());
+        if ($this->bookingService->result($request->all())) {
+            $this->apiService->booking($request->input(BookingContract::PG_ORDER_ID));
+        }
     }
 
     public function post(Request $request) {

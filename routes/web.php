@@ -38,7 +38,7 @@ Route::get('/', function () {
 });
 
 Route::get('/queue', function() {
-    Artisan::call('queue:word');
+    Artisan::call('queue:work');
     dd('queue work');
 });
 

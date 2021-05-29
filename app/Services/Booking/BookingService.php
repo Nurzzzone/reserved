@@ -3,6 +3,7 @@
 
 namespace App\Services\Booking;
 
+use App\Domain\Contracts\OrganizationContract;
 use App\Services\BaseService;
 
 use App\Domain\Repositories\Booking\BookingRepositoryInterface;
@@ -47,25 +48,36 @@ class BookingService extends BaseService
         return false;
     }
 
+    public function convertDate($timezone,$format) {
+        $timestamp = time();
+        $dt = new \DateTime(date('Y-m-d'), new \DateTimeZone($timezone));
+        $dt->setTimestamp($timestamp);
+        return $dt->format($format);
+    }
+
     public function statusCheck($id) {
-        $booking    =   $this->bookingRepository->getLastByTableId($id,date('Y-m-d'));
+        $booking    =   $this->bookingRepository->getLastByTableId($id);
+
         if ($booking) {
-            //$start  =   new \DateTime($parameter[BookingContract::DATE].' '.$parameter[BookingContract::START].':00', );
-            $time       =   (new \DateTime(date('H:i:s')))->modify('+1 day');
-            $time->setTimezone(new \DateTimeZone($booking->organization->timezone));
-            $beginTime  =   new \DateTime($booking->start);
-            $endTime    =   (new \DateTime($booking->end))->modify('+1 day');
-            $time       =   \DateTime::createFromFormat('H:i',$time->format('H:i'));
-            $beginTime  =   \DateTime::createFromFormat('H:i',$beginTime->format('H:i'));
-            $endTime    =   \DateTime::createFromFormat('H:i',$endTime->format('H:i'));
-            if ($beginTime <= $time && $time <= $endTime) {
-                if ($booking->status === BookingContract::ENABLED || $booking->status === 'Включен') {
-                    return 'paid';
-                } elseif ($booking->status === BookingContract::CHECKING || $booking->status === 'На проверке') {
-                    return 'unpaid';
+            if ($booking[BookingContract::DATE] === $this->convertDate($booking[BookingContract::ORGANIZATION][OrganizationContract::TIMEZONE],'Y-m-d')) {
+
+                $time       =   (new \DateTime(date('H:i:s')))->modify('+1 day');
+                $time->setTimezone(new \DateTimeZone($booking->organization->timezone));
+                $beginTime  =   new \DateTime($booking->start);
+                $endTime    =   (new \DateTime($booking->end))->modify('+1 day');
+                $time       =   \DateTime::createFromFormat('H:i',$time->format('H:i'));
+                $beginTime  =   \DateTime::createFromFormat('H:i',$beginTime->format('H:i'));
+                $endTime    =   \DateTime::createFromFormat('H:i',$endTime->format('H:i'));
+                if ($beginTime <= $time && $time <= $endTime) {
+
+                    if ($booking->status === BookingContract::ENABLED || $booking->status === 'Включен') {
+                        return 'paid';
+                    } elseif ($booking->status === BookingContract::CHECKING || $booking->status === 'На проверке') {
+                        return 'unpaid';
+                    }
+                } else if ($time < $beginTime) {
+                    return $booking->start;
                 }
-            } else if ($time < $beginTime) {
-                return $booking->start;
             }
         }
         return 'free';
@@ -73,14 +85,14 @@ class BookingService extends BaseService
 
     public function status($id) {
         $btnList    =   [
-            'free'      =>  '<a href="/admin/booking/create?table='.$id.'"><button class="btn btn-success btn-sm">Свободен</button></a>',
-            'unpaid'    =>  '<button class="btn btn-sm btn-info">В резерве (Не оплачен)</button>',
-            'paid'      =>  '<button class="btn btn-sm btn-danger">Забронирован</button>',
+            'free'      =>  '<a href="/admin/booking/create?table='.$id.'" class="btn btn-success btn-block text-white font-weight-bold">Свободно</a>',
+            'unpaid'    =>  '<a class="btn btn-info btn-block text-white font-weight-bold">В резерве (Не оплачен)</a>',
+            'paid'      =>  '<a class="btn btn-danger btn-block text-white font-weight-bold">Забронирован</a>',
         ];
         $status     =   $this->statusCheck($id);
         if (array_key_exists($status,$btnList)) {
-            return $btnList[$status];
+            return [$status,$btnList[$status]];
         }
-        return '<button class="btn btn-sm btn-warning">Свободен до '.$status.'</button>';
+        return ['','<a class="btn btn-warning btn-block text-white font-weight-bold">Свободен до '.$status.'</a>'];
     }
 }

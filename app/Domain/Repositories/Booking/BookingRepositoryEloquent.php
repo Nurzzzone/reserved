@@ -63,10 +63,9 @@ class BookingRepositoryEloquent implements BookingRepositoryInterface
         ]);
     }
 
-    public function getLastByTableId($id,$date) {
+    public function getLastByTableId($id) {
         return Booking::with('organization')->where([
             [BookingContract::ORGANIZATION_TABLE_LIST_ID,$id],
-            [BookingContract::DATE,$date]
         ])->orderBy(BookingContract::ID,'desc')->first();
     }
 }

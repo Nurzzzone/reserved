@@ -2696,32 +2696,42 @@ $widgets['before_content'][] = [
 @else
 @section('content')
     @foreach($organizations->getByUserId(backpack_auth()->user()->id) as &$organization)
-        <div class="row">
-            @foreach($sections->getByOrganizationId($organization->id) as & $section)
-                <div class="col-12 pt-4">
-                    <table class="table bg-white table-hover">
-                        <thead class="bg-primary text-white">
-                            <tr>
-                                <th scope="col">{{$section->name}} <span class="text-secondary">{{$organization->title}}</span></th>
-                                <th scope="col">Название</th>
-                                <th scope="col">Лимит</th>
-                                <th scope="col">Статус</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                        @foreach($tables->getByTableId($section->id) as &$table)
-                            <tr data-table="{{$table->id}}">
-                                <td scope="row">{{$table->id}}</td>
-                                <td>{{$table->title}}</td>
-                                <td>{{$table->limit}}</td>
-                                <td>{!!$booking->status($table->id)!!}</td>
-                            </tr>
-                        @endforeach
-                        </tbody>
-                    </table>
-                </div>
-            @endforeach
-        </div>
+        <h1 class="my-3 text-center font-weight-bold text-primary">{{$organization->title}}</h1>
+        <p class="text-center h5 text-secondary">Выберите стол для бронирования</p>
+        @foreach($sections->getByOrganizationId($organization->id) as & $section)
+            <h3 class="my-3">{{$section->name}}</h3>
+            <div class="row">
+                @foreach($tables->getByTableId($section->id) as &$table)
+                    @php
+                        $status   =   $booking->statusCheck($table->id);
+                    @endphp
+                    <div class="col-xl-3 col-lg-4 col-md-6">
+                        <div class="card shadow border-0 overflow-hidden" data-card="{{$table->id}}" style="border-radius: 10px;">
+                            <div class="card-header @if($status === 'free') bg-success @elseif($status === 'unpaid') bg-info @elseif($status === 'paid') bg-danger @else btn-warning @endif  font-weight-bold text-center h6 border-0">
+                                {{$table->title}} <span class="text-dark">#{{$table->id}}</span>
+                            </div>
+                            <ul class="list-group list-group-flush">
+                                <li class="list-group-item text-center @if($status === 'free') text-success @elseif($status === 'unpaid') text-info @elseif($status === 'paid') text-danger @else text-warning @endif ">
+                                    <a class="nav-link p-0"><i class="nav-icon la la-users h2"></i><br>Вместимость <span class="text-dark font-weight-bold">{{$table->limit}}</span> человек</a>
+                                </li>
+                            </ul>
+                            <div class="card-body">
+                                @if ($status === 'free')
+                                    <a href="/admin/booking/create?table={{$table->id}}" class="btn btn-success btn-block text-white font-weight-bold" >Свободно</a>
+                                @elseif ($status === 'unpaid')
+                                    <a class="btn btn-info btn-block text-white font-weight-bold">В резерве (Не оплачен)</a>
+                                @elseif ($status === 'paid')
+                                    <a class="btn btn-danger btn-block text-white font-weight-bold">Забронирован</a>
+                                @else
+                                    <a class="btn btn-warning btn-block text-white font-weight-bold">Свободен до {{$status}}</a>
+                                @endif
+
+                            </div>
+                        </div>
+                    </div>
+                @endforeach
+            </div>
+        @endforeach
     @endforeach
     <script>
         $(document).ready(function() {
@@ -2733,13 +2743,28 @@ $widgets['before_content'][] = [
                         success: function (result) {
                             let size    =   result.length;
                             for (let i=0;i<size;i++) {
-                                let item    =   $("[data-table='"+result[i].id+"']").find('td').eq(3);
-                                item.html(result[i].status);
+                                let item    =   $("[data-card='"+result[i].id+"']");
+                                item.find('.card-header').removeClass('bg-success bg-info bg-danger bg-warning');
+                                item.find('.list-group-item').removeClass('text-success text-info text-danger text-warning');
+                                if (result[i].status[0] === 'free') {
+                                    item.find('.card-header').addClass('bg-success');
+                                    item.find('.list-group-item').addClass('text-success');
+                                } else if (result[i].status[0] === 'unpaid') {
+                                    item.find('.card-header').addClass('bg-info');
+                                    item.find('.list-group-item').addClass('text-info');
+                                } else if (result[i].status[0] === 'paid') {
+                                    item.find('.card-header').addClass('bg-danger');
+                                    item.find('.list-group-item').addClass('text-danger');
+                                } else {
+                                    item.find('.card-header').addClass('bg-warning');
+                                    item.find('.list-group-item').addClass('text-warning');
+                                }
+                                item.find('.card-body').html(result[i].status[1]);
                             }
                         },
                         complete: load
                     });
-                }, 1101);
+                }, 2000);
             }
             load();
         });

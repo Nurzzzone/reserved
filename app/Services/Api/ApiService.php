@@ -18,18 +18,18 @@ class ApiService extends BaseService
 {
 //    const USER_ID       =   'api25';
 //    const USER_SECRET   =   'Qwerty00';
-    const PATH  =   'https://iiko.biz:9900';
-    const API   =   '/api/0';
-    const URL   =   self::PATH.self::API.'/auth/access_token';
-    const URL_ORDER =   self::PATH.self::API.'/orders/add';
+    const PATH              =   'https://iiko.biz:9900';
+    const API               =   '/api/0';
+    const URL               =   self::PATH.self::API.'/auth/access_token';
+    const URL_ORDER         =   self::PATH.self::API.'/orders/add';
     const URL_ORGANIZATION  =   self::PATH.self::API.'/organization/list';
-    const URL_SECTIONS  =   self::PATH.self::API.'/rmsSettings/getRestaurantSections';
+    const URL_SECTIONS      =   self::PATH.self::API.'/rmsSettings/getRestaurantSections';
 
-    const AUTH          =   'https://api-ru.iiko.services/api/1/access_token';
-    const ORGANIZATIONS =   'https://api-ru.iiko.services/api/1/organizations';
-    const TERMINALS     =   'https://api-ru.iiko.services/api/1/terminal_groups';
-    const SECTIONS      =   'https://api-ru.iiko.services/api/1/reserve/available_restaurant_sections';
-    const RESERVE       =   'https://api-ru.iiko.services/api/1/reserve/create';
+    const AUTH              =   'https://api-ru.iiko.services/api/1/access_token';
+    const ORGANIZATIONS     =   'https://api-ru.iiko.services/api/1/organizations';
+    const TERMINALS         =   'https://api-ru.iiko.services/api/1/terminal_groups';
+    const SECTIONS          =   'https://api-ru.iiko.services/api/1/reserve/available_restaurant_sections';
+    const RESERVE           =   'https://api-ru.iiko.services/api/1/reserve/create';
 
     public $token;
     protected $userRepository;
@@ -39,8 +39,7 @@ class ApiService extends BaseService
     protected $bookingRepository;
     protected $curl;
 
-    public function __construct(UserRepositoryInterface $userRepository, OrganizationRepositoryInterface $organizationRepository, OrganizationTableRepositoryInterface $organizationTableRepository, Curl $curl, OrganizationTableListRepositoryInterface $organizationTableListRepository, BookingRepositoryInterface $bookingRepository)
-    {
+    public function __construct(UserRepositoryInterface $userRepository, OrganizationRepositoryInterface $organizationRepository, OrganizationTableRepositoryInterface $organizationTableRepository, Curl $curl, OrganizationTableListRepositoryInterface $organizationTableListRepository, BookingRepositoryInterface $bookingRepository) {
         $this->userRepository               =   $userRepository;
         $this->organizationRepository       =   $organizationRepository;
         $this->organizationTableRepository  =   $organizationTableRepository;
@@ -63,6 +62,7 @@ class ApiService extends BaseService
         $arr            =   [];
         $organizations  =   $this->getOrganizationList($token,$booking->organization->iiko_organization_id);
         $user           =   $this->userRepository->getById($booking->user_id);
+
         $reserve        =   $this->curl->postToken(self::RESERVE,$token,[
             'organizationId'    =>  $organizations[0],
             'customer'          =>  [
@@ -77,24 +77,23 @@ class ApiService extends BaseService
             ],
             'estimatedStartTime'    =>  date('Y-m-d H:i:s.u', strtotime($booking->date.' '.$booking->start))
         ],true);
-        /*
-         public function getOrganizationList($token,$id):array {
-        $arr            =   [];
-        $organizations  =   json_decode($this->curl->postToken(self::ORGANIZATIONS,$token,[
-            "organizationIds"   =>  [
-                $id
+
+        echo $token;
+        print_r([
+            'organizationId'    =>  $organizations[0],
+            'customer'          =>  [
+                'id'        =>  $user->id,
+                'gender'    =>  'NotSpecified'
             ],
-            "returnAdditionalInfo"  =>  false,
-            "includeDisabled"   =>  false
-        ],false),true);
-        if (array_key_exists('organizations',$organizations)) {
-            foreach ($organizations['organizations'] as &$value) {
-                $arr[]  =   $value['id'];
-            }
-        }
-        return $arr;
-    }
-         */
+            'phone'             =>  $user->phone,
+            'guestsCount'       =>  $booking->organizationTables->limit,
+            'durationInMinutes' =>  0,
+            'tableIds'  =>  [
+                $booking->organizationTables->key
+            ],
+            'estimatedStartTime'    =>  date('Y-m-d H:i:s.u', strtotime($booking->date.' '.$booking->start))
+        ]);
+
         return $arr;
     }
 

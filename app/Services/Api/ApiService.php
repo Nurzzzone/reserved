@@ -75,7 +75,7 @@ class ApiService extends BaseService
             'tableIds'  =>  [
                 $booking->organizationTables->key
             ],
-            'estimatedStartTime'    =>  date('Y-m-d H:i:s.u', $booking->date.' '.$booking->start)
+            'estimatedStartTime'    =>  date('Y-m-d H:i:s.u', strtotime($booking->date.' '.$booking->start))
         ],true);
         /*
          public function getOrganizationList($token,$id):array {

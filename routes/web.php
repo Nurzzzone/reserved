@@ -33,9 +33,7 @@ Route::get('organizationTables',[OrganizationTablesCrudController::class, 'list'
 Route::get('organizationTables/{id}',[OrganizationTablesCrudController::class, 'getByOrganizationId']);
 Route::get('lk/{id}',[LinkController::class, 'link']);
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::get('/', [MainController::class, 'index']);
 
 Route::get('/queue', function() {
     Artisan::call('queue:work');

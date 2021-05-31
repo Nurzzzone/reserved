@@ -4,8 +4,7 @@
 namespace App\Domain\Contracts;
 
 
-class BookingContract extends MainContract
-{
+class BookingContract extends MainContract {
     const TABLE =   'bookings';
 
     const FILLABLE  =   [

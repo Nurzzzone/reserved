@@ -34,4 +34,8 @@ class MainController extends Controller
         $table  =   $this->organizationTableList->getById($id);
         return view('vendor.backpack.base.booking',compact('table'));
     }
+
+    public function index() {
+        return view('index');
+    }
 }

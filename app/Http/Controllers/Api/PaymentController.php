@@ -11,8 +11,7 @@ use App\Services\Api\ApiService;
 
 use App\Domain\Contracts\BookingContract;
 
-class PaymentController extends Controller
-{
+class PaymentController extends Controller {
     protected $paymentService;
     protected $bookingService;
     protected $apiService;

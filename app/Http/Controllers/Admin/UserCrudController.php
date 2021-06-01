@@ -149,11 +149,11 @@ class UserCrudController extends CrudController
         if ($search_term) {
             if (backpack_user()->role === UserContract::TRANSLATE[UserContract::MODERATOR]) {
                 $results = User::where([
-                    [UserContract::NAME, 'LIKE', '%'.$search_term.'%'],
-                    [UserContract::USER,backpack_user()->id]
+                    [UserContract::PHONE, 'LIKE', '%'.$search_term.'%'],
+                    [UserContract::USER_ID,backpack_user()->id]
                 ])->paginate(10);
             } else {
-                $results = User::where(UserContract::NAME, 'LIKE', '%'.$search_term.'%')->paginate(10);
+                $results = User::where(UserContract::PHONE, 'LIKE', '%'.$search_term.'%')->paginate(10);
             }
         } else {
             $results = User::paginate(10);

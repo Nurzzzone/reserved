@@ -31,3 +31,6 @@
         <li class='nav-item'><a class='nav-link' href='{{ backpack_url('organizationcity') }}'><i class='nav-icon las la-map-marker'></i> Города</a></li>
     </ul>
 </li>
+
+<li class='nav-item'><a class='nav-link' href='{{ backpack_url('contracts') }}'><i class='nav-icon la la-question'></i> Contracts</a></li>
+<li class='nav-item'><a class='nav-link' href='{{ backpack_url('privacy') }}'><i class='nav-icon la la-question'></i> Privacies</a></li>

@@ -187,6 +187,8 @@ return [
         App\Providers\Repositories\PaymentRepositoryProvider::class,
         App\Providers\Repositories\OrganizationTableListRepositoryProvider::class,
         App\Providers\Repositories\LinkRepositoryProvider::class,
+        App\Providers\Repositories\ContractRepositoryProvider::class,
+        App\Providers\Repositories\PrivacyRepositoryProvider::class,
     ],
 
     /*

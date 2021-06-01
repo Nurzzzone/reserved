@@ -6,6 +6,7 @@ use Illuminate\Support\Facades\Artisan;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\MainController;
 use App\Http\Controllers\LinkController;
+use App\Http\Controllers\ContactController;
 
 use App\Http\Controllers\Admin\Auth\RegisterController;
 use App\Http\Controllers\Admin\Auth\LoginController;
@@ -24,6 +25,11 @@ use App\Http\Controllers\Admin\BookingCrudController;
 | contains the "web" middleware group. Now create something great!
 |
 */
+
+Route::prefix('contacts')->group(function() {
+    Route::get('contracts',[ContactController::class,'contracts']);
+    Route::get('privacy',[ContactController::class,'privacy']);
+});
 
 Route::get('users',[UserCrudController::class, 'list']);
 Route::get('tables',[OrganizationTableListCrudController::class,'list']);

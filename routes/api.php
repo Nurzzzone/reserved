@@ -10,20 +10,21 @@ use App\Http\Controllers\Api\OrganizationCityController;
 use App\Http\Controllers\Api\BookingController;
 use App\Http\Controllers\Api\ReviewController;
 use App\Http\Controllers\Api\PaymentController;
+use App\Http\Controllers\Api\ContactController;
+
+Route::prefix('contacts')->group(function() {
+    Route::get('/contracts',[ContactController::class,'contracts'])->name('contacts.contracts');
+    Route::get('/privacy',[ContactController::class,'privacy'])->name('contacts.privacy');
+});
 
 Route::prefix('payment')->group(function() {
-
     Route::get('/card/add/{id}',[PaymentController::class,'cardAdd']);
     Route::get('/card/list/{id}',[PaymentController::class,'cardList']);
-
     Route::get('/result',[PaymentController::class,'result']);
-
     Route::get('/success',[PaymentController::class,'success']);
     Route::get('/failure',[PaymentController::class,'failure']);
-
     Route::get('/post',[PaymentController::class,'post']);
     Route::get('/check',[PaymentController::class,'check']);
-
 });
 
 Route::prefix('review')->group(function () {

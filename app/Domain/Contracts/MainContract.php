@@ -71,6 +71,7 @@ class MainContract
     const API_KEY   =   'api_key';
     const TIMEZONE  =   'timezone';
     const UTC       =   'UTC';
+    const JSON      =   'json';
 
     const ON        =   'on';
     const OFF       =   'off';

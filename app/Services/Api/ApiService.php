@@ -54,21 +54,21 @@ class ApiService extends BaseService
 
     public function booking($id) {
         $booking    =   $this->bookingRepository->getById($id);
-        $token      =   $this->getSessionToken($booking->organization->api_key);
-        $reserve    =   $this->reserve($token,$booking);
+        if ($booking) {
+            $token      =   $this->getSessionToken($booking->organization->api_key);
+            $reserve    =   $this->reserve($token,$booking);
+        }
     }
 
     public function reserve($token,$booking) {
         $arr            =   [];
         $organizations  =   $this->getOrganizationList($token,$booking->organization->iiko_organization_id);
+        $terminals      =   $this->getTerminalList($token,$organizations);
         $user           =   $this->userRepository->getById($booking->user_id);
-
         $reserve        =   $this->curl->postToken(self::RESERVE,$token,[
             'organizationId'    =>  $organizations[0],
-            'customer'          =>  [
-                'id'        =>  $user->id,
-                'gender'    =>  'NotSpecified'
-            ],
+            'terminalGroupId'   =>  $terminals[0],
+            'customer'          =>  [],
             'phone'             =>  $user->phone,
             'guestsCount'       =>  $booking->organizationTables->limit,
             'durationInMinutes' =>  0,
@@ -77,23 +77,8 @@ class ApiService extends BaseService
             ],
             'estimatedStartTime'    =>  date('Y-m-d H:i:s.u', strtotime($booking->date.' '.$booking->start))
         ],true);
-
-        echo $token;
-        print_r([
-            'organizationId'    =>  $organizations[0],
-            'customer'          =>  [
-                'id'        =>  $user->id,
-                'gender'    =>  'NotSpecified'
-            ],
-            'phone'             =>  $user->phone,
-            'guestsCount'       =>  $booking->organizationTables->limit,
-            'durationInMinutes' =>  0,
-            'tableIds'  =>  [
-                $booking->organizationTables->key
-            ],
-            'estimatedStartTime'    =>  date('Y-m-d H:i:s.u', strtotime($booking->date.' '.$booking->start))
-        ]);
-
+        echo '<pre>';
+        print_r($reserve);
         return $arr;
     }
 

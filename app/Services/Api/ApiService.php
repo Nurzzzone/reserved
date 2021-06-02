@@ -62,6 +62,7 @@ class ApiService extends BaseService
 
     public function reserve($token,$booking) {
         $arr            =   [];
+        print_r($token);
         $organizations  =   $this->getOrganizationList($token,$booking->organization->iiko_organization_id);
         $terminals      =   $this->getTerminalList($token,$organizations);
         $user           =   $this->userRepository->getById($booking->user_id);
@@ -74,6 +75,14 @@ class ApiService extends BaseService
             'durationInMinutes' =>  0,
             'tableIds'  =>  [
                 $booking->organizationTables->key
+            ],
+            'order'     =>  [
+                'payments'  =>  [
+                    'paymentTypeKind'       =>  'Card',
+                    'sum'                   =>  4000,
+                    'paymentTypeId'         =>  'e46b4e6c-10d5-a739-8fb1-b6674d1e65e7',
+                    'isProcessedExternally' =>  true
+                ]
             ],
             'estimatedStartTime'    =>  date('Y-m-d H:i:s.u', strtotime($booking->date.' '.$booking->start))
         ],true);

@@ -3,12 +3,13 @@
 
 namespace App\Services\Booking;
 
-use App\Domain\Contracts\OrganizationContract;
+
 use App\Services\BaseService;
 
 use App\Domain\Repositories\Booking\BookingRepositoryInterface;
 
 use App\Domain\Contracts\BookingContract;
+use App\Domain\Contracts\OrganizationContract;
 
 use http\Env\Request;
 

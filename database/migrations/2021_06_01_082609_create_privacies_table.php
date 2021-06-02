@@ -16,7 +16,7 @@ class CreatePrivaciesTable extends Migration
     {
         Schema::create(PrivacyContract::TABLE, function (Blueprint $table) {
             $table->id();
-            $table->text(PrivacyContract::JSON);
+            $table->longText(PrivacyContract::JSON);
             $table->timestamps();
         });
     }

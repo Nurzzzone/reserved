@@ -1,3 +1,3 @@
 @foreach($contracts as $contract)
-    {!! $contract->json !!}
+    {!! htmlspecialchars_decode($contract->json) !!}
 @endforeach

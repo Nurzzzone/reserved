@@ -16,7 +16,7 @@ class CreateContractsTable extends Migration
     {
         Schema::create(ContractContract::TABLE, function (Blueprint $table) {
             $table->id();
-            $table->text(ContractContract::JSON);
+            $table->longText(ContractContract::JSON);
             $table->timestamps();
         });
     }

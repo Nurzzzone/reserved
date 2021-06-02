@@ -1,3 +1,3 @@
-@foreach($privacies as $privacy)
-    {!! $privacy->json !!}
+@foreach($contracts as $contract)
+    {!! htmlspecialchars_decode($contract->json) !!}
 @endforeach

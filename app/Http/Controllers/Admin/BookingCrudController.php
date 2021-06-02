@@ -52,11 +52,14 @@ class BookingCrudController extends CrudController
     }
 
     public function store(ApiService $apiService) {
+
         $parameter  =   (array) $this->crud->getRequest()->request;
+
         foreach ($parameter as &$param) {
             $parameter  =   $param;
             break;
         }
+
         $start  =   new \DateTime($parameter[BookingContract::DATE].' '.$parameter[BookingContract::START].':00', new \DateTimeZone($parameter[BookingContract::TIMEZONE]));
         $end    =   new \DateTime($parameter[BookingContract::DATE].' '.$parameter[BookingContract::END].':00', new \DateTimeZone($parameter[BookingContract::TIMEZONE]));
 
@@ -65,10 +68,8 @@ class BookingCrudController extends CrudController
 
         $this->crud->removeField(BookingContract::START);
         $this->crud->removeField(BookingContract::END);
-
         $this->crud->addField(['type' => 'hidden', 'name' => BookingContract::START]);
         $this->crud->addField(['type' => 'hidden', 'name' => BookingContract::END]);
-
         $this->crud->getRequest()->request->add([BookingContract::START  =>  $start->format('H:i')]);
         $this->crud->getRequest()->request->add([BookingContract::END    =>  $end->format('H:i')]);
 

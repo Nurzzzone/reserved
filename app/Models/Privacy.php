@@ -12,4 +12,8 @@ class Privacy extends Model
     use HasFactory;
 
     protected $fillable =   PrivacyContract::FILLABLE;
+
+    public function setJsonAttribute($value) {
+        $this->attributes[PrivacyContract::JSON]   =   htmlspecialchars($value);
+    }
 }

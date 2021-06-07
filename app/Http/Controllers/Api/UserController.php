@@ -39,6 +39,16 @@ class UserController extends Controller
         return response(['message'  =>  'incorrect code'],400);
     }
 
+    public function smsResend($phone)
+    {
+        $user   =   $this->userService->smsResend($phone);
+        if ($user) {
+            $this->smsService->sendCode($user->phone,$user->code);
+            return new UserResource($user);
+        }
+        return response(['message'  =>  'Phone doesn\'t exist'],400);
+    }
+
     public function token($token)
     {
         $user   =   $this->userService->getByApiToken($token);

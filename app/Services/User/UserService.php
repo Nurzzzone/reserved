@@ -21,6 +21,10 @@ class UserService extends BaseService
         return $this->userRepository->smsVerify($phone,$code);
     }
 
+    public function smsResend($phone) {
+        return $this->userRepository->smsResend($phone);
+    }
+
     public function getById(int $id) {
         return $this->userRepository->getById($id);
     }

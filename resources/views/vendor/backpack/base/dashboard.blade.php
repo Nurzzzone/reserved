@@ -749,6 +749,40 @@ organization_tables: [ ],
 }
                     </div>',
                 ]
+            ],
+            [
+                'type' => 'card',
+                'class' => 'card bg-success text-white',
+                'content' => [
+                    'header' => 'Переотправка SMS для подтверждения номера',
+                    'body'   => '<b>Запрос GET</b><br>
+                    https://'.$_SERVER['HTTP_HOST'].'/api/sms_verify/{phone}<br>
+                    <b>Параметры</b><br>
+                    <span class="text-dark">{phone}</span> Номер телефона (77776665544)<br>
+                    <hr>
+                    <button class="btn btn-sm btn-primary mt-2" type="button" data-toggle="collapse" data-target="#api-16a" aria-expanded="false" aria-controls="api-16a">Ответ 200</button>
+                    <button class="btn btn-sm btn-danger mt-2" type="button" data-toggle="collapse" data-target="#api-16a-400" aria-expanded="false" aria-controls="api-16a-400">Ответ 400</button>
+                    <div class="collapse mt-2" id="api-16a-400" style="font-size: 10px; line-height: 1;">
+                        {
+                            "message": "Phone doesn\'t exist"
+                        }
+                    </div>
+                    <div class="collapse mt-2" id="api-16a" style="font-size: 10px; line-height: 1; white-space: pre;">
+                        {
+                            "data": {
+                                "id": 1,
+                                "blocked": "Активный",
+                                "name": "Ersa",
+                                "avatar": null,
+                                "phone": "77784139424",
+                                "phone_verified_at": "Не подтвержден",
+                                "email": null,
+                                "email_verified_at": "Не подтвержден",
+                                "api_token": "qwerty01"
+                            }
+                        }
+                    </div>',
+                ]
             ]
         ]
     ];
@@ -2703,29 +2737,20 @@ $widgets['before_content'][] = [
             <div class="row">
                 @foreach($tables->getByTableId($section->id) as &$table)
                     @php
-                        $status   =   $booking->statusCheck($table->id);
+                        $status   =   $booking->status($table->id);
                     @endphp
                     <div class="col-xl-3 col-lg-4 col-md-6">
                         <div class="card shadow border-0 overflow-hidden" data-card="{{$table->id}}" style="border-radius: 10px;">
-                            <div class="card-header @if($status === 'free') bg-success @elseif($status === 'unpaid') bg-info @elseif($status === 'paid') bg-danger @else btn-warning @endif  font-weight-bold text-center h6 border-0">
-                                {{$table->title}} <span class="text-dark">#{{$table->id}}</span>
+                            <div class="card-header @if($status[0] === \App\Domain\Contracts\BookingContract::CHECKING) bg-info @elseif($status[0] === \App\Domain\Contracts\BookingContract::ENABLED) bg-danger @else bg-success @endif  font-weight-bold text-center h6 border-0">
+                                {{$table->title}} <span class="text-dark card-id">@if($status[0] === \App\Domain\Contracts\BookingContract::CHECKING || $status[0] === \App\Domain\Contracts\BookingContract::ENABLED)#{{$status[2]}}@endif</span>
                             </div>
                             <ul class="list-group list-group-flush">
-                                <li class="list-group-item text-center @if($status === 'free') text-success @elseif($status === 'unpaid') text-info @elseif($status === 'paid') text-danger @else text-warning @endif ">
+                                <li class="list-group-item text-center text-secondary">
                                     <a class="nav-link p-0"><i class="nav-icon la la-users h2"></i><br>Вместимость <span class="text-dark font-weight-bold">{{$table->limit}}</span> человек</a>
                                 </li>
                             </ul>
                             <div class="card-body">
-                                @if ($status === 'free')
-                                    <a href="/admin/booking/create?table={{$table->id}}" class="btn btn-success btn-block text-white font-weight-bold" >Свободно</a>
-                                @elseif ($status === 'unpaid')
-                                    <a class="btn btn-info btn-block text-white font-weight-bold">В резерве (Не оплачен)</a>
-                                @elseif ($status === 'paid')
-                                    <a class="btn btn-danger btn-block text-white font-weight-bold">Забронирован</a>
-                                @else
-                                    <a class="btn btn-warning btn-block text-white font-weight-bold">Свободен до {{$status}}</a>
-                                @endif
-
+                                {!! $status[1] !!}
                             </div>
                         </div>
                     </div>
@@ -2734,7 +2759,11 @@ $widgets['before_content'][] = [
         @endforeach
     @endforeach
     <script>
+        $(document.body).on('click', '.btn-booking', function() {
+            $.get('booking/status/'+$(this).attr('data-id'));
+        });
         $(document).ready(function() {
+
             function load() {
                 setTimeout(function () {
                     $.ajax({
@@ -2745,19 +2774,15 @@ $widgets['before_content'][] = [
                             for (let i=0;i<size;i++) {
                                 let item    =   $("[data-card='"+result[i].id+"']");
                                 item.find('.card-header').removeClass('bg-success bg-info bg-danger bg-warning');
-                                item.find('.list-group-item').removeClass('text-success text-info text-danger text-warning');
-                                if (result[i].status[0] === 'free') {
-                                    item.find('.card-header').addClass('bg-success');
-                                    item.find('.list-group-item').addClass('text-success');
-                                } else if (result[i].status[0] === 'unpaid') {
+                                if (result[i].status[0] === 'CHECKING') {
                                     item.find('.card-header').addClass('bg-info');
-                                    item.find('.list-group-item').addClass('text-info');
-                                } else if (result[i].status[0] === 'paid') {
+                                    item.find('.card-id').html('#'+result[i].status[2]);
+                                } else if (result[i].status[0] === 'ENABLED') {
                                     item.find('.card-header').addClass('bg-danger');
-                                    item.find('.list-group-item').addClass('text-danger');
+                                    item.find('.card-id').html('#'+result[i].status[2]);
                                 } else {
-                                    item.find('.card-header').addClass('bg-warning');
-                                    item.find('.list-group-item').addClass('text-warning');
+                                    item.find('.card-header').addClass('bg-success');
+                                    item.find('.card-id').html('');
                                 }
                                 item.find('.card-body').html(result[i].status[1]);
                             }

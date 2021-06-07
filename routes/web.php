@@ -59,4 +59,5 @@ Route::prefix('admin')->group(function () {
     Route::get('blocked_user',[UserController::class, 'blockedUser'])->name('user.blocked');
     Route::get('blocked_restricted',[UserController::class, 'restrictedUser'])->name('user.restricted');
     Route::get('booking/status',[BookingCrudController::class, 'bookingStatus']);
+    Route::get('booking/status/{id}',[BookingCrudController::class, 'cancel']);
 });

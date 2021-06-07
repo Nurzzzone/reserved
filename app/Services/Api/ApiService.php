@@ -60,35 +60,34 @@ class ApiService extends BaseService
         }
     }
 
-    public function reserve($token,$booking) {
-        $arr            =   [];
-        print_r($token);
+    public function postTokenReserve($token,$booking) {
         $organizations  =   $this->getOrganizationList($token,$booking->organization->iiko_organization_id);
         $terminals      =   $this->getTerminalList($token,$organizations);
         $user           =   $this->userRepository->getById($booking->user_id);
-        $reserve        =   $this->curl->postToken(self::RESERVE,$token,[
+        return $this->curl->postTokenReserve(self::RESERVE,$token,[
             'organizationId'    =>  $organizations[0],
             'terminalGroupId'   =>  $terminals[0],
-            'customer'          =>  [],
             'phone'             =>  $user->phone,
             'guestsCount'       =>  $booking->organizationTables->limit,
-            'durationInMinutes' =>  0,
+            'durationInMinutes' =>  100,
             'tableIds'  =>  [
                 $booking->organizationTables->key
             ],
             'order'     =>  [
+                'items'     =>  [
+                    'type'      =>  'Product',
+                    'productId' =>  'ac18f6a7-059e-4deb-8d72-0bc12289544e',
+                    'amount'    =>  1
+                ],
                 'payments'  =>  [
                     'paymentTypeKind'       =>  'Card',
-                    'sum'                   =>  4000,
+                    'sum'                   =>  $booking->organization->price,
                     'paymentTypeId'         =>  'e46b4e6c-10d5-a739-8fb1-b6674d1e65e7',
                     'isProcessedExternally' =>  true
                 ]
             ],
-            'estimatedStartTime'    =>  date('Y-m-d H:i:s.u', strtotime($booking->date.' '.$booking->start))
-        ],true);
-        echo '<pre>';
-        print_r($reserve);
-        return $arr;
+            'estimatedStartTime'    =>  date('Y-m-d H:i:s', strtotime($booking->date.' '.$booking->start)).'.000'
+        ]);
     }
 
     public function createOrder() {

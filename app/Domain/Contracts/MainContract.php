@@ -72,6 +72,7 @@ class MainContract
     const TIMEZONE  =   'timezone';
     const UTC       =   'UTC';
     const JSON      =   'json';
+    const TIME      =   'time';
 
     const ON        =   'on';
     const OFF       =   'off';

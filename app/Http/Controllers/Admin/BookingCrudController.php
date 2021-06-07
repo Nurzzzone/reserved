@@ -52,64 +52,37 @@ class BookingCrudController extends CrudController
     }
 
     public function store(ApiService $apiService) {
-
         $parameter  =   (array) $this->crud->getRequest()->request;
-
         foreach ($parameter as &$param) {
             $parameter  =   $param;
             break;
         }
-
-        $start  =   new \DateTime($parameter[BookingContract::DATE].' '.$parameter[BookingContract::START].':00', new \DateTimeZone($parameter[BookingContract::TIMEZONE]));
-        $end    =   new \DateTime($parameter[BookingContract::DATE].' '.$parameter[BookingContract::END].':00', new \DateTimeZone($parameter[BookingContract::TIMEZONE]));
-
-        $start->setTimezone(new \DateTimeZone(BookingContract::UTC));
-        $end->setTimezone(new \DateTimeZone(BookingContract::UTC));
-
-        $this->crud->removeField(BookingContract::START);
-        $this->crud->removeField(BookingContract::END);
-        $this->crud->addField(['type' => 'hidden', 'name' => BookingContract::START]);
-        $this->crud->addField(['type' => 'hidden', 'name' => BookingContract::END]);
-        $this->crud->getRequest()->request->add([BookingContract::START  =>  $start->format('H:i')]);
-        $this->crud->getRequest()->request->add([BookingContract::END    =>  $end->format('H:i')]);
-
+        $time   =   new \DateTime(date('Y-m-d').' '.$parameter[BookingContract::TIME], new \DateTimeZone($parameter[BookingContract::TIMEZONE]));
+        $time->setTimezone(new \DateTimeZone(BookingContract::UTC));
+        $this->crud->removeField(BookingContract::TIME);
+        $this->crud->addField(['type' => 'hidden', 'name' => BookingContract::TIME]);
+        $this->crud->getRequest()->request->add([BookingContract::TIME   =>  $time->format('H:i:s')]);
         $response   =   $this->traitStore();
-
         BookingPayment::dispatch([
             $this->crud->entry->id,
             $parameter[BookingContract::ORGANIZATION_ID],
             $parameter[BookingContract::USER_ID]
         ]);
-
         return $response;
     }
 
     public function update() {
-
         $parameter  =   (array) $this->crud->getRequest()->request;
         foreach ($parameter as &$param) {
             $parameter  =   $param;
             break;
         }
-
-        $start  =   new \DateTime($parameter[BookingContract::DATE].' '.$parameter[BookingContract::START].':00', new \DateTimeZone($parameter[BookingContract::TIMEZONE]));
-        $end    =   new \DateTime($parameter[BookingContract::DATE].' '.$parameter[BookingContract::END].':00', new \DateTimeZone($parameter[BookingContract::TIMEZONE]));
-
-        $start->setTimezone(new \DateTimeZone(BookingContract::UTC));
-        $end->setTimezone(new \DateTimeZone(BookingContract::UTC));
-
-        $this->crud->removeField(BookingContract::START);
-        $this->crud->removeField(BookingContract::END);
-
-        $this->crud->addField(['type' => 'hidden', 'name' => BookingContract::START]);
-        $this->crud->addField(['type' => 'hidden', 'name' => BookingContract::END]);
-
-        $this->crud->getRequest()->request->add([BookingContract::START  =>  $start->format('H:i')]);
-        $this->crud->getRequest()->request->add([BookingContract::END    =>  $end->format('H:i')]);
-
-        $response = $this->traitUpdate();
-        // do something after save
-        return $response;
+        $time   =   new \DateTime(date('Y-m-d').' '.$parameter[BookingContract::TIME], new \DateTimeZone($parameter[BookingContract::TIMEZONE]));
+        $time->setTimezone(new \DateTimeZone(BookingContract::UTC));
+        $this->crud->removeField(BookingContract::TIME);
+        $this->crud->addField(['type' => 'hidden', 'name' => BookingContract::TIME]);
+        $this->crud->getRequest()->request->add([BookingContract::TIME  =>  $time->format('H:i:s')]);
+        return $this->traitUpdate();
     }
 
     protected function setupShowOperation() {
@@ -120,9 +93,7 @@ class BookingCrudController extends CrudController
             ->entity('organization')->model('App\Models\Organization')->attribute(OrganizationContract::TITLE);
         CRUD::column(BookingContract::ORGANIZATION_TABLE_LIST_ID)->type('select')->label('Номер стола')
             ->entity('organizationTables')->model('App\Models\OrganizationTables')->attribute(OrganizationTablesContract::TITLE);
-        CRUD::column(BookingContract::START)->label('Начало');
-        CRUD::column(BookingContract::END)->label('Конец');
-        CRUD::column(BookingContract::DATE)->label('Дата');
+        CRUD::column(BookingContract::TIME)->label('Время');
         CRUD::column(BookingContract::COMMENT)->label('Комментарии');
         CRUD::column(BookingContract::STATUS)->label('Статус');
     }
@@ -134,12 +105,9 @@ class BookingCrudController extends CrudController
         }
         CRUD::column(BookingContract::USER_ID)->type('select')->label('Пользователь')
             ->entity('user')->model('App\Models\User')->attribute(UserContract::PHONE);
-
         CRUD::column(BookingContract::ORGANIZATION_TABLE_LIST_ID)->type('select')->label('Номер стола')
             ->entity('organizationTables')->model('App\Models\OrganizationTables')->attribute(OrganizationTablesContract::TITLE);
-        CRUD::column(BookingContract::START)->label('Начало');
-        CRUD::column(BookingContract::END)->label('Конец');
-        CRUD::column(BookingContract::DATE)->label('Дата');
+        CRUD::column(BookingContract::TIME)->label('Время');
         CRUD::column(BookingContract::STATUS)->label('Статус');
     }
 
@@ -150,13 +118,11 @@ class BookingCrudController extends CrudController
             $table  =   \request()->input('table');
             $organizationTable  =   $this->organizationTableListService->getById($table);
         }
-
         $this->crud->addField([
             'id'    =>  BookingContract::TIMEZONE,
             'name'  =>  BookingContract::TIMEZONE,
             'type'  =>  'hidden',
         ]);
-
         $this->crud->addField([
             'label'         => 'Номер телефона',
             'type'          => 'select2_from_ajax',
@@ -167,14 +133,12 @@ class BookingCrudController extends CrudController
             'attribute'     => UserContract::PHONE,
             'data_source'   =>  url('users')
         ]);
-
         if ($organizationTable) {
             $this->crud->addField([
                 'name'  =>  BookingContract::ORGANIZATION_ID,
                 'type'  =>  'hidden',
                 'value' =>  $organizationTable->organization->id
             ]);
-
             $this->crud->addField([
                 'name'  =>  BookingContract::ORGANIZATION_TABLE_LIST_ID,
                 'type'  =>  'hidden',
@@ -191,7 +155,6 @@ class BookingCrudController extends CrudController
                 'attribute'     => OrganizationContract::TITLE,
                 'data_source'   =>  url('organization'),
             ]);
-
             $this->crud->addField([
                 'label' =>  'Стол',
                 'type'  =>  'select2_from_ajax',
@@ -205,13 +168,7 @@ class BookingCrudController extends CrudController
                 'dependencies'  => ['organization'],
             ]);
         }
-
-        //CRUD::field(BookingContract::ORGANIZATION_TABLE_ID)->type('number')->label('ID стола');
-
-        CRUD::field(BookingContract::START)->type('time')->value(date('H:i'))->label('Начало');
-        CRUD::field(BookingContract::END)->type('time')->value(date('H:i'))->label('Конец');
-        CRUD::field(BookingContract::DATE)->type('date')->label('дата');
-
+        CRUD::field(BookingContract::TIME)->type('time')->label('Время');
         CRUD::field(BookingContract::COMMENT)->label('Комментарии');
         CRUD::field(BookingContract::STATUS)->type('select_from_array')
             ->label('Статус')->options([
@@ -221,11 +178,14 @@ class BookingCrudController extends CrudController
                 BookingContract::CANCELED   =>  BookingContract::TRANSLATE[BookingContract::CANCELED],
                 BookingContract::DELETED   =>  BookingContract::TRANSLATE[BookingContract::DELETED],
             ]);
-
     }
 
     protected function setupUpdateOperation() {
         $this->setupCreateOperation();
+    }
+
+    public function cancel($id) {
+        $this->bookingService->cancel($id);
     }
 
     public function bookingStatus() {

@@ -10,7 +10,7 @@ use App\Domain\Repositories\Booking\BookingRepositoryInterface;
 
 use App\Domain\Contracts\BookingContract;
 use App\Domain\Contracts\OrganizationContract;
-
+use Carbon\Carbon;
 use http\Env\Request;
 
 class BookingService extends BaseService
@@ -37,6 +37,10 @@ class BookingService extends BaseService
         return $this->bookingRepository->create($data);
     }
 
+    public function cancel($id) {
+        return $this->bookingRepository->cancel($id);
+    }
+
     public function result($data):bool {
         if (array_key_exists(BookingContract::PG_RESULT,$data)) {
             if ((int) $data[BookingContract::PG_RESULT] === 1) {
@@ -57,43 +61,34 @@ class BookingService extends BaseService
     }
 
     public function statusCheck($id) {
-        $booking    =   $this->bookingRepository->getLastByTableId($id);
-
+        $booking    =   $this->bookingRepository->getLastByTableId($id,Carbon::today());
         if ($booking) {
-            if ($booking[BookingContract::DATE] === $this->convertDate($booking[BookingContract::ORGANIZATION][OrganizationContract::TIMEZONE],'Y-m-d')) {
-
-                $time       =   (new \DateTime(date('H:i:s')))->modify('+1 day');
-                $time->setTimezone(new \DateTimeZone($booking->organization->timezone));
-                $beginTime  =   new \DateTime($booking->start);
-                $endTime    =   (new \DateTime($booking->end))->modify('+1 day');
-                $time       =   \DateTime::createFromFormat('H:i',$time->format('H:i'));
-                $beginTime  =   \DateTime::createFromFormat('H:i',$beginTime->format('H:i'));
-                $endTime    =   \DateTime::createFromFormat('H:i',$endTime->format('H:i'));
-                if ($beginTime <= $time && $time <= $endTime) {
-
-                    if ($booking->status === BookingContract::ENABLED || $booking->status === 'Включен') {
-                        return 'paid';
-                    } elseif ($booking->status === BookingContract::CHECKING || $booking->status === 'На проверке') {
-                        return 'unpaid';
-                    }
-                } else if ($time < $beginTime) {
-                    return $booking->start;
-                }
+            if ($booking[BookingContract::STATUS] === 'Включен') {
+                return [
+                    BookingContract::STATUS =>  BookingContract::ENABLED,
+                    BookingContract::TIME   =>  $booking[BookingContract::TIME],
+                    BookingContract::ID     =>  $booking[BookingContract::ID],
+                ];
+            } elseif ($booking[BookingContract::STATUS] === 'На проверке') {
+                return [
+                    BookingContract::STATUS =>  BookingContract::CHECKING,
+                    BookingContract::TIME   =>  $booking[BookingContract::TIME],
+                    BookingContract::ID     =>  $booking[BookingContract::ID],
+                ];
             }
         }
-        return 'free';
+        return [
+            BookingContract::STATUS =>  'free',
+        ];
     }
 
     public function status($id) {
-        $btnList    =   [
-            'free'      =>  '<a href="/admin/booking/create?table='.$id.'" class="btn btn-success btn-block text-white font-weight-bold">Свободно</a>',
-            'unpaid'    =>  '<a class="btn btn-info btn-block text-white font-weight-bold">В резерве (Не оплачен)</a>',
-            'paid'      =>  '<a class="btn btn-danger btn-block text-white font-weight-bold">Забронирован</a>',
-        ];
         $status     =   $this->statusCheck($id);
-        if (array_key_exists($status,$btnList)) {
-            return [$status,$btnList[$status]];
+        if ($status[BookingContract::STATUS] === BookingContract::ENABLED) {
+            return [BookingContract::ENABLED,'<a class="btn btn-danger btn-block text-white font-weight-bold">Забронирован ('.$status[BookingContract::TIME].')</a><a class="btn btn-dark btn-block text-white font-weight-bold btn-booking" data-id="'.$status[BookingContract::ID].'">Отменить</a>',$status[BookingContract::ID]];
+        } elseif ($status[BookingContract::STATUS] === BookingContract::CHECKING) {
+            return [BookingContract::CHECKING,'<a class="btn btn-info btn-block text-white font-weight-bold">В резерве ('.$status[BookingContract::TIME].')</a><a class="btn btn-dark btn-block text-white font-weight-bold btn-booking" data-id="'.$status[BookingContract::ID].'">Отменить</a>',$status[BookingContract::ID]];
         }
-        return ['','<a class="btn btn-warning btn-block text-white font-weight-bold">Свободен до '.$status.'</a>'];
+        return ['free','<a href="/admin/booking/create?table='.$id.'" class="btn btn-success btn-block text-white font-weight-bold">Свободно</a>'];
     }
 }

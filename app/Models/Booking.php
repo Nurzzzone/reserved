@@ -18,18 +18,11 @@ class Booking extends Model
         return BookingContract::TRANSLATE[$value];
     }
 
-    public function getStartAttribute($value) {
-        $start  =   new \DateTime($this->date.' '.$value, new \DateTimeZone(BookingContract::UTC));
-        $start->setTimezone(new \DateTimeZone($this->organization->timezone));
-//        echo $start->format('H:i');
-//        die();
-        return $start->format('H:i');
-    }
-
-    public function getEndAttribute($value) {
-        $start  =   new \DateTime($this->date.' '.$value, new \DateTimeZone(BookingContract::UTC));
-        $start->setTimezone(new \DateTimeZone($this->organization->timezone));
-        return $start->format('H:i');
+    public function getTimeAttribute($value) {
+        $date   =   explode(' ',$this->created_at);
+        $time   =   new \DateTime($date[0].' '.$value, new \DateTimeZone(BookingContract::UTC));
+        $time->setTimezone(new \DateTimeZone($this->organization->timezone));
+        return $time->format('H:i:s');
     }
 
     public function user() {
@@ -42,10 +35,6 @@ class Booking extends Model
 
     public function organizationTables() {
         return $this->hasOne(OrganizationTableList::class,OrganizationTableListContract::ID,BookingContract::ORGANIZATION_TABLE_LIST_ID);
-    }
-
-    public function price() {
-
     }
 
 }

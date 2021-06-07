@@ -51,6 +51,7 @@ Route::get('/city/organizations/{id}/',[OrganizationCityController::class,'getBy
 Route::get('/category/organizations/{id}',[OrganizationController::class,'getByCategoryId']);
 
 Route::get('/sms/{phone}/{code}',[UserController::class,'smsVerify']);
+Route::get('/sms_resend/{phone}',[UserController::class,'smsResend']);
 Route::get('/login/{phone}/{password}',[UserController::class,'login']);
 Route::get('/register',[UserController::class,'register']);
 

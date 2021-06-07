@@ -5,6 +5,7 @@ namespace App\Domain\Repositories\Booking;
 
 use App\Domain\Contracts\BookingContract;
 use App\Models\Booking;
+use Carbon\Carbon;
 
 class BookingRepositoryEloquent implements BookingRepositoryInterface
 {
@@ -51,6 +52,13 @@ class BookingRepositoryEloquent implements BookingRepositoryInterface
         ]);
     }
 
+    public function cancel($id) {
+        $booking    =   Booking::where(BookingContract::ID,$id)->first();
+        $booking->status    =   BookingContract::CANCELED;
+        $booking->save();
+        return $booking;
+    }
+
     public function success($id):void {
         Booking::where(BookingContract::ID,$id)->update([
             BookingContract::STATUS =>  BookingContract::ENABLED
@@ -63,9 +71,9 @@ class BookingRepositoryEloquent implements BookingRepositoryInterface
         ]);
     }
 
-    public function getLastByTableId($id) {
+    public function getLastByTableId($id,$datetime) {
         return Booking::with('organization')->where([
             [BookingContract::ORGANIZATION_TABLE_LIST_ID,$id],
-        ])->orderBy(BookingContract::ID,'desc')->first();
+        ])->whereDate(BookingContract::CREATED_AT,$datetime)->orderBy(BookingContract::ID,'desc')->first();
     }
 }

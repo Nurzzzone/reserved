@@ -52,4 +52,15 @@ class UserRepositoryEloquent implements UserRepositoryInterface
         }
         return false;
     }
+
+    public function smsResend($phone)
+    {
+        $user   =   User::where(UserContract::PHONE,$phone)->first();
+        if ($user) {
+            $user->code =   rand(100000,999999);
+            $user->save();
+            return $user;
+        }
+        return false;
+    }
 }

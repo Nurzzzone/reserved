@@ -11,9 +11,7 @@ class BookingContract extends MainContract {
         self::USER_ID,
         self::ORGANIZATION_ID,
         self::ORGANIZATION_TABLE_LIST_ID,
-        self::START,
-        self::END,
-        self::DATE,
+        self::TIME,
         self::COMMENT,
         self::STATUS
     ];

@@ -12,6 +12,15 @@
             <li class='nav-item'><a class='nav-link' href='{{ backpack_url('city') }}'><i class='nav-icon las la-map-marker'></i> Города</a></li>
         </ul>
     </li>
+
+    <li class="nav-item nav-dropdown">
+        <a class="nav-link nav-dropdown-toggle font-weight-normal" href="#"><i class="las la-id-card"></i> Контакты</a>
+        <ul class="nav-dropdown-items">
+            <li class='nav-item'><a class='nav-link' href='{{ backpack_url('contracts') }}'><i class="las la-address-card"></i> Договор оферты</a></li>
+            <li class='nav-item'><a class='nav-link' href='{{ backpack_url('privacy') }}'><i class="las la-id-card-alt"></i> Политика конфиденциальности</a></li>
+        </ul>
+    </li>
+
 @else
     <li class="nav-title"><span class="text-primary">Модератор</span></li>
     <li class='nav-item'><a class='nav-link' href='{{ backpack_url('user') }}'><i class='nav-icon la la-users'></i> Пользователи</a></li>
@@ -31,6 +40,3 @@
         <li class='nav-item'><a class='nav-link' href='{{ backpack_url('organizationcity') }}'><i class='nav-icon las la-map-marker'></i> Города</a></li>
     </ul>
 </li>
-
-<li class='nav-item'><a class='nav-link' href='{{ backpack_url('contracts') }}'><i class='nav-icon la la-question'></i> Contracts</a></li>
-<li class='nav-item'><a class='nav-link' href='{{ backpack_url('privacy') }}'><i class='nav-icon la la-question'></i> Privacies</a></li>

@@ -76,15 +76,19 @@ class ApiService extends BaseService
             'durationInMinutes' =>  100,
             'order'     =>  [
                 'items'     =>  [
-                    'type'      =>  'Product',
-                    'productId' =>  'ac18f6a7-059e-4deb-8d72-0bc12289544e',
-                    'amount'    =>  1
+                    [
+                        'type'      =>  'Product',
+                        'productId' =>  'ac18f6a7-059e-4deb-8d72-0bc12289544e',
+                        'amount'    =>  1
+                    ]
                 ],
                 'payments'  =>  [
-                    'paymentTypeKind'       =>  'Card',
-                    'sum'                   =>  $booking->organization->price,
-                    'paymentTypeId'         =>  'e46b4e6c-10d5-a739-8fb1-b6674d1e65e7',
-                    'isProcessedExternally' =>  true
+                    [
+                        'paymentTypeKind'       =>  'Card',
+                        'sum'                   =>  $booking->organization->price,
+                        'paymentTypeId'         =>  'e46b4e6c-10d5-a739-8fb1-b6674d1e65e7',
+                        'isProcessedExternally' =>  true
+                    ]
                 ],
             ],
             'tableIds'  =>  [

@@ -68,7 +68,9 @@ class ApiService extends BaseService
         return $this->curl->postTokenReserve(self::RESERVE,$token,[
             'organizationId'    =>  $organizations[0],
             'terminalGroupId'   =>  $terminals[0],
-            'customer'          =>  [],
+            'customer'          =>  [
+                'id'    =>  null
+            ],
             'phone'             =>  $user->phone,
             'guestsCount'       =>  ($booking->organizationTables->limit>1?$booking->organizationTables->limit:2) ,
             'durationInMinutes' =>  100,

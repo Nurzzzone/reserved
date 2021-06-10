@@ -53,10 +53,11 @@ class ApiService extends BaseService
     }
 
     public function booking($id) {
-        $booking    =   $this->bookingRepository->getById($id);
-        if ($booking) {
-            $token      =   $this->getSessionToken($booking->organization->api_key);
-            $reserve    =   $this->reserve($token,$booking);
+        if ($booking    =   $this->bookingRepository->getById($id)) {
+            $reserve    =   $this->reserve($this->getSessionToken($booking->organization->api_key),$booking);
+            echo '<pre>';
+            print_r($reserve);
+            exit();
         }
     }
 
@@ -67,12 +68,10 @@ class ApiService extends BaseService
         return $this->curl->postTokenReserve(self::RESERVE,$token,[
             'organizationId'    =>  $organizations[0],
             'terminalGroupId'   =>  $terminals[0],
+            'customer'          =>  [],
             'phone'             =>  $user->phone,
-            'guestsCount'       =>  $booking->organizationTables->limit,
+            'guestsCount'       =>  ($booking->organizationTables->limit>1?$booking->organizationTables->limit:2) ,
             'durationInMinutes' =>  100,
-            'tableIds'  =>  [
-                $booking->organizationTables->key
-            ],
             'order'     =>  [
                 'items'     =>  [
                     'type'      =>  'Product',
@@ -84,9 +83,13 @@ class ApiService extends BaseService
                     'sum'                   =>  $booking->organization->price,
                     'paymentTypeId'         =>  'e46b4e6c-10d5-a739-8fb1-b6674d1e65e7',
                     'isProcessedExternally' =>  true
-                ]
+                ],
             ],
-            'estimatedStartTime'    =>  date('Y-m-d H:i:s', strtotime($booking->date.' '.$booking->start)).'.000'
+            'tableIds'  =>  [
+                $booking->organizationTables->key
+            ],
+            'shouldRemind'  =>  true,
+            'estimatedStartTime'    =>  date('Y-m-d H:i:s', strtotime(date('Y-m-d', strtotime($booking->created_at)).' '.$booking->start)).'.000'
         ]);
     }
 
@@ -96,13 +99,23 @@ class ApiService extends BaseService
 
     public function getRooms($data) {
         $token          =   $this->getSessionToken($data->api_key);
-        $organizations  =   $this->getOrganizationList($token,$data->iiko_organization_id);
-        $terminals      =   $this->getTerminalList($token,$organizations);
-        $sections       =   $this->getSectionList($token,$terminals);
+        $sections       =   $this->getSectionList(
+            $token,
+            $this->getTerminalList(
+                $token,
+                $this->getOrganizationList($token,$data->iiko_organization_id)
+            )
+        );
         foreach ($sections as $key=>$value) {
             $section    =   $this->organizationTableRepository->create($data->id,$key,$value['name']);
             foreach ($value['tables'] as &$table) {
-                $this->organizationTableListRepository->create($data->id, $section->id, $table['id'],$table['name'], $table['seatingCapacity']);
+                $this->organizationTableListRepository->create(
+                    $data->id,
+                    $section->id,
+                    $table['id'],
+                    $table['name'],
+                    $table['seatingCapacity']
+                );
             }
         }
     }

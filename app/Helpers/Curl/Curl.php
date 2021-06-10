@@ -62,7 +62,7 @@ class Curl
             CURLOPT_HTTP_VERSION    =>  CURL_HTTP_VERSION_1_1,
             CURLOPT_CUSTOMREQUEST   =>  'POST',
             CURLOPT_POSTFIELDS      =>  json_encode($data),
-            CURLOPT_HTTPHEADER => [
+            CURLOPT_HTTPHEADER      =>  [
                 'Authorization: Bearer '.$token,
                 'Content-Type: application/json'
             ],

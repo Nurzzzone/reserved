@@ -15,6 +15,13 @@ class BookingRepositoryEloquent implements BookingRepositoryInterface
         return Booking::with('organizationTables','organization')->where(BookingContract::ID,$id)->first();
     }
 
+    public function updateIikoBookingId(int $id, string $iikoId)
+    {
+        return Booking::where(BookingContract::ID,$id)->update([
+            BookingContract::IIKO_BOOKING_ID    =>  $iikoId
+        ]);
+    }
+
     public function getByUserId($id,$paginate) {
         return Booking::with('organizationTables','organization')
             ->where(BookingContract::USER_ID,$id)

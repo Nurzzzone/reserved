@@ -65,6 +65,7 @@ class ApiService extends BaseService
         $organizations  =   $this->getOrganizationList($token,$booking->organization->iiko_organization_id);
         $terminals      =   $this->getTerminalList($token,$organizations);
         $user           =   $this->userRepository->getById($booking->user_id);
+        echo date('Y-m-d H:i:s', strtotime(date('Y-m-d', strtotime($booking->created_at)).' '.$booking->start)).'.000';
         return $this->curl->postTokenReserve(self::RESERVE,$token,[
             'organizationId'    =>  $organizations[0],
             'terminalGroupId'   =>  $terminals[0],
@@ -97,6 +98,7 @@ class ApiService extends BaseService
             'shouldRemind'  =>  true,
             'estimatedStartTime'    =>  date('Y-m-d H:i:s', strtotime(date('Y-m-d', strtotime($booking->created_at)).' '.$booking->start)).'.000'
         ]);
+
     }
 
     public function createOrder() {

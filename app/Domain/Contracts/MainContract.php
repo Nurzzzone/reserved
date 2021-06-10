@@ -143,6 +143,7 @@ class MainContract
     const REMOTE_ADDR   =   'REMOTE_ADDR';
     const PG_LANGUAGE   =   'PG_LANGUAGE';
 
+    const IIKO_BOOKING_ID   =   'iiko_booking_id';
     const PG_REDIRECT_URL   =   'pg_redirect_url';
     const PG_TESTING_MODE   =   'pg_testing_mode';
     const PG_PAYMENT_SYSTEM =   'pg_payment_system';

@@ -20,10 +20,8 @@
             <li class='nav-item'><a class='nav-link' href='{{ backpack_url('privacy') }}'><i class="las la-id-card-alt"></i> Политика конфиденциальности</a></li>
         </ul>
     </li>
-
 @else
     <li class="nav-title"><span class="text-primary">Модератор</span></li>
-    <li class='nav-item'><a class='nav-link' href='{{ backpack_url('user') }}'><i class='nav-icon la la-users'></i> Пользователи</a></li>
 @endif
 
 <li class='nav-item'><a class='nav-link' href='{{ backpack_url('booking') }}'><i class='nav-icon las la-sort'></i> Бронирование</a></li>

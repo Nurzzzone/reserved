@@ -15,16 +15,6 @@ use App\Http\Controllers\Admin\UserCrudController;
 use App\Http\Controllers\Admin\OrganizationTablesCrudController;
 use App\Http\Controllers\Admin\OrganizationTableListCrudController;
 use App\Http\Controllers\Admin\BookingCrudController;
-/*
-|--------------------------------------------------------------------------
-| Web Routes
-|--------------------------------------------------------------------------
-|
-| Here is where you can register web routes for your application. These
-| routes are loaded by the RouteServiceProvider within a group which
-| contains the "web" middleware group. Now create something great!
-|
-*/
 
 Route::prefix('contacts')->group(function() {
     Route::get('contracts',[ContactController::class,'contracts']);

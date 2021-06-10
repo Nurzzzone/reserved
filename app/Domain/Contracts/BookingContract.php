@@ -8,6 +8,7 @@ class BookingContract extends MainContract {
     const TABLE =   'bookings';
 
     const FILLABLE  =   [
+        self::IIKO_BOOKING_ID,
         self::USER_ID,
         self::ORGANIZATION_ID,
         self::ORGANIZATION_TABLE_LIST_ID,

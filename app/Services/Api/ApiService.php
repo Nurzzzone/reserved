@@ -56,7 +56,7 @@ class ApiService extends BaseService
         if ($booking    =   $this->bookingRepository->getById($id)) {
             $reserve    =   $this->postTokenReserve($this->getSessionToken($booking->organization->api_key),$booking);
             echo '<pre>';
-            print_r($reserve);
+            echo gettype($reserve);
             exit();
         }
     }

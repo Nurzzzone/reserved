@@ -67,39 +67,6 @@ class Curl
                 'Content-Type: application/json'
             ],
         ]);
-
-        /*
-         '{
-    		"organizationId": "'.$data['organizationId'].'",
-    		"terminalGroupId": "'.$data['terminalGroupId'].'",
-    		"customer": {},
-    		"phone": "'.$data['phone'].'",
-    		"guestsCount": '.$data['guestsCount'].',
-    		"durationInMinutes": '.$data['durationInMinutes'].',
-    		"order": {
-                 "items": [
-                        {
-                            "type": "Product",
-                            "productId": "ac18f6a7-059e-4deb-8d72-0bc12289544e",
-                            "amount": 1
-                        }
-                    ],
-                    "payments": [
-                        {
-                            "paymentTypeKind": "Card",
-                            "sum": 4000,
-                            "paymentTypeId": "e46b4e6c-10d5-a739-8fb1-b6674d1e65e7",
-                            "isProcessedExternally": true
-                        }
-                    ]
-                },
-                "tableIds": [
-                    "0e40bb44-52d8-47d8-ad8b-fc708e0d0c00"
-                ],
-                "shouldRemind": true,
-                "estimatedStartTime": "2021-06-02 22:55:00.000"
-            }'
-         */
         $response = curl_exec($curl);
         curl_close($curl);
         return $response;

@@ -12,6 +12,7 @@ class CreateBookingsTable extends Migration
     {
         Schema::create(BookingContract::TABLE, function (Blueprint $table) {
             $table->id();
+            $table->string(BookingContract::IIKO_BOOKING_ID)->nullable();
             $table->bigInteger(BookingContract::USER_ID)->nullable();
             $table->bigInteger(BookingContract::ORGANIZATION_ID)->nullable();
             $table->bigInteger( BookingContract::ORGANIZATION_TABLE_LIST_ID)->nullable();

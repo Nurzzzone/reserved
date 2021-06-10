@@ -71,7 +71,7 @@ class ApiService extends BaseService
             'customer'          =>  [
                 'id'    =>  null
             ],
-            'phone'             =>  $user->phone,
+            'phone'             =>  '+'.$user->phone,
             'guestsCount'       =>  ($booking->organizationTables->limit>1?$booking->organizationTables->limit:2) ,
             'durationInMinutes' =>  100,
             'order'     =>  [

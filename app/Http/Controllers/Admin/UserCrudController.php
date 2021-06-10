@@ -145,19 +145,9 @@ class UserCrudController extends CrudController
 
     public function list(Request $request)
     {
-        $search_term = $request->input('q');
-        if ($search_term) {
-            if (backpack_user()->role === UserContract::TRANSLATE[UserContract::MODERATOR] || backpack_user()->role === UserContract::MODERATOR) {
-                $results = User::where([
-                    [UserContract::PHONE, 'LIKE', $search_term.'%'],
-                    [UserContract::USER_ID,backpack_user()->id]
-                ])->paginate(10);
-            } else {
-                $results = User::where(UserContract::PHONE, 'LIKE', '%'.$search_term.'%')->paginate(10);
-            }
-        } else {
-            $results = User::paginate(10);
+        if ($request->has('q')) {
+            return User::where(UserContract::PHONE, 'LIKE', $request->input('q').'%')->paginate(10);
         }
-        return $results;
+        return User::paginate(10);
     }
 }

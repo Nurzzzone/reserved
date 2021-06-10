@@ -2739,7 +2739,7 @@ $widgets['before_content'][] = [
                     @php
                         $status   =   $booking->status($table->id);
                     @endphp
-                    <div class="col-xl-3 col-lg-4 col-md-6">
+                    <div class="col-xl-3 col-lg-4 col-md-6 col-6">
                         <div class="card shadow border-0 overflow-hidden" data-card="{{$table->id}}" style="border-radius: 10px;">
                             <div class="card-header @if($status[0] === \App\Domain\Contracts\BookingContract::CHECKING) bg-info @elseif($status[0] === \App\Domain\Contracts\BookingContract::ENABLED) bg-danger @else bg-success @endif  font-weight-bold text-center h6 border-0">
                                 {{$table->title}} <span class="text-dark card-id">@if($status[0] === \App\Domain\Contracts\BookingContract::CHECKING || $status[0] === \App\Domain\Contracts\BookingContract::ENABLED)#{{$status[2]}}@endif</span>

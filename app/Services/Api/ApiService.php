@@ -20,7 +20,7 @@ class ApiService extends BaseService
 //    const USER_SECRET   =   'Qwerty00';
     const PATH              =   'https://iiko.biz:9900';
     const API               =   '/api/0';
-    const URL               =   self::PATH.self::API.'/auth/access_token';
+    const URL               =   'https://iiko.biz:9900'.self::API.'/auth/access_token';
     const URL_ORDER         =   self::PATH.self::API.'/orders/add';
     const URL_ORGANIZATION  =   self::PATH.self::API.'/organization/list';
     const URL_SECTIONS      =   self::PATH.self::API.'/rmsSettings/getRestaurantSections';

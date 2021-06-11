@@ -22,7 +22,7 @@ class ApiService extends BaseService
     const API               =   '/api/0';
     const URL               =   'https://iiko.biz:9900'.self::API.'/auth/access_token';
     const URL_ORDER         =   self::PATH.self::API.'/orders/add';
-    const URL_ORGANIZATION  =   self::PATH.self::API.'/organization/list';
+    const URL_ORGANIZATION  =   'https://iiko.biz:9900/api/0/organization/list';
     const URL_SECTIONS      =   self::PATH.self::API.'/rmsSettings/getRestaurantSections';
 
     const AUTH              =   'https://api-ru.iiko.services/api/1/access_token';
@@ -197,8 +197,7 @@ class ApiService extends BaseService
 
     public function getOrganizations(string $token)
     {
-        $organizations  =   $this->curlGet(self::URL_ORGANIZATION.'?access_token='.$token);
-        if ($organizations) {
+        if ($organizations  =   $this->curlGet(self::URL_ORGANIZATION.'?access_token='.$token)) {
             return json_decode($organizations,true)[0];
         }
         return [];

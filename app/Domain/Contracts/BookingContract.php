@@ -13,6 +13,7 @@ class BookingContract extends MainContract {
         self::ORGANIZATION_ID,
         self::ORGANIZATION_TABLE_LIST_ID,
         self::TIME,
+        self::DATE,
         self::COMMENT,
         self::STATUS
     ];

@@ -61,7 +61,7 @@ class BookingService extends BaseService
     }
 
     public function statusCheck($id) {
-        $booking    =   $this->bookingRepository->getLastByTableId($id,Carbon::today());
+        $booking    =   $this->bookingRepository->getLastByTableId($id,date('Y-m-d'));
         if ($booking) {
             if ($booking[BookingContract::STATUS] === 'Включен') {
                 return [

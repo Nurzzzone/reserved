@@ -50,12 +50,10 @@ class BookingRepositoryEloquent implements BookingRepositoryInterface
         return Booking::create([
             BookingContract::USER_ID    =>  $data[BookingContract::USER_ID],
             BookingContract::ORGANIZATION_ID    =>  $data[BookingContract::ORGANIZATION_ID],
-            BookingContract::ORGANIZATION_TABLE_LIST_ID  =>  $data[BookingContract::ORGANIZATION_TABLE_LIST_ID],
-            BookingContract::START  =>  $data[BookingContract::START],
-            BookingContract::END    =>  $data[BookingContract::END],
+            BookingContract::ORGANIZATION_TABLE_LIST_ID =>  $data[BookingContract::ORGANIZATION_TABLE_ID],
+            BookingContract::TIME   =>  $data[BookingContract::TIME],
             BookingContract::DATE   =>  $data[BookingContract::DATE],
             BookingContract::COMMENT    =>  array_key_exists(BookingContract::COMMENT,$data)?$data[BookingContract::COMMENT]:null,
-            BookingContract::STATUS     =>  $data[BookingContract::STATUS],
         ]);
     }
 
@@ -78,9 +76,9 @@ class BookingRepositoryEloquent implements BookingRepositoryInterface
         ]);
     }
 
-    public function getLastByTableId($id,$datetime) {
+    public function getLastByTableId($id,$date) {
         return Booking::with('organization')->where([
             [BookingContract::ORGANIZATION_TABLE_LIST_ID,$id],
-        ])->whereDate(BookingContract::CREATED_AT,$datetime)->orderBy(BookingContract::ID,'desc')->first();
+        ])->whereDate(BookingContract::DATE,$date)->orderBy(BookingContract::ID,'desc')->first();
     }
 }

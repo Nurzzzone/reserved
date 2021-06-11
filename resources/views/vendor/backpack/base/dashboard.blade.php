@@ -2729,6 +2729,14 @@ $widgets['before_content'][] = [
 @endsection
 @else
 @section('content')
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+    <div class="row justify-content-center">
+        <div class="col-md-2 col-12">
+            <div class="form-group mt-3">
+                <input type="text" class="form-control w-100 text-center" readonly id="datepicker">
+            </div>
+        </div>
+    </div>
     @foreach($organizations->getByUserId(backpack_auth()->user()->id) as &$organization)
         <h1 class="my-3 text-center font-weight-bold text-primary">{{$organization->title}}</h1>
         <p class="text-center h5 text-secondary">Выберите стол для бронирования</p>
@@ -2739,14 +2747,14 @@ $widgets['before_content'][] = [
                     @php
                         $status   =   $booking->status($table->id);
                     @endphp
-                    <div class="col-xl-3 col-lg-4 col-md-6 col-6">
+                    <div class="col-xl-2 col-lg-4 col-md-6 col-6">
                         <div class="card shadow border-0 overflow-hidden" data-card="{{$table->id}}" style="border-radius: 10px;">
                             <div class="card-header @if($status[0] === \App\Domain\Contracts\BookingContract::CHECKING) bg-info @elseif($status[0] === \App\Domain\Contracts\BookingContract::ENABLED) bg-danger @else bg-success @endif  font-weight-bold text-center h6 border-0">
                                 {{$table->title}} <span class="text-dark card-id">@if($status[0] === \App\Domain\Contracts\BookingContract::CHECKING || $status[0] === \App\Domain\Contracts\BookingContract::ENABLED)#{{$status[2]}}@endif</span>
                             </div>
                             <ul class="list-group list-group-flush">
                                 <li class="list-group-item text-center text-secondary">
-                                    <a class="nav-link p-0"><i class="nav-icon la la-users h2"></i><br>Вместимость <span class="text-dark font-weight-bold">{{$table->limit}}</span> человек</a>
+                                    <a class="nav-link p-0"><i class="nav-icon la la-users h2"></i><br>Вместимость <span class="text-dark font-weight-bold">{{$table->limit}}</span></a>
                                 </li>
                             </ul>
                             <div class="card-body">
@@ -2763,7 +2771,7 @@ $widgets['before_content'][] = [
             $.get('booking/status/'+$(this).attr('data-id'));
         });
         $(document).ready(function() {
-
+            $("#datepicker").datepicker();
             function load() {
                 setTimeout(function () {
                     $.ajax({

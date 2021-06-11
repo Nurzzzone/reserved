@@ -36,6 +36,7 @@ class PaymentService
     const LIFETIME  =   86400;
     const LANGUAGE  =   'ru';
 
+    const REDIRECT_URL  =   self::SITE.'/payment/success';
     const RESULT_URL    =   self::SITE.'/api/payment/result';
     const SUCCESS_URL   =   self::SITE.'/api/payment/success';
     const FAILURE_URL   =   self::SITE.'/api/payment/failure';
@@ -72,6 +73,7 @@ class PaymentService
             PaymentContract::PG_SUCCESS_URL_METHOD  => PaymentContract::GET,
             PaymentContract::PG_FAILURE_URL =>  self::FAILURE_URL,
             PaymentContract::PG_FAILURE_URL_METHOD  => PaymentContract::GET,
+            PaymentContract::PG_REDIRECT_URL    =>  self::REDIRECT_URL.'?id='.$id,
             PaymentContract::PG_USER_PHONE  =>  $phone
         ]));
         return json_decode(json_encode(simplexml_load_string($xml)),true);

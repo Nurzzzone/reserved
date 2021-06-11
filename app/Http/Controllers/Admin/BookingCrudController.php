@@ -94,6 +94,7 @@ class BookingCrudController extends CrudController
         CRUD::column(BookingContract::ORGANIZATION_TABLE_LIST_ID)->type('select')->label('Номер стола')
             ->entity('organizationTables')->model('App\Models\OrganizationTables')->attribute(OrganizationTablesContract::TITLE);
         CRUD::column(BookingContract::TIME)->label('Время');
+        CRUD::column(BookingContract::DATE)->label('Дата');
         CRUD::column(BookingContract::COMMENT)->label('Комментарии');
         CRUD::column(BookingContract::STATUS)->label('Статус');
     }
@@ -108,6 +109,7 @@ class BookingCrudController extends CrudController
         CRUD::column(BookingContract::ORGANIZATION_TABLE_LIST_ID)->type('select')->label('Номер стола')
             ->entity('organizationTables')->model('App\Models\OrganizationTables')->attribute(OrganizationTablesContract::TITLE);
         CRUD::column(BookingContract::TIME)->label('Время');
+        CRUD::column(BookingContract::DATE)->label('Дата');
         CRUD::column(BookingContract::STATUS)->label('Статус');
     }
 
@@ -169,6 +171,7 @@ class BookingCrudController extends CrudController
             ]);
         }
         CRUD::field(BookingContract::TIME)->type('time')->label('Время');
+        CRUD::field(BookingContract::DATE)->type('date')->format('Y-m-d')->value(date('Y-m-d'))->label('Дата');
         CRUD::field(BookingContract::COMMENT)->label('Комментарии');
         CRUD::field(BookingContract::STATUS)->type('select_from_array')
             ->label('Статус')->options([

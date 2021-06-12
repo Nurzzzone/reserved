@@ -26,6 +26,11 @@ class SmsService extends BaseService
         $this->linkRepository   =   $linkRepository;
     }
 
+    public function sendAuth(string $phone, string $password)
+    {
+        return $this->curl->get($this->url.'?'.$this->getAuthParameters($phone,$password));
+    }
+
     public function sendBooking(string $phone, string $detail, string $link) {
         return $this->curl->get($this->url.'?'.$this->getPaymentParameters($phone,$detail,$link));
     }
@@ -39,6 +44,16 @@ class SmsService extends BaseService
         $this->userPhone    =   $phone;
         $this->userPassword =   $password;
         return $this->curl->get($this->url.'?'.$this->getUserParameters($phone));
+    }
+
+    public function getAuthParameters($phone,$password)
+    {
+        return http_build_query([
+            'login'     =>  $this->login,
+            'psw'       =>  $this->password,
+            'phones'    =>  $phone,
+            'mes'       =>  $this->messageAuth($password)
+        ]);
     }
 
     public function getPaymentParameters($phone,$detail,$link) {
@@ -67,6 +82,11 @@ class SmsService extends BaseService
             'phones'    =>  $phone,
             'mes'       =>  $this->message()
         ]);
+    }
+
+    public function messageAuth($password)
+    {
+        return $_SERVER['SERVER_NAME'].' ваш пароль: '.$password;
     }
 
     public function messagePayment($detail,$link):string {

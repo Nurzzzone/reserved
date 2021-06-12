@@ -191,7 +191,7 @@ class BookingCrudController extends CrudController
         $this->bookingService->cancel($id);
     }
 
-    public function bookingStatus() {
+    public function bookingStatus($date) {
         $arr    =   [];
         $organizations  =   $this->organizationService->getByUserId(backpack_auth()->user()->id);
         foreach ($organizations as &$organization) {
@@ -199,7 +199,7 @@ class BookingCrudController extends CrudController
             foreach ($tables as &$table) {
                 $arr[]  =   [
                     'id'        =>  $table->id,
-                    'status'    =>  $this->bookingService->status($table->id)
+                    'status'    =>  $this->bookingService->status($table->id, $date)
                 ];
             }
         }

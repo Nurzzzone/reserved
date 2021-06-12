@@ -2729,11 +2729,13 @@ $widgets['before_content'][] = [
 @endsection
 @else
 @section('content')
-    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+
     <div class="row justify-content-center">
-        <div class="col-md-2 col-12">
-            <div class="form-group mt-3">
-                <input type="text" class="form-control w-100 text-center" readonly id="datepicker">
+        <div class="col-md-3 col-12">
+            <div class="row mt-3">
+                <div class="col">
+                    <input type="text" class="form-control w-100 text-center border-0 shadow-sm bg-white font-weight-bold" readonly id="datepicker" value="{{date('Y-m-d')}}" >
+                </div>
             </div>
         </div>
     </div>
@@ -2757,7 +2759,7 @@ $widgets['before_content'][] = [
                                     <a class="nav-link p-0"><i class="nav-icon la la-users h2"></i><br>Вместимость <span class="text-dark font-weight-bold">{{$table->limit}}</span></a>
                                 </li>
                             </ul>
-                            <div class="card-body">
+                            <div class="card-body" data-id="{{$organization->id}}" data-user="{{backpack_user()->id}}">
                                 {!! $status[1] !!}
                             </div>
                         </div>
@@ -2767,15 +2769,19 @@ $widgets['before_content'][] = [
         @endforeach
     @endforeach
     <script>
+        $(document.body).on('click', '.booking-new-btn', function() {
+            $("#booking-modal").attr('data-id',$(this).attr('data-id'));
+            $("#booking-modal").attr('data-organization',$(this).closest('.card-body').attr('data-id'));
+            $("#booking-modal").attr('data-user',$(this).closest('.card-body').attr('data-user'));
+        });
         $(document.body).on('click', '.btn-booking', function() {
             $.get('booking/status/'+$(this).attr('data-id'));
         });
         $(document).ready(function() {
-            $("#datepicker").datepicker();
             function load() {
                 setTimeout(function () {
                     $.ajax({
-                        url: "booking/status/",
+                        url: 'booking/status_date/'+$("#datepicker").val(),
                         type: "GET",
                         success: function (result) {
                             let size    =   result.length;

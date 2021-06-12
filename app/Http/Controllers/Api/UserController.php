@@ -2,23 +2,79 @@
 
 namespace App\Http\Controllers\Api;
 
+use App\Domain\Contracts\BookingContract;
 use App\Domain\Contracts\UserContract;
+
 use App\Http\Controllers\Controller;
+
 use Illuminate\Http\Request;
-use App\Services\User\UserService;
-use App\Services\Sms\SmsService;
-use App\Http\Resources\UserResource;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Str;
+use Illuminate\Support\Facades\Auth;
+
+use App\Services\User\UserService;
+use App\Services\Sms\SmsService;
+use App\Services\Booking\BookingService;
+
+use App\Http\Resources\UserResource;
+
+use App\Jobs\BookingPayment;
+use App\Jobs\UserPassword;
 
 class UserController extends Controller
 {
+
     protected $userService;
     protected $smsService;
-    public function __construct(UserService $userService, SmsService $smsService)
+    protected $bookingService;
+
+    public function __construct(UserService $userService, SmsService $smsService, BookingService $bookingService)
     {
         $this->userService  =   $userService;
         $this->smsService   =   $smsService;
+        $this->bookingService   =   $bookingService;
+    }
+
+    public function booking(Request $request)
+    {
+        $user   =   $this->userService->getByPhone($request->input(UserContract::PHONE));
+
+        if (!$user) {
+            $password   =   Str::random(8);
+            $user   =   $this->userService->adminCreate([
+                UserContract::USER_ID   =>  $request->input(UserContract::USER_ID),
+                UserContract::NAME  =>  $request->input(UserContract::NAME),
+                UserContract::PHONE =>  $request->input(UserContract::PHONE),
+                UserContract::PASSWORD  =>  $password
+            ]);
+            UserPassword::dispatch([$user->{UserContract::PHONE},$password]);
+        }
+
+        $time   =   new \DateTime(date('Y-m-d').' '.$request->input(BookingContract::TIME), new \DateTimeZone($request->input(BookingContract::TIMEZONE)));
+        $time->setTimezone(new \DateTimeZone(BookingContract::UTC));
+
+        $booking    =   $this->bookingService->create([
+            BookingContract::USER_ID    =>  $user->{UserContract::ID},
+            BookingContract::ORGANIZATION_ID    =>  $request->input(BookingContract::ORGANIZATION_ID),
+            BookingContract::ORGANIZATION_TABLE_ID  =>  $request->input(BookingContract::ORGANIZATION_TABLE_ID),
+            BookingContract::TIME   =>  $time->format('H:i:s'),
+            BookingContract::DATE   =>  $request->input(BookingContract::DATE),
+            BookingContract::COMMENT    =>  $request->input(BookingContract::COMMENT)
+        ]);
+
+        BookingPayment::dispatch([$booking->id,$request->input(BookingContract::ORGANIZATION_ID),$user->{UserContract::ID}]);
+
+        return $booking;
+    }
+
+    public function getByPhone($phone)
+    {
+        $user   =   $this->userService->getByPhone($phone);
+        if ($user) {
+            return new UserResource($user);
+        }
+        return response(['message'  =>  'Пользователь не найден'],404);
     }
 
     public function getById($id)

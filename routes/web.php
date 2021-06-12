@@ -16,6 +16,10 @@ use App\Http\Controllers\Admin\OrganizationTablesCrudController;
 use App\Http\Controllers\Admin\OrganizationTableListCrudController;
 use App\Http\Controllers\Admin\BookingCrudController;
 
+header('Access-Control-Allow-Origin: *');
+header('Access-Control-Allow-Methods: POST, GET, OPTIONS, PUT, DELETE');
+header('Access-Control-Allow-Headers: Content-Type, X-Auth-Token, Origin, Authorization,X-localization,X-No-Cache');
+
 Route::prefix('contacts')->group(function() {
     Route::get('contracts',[ContactController::class,'contracts']);
     Route::get('privacy',[ContactController::class,'privacy']);
@@ -48,6 +52,6 @@ Route::prefix('admin')->group(function () {
     Route::post('phone_verify',[UserController::class, 'checkPhoneCode'])->name('phone.code');
     Route::get('blocked_user',[UserController::class, 'blockedUser'])->name('user.blocked');
     Route::get('blocked_restricted',[UserController::class, 'restrictedUser'])->name('user.restricted');
-    Route::get('booking/status',[BookingCrudController::class, 'bookingStatus']);
+    Route::get('booking/status_date/{date}',[BookingCrudController::class, 'bookingStatus']);
     Route::get('booking/status/{id}',[BookingCrudController::class, 'cancel']);
 });

@@ -13,6 +13,11 @@ class UserService extends BaseService
         $this->userRepository   =   $userRepository;
     }
 
+    public function adminCreate(array $data)
+    {
+        return $this->userRepository->adminCreate($data);
+    }
+
     public function create(array $data) {
         return $this->userRepository->create($data);
     }
@@ -23,6 +28,11 @@ class UserService extends BaseService
 
     public function smsResend($phone) {
         return $this->userRepository->smsResend($phone);
+    }
+
+    public function getByPhone(string $phone)
+    {
+        return $this->userRepository->getByPhone($phone);
     }
 
     public function getById(int $id) {

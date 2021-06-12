@@ -56,6 +56,8 @@ Route::get('/login/{phone}/{password}',[UserController::class,'login']);
 Route::get('/register',[UserController::class,'register']);
 
 Route::get('/user/{id}',[UserController::class,'getById']);
+Route::get('/user/phone/{phone}',[UserController::class,'getByPhone']);
+Route::post('/user/booking',[UserController::class,'booking']);
 Route::get('/token/{token}', [UserController::class,'token']);
 
 Route::middleware('auth:api')->get('/user', function (Request $request) {

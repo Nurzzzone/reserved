@@ -60,8 +60,11 @@ class BookingService extends BaseService
         return $dt->format($format);
     }
 
-    public function statusCheck($id) {
-        $booking    =   $this->bookingRepository->getLastByTableId($id,date('Y-m-d'));
+    public function statusCheck($id, $date  =   '') {
+        if (!$date) {
+            $date   =   date('Y-m-d');
+        }
+        $booking    =   $this->bookingRepository->getLastByTableId($id,$date);
         if ($booking) {
             if ($booking[BookingContract::STATUS] === 'Включен') {
                 return [
@@ -82,13 +85,16 @@ class BookingService extends BaseService
         ];
     }
 
-    public function status($id) {
-        $status     =   $this->statusCheck($id);
+    public function status($id, $date   =   '') {
+        if (!$date) {
+            $date   =   date('Y-m-d');
+        }
+        $status     =   $this->statusCheck($id,$date);
         if ($status[BookingContract::STATUS] === BookingContract::ENABLED) {
             return [BookingContract::ENABLED,'<a class="btn btn-danger btn-block text-white font-weight-bold">Забронирован ('.$status[BookingContract::TIME].')</a><a class="btn btn-dark btn-block text-white font-weight-bold btn-booking" data-id="'.$status[BookingContract::ID].'">Отменить</a>',$status[BookingContract::ID]];
         } elseif ($status[BookingContract::STATUS] === BookingContract::CHECKING) {
             return [BookingContract::CHECKING,'<a class="btn btn-info btn-block text-white font-weight-bold">В резерве ('.$status[BookingContract::TIME].')</a><a class="btn btn-dark btn-block text-white font-weight-bold btn-booking" data-id="'.$status[BookingContract::ID].'">Отменить</a>',$status[BookingContract::ID]];
         }
-        return ['free','<a href="/admin/booking/create?table='.$id.'" class="btn btn-success btn-block text-white font-weight-bold">Свободно</a>'];
+        return ['free','<a href="/admin/booking/create?table='.$id.'" class="btn btn-success btn-block text-white font-weight-bold booking-new-btn" data-toggle="modal" data-target="#booking-modal" data-id="'.$id.'">Свободно</a>'];
     }
 }

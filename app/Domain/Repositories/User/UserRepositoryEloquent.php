@@ -9,10 +9,23 @@ use Illuminate\Support\Str;
 
 class UserRepositoryEloquent implements UserRepositoryInterface
 {
+
+    public function adminCreate(array $data)
+    {
+        return User::create([
+            UserContract::USER_ID   =>  array_key_exists(UserContract::USER_ID,$data)?$data[UserContract::USER_ID]:null,
+            UserContract::NAME      =>  $data[UserContract::NAME],
+            UserContract::PHONE     =>  $data[UserContract::PHONE],
+            UserContract::CODE      =>  rand(100000,999999),
+            UserContract::PASSWORD  =>  $data[UserContract::PASSWORD],
+            UserContract::API_TOKEN =>  Str::random(60)
+        ]);
+    }
+
     public function create(array $data)
     {
         return  User::create([
-            UserContract::USER_ID   =>  array_key_exists(UserContract::USER_ID,$data)?$data[UserContract::NAME]:null,
+            UserContract::USER_ID   =>  array_key_exists(UserContract::USER_ID,$data)?$data[UserContract::USER_ID]:null,
             UserContract::NAME      =>  $data[UserContract::NAME],
             UserContract::PHONE     =>  $data[UserContract::PHONE],
             UserContract::CODE      =>  rand(100000,999999),
@@ -30,6 +43,11 @@ class UserRepositoryEloquent implements UserRepositoryInterface
     public function getById(int $id)
     {
         return User::where(UserContract::ID,$id)->first();
+    }
+
+    public function getByPhone($phone)
+    {
+        return User::where(UserContract::PHONE,$phone)->first();
     }
 
     public function getByPhoneAndPassword($phone)

@@ -70,7 +70,8 @@ class ApiService extends BaseService
             'organizationId'    =>  $organizations[0],
             'terminalGroupId'   =>  $terminals[0],
             'customer'          =>  [
-                'id'    =>  null
+                'id'    =>  $booking->user_id,
+                'name'  =>  $user->name,
             ],
             'phone'             =>  '+'.$user->phone,
             'guestsCount'       =>  ($booking->organizationTables->limit>1?$booking->organizationTables->limit:2) ,

@@ -1,43 +1,50 @@
 <template>
-    <header class="header">
-        <nav class="navbar navbar-expand-lg fixed-top py-3">
-            <div class="container">
-                <a class="navbar-brand text-uppercase font-weight-bold logo-text" href="/">
-                    <button class="logo">R</button>eserved
-                </a>
-                <button type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation" class="navbar-toggler navbar-toggler-right"><i class="fa fa-bars"></i></button>
-                <div id="navbarSupportedContent" class="collapse navbar-collapse">
-                    <ul class="navbar-nav ml-auto">
-                        <li class="nav-item">
-                            <div class="btn-group btn-menu">
-                                <a class="nav-link font-weight-bold font-menu" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Русскии</a>
-                                <div class="dropdown-menu dropdown-menu-right border-0 shadow rounded-lg">
-                                    <button class="dropdown-item font-menu font-menu-item">Казакша</button>
-                                    <button class="dropdown-item font-menu font-menu-item">Русскии</button>
-                                    <button class="dropdown-item font-menu font-menu-item">English</button>
+    <div class="container-fluid">
+        <header class="header">
+            <nav class="navbar navbar-expand-lg fixed-top py-3">
+                <div class="container">
+                    <a class="navbar-brand text-uppercase font-weight-bold logo-text" href="/">
+                        Reserved
+                    </a>
+                    <button type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation" class="navbar-toggler navbar-toggler-right"><i class="fa fa-bars"></i></button>
+                    <div id="navbarSupportedContent" class="collapse navbar-collapse">
+                        <ul class="navbar-nav ml-auto">
+                            <li class="nav-item">
+                                <div class="btn-group btn-menu">
+                                    <a class="nav-link font-weight-bold font-menu" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Русскии</a>
+                                    <div class="dropdown-menu dropdown-menu-right border-0 shadow rounded-lg">
+                                        <button class="dropdown-item font-menu font-menu-item">Казакша</button>
+                                        <button class="dropdown-item font-menu font-menu-item">Русскии</button>
+                                        <button class="dropdown-item font-menu font-menu-item">English</button>
+                                    </div>
                                 </div>
-                            </div>
-                        </li>
-                        <li class="nav-item mx-3">
-                            <a href="#" class="btn nav-link font-weight-bold font-menu">
-                                <div>Войти</div>
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a href="#" class="btn btn-register nav-link font-weight-bold rounded-100 text-white px-3 font-menu register-btn">
-                                <div>Регистрация</div>
-                            </a>
-                        </li>
-                    </ul>
+                            </li>
+                            <li class="nav-item mx-3">
+                                <a class="btn nav-link font-weight-bold font-menu" data-toggle="modal" data-target="#exampleModalCenter">
+                                    <div>Войти</div>
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="#" class="btn btn-register nav-link font-weight-bold rounded-100 text-white px-3 font-menu register-btn">
+                                    <div>Регистрация</div>
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
                 </div>
-            </div>
-        </nav>
-    </header>
+            </nav>
+        </header>
+    </div>
+    <Auth></Auth>
 </template>
 
 <script>
+import Auth from "./auth/Auth";
 export default {
-    name: "Header"
+    name: "Header",
+    components: {
+        Auth
+    }
 }
 </script>
 

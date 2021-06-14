@@ -26,29 +26,10 @@
     </div>
     <div class="container-fluid wave">
         <svg viewBox="0 0 500 50" preserveAspectRatio="xMinYMin meet">
-            <path d="M0,25 C150,50 350,0 500,25 L500,00 L0,0 Z" style="stroke: none; fill: #4ca1af;"></path>
+            <path d="M0,25 C150,50 350,0 500,25 L500,00 L0,0 Z" style="stroke: none; fill: #00a082;"></path>
         </svg>
     </div>
     <div class="container">
-        <div class="row">
-            <div class="col">
-                <div class="top-head">Top restaurants and more in Reserved</div>
-            </div>
-        </div>
-        <div class="row mt-5">
-            <div class="col-6 col-md-3 p-3" v-for="(item,key) in top" :key="key">
-                <div class="card border-0 shadow top-card overflow-hidden">
-                    <div>
-                        <img class="card-img-top" :src="item.img" width="100%" height="150">
-                    </div>
-                    <div class="card-body">
-                        <h5 class="card-title">{{ item.title }}</h5>
-                        <p class="card-text">Some quick example text to build on the card title.</p>
-                        <a href="#" class="btn btn-primary btn-block top-btn">Go somewhere</a>
-                    </div>
-                </div>
-            </div>
-        </div>
         <div class="row mt-5">
             <div class="col">
                 <div class="top-head">Откройте города, где доступен Reserved</div>
@@ -60,30 +41,105 @@
                     <div class="card-header bg-transparent d-flex justify-content-center">
                         <ul class="nav nav-tabs card-header-tabs">
                             <li class="nav-item">
-                                <a class="nav-link active">Казахстан</a>
+                                <a class="nav-link text-secondary font-weight-bold" :class="{active: location.sel,'main-color':location.sel}" role="button" @click="location.sel = true">Казахстан</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link">Другие страны</a>
+                                <a class="nav-link text-secondary font-weight-bold" :class="{active: !location.sel,'main-color':!location.sel}" role="button" @click="location.sel = false">Другие страны</a>
                             </li>
                         </ul>
                     </div>
                 </div>
             </div>
         </div>
-        <div class="row mt-5">
-            <div class="col-3 p-3" v-for="(city,id) in location.countries[location.country]['list']" :key="id">
-                <div class="card border-0 shadow-sm rounded-lg">
+        <div class="row mt-5" :class="{'d-none': !location.sel}">
+            <div class="col-12 col-md-6 col-lg-3 p-3" v-for="(city,id) in location.countries[location.country]['list']" :key="id">
+                <div class="card border-1 rounded-lg">
                     <div class="card-body">{{city.title}}</div>
                 </div>
             </div>
         </div>
+        <div class="row mt-5" :class="{'d-none': location.sel}">
+            <div class="col-12 col-md-6 col-lg-3 p-3" v-for="(country,id) in location.countries" :key="id">
+                <div class="card border-1 rounded-lg">
+                    <div class="card-body">{{country.title}}</div>
+                </div>
+            </div>
+        </div>
+        <div class="row mt-5">
+            <div class="col">
+                <div class="top-head">Top restaurants and more in Reserved</div>
+            </div>
+        </div>
+        <div class="row mt-5">
+            <div class="col-12 col-md-6 col-lg-3 p-3" v-for="(item,key) in top" :key="key">
+                <div class="card border-0 top-card overflow-hidden">
+                    <div class="card-img">
+                        <img class="card-img-top" :src="item.img" width="100%" height="150">
+                    </div>
+                    <div class="card-body p-0 mt-4">
+                        <h5 class="card-title text-center font-weight-bold">{{ item.title }}</h5>
+                        <p class="card-text mt-2">Some quick example text to build on the card title.</p>
+                        <button class="btn card-btn btn-block top-btn">Go somewhere</button>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
+    <div class="container-fluid wave mt-5">
+        <svg viewBox="0 0 500 50" preserveAspectRatio="xMinYMin meet" style="background: #00a082;">
+            <path d="M0,25 C150,50 350,0 500,25 L500,00 L0,0 Z" style="stroke: none; fill: #fff;"></path>
+        </svg>
+    </div>
+    <div class="container-fluid search pt-5">
+        <div class="container">
+            <div class="row">
+                <div class="col">
+                    <div class="top-head text-white">Хотите чего-то большего?</div>
+                </div>
+            </div>
+            <div class="row mt-5">
+                <div class="col-12 col-md-6 p-5">
+                    <div class="main-img">
+                        <img class="card-img-top" src="/img/main/img-8.jpg" alt="Card image cap" >
+                    </div>
+                </div>
+                <div class="col-12 col-md-6 d-flex align-items-center p-5">
+                    <div class="card border-0 top-card overflow-hidden bg-transparent text-white">
+                        <div class="card-body p-0 m-2">
+                            <h1 class="card-title main-title">Станьте нашим партнёром</h1>
+                            <p class="card-text main-desc h5 mt-3">Some quick example text to build on the card title and make up the bulk of the card's content. Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                            <button class="btn main-btn text-white font-weight-bold mt-3">Стать партнёром</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-12 col-md-6 d-flex align-items-center text-right p-5">
+                    <div class="card border-0 top-card overflow-hidden bg-transparent text-white">
+                        <div class="card-body p-0 m-2">
+                            <h1 class="card-title main-title">Начни работу в Reserved</h1>
+                            <p class="card-text main-desc h5 mt-3">Some quick example text to build on the card title and make up the bulk of the card's content. Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                            <button class="btn main-btn text-white font-weight-bold mt-3">Подать заявку</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-12 col-md-6 p-5">
+                    <div class="main-img">
+                        <img class="card-img-top" src="/img/main/img-9.jpg" alt="Card image cap" >
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <Footer></Footer>
 </template>
 <script>
 import Header from "./header/Header";
+import Footer from "./footer/Footer";
 export default {
     components: {
-        Header
+        Header,
+        Footer
     },
     name: "Home",
     data() {
@@ -123,6 +179,7 @@ export default {
                 },
             ],
             location: {
+                sel: true,
                 country: 0,
                 countries: [
                     {
@@ -146,29 +203,70 @@ export default {
                         ]
                     }
                 ]
-            }
+            },
         }
+    },
+    methods: {
+
     }
 }
 </script>
 
 <style lang="scss">
+    .card {
+        &-img {
+            border-radius: 100%;
+            overflow: hidden;
+        }
+        &-btn {
+            background-color: #FF8008;
+            color: #fff;
+            border-radius: 30px;
+            height: 44px;
+            padding: 0 30px 0 30px;
+        }
+    }
     .top {
         &-head {
-            font-size: 30px;
-            font-weight: bold;
+            font-size: 40px;
             text-align: center;
-            font-family: 'Work Sans', sans-serif;
+            font-family: 'Lobster', cursive;
         }
         &-card {
-            border-radius: 35px;
+            border-radius: 10px;
         }
         &-btn {
             border-radius: 30px;
         }
     }
+    .main {
+        &-color {
+            color: #FF8008 !important;
+        }
+        &-btn {
+            background-color: #FF8008;
+            color: #fff;
+            border-radius: 30px;
+            height: 44px;
+            padding: 0 30px 0 30px;
+        }
+        &-img {
+            border-radius: 100%;
+            overflow: hidden;
+            position: relative;
+            & > img {
+                display: table;
+            }
+        }
+        &-title {
+            font-family: 'Lobster', cursive;
+        }
+        &-desc {
+            font-family: 'Lobster', cursive;
+        }
+    }
     .search {
-        background-color: #4ca1af;
+        background-color: #00a082;
         min-height: 550px;
         &-right, &-left {
             display: flex;

@@ -1,9 +1,4 @@
 <template>
-    <div class="container-fluid wave">
-        <svg viewBox="0 0 500 50" preserveAspectRatio="xMinYMin meet" style="background: #1d1d1d;">
-            <path d="M0,25 C150,50 350,0 500,25 L500,00 L0,0 Z" style="stroke: none; fill: #00a082;"></path>
-        </svg>
-    </div>
     <div class="container-fluid pt-5 text-white" style="background: #1d1d1d;">
         <div class="container pb-5">
             <div class="row mb-5">
@@ -49,6 +44,39 @@
             </div>
         </div>
     </div>
+  <link rel="stylesheet" href="https://maxst.icons8.com/vue-static/landings/line-awesome/line-awesome/1.3.0/css/line-awesome.min.css">
+    <div class="container">
+      <div class="row fixed-bottom bg-white width-auto footer-fixed d-flex justify-content-center">
+        <div class="col-12 col-md-4">
+          <div class="footer-fixed-main w-100">
+            <a href="/">
+              <button class="btn p-3 font-weight-bold w-25">
+                <img src="/img/logo/home.svg" width="20" height="20">
+                <div class="mt-1 title">Главная</div>
+              </button>
+            </a>
+            <a href="/top">
+              <button class="btn p-3 font-weight-bold w-25">
+                <img src="/img/logo/star.svg" width="20" height="20">
+                <div class="mt-1 title">Топ</div>
+              </button>
+            </a>
+            <a href="/favorite">
+              <button class="btn p-3 font-weight-bold w-25">
+                <img src="/img/logo/favorite.svg" width="20" height="20">
+                <div class="mt-1 title">Избранное</div>
+              </button>
+            </a>
+            <a href="/profile">
+              <button class="btn p-3 font-weight-bold w-25">
+                <img src="/img/logo/profile.svg" width="20" height="20">
+                <div class="mt-1 title">Профиль</div>
+              </button>
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
 </template>
 
 <script>
@@ -58,10 +86,21 @@ export default {
 </script>
 
 <style lang="scss">
+  .title {
+    color: #00a082;
+  }
     .main {
         &-thumbnail {
             max-width: 160px;
             border-radius: 5px;
+        }
+    }
+    .footer {
+        &-fixed {
+          box-shadow: 0 0 10px 0 rgba(0,0,0,.3);
+            &-main {
+
+            }
         }
     }
 </style>

@@ -38,4 +38,17 @@ class MainController extends Controller
     public function index() {
         return view('index');
     }
+
+    public function profile() {
+        return view('index');
+    }
+
+    public function profileSettings() {
+        return view('index');
+    }
+
+    public function profilePayments() {
+        return view('index');
+    }
+
 }

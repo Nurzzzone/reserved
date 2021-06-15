@@ -24,7 +24,7 @@ class PaymentService
     const MAIN_URL  =   'https://api.paybox.money/init_payment.php';
     const PAY_URL   =   self::URL.'/'.self::STATUS;
 
-    const CARD_ADD  =   self::URL.'/v1/merchant/'.self::ID.'/cardstorage/add';
+    const CARD_ADD  =   'https://api.paybox.money/v1/merchant/'.self::ID.'/cardstorage/add';
     const CARD_LIST =   self::URL.'/v1/merchant/'.self::ID.'/cardstorage/list';
 
     const CARD_POST =   self::SITE.'/api/payment/card/post';
@@ -88,14 +88,15 @@ class PaymentService
     }
 
     public function cardAdd($userId) {
+
         return $this->curl->post(self::CARD_ADD, $this->signature([
+            PaymentContract::PG_MERCHANT_ID =>  self::ID,
             PaymentContract::PG_USER_ID =>  $userId,
             PaymentContract::PG_SALT    =>  rand(100000,99999),
-            PaymentContract::PG_MERCHANT_ID =>  self::ID,
             PaymentContract::PG_POST_LINK   =>  self::CARD_POST,
             PaymentContract::PG_BACK_LINK   =>  self::CARD_BACK,
-
         ]));
+
     }
 
     public function params($id, $price, $description, $userId, $cardId) {

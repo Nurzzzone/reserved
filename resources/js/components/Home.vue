@@ -131,6 +131,11 @@
             </div>
         </div>
     </div>
+    <div class="container-fluid wave">
+        <svg viewBox="0 0 500 50" preserveAspectRatio="xMinYMin meet" style="background: #1d1d1d;">
+            <path d="M0,25 C150,50 350,0 500,25 L500,00 L0,0 Z" style="stroke: none; fill: #00a082;"></path>
+        </svg>
+    </div>
     <Footer></Footer>
 </template>
 <script>

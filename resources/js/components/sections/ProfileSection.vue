@@ -28,13 +28,13 @@
                         <div class="card-header top-bg border-0 d-flex justify-content-center">
                             <ul class="nav nav-tabs card-header-tabs border-0 font-weight-bold">
                                 <li class="nav-item">
-                                    <a class="nav-link border-0" href="/profile" :class="{ active: (url==='profile'?true:false),disabled: (url==='profile'?true:false),'text-white': (url!=='profile'?true:false) }">Профиль</a>
+                                    <a class="nav-link border-0" href="/profile" :class="{ active: (url==='profile'?true:false),disabled: (url==='profile'?true:false),'text-white': (url!=='profile'?true:false) }">
+                                        <img src="/img/logo/profile-white.svg" width="20" height="20" class="d-md-none">
+                                        <span class="d-sm-none d-md-block">Профиль</span>
+                                    </a>
                                 </li>
                                 <li class="nav-item">
                                     <a class="nav-link border-0" href="/profile/settings" :class="{ active: (url==='settings'?true:false),disabled: (url==='settings'?true:false),'text-white': (url!=='settings'?true:false) }">Настройки</a>
-                                </li>
-                                <li class="nav-item">
-                                    <a class="nav-link text-white border-0" href="/profile/favorites">Избранное</a>
                                 </li>
                                 <li class="nav-item">
                                     <a class="nav-link text-white border-0" href="/profile/history">История</a>

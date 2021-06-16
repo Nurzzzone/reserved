@@ -20,14 +20,13 @@ header('Access-Control-Allow-Origin: *');
 header('Access-Control-Allow-Methods: POST, GET, OPTIONS, PUT, DELETE');
 header('Access-Control-Allow-Headers: Content-Type, X-Auth-Token, Origin, Authorization,X-localization,X-No-Cache');
 
-Route::get('/welcome', [MainController::class, 'index'])->name('index');
+Route::get('/', [MainController::class, 'index'])->name('index');
 
 Route::prefix('profile')->group(function() {
     Route::get('/',[MainController::class, 'profile'])->name('profile');
     Route::get('/settings',[MainController::class, 'profileSettings'])->name('profile.settings');
     Route::get('/payments',[MainController::class, 'profilePayments'])->name('profile.payments');
 });
-
 
 Route::prefix('contacts')->group(function() {
     Route::get('contracts',[ContactController::class,'contracts']);

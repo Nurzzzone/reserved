@@ -18,6 +18,7 @@ Route::prefix('contacts')->group(function() {
 });
 
 Route::prefix('payment')->group(function() {
+    Route::post('/card/post',[PaymentController::class,'post']);
     Route::get('/card/add/{id}',[PaymentController::class,'cardAdd']);
     Route::get('/card/list/{id}',[PaymentController::class,'cardList']);
     Route::get('/result',[PaymentController::class,'result']);

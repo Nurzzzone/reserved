@@ -44,41 +44,7 @@
             </div>
         </div>
     </div>
-  <link rel="stylesheet" href="https://maxst.icons8.com/vue-static/landings/line-awesome/line-awesome/1.3.0/css/line-awesome.min.css">
-    <div class="container">
-      <div class="row fixed-bottom bg-white width-auto footer-fixed d-flex justify-content-center">
-        <div class="col-12 col-md-4">
-          <div class="footer-fixed-main w-100">
-            <a href="/">
-              <button class="btn p-3 font-weight-bold w-25">
-                <img src="/img/logo/home.svg" width="20" height="20">
-                <div class="mt-1 title">Главная</div>
-              </button>
-            </a>
-            <a href="/top">
-              <button class="btn p-3 font-weight-bold w-25">
-                <img src="/img/logo/star.svg" width="20" height="20">
-                <div class="mt-1 title">Топ</div>
-              </button>
-            </a>
-            <a href="/favorite">
-              <button class="btn p-3 font-weight-bold w-25">
-                <img src="/img/logo/favorite.svg" width="20" height="20">
-                <div class="mt-1 title">Избранное</div>
-              </button>
-            </a>
-            <a href="/profile">
-              <button class="btn p-3 font-weight-bold w-25">
-                <img src="/img/logo/profile.svg" width="20" height="20">
-                <div class="mt-1 title">Профиль</div>
-              </button>
-            </a>
-          </div>
-        </div>
-      </div>
-    </div>
 </template>
-
 <script>
 export default {
     name: "Footer"

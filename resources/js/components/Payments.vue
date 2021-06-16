@@ -52,6 +52,7 @@
             </div>
         </div>
     </div>
+    <Footer-menu></Footer-menu>
     <Footer></Footer>
 </template>
 
@@ -59,12 +60,14 @@
 import Header from "./header/Header";
 import Footer from "./footer/Footer";
 import ProfileSection from "./sections/ProfileSection";
+import FooterMenu from "./footerMenu/FooterMenu";
 export default {
     name: "Payments",
     components: {
         Header,
         Footer,
-        ProfileSection
+        ProfileSection,
+        FooterMenu
     }
 }
 </script>

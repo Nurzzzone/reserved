@@ -17,7 +17,7 @@
                         <li class="list-group-item px-0 d-flex justify-content-between settings-item align-items-center">
                             <div>
                                 <div class="h5 font-weight-bold">Язык</div>
-                                <p class="h6 text-secondary">Выберите желаемый язык. Список товаров может всё же отображаться на разных языках.</p>
+                                <p class="h6 text-secondary">Выберите желаемый язык.</p>
                             </div>
                             <div class="d-flex">
                                 <select class="form-control form-control-lg" aria-label="Default select example">
@@ -30,7 +30,7 @@
                         <li class="list-group-item px-0 d-flex justify-content-between settings-item align-items-center">
                             <div>
                                 <div class="h5 font-weight-bold">Страна</div>
-                                <p class="h6 text-secondary">Выбранная страна определяет валюту вашего пригласительного кода</p>
+                                <p class="h6 text-secondary">Выберите страну</p>
                             </div>
                             <div>
                                 <select class="form-control form-control-lg" aria-label="Default select example">
@@ -109,6 +109,7 @@
             </div>
         </div>
     </div>
+    <Footer-menu></Footer-menu>
     <Footer></Footer>
 </template>
 
@@ -116,12 +117,14 @@
 import Header from "./header/Header";
 import Footer from "./footer/Footer";
 import ProfileSection from "./sections/ProfileSection";
+import FooterMenu from './footerMenu/FooterMenu';
 export default {
     name: "Settings",
     components: {
         Header,
         Footer,
-        ProfileSection
+        ProfileSection,
+        FooterMenu
     }
 }
 </script>

@@ -21,8 +21,16 @@ class PaymentController extends Controller {
         $this->apiService       =   $apiService;
     }
 
+    public function post(Request $request)
+    {
+        print_r($request);
+    }
+
     public function cardAdd($id) {
-        return $this->paymentService->cardAdd($id);
+        if ($card   =   $this->paymentService->cardAdd($id)) {
+            return $card;
+        }
+        return response(['message'  =>  'Произошла ошибка'],400);
     }
 
     public function cardList($id) {

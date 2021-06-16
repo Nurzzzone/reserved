@@ -7,7 +7,7 @@ import Payments from "../components/Payments";
 
 const routes = [
     {
-        path: "/welcome",
+        path: "/",
         name: "Home",
         component: Home,
     },

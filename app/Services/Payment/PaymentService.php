@@ -27,7 +27,7 @@ class PaymentService
     const CARD_ADD  =   'https://api.paybox.money/v1/merchant/'.self::ID.'/cardstorage/add';
     const CARD_LIST =   self::URL.'/v1/merchant/'.self::ID.'/cardstorage/list';
 
-    const CARD_POST =   self::SITE.'/api/payment/card/post';
+    const CARD_POST =   'https://reserved.org.kz/api/payment/card/post';
     const CARD_BACK =   self::SITE.'/api/payment/card/back';
     const CURRENCY  =   'KZT';
     const CHECK_URL =   self::SITE.'/api/payment/check';
@@ -88,15 +88,45 @@ class PaymentService
     }
 
     public function cardAdd($userId) {
-
-        return $this->curl->post(self::CARD_ADD, $this->signature([
+        $arr    =   [
             PaymentContract::PG_MERCHANT_ID =>  self::ID,
             PaymentContract::PG_USER_ID =>  $userId,
             PaymentContract::PG_SALT    =>  rand(100000,99999),
             PaymentContract::PG_POST_LINK   =>  self::CARD_POST,
             PaymentContract::PG_BACK_LINK   =>  self::CARD_BACK,
-        ]));
+        ];
+        $card   =   $this->curl->post(self::CARD_ADD, $this->signatureCard($arr));
+        $xml    =   simplexml_load_string($card);
+        if (property_exists($xml,'pg_redirect_url')) {
+            return $xml->pg_redirect_url[0];
+        } else {
+            $card   =   $this->curl->post(self::CARD_ADD, $this->signatureCard($arr));
+            $xml    =   simplexml_load_string($card);
+            if (property_exists($xml,'pg_redirect_url')) {
+                return $xml->pg_redirect_url[0];
+            }
+        }
+        return false;
+    }
 
+    public function signatureCard($request)
+    {
+        ksort($request);
+        array_unshift($request, 'add');
+        array_push($request, self::KEY);
+        $request['pg_sig'] = md5(implode(';', $request));
+        unset($request[0], $request[1]);
+        return $request;
+    }
+
+    public function signature($request) {
+        $requestForSignature    =   $request;
+        $requestForSignature = $this->makeFlatParamsArray($requestForSignature);
+        ksort($requestForSignature);
+        array_unshift($requestForSignature, self::INIT);
+        array_push($requestForSignature, self::KEY);
+        $request[PaymentContract::PG_SIG] = md5(implode(';', $requestForSignature));
+        return $request;
     }
 
     public function params($id, $price, $description, $userId, $cardId) {
@@ -149,15 +179,7 @@ class PaymentService
         ]);
     }
 
-    public function signature($request) {
-        $requestForSignature    =   $request;
-        $requestForSignature = $this->makeFlatParamsArray($requestForSignature);
-        ksort($requestForSignature);
-        array_unshift($requestForSignature, self::INIT);
-        array_push($requestForSignature, self::KEY);
-        $request[PaymentContract::PG_SIG] = md5(implode(';', $requestForSignature));
-        return $request;
-    }
+
 
     public function makeFlatParamsArray($arrParams, $parent_name = '') {
         $arr    =   [];

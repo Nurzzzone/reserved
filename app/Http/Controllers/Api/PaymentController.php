@@ -21,7 +21,7 @@ class PaymentController extends Controller {
         $this->apiService       =   $apiService;
     }
 
-    public function post(Request $request)
+    public function cardPost(Request $request)
     {
         print_r($request);
     }

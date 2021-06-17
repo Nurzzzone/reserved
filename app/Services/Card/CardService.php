@@ -34,7 +34,7 @@ class CardService extends BaseService
         return $this->cardRepository->getById($id);
     }
 
-    public function getByUserId($userId):array
+    public function getByUserId($userId)
     {
         return $this->cardRepository->getByUserId($userId);
     }

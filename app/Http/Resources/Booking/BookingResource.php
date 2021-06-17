@@ -24,6 +24,7 @@ class BookingResource extends JsonResource
             BookingContract::PRICE  =>  $this->{BookingContract::PRICE},
             BookingContract::CURRENCY   =>  $this->{BookingContract::CURRENCY},
             BookingContract::PG_SIG =>  PaymentService::paySignature($this->{BookingContract::PAYMENT_ID}),
+            BookingContract::STATUS =>  $this->{BookingContract::STATUS}
         ];
     }
 }

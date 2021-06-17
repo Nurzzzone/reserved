@@ -27,7 +27,7 @@ class PaymentService
     const CARD_ADD  =   'https://api.paybox.money/v1/merchant/'.self::ID.'/cardstorage/add';
     const CARD_LIST =   self::URL.'/v1/merchant/'.self::ID.'/cardstorage/list';
 
-    const CARD_POST =   'https://reserved.org.kz/api/payment/card/post';
+    const CARD_POST =   'https://reserved.org.kz/api/card/post';
     const CARD_BACK =   self::SITE.'/api/payment/card/back';
     const CURRENCY  =   'KZT';
     const CHECK_URL =   self::SITE.'/api/payment/check';

@@ -8,6 +8,13 @@ use Carbon\Carbon;
 
 class MainContract
 {
+    const PG_XML    =   'pg_xml';
+    const CARD_3D   =   'card_3d';
+    const COUNTRY   =   'country';
+    const BANK      =   'bank';
+    const YEAR      =   'year';
+    const MONTH     =   'month';
+    const HASH      =   'hash';
     const ID        =   'id';
     const KEY       =   'key';
     const PARENT_ID =   'parent_id';

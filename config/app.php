@@ -13,7 +13,7 @@ return [
     |
     */
 
-    'name' => env('APP_NAME', 'Laravel'),
+    'name' => env('APP_NAME', 'Reserved'),
 
     /*
     |--------------------------------------------------------------------------
@@ -52,7 +52,7 @@ return [
     |
     */
 
-    'url' => env('APP_URL', 'http://localhost'),
+    'url' => env('APP_URL', 'https://reserved.org.kz'),
 
     'asset_url' => env('ASSET_URL', null),
 
@@ -189,6 +189,7 @@ return [
         App\Providers\Repositories\LinkRepositoryProvider::class,
         App\Providers\Repositories\ContractRepositoryProvider::class,
         App\Providers\Repositories\PrivacyRepositoryProvider::class,
+        App\Providers\Repositories\CardRepositoryProvider::class,
     ],
 
     /*

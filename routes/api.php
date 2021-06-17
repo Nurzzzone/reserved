@@ -11,14 +11,18 @@ use App\Http\Controllers\Api\BookingController;
 use App\Http\Controllers\Api\ReviewController;
 use App\Http\Controllers\Api\PaymentController;
 use App\Http\Controllers\Api\ContactController;
+use App\Http\Controllers\Api\CardController;
 
 Route::prefix('contacts')->group(function() {
     Route::get('/contracts',[ContactController::class,'contracts'])->name('contacts.contracts');
     Route::get('/privacy',[ContactController::class,'privacy'])->name('contacts.privacy');
 });
 
+Route::prefix('card')->group(function() {
+    Route::post('post',[CardController::class,'post'])->name('card.post');
+});
+
 Route::prefix('payment')->group(function() {
-    Route::post('/card/post',[PaymentController::class,'cardPost']);
     Route::get('/card/add/{id}',[PaymentController::class,'cardAdd']);
     Route::get('/card/list/{id}',[PaymentController::class,'cardList']);
     Route::get('/result',[PaymentController::class,'result']);

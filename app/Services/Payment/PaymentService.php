@@ -84,7 +84,7 @@ class PaymentService
         if ($card) {
             if ($payment    =   $this->paymentCard($booking)) {
                 $booking->{BookingContract::PAYMENT_URL}    =   self::CARD_PAYMENT;
-                $booking->{BookingContract::PAYMENT_ID}     =   $payment[MainContract::PG_PAYMENT_ID];
+                $booking->{BookingContract::PAYMENT_ID}     =   $payment;
                 $booking->save();
                 return $booking;
             }
@@ -112,7 +112,7 @@ class PaymentService
 
         $xml    =   simplexml_load_string($payment);
         if (property_exists(MainContract::PG_PAYMENT_ID,$xml)) {
-            return json_decode(json_encode($xml),true);
+            return $xml->{MainContract::PG_PAYMENT_ID};
         }
         return false;
     }

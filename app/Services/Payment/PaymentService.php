@@ -109,7 +109,10 @@ class PaymentService
             PaymentContract::PG_SUCCESS_URL =>  self::CARD_SUCCESS,
             PaymentContract::PG_FAILURE_URL =>  self::CARD_FAILURE
         ],MainContract::INIT));
+
         $xml    =   simplexml_load_string($payment);
+        print_r($payment);
+        exit;
         if (property_exists(MainContract::PG_PAYMENT_ID,$xml)) {
             return $xml;
         }

@@ -83,6 +83,8 @@ class PaymentService
     {
         if ($card) {
             if ($payment    =   $this->paymentCard($booking)) {
+                print_r($payment);
+                exit;
                 $booking->{BookingContract::PAYMENT_URL}    =   self::CARD_PAYMENT;
                 $booking->{BookingContract::PAYMENT_ID}     =   $payment;
                 $booking->save();

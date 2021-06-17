@@ -11,6 +11,7 @@ class BookingResource extends JsonResource
     public function toArray($request)
     {
         return [
+            BookingContract::ID =>  $this->{BookingContract::ID},
             BookingContract::USER_ID    =>  $this->{BookingContract::USER_ID},
             BookingContract::ORGANIZATION_ID    =>  $this->{BookingContract::ORGANIZATION_ID},
             BookingContract::ORGANIZATION_TABLE_LIST_ID =>  $this->{BookingContract::ORGANIZATION_TABLE_LIST_ID},

@@ -70,6 +70,12 @@ class PaymentService
     public static function paySignature($paymentId):array
     {
         if ($paymentId) {
+            print_r(self::signatureCard([
+                PaymentContract::PG_MERCHANT_ID =>  self::ID,
+                PaymentContract::PG_PAYMENT_ID  =>  $paymentId,
+                PaymentContract::PG_SALT        =>  rand(100000,999999),
+            ],MainContract::PAY));
+            exit;
             return self::signatureCard([
                 PaymentContract::PG_MERCHANT_ID =>  self::ID,
                 PaymentContract::PG_PAYMENT_ID  =>  $paymentId,

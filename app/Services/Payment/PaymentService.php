@@ -111,10 +111,8 @@ class PaymentService
         ],MainContract::INIT));
 
         $xml    =   simplexml_load_string($payment);
-        print_r($payment);
-        exit;
         if (property_exists(MainContract::PG_PAYMENT_ID,$xml)) {
-            return $xml;
+            return json_decode(json_encode($xml),true);
         }
         return false;
     }

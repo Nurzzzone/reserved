@@ -10,6 +10,7 @@ use App\Services\Booking\BookingService;
 use App\Services\Api\ApiService;
 
 use App\Domain\Contracts\BookingContract;
+use Illuminate\Support\Facades\Log;
 
 class PaymentController extends Controller {
     protected $paymentService;
@@ -23,7 +24,7 @@ class PaymentController extends Controller {
 
     public function cardPost(Request $request)
     {
-        print_r($request);
+        Log::info('This is some useful information.', $request->all());
     }
 
     public function cardAdd($id) {

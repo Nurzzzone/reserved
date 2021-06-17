@@ -40,7 +40,8 @@ class PaymentService
     const CARD_FAILURE  =   'https://reserved.org.kz/card/failure';
 
     const CARD_POST =   'https://reserved.org.kz/api/card/post';
-    const CARD_BACK =   self::SITE.'/api/payment/card/back';
+    const CARD_BACK =   'https://reserved.org.kz/api/payment/card/back';
+
     const CURRENCY  =   'KZT';
     const CHECK_URL =   self::SITE.'/api/payment/check';
     const POST_URL  =   self::SITE.'/api/payment/post';

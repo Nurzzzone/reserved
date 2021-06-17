@@ -31,6 +31,8 @@ class CardController extends Controller
     public function post(CardPostRequest $request)
     {
         $request    =   $request->validated();
+        Log::info('Card Info',$request);
+        exit;
         $xml    =   json_decode(json_encode(simplexml_load_string($request(MainContract::PG_XML))),true);
         if ($xml && array_key_exists(MainContract::PG_STATUS,$xml) && ($xml[MainContract::PG_STATUS] === MainContract::SUCCESS)) {
             $this->cardService->create([

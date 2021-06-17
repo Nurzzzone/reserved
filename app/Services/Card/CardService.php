@@ -14,9 +14,29 @@ class CardService extends BaseService
         $this->cardRepository   =   $cardRepository;
     }
 
-    public function create(array $request)
+    public function create(array $input)
     {
-        return $this->cardRepository->create($request);
+        return $this->cardRepository->create($input);
+    }
+
+    public function update($id, array $input):void
+    {
+        $this->cardRepository->update($id, $input);
+    }
+
+    public function delete($id)
+    {
+        $this->cardRepository->delete($id);
+    }
+
+    public function getById($id)
+    {
+        return $this->cardRepository->getById($id);
+    }
+
+    public function getByUserId($userId):array
+    {
+        return $this->cardRepository->getByUserId($userId);
     }
 
 }

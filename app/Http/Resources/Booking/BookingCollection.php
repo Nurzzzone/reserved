@@ -1,16 +1,15 @@
 <?php
 
-namespace App\Http\Resources;
+namespace App\Http\Resources\Booking;
 
-use App\Domain\Contracts\BookingContract;
 use Illuminate\Http\Resources\Json\ResourceCollection;
 
 class BookingCollection extends ResourceCollection
 {
     public function toArray($request)
     {
-        return $this->collection->map(function ($item) {
-            return new BookingResource($item);
+        return $this->collection->map(function ($request) {
+            return new BookingResource($request);
         });
     }
 }

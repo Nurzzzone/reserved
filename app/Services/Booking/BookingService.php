@@ -17,21 +17,41 @@ class BookingService extends BaseService
 {
     protected $bookingRepository;
 
-    public function __construct(BookingRepositoryInterface $bookingRepository) {
+    public function __construct(BookingRepositoryInterface $bookingRepository)
+    {
         $this->bookingRepository    =   $bookingRepository;
     }
 
-    public function getByUserId($id,$paginate) {
-        return $this->bookingRepository->getByUserId($id,$paginate);
+    public function delete($id):void
+    {
+        $this->bookingRepository->delete($id);
     }
 
-    public function getByTableId($id,$paginate) {
-        return $this->bookingRepository->getByTableId($id,$paginate);
+    public function getById($id)
+    {
+        return $this->bookingRepository->getById($id);
     }
 
-    public function getByOrganizationId($id, $paginate) {
-        return $this->bookingRepository->getByOrganizationId($id,$paginate);
+    public function getByUserId($userId,int $paginate):array
+    {
+        return $this->bookingRepository->getByUserId($userId,$paginate);
     }
+
+    public function getByOrganizationId($organizationId, int $paginate):array
+    {
+        return $this->bookingRepository->getByOrganizationId($organizationId,$paginate);
+    }
+
+    public function getByTableId($tableId, int $paginate):array
+    {
+        return $this->bookingRepository->getByTableId($tableId, $paginate);
+    }
+
+    public function getByDate($date, int $paginate):array
+    {
+        return $this->bookingRepository->getByDate($date, $paginate);
+    }
+
 
     public function create(array $data) {
         return $this->bookingRepository->create($data);

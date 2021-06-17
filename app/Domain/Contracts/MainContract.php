@@ -8,6 +8,24 @@ use Carbon\Carbon;
 
 class MainContract
 {
+    const PAY   =   'pay';
+    const PAYMENT   =   'payment';
+    const PAYMENT_ID    =   'payment_id';
+    const INIT  =   'init';
+    const CURRENCY  =   'currency';
+    const PAYMENT_URL   =   'payment';
+    const MESSAGE   =   'message';
+    const DESC  =   'desc';
+    const REMOVE    =   'remove';
+    const ADD   =   'add';
+    const PG_CARD_3DS   =   'pg_card_3ds';
+    const PG_COUNTRY    =   'pg_country';
+    const PG_BANK       =   'pg_bank';
+    const PG_CARD_YEAR  =   'pg_card_year';
+    const PG_CARD_MONTH =   'pg_card_month';
+    const PG_CARD_HASH  =   'pg_card_hash';
+    const SUCCESS   =   'success';
+    const PG_STATUS =   'pg_status';
     const PG_XML    =   'pg_xml';
     const CARD_3D   =   'card_3d';
     const COUNTRY   =   'country';
@@ -108,10 +126,8 @@ class MainContract
 
     const STATUSES_BOOKING  =   [
         self::CHECKING,
-        self::ENABLED,
-        self::DISABLED,
-        self::CANCELED,
-        self::DELETED
+        self::ON,
+        self::OFF,
     ];
 
     const STATUSES_REVIEWS  =   [

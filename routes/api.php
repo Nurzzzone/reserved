@@ -19,31 +19,52 @@ Route::prefix('contacts')->group(function() {
 });
 
 Route::prefix('card')->group(function() {
+
     Route::post('post',[CardController::class,'post'])->name('card.post');
+    Route::post('update/{id}',[CardController::class,'update'])->name('card.update');
+
+    Route::get('delete/{id}',[CardController::class,'delete'])->name('card.delete');
+    Route::get('id/{id}',[CardController::class,'getById'])->name('card.id');
+    Route::get('user/{userId}',[CardController::class,'getByUserId'])->name('card.user');
+
+});
+
+Route::prefix('booking')->group(function() {
+
+    Route::post('create',[BookingController::class,'create'])->name('booking.create');
+
+    Route::get('delete/{id}',[BookingController::class,'delete'])->name('booking.delete');
+    Route::get('id/{id}',[BookingController::class,'getById'])->name('booking.id');
+    Route::get('user/{userId}',[BookingController::class,'getByUserId'])->name('booking.user');
+    Route::get('organization/{organizationId}',[BookingController::class,'getByOrganizationId'])->name('booking.organization');
+    Route::get('table/{tableId}',[BookingController::class,'getByTableId'])->name('booking.table');
+    Route::get('date/{date}',[BookingController::class,'getByDate'])->name('booking.date');
+
 });
 
 Route::prefix('payment')->group(function() {
-    Route::get('/card/add/{id}',[PaymentController::class,'cardAdd']);
-    Route::get('/card/list/{id}',[PaymentController::class,'cardList']);
+
+    Route::post('card/result',[PaymentController::class,'cardResult'])->name('payment.card.result');
+
+    Route::get('card/{id}',[PaymentController::class,'card']);
     Route::get('/result',[PaymentController::class,'result']);
     Route::get('/success',[PaymentController::class,'success']);
     Route::get('/failure',[PaymentController::class,'failure']);
     Route::get('/post',[PaymentController::class,'post']);
     Route::get('/check',[PaymentController::class,'check']);
+
 });
 
 Route::prefix('review')->group(function () {
+
     Route::post('/create/',[ReviewController::class,'create']);
     Route::post('/update/{id}',[ReviewController::class,'update']);
+
     Route::get('/delete/{id}',[ReviewController::class,'delete']);
     Route::get('/list/organization/{id}',[ReviewController::class,'getByOrganizationId']);
     Route::get('/list/user/{id}',[ReviewController::class,'getByUserId']);
-});
 
-Route::post('/add/booking/',[BookingController::class,'add']);
-Route::get('/organization/booking/{id}',[BookingController::class,'getByOrganizationId']);
-Route::get('/booking/{id}',[BookingController::class,'getByUserId']);
-Route::get('/tables/{id}',[BookingController::class,'tables']);
+});
 
 Route::get('/categories',[CategoryController::class,'list']);
 Route::get('/countries',[CountryController::class,'list']);
@@ -55,7 +76,10 @@ Route::get('/organization/{id}',[OrganizationController::class,'getById']);
 Route::get('/city/organizations/{id}/',[OrganizationCityController::class,'getByCityId']);
 Route::get('/category/organizations/{id}',[OrganizationController::class,'getByCategoryId']);
 
-Route::get('/sms/{phone}/{code}',[UserController::class,'smsVerify']);
+Route::prefix('sms')->group(function() {
+    Route::get('{phone}/{code}',[UserController::class,'smsVerify']);
+});
+
 Route::get('/sms_resend/{phone}',[UserController::class,'smsResend']);
 Route::get('/login/{phone}/{password}',[UserController::class,'login']);
 Route::get('/register',[UserController::class,'register']);

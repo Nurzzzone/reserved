@@ -13,6 +13,7 @@ class CreateBookingsTable extends Migration
         Schema::create(BookingContract::TABLE, function (Blueprint $table) {
             $table->id();
             $table->string(BookingContract::IIKO_BOOKING_ID)->nullable();
+
             $table->bigInteger(BookingContract::USER_ID)->nullable();
             $table->bigInteger(BookingContract::ORGANIZATION_ID)->nullable();
             $table->bigInteger( BookingContract::ORGANIZATION_TABLE_LIST_ID)->nullable();
@@ -21,10 +22,19 @@ class CreateBookingsTable extends Migration
             $table->text(BookingContract::COMMENT)->nullable();
             $table->enum(BookingContract::STATUS,BookingContract::STATUSES_BOOKING)
                 ->default(BookingContract::CHECKING);
+
+            $table->string(BookingContract::PAYMENT_URL)->nullable();
+            $table->bigInteger(BookingContract::PAYMENT_ID)->nullable();
+            $table->string(BookingContract::PRICE)->nullable();
+            $table->smallInteger(BookingContract::CURRENCY)->default(1);
+            $table->bigInteger(BookingContract::CARD_ID)->nullable();
+
             $table->timestamps();
+
             $table->index(BookingContract::USER_ID);
             $table->index(BookingContract::ORGANIZATION_ID);
             $table->index(BookingContract::ORGANIZATION_TABLE_LIST_ID);
+            $table->index(BookingContract::CARD_ID);
         });
     }
 

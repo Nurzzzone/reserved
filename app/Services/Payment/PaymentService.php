@@ -114,7 +114,7 @@ class PaymentService
 
         $xml    =   simplexml_load_string($payment);
         if (property_exists($xml,MainContract::PG_PAYMENT_ID)) {
-            return $xml->{MainContract::PG_PAYMENT_ID};
+            return $xml->{MainContract::PG_PAYMENT_ID}[0];
         }
         return false;
     }

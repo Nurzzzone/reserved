@@ -35,6 +35,8 @@ class PaymentService
     const CARD_LIST     =   'https://api.paybox.money/v1/merchant/'.self::ID.'/cardstorage/list';
     const CARD_DELETE   =   'https://api.paybox.money/v1/merchant/'.self::ID.'/cardstorage/remove';
     const CARD_PAYMENT  =   'https://api.paybox.money/v1/merchant/'.self::ID.'/card/init';
+    const CARD_PAY      =   'https://api.paybox.money/v1/merchant/'.self::ID.'/card/pay';
+
     const CARD_RESULT   =   'https://reserved.org.kz/api/payment/card/result';
     const CARD_SUCCESS  =   'https://reserved.org.kz/card/success';
     const CARD_FAILURE  =   'https://reserved.org.kz/card/failure';
@@ -70,12 +72,6 @@ class PaymentService
     public static function paySignature($paymentId):array
     {
         if ($paymentId) {
-            print_r(self::signatureCard([
-                PaymentContract::PG_MERCHANT_ID =>  self::ID,
-                PaymentContract::PG_PAYMENT_ID  =>  (int) $paymentId,
-                PaymentContract::PG_SALT        =>  rand(100000,999999),
-            ],MainContract::PAY));
-            exit;
             return self::signatureCard([
                 PaymentContract::PG_MERCHANT_ID =>  self::ID,
                 PaymentContract::PG_PAYMENT_ID  =>  $paymentId,
@@ -89,7 +85,7 @@ class PaymentService
     {
         if ($card) {
             if ($payment    =   $this->paymentCard($booking)) {
-                $booking->{BookingContract::PAYMENT_URL}    =   self::CARD_PAYMENT;
+                $booking->{BookingContract::PAYMENT_URL}    =   self::CARD_PAY;
                 $booking->{BookingContract::PAYMENT_ID}     =   $payment[MainContract::PG_PAYMENT_ID];
                 $booking->save();
                 return $booking;

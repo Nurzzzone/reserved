@@ -61,3 +61,7 @@ Route::prefix('admin')->group(function () {
     Route::get('booking/status_date/{date}',[BookingCrudController::class, 'bookingStatus']);
     Route::get('booking/status/{id}',[BookingCrudController::class, 'cancel']);
 });
+
+Route::get('test', function() {
+    return view('test');
+});

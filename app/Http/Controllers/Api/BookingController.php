@@ -30,6 +30,8 @@ class BookingController extends Controller
     public function create(BookingCreateRequest $request):object
     {
         $booking    =   $this->bookingService->create($request->validated());
+        print_r($booking);
+        exit;
         $booking    =   $this->paymentService->create($booking);
         return new BookingResource($booking);
     }

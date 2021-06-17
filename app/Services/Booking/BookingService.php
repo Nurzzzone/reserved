@@ -52,7 +52,6 @@ class BookingService extends BaseService
         return $this->bookingRepository->getByDate($date, $paginate);
     }
 
-
     public function create(array $data) {
         return $this->bookingRepository->create($data);
     }

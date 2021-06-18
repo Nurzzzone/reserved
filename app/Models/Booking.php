@@ -14,10 +14,6 @@ class Booking extends Model
     use HasFactory;
     protected $fillable =   BookingContract::FILLABLE;
 
-    public function getStatusAttribute($value) {
-        return BookingContract::TRANSLATE[$value];
-    }
-
     public function getTimeAttribute($value) {
         $date   =   explode(' ',$this->created_at);
         $time   =   new \DateTime($date[0].' '.$value, new \DateTimeZone(BookingContract::UTC));

@@ -22,6 +22,8 @@ use App\Services\Booking\BookingService;
 use App\Jobs\BookingPayment;
 use http\Env\Request;
 
+use App\Helpers\Time\Time;
+
 class BookingCrudController extends CrudController
 {
     use \Backpack\CRUD\app\Http\Controllers\Operations\ListOperation;
@@ -57,16 +59,18 @@ class BookingCrudController extends CrudController
             $parameter  =   $param;
             break;
         }
-        $time   =   new \DateTime(date('Y-m-d').' '.$parameter[BookingContract::TIME], new \DateTimeZone($parameter[BookingContract::TIMEZONE]));
-        $time->setTimezone(new \DateTimeZone(BookingContract::UTC));
+        $organization   =   $this->organizationService->getById($parameter[BookingContract::ORGANIZATION_ID]);
         $this->crud->removeField(BookingContract::TIME);
         $this->crud->addField(['type' => 'hidden', 'name' => BookingContract::TIME]);
-        $this->crud->getRequest()->request->add([BookingContract::TIME   =>  $time->format('H:i:s')]);
+        $this->crud->getRequest()->request->add([
+            BookingContract::TIME   =>  Time::toLocal(date('Y-m-d').' '.$parameter[BookingContract::TIME], $parameter[BookingContract::TIMEZONE]),
+            BookingContract::PRICE  =>  $organization->{BookingContract::PRICE}
+        ]);
         $response   =   $this->traitStore();
         BookingPayment::dispatch([
-            $this->crud->entry->id,
-            $parameter[BookingContract::ORGANIZATION_ID],
-            $parameter[BookingContract::USER_ID]
+            BookingContract::ID =>  $this->crud->entry->id,
+            BookingContract::ORGANIZATION_ID    =>  $parameter[BookingContract::ORGANIZATION_ID],
+            BookingContract::USER_ID    =>  $parameter[BookingContract::USER_ID]
         ]);
         return $response;
     }
@@ -77,11 +81,11 @@ class BookingCrudController extends CrudController
             $parameter  =   $param;
             break;
         }
-        $time   =   new \DateTime(date('Y-m-d').' '.$parameter[BookingContract::TIME], new \DateTimeZone($parameter[BookingContract::TIMEZONE]));
-        $time->setTimezone(new \DateTimeZone(BookingContract::UTC));
         $this->crud->removeField(BookingContract::TIME);
         $this->crud->addField(['type' => 'hidden', 'name' => BookingContract::TIME]);
-        $this->crud->getRequest()->request->add([BookingContract::TIME  =>  $time->format('H:i:s')]);
+        $this->crud->getRequest()->request->add([
+            BookingContract::TIME  =>  Time::toLocal(date('Y-m-d').' '.$parameter[BookingContract::TIME], $parameter[BookingContract::TIMEZONE])
+        ]);
         return $this->traitUpdate();
     }
 

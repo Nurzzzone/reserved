@@ -15,6 +15,7 @@ use Illuminate\Queue\SerializesModels;
 use App\Services\Payment\PaymentService;
 use App\Services\Sms\SmsService;
 use App\Services\User\UserService;
+use App\Services\Booking\BookingService;
 
 class BookingPayment implements ShouldQueue
 {
@@ -25,26 +26,15 @@ class BookingPayment implements ShouldQueue
         $this->data  =   $data;
     }
 
-    public function handle(OrganizationService $organizationService, PaymentService $paymentService, SmsService $smsService, UserService $userService) {
-
-        $organization   =   $organizationService->getById($this->data[1]);
-        $user           =   $userService->getById($this->data[2]);
-        $payment        =   $paymentService->urlAdmin($this->data[0],$organization->price,$organization->title,$user->phone);
-
-        try {
-            if (sizeof($payment)>0 && array_key_exists(PaymentContract::PG_REDIRECT_URL,$payment)) {
-                $paymentService->create([
-                    PaymentContract::BOOKING_ID =>  $this->data[0],
-                    PaymentContract::PRICE  =>  $organization->price,
-                    PaymentContract::PG_PAYMENT_ID  =>  $payment[PaymentContract::PG_PAYMENT_ID],
-                    PaymentContract::PG_REDIRECT_URL    =>  $payment[PaymentContract::PG_REDIRECT_URL],
-                    PaymentContract::PG_SIG =>  $payment[PaymentContract::PG_SIG],
-                    PaymentContract::STATUS =>  PaymentContract::ENABLED
-                ]);
-                $smsService->sendBooking($user->phone,$organization->title,$payment[PaymentContract::PG_REDIRECT_URL]);
-            }
-        } catch (\Exception $e) {
-            dd($e->getMessage());
+    public function handle(OrganizationService $organizationService, SmsService $smsService, UserService $userService, PaymentService $paymentService, BookingService $bookingService) {
+        $organization   =   $organizationService->getById($this->data[BookingContract::ORGANIZATION_ID]);
+        $user           =   $userService->getById($this->data[BookingContract::USER_ID]);
+        $payment        =   $paymentService->urlAdmin($this->data[BookingContract::ID],$organization->price,$organization->title,$user->phone);
+        if (array_key_exists(PaymentContract::PG_REDIRECT_URL,$payment)) {
+            $bookingService->update($this->data[BookingContract::ID],[
+                BookingContract::PAYMENT_URL    =>  $payment[PaymentContract::PG_REDIRECT_URL]
+            ]);
+            $smsService->sendBooking($user->phone,$organization->title,$payment[PaymentContract::PG_REDIRECT_URL]);
         }
     }
 }

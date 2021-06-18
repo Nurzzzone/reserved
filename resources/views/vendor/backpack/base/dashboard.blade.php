@@ -2791,7 +2791,7 @@ $widgets['before_content'][] = [
                                 if (result[i].status[0] === 'CHECKING') {
                                     item.find('.card-header').addClass('bg-info');
                                     item.find('.card-id').html('#'+result[i].status[2]);
-                                } else if (result[i].status[0] === 'ON') {
+                                } else if (result[i].status[0] === 'on') {
                                     item.find('.card-header').addClass('bg-danger');
                                     item.find('.card-id').html('#'+result[i].status[2]);
                                 } else {

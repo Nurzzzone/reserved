@@ -91,7 +91,7 @@ class BookingService extends BaseService
         }
         $booking    =   $this->bookingRepository->getLastByTableId($id,$date);
         if ($booking) {
-            if ($booking[BookingContract::STATUS] === $booking[BookingContract::ON]) {
+            if ($booking[BookingContract::STATUS] === BookingContract::ON) {
                 return [
                     BookingContract::STATUS =>  BookingContract::ON,
                     BookingContract::TIME   =>  $booking[BookingContract::TIME],

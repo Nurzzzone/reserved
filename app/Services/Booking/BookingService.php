@@ -91,13 +91,13 @@ class BookingService extends BaseService
         }
         $booking    =   $this->bookingRepository->getLastByTableId($id,$date);
         if ($booking) {
-            if ($booking[BookingContract::STATUS] === 'Включен') {
+            if ($booking[BookingContract::STATUS] === $booking[BookingContract::ON]) {
                 return [
-                    BookingContract::STATUS =>  BookingContract::ENABLED,
+                    BookingContract::STATUS =>  BookingContract::ON,
                     BookingContract::TIME   =>  $booking[BookingContract::TIME],
                     BookingContract::ID     =>  $booking[BookingContract::ID],
                 ];
-            } elseif ($booking[BookingContract::STATUS] === 'На проверке') {
+            } elseif ($booking[BookingContract::STATUS] === BookingContract::CHECKING) {
                 return [
                     BookingContract::STATUS =>  BookingContract::CHECKING,
                     BookingContract::TIME   =>  $booking[BookingContract::TIME],
@@ -115,8 +115,8 @@ class BookingService extends BaseService
             $date   =   date('Y-m-d');
         }
         $status     =   $this->statusCheck($id,$date);
-        if ($status[BookingContract::STATUS] === BookingContract::ENABLED) {
-            return [BookingContract::ENABLED,'<a class="btn btn-danger btn-block text-white font-weight-bold">Забронирован ('.$status[BookingContract::TIME].')</a><a class="btn btn-dark btn-block text-white font-weight-bold btn-booking" data-id="'.$status[BookingContract::ID].'">Отменить</a>',$status[BookingContract::ID]];
+        if ($status[BookingContract::STATUS] === BookingContract::ON) {
+            return [BookingContract::ON,'<a class="btn btn-danger btn-block text-white font-weight-bold">Забронирован ('.$status[BookingContract::TIME].')</a><a class="btn btn-dark btn-block text-white font-weight-bold btn-booking" data-id="'.$status[BookingContract::ID].'">Отменить</a>',$status[BookingContract::ID]];
         } elseif ($status[BookingContract::STATUS] === BookingContract::CHECKING) {
             return [BookingContract::CHECKING,'<a class="btn btn-info btn-block text-white font-weight-bold">В резерве ('.$status[BookingContract::TIME].')</a><a class="btn btn-dark btn-block text-white font-weight-bold btn-booking" data-id="'.$status[BookingContract::ID].'">Отменить</a>',$status[BookingContract::ID]];
         }

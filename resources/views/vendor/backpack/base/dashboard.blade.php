@@ -2751,8 +2751,8 @@ $widgets['before_content'][] = [
                     @endphp
                     <div class="col-xl-2 col-lg-4 col-md-6 col-6">
                         <div class="card shadow border-0 overflow-hidden" data-card="{{$table->id}}" style="border-radius: 10px;">
-                            <div class="card-header @if($status[0] === \App\Domain\Contracts\BookingContract::CHECKING) bg-info @elseif($status[0] === \App\Domain\Contracts\BookingContract::ENABLED) bg-danger @else bg-success @endif  font-weight-bold text-center h6 border-0">
-                                {{$table->title}} <span class="text-dark card-id">@if($status[0] === \App\Domain\Contracts\BookingContract::CHECKING || $status[0] === \App\Domain\Contracts\BookingContract::ENABLED)#{{$status[2]}}@endif</span>
+                            <div class="card-header @if($status[0] === \App\Domain\Contracts\BookingContract::CHECKING) bg-info @elseif($status[0] === \App\Domain\Contracts\BookingContract::ON) bg-danger @else bg-success @endif  font-weight-bold text-center h6 border-0">
+                                {{$table->title}} <span class="text-dark card-id">@if($status[0] === \App\Domain\Contracts\BookingContract::CHECKING || $status[0] === \App\Domain\Contracts\BookingContract::ON)#{{$status[2]}}@endif</span>
                             </div>
                             <ul class="list-group list-group-flush">
                                 <li class="list-group-item text-center text-secondary">
@@ -2791,7 +2791,7 @@ $widgets['before_content'][] = [
                                 if (result[i].status[0] === 'CHECKING') {
                                     item.find('.card-header').addClass('bg-info');
                                     item.find('.card-id').html('#'+result[i].status[2]);
-                                } else if (result[i].status[0] === 'ENABLED') {
+                                } else if (result[i].status[0] === 'ON') {
                                     item.find('.card-header').addClass('bg-danger');
                                     item.find('.card-id').html('#'+result[i].status[2]);
                                 } else {

@@ -96,13 +96,13 @@ class BookingRepositoryEloquent implements BookingRepositoryInterface
 
     public function success($id):void {
         Booking::where(BookingContract::ID,$id)->update([
-            BookingContract::STATUS =>  BookingContract::ENABLED
+            BookingContract::STATUS =>  BookingContract::ON
         ]);
     }
 
     public function failure($id):void {
         Booking::where(BookingContract::ID,$id)->update([
-            BookingContract::STATUS =>  BookingContract::CANCELED
+            BookingContract::STATUS =>  BookingContract::OFF
         ]);
     }
 

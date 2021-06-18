@@ -23,6 +23,11 @@ class BookingRepositoryEloquent implements BookingRepositoryInterface
         return Booking::create($data);
     }
 
+    public function update($id, array $input)
+    {
+        Booking::where(BookingContract::ID,$id)->update($input);
+    }
+
     public function delete($id):void
     {
         Booking::where(BookingContract::ID,$id)->update([
@@ -38,7 +43,7 @@ class BookingRepositoryEloquent implements BookingRepositoryInterface
         ])->first();
     }
 
-    public function getByUserId($userId,$paginate):array
+    public function getByUserId($userId,$paginate):object
     {
         return Booking::where([
             [BookingContract::USER_ID,$userId],
@@ -49,7 +54,7 @@ class BookingRepositoryEloquent implements BookingRepositoryInterface
             ->take($this->take)->get();
     }
 
-    public function getByOrganizationId($organizationId,$paginate):array
+    public function getByOrganizationId($organizationId,$paginate):object
     {
         return Booking::where([
             [BookingContract::ORGANIZATION_ID,$organizationId],
@@ -60,7 +65,7 @@ class BookingRepositoryEloquent implements BookingRepositoryInterface
             ->take($this->take)->get();
     }
 
-    public function getByTableId($tableId,$paginate):array
+    public function getByTableId($tableId,$paginate):object
     {
         return Booking::where([
             [BookingContract::ORGANIZATION_TABLE_LIST_ID,$tableId],
@@ -71,7 +76,7 @@ class BookingRepositoryEloquent implements BookingRepositoryInterface
             ->take($this->take)->get();
     }
 
-    public function getByDate($date,$paginate):array
+    public function getByDate($date,$paginate):object
     {
         return Booking::where([
             [BookingContract::DATE,$date],

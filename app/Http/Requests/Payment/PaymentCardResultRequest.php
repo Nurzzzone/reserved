@@ -1,13 +1,13 @@
 <?php
 
-namespace App\Http\Requests\Booking;
+namespace App\Http\Requests\Payment;
 
-use App\Domain\Contracts\MainContract;
 use Illuminate\Contracts\Validation\Validator;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Http\Exceptions\HttpResponseException;
+use App\Domain\Contracts\PaymentContract;
 
-class BookingPaginateRequest extends FormRequest
+class PaymentCardResultRequest extends FormRequest
 {
 
     public function authorize()
@@ -18,18 +18,13 @@ class BookingPaginateRequest extends FormRequest
     public function rules()
     {
         return [
-            MainContract::PAGINATE  =>  'nullable|integer'
+            PaymentContract::PG_ORDER_ID    =>  'required'
         ];
     }
 
     public function validated(): array
     {
         $request = $this->validator->validated();
-        if (!$this->has(MainContract::PAGINATE)) {
-            $request[MainContract::PAGINATE]    =   0;
-        } elseif ((int) $this->has(MainContract::PAGINATE) > 0) {
-            $request[MainContract::PAGINATE]    =   (int) $request[MainContract::PAGINATE] - 1;
-        }
         return $request;
     }
 

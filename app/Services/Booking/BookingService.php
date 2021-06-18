@@ -32,28 +32,34 @@ class BookingService extends BaseService
         return $this->bookingRepository->getById($id);
     }
 
-    public function getByUserId($userId,int $paginate):array
+    public function getByUserId($userId,int $paginate):object
     {
         return $this->bookingRepository->getByUserId($userId,$paginate);
     }
 
-    public function getByOrganizationId($organizationId, int $paginate):array
+    public function getByOrganizationId($organizationId, int $paginate):object
     {
         return $this->bookingRepository->getByOrganizationId($organizationId,$paginate);
     }
 
-    public function getByTableId($tableId, int $paginate):array
+    public function getByTableId($tableId, int $paginate):object
     {
         return $this->bookingRepository->getByTableId($tableId, $paginate);
     }
 
-    public function getByDate($date, int $paginate):array
+    public function getByDate($date, int $paginate):object
     {
         return $this->bookingRepository->getByDate($date, $paginate);
     }
 
-    public function create(array $data) {
-        return $this->bookingRepository->create($data);
+    public function create(array $input)
+    {
+        return $this->bookingRepository->create($input);
+    }
+
+    public function update($id, array $input)
+    {
+        $this->bookingRepository->update($id,$input);
     }
 
     public function cancel($id) {

@@ -14,6 +14,7 @@ use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Auth;
 
 use App\Services\User\UserService;
+use App\Services\Organization\OrganizationService;
 use App\Services\Sms\SmsService;
 use App\Services\Booking\BookingService;
 
@@ -21,6 +22,7 @@ use App\Http\Resources\UserResource;
 
 use App\Jobs\BookingPayment;
 use App\Jobs\UserPassword;
+use App\Helpers\Time\Time;
 
 class UserController extends Controller
 {
@@ -28,12 +30,14 @@ class UserController extends Controller
     protected $userService;
     protected $smsService;
     protected $bookingService;
+    protected $organizationService;
 
-    public function __construct(UserService $userService, SmsService $smsService, BookingService $bookingService)
+    public function __construct(UserService $userService, OrganizationService $organizationService, SmsService $smsService, BookingService $bookingService)
     {
         $this->userService  =   $userService;
         $this->smsService   =   $smsService;
         $this->bookingService   =   $bookingService;
+        $this->organizationService  =   $organizationService;
     }
 
     public function booking(Request $request)
@@ -51,19 +55,23 @@ class UserController extends Controller
             UserPassword::dispatch([$user->{UserContract::PHONE},$password]);
         }
 
-        $time   =   new \DateTime(date('Y-m-d').' '.$request->input(BookingContract::TIME), new \DateTimeZone($request->input(BookingContract::TIMEZONE)));
-        $time->setTimezone(new \DateTimeZone(BookingContract::UTC));
+        $organization   =   $this->organizationService->getById($request->input(BookingContract::ORGANIZATION_ID));
 
         $booking    =   $this->bookingService->create([
             BookingContract::USER_ID    =>  $user->{UserContract::ID},
             BookingContract::ORGANIZATION_ID    =>  $request->input(BookingContract::ORGANIZATION_ID),
-            BookingContract::ORGANIZATION_TABLE_ID  =>  $request->input(BookingContract::ORGANIZATION_TABLE_ID),
-            BookingContract::TIME   =>  $time->format('H:i:s'),
+            BookingContract::ORGANIZATION_TABLE_LIST_ID  =>  $request->input(BookingContract::ORGANIZATION_TABLE_ID),
+            BookingContract::TIME   =>  Time::toLocal(date('Y-m-d').' '.$request->input(BookingContract::TIME), $request->input(BookingContract::TIMEZONE)),
             BookingContract::DATE   =>  $request->input(BookingContract::DATE),
-            BookingContract::COMMENT    =>  $request->input(BookingContract::COMMENT)
+            BookingContract::COMMENT    =>  $request->input(BookingContract::COMMENT),
+            BookingContract::PRICE  =>  $organization->{BookingContract::PRICE}
         ]);
 
-        BookingPayment::dispatch([$booking->id,$request->input(BookingContract::ORGANIZATION_ID),$user->{UserContract::ID}]);
+        BookingPayment::dispatch([
+            BookingContract::ID =>  $booking->id,
+            BookingContract::ORGANIZATION_ID    =>  $request->input(BookingContract::ORGANIZATION_ID),
+            BookingContract::USER_ID    =>  $user->{UserContract::ID}
+        ]);
 
         return $booking;
     }

@@ -87,7 +87,7 @@ class BookingRepositoryEloquent implements BookingRepositoryInterface
             ->take($this->take)->get();
     }
 
-    /*public function cancel($id) {
+    public function cancel($id) {
         $booking    =   Booking::where(BookingContract::ID,$id)->first();
         $booking->status    =   BookingContract::CANCELED;
         $booking->save();
@@ -110,6 +110,6 @@ class BookingRepositoryEloquent implements BookingRepositoryInterface
         return Booking::with('organization')->where([
             [BookingContract::ORGANIZATION_TABLE_LIST_ID,$id],
         ])->whereDate(BookingContract::DATE,$date)->orderBy(BookingContract::ID,'desc')->first();
-    }*/
+    }
 
 }

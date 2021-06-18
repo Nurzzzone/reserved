@@ -180,10 +180,8 @@ class BookingCrudController extends CrudController
         CRUD::field(BookingContract::STATUS)->type('select_from_array')
             ->label('Статус')->options([
                 BookingContract::CHECKING    =>  BookingContract::TRANSLATE[BookingContract::CHECKING],
-                BookingContract::ENABLED    =>  BookingContract::TRANSLATE[BookingContract::ENABLED],
-                BookingContract::DISABLED   =>  BookingContract::TRANSLATE[BookingContract::DISABLED],
-                BookingContract::CANCELED   =>  BookingContract::TRANSLATE[BookingContract::CANCELED],
-                BookingContract::DELETED   =>  BookingContract::TRANSLATE[BookingContract::DELETED],
+                BookingContract::ON    =>  BookingContract::TRANSLATE[BookingContract::ON],
+                BookingContract::OFF   =>  BookingContract::TRANSLATE[BookingContract::OFF],
             ]);
     }
 

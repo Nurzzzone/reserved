@@ -6,6 +6,5 @@
     <input type="submit" id="submit_btn">
 </form>
 <script>
-    let btn =   document.getElementById('submit_btn');
-    btn.click();
+    document.getElementById('submit_btn').click();
 </script>

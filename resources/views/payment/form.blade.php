@@ -7,5 +7,5 @@
 </form>
 <script>
     let btn =   document.getElementById('submit_btn');
-    btn.submit();
+    btn.click();
 </script>

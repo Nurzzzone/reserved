@@ -7,6 +7,7 @@ use App\Http\Controllers\UserController;
 use App\Http\Controllers\MainController;
 use App\Http\Controllers\LinkController;
 use App\Http\Controllers\ContactController;
+use App\Http\Controllers\PaymentController;
 
 use App\Http\Controllers\Admin\Auth\RegisterController;
 use App\Http\Controllers\Admin\Auth\LoginController;
@@ -62,6 +63,4 @@ Route::prefix('admin')->group(function () {
     Route::get('booking/status/{id}',[BookingCrudController::class, 'cancel']);
 });
 
-Route::get('test', function() {
-    return view('test');
-});
+Route::get('form/{bookingId}', [PaymentController::class,'form'])->name('payment.form');

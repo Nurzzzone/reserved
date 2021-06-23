@@ -20,6 +20,7 @@ class OrganizationContract extends MainContract
         self::TITLE_KZ,
         self::TITLE_EN,
         self::RATING,
+        self::WALLPAPER,
         self::IMAGE,
         self::DESCRIPTION,
         self::DESCRIPTION_KZ,

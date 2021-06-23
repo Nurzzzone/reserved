@@ -29,6 +29,22 @@ Route::prefix('profile')->group(function() {
     Route::get('/payments',[MainController::class, 'profilePayments'])->name('profile.payments');
 });
 
+Route::prefix('favorite')->group(function() {
+    Route::get('/',[MainController::class, 'favorite'])->name('favorite');
+});
+
+Route::prefix('home')->group(function() {
+    Route::get('/',[MainController::class, 'home'])->name('home');
+    Route::get('/{id}',[MainController::class, 'home'])->name('home');
+    Route::get('/restaurants',[MainController::class, 'homeRestaurants'])->name('home.restaurants');
+    Route::get('/cafe',[MainController::class, 'homeCafe'])->name('home.cafe');
+    Route::get('/bars',[MainController::class, 'homeBars'])->name('home.bars');
+});
+
+Route::prefix('top')->group(function() {
+    Route::get('/',[MainController::class, 'top'])->name('top');
+});
+
 Route::prefix('contacts')->group(function() {
     Route::get('contracts',[ContactController::class,'contracts']);
     Route::get('privacy',[ContactController::class,'privacy']);
@@ -64,3 +80,9 @@ Route::prefix('admin')->group(function () {
 });
 
 Route::get('form/{bookingId}', [PaymentController::class,'form'])->name('payment.form');
+
+Route::prefix('card')->group(function() {
+    Route::get('success', function() {
+        return 'Спасибо за платеж!';
+    });
+});

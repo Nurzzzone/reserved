@@ -8,6 +8,7 @@ use Carbon\Carbon;
 
 class MainContract
 {
+    const WALLPAPER =   'wallpaper';
     const PAY   =   'pay';
     const PAYMENT   =   'payment';
     const PAYMENT_ID    =   'payment_id';

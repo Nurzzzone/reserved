@@ -2,7 +2,7 @@
     <div class="container-fluid pt-5 text-white" style="background: #1d1d1d;">
         <div class="container pb-5">
             <div class="row mb-5">
-                <div class="col-6 col-md-6 col-lg-3">
+                <div class="col-12 col-md-6 col-lg-3">
                     <h3 class="font-weight-bold">Reserved</h3>
                     <h6 class="mt-3">Скачайте приложение</h6>
                     <div class="mt-4 main-thumbnail overflow-hidden">
@@ -13,7 +13,7 @@
                     </div>
                     <h6 class="mt-4">©  Reserved 2020 - 2021</h6>
                 </div>
-                <div class="col-6 col-md-6 col-lg-3">
+                <div class="col-12 col-md-6 col-lg-3">
                     <h5 class="font-weight-bold mt-4">Давайте сделаем это вместе</h5>
                     <ul class="list-group p-0 mt-4">
                         <li class="list-group-item bg-transparent border-0 px-0 py-2">Для ресторанов</li>
@@ -21,7 +21,7 @@
                         <li class="list-group-item bg-transparent border-0 px-0 py-2">Вакансии</li>
                     </ul>
                 </div>
-                <div class="col-6 col-md-6 col-lg-3">
+                <div class="col-12 col-md-6 col-lg-3">
                     <h5 class="font-weight-bold mt-4">Ссылки Reserved</h5>
                     <ul class="list-group p-0 mt-4">
                         <li class="list-group-item bg-transparent border-0 px-0 py-2">Контакты</li>
@@ -31,7 +31,7 @@
                         <li class="list-group-item bg-transparent border-0 px-0 py-2">Блог</li>
                     </ul>
                 </div>
-                <div class="col-6 col-md-6 col-lg-3">
+                <div class="col-12 col-md-6 col-lg-3">
                     <h5 class="font-weight-bold mt-4">Мы в соц-сетях</h5>
                     <ul class="list-group p-0 mt-4">
                         <li class="list-group-item bg-transparent border-0 px-0 py-2">Facebook</li>

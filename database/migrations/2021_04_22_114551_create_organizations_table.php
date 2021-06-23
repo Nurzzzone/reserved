@@ -24,6 +24,7 @@ class CreateOrganizationsTable extends Migration
             $table->string(OrganizationContract::TITLE_EN)->nullable();
             $table->float(OrganizationContract::RATING)->nullable();
             $table->string(OrganizationContract::IMAGE)->nullable();
+            $table->string(OrganizationContract::WALLPAPER)->nullable();
             $table->text(OrganizationContract::DESCRIPTION)->nullable();
             $table->text(OrganizationContract::DESCRIPTION_KZ)->nullable();
             $table->text(OrganizationContract::DESCRIPTION_EN)->nullable();

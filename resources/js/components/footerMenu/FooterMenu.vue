@@ -3,7 +3,7 @@
         <div class="row fixed-bottom bg-white width-auto footer-fixed d-flex justify-content-center">
             <div class="col-12 col-md-4">
                 <div class="footer-fixed-main w-100">
-                    <a href="/">
+                    <a href="/home">
                         <button class="btn py-3 font-weight-bold w-25">
                             <img src="/img/logo/home.svg" width="20" height="20">
                             <div class="title">Главная</div>

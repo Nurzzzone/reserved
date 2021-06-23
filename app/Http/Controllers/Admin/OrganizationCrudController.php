@@ -78,6 +78,8 @@ class OrganizationCrudController extends CrudController
         CRUD::column(OrganizationContract::CATEGORY_ID)->type('select')->label('Категория')
             ->entity('category')->model('App\Models\Category')->attribute(CategoryContract::TITLE);
         CRUD::column(OrganizationContract::TITLE)->label('Название');
+        CRUD::column(OrganizationContract::WALLPAPER)->type('image')->label('Обложка');
+        CRUD::column(OrganizationContract::IMAGE)->type('image')->label('Лого');
         CRUD::column(OrganizationContract::RATING)->label('Реитинг');
         CRUD::column(OrganizationContract::ADDRESS)->label('Адрес');
         CRUD::column(OrganizationContract::EMAIL)->label('Эл.почта');
@@ -118,6 +120,11 @@ class OrganizationCrudController extends CrudController
             ]);
             CRUD::field(OrganizationContract::TITLE_KZ)->label('Название на казахском');
             CRUD::field(OrganizationContract::TITLE_EN)->label('Название на англииском');
+
+            CRUD::field(OrganizationContract::WALLPAPER)->label('Обложка')->type('image')->attributes([
+                'accept'    =>  'image/png, image/jpeg, image/jpg',
+            ]);
+
             CRUD::field(OrganizationContract::IMAGE)->label('Логотип')->type('image')->attributes([
                 'accept'    =>  'image/png, image/jpeg, image/jpg'
             ]);

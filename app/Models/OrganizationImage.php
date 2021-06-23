@@ -42,7 +42,7 @@ class OrganizationImage extends Model
             Storage::disk($disk)->put($destination_path.'/'.$filename, $image->stream());
             Storage::disk($disk)->delete($this->{OrganizationImageContract::IMAGE});
             $public_destination_path = Str::replaceFirst('public/', '', $destination_path);
-            $this->attributes[OrganizationImageContract::IMAGE] = $public_destination_path.'/'.$filename;
+            $this->attributes[OrganizationImageContract::IMAGE] = '/'.$public_destination_path.'/'.$filename;
         }
     }
 }

@@ -11,8 +11,8 @@
                     </p>
                 </div>
             </div>
-            <div class="row mt-5">
-                <div class="col-8">
+            <div class="row mt-5 justify-content-center">
+                <div class="col-12 col-md-8">
                     <form>
                         <div class="form-group row">
                             <label for="name" class="col-sm-4 col-form-label col-form-label-lg font-weight-bold">Имя</label>
@@ -33,7 +33,7 @@
                             </div>
                         </div>
                         <div class="row">
-                            <div class="col d-flex justify-content-end">
+                            <div class="col d-flex justify-content-center mt-3">
                                 <button type="submit" class="btn profile-btn font-weight-bold text-white px-3  disabled">Сохранить изменения</button>
                             </div>
                         </div>
@@ -48,8 +48,8 @@
                     </p>
                 </div>
             </div>
-            <div class="row mt-5">
-                <div class="col-8">
+            <div class="row mt-5 justify-content-center">
+                <div class="col-12 col-md-8">
                     <form>
                         <div class="form-group row">
                             <label for="old" class="col-sm-4 col-form-label col-form-label-lg font-weight-bold">Старый пароль</label>
@@ -63,15 +63,9 @@
                                 <input type="password" class="form-control form-control-lg profile-input" id="new" >
                             </div>
                         </div>
-                        <div class="form-group row">
-                            <label for="confirm_new" class="col-sm-4 col-form-label col-form-label-lg font-weight-bold">Повторите пароль</label>
-                            <div class="col-sm-8">
-                                <input type="password" class="form-control form-control-lg profile-input" id="confirm_new">
-                            </div>
-                        </div>
                         <div class="row">
-                            <div class="col d-flex justify-content-end">
-                                <button type="submit" class="btn profile-btn font-weight-bold text-white px-5  disabled">Сохранить изменения</button>
+                            <div class="col d-flex justify-content-center mt-3">
+                                <button type="submit" class="btn profile-btn font-weight-bold text-white px-3  disabled">Сохранить изменения</button>
                             </div>
                         </div>
                     </form>

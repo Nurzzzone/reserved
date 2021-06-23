@@ -39,6 +39,33 @@ class MainController extends Controller
         return view('index');
     }
 
+    public function favorite() {
+        return view('index');
+    }
+
+    public function top() {
+        return view('index');
+    }
+
+    public function home() {
+        return view('index');
+    }
+
+    public function homeRestaurants()
+    {
+        return view('index');
+    }
+
+    public function homeCafe()
+    {
+        return view('index');
+    }
+
+    public function homeBars()
+    {
+        return view('index');
+    }
+
     public function profile() {
         return view('index');
     }

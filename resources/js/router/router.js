@@ -1,15 +1,61 @@
 import { createWebHistory, createRouter } from "vue-router";
 
-import Home from "../components/Home";
+import Main from "../components/Main";
+
 import Profile from "../components/Profile";
 import Settings from "../components/Settings";
 import Payments from "../components/Payments";
 
+import Favorite from "../components/Favorite";
+
+import Top from "../components/Top";
+
+import Home from "../components/Home";
+import Restaurants from "../components/Restaurants";
+import Cafe from "../components/Cafe";
+import Bars from "../components/Bars";
+import Organization from '../components/Organization';
+
 const routes = [
     {
         path: "/",
-        name: "Home",
-        component: Home,
+        name: "Main",
+        component: Main,
+    },
+    {
+        path: '/home',
+        name: 'Home',
+        component: Home
+    },
+    {
+        path: '/home/:id',
+        name: 'Organization',
+        component: Organization
+    },
+    {
+        path: '/home/restaurants',
+        name: 'Restaurants',
+        component: Restaurants
+    },
+    {
+        path: '/home/cafe',
+        name: 'Cafe',
+        component: Cafe
+    },
+    {
+        path: '/home/bars',
+        name: 'Bars',
+        component: Bars
+    },
+    {
+        path: '/top',
+        name: 'Top',
+        component: Top
+    },
+    {
+        path: '/favorite',
+        name: 'Favorite',
+        component: Favorite
     },
     {
         path: '/profile',

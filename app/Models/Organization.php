@@ -5,6 +5,9 @@ namespace App\Models;
 use App\Domain\Contracts\OrganizationContract;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Str;
+use Intervention\Image\ImageManagerStatic as Image;
 
 class Organization extends Model
 {
@@ -44,64 +47,52 @@ class Organization extends Model
         return $this->hasOne(OrganizationCity::class);
     }
 
-    public function getStatusAttribute($value)
-    {
-        return OrganizationContract::TRANSLATE[$value];
+    public function setImageAttribute($value) {
+
+        $disk               =   config('backpack.base.root_disk_name');
+        $destination_path   =   'public/uploads';
+
+        if ($value  ==  null) {
+
+            Storage::disk($disk)->delete($this->{OrganizationContract::IMAGE});
+            $this->attributes[OrganizationContract::IMAGE] = null;
+
+        }
+
+        if (Str::startsWith($value, 'data:image')) {
+
+            $image      =   Image::make($value)->encode('jpg', 90);
+            $filename   =   md5($value.time()).'.jpg';
+            Storage::disk($disk)->put($destination_path.'/'.$filename, $image->stream());
+            Storage::disk($disk)->delete($this->{OrganizationContract::IMAGE});
+            $public_destination_path = Str::replaceFirst('public/', '', $destination_path);
+            $this->attributes[OrganizationContract::IMAGE] = '/'.$public_destination_path.'/'.$filename;
+
+        }
     }
 
-    public function getMondayAttribute($value)
-    {
-        if ($this->attributes[OrganizationContract::START_MONDAY] === $this->attributes[OrganizationContract::END_MONDAY]) {
-            return OrganizationContract::TRANSLATE['ALL_DAY'];
+    public function setWallpaperAttribute($value) {
+
+        $disk               =   config('backpack.base.root_disk_name');
+        $destination_path   =   'public/uploads/wallpaper';
+
+        if ($value  ==  null) {
+
+            Storage::disk($disk)->delete($this->{OrganizationContract::WALLPAPER});
+            $this->attributes[OrganizationContract::WALLPAPER] = null;
+
         }
-        return 'с '.$this->attributes[OrganizationContract::START_MONDAY].' до'.$this->attributes[OrganizationContract::END_MONDAY];
+
+        if (Str::startsWith($value, 'data:image')) {
+
+            $image      =   Image::make($value)->encode('jpg', 90);
+            $filename   =   md5($value.time()).'.jpg';
+            Storage::disk($disk)->put($destination_path.'/'.$filename, $image->stream());
+            Storage::disk($disk)->delete($this->{OrganizationContract::WALLPAPER});
+            $public_destination_path = Str::replaceFirst('public/', '', $destination_path);
+            $this->attributes[OrganizationContract::WALLPAPER] = '/'.$public_destination_path.'/'.$filename;
+
+        }
     }
 
-    public function getTuesdayAttribute($value)
-    {
-        if ($this->attributes[OrganizationContract::START_TUESDAY] === $this->attributes[OrganizationContract::END_TUESDAY]) {
-            return OrganizationContract::TRANSLATE['ALL_DAY'];
-        }
-        return 'с '.$this->attributes[OrganizationContract::START_TUESDAY].' до'.$this->attributes[OrganizationContract::START_TUESDAY];
-    }
-
-    public function getWednesdayAttribute($value)
-    {
-        if ($this->attributes[OrganizationContract::START_WEDNESDAY] === $this->attributes[OrganizationContract::END_WEDNESDAY]) {
-            return OrganizationContract::TRANSLATE['ALL_DAY'];
-        }
-        return 'с '.$this->attributes[OrganizationContract::START_WEDNESDAY].' до'.$this->attributes[OrganizationContract::START_WEDNESDAY];
-    }
-
-    public function getThursdayAttribute($value)
-    {
-        if ($this->attributes[OrganizationContract::START_THURSDAY] === $this->attributes[OrganizationContract::END_THURSDAY]) {
-            return OrganizationContract::TRANSLATE['ALL_DAY'];
-        }
-        return 'с '.$this->attributes[OrganizationContract::START_THURSDAY].' до'.$this->attributes[OrganizationContract::END_THURSDAY];
-    }
-
-    public function getFridayAttribute($value)
-    {
-        if ($this->attributes[OrganizationContract::START_FRIDAY] === $this->attributes[OrganizationContract::END_FRIDAY]) {
-            return OrganizationContract::TRANSLATE['ALL_DAY'];
-        }
-        return 'с '.$this->attributes[OrganizationContract::START_FRIDAY].' до'.$this->attributes[OrganizationContract::END_FRIDAY];
-    }
-
-    public function getSaturdayAttribute($value)
-    {
-        if ($this->attributes[OrganizationContract::START_SATURDAY] === $this->attributes[OrganizationContract::END_SATURDAY]) {
-            return OrganizationContract::TRANSLATE['ALL_DAY'];
-        }
-        return 'с '.$this->attributes[OrganizationContract::START_SATURDAY].' до'.$this->attributes[OrganizationContract::END_SATURDAY];
-    }
-
-    public function getSundayAttribute($value)
-    {
-        if ($this->attributes[OrganizationContract::START_SUNDAY] === $this->attributes[OrganizationContract::END_SUNDAY]) {
-            return OrganizationContract::TRANSLATE['ALL_DAY'];
-        }
-        return 'с '.$this->attributes[OrganizationContract::START_SUNDAY].' до'.$this->attributes[OrganizationContract::END_SUNDAY];
-    }
 }

@@ -7,21 +7,18 @@ use Illuminate\Http\Resources\Json\JsonResource;
 
 class OrganizationResource extends JsonResource
 {
-    /**
-     * Transform the resource into an array.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return array
-     */
+
     public function toArray($request)
     {
         return [
-            OrganizationContract::ID    =>  $this->id,
-            OrganizationContract::RATING    =>  $this->rating,
-            OrganizationContract::IMAGE =>  $this->photo,
-            OrganizationContract::TITLE =>  $this->title,
+            OrganizationContract::ID        =>  $this->{OrganizationContract::ID},
+            OrganizationContract::RATING    =>  $this->{OrganizationContract::RATING},
+            OrganizationContract::IMAGE     =>  $this->{OrganizationContract::IMAGE},
+            OrganizationContract::WALLPAPER =>  $this->{OrganizationContract::WALLPAPER},
+            OrganizationContract::TITLE     =>  $this->{OrganizationContract::TITLE},
             OrganizationContract::TITLE_KZ  =>  $this->title_kz,
             OrganizationContract::TITLE_EN  =>  $this->title_en,
+            OrganizationContract::TIME      =>  '09.00 - 18.00',
             OrganizationContract::DESCRIPTION   =>  $this->description,
             OrganizationContract::DESCRIPTION_KZ    =>  $this->description_kz,
             OrganizationContract::DESCRIPTION_EN    =>  $this->description_en,
@@ -55,13 +52,13 @@ class OrganizationResource extends JsonResource
                 OrganizationContract::END   =>  $this->end_saturday
             ],
             OrganizationContract::SUNDAY    =>  [
-                OrganizationContract::START =>  $this->start_sunday,
-                OrganizationContract::END   =>  $this->end_sunday
+                OrganizationContract::START     =>  $this->start_sunday,
+                OrganizationContract::END       =>  $this->end_sunday
             ],
-            OrganizationContract::STATUS    =>  $this->status,
-            OrganizationContract::USER_ID   =>  new UserResource($this->user),
+            OrganizationContract::STATUS        =>  $this->status,
+            OrganizationContract::USER_ID       =>  new UserResource($this->user),
             OrganizationContract::CATEGORY_ID   =>  new CategoryResource($this->category),
-            OrganizationContract::IMAGES    =>  new OrganizationImageCollection($this->images)
+            OrganizationContract::IMAGES        =>  new OrganizationImageCollection($this->images)
         ];
     }
 }

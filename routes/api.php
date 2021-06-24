@@ -82,6 +82,7 @@ Route::prefix('sms')->group(function() {
 Route::get('/sms_resend/{phone}',[UserController::class,'smsResend']);
 Route::get('/login/{phone}/{password}',[UserController::class,'login']);
 Route::get('/register',[UserController::class,'register']);
+Route::post('/register',[UserController::class,'register']);
 
 Route::get('/user/{id}',[UserController::class,'getById']);
 Route::get('/user/phone/{phone}',[UserController::class,'getByPhone']);

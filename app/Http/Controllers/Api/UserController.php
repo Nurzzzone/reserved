@@ -24,6 +24,8 @@ use App\Jobs\BookingPayment;
 use App\Jobs\UserPassword;
 use App\Helpers\Time\Time;
 
+use App\Http\Requests\User\UserCreateRequest;
+
 class UserController extends Controller
 {
 
@@ -131,27 +133,11 @@ class UserController extends Controller
         return response(['message'  =>  'incorrect phone or password'],401);
     }
 
-    public function register(Request $request)
+    public function register(UserCreateRequest $request)
     {
-        $validator = Validator::make($request->all(), [
-            UserContract::NAME  =>  'required|min:2|max:255',
-            UserContract::PHONE     =>  'required|max:255|unique:users',
-            UserContract::PASSWORD  =>  'required|min:8',
-        ]);
-
-        if ($validator->fails()) {
-            $message    =   '';
-            if ($validator->messages()->first(UserContract::NAME)) {
-                $message    =   $validator->messages()->first(UserContract::NAME);
-            } elseif ($validator->messages()->first(UserContract::PHONE)) {
-                $message    =   $validator->messages()->first(UserContract::PHONE);
-            } elseif ($validator->messages()->first(UserContract::PASSWORD)) {
-                $message    =   $validator->messages()->first(UserContract::PASSWORD);
-            }
-            return response(['message'  =>  $message],400);
-        }
-        $user   =   $this->userService->create($request->all());
+        $user   =   $this->userService->create($request->validated());
         $this->smsService->sendCode($user->phone,$user->code);
         return new UserResource($user);
     }
+
 }

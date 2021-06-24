@@ -1,18 +1,19 @@
 <template>
     <Header></Header>
     <profile-section :name="name"></profile-section>
+    <Booking></Booking>
     <div class="container-fluid mb-5">
         <div class="container">
             <div class="row">
                 <div class="col-12">
                     <div class="wallpaper">
                         <div class="wallpaper-screen">
-                            <div class="organization-description h3 text-center mt-5 text-white">{{organization.address}}</div>
-                            <div class="organization-description h5 text-center mt-3 text-white">{{organization.time}}</div>
+                            <div class="organization-description text-center text-white">{{organization.address}}</div>
+                            <div class="organization-description text-center text-white">{{organization.time}}</div>
                         </div>
                         <img :src="organization.wallpaper">
                     </div>
-                    <div class="d-flex justify-content-center">
+                    <div class="d-flex justify-content-center organization-photo">
                         <div class="organization-logo">
                             <img :src="organization.image">
                         </div>
@@ -51,15 +52,19 @@
                             </div>
                         </div>
                         <div class="row justify-content-center mt-4"  v-for="(item,key) in sections" :key="key" :class="{'d-none':(key !== section)}">
-                            <div class="col-3 p-2" v-for="(table,tableKey) in item.organization_tables">
-                                <div class="card border-0 organization-shadow">
+                            <div class="col-12 col-md-6 col-lg-3 p-2" v-for="(table,tableKey) in item.organization_tables">
+                                <div class="card border-0 organization-shadow"  data-toggle="modal" data-target="#booking_modal">
                                     <div class="card-body">
                                         <div class="organization-card">
-                                            <div>
-                                                <div>{{table.title}}</div>
-                                                <div>Свободно</div>
+                                            <div class="row align-content-center pl-3">
+                                                <div class="organization-card-title w-100 font-weight-bold">{{table.title}}</div>
+                                                <div class="organization-card-status w-100 text-secondary">Свободно</div>
                                             </div>
-                                            <div class="organization-card-icon"></div>
+                                            <div>
+                                                <div class="organization-card-icon"></div>
+                                                <div class="organization-card-limit text-secondary text-center">{{table.limit}} чл.</div>
+                                            </div>
+                                            <div class="organization-card-arr"></div>
                                         </div>
                                     </div>
                                 </div>
@@ -91,12 +96,14 @@ import Header from "./header/Header";
 import Footer from "./footer/Footer";
 import ProfileSection from './sections/ProfileSection';
 import FooterMenu from './footerMenu/FooterMenu';
+import Booking from './modal/Booking';
 export default {
     components: {
         Header,
         Footer,
         ProfileSection,
-        FooterMenu
+        FooterMenu,
+        Booking
     },
     name: "Organization",
     data() {
@@ -140,9 +147,29 @@ export default {
 
 <style lang="scss">
     .organization {
+        &-description {
+            margin-top: 30px;
+        }
+        &-photo {
+
+        }
         &-card {
+            &-arr {
+                background: url('/img/logo/right-arrow.svg') no-repeat center;
+                background-size: contain;
+            }
             display: grid;
-            grid-template-columns: auto 40px;
+            grid-template-columns: auto 40px 15px;
+            grid-gap: 15px;
+            &-limit {
+                font-size: 12px;
+            }
+            &-title {
+                font-size: 16px;
+            }
+            &-status {
+                font-size: 14px;
+            }
             &-icon {
                 background: url('/img/logo/table.svg') no-repeat center;
                 background-size: contain;
@@ -162,6 +189,10 @@ export default {
         &-shadow {
             box-shadow: 0 0 5px 0 rgba(0,0,0,.15);
             border-radius: 10px;
+            cursor: pointer;
+            &:hover {
+                background: rgb(250,250,250);
+            }
         }
         &-image {
             width: 100%;
@@ -189,7 +220,7 @@ export default {
         }
     }
     .wallpaper {
-        height: 350px;
+        max-height: 350px;
         position: relative;
         overflow: hidden;
         border-radius: 0 0 20px 20px;
@@ -206,6 +237,18 @@ export default {
             height: 100%;
             background: rgba(0,0,0,.5);
             z-index: 2;
+        }
+    }
+    @media only screen and (max-width: 768px) {
+        .organization {
+            &-description {
+                margin-top: 10px;
+            }
+            &-logo {
+                width: 100px;
+                margin-top: -75px;
+                height: 100px;
+            }
         }
     }
 </style>

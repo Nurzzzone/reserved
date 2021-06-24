@@ -2,33 +2,23 @@
     <div class="container-fluid pt-5 top-bg">
         <div class="container pt-5 pb-4">
             <div class="row">
-                <div class="col-6" v-if="end === 'profile'">
+                <div class="col-12" v-if="end === 'profile'">
                     <h1 class="text-white top-title" v-if="url === 'profile'">Профиль</h1>
                     <h1 class="text-white top-title" v-else-if="url === 'settings'">Настройки</h1>
                     <h1 class="text-white top-title" v-else-if="url === 'payments'">Способ оплаты</h1>
                 </div>
-                <div class="col-6" v-else-if="end === 'favorite'">
+                <div class="col-12" v-else-if="end === 'favorite'">
                     <h1 class="text-white top-title" v-if="url === 'favorite'">Избранное</h1>
                 </div>
-                <div class="col-6" v-else-if="end === 'top'">
+                <div class="col-12" v-else-if="end === 'top'">
                     <h1 class="text-white top-title" v-if="url === 'top'">Топ 10</h1>
                 </div>
-                <div class="col-6" v-else-if="end === 'home'">
+                <div class="col-12" v-else-if="end === 'home'">
                     <h1 class="text-white top-title" v-if="url === 'home'">Категории</h1>
                     <h1 class="text-white top-title" v-if="url === 'restaurants'">Рестораны</h1>
                     <h1 class="text-white top-title" v-if="url === 'cafe'">Кафе</h1>
                     <h1 class="text-white top-title" v-if="url === 'bars'">Бары</h1>
                     <h1 class="text-white top-title" v-if="name">{{name}}</h1>
-                </div>
-                <div class="col-6 d-flex justify-content-end">
-                    <div class="d-flex justify-content-center align-items-center">
-                        <h5 class="m-0 mr-3 text-white font-weight-bold">Azim Tulendiev</h5>
-                        <div class="avatar">
-                            <div class="avatar-img bg-white rounded-circle">
-                                <div class="font-weight-bold">A</div>
-                            </div>
-                        </div>
-                    </div>
                 </div>
             </div>
         </div>
@@ -91,19 +81,24 @@ export default {
     data() {
         return {
             url: 'profile',
-            end: ''
+            end: '',
         }
     },
     created() {
-        let path    =   window.location.pathname.split('/');
-        this.url    =   path[ path.length - 1 ];
-        let length  =   path.length;
-        for (let i = 0; i < length; i++) {
-            if (path[i].trim() !== '') {
-                this.end    =   path[i];
-                break;
+        this.setEnd();
+    },
+    methods: {
+        setEnd: function() {
+            let path    =   window.location.pathname.split('/');
+            this.url    =   path[ path.length - 1 ];
+            let length  =   path.length;
+            for (let i = 0; i < length; i++) {
+                if (path[i].trim() !== '') {
+                    this.end    =   path[i];
+                    break;
+                }
             }
-        }
+        },
     }
 }
 </script>

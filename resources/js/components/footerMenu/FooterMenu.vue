@@ -1,5 +1,5 @@
 <template>
-    <div class="container">
+    <div class="container d-md-none">
         <div class="row fixed-bottom bg-white width-auto footer-fixed d-flex justify-content-center">
             <div class="col-12 col-md-4">
                 <div class="footer-fixed-main w-100">

@@ -120,7 +120,13 @@ export default {
     created() {
         this.getOrganization();
     },
+    mounted() {
+        this.updateStatus();
+    },
     methods: {
+        updateStatus: function() {
+            console.log('update-status');
+        },
         selTable: function(key, tableKey) {
             this.table  =   this.sections[key].organization_tables[tableKey];
         },

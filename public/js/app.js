@@ -17034,7 +17034,13 @@ __webpack_require__.r(__webpack_exports__);
   created: function created() {
     this.getOrganization();
   },
+  mounted: function mounted() {
+    this.updateStatus();
+  },
   methods: {
+    updateStatus: function updateStatus() {
+      console.log('update-status');
+    },
     selTable: function selTable(key, tableKey) {
       this.table = this.sections[key].organization_tables[tableKey];
     },
@@ -17528,11 +17534,16 @@ __webpack_require__.r(__webpack_exports__);
   props: ['organization', 'table'],
   data: function data() {
     return {
+      lang: 'ru',
       status: false,
+      cardStatus: true,
+      cardError: false,
       user: {},
       cardIndex: 0,
       cards: [],
       date: {
+        before: false,
+        after: true,
         title: '24 июня',
         data: '2021-06-24',
         timeIndex: 0,
@@ -17564,7 +17575,11 @@ __webpack_require__.r(__webpack_exports__);
           time: '22:00'
         }, {
           time: '23:00'
-        }]
+        }],
+        monthName: {
+          ru: ['Января', 'Февраля', 'Марта', 'Апреля', 'Мая', 'Июня', 'Июля', 'Августа', 'Сентября', 'Октября', 'Ноября', 'Декабря'],
+          en: ['Январь', 'Февраль', 'Март', 'Апрель', 'Май', 'Июнь', 'Июль', 'Август', 'Сентябрь', 'Октябрь', 'Ноябрь', 'Декабрь']
+        }
       },
       authUser: {
         status: true,
@@ -17574,9 +17589,50 @@ __webpack_require__.r(__webpack_exports__);
     };
   },
   created: function created() {
+    this.setDateTime();
     this.setUser();
   },
   methods: {
+    previousDay: function previousDay() {
+      if (this.date.before) {
+        var today = new Date();
+        today = new Date(today.getFullYear(), today.getMonth(), today.getDate());
+        var date = this.date.data.split('-');
+        var current = new Date(date[0], date[1] - 1, date[2]);
+        current.setDate(current.getDate() - 1);
+
+        if (today.getTime() <= current.getTime()) {
+          var year = current.getFullYear();
+          var month = current.getMonth();
+          var day = current.getDate();
+          this.date.title = day + ' ' + this.date.monthName[this.lang][month];
+          this.date.data = year + '-' + (month + 1) + '-' + day;
+
+          if (today.getTime() === current.getTime()) {
+            this.date.before = false;
+          }
+        }
+      }
+    },
+    nextDay: function nextDay() {
+      var date = this.date.data.split('-');
+      var current = new Date(date[0], date[1] - 1, date[2]);
+      current.setDate(current.getDate() + 1);
+      var year = current.getFullYear();
+      var month = current.getMonth();
+      var day = current.getDate();
+      this.date.title = day + ' ' + this.date.monthName[this.lang][month];
+      this.date.data = year + '-' + (month + 1) + '-' + day;
+      this.date.before = true;
+    },
+    setDateTime: function setDateTime() {
+      var date = new Date();
+      var year = date.getFullYear();
+      var month = date.getMonth();
+      var day = date.getDate();
+      this.date.title = day + ' ' + this.date.monthName[this.lang][month];
+      this.date.data = year + '-' + (month + 1) + '-' + day;
+    },
     bookingAddCard: function bookingAddCard() {
       var _this = this;
 
@@ -17602,26 +17658,33 @@ __webpack_require__.r(__webpack_exports__);
       });
     },
     bookingAuthFinish: function bookingAuthFinish() {
-      var data = {
-        user_id: this.user.id,
-        organization_id: this.organization.id,
-        organization_table_list_id: this.table.id,
-        timezone: Intl.DateTimeFormat().resolvedOptions().timeZone,
-        time: this.date.time[this.date.timeIndex].time,
-        date: this.date.data,
-        price: this.organization.price,
-        card_id: this.cards[this.cardIndex].card_id
-      };
-      axios.post("/api/booking/create", data).then(function (response) {
-        var data = response.data;
+      var _this3 = this;
 
-        if (data.hasOwnProperty('data')) {
-          window.open('/form/' + data.data.id, '_blank');
-          window.location.href = '/profile/history';
-        }
-      })["catch"](function (error) {
-        console.log(error.response);
-      });
+      if (this.cardStatus) {
+        var data = {
+          user_id: this.user.id,
+          organization_id: this.organization.id,
+          organization_table_list_id: this.table.id,
+          timezone: Intl.DateTimeFormat().resolvedOptions().timeZone,
+          time: this.date.time[this.date.timeIndex].time,
+          date: this.date.data,
+          price: this.organization.price,
+          card_id: this.cards[this.cardIndex].card_id
+        };
+        this.cardStatus = false;
+        this.cardError = false;
+        axios.post("/api/booking/create", data).then(function (response) {
+          var data = response.data;
+
+          if (data.hasOwnProperty('data')) {
+            window.open('/form/' + data.data.id, '_blank');
+            window.location.href = '/profile/history';
+          }
+        })["catch"](function (error) {
+          _this3.cardStatus = true;
+          _this3.cardError = true;
+        });
+      }
     },
     setUser: function setUser() {
       if (this.storage.token) {
@@ -17632,10 +17695,10 @@ __webpack_require__.r(__webpack_exports__);
       }
     },
     cardList: function cardList() {
-      var _this3 = this;
+      var _this4 = this;
 
       axios.get('/api/card/user/' + this.user.id).then(function (response) {
-        _this3.cards = response.data;
+        _this4.cards = response.data;
       })["catch"](function (error) {
         console.log(error.response.data);
       });
@@ -19267,35 +19330,31 @@ var _hoisted_9 = {
   "class": "col-12 mt-3"
 };
 var _hoisted_10 = {
-  "class": "form-group booking-date"
+  "class": "form-group booking-date",
+  onselectstart: "return false;"
 };
-
-var _hoisted_11 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("a", {
-  href: "#",
-  "class": "previous round text-decoration-none"
-}, "‹", -1
-/* HOISTED */
-);
-
-var _hoisted_12 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("a", {
-  href: "#",
-  "class": "next round text-decoration-none"
-}, "›", -1
-/* HOISTED */
-);
-
-var _hoisted_13 = {
+var _hoisted_11 = {
   "class": "col-12 mt-3",
   onselectstart: "return false"
 };
-var _hoisted_14 = {
+var _hoisted_12 = {
   "class": "form-group booking-time"
 };
-var _hoisted_15 = {
+var _hoisted_13 = {
   "class": "col-12 mt-4 mb-2"
 };
-var _hoisted_16 = {
+var _hoisted_14 = {
   key: 0,
+  "class": "form-group mx-3 booking-card-list"
+};
+
+var _hoisted_15 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("h5", {
+  "class": "text-danger text-center"
+}, "Произошла ошибка, попробуите заново!", -1
+/* HOISTED */
+);
+
+var _hoisted_16 = {
   "class": "form-group mx-3 booking-card-list"
 };
 
@@ -19347,17 +19406,35 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
     key: 0
   }, [!$data.authUser.next ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)(vue__WEBPACK_IMPORTED_MODULE_0__.Fragment, {
     key: 0
-  }, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_9, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_10, [_hoisted_11, (0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("input", {
+  }, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_9, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_10, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("a", {
+    "class": ["text-decoration-none cursor-pointer", {
+      'booking-arr-btn': $data.date.before
+    }],
+    onClick: _cache[1] || (_cache[1] = function ($event) {
+      return $options.previousDay();
+    })
+  }, "‹", 2
+  /* CLASS */
+  ), (0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("input", {
     type: "text",
     "class": "border-0 booking-input text-dark text-center font-weight-bold",
-    "onUpdate:modelValue": _cache[1] || (_cache[1] = function ($event) {
+    "onUpdate:modelValue": _cache[2] || (_cache[2] = function ($event) {
       return $data.date.title = $event;
     }),
     "data-date": $data.date.data,
     readonly: ""
   }, null, 8
   /* PROPS */
-  , ["data-date"]), [[vue__WEBPACK_IMPORTED_MODULE_0__.vModelText, $data.date.title]]), _hoisted_12])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_13, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_14, [((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)(vue__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.renderList)($data.date.time, function (time, key) {
+  , ["data-date"]), [[vue__WEBPACK_IMPORTED_MODULE_0__.vModelText, $data.date.title]]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("a", {
+    "class": ["text-decoration-none cursor-pointer", {
+      'booking-arr-btn': $data.date.after
+    }],
+    onClick: _cache[3] || (_cache[3] = function ($event) {
+      return $options.nextDay();
+    })
+  }, "›", 2
+  /* CLASS */
+  )])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_11, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_12, [((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)(vue__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.renderList)($data.date.time, function (time, key) {
     return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)("div", {
       "class": ["booking-time-item", {
         'booking-time-item-sel': key === $data.date.timeIndex
@@ -19371,16 +19448,18 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
     , ["onClick"]);
   }), 128
   /* KEYED_FRAGMENT */
-  ))])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_15, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("button", {
+  ))])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_13, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("button", {
     "class": "btn btn-block auth-register text-white",
-    onClick: _cache[2] || (_cache[2] = function ($event) {
+    onClick: _cache[4] || (_cache[4] = function ($event) {
       return $data.authUser.next = true;
     })
   }, "Далее")])], 64
   /* STABLE_FRAGMENT */
   )) : ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)(vue__WEBPACK_IMPORTED_MODULE_0__.Fragment, {
     key: 1
-  }, [$data.cards.length > 0 ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)("div", _hoisted_16, [((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)(vue__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.renderList)($data.cards, function (item, key) {
+  }, [$data.cards.length > 0 ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)(vue__WEBPACK_IMPORTED_MODULE_0__.Fragment, {
+    key: 0
+  }, [$data.cardError ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)("div", _hoisted_14, [_hoisted_15])) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_16, [((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)(vue__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.renderList)($data.cards, function (item, key) {
     return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)("div", {
       "class": ["booking-card", {
         'booking-card-sel': key === $data.cardIndex
@@ -19398,9 +19477,11 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
     , ["onClick"]);
   }), 128
   /* KEYED_FRAGMENT */
-  ))])) : ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)("div", _hoisted_21, [_hoisted_22, _hoisted_23])), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_24, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("button", {
+  ))])], 64
+  /* STABLE_FRAGMENT */
+  )) : ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)("div", _hoisted_21, [_hoisted_22, _hoisted_23])), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_24, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("button", {
     "class": "btn btn-block bg-light text-dark",
-    onClick: _cache[3] || (_cache[3] = function ($event) {
+    onClick: _cache[5] || (_cache[5] = function ($event) {
       return $options.bookingAddCard();
     }),
     style: {
@@ -19409,7 +19490,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
     }
   }, "Добавить карту карту")]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_25, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("button", {
     "class": "btn btn-block auth-register text-white",
-    onClick: _cache[4] || (_cache[4] = function ($event) {
+    onClick: _cache[6] || (_cache[6] = function ($event) {
       return $options.bookingAuthFinish();
     }),
     disabled: $data.cards.length === 0
@@ -19417,7 +19498,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
   /* TEXT, PROPS */
   , ["disabled"])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_26, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("button", {
     "class": "btn btn-block auth-register text-white",
-    onClick: _cache[5] || (_cache[5] = function ($event) {
+    onClick: _cache[7] || (_cache[7] = function ($event) {
       return $data.authUser.next = false;
     })
   }, "Назад")])], 64
@@ -20123,7 +20204,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, ".booking-empty {\n  display: grid;\n  grid-gap: 15px;\n}\n.booking-empty-icon {\n  width: 70px;\n  height: 70px;\n  background: url(\"/img/logo/card.svg\") no-repeat center;\n  background-size: cover;\n  margin: 0 auto 0 auto;\n}\n.booking-empty-title {\n  font-size: 20px;\n  font-weight: bold;\n  text-align: center;\n  color: darkgrey;\n}\n.booking-card {\n  display: grid;\n  grid-template-columns: 40px auto;\n  grid-gap: 15px;\n  background: #fafafa;\n  border-radius: 10px;\n  padding: 10px 15px 10px 15px;\n  cursor: pointer;\n  color: grey;\n}\n.booking-card:hover, .booking-card-sel {\n  background: #FF8008;\n  color: #fff;\n}\n.booking-card-list {\n  display: grid;\n  gap: 15px;\n}\n.booking-card-icon {\n  width: 40px;\n  background: url(\"/img/logo/card.svg\") no-repeat center;\n  background-size: contain;\n}\n.booking-card-detail-title {\n  font-size: 18px;\n  font-weight: bold;\n}\n.booking-card-detail-num {\n  font-size: 12px;\n}\n.booking-date {\n  display: grid;\n  grid-template-columns: 40px auto 40px;\n  grid-gap: 10px;\n  padding: 5px;\n  background: #fafafa;\n  border-radius: 40px;\n}\n.booking-time {\n  display: grid;\n  grid-template-columns: repeat(5, auto);\n  gap: 10px;\n}\n.booking-time-item {\n  float: left;\n  padding: 10px 0 10px 0;\n  border-right: 30px;\n  background: #fafafa;\n  text-align: center;\n  border-radius: 20px;\n  font-size: 14px;\n  font-weight: bold;\n  cursor: pointer;\n}\n.booking-time-item:hover, .booking-time-item-sel {\n  background: #00a082;\n  color: #fff;\n}\n.booking-input {\n  color: #00a082;\n  outline: none !important;\n  font-size: 20px;\n  background: transparent;\n}\na {\n  text-decoration: none;\n  display: inline-block;\n  padding: 8px 16px;\n}\na:hover {\n  color: black;\n}\n.previous {\n  background-color: #f1f1f1;\n  color: black;\n}\n.next {\n  background-color: #04AA6D;\n  color: white;\n}\n.round {\n  border-radius: 50%;\n}\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, ".booking-arr-btn {\n  background: #00a082;\n  color: white;\n  border-radius: 30px;\n}\n.booking-empty {\n  display: grid;\n  grid-gap: 15px;\n}\n.booking-empty-icon {\n  width: 70px;\n  height: 70px;\n  background: url(\"/img/logo/card.svg\") no-repeat center;\n  background-size: cover;\n  margin: 0 auto 0 auto;\n}\n.booking-empty-title {\n  font-size: 20px;\n  font-weight: bold;\n  text-align: center;\n  color: darkgrey;\n}\n.booking-card {\n  display: grid;\n  grid-template-columns: 40px auto;\n  grid-gap: 15px;\n  background: #fafafa;\n  border-radius: 10px;\n  padding: 10px 15px 10px 15px;\n  cursor: pointer;\n  color: grey;\n}\n.booking-card:hover, .booking-card-sel {\n  background: #FF8008;\n  color: #fff;\n}\n.booking-card-list {\n  display: grid;\n  gap: 15px;\n}\n.booking-card-icon {\n  width: 40px;\n  background: url(\"/img/logo/card.svg\") no-repeat center;\n  background-size: contain;\n}\n.booking-card-detail-title {\n  font-size: 18px;\n  font-weight: bold;\n}\n.booking-card-detail-num {\n  font-size: 12px;\n}\n.booking-date {\n  display: grid;\n  grid-template-columns: 40px auto 40px;\n  grid-gap: 10px;\n  padding: 5px;\n  background: #fafafa;\n  border-radius: 40px;\n}\n.booking-time {\n  display: grid;\n  grid-template-columns: repeat(5, auto);\n  gap: 10px;\n}\n.booking-time-item {\n  float: left;\n  padding: 10px 0 10px 0;\n  border-right: 30px;\n  background: #fafafa;\n  text-align: center;\n  border-radius: 20px;\n  font-size: 14px;\n  font-weight: bold;\n  cursor: pointer;\n}\n.booking-time-item:hover, .booking-time-item-sel {\n  background: #00a082;\n  color: #fff;\n}\n.booking-input {\n  color: #00a082;\n  outline: none !important;\n  font-size: 20px;\n  background: transparent;\n}\na {\n  text-decoration: none;\n  display: inline-block;\n  padding: 8px 16px;\n}\n.round {\n  border-radius: 50%;\n}\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 

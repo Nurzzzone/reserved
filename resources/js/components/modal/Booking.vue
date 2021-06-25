@@ -13,10 +13,10 @@
                     <template v-if="status">
                         <template v-if="!authUser.next">
                             <div class="col-12 mt-3">
-                                <div class="form-group booking-date">
-                                    <a href="#" class="previous round text-decoration-none">&#8249;</a>
+                                <div class="form-group booking-date" onselectstart="return false;">
+                                    <a class="text-decoration-none cursor-pointer" :class="{'booking-arr-btn':date.before}" @click="previousDay()">&#8249;</a>
                                     <input type="text" class="border-0 booking-input text-dark text-center font-weight-bold" v-model="date.title" :data-date="date.data" readonly>
-                                    <a href="#" class="next round text-decoration-none">&#8250;</a>
+                                    <a class="text-decoration-none cursor-pointer" :class="{'booking-arr-btn':date.after}" @click="nextDay()">&#8250;</a>
                                 </div>
                             </div>
                             <div class="col-12 mt-3" onselectstart="return false">
@@ -30,6 +30,9 @@
                         </template>
                         <template v-else>
                             <template v-if="cards.length > 0">
+                                <div class="form-group mx-3 booking-card-list" v-if="cardError">
+                                    <h5 class="text-danger text-center">Произошла ошибка, попробуите заново!</h5>
+                                </div>
                                 <div class="form-group mx-3 booking-card-list">
                                     <div class="booking-card" :class="{'booking-card-sel':(key === cardIndex)}" v-for="(item,key) in cards" :key="key" @click="cardIndex = key">
                                         <div class="booking-card-icon"></div>
@@ -72,11 +75,16 @@ export default {
     props: ['organization','table'],
     data() {
         return {
+            lang: 'ru',
             status: false,
+            cardStatus: true,
+            cardError: false,
             user: {},
             cardIndex: 0,
             cards: [],
             date: {
+                before: false,
+                after: true,
                 title: '24 июня',
                 data: '2021-06-24',
                 timeIndex: 0,
@@ -123,20 +131,62 @@ export default {
                     {
                         time: '23:00',
                     }
-                ]
+                ],
+                monthName: {
+                    ru: ['Января','Февраля','Марта','Апреля','Мая','Июня','Июля','Августа','Сентября','Октября','Ноября','Декабря'],
+                    en: ['Январь','Февраль','Март','Апрель','Май','Июнь','Июль','Август','Сентябрь','Октябрь','Ноябрь','Декабрь']
+                }
             },
             authUser: {
                 status: true,
                 next: false,
                 card: '',
-
-            }
+            },
         }
     },
     created() {
+        this.setDateTime();
         this.setUser();
     },
     methods: {
+        previousDay: function() {
+            if (this.date.before) {
+                let today   =   new Date();
+                today       =   new Date(today.getFullYear(),today.getMonth(),today.getDate());
+                let date    =   this.date.data.split('-');
+                let current =   new Date(date[0],(date[1] - 1),date[2]);
+                current.setDate(current.getDate() - 1);
+                if (today.getTime() <= current.getTime()) {
+                    let year    =   current.getFullYear();
+                    let month   =   current.getMonth();
+                    let day     =   current.getDate();
+                    this.date.title =   day+' '+this.date.monthName[this.lang][month];
+                    this.date.data  =   year+'-'+(month + 1)+'-'+day;
+                    if (today.getTime() === current.getTime()) {
+                        this.date.before    =   false;
+                    }
+                }
+            }
+        },
+        nextDay: function() {
+            let date    =   this.date.data.split('-');
+            let current =   new Date(date[0],(date[1]-1),date[2]);
+            current.setDate(current.getDate() + 1);
+            let year    =   current.getFullYear();
+            let month   =   current.getMonth();
+            let day     =   current.getDate();
+            this.date.title =   day+' '+this.date.monthName[this.lang][month];
+            this.date.data  =   year+'-'+(month + 1)+'-'+day;
+            this.date.before    =   true;
+        },
+        setDateTime: function() {
+            let date    =   new Date();
+            let year    =   date.getFullYear();
+            let month   =   date.getMonth();
+            let day     =   date.getDate();
+            this.date.title =   day+' '+this.date.monthName[this.lang][month];
+            this.date.data  =   year+'-'+(month + 1)+'-'+day;
+        },
         bookingAddCard: function() {
             axios.get('/api/payment/card/'+this.user.id)
             .then(response => {
@@ -159,26 +209,31 @@ export default {
             });
         },
         bookingAuthFinish: function() {
-            let data    =   {
-                user_id: this.user.id,
-                organization_id: this.organization.id,
-                organization_table_list_id: this.table.id,
-                timezone: Intl.DateTimeFormat().resolvedOptions().timeZone,
-                time: this.date.time[ this.date.timeIndex ].time,
-                date: this.date.data,
-                price: this.organization.price,
-                card_id: this.cards[ this.cardIndex ].card_id
-            };
-            axios.post("/api/booking/create", data)
-            .then(response => {
-                let data = response.data;
-                if (data.hasOwnProperty('data')) {
-                    window.open('/form/'+data.data.id,'_blank');
-                    window.location.href    =   '/profile/history';
-                }
-            }).catch(error => {
-                console.log(error.response);
-            });
+            if (this.cardStatus) {
+                let data    =   {
+                    user_id: this.user.id,
+                    organization_id: this.organization.id,
+                    organization_table_list_id: this.table.id,
+                    timezone: Intl.DateTimeFormat().resolvedOptions().timeZone,
+                    time: this.date.time[ this.date.timeIndex ].time,
+                    date: this.date.data,
+                    price: this.organization.price,
+                    card_id: this.cards[ this.cardIndex ].card_id
+                };
+                this.cardStatus =   false;
+                this.cardError  =   false;
+                axios.post("/api/booking/create", data)
+                .then(response => {
+                    let data = response.data;
+                    if (data.hasOwnProperty('data')) {
+                        window.open('/form/'+data.data.id,'_blank');
+                        window.location.href    =   '/profile/history';
+                    }
+                }).catch(error => {
+                    this.cardStatus =   true;
+                    this.cardError  =   true;
+                });
+            }
         },
         setUser: function() {
             if (this.storage.token) {
@@ -202,6 +257,13 @@ export default {
 
 <style lang="scss">
 .booking {
+    &-arr {
+        &-btn {
+            background: #00a082;
+            color: white;
+            border-radius: 30px;
+        }
+    }
     &-empty {
         display: grid;
         grid-gap: 15px;
@@ -290,20 +352,6 @@ a {
     text-decoration: none;
     display: inline-block;
     padding: 8px 16px;
-}
-
-a:hover {
-    color: black;
-}
-
-.previous {
-    background-color: #f1f1f1;
-    color: black;
-}
-
-.next {
-    background-color: #04AA6D;
-    color: white;
 }
 
 .round {

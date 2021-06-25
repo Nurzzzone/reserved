@@ -17612,7 +17612,6 @@ __webpack_require__.r(__webpack_exports__);
         price: this.organization.price,
         card_id: this.cards[this.cardIndex].card_id
       };
-      return console.log(this.cards[this.cardIndex]);
       axios.post("/api/booking/create", data).then(function (response) {
         var data = response.data;
         console.log(data);

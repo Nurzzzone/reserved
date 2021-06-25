@@ -169,7 +169,6 @@ export default {
                 price: this.organization.price,
                 card_id: this.cards[ this.cardIndex ].card_id
             };
-            return console.log(this.cards[ this.cardIndex ]);
             axios.post("/api/booking/create", data)
             .then(response => {
                 let data = response.data;

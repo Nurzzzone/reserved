@@ -18,7 +18,8 @@ class PaymentCardResultRequest extends FormRequest
     public function rules()
     {
         return [
-            PaymentContract::PG_ORDER_ID    =>  'required'
+            PaymentContract::PG_ORDER_ID    =>  'required',
+            PaymentContract::PG_RESULT      =>  'required'
         ];
     }
 

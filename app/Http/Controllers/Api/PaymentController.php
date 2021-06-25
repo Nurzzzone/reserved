@@ -36,8 +36,6 @@ class PaymentController extends Controller {
     public function cardResult(PaymentCardResultRequest $request):void
     {
         $data   =   $request->validated();
-        Log::info('card result',$data);
-        exit;
         if ((int)$data[MainContract::PG_RESULT] === 1) {
             $this->bookingService->update($data[MainContract::PG_ORDER_ID],[
                 MainContract::STATUS    =>  MainContract::ON

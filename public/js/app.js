@@ -17616,7 +17616,7 @@ __webpack_require__.r(__webpack_exports__);
         var data = response.data;
 
         if (data.hasOwnProperty('data')) {
-          window.open('/form/' + data.data.payment_id, '_blank');
+          window.open('/form/' + data.data.id, '_blank');
           window.location.href = '/profile/history';
         }
       })["catch"](function (error) {

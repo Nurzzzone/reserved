@@ -17614,7 +17614,11 @@ __webpack_require__.r(__webpack_exports__);
       };
       axios.post("/api/booking/create", data).then(function (response) {
         var data = response.data;
-        console.log(data);
+
+        if (data.hasOwnProperty('data')) {
+          window.open('/form/' + data.data.payment_id, '_blank');
+          window.location.href = '/profile/history';
+        }
       })["catch"](function (error) {
         console.log(error.response);
       });

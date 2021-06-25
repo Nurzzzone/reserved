@@ -172,7 +172,10 @@ export default {
             axios.post("/api/booking/create", data)
             .then(response => {
                 let data = response.data;
-                console.log(data);
+                if (data.hasOwnProperty('data')) {
+                    window.open('/form/'+data.data.payment_id,'_blank');
+                    window.location.href    =   '/profile/history';
+                }
             }).catch(error => {
                 console.log(error.response);
             });

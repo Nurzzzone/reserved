@@ -1,7 +1,7 @@
 <template>
     <Header></Header>
     <profile-section :name="name"></profile-section>
-    <Booking></Booking>
+    <Booking :organization="organization" :table="table"></Booking>
     <div class="container-fluid mb-5">
         <div class="container">
             <div class="row">
@@ -52,7 +52,7 @@
                             </div>
                         </div>
                         <div class="row justify-content-center mt-4"  v-for="(item,key) in sections" :key="key" :class="{'d-none':(key !== section)}">
-                            <div class="col-12 col-md-6 col-lg-3 p-2" v-for="(table,tableKey) in item.organization_tables">
+                            <div class="col-12 col-md-6 col-lg-3 p-2" v-for="(table,tableKey) in item.organization_tables" :key="tableKey" @click="selTable(key,tableKey)">
                                 <div class="card border-0 organization-shadow"  data-toggle="modal" data-target="#booking_modal">
                                     <div class="card-body">
                                         <div class="organization-card">
@@ -111,6 +111,7 @@ export default {
             status: 0,
             name: '',
             tab: 1,
+            table: '',
             organization: {},
             section: 0,
             sections: []
@@ -120,6 +121,9 @@ export default {
         this.getOrganization();
     },
     methods: {
+        selTable: function(key, tableKey) {
+            this.table  =   this.sections[key].organization_tables[tableKey];
+        },
         getOrganization: function() {
             axios.get('/api/organization/'+this.$route.params.id)
                 .then(response => {
@@ -137,7 +141,6 @@ export default {
                     let data    =   response.data;
                     if (data.hasOwnProperty('data')) {
                         this.sections   =   data.data;
-                        console.log(data.data);
                     }
                 });
         }

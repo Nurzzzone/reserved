@@ -8,7 +8,7 @@
                     </div>
                     <div class="form-group">
                         <h3 class="auth-title text-center">Бронирование стола</h3>
-                        <h6 class="text-secondary text-center mt-3">Моментальное бронирование стола.</h6>
+                        <h6 class="text-secondary text-center mt-3">{{table.title}}</h6>
                     </div>
                     <template v-if="status">
                         <template v-if="!authUser.next">
@@ -31,18 +31,11 @@
                         <template v-else>
                             <template v-if="cards.length > 0">
                                 <div class="form-group mx-3 booking-card-list">
-                                    <div class="booking-card">
+                                    <div class="booking-card" :class="{'booking-card-sel':(key === cardIndex)}" v-for="(item,key) in cards" :key="key" @click="cardIndex = key">
                                         <div class="booking-card-icon"></div>
                                         <div class="booking-card-detail">
-                                            <div class="booking-card-detail-title">Card 1</div>
-                                            <div class="booking-card-detail-num">1231-1231-1312-1231</div>
-                                        </div>
-                                    </div>
-                                    <div class="booking-card">
-                                        <div class="booking-card-icon"></div>
-                                        <div class="booking-card-detail">
-                                            <div class="booking-card-detail-title">Card 1</div>
-                                            <div class="booking-card-detail-num">1231-1231-1312-1231</div>
+                                            <div class="booking-card-detail-title">{{item.bank}}</div>
+                                            <div class="booking-card-detail-num">{{item.hash}}</div>
                                         </div>
                                     </div>
                                 </div>
@@ -54,10 +47,10 @@
                                 </div>
                             </template>
                             <div class="col-12 mt-4">
-                                <button class="btn btn-block auth-btn text-white" @click="bookingAddCard()">Добавить карту карту</button>
+                                <button class="btn btn-block bg-light text-dark" @click="bookingAddCard()" style="border-radius: 30px; height: 44px;">Добавить карту карту</button>
                             </div>
                             <div class="col-12 mt-4">
-                                <button class="btn btn-block auth-register text-white" @click="bookingAuthFinish()" disabled>Оплатить</button>
+                                <button class="btn btn-block auth-register text-white" @click="bookingAuthFinish()" :disabled="cards.length === 0">Оплатить {{organization.price}} KZT</button>
                             </div>
                             <div class="col-12 mt-4 mb-2">
                                 <button class="btn btn-block auth-register text-white" @click="authUser.next = false">Назад</button>
@@ -76,6 +69,7 @@
 <script>
 export default {
     name: "Booking",
+    props: ['organization','table'],
     data() {
         return {
             status: false,
@@ -84,7 +78,7 @@ export default {
             cards: [],
             date: {
                 title: '24 июня',
-                data: '',
+                data: '2021-06-24',
                 timeIndex: 0,
                 time: [
                     {
@@ -145,10 +139,10 @@ export default {
     methods: {
         bookingAddCard: function() {
             axios.get('/api/payment/card/'+this.user.id)
-                .then(response => {
-                    window.open(response.data,'_blank');
-                    this.cardUpdate();
-                }).catch(error => {
+            .then(response => {
+                window.open(response.data,'_blank');
+                this.cardUpdate();
+            }).catch(error => {
                 console.log(error.response.data);
             });
         },
@@ -165,7 +159,24 @@ export default {
             });
         },
         bookingAuthFinish: function() {
-
+            let data    =   {
+                user_id: this.user.id,
+                organization_id: this.organization.id,
+                organization_table_list_id: this.table.id,
+                timezone: Intl.DateTimeFormat().resolvedOptions().timeZone,
+                time: this.date.time[ this.date.timeIndex ].time,
+                date: this.date.data,
+                price: this.organization.price,
+                card_id: this.cards[ this.cardIndex ].card_id
+            };
+            return console.log(this.cards[ this.cardIndex ]);
+            axios.post("/api/booking/create", data)
+            .then(response => {
+                let data = response.data;
+                console.log(data);
+            }).catch(error => {
+                console.log(error.response);
+            });
         },
         setUser: function() {
             if (this.storage.token) {

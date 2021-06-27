@@ -93,7 +93,7 @@ export default {
                         let data    =   response.data;
                         if (data.hasOwnProperty('data')) {
                             this.bookings   =   data.data;
-                            console.log(data.data);
+                            console.log(this.bookings);
                             setTimeout(function() {
                                 self.getBookings();
                             },1000);

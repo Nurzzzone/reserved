@@ -16998,7 +16998,7 @@ __webpack_require__.r(__webpack_exports__);
 
           if (data.hasOwnProperty('data')) {
             _this.bookings = data.data;
-            console.log(data.data);
+            console.log(_this.bookings);
             setTimeout(function () {
               self.getBookings();
             }, 1000);

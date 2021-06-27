@@ -17885,7 +17885,7 @@ __webpack_require__.r(__webpack_exports__);
         return this.$refs.guest_phone.focus();
       }
 
-      axios.post("/api/user/guest", {
+      axios.post("/api/user/new", {
         name: this.guest.name,
         phone: this.guest.phone
       }).then(function (response) {

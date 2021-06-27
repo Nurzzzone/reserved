@@ -18,8 +18,8 @@ class BookingGuestRequest extends FormRequest
     public function rules()
     {
         return [
-            BookingContract::USER_ID                    =>  'required|exists:users,id',
-            BookingContract::ORGANIZATION_ID            =>  'required|exists:organizations,id',
+            BookingContract::USER_ID                    =>  'required|integer|exists:users,id',
+            BookingContract::ORGANIZATION_ID            =>  'required|integer|exists:organizations,id',
             BookingContract::TITLE                      =>  'required',
             BookingContract::ORGANIZATION_TABLE_LIST_ID =>  'required|exists:organization_table_lists,id',
             BookingContract::TIMEZONE                   =>  'required',

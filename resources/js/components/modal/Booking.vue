@@ -191,7 +191,7 @@ export default {
                     price: this.organization.price,
                     code: this.guest.code,
                 };
-                axios.post("/api/booking/guest", data)
+                axios.post("/api/booking/new", data)
                 .then(response => {
                     let data = response.data.data;
                     this.storage.token  =   this.guest.user.api_token;

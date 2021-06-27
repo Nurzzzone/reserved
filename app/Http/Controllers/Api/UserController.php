@@ -49,7 +49,6 @@ class UserController extends Controller
     public function guest(UserGuestRequest $userGuestRequest)
     {
         $data   =   $userGuestRequest->validated();
-        exit('here');
         $user   =   $this->userService->smsResend($data[UserContract::PHONE]);
         if (!$user) {
             $user   =   $this->userService->create($data);

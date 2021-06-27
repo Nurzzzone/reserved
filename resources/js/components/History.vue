@@ -75,6 +75,8 @@ export default {
     },
     created() {
         this.getUser();
+    },
+    mounted() {
         this.getBookings();
     },
     methods: {

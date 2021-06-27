@@ -17864,7 +17864,7 @@ __webpack_require__.r(__webpack_exports__);
           price: this.organization.price,
           code: this.guest.code
         };
-        axios.post("/api/booking/new", data).then(function (response) {
+        axios.post("/api/booking/guest", data).then(function (response) {
           var data = response.data.data;
           _this.storage.token = _this.guest.user.api_token;
           sessionStorage.user = JSON.stringify(_this.guest.user);
@@ -17885,7 +17885,7 @@ __webpack_require__.r(__webpack_exports__);
         return this.$refs.guest_phone.focus();
       }
 
-      axios.post("/api/user/guest/", {
+      axios.post("/api/user/guest", {
         name: this.guest.name,
         phone: this.guest.phone
       }).then(function (response) {

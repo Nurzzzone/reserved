@@ -46,9 +46,9 @@ class UserController extends Controller
         $this->organizationService  =   $organizationService;
     }
 
-    public function guest(UserGuestRequest $request)
+    public function guest(UserGuestRequest $userGuestRequest)
     {
-        $data   =   $request->validated();
+        $data   =   $userGuestRequest->validated();
         $user   =   $this->userService->smsResend($data[UserContract::PHONE]);
         if (!$user) {
             $user   =   $this->userService->create($data);

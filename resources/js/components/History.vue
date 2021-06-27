@@ -19,7 +19,7 @@
                                 <div class="d-flex">
                                     <div class="payments-card-icon history-icon mr-3"></div>
                                     <div>
-                                        <div class="history-font font-weight-bold"><a :href="'/home/'+booking.organization.id" class="p-0 text-dark">{{booking.organization.title}}</a> • <span class="text-secondary">{{booking.organization_tables.title}}</span></div>
+                                        <div class="history-font font-weight-bold"> • <span class="text-secondary">{{booking.organization_tables.title}}</span></div>
                                         <p class="history-font text-secondary m-0">{{booking.date}} • {{booking.time}}</p>
                                     </div>
                                 </div>

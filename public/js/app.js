@@ -16989,12 +16989,10 @@ __webpack_require__.r(__webpack_exports__);
       }
     },
     getBookings: function getBookings() {
-      var _this = this;
-
       if (this.user) {
         var self = this;
         axios.get('/api/booking/user/' + this.user.id + '?paginate=' + this.paginate).then(function (response) {
-          _this.bookings = response.data.data;
+          self.bookings = response.data.data;
           setTimeout(function () {
             self.getBookings();
           }, 1000);

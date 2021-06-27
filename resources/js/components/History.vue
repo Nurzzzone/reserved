@@ -15,7 +15,7 @@
                 <div class="row mt-5">
                     <div class="col-12">
                         <ul class="list-group list-group-flush">
-                            <li class="list-group-item px-0 d-flex justify-content-between settings-item align-items-center" v-for="(booking,key) in bookings" :key="key" v-if="booking">
+                            <li class="list-group-item px-0 d-flex justify-content-between settings-item align-items-center" v-for="(booking,key) in bookings" :key="key">
                                 <div class="d-flex">
                                     <div class="payments-card-icon history-icon mr-3"></div>
                                     <div>
@@ -75,6 +75,8 @@ export default {
     },
     created() {
         this.getUser();
+    },
+    mounted() {
         this.getBookings();
     },
     methods: {
@@ -92,8 +94,12 @@ export default {
                     .then(response => {
                         let data    =   response.data;
                         if (data.hasOwnProperty('data')) {
-                            this.bookings   =   data.data;
-                            console.log(this.bookings);
+                            let arr  =   data.data;
+                            let list =  [];
+                            arr.forEach(item => {
+                                list.push(item);
+                            });
+                            this.bookings   =   list;
                             setTimeout(function() {
                                 self.getBookings();
                             },1000);

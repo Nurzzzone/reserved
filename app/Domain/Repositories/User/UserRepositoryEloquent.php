@@ -40,7 +40,7 @@ class UserRepositoryEloquent implements UserRepositoryInterface
         return $user->save();
     }
 
-    public function getById(int $id)
+    public function getById($id)
     {
         return User::where(UserContract::ID,$id)->first();
     }

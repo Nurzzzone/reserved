@@ -35,7 +35,7 @@ class UserService extends BaseService
         return $this->userRepository->getByPhone($phone);
     }
 
-    public function getById(int $id) {
+    public function getById($id) {
         return $this->userRepository->getById($id);
     }
 

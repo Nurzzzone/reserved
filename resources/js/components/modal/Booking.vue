@@ -2,7 +2,7 @@
     <div class="modal fade" id="booking_modal" tabindex="-1" role="dialog" aria-labelledby="booking_modal" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered" role="document">
             <div class="modal-content auth-modal">
-                <div class="modal-body">
+                <div class="modal-body" onselectstart="return false">
                     <div class="form-group d-flex justify-content-end">
                         <button class="auth-btn-close" data-dismiss="modal" aria-label="Close"></button>
                     </div>
@@ -10,58 +10,123 @@
                         <h3 class="auth-title text-center">Бронирование стола</h3>
                         <h6 class="text-secondary text-center mt-3">{{table.title}}</h6>
                     </div>
-                    <template v-if="status">
-                        <template v-if="!authUser.next">
-                            <div class="col-12 mt-3">
-                                <div class="form-group booking-date" onselectstart="return false;">
-                                    <a class="text-decoration-none cursor-pointer" :class="{'booking-arr-btn':date.before}" @click="previousDay()">&#8249;</a>
-                                    <input type="text" class="border-0 booking-input text-dark text-center font-weight-bold" v-model="date.title" :data-date="date.data" readonly>
-                                    <a class="text-decoration-none cursor-pointer" :class="{'booking-arr-btn':date.after}" @click="nextDay()">&#8250;</a>
-                                </div>
-                            </div>
-                            <div class="col-12 mt-3" onselectstart="return false">
-                                <div class="form-group booking-time">
-                                    <div class="booking-time-item" v-for="(time,key) in date.time" :class="{'booking-time-item-sel':(key === date.timeIndex)}" :key="key" @click="date.timeIndex = key">{{time.time}}</div>
-                                </div>
-                            </div>
-                            <div class="col-12 mt-4 mb-2">
-                                <button class="btn btn-block auth-register text-white" @click="authUser.next = true">Далее</button>
-                            </div>
-                        </template>
-                        <template v-else>
-                            <template v-if="cards.length > 0">
-                                <div class="form-group mx-3 booking-card-list" v-if="cardError">
-                                    <h5 class="text-danger text-center">Произошла ошибка, попробуите заново!</h5>
-                                </div>
-                                <div class="form-group mx-3 booking-card-list">
-                                    <div class="booking-card" :class="{'booking-card-sel':(key === cardIndex)}" v-for="(item,key) in cards" :key="key" @click="cardIndex = key">
-                                        <div class="booking-card-icon"></div>
-                                        <div class="booking-card-detail">
-                                            <div class="booking-card-detail-title">{{item.bank}}</div>
-                                            <div class="booking-card-detail-num">{{item.hash}}</div>
-                                        </div>
+                    <template v-if="table.bookingStatus === 'free'">
+                        <template v-if="status">
+                            <template v-if="!storage.modal">
+                                <div class="col-12 mt-3">
+                                    <div class="form-group booking-time">
+                                        <div class="booking-time-item" v-for="(time,key) in date.time" :class="{'booking-time-item-sel':(key === date.timeIndex)}" :key="key" @click="date.timeIndex = key">{{time.time}}</div>
                                     </div>
+                                </div>
+                                <div class="col-12 mt-4 mb-2">
+                                    <button class="btn btn-block auth-register text-white" @click="storage.modal = true">Далее</button>
                                 </div>
                             </template>
                             <template v-else>
-                                <div class="booking-empty mt-3">
-                                    <div class="booking-empty-icon"></div>
-                                    <div class="booking-empty-title">У вас нет карт</div>
+                                <template v-if="cards.length > 0">
+                                    <div class="form-group mx-3 booking-card-list" v-if="cardError">
+                                        <h5 class="text-danger text-center">Произошла ошибка, попробуите заново!</h5>
+                                    </div>
+                                    <div class="form-group mx-3 booking-card-list">
+                                        <div class="booking-card" :class="{'booking-card-sel':(key === cardIndex)}" v-for="(item,key) in cards" :key="key" @click="cardIndex = key">
+                                            <div class="booking-card-icon"></div>
+                                            <div class="booking-card-detail">
+                                                <div class="booking-card-detail-title">{{item.bank}}</div>
+                                                <div class="booking-card-detail-num">{{item.hash}}</div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </template>
+                                <template v-else>
+                                    <div class="booking-empty mt-3">
+                                        <div class="booking-empty-icon"></div>
+                                        <div class="booking-empty-title">У вас нет карт</div>
+                                    </div>
+                                </template>
+                                <div class="col-12 mt-4">
+                                    <button class="btn btn-block bg-light text-dark" @click="bookingAddCard()" style="border-radius: 30px; height: 44px;">Добавить карту карту</button>
+                                </div>
+                                <div class="col-12 mt-4">
+                                    <button class="btn btn-block auth-register text-white" @click="bookingAuthFinish()" :disabled="cards.length === 0">Оплатить {{organization.price}} KZT</button>
+                                </div>
+                                <div class="col-12 mt-4 mb-2">
+                                    <button class="btn btn-block auth-register text-white" @click="storage.modal = false">Назад</button>
                                 </div>
                             </template>
-                            <div class="col-12 mt-4">
-                                <button class="btn btn-block bg-light text-dark" @click="bookingAddCard()" style="border-radius: 30px; height: 44px;">Добавить карту карту</button>
-                            </div>
-                            <div class="col-12 mt-4">
-                                <button class="btn btn-block auth-register text-white" @click="bookingAuthFinish()" :disabled="cards.length === 0">Оплатить {{organization.price}} KZT</button>
-                            </div>
-                            <div class="col-12 mt-4 mb-2">
-                                <button class="btn btn-block auth-register text-white" @click="authUser.next = false">Назад</button>
-                            </div>
+                        </template>
+                        <template v-else>
+                            <template v-if="!storage.modal">
+                                <div class="col-12 mt-3">
+                                    <div class="form-group booking-time">
+                                        <div class="booking-time-item" v-for="(time,key) in date.time" :class="{'booking-time-item-sel':(key === date.timeIndex)}" :key="key" @click="date.timeIndex = key">{{time.time}}</div>
+                                    </div>
+                                </div>
+                                <div class="col-12 mt-4 mb-2">
+                                    <button class="btn btn-block auth-register text-white" @click="storage.modal = true">Далее</button>
+                                </div>
+                            </template>
+                            <template v-else>
+                                <template v-if="!guest.verify">
+                                    <div class="col-12 mt-3">
+                                        <div class="form-group">
+                                            <input type="text" class="form-control p-3 auth-input" placeholder="Ваше имя" v-model="guest.name" ref="guest_name">
+                                        </div>
+                                    </div>
+                                    <div class="col-12 mt-3">
+                                        <div class="form-group">
+                                            <input type="text" class="form-control p-3 auth-input" v-maska="'7##########'" placeholder="Номер телефона" v-model="guest.phone" ref="guest_phone">
+                                        </div>
+                                    </div>
+                                    <div class="col-12 mt-4 mb-2 d-flex" style="gap: 20px;">
+                                        <div class="w-50">
+                                            <button class="btn btn-block auth-btn text-white" @click="storage.modal = false">Назад</button>
+                                        </div>
+                                        <div class=" w-50">
+                                            <button class="btn btn-block auth-register text-white" @click="guestAuth()">Далее</button>
+                                        </div>
+                                    </div>
+                                </template>
+                                <template v-else>
+                                    <div class="form-group">
+                                        <h6 class="text-secondary text-center mt-3">На Ваш номер был отправлен код</h6>
+                                    </div>
+                                    <div class="form-group p-0" v-if="guest.codeError">
+                                        <div class="auth-error font-weight-bold text-center">Не код правильный код подтверждения.</div>
+                                    </div>
+                                    <div class="form-row mx-3">
+                                        <div class="col-12 mt-3">
+                                            <input type="text" class="form-control p-3 auth-input" v-maska="'######'" v-model="guest.code" placeholder="код смс" ref="sms_code">
+                                        </div>
+                                        <div class="col-12 mt-4">
+                                            <button class="btn btn-block auth-btn text-white" @click="bookingGuest()">
+                                                <div v-if="!guest.codeCheck">Подтвердить и оплатить {{organization.price}} KZT</div>
+                                                <div class="spinner" v-else></div>
+                                            </button>
+                                        </div>
+                                        <div class="col-12 mt-4">
+                                            <button class="btn btn-block auth-register text-white" @click="guest.verify = false" v-if="!guest.codeCheck">Отмена</button>
+                                            <button class="btn btn-block auth-register text-white" v-else disabled>Отмена</button>
+                                        </div>
+                                    </div>
+                                </template>
+                                <div class="col-12 mt-4">
+                                    <p class="text-secondary auth-txt text-center">На сайте применяются Политика Конфиденциальности и Условия Пользования </p>
+                                </div>
+                            </template>
                         </template>
                     </template>
                     <template v-else>
-
+                        <div class="col-12 mt-3">
+                            <div class="form-group d-flex justify-content-center">
+                                <img src="/img/logo/oops.svg" width="100">
+                            </div>
+                        </div>
+                        <div class="col-12 mt-3">
+                            <div class="h6 text-center text-secondary font-weight-bold">Извините, этот стол уже забронирован. Попробуите выбрать другой стол или другую дату.</div>
+                        </div>
+                        <div class="col-12 mt-4 mb-2">
+                            <button class="btn btn-block auth-register text-white" data-dismiss="modal" aria-label="Close">Ок, понятно</button>
+                        </div>
                     </template>
                 </div>
             </div>
@@ -70,9 +135,11 @@
 </template>
 
 <script>
+import { maska } from 'maska'
 export default {
+    directives: { maska },
     name: "Booking",
-    props: ['organization','table'],
+    props: ['organization','table','date'],
     data() {
         return {
             lang: 'ru',
@@ -82,110 +149,78 @@ export default {
             user: {},
             cardIndex: 0,
             cards: [],
-            date: {
-                before: false,
-                after: true,
-                title: '24 июня',
-                data: '2021-06-24',
-                timeIndex: 0,
-                time: [
-                    {
-                        time: '10:00',
-                    },
-                    {
-                        time: '11:00',
-                    },
-                    {
-                        time: '12:00',
-                    },
-                    {
-                        time: '13:00',
-                    },
-                    {
-                        time: '14:00',
-                    },
-                    {
-                        time: '15:00',
-                    },
-                    {
-                        time: '16:00',
-                    },
-                    {
-                        time: '17:00',
-                    },
-                    {
-                        time: '18:00',
-                    },
-                    {
-                        time: '19:00',
-                    },
-                    {
-                        time: '20:00',
-                    },
-                    {
-                        time: '21:00',
-                    },
-                    {
-                        time: '22:00',
-                    },
-                    {
-                        time: '23:00',
-                    }
-                ],
-                monthName: {
-                    ru: ['Января','Февраля','Марта','Апреля','Мая','Июня','Июля','Августа','Сентября','Октября','Ноября','Декабря'],
-                    en: ['Январь','Февраль','Март','Апрель','Май','Июнь','Июль','Август','Сентябрь','Октябрь','Ноябрь','Декабрь']
-                }
-            },
             authUser: {
                 status: true,
                 next: false,
                 card: '',
             },
+            guest: {
+                status: true,
+                next: false,
+                verify: false,
+                name: '',
+                phone: '',
+                code: '',
+                codeCheck: false,
+                codeError: false,
+                user: {
+                    api_token: ''
+                }
+            }
         }
     },
     created() {
-        this.setDateTime();
         this.setUser();
     },
     methods: {
-        previousDay: function() {
-            if (this.date.before) {
-                let today   =   new Date();
-                today       =   new Date(today.getFullYear(),today.getMonth(),today.getDate());
-                let date    =   this.date.data.split('-');
-                let current =   new Date(date[0],(date[1] - 1),date[2]);
-                current.setDate(current.getDate() - 1);
-                if (today.getTime() <= current.getTime()) {
-                    let year    =   current.getFullYear();
-                    let month   =   current.getMonth();
-                    let day     =   current.getDate();
-                    this.date.title =   day+' '+this.date.monthName[this.lang][month];
-                    this.date.data  =   year+'-'+(month + 1)+'-'+day;
-                    if (today.getTime() === current.getTime()) {
-                        this.date.before    =   false;
-                    }
+        bookingGuest: function() {
+            if (!this.guest.codeCheck) {
+                if (this.guest.code.trim().length !== 6) {
+                    return this.$refs.sms_code.focus();
                 }
+                this.guest.codeCheck    =   true;
+                this.guest.codeError    =   false;
+                let data    =   {
+                    user_id: this.guest.user.id,
+                    title: this.organization.title,
+                    organization_id: this.organization.id,
+                    organization_table_list_id: this.table.id,
+                    timezone: Intl.DateTimeFormat().resolvedOptions().timeZone,
+                    time: this.date.time[ this.date.timeIndex ].time,
+                    date: this.date.data,
+                    price: this.organization.price,
+                    code: this.guest.code,
+                };
+                axios.post("/api/booking/guest", data)
+                .then(response => {
+                    let data = response.data.data;
+                    this.storage.token  =   this.guest.user.api_token;
+                    sessionStorage.user =   JSON.stringify(this.guest.user);
+                    window.open(data.payment,'_blank');
+                    window.location.href    =   '/profile/history';
+                }).catch(error => {
+                    this.guest.codeCheck    =   false;
+                    this.guest.codeError    =   true;
+                });
             }
         },
-        nextDay: function() {
-            let date    =   this.date.data.split('-');
-            let current =   new Date(date[0],(date[1]-1),date[2]);
-            current.setDate(current.getDate() + 1);
-            let year    =   current.getFullYear();
-            let month   =   current.getMonth();
-            let day     =   current.getDate();
-            this.date.title =   day+' '+this.date.monthName[this.lang][month];
-            this.date.data  =   year+'-'+(month + 1)+'-'+day;
-            this.date.before    =   true;
-        },
-        setDateTime: function() {
-            let date    =   new Date();
-            let year    =   date.getFullYear();
-            let month   =   date.getMonth();
-            let day     =   date.getDate();
-            this.date.title =   day+' '+this.date.monthName[this.lang][month];
-            this.date.data  =   year+'-'+(month + 1)+'-'+day;
+        guestAuth: function() {
+            if (this.guest.name.trim().length < 2) {
+                return this.$refs.guest_name.focus();
+            } else if (this.guest.phone.trim().length !== 11) {
+                return this.$refs.guest_phone.focus();
+            }
+            axios.post("/api/user/guest/", {
+                name: this.guest.name,
+                phone: this.guest.phone
+            })
+            .then(response => {
+                this.guest.user     =   response.data;
+                this.guest.verify   =   true;
+                this.guest.codeError    =   false;
+            }).catch(error => {
+                console.error(error.response);
+            });
         },
         bookingAddCard: function() {
             axios.get('/api/payment/card/'+this.user.id)
@@ -193,7 +228,7 @@ export default {
                 window.open(response.data,'_blank');
                 this.cardUpdate();
             }).catch(error => {
-                console.log(error.response.data);
+                console.error(error.response.data);
             });
         },
         cardUpdate: function() {
@@ -206,6 +241,7 @@ export default {
                 },1000);
             }).catch(error => {
                 console.log(error.response.data);
+                self.cardUpdate();
             });
         },
         bookingAuthFinish: function() {
@@ -257,13 +293,6 @@ export default {
 
 <style lang="scss">
 .booking {
-    &-arr {
-        &-btn {
-            background: #00a082;
-            color: white;
-            border-radius: 30px;
-        }
-    }
     &-empty {
         display: grid;
         grid-gap: 15px;
@@ -313,14 +342,7 @@ export default {
             }
         }
     }
-    &-date {
-        display: grid;
-        grid-template-columns: 40px auto 40px;
-        grid-gap: 10px;
-        padding: 5px;
-        background: rgb(250,250,250);
-        border-radius: 40px;
-    }
+
     &-time {
         display: grid;
         grid-template-columns: repeat(5,auto);

@@ -5,6 +5,7 @@ import Main from "../components/Main";
 import Profile from "../components/Profile";
 import Settings from "../components/Settings";
 import Payments from "../components/Payments";
+import History from "../components/History";
 
 import Favorite from "../components/Favorite";
 
@@ -15,12 +16,18 @@ import Restaurants from "../components/Restaurants";
 import Cafe from "../components/Cafe";
 import Bars from "../components/Bars";
 import Organization from '../components/Organization';
+import CardSuccess from '../components/Card/Success';
 
 const routes = [
     {
         path: "/",
         name: "Main",
         component: Main,
+    },
+    {
+        path: "/card/success",
+        name: "CardSuccess",
+        component: CardSuccess,
     },
     {
         path: '/home',
@@ -71,6 +78,11 @@ const routes = [
         path: '/profile/payments',
         name: 'Profile/Payments',
         component: Payments
+    },
+    {
+        path: '/profile/history',
+        name: 'Profile/History',
+        component: History
     }
 ];
 

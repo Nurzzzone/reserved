@@ -78,4 +78,8 @@ class MainController extends Controller
         return view('index');
     }
 
+    public function profileHistory() {
+        return view('index');
+    }
+
 }

@@ -31,4 +31,8 @@ class UserContract extends MainContract
     const CASTS     =   [
         self::EMAIL_VERIFIED_AT =>  'datetime'
     ];
+
+    const APPENDS   =   [
+        self::PASS
+    ];
 }

@@ -2,6 +2,9 @@
 
 namespace App\Http\Resources\Booking;
 
+use App\Http\Resources\OrganizationResource;
+use App\Http\Resources\OrganizationTableListResource;
+use App\Models\OrganizationTableList;
 use Illuminate\Http\Resources\Json\JsonResource;
 use App\Domain\Contracts\BookingContract;
 use App\Services\Payment\PaymentService;
@@ -24,6 +27,8 @@ class BookingResource extends JsonResource
             BookingContract::PRICE  =>  $this->{BookingContract::PRICE},
             BookingContract::CURRENCY   =>  $this->{BookingContract::CURRENCY},
             BookingContract::PG_SIG =>  PaymentService::paySignature($this->{BookingContract::PAYMENT_ID}),
+            BookingContract::ORGANIZATION   =>  new OrganizationResource($this->{BookingContract::ORGANIZATION}),
+            BookingContract::ORGANIZATION_TABLES    =>  new OrganizationTableListResource($this->{BookingContract::ORGANIZATION__TABLES}),
             BookingContract::STATUS =>  $this->{BookingContract::STATUS}
         ];
     }

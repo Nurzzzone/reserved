@@ -4,11 +4,11 @@
     <div class="container-fluid mb-5">
         <div class="container">
             <div class="row mt-5">
-                <div class="col-12 col-sm-6 col-md-4" v-for="(item,key) in menu" :key="key">
+                <div class="col-4 d-flex justify-content-center" v-for="(item,key) in menu" :key="key">
                     <a :href="item.url" style="text-decoration: none !important;">
-                        <div class="card border-0 m-3 shadow rounded-lg">
+                        <div class="card border-0">
                             <div class="d-flex justify-content-center">
-                                <img class="mt-5 mx-5 mb-3" :src="item.img" width="100">
+                                <img class="mt-5 mb-3" :src="item.img" width="100">
                             </div>
                             <h3 class="card-title text-center mb-5 text-dark">{{item.title}}</h3>
                         </div>

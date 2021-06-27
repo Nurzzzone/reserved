@@ -36,7 +36,7 @@
                             <template v-else>
                                 <li class="nav-item mx-3 ">
                                     <a href="/home" class="btn nav-link font-weight-bold font-menu d-none d-md-block">
-                                        <div>Главная</div>
+                                        <div>Категории</div>
                                     </a>
                                 </li>
                                 <li class="nav-item mx-3">

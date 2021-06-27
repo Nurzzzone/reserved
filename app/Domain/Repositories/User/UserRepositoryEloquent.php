@@ -75,7 +75,7 @@ class UserRepositoryEloquent implements UserRepositoryInterface
     {
         $user   =   User::where(UserContract::PHONE,$phone)->first();
         if ($user) {
-            $user->code =   rand(100000,999999);
+            $user->{UserContract::CODE} =   rand(100000,999999);
             $user->save();
             return $user;
         }

@@ -22,9 +22,13 @@ use App\Http\Resources\UserResource;
 
 use App\Jobs\BookingPayment;
 use App\Jobs\UserPassword;
+use App\Jobs\UserCode;
+
 use App\Helpers\Time\Time;
+use App\Helpers\Random\Random;
 
 use App\Http\Requests\User\UserCreateRequest;
+use App\Http\Requests\User\UserGuestRequest;
 
 class UserController extends Controller
 {
@@ -42,19 +46,32 @@ class UserController extends Controller
         $this->organizationService  =   $organizationService;
     }
 
+    public function guest(UserGuestRequest $request)
+    {
+        $data   =   $request->validated();
+        $user   =   $this->userService->smsResend($data[UserContract::PHONE]);
+        if (!$user) {
+            $user   =   $this->userService->create($data);
+            UserPassword::dispatch($user,$data[UserContract::PASSWORD]);
+        }
+        UserCode::dispatch($user);
+        return $user;
+    }
+
     public function booking(Request $request)
     {
         $user   =   $this->userService->getByPhone($request->input(UserContract::PHONE));
 
         if (!$user) {
-            $password   =   Str::random(8);
+            $password   =   Random::generate(8);
             $user   =   $this->userService->adminCreate([
                 UserContract::USER_ID   =>  $request->input(UserContract::USER_ID),
                 UserContract::NAME  =>  $request->input(UserContract::NAME),
                 UserContract::PHONE =>  $request->input(UserContract::PHONE),
+                UserContract::PHONE_VERIFIED_AT =>  date('Y-m-d H:i:s'),
                 UserContract::PASSWORD  =>  $password
             ]);
-            UserPassword::dispatch([$user->{UserContract::PHONE},$password]);
+            UserPassword::dispatch($user,$password);
         }
 
         $organization   =   $this->organizationService->getById($request->input(BookingContract::ORGANIZATION_ID));

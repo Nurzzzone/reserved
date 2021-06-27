@@ -20,7 +20,8 @@ class BookingRepositoryEloquent implements BookingRepositoryInterface
 
     public function create(array $data)
     {
-        return Booking::create($data);
+        $booking    =   Booking::create($data);
+        return $this->getById($booking->{BookingContract::ID});
     }
 
     public function update($id, array $input)
@@ -37,18 +38,20 @@ class BookingRepositoryEloquent implements BookingRepositoryInterface
 
     public function getById($id)
     {
-        return Booking::where([
-            [BookingContract::ID,$id],
-            [BookingContract::STATUS,'!=',BookingContract::OFF]
-        ])->first();
+        return Booking::with('organization','organizationTables')
+            ->where([
+                [BookingContract::ID,$id],
+                [BookingContract::STATUS,'!=',BookingContract::OFF]
+            ])->first();
     }
 
     public function getByUserId($userId,$paginate):object
     {
-        return Booking::where([
-            [BookingContract::USER_ID,$userId],
-            [BookingContract::STATUS,'!=',BookingContract::OFF]
-        ])
+        return Booking::with('organization','organizationTables')
+            ->where([
+                [BookingContract::USER_ID,$userId],
+                [BookingContract::STATUS,'!=',BookingContract::OFF]
+            ])
             ->orderBy(BookingContract::ID,BookingContract::DESC)
             ->skip($paginate * $this->take)
             ->take($this->take)->get();
@@ -56,10 +59,11 @@ class BookingRepositoryEloquent implements BookingRepositoryInterface
 
     public function getByOrganizationId($organizationId,$paginate):object
     {
-        return Booking::where([
-            [BookingContract::ORGANIZATION_ID,$organizationId],
-            [BookingContract::STATUS,'!=',BookingContract::OFF]
-        ])
+        return Booking::with('organization','organizationTables')
+            ->where([
+                [BookingContract::ORGANIZATION_ID,$organizationId],
+                [BookingContract::STATUS,'!=',BookingContract::OFF]
+            ])
             ->orderBy(BookingContract::ID,BookingContract::DESC)
             ->skip($paginate * $this->take)
             ->take($this->take)->get();
@@ -67,10 +71,11 @@ class BookingRepositoryEloquent implements BookingRepositoryInterface
 
     public function getByTableId($tableId,$paginate):object
     {
-        return Booking::where([
-            [BookingContract::ORGANIZATION_TABLE_LIST_ID,$tableId],
-            [BookingContract::STATUS,'!=',BookingContract::OFF]
-        ])
+        return Booking::with('organization','organizationTables')
+            ->where([
+                [BookingContract::ORGANIZATION_TABLE_LIST_ID,$tableId],
+                [BookingContract::STATUS,'!=',BookingContract::OFF]
+            ])
             ->orderBy(BookingContract::ID,BookingContract::DESC)
             ->skip($paginate * $this->take)
             ->take($this->take)->get();
@@ -78,10 +83,11 @@ class BookingRepositoryEloquent implements BookingRepositoryInterface
 
     public function getByDate($date,$paginate):object
     {
-        return Booking::where([
-            [BookingContract::DATE,$date],
-            [BookingContract::STATUS,'!=',BookingContract::OFF]
-        ])
+        return Booking::with('organization','organizationTables')
+            ->where([
+                [BookingContract::DATE,$date],
+                [BookingContract::STATUS,'!=',BookingContract::OFF]
+            ])
             ->orderBy(BookingContract::ID,BookingContract::DESC)
             ->skip($paginate * $this->take)
             ->take($this->take)->get();
@@ -107,10 +113,14 @@ class BookingRepositoryEloquent implements BookingRepositoryInterface
     }
 
     public function getLastByTableId($id,$date) {
-        return Booking::with('organization')->where([
-            [BookingContract::ORGANIZATION_TABLE_LIST_ID,$id],
-            [BookingContract::STATUS,'!=',BookingContract::OFF]
-        ])->whereDate(BookingContract::DATE,$date)->orderBy(BookingContract::ID,'desc')->first();
+        return Booking::with('organization','organizationTables')
+            ->where([
+                [BookingContract::ORGANIZATION_TABLE_LIST_ID,$id],
+                [BookingContract::STATUS,'!=',BookingContract::OFF]
+            ])
+            ->whereDate(BookingContract::DATE,$date)
+            ->orderBy(BookingContract::ID,'desc')
+            ->first();
     }
 
 }

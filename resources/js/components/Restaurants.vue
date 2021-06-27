@@ -4,36 +4,49 @@
     <div class="container-fluid mb-5">
         <div class="container">
             <div class="row mt-5">
-                <div class="col-12 col-md-6 col-xl-4 p-2" v-for="(restaurant,key) in restaurants" :key="key">
-                    <div class="card border-0 shadow overflow-hidden m-2 item-radius">
-                        <div class="item-main">
-                            <div class="item-rating">
-                                <span v-if="restaurant.rating">{{restaurant.rating}}</span>
-                                <span v-else>-</span>
+                <template v-if="restaurants.length > 0">
+                    <div class="col-12 col-md-6 col-xl-4 p-2" v-for="(restaurant,key) in restaurants" :key="key">
+                        <div class="card border-0 shadow overflow-hidden m-2 item-radius">
+                            <div class="item-main">
+                                <div class="item-rating">
+                                    <span v-if="restaurant.rating">{{restaurant.rating}}</span>
+                                    <span v-else>-</span>
+                                </div>
+                                <img :src="restaurant.wallpaper">
                             </div>
-                            <img :src="restaurant.wallpaper">
+                            <div class="mx-5 item-logo mb-2 d-flex justify-content-center">
+                                <img v-if="restaurant.image" :src="restaurant.image" width="120">
+                                <img v-else src="/img/logo/restaurant.svg" width="120">
+                            </div>
+                            <ul class="list-group list-group-flush">
+                                <li class="list-group-item text-center p-0">
+                                    <a :href="'/home/'+restaurant.id" class="text-dark">
+                                        <h3 class=" font-weight-bold">{{restaurant.title}}</h3>
+                                    </a>
+                                    <p class="item-description text-secondary mx-3" v-if="restaurant.description">{{restaurant.description}}</p>
+                                </li>
+                                <li class="list-group-item text-center bg-light">
+                                    <div class="h6 text-secondary text-font" v-if="restaurant.time">{{restaurant.time}}</div>
+                                    <div class="text-center my-2 h6 text-secondary text-font">{{restaurant.address}}</div>
+                                </li>
+                                <li class="list-group-item">
+                                    <button class="btn w-100 h6 text-white text-btn mt-2 text-font font-weight-bold">Забронировать {{restaurant.price}} KZT</button>
+                                </li>
+                            </ul>
                         </div>
-                        <div class="mx-5 item-logo mb-2 d-flex justify-content-center">
-                            <img v-if="restaurant.image" :src="restaurant.image" width="120">
-                            <img v-else src="/img/logo/restaurant.svg" width="120">
-                        </div>
-                        <ul class="list-group list-group-flush">
-                            <li class="list-group-item text-center p-0">
-                                <a :href="'/home/'+restaurant.id" class="text-dark">
-                                    <h3 class=" font-weight-bold">{{restaurant.title}}</h3>
-                                </a>
-                                <p class="item-description text-secondary mx-3" v-if="restaurant.description">{{restaurant.description}}</p>
-                            </li>
-                            <li class="list-group-item text-center bg-light">
-                                <div class="h6 text-secondary text-font" v-if="restaurant.time">{{restaurant.time}}</div>
-                                <div class="text-center my-2 h6 text-secondary text-font">{{restaurant.address}}</div>
-                            </li>
-                            <li class="list-group-item">
-                                <button class="btn w-100 h6 text-white text-btn mt-2 text-font font-weight-bold">Забронировать {{restaurant.price}} KZT</button>
-                            </li>
-                        </ul>
                     </div>
-                </div>
+                </template>
+                <template v-else>
+                    <div class="col-12 d-flex justify-content-center my-5">
+                        <div>
+                            <img src="/img/logo/cafe.svg" width="120">
+                        </div>
+                    </div>
+                    <div class="col-12 mt-3 mb-5">
+                        <h2 class="text-center">Список пуст</h2>
+                        <p class="text-center h5 text-secondary mt-2">Возможно в данный момент все заведения закрыты. Попробуите обновить страницу позднее.</p>
+                    </div>
+                </template>
             </div>
         </div>
     </div>

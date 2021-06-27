@@ -39,6 +39,7 @@ Route::prefix('booking')->group(function() {
     Route::get('organization/{organizationId}',[BookingController::class,'getByOrganizationId'])->name('booking.organization');
     Route::get('table/{tableId}',[BookingController::class,'getByTableId'])->name('booking.table');
     Route::get('date/{date}',[BookingController::class,'getByDate'])->name('booking.date');
+    Route::post('guest',[BookingController::class,'guest'])->name('booking.guest');
 
 });
 
@@ -66,6 +67,10 @@ Route::prefix('review')->group(function () {
 
 });
 
+Route::prefix('organization')->group(function() {
+    Route::get('/status/{id}/{date}',[OrganizationController::class,'status'])->name('organization.status');
+});
+
 Route::get('/categories',[CategoryController::class,'list']);
 Route::get('/countries',[CountryController::class,'list']);
 Route::get('/organization/section/{id}',[OrganizationController::class,'getSectionsById']);
@@ -80,14 +85,19 @@ Route::prefix('sms')->group(function() {
     Route::get('{phone}/{code}',[UserController::class,'smsVerify']);
 });
 
+
+Route::prefix('user')->group(function() {
+    Route::get('/{id}',[UserController::class,'getById'])->name('user.id');
+    Route::get('phone/{phone}',[UserController::class,'getByPhone'])->name('user.phone');
+    Route::post('booking',[UserController::class,'booking'])->name('user.booking');
+    Route::post('guest',[UserController::class,'guest'])->name('user.guest');
+});
+
 Route::get('/sms_resend/{phone}',[UserController::class,'smsResend']);
 Route::get('/login/{phone}/{password}',[UserController::class,'login']);
 Route::get('/register',[UserController::class,'register']);
 Route::post('/register',[UserController::class,'register']);
 
-Route::get('/user/{id}',[UserController::class,'getById']);
-Route::get('/user/phone/{phone}',[UserController::class,'getByPhone']);
-Route::post('/user/booking',[UserController::class,'booking']);
 Route::get('/token/{token}', [UserController::class,'token']);
 
 Route::middleware('auth:api')->get('/user', function (Request $request) {

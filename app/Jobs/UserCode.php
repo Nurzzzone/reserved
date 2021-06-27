@@ -13,20 +13,18 @@ use App\Models\User;
 
 use App\Helpers\Sms\Sms;
 
-class UserPassword implements ShouldQueue
+class UserCode implements ShouldQueue
 {
     use Dispatchable, InteractsWithQueue, Queueable, SerializesModels;
     protected $user;
-    protected $password;
 
-    public function __construct(User $user, string $password)
+    public function __construct(User $user)
     {
         $this->user =   $user;
-        $this->password =   $password;
     }
 
     public function handle(Sms $sms)
     {
-        $sms->password($this->user,$this->password);
+        $sms->code($this->user);
     }
 }

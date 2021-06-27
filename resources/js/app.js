@@ -11,7 +11,8 @@ app.use(Maska);
 app.use(ReactiveStorage, {
     token: '',
     user: '',
-    auth: true
+    auth: true,
+    modal: false
 });
 
 app.mount('#app');

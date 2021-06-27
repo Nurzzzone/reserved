@@ -18,7 +18,7 @@ class Booking extends Model
         $date   =   explode(' ',$this->created_at);
         $time   =   new \DateTime($date[0].' '.$value, new \DateTimeZone(BookingContract::UTC));
         $time->setTimezone(new \DateTimeZone($this->organization->timezone));
-        return $time->format('H:i:s');
+        return $time->format('H:i');
     }
 
     public function user() {

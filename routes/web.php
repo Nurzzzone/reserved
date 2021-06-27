@@ -8,6 +8,7 @@ use App\Http\Controllers\MainController;
 use App\Http\Controllers\LinkController;
 use App\Http\Controllers\ContactController;
 use App\Http\Controllers\PaymentController;
+use App\Http\Controllers\CardController;
 
 use App\Http\Controllers\Admin\Auth\RegisterController;
 use App\Http\Controllers\Admin\Auth\LoginController;
@@ -17,6 +18,7 @@ use App\Http\Controllers\Admin\OrganizationTablesCrudController;
 use App\Http\Controllers\Admin\OrganizationTableListCrudController;
 use App\Http\Controllers\Admin\BookingCrudController;
 
+
 header('Access-Control-Allow-Origin: *');
 header('Access-Control-Allow-Methods: POST, GET, OPTIONS, PUT, DELETE');
 header('Access-Control-Allow-Headers: Content-Type, X-Auth-Token, Origin, Authorization,X-localization,X-No-Cache');
@@ -25,8 +27,9 @@ Route::get('/', [MainController::class, 'index'])->name('index');
 
 Route::prefix('profile')->group(function() {
     Route::get('/',[MainController::class, 'profile'])->name('profile');
-    Route::get('/settings',[MainController::class, 'profileSettings'])->name('profile.settings');
-    Route::get('/payments',[MainController::class, 'profilePayments'])->name('profile.payments');
+    Route::get('settings',[MainController::class, 'profileSettings'])->name('profile.settings');
+    Route::get('payments',[MainController::class, 'profilePayments'])->name('profile.payments');
+    Route::get('history',[MainController::class, 'profileHistory'])->name('profile.history');
 });
 
 Route::prefix('favorite')->group(function() {
@@ -82,7 +85,5 @@ Route::prefix('admin')->group(function () {
 Route::get('form/{bookingId}', [PaymentController::class,'form'])->name('payment.form');
 
 Route::prefix('card')->group(function() {
-    Route::get('success', function() {
-        return 'Спасибо за платеж!';
-    });
+    Route::get('success', [CardController::class,'success'])->name('success');
 });

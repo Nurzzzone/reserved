@@ -1,8 +1,8 @@
 <template>
     <Header></Header>
     <profile-section :name="name"></profile-section>
-    <Booking :organization="organization" :table="table"></Booking>
-    <div class="container-fluid mb-5">
+    <Booking :organization="organization" :table="table" :date="date"></Booking>
+    <div class="container-fluid organization-bg">
         <div class="container">
             <div class="row">
                 <div class="col-12">
@@ -15,35 +15,55 @@
                     </div>
                     <div class="d-flex justify-content-center organization-photo">
                         <div class="organization-logo">
-                            <img :src="organization.image">
+                            <img v-if="organization.image" :src="organization.image">
+                            <img v-else src="/img/logo/restaurant.svg">
                         </div>
                     </div>
                     <div class="organization-title h3 text-dark font-weight-bold text-center mt-3">{{organization.title}}</div>
                     <div class="organization-description h6 text-secondary text-center mt-3">{{organization.description}}</div>
                 </div>
             </div>
-            <div class="row mt-2">
+        </div>
+    </div>
+    <div class="container-fluid organization-shadow-main organization-bg">
+        <div class="container">
+            <div class="row pt-2">
                 <div class="col d-flex justify-content-center">
-                    <div class="card text-center border-0">
-                        <div class="card-header bg-transparent d-flex justify-content-center">
+                    <div class="card text-center bg-transparent border-0">
+                        <div class="card-header bg-transparent d-flex justify-content-center border-0">
                             <ul class="nav nav-tabs card-header-tabs">
                                 <li class="nav-item">
-                                    <a class="nav-link h6 text-secondary" :class="{active: (tab === 1), 'main-color': (tab === 1)}" role="button" @click="tab = 1">Бронирование</a>
+                                    <a class="nav-link h6 text-secondary bg-transparent organization-tab py-3 d-block" :class="{active: (tab === 1), 'organization-tab-sel': (tab === 1)}" role="button" @click="tab = 1">Бронирование</a>
                                 </li>
                                 <li class="nav-item">
-                                    <a class="nav-link h6 text-secondary" :class="{active: (tab === 2), 'main-color': (tab === 2)}" role="button" @click="tab = 2">Галлерея</a>
+                                    <a class="nav-link h6 text-secondary bg-transparent organization-tab py-3 d-block" :class="{active: (tab === 2), 'organization-tab-sel': (tab === 2)}" role="button" @click="tab = 2">Галлерея</a>
                                 </li>
                                 <li class="nav-item">
-                                    <a class="nav-link h6 text-secondary" :class="{active: (tab === 3), 'main-color': (tab === 3)}" role="button" @click="tab = 3">Отзывы</a>
+                                    <a class="nav-link h6 text-secondary bg-transparent organization-tab py-3 d-block" :class="{active: (tab === 3), 'organization-tab-sel': (tab === 3)}" role="button" @click="tab = 3">Отзывы</a>
                                 </li>
                             </ul>
                         </div>
                     </div>
                 </div>
             </div>
+        </div>
+    </div>
+    <div class="container-fluid mb-5">
+        <div class="container">
             <div class="row mt-4">
                 <div class="col-12">
                     <div v-if="tab === 1">
+                        <div class="row justify-content-center mt-3">
+                            <div class="col-12 col-md-6 col-lg-4">
+                                <div class="form-group organization-date" onselectstart="return false;">
+                                    <a class="text-decoration-none cursor-pointer" :class="{'organization-arr-btn':date.before}" @click="previousDay()">&#8249;</a>
+                                    <div type="text" class="border-0 organization-input text-dark text-center font-weight-bold" :data-date="date.data">
+                                        <div>{{date.title}}</div>
+                                    </div>
+                                    <a class="text-decoration-none cursor-pointer" :class="{'organization-arr-btn':date.after}" @click="nextDay()">&#8250;</a>
+                                </div>
+                            </div>
+                        </div>
                         <div class="row justify-content-center mt-3">
                             <div>
                                 <div class="d-flex">
@@ -53,12 +73,20 @@
                         </div>
                         <div class="row justify-content-center mt-4"  v-for="(item,key) in sections" :key="key" :class="{'d-none':(key !== section)}">
                             <div class="col-12 col-md-6 col-lg-3 p-2" v-for="(table,tableKey) in item.organization_tables" :key="tableKey" @click="selTable(key,tableKey)">
-                                <div class="card border-0 organization-shadow"  data-toggle="modal" data-target="#booking_modal">
+                                <div class="card border-0 organization-shadow" data-toggle="modal" data-target="#booking_modal">
                                     <div class="card-body">
                                         <div class="organization-card">
                                             <div class="row align-content-center pl-3">
                                                 <div class="organization-card-title w-100 font-weight-bold">{{table.title}}</div>
-                                                <div class="organization-card-status w-100 text-secondary">Свободно</div>
+                                                <template v-if="!table.bookingStatus">
+                                                    <div class="lds-ellipsis"><div></div><div></div><div></div><div></div></div>
+                                                </template>
+                                                <template v-else-if="table.bookingStatus === 'free'">
+                                                    <div class="organization-card-status organization-card-status-free">Свободно</div>
+                                                </template>
+                                                <template v-else>
+                                                    <div class="organization-card-status organization-card-status-reserved">Занято</div>
+                                                </template>
                                             </div>
                                             <div>
                                                 <div class="organization-card-icon"></div>
@@ -108,26 +136,144 @@ export default {
     name: "Organization",
     data() {
         return {
+            lang: 'ru',
             status: 0,
             name: '',
             tab: 1,
             table: '',
             organization: {},
             section: 0,
-            sections: []
+            sections: [],
+            date: {
+                before: false,
+                after: true,
+                title: '',
+                data: '',
+                timeIndex: 0,
+                time: [
+                    {
+                        time: '10:00',
+                    },
+                    {
+                        time: '11:00',
+                    },
+                    {
+                        time: '12:00',
+                    },
+                    {
+                        time: '13:00',
+                    },
+                    {
+                        time: '14:00',
+                    },
+                    {
+                        time: '15:00',
+                    },
+                    {
+                        time: '16:00',
+                    },
+                    {
+                        time: '17:00',
+                    },
+                    {
+                        time: '18:00',
+                    },
+                    {
+                        time: '19:00',
+                    },
+                    {
+                        time: '20:00',
+                    },
+                    {
+                        time: '21:00',
+                    },
+                    {
+                        time: '22:00',
+                    },
+                    {
+                        time: '23:00',
+                    }
+                ],
+                monthName: {
+                    ru: ['Января','Февраля','Марта','Апреля','Мая','Июня','Июля','Августа','Сентября','Октября','Ноября','Декабря'],
+                    en: ['Январь','Февраль','Март','Апрель','Май','Июнь','Июль','Август','Сентябрь','Октябрь','Ноябрь','Декабрь']
+                }
+            },
         }
     },
     created() {
+        this.setDateTime();
         this.getOrganization();
-    },
-    mounted() {
-        this.updateStatus();
     },
     methods: {
         updateStatus: function() {
-            console.log('update-status');
+            let self    =   this;
+            axios.get('/api/organization/status/'+this.$route.params.id+'/'+this.date.data)
+                .then(response => {
+                    let data    =   response.data;
+                    let statuses    =   [];
+                    data.forEach(element => {
+                        statuses[element.id]    =   element.bookingStatus.status;
+                    });
+                    this.sections.forEach(element => {
+                        element.organization_tables.forEach(item => {
+                            if (statuses[item.id]) {
+                                item.bookingStatus  =   statuses[item.id];
+                            }
+                        });
+                    });
+
+                    setTimeout(function() {
+                        self.updateStatus();
+                    },1000);
+                }).catch(error => {
+                    setTimeout(function() {
+                        self.updateStatus();
+                    },1000);
+                });
+        },
+        previousDay: function() {
+            if (this.date.before) {
+                let today   =   new Date();
+                today       =   new Date(today.getFullYear(),today.getMonth(),today.getDate());
+                let date    =   this.date.data.split('-');
+                let current =   new Date(date[0],(date[1] - 1),date[2]);
+                current.setDate(current.getDate() - 1);
+                if (today.getTime() <= current.getTime()) {
+                    let year    =   current.getFullYear();
+                    let month   =   current.getMonth();
+                    let day     =   current.getDate();
+                    this.date.title =   day+' '+this.date.monthName[this.lang][month];
+                    this.date.data  =   year+'-'+(month + 1)+'-'+day;
+                    if (today.getTime() === current.getTime()) {
+                        this.date.before    =   false;
+                    }
+                    this.updateStatus();
+                }
+            }
+        },
+        nextDay: function() {
+            let date    =   this.date.data.split('-');
+            let current =   new Date(date[0],(date[1]-1),date[2]);
+            current.setDate(current.getDate() + 1);
+            let year    =   current.getFullYear();
+            let month   =   current.getMonth();
+            let day     =   current.getDate();
+            this.date.title =   day+' '+this.date.monthName[this.lang][month];
+            this.date.data  =   year+'-'+(month + 1)+'-'+day;
+            this.date.before    =   true;
+            this.updateStatus();
+        },
+        setDateTime: function() {
+            let date    =   new Date();
+            let year    =   date.getFullYear();
+            let month   =   date.getMonth();
+            let day     =   date.getDate();
+            this.date.title =   day+' '+this.date.monthName[this.lang][month];
+            this.date.data  =   year+'-'+(month + 1)+'-'+day;
         },
         selTable: function(key, tableKey) {
+            this.storage.modal = false;
             this.table  =   this.sections[key].organization_tables[tableKey];
         },
         getOrganization: function() {
@@ -147,6 +293,7 @@ export default {
                     let data    =   response.data;
                     if (data.hasOwnProperty('data')) {
                         this.sections   =   data.data;
+                        this.updateStatus();
                     }
                 });
         }
@@ -155,7 +302,101 @@ export default {
 </script>
 
 <style lang="scss">
+
+    .lds-ellipsis {
+        display: inline-block;
+        position: relative;
+        width: 20px;
+        height: 20px;
+        transform: scale(.5);
+        margin: 5px 0 0 0;
+    }
+    .lds-ellipsis div {
+        position: absolute;
+        top: 0;
+        width: 13px;
+        height: 13px;
+        border-radius: 50%;
+        background: #00a082;
+        animation-timing-function: cubic-bezier(0, 1, 1, 0);
+    }
+    .lds-ellipsis div:nth-child(1) {
+        left: 8px;
+        animation: lds-ellipsis1 0.6s infinite;
+    }
+    .lds-ellipsis div:nth-child(2) {
+        left: 8px;
+        animation: lds-ellipsis2 0.6s infinite;
+    }
+    .lds-ellipsis div:nth-child(3) {
+        left: 32px;
+        animation: lds-ellipsis2 0.6s infinite;
+    }
+    .lds-ellipsis div:nth-child(4) {
+        left: 56px;
+        animation: lds-ellipsis3 0.6s infinite;
+    }
+    @keyframes lds-ellipsis1 {
+        0% {
+            transform: scale(0);
+        }
+        100% {
+            transform: scale(1);
+        }
+    }
+    @keyframes lds-ellipsis3 {
+        0% {
+            transform: scale(1);
+        }
+        100% {
+            transform: scale(0);
+        }
+    }
+    @keyframes lds-ellipsis2 {
+        0% {
+            transform: translate(0, 0);
+        }
+        100% {
+            transform: translate(24px, 0);
+        }
+    }
     .organization {
+        &-tab {
+            border:  none !important;
+            border-bottom: 4px solid transparent !important;
+            &-sel {
+                color: #FF8008 !important;
+                border-bottom-color: #FF8008 !important;
+            }
+        }
+        &-bg {
+            background: #f5f5f5;
+        }
+        &-arr {
+            &-btn {
+                background: #00a082;
+                color: white;
+                border-radius: 30px;
+                cursor: pointer;
+            }
+        }
+        &-date {
+            display: grid;
+            grid-template-columns: 40px auto 40px;
+            grid-gap: 10px;
+            padding: 5px;
+            background: rgb(250,250,250);
+            border-radius: 40px;
+            margin: 0 .5rem 0 .5rem!important;
+        }
+        &-input {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            & > div {
+
+            }
+        }
         &-description {
             margin-top: 30px;
         }
@@ -178,6 +419,19 @@ export default {
             }
             &-status {
                 font-size: 14px;
+                display: flex;
+                padding: 2px 10px 2px 10px;
+                border-radius: 3px;
+                font-weight: bold;
+                margin-top: 5px;
+                &-free {
+                    background: #00a082;
+                    color: #fff;
+                }
+                &-reserved {
+                    background: #FF8008;
+                    color: #fff;
+                }
             }
             &-icon {
                 background: url('/img/logo/table.svg') no-repeat center;
@@ -201,6 +455,9 @@ export default {
             cursor: pointer;
             &:hover {
                 background: rgb(250,250,250);
+            }
+            &-main {
+                box-shadow: 0 3px 3px rgba(0,0,0,.1);
             }
         }
         &-image {

@@ -45,7 +45,7 @@
                                     </a>
                                 </li>
                                 <li class="nav-item">
-                                    <a class="nav-link text-white border-0" href="/profile/history" :class="{ active: (url==='history'?true:false),disabled: (url==='history'?true:false),'text-white': (url!=='history'?true:false) }">
+                                    <a class="nav-link border-0" href="/profile/history" :class="{ active: (url==='history'?true:false),disabled: (url==='history'?true:false),'text-white': (url!=='history'?true:false) }">
                                         <img src="/img/logo/history-white.svg" width="20" height="20" class="d-md-none" v-if="url!=='history'">
                                         <img src="/img/logo/history.svg" width="20" height="20" class="d-md-none" v-else>
                                         <span class="d-none d-md-block">История</span>
@@ -58,6 +58,7 @@
                                         <span class="d-none d-md-block">Способ оплаты</span>
                                     </a>
                                 </li>
+                                <!--
                                 <li class="nav-item">
                                     <a class="nav-link text-white border-0" href="/profile/support" :class="{ active: (url==='support'?true:false),disabled: (url==='support'?true:false),'text-white': (url!=='support'?true:false) }">
                                         <img src="/img/logo/help-white.svg" width="20" height="20" class="d-md-none" v-if="url!=='support'">
@@ -65,6 +66,7 @@
                                         <span class="d-none d-md-block">Служба Поддержки</span>
                                     </a>
                                 </li>
+                                -->
                             </ul>
                         </div>
                     </div>

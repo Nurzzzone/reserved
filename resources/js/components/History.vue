@@ -90,15 +90,10 @@ export default {
                 let self    =   this;
                 axios.get('/api/booking/user/'+this.user.id+'?paginate='+this.paginate)
                     .then(response => {
-                        let data    =   response.data;
-                        return console.log(data.data);
-                        if (data.hasOwnProperty('data')) {
-                            this.bookings   =   data.data;
-
-                            setTimeout(function() {
-                                self.getBookings();
-                            },1000);
-                        }
+                        this.bookings   =   response.data.data;
+                        setTimeout(function() {
+                            self.getBookings();
+                        },1000);
                     }).catch(error => {
                         setTimeout(function() {
                             self.getBookings();

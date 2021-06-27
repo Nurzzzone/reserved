@@ -16994,15 +16994,10 @@ __webpack_require__.r(__webpack_exports__);
       if (this.user) {
         var self = this;
         axios.get('/api/booking/user/' + this.user.id + '?paginate=' + this.paginate).then(function (response) {
-          var data = response.data;
-          return console.log(data.data);
-
-          if (data.hasOwnProperty('data')) {
-            _this.bookings = data.data;
-            setTimeout(function () {
-              self.getBookings();
-            }, 1000);
-          }
+          _this.bookings = response.data.data;
+          setTimeout(function () {
+            self.getBookings();
+          }, 1000);
         })["catch"](function (error) {
           setTimeout(function () {
             self.getBookings();

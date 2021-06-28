@@ -19,14 +19,15 @@
                                 <div class="d-flex" v-if="item">
                                     <div class="payments-card-icon history-icon mr-3"></div>
                                     <div>
-                                        <div class="history-font font-weight-bold" v-if="item.organization">
-                                            <a :href="'/home/'+item.organization.id" class="p-0 text-dark">{{item.organization.title}}</a> • <span class="text-secondary">{{item.organization_tables.title}}</span>
-                                        </div>
+
                                         <p class="history-font text-secondary m-0">{{item.date}} • {{item.time}}</p>
                                     </div>
                                 </div>
 
                                 <!--
+                                                                        <div class="history-font font-weight-bold" v-if="item.organization">
+                                            <a :href="'/home/'+item.organization.id" class="p-0 text-dark">{{item.organization.title}}</a> • <span class="text-secondary">{{item.organization_tables.title}}</span>
+                                        </div>
 
                                 <div class="d-flex">
                                     <div class="history-status history-status-waiting" v-if="item.status === 'CHECKING'">

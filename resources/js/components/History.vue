@@ -15,20 +15,20 @@
                 <div class="row mt-5">
                     <div class="col-12">
                         <ul class="list-group list-group-flush">
-                            <li class="list-group-item px-0 d-flex justify-content-between settings-item align-items-center" v-for="(booking,key) in items" :key="key">
+                            <li class="list-group-item px-0 d-flex justify-content-between settings-item align-items-center" v-for="(item,key) in items" :key="key">
                                 <div class="d-flex">
                                     <div class="payments-card-icon history-icon mr-3"></div>
                                     <div>
-                                        <div class="history-font font-weight-bold"><a :href="'/home/'+booking.organization.id" class="p-0 text-dark">{{booking.organization.title}}</a> • <span class="text-secondary">{{booking.organization_tables.title}}</span></div>
-                                        <p class="history-font text-secondary m-0">{{booking.date}} • {{booking.time}}</p>
+                                        <div class="history-font font-weight-bold"><a :href="'/home/'+item.organization.id" class="p-0 text-dark">{{item.organization.title}}</a> • <span class="text-secondary">{{item.organization_tables.title}}</span></div>
+                                        <p class="history-font text-secondary m-0">{{item.date}} • {{item.time}}</p>
                                     </div>
                                 </div>
                                 <div class="d-flex">
-                                    <div class="history-status history-status-waiting" v-if="booking.status === 'CHECKING'">
-                                        Ожидает оплаты {{booking.price}} KZT
+                                    <div class="history-status history-status-waiting" v-if="item.status === 'CHECKING'">
+                                        Ожидает оплаты {{item.price}} KZT
                                     </div>
                                     <div class="history-status history-status-success" v-else>
-                                        Забронировано {{booking.price}} KZT
+                                        Забронировано {{item.price}} KZT
                                     </div>
                                 </div>
                             </li>

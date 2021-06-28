@@ -16971,7 +16971,11 @@ __webpack_require__.r(__webpack_exports__);
   name: "History",
   data: function data() {
     return {
-      items: [],
+      items: [{
+        organization: {
+          title: ''
+        }
+      }],
       user: false,
       paginate: 1
     };
@@ -18452,7 +18456,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
     return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)("li", {
       "class": "list-group-item px-0 d-flex justify-content-between settings-item align-items-center",
       key: key
-    }, [item ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)("div", _hoisted_7, [_hoisted_8, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", null, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)((0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(JSON.stringify(item.organization)), 1
+    }, [item ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)("div", _hoisted_7, [_hoisted_8, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", null, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)((0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(JSON.stringify(item.organization.title)), 1
     /* TEXT */
     ), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("\n                                        <div class=\"history-font font-weight-bold\" v-if=\"item.organization\">\n                                            <a :href=\"'/home/'+item.organization.id\" class=\"p-0 text-dark\" v-if=\"item.organization.title\">{{item.organization.title}}</a> • <span class=\"text-secondary\" v-if=\"item.organization_tables.title\">{{item.organization_tables.title}}</span>\n                                        </div>\n                                        "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("p", _hoisted_9, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(item.date) + " • " + (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(item.time), 1
     /* TEXT */

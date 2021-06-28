@@ -20,13 +20,13 @@
                                     <div class="payments-card-icon history-icon mr-3"></div>
                                     <div>
                                         <div class="history-font font-weight-bold">
-                                            <a :href="'/home/'+item.organization.id" class="p-0 text-dark">{{item.organization.title}}</a>
-                                        </div> • <span class="text-secondary" v-if="item.organization_tables.title">{{item.organization_tables.title}}</span>
+                                            <a :href="'/home/'+item.organization.id" class="p-0 text-dark">{{item.organization.title}}</a> • <span class="text-secondary" v-if="item.organization_tables.title">{{item.organization_tables.title}}</span>
+                                        </div>
                                         <p class="history-font text-secondary m-0">{{item.date}} • {{item.time}}</p>
                                     </div>
                                 </div>
                                 <div class="d-flex">
-                                    <div class="history-status history-status-waiting" v-if="item.status === 'CHECKING'">
+                                    <div class="history-status history-status-waiting" v-if="item.status === 'CHECKING'" @click="initPayment(key)">
                                         Ожидает оплаты {{item.price}} KZT
                                     </div>
                                     <div class="history-status history-status-success" v-else>
@@ -82,6 +82,14 @@ export default {
         this.getBookings();
     },
     methods: {
+        initPayment: function(key) {
+            let payment =   this.items[key];
+            if (!payment.payment_id) {
+                window.open(payment.payment,'_blank');
+            } else {
+                window.open('/form/'+payment.id,'_blank');
+            }
+        },
         getUser: function() {
             if (this.storage.token && sessionStorage.user) {
                 this.user   =   JSON.parse(sessionStorage.user);
@@ -99,12 +107,12 @@ export default {
                             this.items  =   data.data;
                             setTimeout(function() {
                                 self.getBookings();
-                            },1000);
+                            },1500);
                         }
                     }).catch(error => {
                         setTimeout(function() {
                             self.getBookings();
-                        },1000);
+                        },1500);
                     });
             }
         }
@@ -135,6 +143,7 @@ export default {
             border-radius: 30px;
             font-size: 13px;
             &-waiting {
+                cursor: pointer;
                 background: #FF8008;
             }
             &-success {

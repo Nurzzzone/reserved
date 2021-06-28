@@ -44,7 +44,11 @@
                                     </div>
                                 </template>
                                 <div class="col-12 mt-4">
-                                    <button class="btn btn-block bg-light text-dark" @click="bookingAddCard()" style="border-radius: 30px; height: 44px;">Добавить карту карту</button>
+                                    <button class="btn btn-block bg-light text-dark" @click="bookingAddCard()" style="border-radius: 30px; height: 44px;">
+                                        <div v-if="!cardLoading">Добавить карту карту</div>
+                                        <div class="spinner" v-else></div>
+
+                                    </button>
                                 </div>
                                 <div class="col-12 mt-4">
                                     <button class="btn btn-block auth-register text-white" @click="bookingAuthFinish()" :disabled="cards.length === 0">Оплатить {{organization.price}} KZT</button>
@@ -69,12 +73,13 @@
                                 <template v-if="!guest.verify">
                                     <div class="col-12 mt-3">
                                         <div class="form-group">
-                                            <input type="text" class="form-control p-3 auth-input" placeholder="Ваше имя" v-model="guest.name" ref="guest_name">
+                                            <input type="text" class="form-control p-3 auth-input" placeholder="Ваше имя" v-model="guest.name" ref="guest_name" v-on:keyup.enter="guestAuth">
                                         </div>
                                     </div>
                                     <div class="col-12 mt-3">
                                         <div class="form-group">
-                                            <input type="text" class="form-control p-3 auth-input" v-maska="'7##########'" placeholder="Номер телефона" v-model="guest.phone" ref="guest_phone">
+                                            <div class="auth-phone-prefix">+7</div>
+                                            <input type="text" class="form-control p-3 auth-input auth-phone" v-maska="'##########'" v-model="guest.phone" ref="guest_phone" v-on:keyup.enter="guestAuth">
                                         </div>
                                     </div>
                                     <div class="col-12 mt-4 mb-2 d-flex" style="gap: 20px;">
@@ -82,7 +87,7 @@
                                             <button class="btn btn-block auth-btn text-white" @click="storage.modal = false">Назад</button>
                                         </div>
                                         <div class=" w-50">
-                                            <button class="btn btn-block auth-register text-white" @click="guestAuth()">Далее</button>
+                                            <button class="btn btn-block auth-register text-white" @click="guestAuth">Далее</button>
                                         </div>
                                     </div>
                                 </template>
@@ -144,9 +149,10 @@ export default {
         return {
             lang: 'ru',
             status: false,
+            user: {},
             cardStatus: true,
             cardError: false,
-            user: {},
+            cardLoading: false,
             cardIndex: 0,
             cards: [],
             authUser: {
@@ -171,8 +177,13 @@ export default {
     },
     created() {
         this.setUser();
+        this.setTime();
     },
     methods: {
+        setTime: function() {
+            let date    =   this.date.data.split('-');
+            console.log(date);
+        },
         bookingGuest: function() {
             if (!this.guest.codeCheck) {
                 if (this.guest.code.trim().length !== 6) {
@@ -207,12 +218,12 @@ export default {
         guestAuth: function() {
             if (this.guest.name.trim().length < 2) {
                 return this.$refs.guest_name.focus();
-            } else if (this.guest.phone.trim().length !== 11) {
+            } else if (this.guest.phone.trim().length !== 10) {
                 return this.$refs.guest_phone.focus();
             }
             axios.post("/api/user/new", {
                 name: this.guest.name,
-                phone: this.guest.phone
+                phone: '7'+this.guest.phone
             })
             .then(response => {
                 this.guest.user     =   response.data;
@@ -223,26 +234,32 @@ export default {
             });
         },
         bookingAddCard: function() {
-            axios.get('/api/payment/card/'+this.user.id)
-            .then(response => {
-                window.open(response.data,'_blank');
-                this.cardUpdate();
-            }).catch(error => {
-                console.error(error.response.data);
-            });
+            if (!this.cardLoading) {
+                this.cardLoading    =   true;
+                axios.get('/api/payment/card/'+this.user.id)
+                    .then(response => {
+                        this.cardLoading    =   false;
+                        window.open(response.data,'_blank');
+                        this.cardUpdate();
+                    }).catch(error => {
+                        this.cardLoading    =   false;
+                        console.error(error.response.data);
+                    });
+            }
         },
         cardUpdate: function() {
-            axios.get('/api/card/user/'+this.user.id)
-            .then(response => {
-                this.cards  =   response.data;
-                let self    =   this;
-                setTimeout(function() {
-                    self.cardUpdate();
-                },1000);
-            }).catch(error => {
-                console.log(error.response.data);
-                self.cardUpdate();
-            });
+            if (!this.cardLoading) {
+                axios.get('/api/card/user/'+this.user.id)
+                    .then(response => {
+                        this.cards  =   response.data;
+                        let self    =   this;
+                        setTimeout(function() {
+                            self.cardUpdate();
+                        },2000);
+                    }).catch(error => {
+                        this.cardUpdate();
+                    });
+            }
         },
         bookingAuthFinish: function() {
             if (this.cardStatus) {

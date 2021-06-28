@@ -38,24 +38,24 @@ class PaymentService
     const CARD_PAY      =   'https://api.paybox.money/v1/merchant/'.self::ID.'/card/pay';
 
     const CARD_RESULT   =   'https://reserved-app.com/api/payment/card/result';
-    const CARD_SUCCESS  =   'https://reserved-app.com/card/success';
-    const CARD_FAILURE  =   'https://reserved-app.com/card/failure';
+    const CARD_SUCCESS  =   'https://reserved-app.com/profile/payments';
+    const CARD_FAILURE  =   'https://reserved-app.com/profile/payments';
 
     const CARD_POST =   'https://reserved-app.com/api/card/post';
     const CARD_BACK =   'https://reserved-app.com/api/payment/card/back';
 
     const CURRENCY  =   'KZT';
-    const CHECK_URL =   self::SITE.'/api/payment/check';
-    const POST_URL  =   self::SITE.'/api/payment/post';
-    const STATE_URL =   self::SITE.'/state';
+    const CHECK_URL =   'https://reserved-app.com/api/payment/check';
+    const POST_URL  =   'https://reserved-app.com/api/payment/post';
+    const STATE_URL =   'https://reserved-app.com/state';
     const LIFETIME  =   86400;
     const LANGUAGE  =   'ru';
 
-    const REDIRECT_URL  =   self::SITE.'/payment/success';
-    const RESULT_URL    =   self::SITE.'/api/payment/result';
-    const SUCCESS_URL   =   self::SITE.'/api/payment/success';
-    const FAILURE_URL   =   self::SITE.'/api/payment/failure';
-    const RETURN_URL    =   self::SITE.'/return';
+    const REDIRECT_URL  =   'https://reserved-app.com/payment/success';
+    const RESULT_URL    =   'https://reserved-app.com/api/payment/result';
+    const SUCCESS_URL   =   'https://reserved-app.com/profile/history';
+    const FAILURE_URL   =   'https://reserved-app.com/profile/history';
+    const RETURN_URL    =   'https://reserved-app.com/return';
     const PAYMENT_ROUTE =   'frame';
 
 
@@ -163,14 +163,14 @@ class PaymentService
             PaymentContract::PG_BACK_LINK   =>  self::CARD_BACK,
         ];
         $card   =   $this->curl->post(self::CARD_ADD, $this->signatureCard($arr,MainContract::ADD));
-        $xml    =   simplexml_load_string($card);
-        if (property_exists($xml,'pg_redirect_url')) {
-            return $xml->pg_redirect_url[0];
+        $xml    =   json_decode(json_encode(simplexml_load_string($card)),true);
+        if (array_key_exists('pg_redirect_url',$xml)) {
+            return $xml['pg_redirect_url'];
         } else {
             $card   =   $this->curl->post(self::CARD_ADD, $this->signatureCard($arr,MainContract::ADD));
-            $xml    =   simplexml_load_string($card);
-            if (property_exists($xml,'pg_redirect_url')) {
-                return $xml->pg_redirect_url[0];
+            $xml    =   json_decode(json_encode(simplexml_load_string($card)),true);
+            if (array_key_exists('pg_redirect_url',$xml)) {
+                return $xml['pg_redirect_url'];
             }
         }
         return false;
@@ -279,13 +279,5 @@ class PaymentService
 
     public function check($data) {
 
-    }
-
-    public function success($data) {
-        return 'success';
-    }
-
-    public function failure($data) {
-        return 'failure';
     }
 }

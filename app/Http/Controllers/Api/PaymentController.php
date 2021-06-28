@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Api;
 
 use App\Domain\Contracts\MainContract;
 use App\Http\Controllers\Controller;
+use App\Http\Requests\Payment\PaymentResultRequest;
 use Illuminate\Http\Request;
 
 use App\Services\Payment\PaymentService;
@@ -47,11 +48,12 @@ class PaymentController extends Controller {
         }
     }
 
-    public function result(Request $request):void
+    public function result(PaymentResultRequest $paymentResultRequest):void
     {
-        $this->paymentService->result($request->all());
-        if ($this->bookingService->result($request->all())) {
-            $this->apiService->booking($request->input(BookingContract::PG_ORDER_ID));
+        $data   =   $paymentResultRequest->validated();
+        //$this->paymentService->result($request->all());
+        if ($this->bookingService->result($data)) {
+            $this->apiService->booking($data[BookingContract::PG_ORDER_ID]);
         }
     }
 
@@ -61,13 +63,5 @@ class PaymentController extends Controller {
 
     public function check(Request $request) {
         $this->paymentService->check($request->all());
-    }
-
-    public function success(Request $request) {
-        return $this->paymentService->success($request->all());
-    }
-
-    public function failure(Request $request) {
-        return $this->paymentService->failure($request->all());
     }
 }

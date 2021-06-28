@@ -67,14 +67,11 @@ class BookingService extends BaseService
     }
 
     public function result($data):bool {
-        if (array_key_exists(BookingContract::PG_RESULT,$data)) {
-            if ((int) $data[BookingContract::PG_RESULT] === 1) {
-                $this->bookingRepository->success($data[BookingContract::PG_ORDER_ID]);
-                return true;
-            } else {
-                $this->bookingRepository->failure($data[BookingContract::PG_ORDER_ID]);
-            }
+        if ((int) $data[BookingContract::PG_RESULT] === 1) {
+            $this->bookingRepository->success($data[BookingContract::PG_ORDER_ID]);
+            return true;
         }
+        $this->bookingRepository->failure($data[BookingContract::PG_ORDER_ID]);
         return false;
     }
 

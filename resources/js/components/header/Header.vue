@@ -1,80 +1,84 @@
 <template>
     <div class="container-fluid">
-        <header class="header">
-            <nav class="navbar navbar-expand-lg fixed-top py-3">
-                <div class="container">
-                    <a class="navbar-brand text-uppercase font-weight-bold logo-text" href="/">
-                        Reserved
-                    </a>
-                    <button type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation" class="navbar-toggler navbar-toggler-right"><i class="fa fa-bars"></i></button>
-                    <div id="navbarSupportedContent" class="collapse navbar-collapse">
-                        <ul class="navbar-nav ml-auto">
-                            <!--
-                            <li class="nav-item">
-                                <div class="btn-group btn-menu">
-                                    <a class="nav-link font-weight-bold font-menu" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Русскии</a>
-                                    <div class="dropdown-menu dropdown-menu-right border-0 shadow rounded-lg">
-                                        <button class="dropdown-item font-menu font-menu-item">Казакша</button>
-                                        <button class="dropdown-item font-menu font-menu-item">Русскии</button>
-                                        <button class="dropdown-item font-menu font-menu-item">English</button>
-                                    </div>
-                                </div>
-                            </li>
-                            -->
-                            <template v-if="login">
-                                <li class="nav-item mx-3">
-                                    <a class="btn nav-link font-weight-bold font-menu" data-toggle="modal" data-target="#auth_modal" @click="storage.auth = true">
-                                        <div>Войти</div>
-                                    </a>
-                                </li>
-                                <li class="nav-item">
-                                    <a class="btn btn-register nav-link font-weight-bold rounded-100 text-white px-3 font-menu register-btn" data-toggle="modal" data-target="#auth_modal" @click="storage.auth = false">
-                                        <div>Регистрация</div>
-                                    </a>
-                                </li>
-                            </template>
-                            <template v-else>
-                                <li class="nav-item mx-3 ">
-                                    <a href="/home" class="btn nav-link font-weight-bold font-menu d-none d-md-block">
-                                        <div>Категории</div>
-                                    </a>
-                                </li>
-                                <li class="nav-item mx-3">
-                                    <a href="/top" class="btn nav-link font-weight-bold font-menu d-none d-md-block">
-                                        <div>Топ</div>
-                                    </a>
-                                </li>
-                                <li class="nav-item mx-3">
-                                    <a href="/favorite" class="btn nav-link font-weight-bold font-menu d-none d-md-block">
-                                        <div>Избранное</div>
-                                    </a>
-                                </li>
-                                <li class="ml-3 header-main position-relative">
-                                    <div class="header-profile">
-                                        <div class="header-profile-main font-weight-bold text-capitalize">
-                                            <div class="header-profile-main-content">
-                                                <div>{{user.name}}</div>
+        <div class="container">
+            <div class="row">
+                <header class="header">
+                    <nav class="navbar navbar-expand-lg fixed-top py-3">
+                        <div class="container">
+                            <a class="navbar-brand text-uppercase font-weight-bold logo-text" href="/">
+                                Reserved
+                            </a>
+                            <button type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation" class="navbar-toggler navbar-toggler-right"><i class="fa fa-bars"></i></button>
+                            <div id="navbarSupportedContent" class="collapse navbar-collapse">
+                                <ul class="navbar-nav ml-auto">
+                                    <!--
+                                    <li class="nav-item">
+                                        <div class="btn-group btn-menu">
+                                            <a class="nav-link font-weight-bold font-menu" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Русскии</a>
+                                            <div class="dropdown-menu dropdown-menu-right border-0 shadow rounded-lg">
+                                                <button class="dropdown-item font-menu font-menu-item">Казакша</button>
+                                                <button class="dropdown-item font-menu font-menu-item">Русскии</button>
+                                                <button class="dropdown-item font-menu font-menu-item">English</button>
                                             </div>
                                         </div>
-                                        <div class="header-profile-icon">
-                                            <div class="text-white font-weight-bold">{{user.name[0]}}</div>
-                                        </div>
-                                    </div>
-                                    <div class="header-dropdown overflow-hidden">
-                                        <div class="list-group list-group-flush header-dropdown-ul">
-                                            <a href="/profile" class="list-group-item text-decoration-none">Мой профиль</a>
-                                            <a href="/profile/settings" class="list-group-item text-decoration-none">Настройки</a>
-                                            <a href="/profile/history" class="list-group-item text-decoration-none">История</a>
-                                            <a class="list-group-item text-decoration-none" @click="exit()">Выйти</a>
-                                        </div>
-                                    </div>
-                                </li>
-                            </template>
-                        </ul>
-                    </div>
-                </div>
-            </nav>
-        </header>
+                                    </li>
+                                    -->
+                                    <template v-if="login">
+                                        <li class="nav-item mx-3">
+                                            <a class="btn nav-link font-weight-bold font-menu" data-toggle="modal" data-target="#auth_modal" @click="storage.auth = true">
+                                                <div>Войти</div>
+                                            </a>
+                                        </li>
+                                        <li class="nav-item">
+                                            <a class="btn btn-register nav-link font-weight-bold rounded-100 text-white px-3 font-menu register-btn" data-toggle="modal" data-target="#auth_modal" @click="storage.auth = false">
+                                                <div>Регистрация</div>
+                                            </a>
+                                        </li>
+                                    </template>
+                                    <template v-else>
+                                        <li class="nav-item mx-3 ">
+                                            <a href="/home" class="btn nav-link font-weight-bold font-menu d-none d-md-block">
+                                                <div>Категории</div>
+                                            </a>
+                                        </li>
+                                        <li class="nav-item mx-3">
+                                            <a href="/top" class="btn nav-link font-weight-bold font-menu d-none d-md-block">
+                                                <div>Топ</div>
+                                            </a>
+                                        </li>
+                                        <li class="nav-item mx-3">
+                                            <a href="/favorite" class="btn nav-link font-weight-bold font-menu d-none d-md-block">
+                                                <div>Избранное</div>
+                                            </a>
+                                        </li>
+                                        <li class="ml-3 header-main position-relative">
+                                            <div class="header-profile">
+                                                <div class="header-profile-main font-weight-bold text-capitalize">
+                                                    <div class="header-profile-main-content">
+                                                        <div>{{user.name}}</div>
+                                                    </div>
+                                                </div>
+                                                <div class="header-profile-icon">
+                                                    <div class="text-white font-weight-bold">{{user.name[0]}}</div>
+                                                </div>
+                                            </div>
+                                            <div class="header-dropdown overflow-hidden">
+                                                <div class="list-group list-group-flush header-dropdown-ul">
+                                                    <a href="/profile" class="list-group-item text-decoration-none">Мой профиль</a>
+                                                    <a href="/profile/settings" class="list-group-item text-decoration-none">Настройки</a>
+                                                    <a href="/profile/history" class="list-group-item text-decoration-none">История</a>
+                                                    <a class="list-group-item text-decoration-none" @click="exit()">Выйти</a>
+                                                </div>
+                                            </div>
+                                        </li>
+                                    </template>
+                                </ul>
+                            </div>
+                        </div>
+                    </nav>
+                </header>
+            </div>
+        </div>
     </div>
     <Auth></Auth>
 </template>

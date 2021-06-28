@@ -16,8 +16,6 @@
                     <div class="col-12">
                         <ul class="list-group list-group-flush">
                             <li class="list-group-item px-0 d-flex justify-content-between settings-item align-items-center" v-for="(item,key) in items" :key="key">
-                                {{JSON.stringify(item)}}
-                                <!--
                                 <div class="d-flex">
                                     <div class="payments-card-icon history-icon mr-3"></div>
                                     <div>
@@ -25,6 +23,9 @@
                                         <p class="history-font text-secondary m-0">{{item.date}} • {{item.time}}</p>
                                     </div>
                                 </div>
+                                {{JSON.stringify(item)}}
+                                <!--
+
                                 <div class="d-flex">
                                     <div class="history-status history-status-waiting" v-if="item.status === 'CHECKING'">
                                         Ожидает оплаты {{item.price}} KZT

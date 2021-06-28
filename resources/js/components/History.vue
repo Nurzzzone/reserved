@@ -16,6 +16,7 @@
                     <div class="col-12">
                         <ul class="list-group list-group-flush">
                             <li class="list-group-item px-0 d-flex justify-content-between settings-item align-items-center" v-for="(item,key) in items" :key="key">
+                                {{JSON.stringify(item)}}
                                 <!--
                                 <div class="d-flex">
                                     <div class="payments-card-icon history-icon mr-3"></div>

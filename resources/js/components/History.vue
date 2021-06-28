@@ -77,7 +77,7 @@ export default {
                         title: ''
                     },
                     organization_tables: {
-
+                        title: ''
                     }
                 }
             ],

@@ -16976,7 +16976,9 @@ __webpack_require__.r(__webpack_exports__);
         organization: {
           title: ''
         },
-        organization_tables: {}
+        organization_tables: {
+          title: ''
+        }
       }],
       user: false,
       paginate: 1

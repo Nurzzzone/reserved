@@ -19,11 +19,11 @@
                                 <div class="d-flex" v-if="item">
                                     <div class="payments-card-icon history-icon mr-3"></div>
                                     <div>
-                                        {{JSON.stringify(item.organization.title)}}
-                                        <!--
-                                        <div class="history-font font-weight-bold" v-if="item.organization">
-                                            <a :href="'/home/'+item.organization.id" class="p-0 text-dark" v-if="item.organization.title">{{item.organization.title}}</a> • <span class="text-secondary" v-if="item.organization_tables.title">{{item.organization_tables.title}}</span>
+                                        <div class="history-font font-weight-bold">
+                                            <a :href="'/home/'+item.organization.id" class="p-0 text-dark">{{item.organization.title}}</a>
                                         </div>
+                                        <!--
+                                         • <span class="text-secondary" v-if="item.organization_tables.title">{{item.organization_tables.title}}</span>
                                         -->
                                         <p class="history-font text-secondary m-0">{{item.date}} • {{item.time}}</p>
                                     </div>

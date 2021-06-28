@@ -18380,8 +18380,6 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "render": () => (/* binding */ render)
 /* harmony export */ });
 /* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.esm-bundler.js");
-function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
-
 
 var _hoisted_1 = {
   "class": "container-fluid mb-5"
@@ -18411,8 +18409,32 @@ var _hoisted_5 = {
 var _hoisted_6 = {
   "class": "list-group list-group-flush"
 };
+var _hoisted_7 = {
+  key: 0,
+  "class": "d-flex"
+};
 
-var _hoisted_7 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createStaticVNode)("<div class=\"col-12 d-flex justify-content-center my-5 pt-5\"><div><img src=\"/img/logo/calendar.svg\" width=\"120\"></div></div><div class=\"col-12 mt-3 mb-5 pb-5\"><h2 class=\"text-center\">Пусто</h2><p class=\"text-center h5 text-secondary mt-2\">Ваша история заказов будет отображаться здесь.</p></div>", 2);
+var _hoisted_8 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", {
+  "class": "payments-card-icon history-icon mr-3"
+}, null, -1
+/* HOISTED */
+);
+
+var _hoisted_9 = {
+  key: 0,
+  "class": "history-font font-weight-bold"
+};
+
+var _hoisted_10 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)(" • ");
+
+var _hoisted_11 = {
+  "class": "text-secondary"
+};
+var _hoisted_12 = {
+  "class": "history-font text-secondary m-0"
+};
+
+var _hoisted_13 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createStaticVNode)("<div class=\"col-12 d-flex justify-content-center my-5 pt-5\"><div><img src=\"/img/logo/calendar.svg\" width=\"120\"></div></div><div class=\"col-12 mt-3 mb-5 pb-5\"><h2 class=\"text-center\">Пусто</h2><p class=\"text-center h5 text-secondary mt-2\">Ваша история заказов будет отображаться здесь.</p></div>", 2);
 
 function render(_ctx, _cache, $props, $setup, $data, $options) {
   var _component_Header = (0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveComponent)("Header");
@@ -18429,16 +18451,23 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
     return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)("li", {
       "class": "list-group-item px-0 d-flex justify-content-between settings-item align-items-center",
       key: key
-    }, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)((0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(_typeof(item)), 1
+    }, [item ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)("div", _hoisted_7, [_hoisted_8, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", null, [item.organization ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)("div", _hoisted_9, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("a", {
+      href: '/home/' + item.organization.id,
+      "class": "p-0 text-dark"
+    }, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(item.organization.title), 9
+    /* TEXT, PROPS */
+    , ["href"]), _hoisted_10, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("span", _hoisted_11, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(item.organization_tables.title), 1
     /* TEXT */
-    ), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("\n<div class=\"d-flex\">\n                                    <div class=\"payments-card-icon history-icon mr-3\"></div>\n                                    <div>\n                                        <div class=\"history-font font-weight-bold\"><a :href=\"'/home/'+item.organization.id\" class=\"p-0 text-dark\">{{item.organization.title}}</a> • <span class=\"text-secondary\">{{item.organization_tables.title}}</span></div>\n                                        <p class=\"history-font text-secondary m-0\">{{item.date}} • {{item.time}}</p>\n                                    </div>\n                                </div>\n                                <div class=\"d-flex\">\n                                    <div class=\"history-status history-status-waiting\" v-if=\"item.status === 'CHECKING'\">\n                                        Ожидает оплаты {{item.price}} KZT\n                                    </div>\n                                    <div class=\"history-status history-status-success\" v-else>\n                                        Забронировано {{item.price}} KZT\n                                    </div>\n                                </div>\n                                ")]);
+    )])) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("p", _hoisted_12, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(item.date) + " • " + (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(item.time), 1
+    /* TEXT */
+    )])])) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("\n\n                                <div class=\"d-flex\">\n                                    <div class=\"history-status history-status-waiting\" v-if=\"item.status === 'CHECKING'\">\n                                        Ожидает оплаты {{item.price}} KZT\n                                    </div>\n                                    <div class=\"history-status history-status-success\" v-else>\n                                        Забронировано {{item.price}} KZT\n                                    </div>\n                                </div>\n                                ")]);
   }), 128
   /* KEYED_FRAGMENT */
   ))])])])], 64
   /* STABLE_FRAGMENT */
   )) : ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)(vue__WEBPACK_IMPORTED_MODULE_0__.Fragment, {
     key: 1
-  }, [_hoisted_7], 64
+  }, [_hoisted_13], 64
   /* STABLE_FRAGMENT */
   ))])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_Footer_menu), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_Footer)], 64
   /* STABLE_FRAGMENT */

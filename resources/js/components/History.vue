@@ -3,7 +3,7 @@
     <profile-section></profile-section>
     <div class="container-fluid mb-5">
         <div class="container">
-            <template v-if="status">
+            <template v-if="items.length > 0">
                 <div class="row mt-5">
                     <div class="col-12">
                         <h2 class=" top-title">История бронирования</h2>
@@ -70,7 +70,6 @@ export default {
     name: "History",
     data() {
         return {
-            status: false,
             items: [
                 {
                     organization: {
@@ -107,7 +106,6 @@ export default {
                         let data    =   response.data;
                         if (data.hasOwnProperty('data')) {
                             this.items  =   data.data;
-                            this.status =   true;
                             setTimeout(function() {
                                 self.getBookings();
                             },1000);

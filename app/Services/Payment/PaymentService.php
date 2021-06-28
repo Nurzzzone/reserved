@@ -19,7 +19,7 @@ class PaymentService
     const ID    =   538109;
     const KEY   =   'UVwuMp4af1xBXYCe';
 
-    const SITE  =   'http://reserved.org.kz';
+    const SITE  =   'https://reserved-app.com';
     const PHONE =   '+77021366697';
     const EMAIL =   'antechnology@bk.ru';
 
@@ -37,12 +37,12 @@ class PaymentService
     const CARD_PAYMENT  =   'https://api.paybox.money/v1/merchant/'.self::ID.'/card/init';
     const CARD_PAY      =   'https://api.paybox.money/v1/merchant/'.self::ID.'/card/pay';
 
-    const CARD_RESULT   =   'https://reserved.org.kz/api/payment/card/result';
-    const CARD_SUCCESS  =   'https://reserved.org.kz/card/success';
-    const CARD_FAILURE  =   'https://reserved.org.kz/card/failure';
+    const CARD_RESULT   =   'https://reserved-app.com/api/payment/card/result';
+    const CARD_SUCCESS  =   'https://reserved-app.com/card/success';
+    const CARD_FAILURE  =   'https://reserved-app.com/card/failure';
 
-    const CARD_POST =   'https://reserved.org.kz/api/card/post';
-    const CARD_BACK =   'https://reserved.org.kz/api/payment/card/back';
+    const CARD_POST =   'https://reserved-app.com/api/card/post';
+    const CARD_BACK =   'https://reserved-app.com/api/payment/card/back';
 
     const CURRENCY  =   'KZT';
     const CHECK_URL =   self::SITE.'/api/payment/check';

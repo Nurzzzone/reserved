@@ -16971,10 +16971,12 @@ __webpack_require__.r(__webpack_exports__);
   name: "History",
   data: function data() {
     return {
+      status: false,
       items: [{
         organization: {
           title: ''
-        }
+        },
+        organization_tables: {}
       }],
       user: false,
       paginate: 1
@@ -17004,6 +17006,7 @@ __webpack_require__.r(__webpack_exports__);
 
           if (data.hasOwnProperty('data')) {
             _this.items = data.data;
+            _this.status = true;
             setTimeout(function () {
               self.getBookings();
             }, 1000);
@@ -18427,22 +18430,29 @@ var _hoisted_8 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("
 var _hoisted_9 = {
   "class": "history-font font-weight-bold"
 };
-var _hoisted_10 = {
-  "class": "history-font text-secondary m-0"
-};
+
+var _hoisted_10 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)(" • ");
+
 var _hoisted_11 = {
-  "class": "d-flex"
+  key: 0,
+  "class": "text-secondary"
 };
 var _hoisted_12 = {
+  "class": "history-font text-secondary m-0"
+};
+var _hoisted_13 = {
+  "class": "d-flex"
+};
+var _hoisted_14 = {
   key: 0,
   "class": "history-status history-status-waiting"
 };
-var _hoisted_13 = {
+var _hoisted_15 = {
   key: 1,
   "class": "history-status history-status-success"
 };
 
-var _hoisted_14 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createStaticVNode)("<div class=\"col-12 d-flex justify-content-center my-5 pt-5\"><div><img src=\"/img/logo/calendar.svg\" width=\"120\"></div></div><div class=\"col-12 mt-3 mb-5 pb-5\"><h2 class=\"text-center\">Пусто</h2><p class=\"text-center h5 text-secondary mt-2\">Ваша история заказов будет отображаться здесь.</p></div>", 2);
+var _hoisted_16 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createStaticVNode)("<div class=\"col-12 d-flex justify-content-center my-5 pt-5\"><div><img src=\"/img/logo/calendar.svg\" width=\"120\"></div></div><div class=\"col-12 mt-3 mb-5 pb-5\"><h2 class=\"text-center\">Пусто</h2><p class=\"text-center h5 text-secondary mt-2\">Ваша история заказов будет отображаться здесь.</p></div>", 2);
 
 function render(_ctx, _cache, $props, $setup, $data, $options) {
   var _component_Header = (0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveComponent)("Header");
@@ -18453,7 +18463,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
 
   var _component_Footer = (0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveComponent)("Footer");
 
-  return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)(vue__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_Header), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_profile_section), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_1, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_2, [$data.items.length > 0 ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)(vue__WEBPACK_IMPORTED_MODULE_0__.Fragment, {
+  return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)(vue__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_Header), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_profile_section), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_1, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_2, [$data.status ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)(vue__WEBPACK_IMPORTED_MODULE_0__.Fragment, {
     key: 0
   }, [_hoisted_3, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_4, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_5, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("ul", _hoisted_6, [((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)(vue__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.renderList)($data.items, function (item, key) {
     return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)("li", {
@@ -18464,11 +18474,13 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
       "class": "p-0 text-dark"
     }, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(item.organization.title), 9
     /* TEXT, PROPS */
-    , ["href"])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("\n                                         • <span class=\"text-secondary\" v-if=\"item.organization_tables.title\">{{item.organization_tables.title}}</span>\n                                        "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("p", _hoisted_10, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(item.date) + " • " + (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(item.time), 1
+    , ["href"])]), _hoisted_10, item.organization_tables.title ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)("span", _hoisted_11, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(item.organization_tables.title), 1
     /* TEXT */
-    )])])) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_11, [item.status === 'CHECKING' ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)("div", _hoisted_12, " Ожидает оплаты " + (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(item.price) + " KZT ", 1
+    )) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("p", _hoisted_12, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(item.date) + " • " + (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(item.time), 1
     /* TEXT */
-    )) : ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)("div", _hoisted_13, " Забронировано " + (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(item.price) + " KZT ", 1
+    )])])) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_13, [item.status === 'CHECKING' ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)("div", _hoisted_14, " Ожидает оплаты " + (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(item.price) + " KZT ", 1
+    /* TEXT */
+    )) : ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)("div", _hoisted_15, " Забронировано " + (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(item.price) + " KZT ", 1
     /* TEXT */
     ))])]);
   }), 128
@@ -18477,7 +18489,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
   /* STABLE_FRAGMENT */
   )) : ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)(vue__WEBPACK_IMPORTED_MODULE_0__.Fragment, {
     key: 1
-  }, [_hoisted_14], 64
+  }, [_hoisted_16], 64
   /* STABLE_FRAGMENT */
   ))])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_Footer_menu), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_Footer)], 64
   /* STABLE_FRAGMENT */

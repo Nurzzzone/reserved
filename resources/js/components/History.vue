@@ -3,7 +3,7 @@
     <profile-section></profile-section>
     <div class="container-fluid mb-5">
         <div class="container">
-            <template v-if="items.length > 0">
+            <template v-if="status">
                 <div class="row mt-5">
                     <div class="col-12">
                         <h2 class=" top-title">История бронирования</h2>
@@ -21,10 +21,7 @@
                                     <div>
                                         <div class="history-font font-weight-bold">
                                             <a :href="'/home/'+item.organization.id" class="p-0 text-dark">{{item.organization.title}}</a>
-                                        </div>
-                                        <!--
-                                         • <span class="text-secondary" v-if="item.organization_tables.title">{{item.organization_tables.title}}</span>
-                                        -->
+                                        </div> • <span class="text-secondary" v-if="item.organization_tables.title">{{item.organization_tables.title}}</span>
                                         <p class="history-font text-secondary m-0">{{item.date}} • {{item.time}}</p>
                                     </div>
                                 </div>
@@ -73,10 +70,14 @@ export default {
     name: "History",
     data() {
         return {
+            status: false,
             items: [
                 {
                     organization: {
                         title: ''
+                    },
+                    organization_tables: {
+
                     }
                 }
             ],
@@ -106,6 +107,7 @@ export default {
                         let data    =   response.data;
                         if (data.hasOwnProperty('data')) {
                             this.items  =   data.data;
+                            this.status =   true;
                             setTimeout(function() {
                                 self.getBookings();
                             },1000);

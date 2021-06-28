@@ -181,8 +181,13 @@ export default {
     },
     methods: {
         setTime: function() {
-            let date    =   this.date.data.split('-');
-            console.log(date);
+            let today   =   new Date();
+            today       =   new Date(today.getFullYear(),today.getMonth(),today.getDate());
+            let current =   this.date.data.split('-');
+            current     =   new Date(current[0],(current[1] - 1),current[2]);
+            if (today.getTime() === current.getTime()) {
+
+            }
         },
         bookingGuest: function() {
             if (!this.guest.codeCheck) {

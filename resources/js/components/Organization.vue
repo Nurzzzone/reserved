@@ -564,6 +564,7 @@ export default {
         position: relative;
         overflow: hidden;
         border-radius: 0 0 20px 20px;
+        box-shadow: 0 0 0 10px #fff;
         & > img {
             width: 100%;
         }

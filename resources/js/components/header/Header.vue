@@ -24,6 +24,16 @@
                                     </li>
                                     -->
                                     <template v-if="login">
+                                        <li class="nav-item mx-3 ">
+                                            <a href="/home" class="btn nav-link font-weight-bold font-menu">
+                                                <div>Категории</div>
+                                            </a>
+                                        </li>
+                                        <li class="nav-item mx-3">
+                                            <a href="/top" class="btn nav-link font-weight-bold font-menu">
+                                                <div>Топ</div>
+                                            </a>
+                                        </li>
                                         <li class="nav-item mx-3">
                                             <a class="btn nav-link font-weight-bold font-menu" data-toggle="modal" data-target="#auth_modal" @click="storage.auth = true">
                                                 <div>Войти</div>
@@ -133,6 +143,10 @@ export default {
 </script>
 
 <style lang="scss">
+.btn {
+    outline: none !important;
+    box-shadow: none !important;
+}
 .header {
     &-dropdown {
         background: #fff;

@@ -12,7 +12,8 @@
                                     <span v-if="organization.rating">{{restaurant.rating}}</span>
                                     <span v-else>-</span>
                                 </div>
-                                <img :src="organization.wallpaper">
+                                <img v-if="organization.wallpaper" :src="organization.wallpaper">
+                                <img v-else src="/img/logo/wall.png">
                             </div>
                             <div class="mx-5 item-logo mb-2 d-flex justify-content-center">
                                 <img v-if="organization.image" :src="organization.image" width="120">
@@ -30,7 +31,9 @@
                                     <div class="text-center my-2 h6 text-secondary text-font">{{organization.address}}</div>
                                 </li>
                                 <li class="list-group-item">
-                                    <button class="btn w-100 h6 text-white text-btn mt-2 text-font font-weight-bold">Забронировать {{organization.price}} KZT</button>
+                                    <a :href="'/home/'+organization.id" class="btn w-100 text-white text-btn mt-2 text-font font-weight-bold d-flex justify-content-center align-content-center">
+                                        <div class="py-1">Подробнее</div>
+                                    </a>
                                 </li>
                             </ul>
                         </div>
@@ -109,7 +112,7 @@ export default {
         color: #fff;
     }
     &-main {
-        max-height: 180px;
+        max-height: 150px;
         overflow: hidden;
         border-radius: 5px;
         margin: 10px;

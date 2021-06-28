@@ -12,7 +12,8 @@
                                     <span v-if="restaurant.rating">{{restaurant.rating}}</span>
                                     <span v-else>-</span>
                                 </div>
-                                <img :src="restaurant.wallpaper">
+                                <img v-if="restaurant.wallpaper" :src="restaurant.wallpaper">
+                                <img v-else src="/img/logo/wall.png">
                             </div>
                             <div class="mx-5 item-logo mb-2 d-flex justify-content-center">
                                 <img v-if="restaurant.image" :src="restaurant.image" width="120">
@@ -30,7 +31,9 @@
                                     <div class="text-center my-2 h6 text-secondary text-font">{{restaurant.address}}</div>
                                 </li>
                                 <li class="list-group-item">
-                                    <button class="btn w-100 h6 text-white text-btn mt-2 text-font font-weight-bold">Забронировать {{restaurant.price}} KZT</button>
+                                    <a :href="'/home/'+restaurant.id" class="btn w-100 text-white text-btn mt-2 text-font font-weight-bold d-flex justify-content-center align-content-center">
+                                        <div class="py-1">Подробнее</div>
+                                    </a>
                                 </li>
                             </ul>
                         </div>
@@ -39,7 +42,7 @@
                 <template v-else>
                     <div class="col-12 d-flex justify-content-center my-5">
                         <div>
-                            <img src="/img/logo/cafe.svg" width="120">
+                            <img src="/img/logo/restaurant.svg" width="120">
                         </div>
                     </div>
                     <div class="col-12 mt-3 mb-5">
@@ -109,7 +112,7 @@ export default {
             color: #fff;
         }
         &-main {
-            max-height: 180px;
+            max-height: 150px;
             overflow: hidden;
             border-radius: 5px;
             margin: 10px;

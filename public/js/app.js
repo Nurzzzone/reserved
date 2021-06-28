@@ -16971,14 +16971,7 @@ __webpack_require__.r(__webpack_exports__);
   name: "History",
   data: function data() {
     return {
-      items: [{
-        organization: {
-          title: ''
-        },
-        organization_tables: {
-          title: ''
-        }
-      }],
+      items: [],
       user: false,
       paginate: 1
     };

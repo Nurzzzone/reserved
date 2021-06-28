@@ -70,16 +70,7 @@ export default {
     name: "History",
     data() {
         return {
-            items: [
-                {
-                    organization: {
-                        title: ''
-                    },
-                    organization_tables: {
-                        title: ''
-                    }
-                }
-            ],
+            items: [],
             user: false,
             paginate: 1
         }

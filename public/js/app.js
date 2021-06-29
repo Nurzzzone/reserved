@@ -18568,7 +18568,7 @@ var _hoisted_4 = {
   "class": "card border-0"
 };
 var _hoisted_5 = {
-  "class": "d-flex justify-content-center"
+  "class": "d-flex justify-content-center mt-5 mb-3"
 };
 var _hoisted_6 = {
   "class": "card-title text-center mb-5 text-dark"
@@ -18592,7 +18592,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
         "text-decoration": "none !important"
       }
     }, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_4, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_5, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("img", {
-      "class": "mt-5 mb-3",
+      "class": "",
       src: item.img,
       width: "100"
     }, null, 8

@@ -7,8 +7,8 @@
                 <div class="col-12 col-md-4 d-flex justify-content-center" v-for="(item,key) in menu" :key="key">
                     <a :href="item.url" style="text-decoration: none !important;">
                         <div class="card border-0">
-                            <div class="d-flex justify-content-center">
-                                <img class="mt-5 mb-3" :src="item.img" width="100">
+                            <div class="d-flex justify-content-center mt-5 mb-3">
+                                <img class="" :src="item.img" width="100">
                             </div>
                             <h3 class="card-title text-center mb-5 text-dark">{{item.title}}</h3>
                         </div>

@@ -79,7 +79,8 @@
 @media only screen and (max-width: 768px) {
     .home {
         &-category {
-            height: 150px;
+            height: 140px;
+            border: 5px solid white;
             &-arrow {
                 & > div {
                     width: 20px;
@@ -94,10 +95,10 @@
                 }
             }
             &-title {
-                font-size: 18px;
+                font-size: 16px;
             }
             &-description {
-                font-size: 12px;
+                font-size: 11px;
             }
             &-shadow {
 
@@ -105,7 +106,7 @@
                     padding: 0 15px 0 15px;
                     grid-template-columns: 40px auto 20px;
                     & > div {
-
+                        grid-gap: 5px;
                     }
                 }
             }

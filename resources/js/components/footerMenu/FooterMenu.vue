@@ -41,7 +41,7 @@ export default {
 
 <style lang="scss">
     .title {
-        font-size: 10px;
+        font-size: 9px;
         margin-top: 2px;
     }
     .footer {
@@ -49,7 +49,7 @@ export default {
             box-shadow: 0 0 5px 0 rgba(0,0,0,.1);
             position: fixed;
             right: 10px;
-            bottom: 45px;
+            bottom: 30px;
             left: 10px;
             z-index: 1030;
             margin: 0;

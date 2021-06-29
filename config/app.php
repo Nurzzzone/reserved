@@ -52,7 +52,7 @@ return [
     |
     */
 
-    'url' => env('APP_URL', 'https://reserved.org.kz'),
+    'url' => env('APP_URL', 'https://reserved-app.com'),
 
     'asset_url' => env('ASSET_URL', null),
 

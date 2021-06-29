@@ -19768,35 +19768,21 @@ var _hoisted_6 = {
 };
 
 var _hoisted_7 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("a", {
-  "class": "navbar-brand text-uppercase font-weight-bold logo-text",
+  "class": "navbar-brand text-uppercase font-weight-bold header-text",
   href: "/"
 }, " Reserved ", -1
 /* HOISTED */
 );
 
-var _hoisted_8 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("button", {
-  type: "button",
-  "data-toggle": "collapse",
-  "data-target": "#navbarSupportedContent",
-  "aria-controls": "navbarSupportedContent",
-  "aria-expanded": "false",
-  "aria-label": "Toggle navigation",
-  "class": "navbar-toggler navbar-toggler-right"
-}, [/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("i", {
-  "class": "fa fa-bars"
-})], -1
-/* HOISTED */
-);
-
-var _hoisted_9 = {
+var _hoisted_8 = {
   id: "navbarSupportedContent",
   "class": "collapse navbar-collapse"
 };
-var _hoisted_10 = {
+var _hoisted_9 = {
   "class": "navbar-nav ml-auto"
 };
 
-var _hoisted_11 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("li", {
+var _hoisted_10 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("li", {
   "class": "nav-item mx-3 "
 }, [/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("a", {
   href: "/home",
@@ -19805,7 +19791,7 @@ var _hoisted_11 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(
 /* HOISTED */
 );
 
-var _hoisted_12 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("li", {
+var _hoisted_11 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("li", {
   "class": "nav-item mx-3"
 }, [/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("a", {
   href: "/top",
@@ -19814,64 +19800,64 @@ var _hoisted_12 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(
 /* HOISTED */
 );
 
-var _hoisted_13 = {
+var _hoisted_12 = {
   "class": "nav-item mx-3"
 };
 
-var _hoisted_14 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", null, "Войти", -1
+var _hoisted_13 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", null, "Войти", -1
 /* HOISTED */
 );
 
-var _hoisted_15 = {
+var _hoisted_14 = {
   "class": "nav-item"
 };
 
-var _hoisted_16 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", null, "Регистрация", -1
+var _hoisted_15 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", null, "Регистрация", -1
 /* HOISTED */
 );
 
-var _hoisted_17 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createStaticVNode)("<li class=\"nav-item mx-3 \"><a href=\"/home\" class=\"btn nav-link font-weight-bold font-menu d-none d-md-block\"><div>Категории</div></a></li><li class=\"nav-item mx-3\"><a href=\"/top\" class=\"btn nav-link font-weight-bold font-menu d-none d-md-block\"><div>Топ</div></a></li><li class=\"nav-item mx-3\"><a href=\"/favorite\" class=\"btn nav-link font-weight-bold font-menu d-none d-md-block\"><div>Избранное</div></a></li>", 3);
+var _hoisted_16 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createStaticVNode)("<li class=\"nav-item mx-3 \"><a href=\"/home\" class=\"btn nav-link font-weight-bold font-menu d-none d-md-block\"><div>Категории</div></a></li><li class=\"nav-item mx-3\"><a href=\"/top\" class=\"btn nav-link font-weight-bold font-menu d-none d-md-block\"><div>Топ</div></a></li><li class=\"nav-item mx-3\"><a href=\"/favorite\" class=\"btn nav-link font-weight-bold font-menu d-none d-md-block\"><div>Избранное</div></a></li>", 3);
 
-var _hoisted_20 = {
+var _hoisted_19 = {
   "class": "ml-3 header-main position-relative"
 };
-var _hoisted_21 = {
+var _hoisted_20 = {
   "class": "header-profile"
 };
-var _hoisted_22 = {
+var _hoisted_21 = {
   "class": "header-profile-main font-weight-bold text-capitalize"
 };
-var _hoisted_23 = {
+var _hoisted_22 = {
   "class": "header-profile-main-content"
 };
-var _hoisted_24 = {
+var _hoisted_23 = {
   "class": "header-profile-icon"
 };
-var _hoisted_25 = {
+var _hoisted_24 = {
   "class": "text-white font-weight-bold"
 };
-var _hoisted_26 = {
+var _hoisted_25 = {
   "class": "header-dropdown overflow-hidden"
 };
-var _hoisted_27 = {
+var _hoisted_26 = {
   "class": "list-group list-group-flush header-dropdown-ul"
 };
 
-var _hoisted_28 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("a", {
+var _hoisted_27 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("a", {
   href: "/profile",
   "class": "list-group-item text-decoration-none"
 }, "Мой профиль", -1
 /* HOISTED */
 );
 
-var _hoisted_29 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("a", {
+var _hoisted_28 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("a", {
   href: "/profile/settings",
   "class": "list-group-item text-decoration-none"
 }, "Настройки", -1
 /* HOISTED */
 );
 
-var _hoisted_30 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("a", {
+var _hoisted_29 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("a", {
   href: "/profile/history",
   "class": "list-group-item text-decoration-none"
 }, "История", -1
@@ -19881,31 +19867,31 @@ var _hoisted_30 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(
 function render(_ctx, _cache, $props, $setup, $data, $options) {
   var _component_Auth = (0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveComponent)("Auth");
 
-  return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)(vue__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_1, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_2, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_3, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("header", _hoisted_4, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("nav", _hoisted_5, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_6, [_hoisted_7, _hoisted_8, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_9, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("ul", _hoisted_10, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("\n                                    <li class=\"nav-item\">\n                                        <div class=\"btn-group btn-menu\">\n                                            <a class=\"nav-link font-weight-bold font-menu\" data-toggle=\"dropdown\" aria-haspopup=\"true\" aria-expanded=\"false\">Русскии</a>\n                                            <div class=\"dropdown-menu dropdown-menu-right border-0 shadow rounded-lg\">\n                                                <button class=\"dropdown-item font-menu font-menu-item\">Казакша</button>\n                                                <button class=\"dropdown-item font-menu font-menu-item\">Русскии</button>\n                                                <button class=\"dropdown-item font-menu font-menu-item\">English</button>\n                                            </div>\n                                        </div>\n                                    </li>\n                                    "), $data.login ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)(vue__WEBPACK_IMPORTED_MODULE_0__.Fragment, {
+  return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)(vue__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_1, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_2, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_3, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("header", _hoisted_4, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("nav", _hoisted_5, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_6, [_hoisted_7, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_8, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("ul", _hoisted_9, [$data.login ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)(vue__WEBPACK_IMPORTED_MODULE_0__.Fragment, {
     key: 0
-  }, [_hoisted_11, _hoisted_12, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("li", _hoisted_13, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("a", {
+  }, [_hoisted_10, _hoisted_11, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("li", _hoisted_12, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("a", {
     "class": "btn nav-link font-weight-bold font-menu",
     "data-toggle": "modal",
     "data-target": "#auth_modal",
     onClick: _cache[1] || (_cache[1] = function ($event) {
       return _ctx.storage.auth = true;
     })
-  }, [_hoisted_14])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("li", _hoisted_15, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("a", {
+  }, [_hoisted_13])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("li", _hoisted_14, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("a", {
     "class": "btn btn-register nav-link font-weight-bold rounded-100 text-white px-3 font-menu register-btn",
     "data-toggle": "modal",
     "data-target": "#auth_modal",
     onClick: _cache[2] || (_cache[2] = function ($event) {
       return _ctx.storage.auth = false;
     })
-  }, [_hoisted_16])])], 64
+  }, [_hoisted_15])])], 64
   /* STABLE_FRAGMENT */
   )) : ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)(vue__WEBPACK_IMPORTED_MODULE_0__.Fragment, {
     key: 1
-  }, [_hoisted_17, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("li", _hoisted_20, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_21, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_22, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_23, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($data.user.name), 1
+  }, [_hoisted_16, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("li", _hoisted_19, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_20, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_21, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_22, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($data.user.name), 1
   /* TEXT */
-  )])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_24, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_25, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($data.user.name[0]), 1
+  )])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_23, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_24, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($data.user.name[0]), 1
   /* TEXT */
-  )])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_26, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_27, [_hoisted_28, _hoisted_29, _hoisted_30, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("a", {
+  )])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_25, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_26, [_hoisted_27, _hoisted_28, _hoisted_29, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("a", {
     "class": "list-group-item text-decoration-none",
     onClick: _cache[3] || (_cache[3] = function ($event) {
       return $options.exit();
@@ -20668,7 +20654,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.esm-bundler.js");
 
 var _hoisted_1 = {
-  "class": "container-fluid pt-5 section-bg"
+  "class": "container-fluid section-bg"
 };
 var _hoisted_2 = {
   "class": "container pt-5 pb-4"
@@ -21365,7 +21351,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, ".btn {\n  outline: none !important;\n  box-shadow: none !important;\n}\n.header-dropdown {\n  background: #fff;\n  box-shadow: 1px 2px 10px rgba(0, 0, 0, 0.1);\n  position: absolute;\n  right: 0;\n  width: -webkit-max-content;\n  width: -moz-max-content;\n  width: max-content;\n  border-radius: 10px;\n  font-size: 14px;\n  display: none;\n}\n.header-dropdown-ul > a {\n  cursor: pointer;\n  border-color: #f0f0f0;\n  color: grey;\n  font-weight: bold;\n}\n.header-dropdown-ul > a:hover {\n  background: #FF8008;\n  color: #fff;\n}\n.header-main:hover > .header-dropdown {\n  display: block;\n}\n.header-profile {\n  display: grid;\n  justify-content: center;\n  align-content: center;\n  grid-template-columns: auto 30px;\n  grid-gap: 5px;\n  height: 40px;\n  font-size: 14px;\n  color: #FF8008;\n  padding: 0 5px 0 10px;\n  background: #fff;\n  border-radius: 30px;\n}\n.header-profile-main-content {\n  display: grid;\n  justify-content: center;\n  align-content: center;\n  height: 100%;\n}\n.header-profile-icon {\n  height: 30px;\n  width: 30px;\n  background: #FF8008;\n  border-radius: 30px;\n  display: grid;\n  justify-content: center;\n  align-content: center;\n}\n.header-profile-icon > div {\n  text-transform: uppercase;\n}\n.btn-menu > a {\n  padding-right: 15px !important;\n  position: relative;\n  cursor: pointer;\n}\n.btn-menu > a:after {\n  content: '';\n  position: absolute;\n  width: 8px;\n  height: 8px;\n  border: 2px solid #fff;\n  border-top: none;\n  border-left: none;\n  border-radius: 2px;\n  right: 0;\n  top: 16px;\n  transform: rotate(45deg);\n}\n.btn, .btn-group {\n  outline: none;\n}\n.register-btn {\n  border-radius: 100px;\n  text-align: center;\n}\n.font-menu {\n  font-size: 14px;\n  font-weight: 500;\n  height: 44px;\n  display: flex;\n  align-items: center;\n  justify-content: center;\n}\n.font-menu-item {\n  color: #000;\n  font-weight: normal;\n}\n.font-menu-item:hover, .font-menu-item:active {\n  background-color: #4ca1af;\n  color: #FFF;\n}\n.logo {\n  font-weight: bold;\n  width: 34px;\n  height: 34px;\n  border-radius: 20px;\n  margin: 0 2px 0 0;\n  border: none;\n  background: #fff;\n  color: #2193b0;\n}\n.logo-blue {\n  background: #2193b0;\n  color: #fff;\n}\n.logo-text {\n  font-size: 20px;\n}\n@media only screen and (max-width: 992px) {\n.logo {\n    background: #2193b0 !important;\n    color: #fff !important;\n}\n.logo-text {\n    color: #2193b0;\n}\n}\n.btn-register {\n  background: #FF8008;\n}\n.navbar {\n  transition: all 0.4s;\n}\n.navbar .nav-link {\n  color: #fff;\n}\n.navbar .nav-link:hover,\n.navbar .nav-link:focus {\n  color: #fff;\n  text-decoration: none;\n}\n.navbar .navbar-brand {\n  color: #fff;\n}\n\n/* Change navbar styling on scroll */\n.navbar.active {\n  background: #fff;\n  box-shadow: 1px 2px 10px rgba(0, 0, 0, 0.1);\n}\n.navbar.active .nav-link {\n  color: #555;\n}\n.navbar.active .nav-link:hover,\n.navbar.active .nav-link:focus {\n  color: #555;\n  text-decoration: none;\n}\n.navbar.active .navbar-brand {\n  color: #555;\n}\n\n/* Change navbar styling on small viewports */\n@media (max-width: 991.98px) {\n.navbar {\n    background: #fff;\n}\n.navbar .navbar-brand, .navbar .nav-link {\n    color: #555;\n}\n}\n\n/*\n*\n* ==========================================\n* FOR DEMO PURPOSES\n* ==========================================\n*\n*/\n.text-small {\n  font-size: 0.9rem !important;\n}\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, ".header-text {\n  font-size: 20px;\n}\n.header-dropdown {\n  background: #fff;\n  box-shadow: 1px 2px 10px rgba(0, 0, 0, 0.1);\n  position: absolute;\n  right: 0;\n  width: -webkit-max-content;\n  width: -moz-max-content;\n  width: max-content;\n  border-radius: 10px;\n  font-size: 14px;\n  display: none;\n}\n.header-dropdown-ul > a {\n  cursor: pointer;\n  border-color: #f0f0f0;\n  color: grey;\n  font-weight: bold;\n}\n.header-dropdown-ul > a:hover {\n  background: #FF8008;\n  color: #fff;\n}\n.header-main:hover > .header-dropdown {\n  display: block;\n}\n.header-profile {\n  display: grid;\n  justify-content: center;\n  align-content: center;\n  grid-template-columns: auto 30px;\n  grid-gap: 5px;\n  height: 40px;\n  font-size: 14px;\n  color: #FF8008;\n  padding: 0 5px 0 10px;\n  background: #fff;\n  border-radius: 30px;\n}\n.header-profile-main-content {\n  display: grid;\n  justify-content: center;\n  align-content: center;\n  height: 100%;\n}\n.header-profile-icon {\n  height: 30px;\n  width: 30px;\n  background: #FF8008;\n  border-radius: 30px;\n  display: grid;\n  justify-content: center;\n  align-content: center;\n}\n.header-profile-icon > div {\n  text-transform: uppercase;\n}\n@media only screen and (max-width: 768px) {\n.header-text {\n    font-size: 18px;\n    margin: 0 auto 0 auto;\n    padding: 0;\n}\n}\n.btn {\n  outline: none !important;\n  box-shadow: none !important;\n}\n.btn-menu > a {\n  padding-right: 15px !important;\n  position: relative;\n  cursor: pointer;\n}\n.btn-menu > a:after {\n  content: '';\n  position: absolute;\n  width: 8px;\n  height: 8px;\n  border: 2px solid #fff;\n  border-top: none;\n  border-left: none;\n  border-radius: 2px;\n  right: 0;\n  top: 16px;\n  transform: rotate(45deg);\n}\n.btn, .btn-group {\n  outline: none;\n}\n.register-btn {\n  border-radius: 100px;\n  text-align: center;\n}\n.font-menu {\n  font-size: 14px;\n  font-weight: 500;\n  height: 44px;\n  display: flex;\n  align-items: center;\n  justify-content: center;\n}\n.font-menu-item {\n  color: #000;\n  font-weight: normal;\n}\n.font-menu-item:hover, .font-menu-item:active {\n  background-color: #4ca1af;\n  color: #FFF;\n}\n.logo {\n  font-weight: bold;\n  width: 34px;\n  height: 34px;\n  border-radius: 20px;\n  margin: 0 2px 0 0;\n  border: none;\n  background: #fff;\n  color: #2193b0;\n}\n.logo-blue {\n  background: #2193b0;\n  color: #fff;\n}\n@media only screen and (max-width: 992px) {\n.logo {\n    background: #2193b0 !important;\n    color: #fff !important;\n}\n.logo-text {\n    color: #2193b0;\n}\n}\n.btn-register {\n  background: #FF8008;\n}\n.navbar {\n  transition: all 0.4s;\n}\n.navbar .nav-link {\n  color: #fff;\n}\n.navbar .nav-link:hover,\n.navbar .nav-link:focus {\n  color: #fff;\n  text-decoration: none;\n}\n.navbar .navbar-brand {\n  color: #fff;\n}\n\n/* Change navbar styling on scroll */\n.navbar.active {\n  background: #fff;\n  box-shadow: 1px 2px 10px rgba(0, 0, 0, 0.1);\n}\n.navbar.active .nav-link {\n  color: #555;\n}\n.navbar.active .nav-link:hover,\n.navbar.active .nav-link:focus {\n  color: #555;\n  text-decoration: none;\n}\n.navbar.active .navbar-brand {\n  color: #555;\n}\n\n/* Change navbar styling on small viewports */\n@media (max-width: 991.98px) {\n.navbar {\n    background: #fff;\n}\n.navbar .navbar-brand, .navbar .nav-link {\n    color: #555;\n}\n}\n\n/*\n*\n* ==========================================\n* FOR DEMO PURPOSES\n* ==========================================\n*\n*/\n.text-small {\n  font-size: 0.9rem !important;\n}\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -21437,7 +21423,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, ".section-bg {\n  background: #00a082;\n}\n.section-title {\n  font-family: 'Lobster', cursive;\n  margin: 0;\n}\n@media only screen and (max-width: 768px) {\n.section-title {\n    font-size: 16px;\n    text-align: center;\n}\n}\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, ".section-bg {\n  padding-top: 3rem !important;\n  background: #00a082;\n}\n.section-title {\n  font-family: 'Lobster', cursive;\n  margin: 0;\n}\n@media only screen and (max-width: 768px) {\n.section-bg {\n    padding-top: 32px !important;\n}\n.section-title {\n    font-size: 16px;\n    text-align: center;\n}\n}\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 

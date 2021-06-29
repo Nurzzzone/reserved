@@ -40,23 +40,5 @@ export default {
 </script>
 
 <style lang="scss">
-    .title {
-        font-size: 8px;
-        margin-top: 2px;
-    }
-    .footer {
-        &-fixed {
-            box-shadow: 0 0 5px 0 rgba(0,0,0,.1);
-            position: fixed;
-            right: 10px;
-            bottom: 30px;
-            left: 10px;
-            z-index: 1030;
-            margin: 0;
-            border-radius: 50px;
-            &-main {
-
-            }
-        }
-    }
+    @import '../../../css/footerMenu/footerMenu.scss';
 </style>

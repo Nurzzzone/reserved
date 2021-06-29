@@ -1,5 +1,5 @@
 <template>
-    <div class="container-fluid pt-5 section-bg">
+    <div class="container-fluid section-bg">
         <div class="container pt-5 pb-4">
             <div class="row">
                 <div class="col-12" v-if="end === 'profile'">

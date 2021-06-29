@@ -1,29 +1,29 @@
 <template>
-    <div class="container-fluid pt-5 top-bg">
+    <div class="container-fluid pt-5 section-bg">
         <div class="container pt-5 pb-4">
             <div class="row">
                 <div class="col-12" v-if="end === 'profile'">
-                    <h1 class="text-white top-title" v-if="url === 'profile'">Профиль</h1>
-                    <h1 class="text-white top-title" v-else-if="url === 'settings'">Настройки</h1>
-                    <h1 class="text-white top-title" v-else-if="url === 'payments'">Способ оплаты</h1>
+                    <h1 class="text-white section-title" v-if="url === 'profile'">Профиль</h1>
+                    <h1 class="text-white section-title" v-else-if="url === 'settings'">Настройки</h1>
+                    <h1 class="text-white section-title" v-else-if="url === 'payments'">Способ оплаты</h1>
                 </div>
                 <div class="col-12" v-else-if="end === 'favorite'">
-                    <h1 class="text-white top-title" v-if="url === 'favorite'">Избранное</h1>
+                    <h1 class="text-white section-title" v-if="url === 'favorite'">Избранное</h1>
                 </div>
                 <div class="col-12" v-else-if="end === 'top'">
-                    <h1 class="text-white top-title" v-if="url === 'top'">Топ 10</h1>
+                    <h1 class="text-white section-title" v-if="url === 'top'">Топ 10</h1>
                 </div>
                 <div class="col-12" v-else-if="end === 'home'">
-                    <h1 class="text-white top-title" v-if="url === 'home'">Категории</h1>
-                    <h1 class="text-white top-title" v-if="url === 'restaurants'">Рестораны</h1>
-                    <h1 class="text-white top-title" v-if="url === 'cafe'">Кафе</h1>
-                    <h1 class="text-white top-title" v-if="url === 'bars'">Бары</h1>
-                    <h1 class="text-white top-title" v-if="name">{{name}}</h1>
+                    <h1 class="text-white section-title" v-if="url === 'home'">Категории</h1>
+                    <h1 class="text-white section-title" v-if="url === 'restaurants'">Рестораны</h1>
+                    <h1 class="text-white section-title" v-if="url === 'cafe'">Кафе</h1>
+                    <h1 class="text-white section-title" v-if="url === 'bars'">Бары</h1>
+                    <h1 class="text-white section-title" v-if="name">{{name}}</h1>
                 </div>
             </div>
         </div>
     </div>
-    <div class="container-fluid top-bg" v-if="end === 'profile'">
+    <div class="container-fluid section-bg" v-if="end === 'profile'">
         <div class="container">
             <div class="row">
                 <div class="col-12">
@@ -105,6 +105,6 @@ export default {
 }
 </script>
 
-<style scoped>
-
+<style lang="scss">
+  @import '../../../css/sections/profileSection.scss';
 </style>

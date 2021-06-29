@@ -1,0 +1,36 @@
+.profile {
+    &-input {
+        border: 2px solid gainsboro;
+    }
+    &-btn {
+        background: #FF8008;
+        border-radius: 30px;
+        height: 44px;
+    }
+}
+
+.avatar {
+    overflow: hidden;
+    clear: both;
+    width: 56px;
+    height: 56px;
+    display: block;
+    &-img {
+        width: 100%;
+        position: relative;
+        float: left;
+        color: #00a082;
+        & > div {
+            font-size: 30px;
+            position: absolute;
+            transform: translate(-50%,-50%);
+            top: 50%;
+            left: 50%;
+        }
+        &:before {
+            content: '';
+            float: left;
+            padding-top: 100%;
+        }
+    }
+}

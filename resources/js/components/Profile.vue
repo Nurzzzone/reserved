@@ -111,47 +111,20 @@ export default {
 </script>
 
 <style lang="scss">
-    .profile {
-        &-input {
-            border: 2px solid gainsboro;
-        }
-        &-btn {
-            background: #FF8008;
-            border-radius: 30px;
-            height: 44px;
-        }
-    }
+    @import '../../css/profile/profile.scss';
+
     .top {
         &-bg {
             background: #00a082;
         }
         &-title {
             font-family: 'Lobster', cursive;
+            margin: 0;
         }
     }
-    .avatar {
-        overflow: hidden;
-        clear: both;
-        width: 56px;
-        height: 56px;
-        display: block;
-        &-img {
-            width: 100%;
-            position: relative;
-            float: left;
-            color: #00a082;
-            & > div {
-                font-size: 30px;
-                position: absolute;
-                transform: translate(-50%,-50%);
-                top: 50%;
-                left: 50%;
-            }
-            &:before {
-                content: '';
-                float: left;
-                padding-top: 100%;
-            }
-        }
-    }
+    /*
+                font-size: 16px;
+            text-align: center;
+     */
+
 </style>

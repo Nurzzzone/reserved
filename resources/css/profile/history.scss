@@ -1,0 +1,30 @@
+.history {
+    &-font {
+        font-size: 15px;
+    }
+    &-shadow {
+        box-shadow: 0 0 5px 0 rgba(0,0,0,.1);
+        border-radius: 10px;
+        overflow: hidden;
+    }
+    &-icon {
+        width: 44px;
+        height: 44px;
+        background: url(/img/logo/calendar.svg) no-repeat center;
+        background-size: contain;
+    }
+    &-status {
+        padding: 8px 10px 8px 10px;
+        color: white;
+        font-weight: bold;
+        border-radius: 30px;
+        font-size: 13px;
+        &-waiting {
+            cursor: pointer;
+            background: #FF8008;
+        }
+        &-success {
+            background: #00a082;
+        }
+    }
+}

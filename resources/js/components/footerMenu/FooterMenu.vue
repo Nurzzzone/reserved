@@ -41,7 +41,7 @@ export default {
 
 <style lang="scss">
     .title {
-        font-size: 9px;
+        font-size: 8px;
         margin-top: 2px;
     }
     .footer {

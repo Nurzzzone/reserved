@@ -4,7 +4,7 @@
     <div class="container-fluid mb-5">
         <div class="container">
             <div class="row mt-5">
-                <div class="col-4 d-flex justify-content-center" v-for="(item,key) in menu" :key="key">
+                <div class="col-12 col-md-4 d-flex justify-content-center" v-for="(item,key) in menu" :key="key">
                     <a :href="item.url" style="text-decoration: none !important;">
                         <div class="card border-0">
                             <div class="d-flex justify-content-center">

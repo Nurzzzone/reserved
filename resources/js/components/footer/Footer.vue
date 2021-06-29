@@ -61,12 +61,4 @@ export default {
             border-radius: 5px;
         }
     }
-    .footer {
-        &-fixed {
-          box-shadow: 0 0 10px 0 rgba(0,0,0,.3);
-            &-main {
-
-            }
-        }
-    }
 </style>

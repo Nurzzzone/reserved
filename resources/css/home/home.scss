@@ -1,6 +1,7 @@
 .home {
     &-main {
         margin-bottom: 20px;
+        margin-top: 20px;
     }
     &-bg {
         background: no-repeat center;
@@ -9,7 +10,6 @@
     &-category {
         height: 230px;
         width: 100%;
-        margin: 20px 10px 0 10px;
         border-radius: 15px;
         box-shadow: 0 0 5px 1px rgba(0,0,0,.1);
         border: 10px solid white;
@@ -71,6 +71,42 @@
                     display: grid;
                     grid-gap: 10px;
                     align-content: center;
+                }
+            }
+        }
+    }
+}
+@media only screen and (max-width: 768px) {
+    .home {
+        &-category {
+            height: 150px;
+            &-arrow {
+                & > div {
+                    width: 20px;
+                    height: 20px;
+                }
+            }
+            &-icon {
+                & > div {
+                    width: 40px;
+                    height: 40px;
+                    border: 2px solid #fff;
+                }
+            }
+            &-title {
+                font-size: 18px;
+            }
+            &-description {
+                font-size: 12px;
+            }
+            &-shadow {
+
+                &-layer {
+                    padding: 0 15px 0 15px;
+                    grid-template-columns: 40px auto 20px;
+                    & > div {
+
+                    }
                 }
             }
         }

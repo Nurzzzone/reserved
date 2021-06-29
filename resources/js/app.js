@@ -7,7 +7,6 @@ import ReactiveStorage from "vue-reactive-localstorage"
 
 const app = createApp(App).use(router);
 app.use(Maska);
-
 app.use(ReactiveStorage, {
     token: '',
     user: '',

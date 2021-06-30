@@ -94,55 +94,5 @@ export default {
 </script>
 
 <style lang="scss">
-.item {
-    &-radius {
-        border-radius: 15px;
-    }
-    &-description {
-        font-size: 13px;
-    }
-    &-rating {
-        position: absolute;
-        z-index: 2;
-        right: 10px;
-        top: 10px;
-        background: red;
-        padding: 5px 10px 5px 10px;
-        border-radius: 5px;
-        color: #fff;
-    }
-    &-main {
-        max-height: 150px;
-        overflow: hidden;
-        border-radius: 5px;
-        margin: 10px;
-        position: relative;
-        & > img {
-            display: table;
-            width: 100%;
-        }
-    }
-    &-logo {
-        position: relative;
-        margin: -75px 0 0 0;
-        & > img {
-            border-radius: 80px;
-            border: 10px solid white;
-            background: #fff;
-        }
-    }
-}
-.text {
-    &-desc {
-        font-size: 12px;
-    }
-    &-btn {
-        background: #57a283;
-        border-radius: 50px;
-        height: 44px;
-    }
-    &-font {
-        font-size: 14px;
-    }
-}
+    @import '../../css/organization/list.scss';
 </style>

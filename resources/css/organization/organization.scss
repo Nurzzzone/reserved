@@ -1,4 +1,14 @@
+@import '../components/loading.scss';
+@import '../components/loading-btn.scss';
 .organization {
+    &-empty {
+        &-title {
+
+        }
+        &-description {
+            font-size: 16px;
+        }
+    }
     &-card {
         &-main {
             padding: 1.25rem;
@@ -227,6 +237,14 @@
             border-radius: 5px;
             &-main {
                 box-shadow:0 1px 1px  rgba(0,0,0,.1);
+            }
+        }
+        &-empty {
+            &-title {
+                font-size: 16px;
+            }
+            &-description {
+                font-size: 12px;
             }
         }
     }

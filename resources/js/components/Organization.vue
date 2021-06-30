@@ -123,28 +123,35 @@
         </template>
         <template v-else>
             <div class="container-fluid">
-                <div class="container py-5">
+                <div class="container pt-md-5">
                     <div class="col-12 d-flex justify-content-center mt-5 mb-3">
                         <div>
-                            <img src="/img/logo/table.svg" width="120">
+                            <img src="/img/logo/table.svg" width="100">
                         </div>
                     </div>
                     <div class="col-12 mt-3 mb-5">
-                        <h2 class="text-center">Заведение не найдено</h2>
-                        <p class="text-center h5 text-secondary mt-2">Возможно в данный момент заведение закрыт.</p>
+                        <h2 class="text-center organization-empty-title font-weight-bold">Заведение не найдено</h2>
+                        <p class="text-center organization-empty-description text-secondary">Возможно в данный момент заведение закрыт</p>
                     </div>
                 </div>
             </div>
         </template>
     </template>
     <template v-else>
-        <div class="container-fluid py-5 my-5">
-            <div class="container py-5 my-5">
-                <div class="col-12 d-flex justify-content-center">
-                    <div class="lds-dual-ring"></div>
-                </div>
-                <div class="col-12 d-flex justify-content-center mt-3">
-                    <h6 class="font-weight-bold text-secondary">Подождите немного...</h6>
+        <div class="container-fluid">
+            <div class="container">
+                <div class="row my-5 py-5">
+                    <div class="col-12 d-flex justify-content-center">
+                        <div class="loading">
+                            <div></div>
+                            <div></div>
+                            <div></div>
+                            <div></div>
+                        </div>
+                    </div>
+                    <div class="col-12 d-flex justify-content-center">
+                        <h4 class="loading-text">Загружаем данные</h4>
+                    </div>
                 </div>
             </div>
         </div>
@@ -338,85 +345,4 @@ export default {
 
 <style lang="scss">
     @import '../../css/organization/organization.scss';
-    .lds-dual-ring {
-        display: inline-block;
-        width: 80px;
-        height: 80px;
-    }
-    .lds-dual-ring:after {
-        content: " ";
-        display: block;
-        width: 64px;
-        height: 64px;
-        margin: 8px;
-        border-radius: 50%;
-        border: 6px solid #00a082;
-        border-color: #00a082 transparent #00a082 transparent;
-        animation: lds-dual-ring 1.2s linear infinite;
-    }
-    @keyframes lds-dual-ring {
-        0% {
-            transform: rotate(0deg);
-        }
-        100% {
-            transform: rotate(360deg);
-        }
-    }
-    .lds-ellipsis {
-        display: inline-block;
-        position: relative;
-        width: 20px;
-        height: 20px;
-        transform: scale(.5);
-        margin: 5px 0 0 0;
-    }
-    .lds-ellipsis div {
-        position: absolute;
-        top: 0;
-        width: 13px;
-        height: 13px;
-        border-radius: 50%;
-        background: #00a082;
-        animation-timing-function: cubic-bezier(0, 1, 1, 0);
-    }
-    .lds-ellipsis div:nth-child(1) {
-        left: 8px;
-        animation: lds-ellipsis1 0.6s infinite;
-    }
-    .lds-ellipsis div:nth-child(2) {
-        left: 8px;
-        animation: lds-ellipsis2 0.6s infinite;
-    }
-    .lds-ellipsis div:nth-child(3) {
-        left: 32px;
-        animation: lds-ellipsis2 0.6s infinite;
-    }
-    .lds-ellipsis div:nth-child(4) {
-        left: 56px;
-        animation: lds-ellipsis3 0.6s infinite;
-    }
-    @keyframes lds-ellipsis1 {
-        0% {
-            transform: scale(0);
-        }
-        100% {
-            transform: scale(1);
-        }
-    }
-    @keyframes lds-ellipsis3 {
-        0% {
-            transform: scale(1);
-        }
-        100% {
-            transform: scale(0);
-        }
-    }
-    @keyframes lds-ellipsis2 {
-        0% {
-            transform: translate(0, 0);
-        }
-        100% {
-            transform: translate(24px, 0);
-        }
-    }
 </style>

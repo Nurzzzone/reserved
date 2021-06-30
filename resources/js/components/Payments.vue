@@ -41,12 +41,12 @@
                         <div class="container pt-md-5">
                             <div class="col-12 d-flex justify-content-center mt-5 mb-3">
                                 <div>
-                                    <img src="/img/logo/card.svg" width="120">
+                                    <img src="/img/logo/card.svg" width="100">
                                 </div>
                             </div>
                             <div class="col-12 mt-3 mb-5">
                                 <h2 class="text-center payments-empty-title font-weight-bold">Список пуст</h2>
-                                <p class="text-center payments-empty-description text-secondary">Вы можете добавить карту.</p>
+                                <p class="text-center payments-empty-description text-secondary">Вы можете добавить карту</p>
                             </div>
                         </div>
                     </div>

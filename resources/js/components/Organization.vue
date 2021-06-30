@@ -58,8 +58,8 @@
                     <div class="row mt-4">
                         <div class="col-12">
                             <div v-if="tab === 1">
-                                <div class="row justify-content-center mt-3">
-                                    <div class="col-12 col-md-6 col-lg-4">
+                                <div class="row justify-content-center mt-md-3">
+                                    <div class="col-12 col-md-6 col-lg-4 p-0">
                                         <div class="form-group organization-date" onselectstart="return false;">
                                             <a class="text-decoration-none cursor-pointer" :class="{'organization-arr-btn':date.before}" @click="previousDay()">&#8249;</a>
                                             <div type="text" class="border-0 organization-input text-dark text-center font-weight-bold" :data-date="date.data">
@@ -72,14 +72,14 @@
                                 <div class="row justify-content-center mt-3">
                                     <div>
                                         <div class="d-flex">
-                                            <button type="button" class="btn organization-btn font-weight-bold mx-2 px-5" v-for="(item,key) in sections" :key="key" :class="{'organization-btn-sel':(key === section)}" @click="section = key">{{item.name}}</button>
+                                            <button type="button" class="btn organization-btn font-weight-bold mx-2" v-for="(item,key) in sections" :key="key" :class="{'organization-btn-sel':(key === section)}" @click="section = key">{{item.name}}</button>
                                         </div>
                                     </div>
                                 </div>
                                 <div class="row justify-content-center mt-4"  v-for="(item,key) in sections" :key="key" :class="{'d-none':(key !== section)}">
-                                    <div class="col-12 col-md-6 col-lg-3 p-2" v-for="(table,tableKey) in item.organization_tables" :key="tableKey" @click="selTable(key,tableKey)">
+                                    <div class="col-6 col-lg-3 p-2" v-for="(table,tableKey) in item.organization_tables" :key="tableKey" @click="selTable(key,tableKey)">
                                         <div class="card border-0 organization-shadow" data-toggle="modal" data-target="#booking_modal">
-                                            <div class="card-body">
+                                            <div class="card-body organization-card-main">
                                                 <div class="organization-card">
                                                     <div class="row align-content-center pl-3">
                                                         <div class="organization-card-title w-100 font-weight-bold">{{table.title}}</div>

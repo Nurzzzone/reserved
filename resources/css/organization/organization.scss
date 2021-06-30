@@ -1,4 +1,9 @@
 .organization {
+    &-card {
+        &-main {
+            padding: 1.25rem;
+        }
+    }
     &-title {
         margin-top: 40px;
         font-size: 30px;
@@ -12,6 +17,7 @@
         margin-right: 10px;
     }
     &-tab {
+        padding: 10px 15px 10px 15px !important;
         border:  none !important;
         border-bottom: 4px solid transparent !important;
         &-sel {
@@ -87,6 +93,7 @@
         }
     }
     &-btn {
+        padding: 10px 25px 10px 25px;
         border-radius: 30px;
         height: 44px;
         color: #000;
@@ -171,9 +178,32 @@
 }
 @media only screen and (max-width: 768px) {
     .organization {
+        &-card {
+            grid-gap: 5px;
+            &-main {
+                padding: 5px;
+            }
+            &-title {
+                font-size: 12px;
+            }
+            &-status {
+                font-size: 11px;
+                padding: 1px 4px 1px 4px;
+            }
+            &-icon {
+                height: 30px;
+            }
+            &-limit {
+                font-size: 11px;
+            }
+        }
+        &-btn {
+            padding: 5px 20px 5px 20px;
+            font-size: 12px;
+            height: auto;
+        }
         &-tab {
             font-size: 11px;
-            padding: 10px 5px 10px 5px !important;
             &-sel {
 
             }

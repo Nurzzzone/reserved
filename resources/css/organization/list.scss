@@ -117,6 +117,14 @@
                 background: #fff;
             }
         }
+        &-empty {
+            &-title {
+                font-size: 16px;
+            }
+            &-description {
+                font-size: 12px;
+            }
+        }
     }
     .text {
         &-desc {

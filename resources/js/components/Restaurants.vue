@@ -3,7 +3,7 @@
     <profile-section></profile-section>
     <div class="container-fluid py-3 py-md-5 item-bg">
         <div class="container">
-            <div class="row justify-content-center">
+            <div class="row">
                 <template v-if="restaurants.length > 0">
                     <div class="col-6 col-xl-4 p-0 p-md-2" v-for="(restaurant,key) in restaurants" :key="key">
                         <div class="card border-0 item-shadow overflow-hidden m-2 m-md-0 item-radius">
@@ -45,12 +45,12 @@
                 <template v-else>
                     <div class="col-12 d-flex justify-content-center my-5">
                         <div>
-                            <img src="/img/logo/restaurant.svg" width="120">
+                            <img src="/img/logo/restaurant.svg" width="100">
                         </div>
                     </div>
                     <div class="col-12 mt-3 mb-5">
-                        <h2 class="text-center">Список пуст</h2>
-                        <p class="text-center h5 text-secondary mt-2">Возможно в данный момент все заведения закрыты. Попробуите обновить страницу позднее.</p>
+                        <h2 class="text-center item-empty-title">Список пуст</h2>
+                        <p class="text-center text-secondary mt-2 item-empty-description">Возможно в данный момент все заведения закрыты. Попробуите обновить страницу позднее.</p>
                     </div>
                 </template>
             </div>
@@ -88,9 +88,6 @@ export default {
             .then(response => {
                 let data    =   response.data.data;
                 for (let i = 0; i < data.length; i++) {
-                    this.restaurants.push(data[i]);
-                    this.restaurants.push(data[i]);
-                    this.restaurants.push(data[i]);
                     this.restaurants.push(data[i]);
                 }
             });

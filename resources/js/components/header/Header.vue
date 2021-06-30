@@ -49,7 +49,7 @@
                                             </a>
                                         </li>
                                         <li class="ml-3 header-main position-relative">
-                                            <div class="header-profile">
+                                            <div class="header-profile" v-if="user.name">
                                                 <div class="header-profile-main font-weight-bold text-capitalize">
                                                     <div class="header-profile-main-content">
                                                         <div>{{user.name}}</div>

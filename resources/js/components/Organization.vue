@@ -77,7 +77,7 @@
                                     </div>
                                 </div>
                                 <div class="row justify-content-center mt-4"  v-for="(item,key) in sections" :key="key" :class="{'d-none':(key !== section)}">
-                                    <div class="col-6 col-lg-3 p-2" v-for="(table,tableKey) in item.organization_tables" :key="tableKey" @click="selTable(key,tableKey)">
+                                    <div class="col-6 col-lg-3 p-md-2 p-1" v-for="(table,tableKey) in item.organization_tables" :key="tableKey" @click="selTable(key,tableKey)">
                                         <div class="card border-0 organization-shadow" data-toggle="modal" data-target="#booking_modal">
                                             <div class="card-body organization-card-main">
                                                 <div class="organization-card">

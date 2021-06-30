@@ -11,6 +11,11 @@ class OrganizationRepositoryEloquent implements OrganizationRepositoryInterface
 
     private $take   =   15;
 
+    public function getByIds($ids)
+    {
+        return Organization::with('user','category','images')->where(OrganizationContract::STATUS,OrganizationContract::ENABLED)->whereIn(OrganizationContract::ID,$ids)->get();
+    }
+
     public function getIdsByUserId(int $userId)
     {
         return Organization::where(OrganizationContract::USER_ID,$userId)->get()->toArray();
@@ -32,11 +37,6 @@ class OrganizationRepositoryEloquent implements OrganizationRepositoryInterface
     public function getById($id)
     {
         return Organization::with('user','category','images')->where(OrganizationContract::ID,$id)->first();
-    }
-
-    public function getByIds($ids)
-    {
-        return Organization::with('user','category','images')->whereIn(OrganizationContract::ID,$ids)->get();
     }
 
     public function getByCategoryId($id, $paginate)

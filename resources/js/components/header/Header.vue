@@ -10,17 +10,22 @@
                             </a>
                             <div id="navbarSupportedContent" class="collapse navbar-collapse">
                                 <ul class="navbar-nav ml-auto">
+                                    <li class="nav-item mx-3 ">
+                                        <a href="/home" class="btn nav-link font-weight-bold font-menu">
+                                            <div>Категории</div>
+                                        </a>
+                                    </li>
+                                    <li class="nav-item mx-3">
+                                        <a href="/top" class="btn nav-link font-weight-bold font-menu">
+                                            <div>Топ</div>
+                                        </a>
+                                    </li>
+                                    <li class="nav-item mx-3">
+                                        <a href="/favorite" class="btn nav-link font-weight-bold font-menu">
+                                            <div>Избранное</div>
+                                        </a>
+                                    </li>
                                     <template v-if="login">
-                                        <li class="nav-item mx-3 ">
-                                            <a href="/home" class="btn nav-link font-weight-bold font-menu">
-                                                <div>Категории</div>
-                                            </a>
-                                        </li>
-                                        <li class="nav-item mx-3">
-                                            <a href="/top" class="btn nav-link font-weight-bold font-menu">
-                                                <div>Топ</div>
-                                            </a>
-                                        </li>
                                         <li class="nav-item mx-3">
                                             <a class="btn nav-link font-weight-bold font-menu" data-toggle="modal" data-target="#auth_modal" @click="storage.auth = true">
                                                 <div>Войти</div>

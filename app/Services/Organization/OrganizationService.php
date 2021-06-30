@@ -24,6 +24,11 @@ class OrganizationService extends BaseService
         $this->organizationRepository->updateRating($id,$average);
     }
 
+    public function getByIds($ids)
+    {
+        return $this->organizationRepository->getByIds($ids);
+    }
+
     public function list(int $paginate)
     {
         return $this->organizationRepository->list($paginate);
@@ -37,11 +42,6 @@ class OrganizationService extends BaseService
     public function getById(int $id)
     {
         return $this->organizationRepository->getById($id);
-    }
-
-    public function getByIds(array $ids)
-    {
-        return $this->organizationRepository->getByIds($ids);
     }
 
     public function getByCategoryId(int $id, int $paginate)

@@ -11,7 +11,8 @@ app.use(ReactiveStorage, {
     token: '',
     user: '',
     auth: true,
-    modal: false
+    modal: false,
+    favorite: []
 });
 
 app.mount('#app');

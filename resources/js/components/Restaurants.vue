@@ -8,9 +8,9 @@
                     <div class="col-6 col-xl-4 p-0 p-md-2" v-for="(restaurant,key) in restaurants" :key="key">
                         <div class="card border-0 item-shadow overflow-hidden m-2 m-md-0 item-radius">
                             <div class="item-main">
-                                <div class="item-rating">
-                                    <span v-if="restaurant.rating">{{restaurant.rating}}</span>
-                                    <span v-else>-</span>
+                                <div class="favorite-category" :class="{'favorite-main-off':(!storage.favorite.includes(restaurant.id)),'favorite-main-on':(storage.favorite.includes(restaurant.id))}" @click="favorite(restaurant.id)"></div>
+                                <div class="item-rating" v-if="restaurant.rating">
+                                    <span>{{restaurant.rating}}</span>
                                 </div>
                                 <img v-if="restaurant.wallpaper" :src="restaurant.wallpaper">
                                 <img v-else src="/img/logo/wall.png">
@@ -82,6 +82,19 @@ export default {
         this.getRestaurants();
     },
     methods: {
+        favorite: function(id) {
+            let len =   this.storage.favorite.length;
+            let status  =   true;
+            for (let i = 0; i < len; i++) {
+                if (this.storage.favorite[i] === id) {
+                    this.storage.favorite.splice(i,1);
+                    status  =   false;
+                }
+            }
+            if (status) {
+                this.storage.favorite.push(id);
+            }
+        },
         getRestaurants: function()
         {
             axios.get('/api/category/organizations/1')
@@ -97,5 +110,6 @@ export default {
 </script>
 
 <style lang="scss">
+    @import '../../css/favorite/favorite.scss';
     @import '../../css/organization/list.scss';
 </style>

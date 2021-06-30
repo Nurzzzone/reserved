@@ -2,8 +2,12 @@
 
 namespace App\Http\Controllers\Api;
 
+use App\Domain\Contracts\MainContract;
 use App\Domain\Contracts\OrganizationTablesContract;
+
 use Illuminate\Http\Request;
+use App\Http\Requests\Organization\OrganizationIdsRequest;
+
 use App\Http\Controllers\Controller;
 
 use App\Http\Resources\OrganizationCollection;
@@ -36,6 +40,12 @@ class OrganizationController extends Controller
             $table->bookingStatus   =   $this->bookingService->statusCheck($table->id,$date);
         }
         return $tables;
+    }
+
+    public function getByIds(OrganizationIdsRequest $organizationIdsRequest)
+    {
+        $data   =   $organizationIdsRequest->validated();
+        return new OrganizationCollection($this->organizationService->getByIds($data[MainContract::IDS]));
     }
 
     public function list(Request $request) {

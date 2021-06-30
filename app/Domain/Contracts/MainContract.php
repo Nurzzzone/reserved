@@ -8,6 +8,7 @@ use Carbon\Carbon;
 
 class MainContract
 {
+    const IDS   =   'ids';
     const ORGANIZATION__TABLES   =   'organizationTables';
     const PASS  =   'pass';
     const WALLPAPER =   'wallpaper';

@@ -24,7 +24,10 @@
                                     <div v-else-if="organization.category_id.id === 3" class="organization-logo-default organization-logo-default-bar"></div>
                                 </div>
                             </div>
-                            <div class="organization-title text-dark font-weight-bold text-center">{{organization.title}}</div>
+                            <div class="organization-title text-dark font-weight-bold text-center">
+                                <div>{{organization.title}}</div>
+                                <div class="favorite-main" :class="{'favorite-main-off':(!storage.favorite.includes(organization.id)),'favorite-main-on':(storage.favorite.includes(organization.id))}" @click="favorite(organization.id)"></div>
+                            </div>
                             <div class="organization-description text-secondary text-center">{{organization.description}}</div>
                         </div>
                     </div>
@@ -248,6 +251,19 @@ export default {
         this.getOrganization();
     },
     methods: {
+        favorite: function(id) {
+            let len =   this.storage.favorite.length;
+            let status  =   true;
+            for (let i = 0; i < len; i++) {
+                if (this.storage.favorite[i] === id) {
+                    this.storage.favorite.splice(i,1);
+                    status  =   false;
+                }
+            }
+            if (status) {
+                this.storage.favorite.push(id);
+            }
+        },
         updateStatus: function() {
             let self    =   this;
             axios.get('/api/organization/status/'+this.$route.params.id+'/'+this.date.data)
@@ -344,5 +360,6 @@ export default {
 </script>
 
 <style lang="scss">
+    @import '../../css/favorite/favorite.scss';
     @import '../../css/organization/organization.scss';
 </style>

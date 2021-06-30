@@ -4,7 +4,7 @@
     <template v-if="!loading">
         <template v-if="organization">
             <Booking :organization="organization" :table="table" :date="date"></Booking>
-            <div class="container-fluid organization-bg">
+            <div class="container-fluid">
                 <div class="container p-0">
                     <div class="row">
                         <div class="col-12 p-0">
@@ -30,7 +30,7 @@
                     </div>
                 </div>
             </div>
-            <div class="container-fluid organization-shadow-main organization-bg">
+            <div class="container-fluid organization-shadow-main">
                 <div class="container">
                     <div class="row pt-2">
                         <div class="col d-flex justify-content-center">
@@ -53,9 +53,9 @@
                     </div>
                 </div>
             </div>
-            <div class="container-fluid mb-5">
+            <div class="container-fluid pb-5 organization-bg">
                 <div class="container">
-                    <div class="row mt-4">
+                    <div class="row pt-4">
                         <div class="col-12">
                             <div v-if="tab === 1">
                                 <div class="row justify-content-center mt-md-3">

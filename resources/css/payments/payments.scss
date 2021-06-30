@@ -59,6 +59,14 @@
             }
         }
     }
+    &-empty {
+        &-title {
+
+        }
+        &-description {
+            font-size: 16px;
+        }
+    }
 }
 @media only screen and (max-width: 768px) {
     .payments {
@@ -91,6 +99,14 @@
             padding: 0 10px 0 10px;
             font-size: 12px !important;
             min-width: 120px;
+        }
+        &-empty {
+            &-title {
+                font-size: 16px;
+            }
+            &-description {
+                font-size: 12px;
+            }
         }
     }
 }

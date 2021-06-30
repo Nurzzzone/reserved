@@ -38,15 +38,15 @@
                 </template>
                 <template v-else>
                     <div class="container-fluid">
-                        <div class="container pt-5">
+                        <div class="container pt-md-5">
                             <div class="col-12 d-flex justify-content-center mt-5 mb-3">
                                 <div>
                                     <img src="/img/logo/card.svg" width="120">
                                 </div>
                             </div>
                             <div class="col-12 mt-3 mb-5">
-                                <h2 class="text-center">Список пуст</h2>
-                                <p class="text-center h5 text-secondary mt-2">Вы можете добавить карту нажав кнопку ниже.</p>
+                                <h2 class="text-center payments-empty-title font-weight-bold">Список пуст</h2>
+                                <p class="text-center payments-empty-description text-secondary">Вы можете добавить карту.</p>
                             </div>
                         </div>
                     </div>

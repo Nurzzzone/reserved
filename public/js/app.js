@@ -18554,26 +18554,26 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.esm-bundler.js");
 
 var _hoisted_1 = {
-  "class": "container-fluid mb-5"
+  "class": "container-fluid mb-md-5"
 };
 var _hoisted_2 = {
-  "class": "container"
+  "class": "container p-0"
 };
 
 var _hoisted_3 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", {
-  "class": "row mt-5"
+  "class": "row"
 }, [/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", {
   "class": "col-12"
 }, [/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("h2", {
-  "class": " top-title"
+  "class": "history-title"
 }, "История бронирования"), /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("p", {
-  "class": "mt-5 h6 text-secondary text-justify"
+  "class": "history-description"
 }, " Здесь вы можете просматривать вашу историю бронировани в заведениях. ")])], -1
 /* HOISTED */
 );
 
 var _hoisted_4 = {
-  "class": "row mt-5"
+  "class": "row"
 };
 var _hoisted_5 = {
   "class": "col-12"
@@ -18587,7 +18587,7 @@ var _hoisted_7 = {
 };
 
 var _hoisted_8 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", {
-  "class": "payments-card-icon history-icon mr-3"
+  "class": "history-card-icon history-icon mr-md-3"
 }, null, -1
 /* HOISTED */
 );
@@ -19010,7 +19010,7 @@ var _hoisted_1 = {
   "class": "container-fluid organization-bg"
 };
 var _hoisted_2 = {
-  "class": "container"
+  "class": "container p-0"
 };
 var _hoisted_3 = {
   "class": "row"
@@ -19053,10 +19053,10 @@ var _hoisted_14 = {
   "class": "organization-logo-default organization-logo-default-bar"
 };
 var _hoisted_15 = {
-  "class": "organization-title h3 text-dark font-weight-bold text-center mt-3"
+  "class": "organization-title text-dark font-weight-bold text-center"
 };
 var _hoisted_16 = {
-  "class": "organization-description h6 text-secondary text-center mt-3"
+  "class": "organization-description text-secondary text-center"
 };
 var _hoisted_17 = {
   "class": "container-fluid organization-shadow-main organization-bg"
@@ -19077,7 +19077,7 @@ var _hoisted_22 = {
   "class": "card-header bg-transparent d-flex justify-content-center border-0"
 };
 var _hoisted_23 = {
-  "class": "nav nav-tabs card-header-tabs"
+  "class": "nav nav-tabs card-header-tabs margin-0 border-0"
 };
 var _hoisted_24 = {
   "class": "nav-item"
@@ -19254,7 +19254,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
   ), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_16, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($data.organization.description), 1
   /* TEXT */
   )])])])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_17, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_18, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_19, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_20, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_21, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_22, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("ul", _hoisted_23, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("li", _hoisted_24, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("a", {
-    "class": ["nav-link h6 text-secondary bg-transparent organization-tab py-3 d-block", {
+    "class": ["nav-link h6 text-secondary bg-transparent organization-tab py-3 px-0 d-block", {
       active: $data.tab === 1,
       'organization-tab-sel': $data.tab === 1
     }],
@@ -19265,7 +19265,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
   }, "Бронирование", 2
   /* CLASS */
   )]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("li", _hoisted_25, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("a", {
-    "class": ["nav-link h6 text-secondary bg-transparent organization-tab py-3 d-block", {
+    "class": ["nav-link h6 text-secondary bg-transparent organization-tab py-3 px-0 d-block", {
       active: $data.tab === 2,
       'organization-tab-sel': $data.tab === 2
     }],
@@ -19276,7 +19276,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
   }, "Галлерея", 2
   /* CLASS */
   )]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("li", _hoisted_26, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("a", {
-    "class": ["nav-link h6 text-secondary bg-transparent organization-tab py-3 d-block", {
+    "class": ["nav-link h6 text-secondary bg-transparent organization-tab py-3 px-0 d-block", {
       active: $data.tab === 3,
       'organization-tab-sel': $data.tab === 3
     }],
@@ -19447,7 +19447,7 @@ var _hoisted_13 = {
   "class": "container-fluid"
 };
 
-var _hoisted_14 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createStaticVNode)("<div class=\"container pt-5\"><div class=\"col-12 d-flex justify-content-center mt-5 mb-3\"><div><img src=\"/img/logo/card.svg\" width=\"120\"></div></div><div class=\"col-12 mt-3 mb-5\"><h2 class=\"text-center\">Список пуст</h2><p class=\"text-center h5 text-secondary mt-2\">Вы можете добавить карту нажав кнопку ниже.</p></div></div>", 1);
+var _hoisted_14 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createStaticVNode)("<div class=\"container pt-md-5\"><div class=\"col-12 d-flex justify-content-center mt-5 mb-3\"><div><img src=\"/img/logo/card.svg\" width=\"120\"></div></div><div class=\"col-12 mt-3 mb-5\"><h2 class=\"text-center payments-empty-title font-weight-bold\">Список пуст</h2><p class=\"text-center payments-empty-description text-secondary\">Вы можете добавить карту.</p></div></div>", 1);
 
 var _hoisted_15 = {
   "class": "container-fluid"
@@ -21028,78 +21028,82 @@ var _hoisted_7 = {
   "class": "text-white section-title"
 };
 var _hoisted_8 = {
+  key: 3,
+  "class": "text-white section-title"
+};
+var _hoisted_9 = {
   key: 1,
   "class": "col-12"
 };
-var _hoisted_9 = {
+var _hoisted_10 = {
   key: 0,
   "class": "text-white section-title"
 };
-var _hoisted_10 = {
+var _hoisted_11 = {
   key: 2,
   "class": "col-12"
 };
-var _hoisted_11 = {
+var _hoisted_12 = {
   key: 0,
   "class": "text-white section-title"
 };
-var _hoisted_12 = {
+var _hoisted_13 = {
   key: 3,
   "class": "col-12"
 };
-var _hoisted_13 = {
-  key: 0,
-  "class": "text-white section-title"
-};
 var _hoisted_14 = {
-  key: 1,
+  key: 0,
   "class": "text-white section-title"
 };
 var _hoisted_15 = {
-  key: 2,
+  key: 1,
   "class": "text-white section-title"
 };
 var _hoisted_16 = {
-  key: 3,
+  key: 2,
   "class": "text-white section-title"
 };
 var _hoisted_17 = {
-  key: 4,
+  key: 3,
   "class": "text-white section-title"
 };
 var _hoisted_18 = {
+  key: 4,
+  "class": "text-white section-title"
+};
+var _hoisted_19 = {
   key: 0,
   "class": "container-fluid section-bg-main"
 };
-var _hoisted_19 = {
+var _hoisted_20 = {
   "class": "container"
 };
-var _hoisted_20 = {
+var _hoisted_21 = {
   "class": "row"
 };
-var _hoisted_21 = {
+var _hoisted_22 = {
   "class": "col-12"
 };
-var _hoisted_22 = {
+var _hoisted_23 = {
   "class": "card text-center border-0 rounded-0 bg-transparent"
 };
-var _hoisted_23 = {
+var _hoisted_24 = {
   "class": "card-header top-bg border-0 d-flex justify-content-center"
 };
-var _hoisted_24 = {
+var _hoisted_25 = {
   "class": "nav nav-tabs card-header-tabs border-0 font-weight-bold"
 };
-var _hoisted_25 = {
+var _hoisted_26 = {
   "class": "nav-item"
 };
-var _hoisted_26 = {
+var _hoisted_27 = {
   key: 0,
   src: "/img/logo/profile-white.svg",
   width: "20",
   height: "20",
   "class": "d-md-none"
 };
-var _hoisted_27 = {
+var _hoisted_28 = {
   key: 1,
   src: "/img/logo/profile.svg",
   width: "20",
@@ -21107,23 +21111,23 @@ var _hoisted_27 = {
   "class": "d-md-none"
 };
 
-var _hoisted_28 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("span", {
+var _hoisted_29 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("span", {
   "class": "d-none d-md-block"
 }, "Профиль", -1
 /* HOISTED */
 );
 
-var _hoisted_29 = {
+var _hoisted_30 = {
   "class": "nav-item"
 };
-var _hoisted_30 = {
+var _hoisted_31 = {
   key: 0,
   src: "/img/logo/settings-white.svg",
   width: "20",
   height: "20",
   "class": "d-md-none"
 };
-var _hoisted_31 = {
+var _hoisted_32 = {
   key: 1,
   src: "/img/logo/settings.svg",
   width: "20",
@@ -21131,23 +21135,23 @@ var _hoisted_31 = {
   "class": "d-md-none"
 };
 
-var _hoisted_32 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("span", {
+var _hoisted_33 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("span", {
   "class": "d-none d-md-block"
 }, "Настройки", -1
 /* HOISTED */
 );
 
-var _hoisted_33 = {
+var _hoisted_34 = {
   "class": "nav-item"
 };
-var _hoisted_34 = {
+var _hoisted_35 = {
   key: 0,
   src: "/img/logo/history-white.svg",
   width: "20",
   height: "20",
   "class": "d-md-none"
 };
-var _hoisted_35 = {
+var _hoisted_36 = {
   key: 1,
   src: "/img/logo/history.svg",
   width: "20",
@@ -21155,23 +21159,23 @@ var _hoisted_35 = {
   "class": "d-md-none"
 };
 
-var _hoisted_36 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("span", {
+var _hoisted_37 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("span", {
   "class": "d-none d-md-block"
 }, "История", -1
 /* HOISTED */
 );
 
-var _hoisted_37 = {
+var _hoisted_38 = {
   "class": "nav-item"
 };
-var _hoisted_38 = {
+var _hoisted_39 = {
   key: 0,
   src: "/img/logo/wallet-white.svg",
   width: "20",
   height: "20",
   "class": "d-md-none"
 };
-var _hoisted_39 = {
+var _hoisted_40 = {
   key: 1,
   src: "/img/logo/wallet.svg",
   width: "20",
@@ -21179,50 +21183,50 @@ var _hoisted_39 = {
   "class": "d-md-none"
 };
 
-var _hoisted_40 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("span", {
+var _hoisted_41 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("span", {
   "class": "d-none d-md-block"
 }, "Способ оплаты", -1
 /* HOISTED */
 );
 
 function render(_ctx, _cache, $props, $setup, $data, $options) {
-  return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)(vue__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_1, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_2, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_3, [$data.end === 'profile' ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)("div", _hoisted_4, [$data.url === 'profile' ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)("h1", _hoisted_5, "Профиль")) : $data.url === 'settings' ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)("h1", _hoisted_6, "Настройки")) : $data.url === 'payments' ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)("h1", _hoisted_7, "Способ оплаты")) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true)])) : $data.end === 'favorite' ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)("div", _hoisted_8, [$data.url === 'favorite' ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)("h1", _hoisted_9, "Избранное")) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true)])) : $data.end === 'top' ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)("div", _hoisted_10, [$data.url === 'top' ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)("h1", _hoisted_11, "Топ 10")) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true)])) : $data.end === 'home' ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)("div", _hoisted_12, [$data.url === 'home' ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)("h1", _hoisted_13, "Категории")) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true), $data.url === 'restaurants' ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)("h1", _hoisted_14, "Рестораны")) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true), $data.url === 'cafe' ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)("h1", _hoisted_15, "Кафе")) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true), $data.url === 'bars' ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)("h1", _hoisted_16, "Бары")) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true), $props.name ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)("h1", _hoisted_17, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($props.name), 1
+  return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)(vue__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_1, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_2, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_3, [$data.end === 'profile' ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)("div", _hoisted_4, [$data.url === 'profile' ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)("h1", _hoisted_5, "Профиль")) : $data.url === 'settings' ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)("h1", _hoisted_6, "Настройки")) : $data.url === 'payments' ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)("h1", _hoisted_7, "Способ оплаты")) : $data.url === 'history' ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)("h1", _hoisted_8, "История")) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true)])) : $data.end === 'favorite' ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)("div", _hoisted_9, [$data.url === 'favorite' ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)("h1", _hoisted_10, "Избранное")) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true)])) : $data.end === 'top' ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)("div", _hoisted_11, [$data.url === 'top' ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)("h1", _hoisted_12, "Топ 10")) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true)])) : $data.end === 'home' ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)("div", _hoisted_13, [$data.url === 'home' ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)("h1", _hoisted_14, "Категории")) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true), $data.url === 'restaurants' ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)("h1", _hoisted_15, "Рестораны")) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true), $data.url === 'cafe' ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)("h1", _hoisted_16, "Кафе")) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true), $data.url === 'bars' ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)("h1", _hoisted_17, "Бары")) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true), $props.name ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)("h1", _hoisted_18, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($props.name), 1
   /* TEXT */
-  )) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true)])) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true)])])]), $data.end === 'profile' ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)("div", _hoisted_18, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_19, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_20, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_21, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_22, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_23, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("ul", _hoisted_24, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("li", _hoisted_25, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("a", {
+  )) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true)])) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true)])])]), $data.end === 'profile' ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)("div", _hoisted_19, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_20, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_21, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_22, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_23, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_24, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("ul", _hoisted_25, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("li", _hoisted_26, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("a", {
     "class": ["nav-link border-0", {
       active: $data.url === 'profile' ? true : false,
       disabled: $data.url === 'profile' ? true : false,
       'text-white': $data.url !== 'profile' ? true : false
     }],
     href: "/profile"
-  }, [$data.url !== 'profile' ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)("img", _hoisted_26)) : ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)("img", _hoisted_27)), _hoisted_28], 2
+  }, [$data.url !== 'profile' ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)("img", _hoisted_27)) : ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)("img", _hoisted_28)), _hoisted_29], 2
   /* CLASS */
-  )]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("li", _hoisted_29, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("a", {
+  )]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("li", _hoisted_30, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("a", {
     "class": ["nav-link border-0", {
       active: $data.url === 'settings' ? true : false,
       disabled: $data.url === 'settings' ? true : false,
       'text-white': $data.url !== 'settings' ? true : false
     }],
     href: "/profile/settings"
-  }, [$data.url !== 'settings' ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)("img", _hoisted_30)) : ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)("img", _hoisted_31)), _hoisted_32], 2
+  }, [$data.url !== 'settings' ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)("img", _hoisted_31)) : ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)("img", _hoisted_32)), _hoisted_33], 2
   /* CLASS */
-  )]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("li", _hoisted_33, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("a", {
+  )]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("li", _hoisted_34, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("a", {
     "class": ["nav-link border-0", {
       active: $data.url === 'history' ? true : false,
       disabled: $data.url === 'history' ? true : false,
       'text-white': $data.url !== 'history' ? true : false
     }],
     href: "/profile/history"
-  }, [$data.url !== 'history' ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)("img", _hoisted_34)) : ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)("img", _hoisted_35)), _hoisted_36], 2
+  }, [$data.url !== 'history' ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)("img", _hoisted_35)) : ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)("img", _hoisted_36)), _hoisted_37], 2
   /* CLASS */
-  )]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("li", _hoisted_37, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("a", {
+  )]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("li", _hoisted_38, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("a", {
     "class": ["nav-link border-0", {
       active: $data.url === 'payments' ? true : false,
       disabled: $data.url === 'payments' ? true : false,
       'text-white': $data.url !== 'payments' ? true : false
     }],
     href: "/profile/payments"
-  }, [$data.url !== 'payments' ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)("img", _hoisted_38)) : ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)("img", _hoisted_39)), _hoisted_40], 2
+  }, [$data.url !== 'payments' ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)("img", _hoisted_39)) : ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)("img", _hoisted_40)), _hoisted_41], 2
   /* CLASS */
   )]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("\n                                <li class=\"nav-item\">\n                                    <a class=\"nav-link text-white border-0\" href=\"/profile/support\" :class=\"{ active: (url==='support'?true:false),disabled: (url==='support'?true:false),'text-white': (url!=='support'?true:false) }\">\n                                        <img src=\"/img/logo/help-white.svg\" width=\"20\" height=\"20\" class=\"d-md-none\" v-if=\"url!=='support'\">\n                                        <img src=\"/img/logo/help.svg\" width=\"20\" height=\"20\" class=\"d-md-none\" v-else>\n                                        <span class=\"d-none d-md-block\">Служба Поддержки</span>\n                                    </a>\n                                </li>\n                                ")])])])])])])])) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true)], 64
   /* STABLE_FRAGMENT */
@@ -21484,7 +21488,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, ".history-font {\n  font-size: 15px;\n}\n.history-shadow {\n  box-shadow: 0 0 5px 0 rgba(0, 0, 0, 0.1);\n  border-radius: 10px;\n  overflow: hidden;\n}\n.history-icon {\n  width: 44px;\n  height: 44px;\n  background: url(/img/logo/calendar.svg) no-repeat center;\n  background-size: contain;\n}\n.history-status {\n  padding: 8px 10px 8px 10px;\n  color: white;\n  font-weight: bold;\n  border-radius: 30px;\n  font-size: 13px;\n}\n.history-status-waiting {\n  cursor: pointer;\n  background: #FF8008;\n}\n.history-status-success {\n  background: #00a082;\n}\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, ".history-title {\n  margin: 50px 0 10px 0;\n  font-weight: bold;\n  font-size: 24px;\n}\n.history-font {\n  font-size: 15px;\n}\n.history-shadow {\n  box-shadow: 0 0 5px 0 rgba(0, 0, 0, 0.1);\n  border-radius: 10px;\n  overflow: hidden;\n}\n.history-icon {\n  width: 44px;\n  height: 44px;\n  background: url(/img/logo/calendar.svg) no-repeat center;\n  background-size: contain;\n}\n.history-status {\n  padding: 8px 10px 8px 10px;\n  color: white;\n  font-weight: bold;\n  border-radius: 30px;\n  font-size: 13px;\n}\n.history-status-waiting {\n  cursor: pointer;\n  background: #FF8008;\n}\n.history-status-success {\n  background: #00a082;\n}\n@media only screen and (max-width: 768px) {\n.history-icon {\n    margin-right: 10px;\n}\n.history-status {\n    padding: 5px;\n    font-size: 11px;\n}\n.history-title {\n    font-size: 16px;\n    margin: 20px 0 0 0;\n}\n.history-font {\n    font-size: 12px;\n}\n.history-description {\n    font-size: 11px;\n    margin: 10px 0 0 0;\n}\n.history-all {\n    margin: 10px 0 10px 0;\n}\n.history-btn {\n    height: 30px;\n    padding: 0 10px 0 10px;\n    font-size: 12px !important;\n    min-width: 120px;\n}\n.history-empty-title {\n    font-size: 16px;\n}\n.history-empty-description {\n    font-size: 12px;\n}\n}\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -21556,7 +21560,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, ".lds-dual-ring {\n  display: inline-block;\n  width: 80px;\n  height: 80px;\n}\n.lds-dual-ring:after {\n  content: \" \";\n  display: block;\n  width: 64px;\n  height: 64px;\n  margin: 8px;\n  border-radius: 50%;\n  border: 6px solid #00a082;\n  border-color: #00a082 transparent #00a082 transparent;\n  -webkit-animation: lds-dual-ring 1.2s linear infinite;\n          animation: lds-dual-ring 1.2s linear infinite;\n}\n@-webkit-keyframes lds-dual-ring {\n0% {\n    transform: rotate(0deg);\n}\n100% {\n    transform: rotate(360deg);\n}\n}\n@keyframes lds-dual-ring {\n0% {\n    transform: rotate(0deg);\n}\n100% {\n    transform: rotate(360deg);\n}\n}\n.lds-ellipsis {\n  display: inline-block;\n  position: relative;\n  width: 20px;\n  height: 20px;\n  transform: scale(0.5);\n  margin: 5px 0 0 0;\n}\n.lds-ellipsis div {\n  position: absolute;\n  top: 0;\n  width: 13px;\n  height: 13px;\n  border-radius: 50%;\n  background: #00a082;\n  -webkit-animation-timing-function: cubic-bezier(0, 1, 1, 0);\n          animation-timing-function: cubic-bezier(0, 1, 1, 0);\n}\n.lds-ellipsis div:nth-child(1) {\n  left: 8px;\n  -webkit-animation: lds-ellipsis1 0.6s infinite;\n          animation: lds-ellipsis1 0.6s infinite;\n}\n.lds-ellipsis div:nth-child(2) {\n  left: 8px;\n  -webkit-animation: lds-ellipsis2 0.6s infinite;\n          animation: lds-ellipsis2 0.6s infinite;\n}\n.lds-ellipsis div:nth-child(3) {\n  left: 32px;\n  -webkit-animation: lds-ellipsis2 0.6s infinite;\n          animation: lds-ellipsis2 0.6s infinite;\n}\n.lds-ellipsis div:nth-child(4) {\n  left: 56px;\n  -webkit-animation: lds-ellipsis3 0.6s infinite;\n          animation: lds-ellipsis3 0.6s infinite;\n}\n@-webkit-keyframes lds-ellipsis1 {\n0% {\n    transform: scale(0);\n}\n100% {\n    transform: scale(1);\n}\n}\n@keyframes lds-ellipsis1 {\n0% {\n    transform: scale(0);\n}\n100% {\n    transform: scale(1);\n}\n}\n@-webkit-keyframes lds-ellipsis3 {\n0% {\n    transform: scale(1);\n}\n100% {\n    transform: scale(0);\n}\n}\n@keyframes lds-ellipsis3 {\n0% {\n    transform: scale(1);\n}\n100% {\n    transform: scale(0);\n}\n}\n@-webkit-keyframes lds-ellipsis2 {\n0% {\n    transform: translate(0, 0);\n}\n100% {\n    transform: translate(24px, 0);\n}\n}\n@keyframes lds-ellipsis2 {\n0% {\n    transform: translate(0, 0);\n}\n100% {\n    transform: translate(24px, 0);\n}\n}\n.organization-tab {\n  border: none !important;\n  border-bottom: 4px solid transparent !important;\n}\n.organization-tab-sel {\n  color: #FF8008 !important;\n  border-bottom-color: #FF8008 !important;\n}\n.organization-bg {\n  background: #f5f5f5;\n}\n.organization-arr-btn {\n  background: #00a082;\n  color: white;\n  border-radius: 30px;\n  cursor: pointer;\n}\n.organization-date {\n  display: grid;\n  grid-template-columns: 40px auto 40px;\n  grid-gap: 10px;\n  padding: 5px;\n  background: #fafafa;\n  border-radius: 40px;\n  margin: 0 0.5rem 0 0.5rem !important;\n}\n.organization-input {\n  display: flex;\n  justify-content: center;\n  align-items: center;\n}\n.organization-description {\n  margin-top: 30px;\n}\n.organization-card {\n  display: grid;\n  grid-template-columns: auto 40px 15px;\n  grid-gap: 15px;\n}\n.organization-card-arr {\n  background: url(\"/img/logo/right-arrow.svg\") no-repeat center;\n  background-size: contain;\n}\n.organization-card-limit {\n  font-size: 12px;\n}\n.organization-card-title {\n  font-size: 16px;\n}\n.organization-card-status {\n  font-size: 14px;\n  display: flex;\n  padding: 2px 10px 2px 10px;\n  border-radius: 3px;\n  font-weight: bold;\n  margin-top: 5px;\n}\n.organization-card-status-free {\n  background: #00a082;\n  color: #fff;\n}\n.organization-card-status-reserved {\n  background: #FF8008;\n  color: #fff;\n}\n.organization-card-icon {\n  background: url(\"/img/logo/table.svg\") no-repeat center;\n  background-size: contain;\n  height: 40px;\n}\n.organization-btn {\n  border-radius: 30px;\n  height: 44px;\n  color: #000;\n  background: #f0f0f0;\n}\n.organization-btn-sel, .organization-btn:hover {\n  background: #FF8008;\n  color: #fff;\n}\n.organization-shadow {\n  box-shadow: 0 0 5px 0 rgba(0, 0, 0, 0.15);\n  border-radius: 10px;\n  cursor: pointer;\n}\n.organization-shadow:hover {\n  background: #fafafa;\n}\n.organization-shadow-main {\n  box-shadow: 0 3px 3px rgba(0, 0, 0, 0.1);\n}\n.organization-image {\n  width: 100%;\n  border-radius: 10px;\n  background: no-repeat center;\n  background-size: cover;\n}\n.organization-image > div {\n  width: 100%;\n  padding-bottom: 100%;\n}\n.organization-logo {\n  margin: -150px auto 0 auto;\n  width: 200px;\n  height: 200px;\n  position: relative;\n  overflow: hidden;\n  z-index: 3;\n  border-radius: 200px;\n  box-shadow: 0 0 0 10px white;\n  background: #fff;\n}\n.organization-logo > img {\n  width: 100%;\n}\n.organization-logo-default {\n  width: 100%;\n  height: 100%;\n  background: no-repeat center;\n  background-size: 50%;\n}\n.organization-logo-default-restaurant {\n  background-image: url(\"/img/logo/restaurant.svg\");\n}\n.organization-logo-default-cafe {\n  background-image: url(\"/img/logo/cafe.svg\");\n}\n.organization-logo-default-bar {\n  background-image: url(\"/img/logo/bar.svg\");\n}\n.wallpaper {\n  max-height: 350px;\n  position: relative;\n  overflow: hidden;\n  border-radius: 0 0 20px 20px;\n  box-shadow: 0 0 0 10px #fff;\n}\n.wallpaper > img {\n  width: 100%;\n}\n.wallpaper-screen {\n  position: absolute;\n  top: 0;\n  left: 0;\n  bottom: 0;\n  right: 0;\n  width: 100%;\n  height: 100%;\n  background: rgba(0, 0, 0, 0.5);\n  z-index: 2;\n}\n@media only screen and (max-width: 768px) {\n.organization-description {\n    margin-top: 10px;\n}\n.organization-logo {\n    width: 100px;\n    margin-top: -75px;\n    height: 100px;\n}\n}\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, ".organization-title {\n  margin-top: 40px;\n  font-size: 30px;\n}\n.organization-description {\n  font-size: 16px;\n  margin-top: 30px;\n}\n.organization-tab {\n  border: none !important;\n  border-bottom: 4px solid transparent !important;\n}\n.organization-tab-sel {\n  color: #FF8008 !important;\n  border-bottom-color: #FF8008 !important;\n}\n.organization-bg {\n  background: #f5f5f5;\n}\n.organization-arr-btn {\n  background: #00a082;\n  color: white;\n  border-radius: 30px;\n  cursor: pointer;\n}\n.organization-date {\n  display: grid;\n  grid-template-columns: 40px auto 40px;\n  grid-gap: 10px;\n  padding: 5px;\n  background: #fafafa;\n  border-radius: 40px;\n  margin: 0 0.5rem 0 0.5rem !important;\n}\n.organization-input {\n  display: flex;\n  justify-content: center;\n  align-items: center;\n}\n.organization-card {\n  display: grid;\n  grid-template-columns: auto 40px 15px;\n  grid-gap: 15px;\n}\n.organization-card-arr {\n  background: url(\"/img/logo/right-arrow.svg\") no-repeat center;\n  background-size: contain;\n}\n.organization-card-limit {\n  font-size: 12px;\n}\n.organization-card-title {\n  font-size: 16px;\n}\n.organization-card-status {\n  font-size: 14px;\n  display: flex;\n  padding: 2px 10px 2px 10px;\n  border-radius: 3px;\n  font-weight: bold;\n  margin-top: 5px;\n}\n.organization-card-status-free {\n  background: #00a082;\n  color: #fff;\n}\n.organization-card-status-reserved {\n  background: #FF8008;\n  color: #fff;\n}\n.organization-card-icon {\n  background: url(\"/img/logo/table.svg\") no-repeat center;\n  background-size: contain;\n  height: 40px;\n}\n.organization-btn {\n  border-radius: 30px;\n  height: 44px;\n  color: #000;\n  background: #f0f0f0;\n}\n.organization-btn-sel, .organization-btn:hover {\n  background: #FF8008;\n  color: #fff;\n}\n.organization-shadow {\n  box-shadow: 0 0 5px 0 rgba(0, 0, 0, 0.15);\n  border-radius: 10px;\n  cursor: pointer;\n}\n.organization-shadow:hover {\n  background: #fafafa;\n}\n.organization-shadow-main {\n  box-shadow: 0 3px 3px rgba(0, 0, 0, 0.1);\n  border-radius: 0 0 15px 15px;\n}\n.organization-image {\n  width: 100%;\n  border-radius: 10px;\n  background: no-repeat center;\n  background-size: cover;\n}\n.organization-image > div {\n  width: 100%;\n  padding-bottom: 100%;\n}\n.organization-logo {\n  margin: -150px auto 0 auto;\n  width: 200px;\n  height: 200px;\n  position: relative;\n  overflow: hidden;\n  z-index: 3;\n  border-radius: 200px;\n  box-shadow: 0 0 0 10px white;\n  background: #fff;\n}\n.organization-logo > img {\n  width: 100%;\n}\n.organization-logo-default {\n  width: 100%;\n  height: 100%;\n  background: no-repeat center;\n  background-size: 50%;\n}\n.organization-logo-default-restaurant {\n  background-image: url(\"/img/logo/restaurant.svg\");\n}\n.organization-logo-default-cafe {\n  background-image: url(\"/img/logo/cafe.svg\");\n}\n.organization-logo-default-bar {\n  background-image: url(\"/img/logo/bar.svg\");\n}\n.wallpaper {\n  max-height: 350px;\n  position: relative;\n  overflow: hidden;\n  border-radius: 0 0 20px 20px;\n  box-shadow: 0 0 0 10px #fff;\n}\n.wallpaper > img {\n  width: 100%;\n}\n.wallpaper-screen {\n  position: absolute;\n  top: 0;\n  left: 0;\n  bottom: 0;\n  right: 0;\n  width: 100%;\n  height: 100%;\n  background: rgba(0, 0, 0, 0.5);\n  z-index: 2;\n}\n@media only screen and (max-width: 768px) {\n.organization-title {\n    margin-top: 10px;\n    font-size: 14px;\n}\n.organization-description {\n    font-size: 12px;\n    margin-top: 10px;\n}\n.organization-logo {\n    width: 80px;\n    margin-top: -40px;\n    height: 80px;\n    box-shadow: 0 0 0 5px white;\n}\n.organization-shadow-main {\n    box-shadow: 0 1px 1px rgba(0, 0, 0, 0.1);\n    border-radius: 0 0 15px 15px;\n}\n.wallpaper {\n    box-shadow: 0 0 0 5px #fff;\n}\n}\n.lds-dual-ring {\n  display: inline-block;\n  width: 80px;\n  height: 80px;\n}\n.lds-dual-ring:after {\n  content: \" \";\n  display: block;\n  width: 64px;\n  height: 64px;\n  margin: 8px;\n  border-radius: 50%;\n  border: 6px solid #00a082;\n  border-color: #00a082 transparent #00a082 transparent;\n  -webkit-animation: lds-dual-ring 1.2s linear infinite;\n          animation: lds-dual-ring 1.2s linear infinite;\n}\n@-webkit-keyframes lds-dual-ring {\n0% {\n    transform: rotate(0deg);\n}\n100% {\n    transform: rotate(360deg);\n}\n}\n@keyframes lds-dual-ring {\n0% {\n    transform: rotate(0deg);\n}\n100% {\n    transform: rotate(360deg);\n}\n}\n.lds-ellipsis {\n  display: inline-block;\n  position: relative;\n  width: 20px;\n  height: 20px;\n  transform: scale(0.5);\n  margin: 5px 0 0 0;\n}\n.lds-ellipsis div {\n  position: absolute;\n  top: 0;\n  width: 13px;\n  height: 13px;\n  border-radius: 50%;\n  background: #00a082;\n  -webkit-animation-timing-function: cubic-bezier(0, 1, 1, 0);\n          animation-timing-function: cubic-bezier(0, 1, 1, 0);\n}\n.lds-ellipsis div:nth-child(1) {\n  left: 8px;\n  -webkit-animation: lds-ellipsis1 0.6s infinite;\n          animation: lds-ellipsis1 0.6s infinite;\n}\n.lds-ellipsis div:nth-child(2) {\n  left: 8px;\n  -webkit-animation: lds-ellipsis2 0.6s infinite;\n          animation: lds-ellipsis2 0.6s infinite;\n}\n.lds-ellipsis div:nth-child(3) {\n  left: 32px;\n  -webkit-animation: lds-ellipsis2 0.6s infinite;\n          animation: lds-ellipsis2 0.6s infinite;\n}\n.lds-ellipsis div:nth-child(4) {\n  left: 56px;\n  -webkit-animation: lds-ellipsis3 0.6s infinite;\n          animation: lds-ellipsis3 0.6s infinite;\n}\n@-webkit-keyframes lds-ellipsis1 {\n0% {\n    transform: scale(0);\n}\n100% {\n    transform: scale(1);\n}\n}\n@keyframes lds-ellipsis1 {\n0% {\n    transform: scale(0);\n}\n100% {\n    transform: scale(1);\n}\n}\n@-webkit-keyframes lds-ellipsis3 {\n0% {\n    transform: scale(1);\n}\n100% {\n    transform: scale(0);\n}\n}\n@keyframes lds-ellipsis3 {\n0% {\n    transform: scale(1);\n}\n100% {\n    transform: scale(0);\n}\n}\n@-webkit-keyframes lds-ellipsis2 {\n0% {\n    transform: translate(0, 0);\n}\n100% {\n    transform: translate(24px, 0);\n}\n}\n@keyframes lds-ellipsis2 {\n0% {\n    transform: translate(0, 0);\n}\n100% {\n    transform: translate(24px, 0);\n}\n}\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -21580,7 +21584,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, ".loading {\n  display: inline-block;\n  position: relative;\n  width: 80px;\n  height: 40px;\n}\n.loading-text {\n  font-size: 20px !important;\n  color: #00a082 !important;\n  margin: 0;\n  font-weight: bold;\n  padding: 0 !important;\n}\n.loading div {\n  position: absolute;\n  top: 16px;\n  width: 13px;\n  height: 13px;\n  border-radius: 50%;\n  background: #00a082;\n  -webkit-animation-timing-function: cubic-bezier(0, 1, 1, 0);\n          animation-timing-function: cubic-bezier(0, 1, 1, 0);\n}\n.loading div:nth-child(1) {\n  left: 8px;\n  -webkit-animation: lds-ellipsis1 0.6s infinite;\n          animation: lds-ellipsis1 0.6s infinite;\n}\n.loading div:nth-child(2) {\n  left: 8px;\n  -webkit-animation: lds-ellipsis2 0.6s infinite;\n          animation: lds-ellipsis2 0.6s infinite;\n}\n.loading div:nth-child(3) {\n  left: 32px;\n  -webkit-animation: lds-ellipsis2 0.6s infinite;\n          animation: lds-ellipsis2 0.6s infinite;\n}\n.loading div:nth-child(4) {\n  left: 56px;\n  -webkit-animation: lds-ellipsis3 0.6s infinite;\n          animation: lds-ellipsis3 0.6s infinite;\n}\n@-webkit-keyframes lds-ellipsis1 {\n0% {\n    transform: scale(0);\n}\n100% {\n    transform: scale(1);\n}\n}\n@keyframes lds-ellipsis1 {\n0% {\n    transform: scale(0);\n}\n100% {\n    transform: scale(1);\n}\n}\n@-webkit-keyframes lds-ellipsis3 {\n0% {\n    transform: scale(1);\n}\n100% {\n    transform: scale(0);\n}\n}\n@keyframes lds-ellipsis3 {\n0% {\n    transform: scale(1);\n}\n100% {\n    transform: scale(0);\n}\n}\n@-webkit-keyframes lds-ellipsis2 {\n0% {\n    transform: translate(0, 0);\n}\n100% {\n    transform: translate(24px, 0);\n}\n}\n@keyframes lds-ellipsis2 {\n0% {\n    transform: translate(0, 0);\n}\n100% {\n    transform: translate(24px, 0);\n}\n}\n@media only screen and (max-width: 768px) {\n.loading {\n    transform: scale(0.7);\n}\n.loading-text {\n    font-size: 13px !important;\n}\n}\n.loading-btn {\n  display: block;\n  position: relative;\n  width: 80px;\n  height: 13px;\n  transform: scale(0.5);\n  margin: 0 auto 0 auto;\n}\n.loading-btn div {\n  position: absolute;\n  top: 0;\n  width: 13px;\n  height: 13px;\n  border-radius: 50%;\n  background: #fff;\n  -webkit-animation-timing-function: cubic-bezier(0, 1, 1, 0);\n          animation-timing-function: cubic-bezier(0, 1, 1, 0);\n}\n.loading-btn div:nth-child(1) {\n  left: 8px;\n  -webkit-animation: lds-ellipsis1 0.6s infinite;\n          animation: lds-ellipsis1 0.6s infinite;\n}\n.loading-btn div:nth-child(2) {\n  left: 8px;\n  -webkit-animation: lds-ellipsis2 0.6s infinite;\n          animation: lds-ellipsis2 0.6s infinite;\n}\n.loading-btn div:nth-child(3) {\n  left: 32px;\n  -webkit-animation: lds-ellipsis2 0.6s infinite;\n          animation: lds-ellipsis2 0.6s infinite;\n}\n.loading-btn div:nth-child(4) {\n  left: 56px;\n  -webkit-animation: lds-ellipsis3 0.6s infinite;\n          animation: lds-ellipsis3 0.6s infinite;\n}\n@keyframes lds-ellipsis1 {\n0% {\n    transform: scale(0);\n}\n100% {\n    transform: scale(1);\n}\n}\n@keyframes lds-ellipsis3 {\n0% {\n    transform: scale(1);\n}\n100% {\n    transform: scale(0);\n}\n}\n@keyframes lds-ellipsis2 {\n0% {\n    transform: translate(0, 0);\n}\n100% {\n    transform: translate(24px, 0);\n}\n}\n.payments-card-bank {\n  font-size: 1.25rem;\n  font-weight: bold;\n  margin: 0 0 5px 0;\n}\n.payments-card-hash {\n  font-size: 1rem;\n  margin: 0;\n}\n.payments-title {\n  margin: 50px 0 10px 0;\n  font-weight: bold;\n  font-size: 24px;\n}\n.payments-description {\n  font-size: 16px;\n  margin: 0;\n}\n.payments-all {\n  margin: 30px 0 30px 0;\n}\n.payments-list {\n  display: flex;\n  gap: 10px;\n}\n.payments-icon {\n  width: 40px;\n  height: 40px;\n  background: #00a082 no-repeat center;\n  background-size: 50%;\n  border-radius: 30px;\n  border: none;\n}\n.payments-icon-delete {\n  background-image: url(\"/img/logo/trash.svg\");\n}\n.payments-icon-edit {\n  background-image: url(\"/img/logo/draw.svg\");\n}\n.payments-btn {\n  background-color: #FF8008;\n  color: #fff;\n  border-radius: 30px;\n  height: 44px;\n  padding: 0 30px 0 30px;\n  min-width: 200px;\n}\n.payments-card-icon {\n  width: 44px;\n}\n.payments-card-icon-visa {\n  background: url(\"/img/logo/card.svg\") no-repeat center;\n  background-size: contain;\n}\n@media only screen and (max-width: 768px) {\n.payments-icon {\n    width: 30px;\n    height: 30px;\n}\n.payments-card-bank {\n    font-size: 12px;\n    margin: 0 0 2px 0;\n}\n.payments-card-hash {\n    font-size: 11px;\n}\n.payments-title {\n    font-size: 16px;\n    margin: 20px 0 0 0;\n}\n.payments-description {\n    font-size: 11px;\n    margin: 10px 0 0 0;\n}\n.payments-all {\n    margin: 10px 0 10px 0;\n}\n.payments-btn {\n    height: 30px;\n    padding: 0 10px 0 10px;\n    font-size: 12px !important;\n    min-width: 120px;\n}\n}\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, ".loading {\n  display: inline-block;\n  position: relative;\n  width: 80px;\n  height: 40px;\n}\n.loading-text {\n  font-size: 20px !important;\n  color: #00a082 !important;\n  margin: 0;\n  font-weight: bold;\n  padding: 0 !important;\n}\n.loading div {\n  position: absolute;\n  top: 16px;\n  width: 13px;\n  height: 13px;\n  border-radius: 50%;\n  background: #00a082;\n  -webkit-animation-timing-function: cubic-bezier(0, 1, 1, 0);\n          animation-timing-function: cubic-bezier(0, 1, 1, 0);\n}\n.loading div:nth-child(1) {\n  left: 8px;\n  -webkit-animation: lds-ellipsis1 0.6s infinite;\n          animation: lds-ellipsis1 0.6s infinite;\n}\n.loading div:nth-child(2) {\n  left: 8px;\n  -webkit-animation: lds-ellipsis2 0.6s infinite;\n          animation: lds-ellipsis2 0.6s infinite;\n}\n.loading div:nth-child(3) {\n  left: 32px;\n  -webkit-animation: lds-ellipsis2 0.6s infinite;\n          animation: lds-ellipsis2 0.6s infinite;\n}\n.loading div:nth-child(4) {\n  left: 56px;\n  -webkit-animation: lds-ellipsis3 0.6s infinite;\n          animation: lds-ellipsis3 0.6s infinite;\n}\n@-webkit-keyframes lds-ellipsis1 {\n0% {\n    transform: scale(0);\n}\n100% {\n    transform: scale(1);\n}\n}\n@keyframes lds-ellipsis1 {\n0% {\n    transform: scale(0);\n}\n100% {\n    transform: scale(1);\n}\n}\n@-webkit-keyframes lds-ellipsis3 {\n0% {\n    transform: scale(1);\n}\n100% {\n    transform: scale(0);\n}\n}\n@keyframes lds-ellipsis3 {\n0% {\n    transform: scale(1);\n}\n100% {\n    transform: scale(0);\n}\n}\n@-webkit-keyframes lds-ellipsis2 {\n0% {\n    transform: translate(0, 0);\n}\n100% {\n    transform: translate(24px, 0);\n}\n}\n@keyframes lds-ellipsis2 {\n0% {\n    transform: translate(0, 0);\n}\n100% {\n    transform: translate(24px, 0);\n}\n}\n@media only screen and (max-width: 768px) {\n.loading {\n    transform: scale(0.7);\n}\n.loading-text {\n    font-size: 13px !important;\n}\n}\n.loading-btn {\n  display: block;\n  position: relative;\n  width: 80px;\n  height: 13px;\n  transform: scale(0.5);\n  margin: 0 auto 0 auto;\n}\n.loading-btn div {\n  position: absolute;\n  top: 0;\n  width: 13px;\n  height: 13px;\n  border-radius: 50%;\n  background: #fff;\n  -webkit-animation-timing-function: cubic-bezier(0, 1, 1, 0);\n          animation-timing-function: cubic-bezier(0, 1, 1, 0);\n}\n.loading-btn div:nth-child(1) {\n  left: 8px;\n  -webkit-animation: lds-ellipsis1 0.6s infinite;\n          animation: lds-ellipsis1 0.6s infinite;\n}\n.loading-btn div:nth-child(2) {\n  left: 8px;\n  -webkit-animation: lds-ellipsis2 0.6s infinite;\n          animation: lds-ellipsis2 0.6s infinite;\n}\n.loading-btn div:nth-child(3) {\n  left: 32px;\n  -webkit-animation: lds-ellipsis2 0.6s infinite;\n          animation: lds-ellipsis2 0.6s infinite;\n}\n.loading-btn div:nth-child(4) {\n  left: 56px;\n  -webkit-animation: lds-ellipsis3 0.6s infinite;\n          animation: lds-ellipsis3 0.6s infinite;\n}\n@keyframes lds-ellipsis1 {\n0% {\n    transform: scale(0);\n}\n100% {\n    transform: scale(1);\n}\n}\n@keyframes lds-ellipsis3 {\n0% {\n    transform: scale(1);\n}\n100% {\n    transform: scale(0);\n}\n}\n@keyframes lds-ellipsis2 {\n0% {\n    transform: translate(0, 0);\n}\n100% {\n    transform: translate(24px, 0);\n}\n}\n.payments-card-bank {\n  font-size: 1.25rem;\n  font-weight: bold;\n  margin: 0 0 5px 0;\n}\n.payments-card-hash {\n  font-size: 1rem;\n  margin: 0;\n}\n.payments-title {\n  margin: 50px 0 10px 0;\n  font-weight: bold;\n  font-size: 24px;\n}\n.payments-description {\n  font-size: 16px;\n  margin: 0;\n}\n.payments-all {\n  margin: 30px 0 30px 0;\n}\n.payments-list {\n  display: flex;\n  gap: 10px;\n}\n.payments-icon {\n  width: 40px;\n  height: 40px;\n  background: #00a082 no-repeat center;\n  background-size: 50%;\n  border-radius: 30px;\n  border: none;\n}\n.payments-icon-delete {\n  background-image: url(\"/img/logo/trash.svg\");\n}\n.payments-icon-edit {\n  background-image: url(\"/img/logo/draw.svg\");\n}\n.payments-btn {\n  background-color: #FF8008;\n  color: #fff;\n  border-radius: 30px;\n  height: 44px;\n  padding: 0 30px 0 30px;\n  min-width: 200px;\n}\n.payments-card-icon {\n  width: 44px;\n}\n.payments-card-icon-visa {\n  background: url(\"/img/logo/card.svg\") no-repeat center;\n  background-size: contain;\n}\n.payments-empty-description {\n  font-size: 16px;\n}\n@media only screen and (max-width: 768px) {\n.payments-icon {\n    width: 30px;\n    height: 30px;\n}\n.payments-card-bank {\n    font-size: 12px;\n    margin: 0 0 2px 0;\n}\n.payments-card-hash {\n    font-size: 11px;\n}\n.payments-title {\n    font-size: 16px;\n    margin: 20px 0 0 0;\n}\n.payments-description {\n    font-size: 11px;\n    margin: 10px 0 0 0;\n}\n.payments-all {\n    margin: 10px 0 10px 0;\n}\n.payments-btn {\n    height: 30px;\n    padding: 0 10px 0 10px;\n    font-size: 12px !important;\n    min-width: 120px;\n}\n.payments-empty-title {\n    font-size: 16px;\n}\n.payments-empty-description {\n    font-size: 12px;\n}\n}\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 

@@ -5,7 +5,7 @@
         <template v-if="organization">
             <Booking :organization="organization" :table="table" :date="date"></Booking>
             <div class="container-fluid organization-bg">
-                <div class="container">
+                <div class="container p-0">
                     <div class="row">
                         <div class="col-12">
                             <div class="wallpaper">
@@ -24,8 +24,8 @@
                                     <div v-else-if="organization.category_id.id === 3" class="organization-logo-default organization-logo-default-bar"></div>
                                 </div>
                             </div>
-                            <div class="organization-title h3 text-dark font-weight-bold text-center mt-3">{{organization.title}}</div>
-                            <div class="organization-description h6 text-secondary text-center mt-3">{{organization.description}}</div>
+                            <div class="organization-title text-dark font-weight-bold text-center">{{organization.title}}</div>
+                            <div class="organization-description text-secondary text-center">{{organization.description}}</div>
                         </div>
                     </div>
                 </div>
@@ -36,15 +36,15 @@
                         <div class="col d-flex justify-content-center">
                             <div class="card text-center bg-transparent border-0">
                                 <div class="card-header bg-transparent d-flex justify-content-center border-0">
-                                    <ul class="nav nav-tabs card-header-tabs">
+                                    <ul class="nav nav-tabs card-header-tabs margin-0 border-0">
                                         <li class="nav-item">
-                                            <a class="nav-link h6 text-secondary bg-transparent organization-tab py-3 d-block" :class="{active: (tab === 1), 'organization-tab-sel': (tab === 1)}" role="button" @click="tab = 1">Бронирование</a>
+                                            <a class="nav-link h6 text-secondary bg-transparent organization-tab py-3 px-0 d-block" :class="{active: (tab === 1), 'organization-tab-sel': (tab === 1)}" role="button" @click="tab = 1">Бронирование</a>
                                         </li>
                                         <li class="nav-item">
-                                            <a class="nav-link h6 text-secondary bg-transparent organization-tab py-3 d-block" :class="{active: (tab === 2), 'organization-tab-sel': (tab === 2)}" role="button" @click="tab = 2">Галлерея</a>
+                                            <a class="nav-link h6 text-secondary bg-transparent organization-tab py-3 px-0 d-block" :class="{active: (tab === 2), 'organization-tab-sel': (tab === 2)}" role="button" @click="tab = 2">Галлерея</a>
                                         </li>
                                         <li class="nav-item">
-                                            <a class="nav-link h6 text-secondary bg-transparent organization-tab py-3 d-block" :class="{active: (tab === 3), 'organization-tab-sel': (tab === 3)}" role="button" @click="tab = 3">Отзывы</a>
+                                            <a class="nav-link h6 text-secondary bg-transparent organization-tab py-3 px-0 d-block" :class="{active: (tab === 3), 'organization-tab-sel': (tab === 3)}" role="button" @click="tab = 3">Отзывы</a>
                                         </li>
                                     </ul>
                                 </div>
@@ -337,6 +337,7 @@ export default {
 </script>
 
 <style lang="scss">
+    @import '../../css/organization/organization.scss';
     .lds-dual-ring {
         display: inline-block;
         width: 80px;
@@ -416,180 +417,6 @@ export default {
         }
         100% {
             transform: translate(24px, 0);
-        }
-    }
-    .organization {
-        &-tab {
-            border:  none !important;
-            border-bottom: 4px solid transparent !important;
-            &-sel {
-                color: #FF8008 !important;
-                border-bottom-color: #FF8008 !important;
-            }
-        }
-        &-bg {
-            background: #f5f5f5;
-        }
-        &-arr {
-            &-btn {
-                background: #00a082;
-                color: white;
-                border-radius: 30px;
-                cursor: pointer;
-            }
-        }
-        &-date {
-            display: grid;
-            grid-template-columns: 40px auto 40px;
-            grid-gap: 10px;
-            padding: 5px;
-            background: rgb(250,250,250);
-            border-radius: 40px;
-            margin: 0 .5rem 0 .5rem!important;
-        }
-        &-input {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            & > div {
-
-            }
-        }
-        &-description {
-            margin-top: 30px;
-        }
-        &-photo {
-
-        }
-        &-card {
-            &-arr {
-                background: url('/img/logo/right-arrow.svg') no-repeat center;
-                background-size: contain;
-            }
-            display: grid;
-            grid-template-columns: auto 40px 15px;
-            grid-gap: 15px;
-            &-limit {
-                font-size: 12px;
-            }
-            &-title {
-                font-size: 16px;
-            }
-            &-status {
-                font-size: 14px;
-                display: flex;
-                padding: 2px 10px 2px 10px;
-                border-radius: 3px;
-                font-weight: bold;
-                margin-top: 5px;
-                &-free {
-                    background: #00a082;
-                    color: #fff;
-                }
-                &-reserved {
-                    background: #FF8008;
-                    color: #fff;
-                }
-            }
-            &-icon {
-                background: url('/img/logo/table.svg') no-repeat center;
-                background-size: contain;
-                height: 40px;
-            }
-        }
-        &-btn {
-            border-radius: 30px;
-            height: 44px;
-            color: #000;
-            background: rgb(240,240,240);
-            &-sel, &:hover {
-                background: #FF8008;
-                color: #fff;
-            }
-        }
-        &-shadow {
-            box-shadow: 0 0 5px 0 rgba(0,0,0,.15);
-            border-radius: 10px;
-            cursor: pointer;
-            &:hover {
-                background: rgb(250,250,250);
-            }
-            &-main {
-                box-shadow: 0 3px 3px rgba(0,0,0,.1);
-            }
-        }
-        &-image {
-            width: 100%;
-            border-radius: 10px;
-            background: no-repeat center;
-            background-size: cover;
-            & > div {
-                width: 100%;
-                padding-bottom: 100%;
-            }
-        }
-        &-logo {
-            margin: -150px auto 0 auto;
-            width: 200px;
-            height: 200px;
-            position: relative;
-            overflow: hidden;
-            z-index: 3;
-            border-radius: 200px;
-            box-shadow: 0 0 0 10px white;
-            background: #fff;
-            & > img {
-                width: 100%;
-            }
-
-            &-default {
-                width: 100%;
-                height: 100%;
-                background: no-repeat center;
-                background-size: 50%;
-                &-restaurant {
-                    background-image: url('/img/logo/restaurant.svg');
-                }
-                &-cafe {
-                    background-image: url('/img/logo/cafe.svg');
-                }
-                &-bar {
-                    background-image: url('/img/logo/bar.svg');
-                }
-            }
-        }
-    }
-    .wallpaper {
-        max-height: 350px;
-        position: relative;
-        overflow: hidden;
-        border-radius: 0 0 20px 20px;
-        box-shadow: 0 0 0 10px #fff;
-        & > img {
-            width: 100%;
-        }
-        &-screen {
-            position: absolute;
-            top: 0;
-            left: 0;
-            bottom: 0;
-            right: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0,0,0,.5);
-            z-index: 2;
-        }
-    }
-    @media only screen and (max-width: 768px) {
-        .organization {
-            &-description {
-                margin-top: 10px;
-            }
-            &-logo {
-                width: 100px;
-                margin-top: -75px;
-                height: 100px;
-            }
         }
     }
 </style>

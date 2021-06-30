@@ -1,4 +1,9 @@
 .history {
+    &-title {
+        margin: 50px 0 10px 0;
+        font-weight: bold;
+        font-size: 24px;
+    }
     &-font {
         font-size: 15px;
     }
@@ -25,6 +30,45 @@
         }
         &-success {
             background: #00a082;
+        }
+    }
+}
+@media only screen and (max-width: 768px) {
+    .history {
+        &-icon {
+            margin-right: 10px;
+        }
+        &-status {
+            padding: 5px;
+            font-size: 11px;
+        }
+        &-title {
+            font-size: 16px;
+            margin: 20px 0 0 0;
+        }
+        &-font {
+            font-size: 12px;
+        }
+        &-description {
+            font-size: 11px;
+            margin: 10px 0 0 0;
+        }
+        &-all {
+            margin: 10px 0 10px 0;
+        }
+        &-btn {
+            height: 30px;
+            padding: 0 10px 0 10px;
+            font-size: 12px !important;
+            min-width: 120px;
+        }
+        &-empty {
+            &-title {
+                font-size: 16px;
+            }
+            &-description {
+                font-size: 12px;
+            }
         }
     }
 }

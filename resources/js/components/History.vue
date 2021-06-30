@@ -1,23 +1,23 @@
 <template>
     <Header></Header>
     <profile-section></profile-section>
-    <div class="container-fluid mb-5">
-        <div class="container">
+    <div class="container-fluid mb-md-5">
+        <div class="container p-0">
             <template v-if="items.length > 0">
-                <div class="row mt-5">
+                <div class="row">
                     <div class="col-12">
-                        <h2 class=" top-title">История бронирования</h2>
-                        <p class="mt-5 h6 text-secondary text-justify">
+                        <h2 class="history-title">История бронирования</h2>
+                        <p class="history-description">
                             Здесь вы можете просматривать вашу историю бронировани в заведениях.
                         </p>
                     </div>
                 </div>
-                <div class="row mt-5">
+                <div class="row">
                     <div class="col-12">
                         <ul class="list-group list-group-flush">
                             <li class="list-group-item px-0 d-flex justify-content-between settings-item align-items-center" v-for="(item,key) in items" :key="key">
                                 <div class="d-flex" v-if="item">
-                                    <div class="payments-card-icon history-icon mr-3"></div>
+                                    <div class="history-card-icon history-icon mr-md-3"></div>
                                     <div>
                                         <div class="history-font font-weight-bold">
                                             <a :href="'/home/'+item.organization.id" class="p-0 text-dark">{{item.organization.title}}</a> • <span class="text-secondary" v-if="item.organization_tables.title">{{item.organization_tables.title}}</span>

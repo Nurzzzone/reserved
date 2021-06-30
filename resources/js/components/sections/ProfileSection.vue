@@ -6,6 +6,7 @@
                     <h1 class="text-white section-title" v-if="url === 'profile'">Профиль</h1>
                     <h1 class="text-white section-title" v-else-if="url === 'settings'">Настройки</h1>
                     <h1 class="text-white section-title" v-else-if="url === 'payments'">Способ оплаты</h1>
+                    <h1 class="text-white section-title" v-else-if="url === 'history'">История</h1>
                 </div>
                 <div class="col-12" v-else-if="end === 'favorite'">
                     <h1 class="text-white section-title" v-if="url === 'favorite'">Избранное</h1>

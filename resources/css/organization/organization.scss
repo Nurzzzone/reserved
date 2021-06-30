@@ -171,6 +171,13 @@
 }
 @media only screen and (max-width: 768px) {
     .organization {
+        &-tab {
+            font-size: 11px;
+            padding: 10px 5px 10px 5px !important;
+            &-sel {
+
+            }
+        }
         &-title {
             margin-top: 10px;
             font-size: 14px;

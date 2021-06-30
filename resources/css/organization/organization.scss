@@ -227,11 +227,10 @@
             border-radius: 5px;
             &-main {
                 box-shadow:0 1px 1px  rgba(0,0,0,.1);
-                border-radius: 0 0 15px 15px;
             }
         }
     }
     .wallpaper {
-
+        border-radius: 0;
     }
 }

@@ -7,7 +7,7 @@
             <div class="container-fluid organization-bg">
                 <div class="container p-0">
                     <div class="row">
-                        <div class="col-12">
+                        <div class="col-12 p-0">
                             <div class="wallpaper">
                                 <div class="wallpaper-screen">
                                     <div class="organization-description text-center text-white">{{organization.address}}</div>

@@ -1,7 +1,7 @@
 <template>
     <Header></Header>
     <profile-section></profile-section>
-    <div class="container-fluid p-0 m-0">
+    <div class="container-fluid p-0 m-0 home-bg-color">
         <div class="container p-0">
             <div class="row home-main" v-if="menu.length">
                 <div class="col-12 col-md-6 d-flex justify-content-center p-0" v-for="(item,key) in menu" :key="key">

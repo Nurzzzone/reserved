@@ -22,7 +22,7 @@
         display: flex;
         justify-content: center;
         align-items: center;
-        gap: 10px;
+        gap: 20px;
     }
     &-description {
         font-size: 16px;
@@ -225,6 +225,7 @@
         &-title {
             margin-top: 10px;
             font-size: 14px;
+            gap: 10px;
         }
         &-description {
             font-size: 12px;

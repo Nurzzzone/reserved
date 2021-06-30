@@ -2,27 +2,27 @@
     <Header></Header>
     <profile-section></profile-section>
     <card-modal :modal="cardModal" :card="card" :index="key" @delete="deleteCardReady"></card-modal>
-    <div class="container-fluid mb-5">
-        <div class="container">
+    <div class="container-fluid mb-md-5">
+        <div class="container p-0">
             <template v-if="!cardLoading">
                 <template v-if="cards.length > 0">
-                    <div class="row mt-5">
+                    <div class="row">
                         <div class="col-12">
-                            <h2 class=" top-title">Ваши карточки</h2>
-                            <p class="mt-5 h6 text-secondary text-justify">
+                            <h2 class="payments-title">Ваши карточки</h2>
+                            <p class="payments-description text-secondary text-justify">
                                 Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin at felis mattis, tincidunt diam eget, venenatis erat. Proin at urna at est sollicitudin volutpat sit amet ut orci. Nunc faucibus neque a purus viverra, vitae aliquam massa tincidunt. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos.
                             </p>
                         </div>
                     </div>
-                    <div class="row mt-5">
-                        <div class="col-12">
+                    <div class="row payments-all">
+                        <div class="col-12 p-0">
                             <ul class="list-group list-group-flush">
                                 <li class="list-group-item px-0 d-flex justify-content-between settings-item align-items-center" v-for="(card,key) in cards" :key="key">
                                     <div class="d-flex">
                                         <div class="payments-card-icon payments-card-icon-visa mr-3"></div>
                                         <div>
-                                            <div class="h5 font-weight-bold">{{card.bank}}</div>
-                                            <p class="h6 text-secondary">{{card.hash}}</p>
+                                            <div class="payments-card-bank">{{card.bank}}</div>
+                                            <p class="payments-card-hash text-secondary">{{card.hash}}</p>
                                         </div>
                                     </div>
                                     <div class="d-flex">
@@ -186,44 +186,7 @@ export default {
 </script>
 
 <style lang="scss">
-    .payments {
-        &-list {
-            display: flex;
-            gap: 10px
-        }
-        &-icon {
-            width: 40px;
-            height: 40px;
-            background: #00a082 no-repeat center;
-            background-size: 50%;
-            border-radius: 30px;
-            border: none;
-            &-delete {
-                background-image: url('/img/logo/trash.svg');
-            }
-            &-edit {
-                background-image: url('/img/logo/draw.svg');
-            }
-        }
-        &-btn {
-            background-color: #FF8008;
-            color: #fff;
-            border-radius: 30px;
-            height: 44px;
-            padding: 0 30px 0 30px;
-            min-width: 200px;
-        }
-        &-card {
-            &-icon {
-                width: 44px;
-                height: 44px;
-                &-visa {
-                    background: url("/img/logo/card.svg") no-repeat center;
-                    background-size: contain;
-                }
-            }
-        }
-    }
+    @import '../../css/payments/payments.scss';
     .loading {
         display: inline-block;
         position: relative;

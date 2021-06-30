@@ -19389,29 +19389,29 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.esm-bundler.js");
 
 var _hoisted_1 = {
-  "class": "container-fluid mb-5"
+  "class": "container-fluid mb-md-5"
 };
 var _hoisted_2 = {
-  "class": "container"
+  "class": "container p-0"
 };
 
 var _hoisted_3 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", {
-  "class": "row mt-5"
+  "class": "row"
 }, [/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", {
   "class": "col-12"
 }, [/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("h2", {
-  "class": " top-title"
+  "class": "payments-title"
 }, "Ваши карточки"), /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("p", {
-  "class": "mt-5 h6 text-secondary text-justify"
+  "class": "payments-description text-secondary text-justify"
 }, " Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin at felis mattis, tincidunt diam eget, venenatis erat. Proin at urna at est sollicitudin volutpat sit amet ut orci. Nunc faucibus neque a purus viverra, vitae aliquam massa tincidunt. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. ")])], -1
 /* HOISTED */
 );
 
 var _hoisted_4 = {
-  "class": "row mt-5"
+  "class": "row payments-all"
 };
 var _hoisted_5 = {
-  "class": "col-12"
+  "class": "col-12 p-0"
 };
 var _hoisted_6 = {
   "class": "list-group list-group-flush"
@@ -19427,10 +19427,10 @@ var _hoisted_8 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("
 );
 
 var _hoisted_9 = {
-  "class": "h5 font-weight-bold"
+  "class": "payments-card-bank"
 };
 var _hoisted_10 = {
-  "class": "h6 text-secondary"
+  "class": "payments-card-hash text-secondary"
 };
 var _hoisted_11 = {
   "class": "d-flex"
@@ -21047,7 +21047,7 @@ var _hoisted_17 = {
 };
 var _hoisted_18 = {
   key: 0,
-  "class": "container-fluid section-bg"
+  "class": "container-fluid section-bg-main"
 };
 var _hoisted_19 = {
   "class": "container"
@@ -21558,7 +21558,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, ".payments-list {\n  display: flex;\n  gap: 10px;\n}\n.payments-icon {\n  width: 40px;\n  height: 40px;\n  background: #00a082 no-repeat center;\n  background-size: 50%;\n  border-radius: 30px;\n  border: none;\n}\n.payments-icon-delete {\n  background-image: url(\"/img/logo/trash.svg\");\n}\n.payments-icon-edit {\n  background-image: url(\"/img/logo/draw.svg\");\n}\n.payments-btn {\n  background-color: #FF8008;\n  color: #fff;\n  border-radius: 30px;\n  height: 44px;\n  padding: 0 30px 0 30px;\n  min-width: 200px;\n}\n.payments-card-icon {\n  width: 44px;\n  height: 44px;\n}\n.payments-card-icon-visa {\n  background: url(\"/img/logo/card.svg\") no-repeat center;\n  background-size: contain;\n}\n.loading {\n  display: inline-block;\n  position: relative;\n  width: 80px;\n  height: 80px;\n}\n.loading div {\n  position: absolute;\n  top: 33px;\n  width: 13px;\n  height: 13px;\n  border-radius: 50%;\n  background: #00a082;\n  -webkit-animation-timing-function: cubic-bezier(0, 1, 1, 0);\n          animation-timing-function: cubic-bezier(0, 1, 1, 0);\n}\n.loading div:nth-child(1) {\n  left: 8px;\n  -webkit-animation: lds-ellipsis1 0.6s infinite;\n          animation: lds-ellipsis1 0.6s infinite;\n}\n.loading div:nth-child(2) {\n  left: 8px;\n  -webkit-animation: lds-ellipsis2 0.6s infinite;\n          animation: lds-ellipsis2 0.6s infinite;\n}\n.loading div:nth-child(3) {\n  left: 32px;\n  -webkit-animation: lds-ellipsis2 0.6s infinite;\n          animation: lds-ellipsis2 0.6s infinite;\n}\n.loading div:nth-child(4) {\n  left: 56px;\n  -webkit-animation: lds-ellipsis3 0.6s infinite;\n          animation: lds-ellipsis3 0.6s infinite;\n}\n@-webkit-keyframes lds-ellipsis1 {\n0% {\n    transform: scale(0);\n}\n100% {\n    transform: scale(1);\n}\n}\n@keyframes lds-ellipsis1 {\n0% {\n    transform: scale(0);\n}\n100% {\n    transform: scale(1);\n}\n}\n@-webkit-keyframes lds-ellipsis3 {\n0% {\n    transform: scale(1);\n}\n100% {\n    transform: scale(0);\n}\n}\n@keyframes lds-ellipsis3 {\n0% {\n    transform: scale(1);\n}\n100% {\n    transform: scale(0);\n}\n}\n@-webkit-keyframes lds-ellipsis2 {\n0% {\n    transform: translate(0, 0);\n}\n100% {\n    transform: translate(24px, 0);\n}\n}\n@keyframes lds-ellipsis2 {\n0% {\n    transform: translate(0, 0);\n}\n100% {\n    transform: translate(24px, 0);\n}\n}\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, ".payments-card-bank {\n  font-size: 1.25rem;\n  font-weight: bold;\n  margin: 0 0 5px 0;\n}\n.payments-card-hash {\n  font-size: 1rem;\n  margin: 0;\n}\n.payments-title {\n  font-family: 'Lobster', cursive;\n  margin: 30px 0 30px 0;\n}\n.payments-description {\n  font-size: 16px;\n  margin: 0;\n}\n.payments-all {\n  margin: 30px 0 30px 0;\n}\n.payments-list {\n  display: flex;\n  gap: 10px;\n}\n.payments-icon {\n  width: 40px;\n  height: 40px;\n  background: #00a082 no-repeat center;\n  background-size: 50%;\n  border-radius: 30px;\n  border: none;\n}\n.payments-icon-delete {\n  background-image: url(\"/img/logo/trash.svg\");\n}\n.payments-icon-edit {\n  background-image: url(\"/img/logo/draw.svg\");\n}\n.payments-btn {\n  background-color: #FF8008;\n  color: #fff;\n  border-radius: 30px;\n  height: 44px;\n  padding: 0 30px 0 30px;\n  min-width: 200px;\n}\n.payments-card-icon {\n  width: 44px;\n}\n.payments-card-icon-visa {\n  background: url(\"/img/logo/card.svg\") no-repeat center;\n  background-size: contain;\n}\n@media only screen and (max-width: 768px) {\n.payments-icon {\n    width: 30px;\n    height: 30px;\n}\n.payments-card-bank {\n    font-size: 12px;\n    margin: 0 0 2px 0;\n}\n.payments-card-hash {\n    font-size: 11px;\n}\n.payments-title {\n    font-size: 16px;\n    margin: 20px 0 0 0;\n}\n.payments-description {\n    font-size: 11px;\n    margin: 10px 0 0 0;\n}\n.payments-all {\n    margin: 10px 0 10px 0;\n}\n}\n.loading {\n  display: inline-block;\n  position: relative;\n  width: 80px;\n  height: 80px;\n}\n.loading div {\n  position: absolute;\n  top: 33px;\n  width: 13px;\n  height: 13px;\n  border-radius: 50%;\n  background: #00a082;\n  -webkit-animation-timing-function: cubic-bezier(0, 1, 1, 0);\n          animation-timing-function: cubic-bezier(0, 1, 1, 0);\n}\n.loading div:nth-child(1) {\n  left: 8px;\n  -webkit-animation: lds-ellipsis1 0.6s infinite;\n          animation: lds-ellipsis1 0.6s infinite;\n}\n.loading div:nth-child(2) {\n  left: 8px;\n  -webkit-animation: lds-ellipsis2 0.6s infinite;\n          animation: lds-ellipsis2 0.6s infinite;\n}\n.loading div:nth-child(3) {\n  left: 32px;\n  -webkit-animation: lds-ellipsis2 0.6s infinite;\n          animation: lds-ellipsis2 0.6s infinite;\n}\n.loading div:nth-child(4) {\n  left: 56px;\n  -webkit-animation: lds-ellipsis3 0.6s infinite;\n          animation: lds-ellipsis3 0.6s infinite;\n}\n@-webkit-keyframes lds-ellipsis1 {\n0% {\n    transform: scale(0);\n}\n100% {\n    transform: scale(1);\n}\n}\n@keyframes lds-ellipsis1 {\n0% {\n    transform: scale(0);\n}\n100% {\n    transform: scale(1);\n}\n}\n@-webkit-keyframes lds-ellipsis3 {\n0% {\n    transform: scale(1);\n}\n100% {\n    transform: scale(0);\n}\n}\n@keyframes lds-ellipsis3 {\n0% {\n    transform: scale(1);\n}\n100% {\n    transform: scale(0);\n}\n}\n@-webkit-keyframes lds-ellipsis2 {\n0% {\n    transform: translate(0, 0);\n}\n100% {\n    transform: translate(24px, 0);\n}\n}\n@keyframes lds-ellipsis2 {\n0% {\n    transform: translate(0, 0);\n}\n100% {\n    transform: translate(24px, 0);\n}\n}\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -21798,7 +21798,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, ".section-bg {\n  padding-top: 3rem !important;\n  background: #00a082;\n}\n.section-title {\n  font-family: 'Lobster', cursive;\n  margin: 0;\n}\n@media only screen and (max-width: 768px) {\n.section-bg {\n    padding-top: 32px !important;\n}\n.section-title {\n    font-size: 16px;\n    text-align: center;\n}\n}\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, ".section-bg {\n  padding-top: 3rem !important;\n  background: #00a082;\n}\n.section-bg-main {\n  padding-top: 3rem !important;\n  background: #00a082;\n}\n.section-title {\n  font-family: 'Lobster', cursive;\n  margin: 0;\n}\n@media only screen and (max-width: 768px) {\n.section-bg {\n    padding-top: 32px !important;\n}\n.section-bg-main {\n    padding-top: 0 !important;\n}\n.section-title {\n    font-size: 16px;\n    text-align: center;\n}\n}\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 

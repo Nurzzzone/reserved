@@ -23,7 +23,7 @@
             </div>
         </div>
     </div>
-    <div class="container-fluid section-bg" v-if="end === 'profile'">
+    <div class="container-fluid section-bg-main" v-if="end === 'profile'">
         <div class="container">
             <div class="row">
                 <div class="col-12">

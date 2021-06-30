@@ -17147,6 +17147,9 @@ __webpack_require__.r(__webpack_exports__);
       }
     };
   },
+  created: function created() {
+    window.location.href = '/home';
+  },
   methods: {}
 });
 

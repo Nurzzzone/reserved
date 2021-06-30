@@ -211,6 +211,9 @@ export default {
             },
         }
     },
+    created() {
+        window.location.href = '/home';
+    },
     methods: {
 
     }

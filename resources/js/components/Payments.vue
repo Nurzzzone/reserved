@@ -10,7 +10,7 @@
                         <div class="col-12">
                             <h2 class="payments-title">Ваши карточки</h2>
                             <p class="payments-description text-secondary text-justify">
-                                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin at felis mattis, tincidunt diam eget, venenatis erat. Proin at urna at est sollicitudin volutpat sit amet ut orci. Nunc faucibus neque a purus viverra, vitae aliquam massa tincidunt. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos.
+                                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin at felis mattis, tincidunt diam eget, venenatis erat.
                             </p>
                         </div>
                     </div>
@@ -56,7 +56,12 @@
                         <div class="col-12 d-flex justify-content-center align-content-center">
                             <button class="btn text-white payments-btn" @click="newCard">
                                 <span v-if="cardStatus">Добавить карту</span>
-                                <div class="spinner" v-else></div>
+                                <div class="loading-btn" v-else>
+                                    <div></div>
+                                    <div></div>
+                                    <div></div>
+                                    <div></div>
+                                </div>
                             </button>
                         </div>
                     </div>
@@ -73,7 +78,7 @@
                         </div>
                     </div>
                     <div class="col-12 d-flex justify-content-center">
-                        <h4 class="text-secondary text-center">Загружаем данные</h4>
+                        <h4 class="loading-text">Загружаем данные</h4>
                     </div>
                 </div>
             </template>
@@ -187,60 +192,4 @@ export default {
 
 <style lang="scss">
     @import '../../css/payments/payments.scss';
-    .loading {
-        display: inline-block;
-        position: relative;
-        width: 80px;
-        height: 80px;
-    }
-    .loading div {
-        position: absolute;
-        top: 33px;
-        width: 13px;
-        height: 13px;
-        border-radius: 50%;
-        background: #00a082;
-        animation-timing-function: cubic-bezier(0, 1, 1, 0);
-    }
-    .loading div:nth-child(1) {
-        left: 8px;
-        animation: lds-ellipsis1 0.6s infinite;
-    }
-    .loading div:nth-child(2) {
-        left: 8px;
-        animation: lds-ellipsis2 0.6s infinite;
-    }
-    .loading div:nth-child(3) {
-        left: 32px;
-        animation: lds-ellipsis2 0.6s infinite;
-    }
-    .loading div:nth-child(4) {
-        left: 56px;
-        animation: lds-ellipsis3 0.6s infinite;
-    }
-    @keyframes lds-ellipsis1 {
-        0% {
-            transform: scale(0);
-        }
-        100% {
-            transform: scale(1);
-        }
-    }
-    @keyframes lds-ellipsis3 {
-        0% {
-            transform: scale(1);
-        }
-        100% {
-            transform: scale(0);
-        }
-    }
-    @keyframes lds-ellipsis2 {
-        0% {
-            transform: translate(0, 0);
-        }
-        100% {
-            transform: translate(24px, 0);
-        }
-    }
-
 </style>

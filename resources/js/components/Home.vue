@@ -3,7 +3,7 @@
     <profile-section></profile-section>
     <div class="container-fluid p-0 m-0">
         <div class="container p-0">
-            <div class="row home-main">
+            <div class="row home-main" v-if="menu.length">
                 <div class="col-12 col-md-6 d-flex justify-content-center p-0" v-for="(item,key) in menu" :key="key">
                     <a :href="item.url" class="d-block w-100 text-decoration-none p-2">
                         <div class="home-category">

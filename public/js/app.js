@@ -19723,13 +19723,13 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.esm-bundler.js");
 
 var _hoisted_1 = {
-  "class": "container-fluid mb-md-5 item-bg"
+  "class": "container-fluid py-3 py-md-5 item-bg"
 };
 var _hoisted_2 = {
   "class": "container"
 };
 var _hoisted_3 = {
-  "class": "row mt-md-5"
+  "class": "row justify-content-center"
 };
 var _hoisted_4 = {
   "class": "card border-0 item-shadow overflow-hidden m-2 m-md-0 item-radius"
@@ -19754,43 +19754,51 @@ var _hoisted_10 = {
   "class": "item-logo mb-md-2 d-flex justify-content-center"
 };
 var _hoisted_11 = {
-  key: 1,
-  src: "/img/logo/restaurant.svg"
+  "class": "item-logo-default"
 };
-var _hoisted_12 = {
+
+var _hoisted_12 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", {
+  style: {
+    "background-image": "url('/img/logo/restaurant.svg')"
+  }
+}, null, -1
+/* HOISTED */
+);
+
+var _hoisted_13 = {
   "class": "list-group list-group-flush"
 };
-var _hoisted_13 = {
+var _hoisted_14 = {
   "class": "list-group-item text-center p-0"
 };
-var _hoisted_14 = {
+var _hoisted_15 = {
   "class": " font-weight-bold item-title"
 };
-var _hoisted_15 = {
-  key: 0,
-  "class": "item-description text-secondary mx-3"
-};
 var _hoisted_16 = {
-  "class": "list-group-item text-center bg-light"
+  key: 0,
+  "class": "item-description text-secondary mx-3 my-0"
 };
 var _hoisted_17 = {
+  "class": "list-group-item text-center bg-light"
+};
+var _hoisted_18 = {
   key: 0,
   "class": "h6 text-secondary text-font"
 };
-var _hoisted_18 = {
-  "class": "text-center my-2 h6 text-secondary text-font"
-};
 var _hoisted_19 = {
+  "class": "text-center mb-0 mt-2 h6 text-secondary text-font"
+};
+var _hoisted_20 = {
   "class": "list-group-item"
 };
 
-var _hoisted_20 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", {
-  "class": "py-1"
+var _hoisted_21 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", {
+  "class": "py-md-1"
 }, "Подробнее", -1
 /* HOISTED */
 );
 
-var _hoisted_21 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createStaticVNode)("<div class=\"col-12 d-flex justify-content-center my-5\"><div><img src=\"/img/logo/restaurant.svg\" width=\"120\"></div></div><div class=\"col-12 mt-3 mb-5\"><h2 class=\"text-center\">Список пуст</h2><p class=\"text-center h5 text-secondary mt-2\">Возможно в данный момент все заведения закрыты. Попробуите обновить страницу позднее.</p></div>", 2);
+var _hoisted_22 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createStaticVNode)("<div class=\"col-12 d-flex justify-content-center my-5\"><div><img src=\"/img/logo/restaurant.svg\" width=\"120\"></div></div><div class=\"col-12 mt-3 mb-5\"><h2 class=\"text-center\">Список пуст</h2><p class=\"text-center h5 text-secondary mt-2\">Возможно в данный момент все заведения закрыты. Попробуите обновить страницу позднее.</p></div>", 2);
 
 function render(_ctx, _cache, $props, $setup, $data, $options) {
   var _component_Header = (0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveComponent)("Header");
@@ -19814,35 +19822,35 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
       src: restaurant.wallpaper
     }, null, 8
     /* PROPS */
-    , ["src"])) : ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)("img", _hoisted_9))]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_10, [restaurant.image ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)("img", {
+    , ["src"])) : ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)("img", _hoisted_9))]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_10, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_11, [restaurant.image ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)("img", {
       key: 0,
       src: restaurant.image
     }, null, 8
     /* PROPS */
-    , ["src"])) : ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)("img", _hoisted_11))]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("ul", _hoisted_12, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("li", _hoisted_13, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("a", {
+    , ["src"])) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true), _hoisted_12])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("ul", _hoisted_13, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("li", _hoisted_14, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("a", {
       href: '/home/' + restaurant.id,
       "class": "text-dark"
-    }, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("h3", _hoisted_14, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(restaurant.title), 1
+    }, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("h3", _hoisted_15, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(restaurant.title), 1
     /* TEXT */
     )], 8
     /* PROPS */
-    , ["href"]), restaurant.description ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)("p", _hoisted_15, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(restaurant.description), 1
+    , ["href"]), restaurant.description ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)("p", _hoisted_16, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(restaurant.description), 1
     /* TEXT */
-    )) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true)]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("li", _hoisted_16, [restaurant.time ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)("div", _hoisted_17, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(restaurant.time), 1
+    )) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true)]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("li", _hoisted_17, [restaurant.time ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)("div", _hoisted_18, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(restaurant.time), 1
     /* TEXT */
-    )) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_18, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(restaurant.address), 1
+    )) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_19, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(restaurant.address), 1
     /* TEXT */
-    )]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("li", _hoisted_19, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("a", {
+    )]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("li", _hoisted_20, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("a", {
       href: '/home/' + restaurant.id,
-      "class": "btn w-100 text-white text-btn mt-2 text-font font-weight-bold d-flex justify-content-center align-content-center"
-    }, [_hoisted_20], 8
+      "class": "btn w-100 text-white text-btn text-font font-weight-bold d-flex justify-content-center align-content-center"
+    }, [_hoisted_21], 8
     /* PROPS */
     , ["href"])])])])]);
   }), 128
   /* KEYED_FRAGMENT */
   )) : ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)(vue__WEBPACK_IMPORTED_MODULE_0__.Fragment, {
     key: 1
-  }, [_hoisted_21], 64
+  }, [_hoisted_22], 64
   /* STABLE_FRAGMENT */
   ))])])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_Footer_menu), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_Footer)], 64
   /* STABLE_FRAGMENT */
@@ -21420,7 +21428,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, ".item-title {\n  font-size: 1.75rem;\n}\n.item-bg {\n  background: whitesmoke;\n}\n.item-shadow {\n  box-shadow: 0 0 2px 0 rgba(0, 0, 0, 0.1);\n}\n.item-radius {\n  border-radius: 15px;\n}\n.item-description {\n  font-size: 13px;\n  text-align: justify;\n}\n.item-rating {\n  position: absolute;\n  z-index: 2;\n  right: 10px;\n  top: 10px;\n  background: red;\n  padding: 5px 10px 5px 10px;\n  border-radius: 5px;\n  color: #fff;\n}\n.item-main {\n  max-height: 150px;\n  overflow: hidden;\n  border-radius: 5px;\n  margin: 10px;\n  position: relative;\n}\n.item-main > img {\n  display: table;\n  width: 100%;\n}\n.item-logo {\n  position: relative;\n  margin: -75px auto 0 auto;\n  width: 120px;\n}\n.item-logo > img {\n  border-radius: 80px;\n  border: 10px solid white;\n  background: #fff;\n  width: 100%;\n}\n.text-desc {\n  font-size: 12px;\n}\n.text-btn {\n  background: #57a283;\n  border-radius: 50px;\n  height: 44px;\n}\n.text-font {\n  font-size: 14px;\n}\n@media only screen and (max-width: 768px) {\n.item-rating {\n    padding: 2px 5px 2px 5px;\n    line-height: 1;\n    right: 5px;\n    top: 5px;\n}\n.item-radius {\n    border-radius: 10px;\n}\n.item-title {\n    font-size: 12px;\n    margin: 0;\n}\n.item-description {\n    font-size: 9px;\n    padding: 0 !important;\n    margin: 0 10px 10px 10px !important;\n}\n.item-logo {\n    margin: -35px auto 0 auto;\n    width: 50px;\n}\n.item-logo > img {\n    border-radius: 80px;\n    border: 4px solid white;\n    background: #fff;\n}\n}\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, ".item-title {\n  font-size: 1.75rem;\n}\n.item-bg {\n  background: whitesmoke;\n}\n.item-shadow {\n  box-shadow: 0 0 2px 0 rgba(0, 0, 0, 0.1);\n}\n.item-radius {\n  border-radius: 15px;\n}\n.item-description {\n  font-size: 13px;\n  text-align: justify;\n}\n.item-rating {\n  position: absolute;\n  z-index: 2;\n  right: 10px;\n  top: 10px;\n  background: red;\n  padding: 5px 10px 5px 10px;\n  border-radius: 5px;\n  color: #fff;\n}\n.item-main {\n  max-height: 150px;\n  overflow: hidden;\n  border-radius: 5px;\n  margin: 10px;\n  position: relative;\n}\n.item-main > img {\n  display: table;\n  width: 100%;\n}\n.item-logo {\n  position: relative;\n  margin: -75px auto 0 auto;\n  width: 120px;\n}\n.item-logo > img {\n  border-radius: 80px;\n  border: 10px solid white;\n  background: #fff;\n  width: 100%;\n}\n.item-logo-default {\n  position: relative;\n  width: 100px;\n  float: left;\n  overflow: hidden;\n  border-radius: 100px;\n  box-shadow: 0 0 0 10px #fff;\n}\n.item-logo-default:before {\n  content: \"\";\n  float: left;\n  padding-top: 100%;\n}\n.item-logo-default > img {\n  width: 100%;\n  margin: 0;\n}\n.item-logo-default > div {\n  width: 100%;\n  height: 100%;\n  background: #fff no-repeat center;\n  background-size: 50%;\n  border-radius: 100px;\n}\n.text-desc {\n  font-size: 12px;\n}\n.text-btn {\n  background: #57a283;\n  border-radius: 50px;\n  height: auto;\n}\n.text-font {\n  font-size: 14px;\n}\n@media only screen and (max-width: 768px) {\n.item-rating {\n    padding: 2px 5px 2px 5px;\n    line-height: 1;\n    right: 5px;\n    top: 5px;\n}\n.item-radius {\n    border-radius: 10px;\n}\n.item-title {\n    font-size: 12px;\n    margin: 0;\n}\n.item-description {\n    font-size: 9px;\n    padding: 0 !important;\n    margin: 0 10px 10px 10px !important;\n}\n.item-logo {\n    margin: -35px auto 0 auto;\n    width: 50px;\n}\n.item-logo-default {\n    box-shadow: 0 0 0 5px #fff;\n}\n.item-logo > img {\n    border-radius: 80px;\n    border: 4px solid white;\n    background: #fff;\n}\n.text-btn {\n    background: #57a283;\n    border-radius: 50px;\n    height: 30px;\n}\n.text-font {\n    font-size: 11px;\n}\n}\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -21444,7 +21452,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, ".item-title {\n  font-size: 1.75rem;\n}\n.item-bg {\n  background: whitesmoke;\n}\n.item-shadow {\n  box-shadow: 0 0 2px 0 rgba(0, 0, 0, 0.1);\n}\n.item-radius {\n  border-radius: 15px;\n}\n.item-description {\n  font-size: 13px;\n  text-align: justify;\n}\n.item-rating {\n  position: absolute;\n  z-index: 2;\n  right: 10px;\n  top: 10px;\n  background: red;\n  padding: 5px 10px 5px 10px;\n  border-radius: 5px;\n  color: #fff;\n}\n.item-main {\n  max-height: 150px;\n  overflow: hidden;\n  border-radius: 5px;\n  margin: 10px;\n  position: relative;\n}\n.item-main > img {\n  display: table;\n  width: 100%;\n}\n.item-logo {\n  position: relative;\n  margin: -75px auto 0 auto;\n  width: 120px;\n}\n.item-logo > img {\n  border-radius: 80px;\n  border: 10px solid white;\n  background: #fff;\n  width: 100%;\n}\n.text-desc {\n  font-size: 12px;\n}\n.text-btn {\n  background: #57a283;\n  border-radius: 50px;\n  height: 44px;\n}\n.text-font {\n  font-size: 14px;\n}\n@media only screen and (max-width: 768px) {\n.item-rating {\n    padding: 2px 5px 2px 5px;\n    line-height: 1;\n    right: 5px;\n    top: 5px;\n}\n.item-radius {\n    border-radius: 10px;\n}\n.item-title {\n    font-size: 12px;\n    margin: 0;\n}\n.item-description {\n    font-size: 9px;\n    padding: 0 !important;\n    margin: 0 10px 10px 10px !important;\n}\n.item-logo {\n    margin: -35px auto 0 auto;\n    width: 50px;\n}\n.item-logo > img {\n    border-radius: 80px;\n    border: 4px solid white;\n    background: #fff;\n}\n}\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, ".item-title {\n  font-size: 1.75rem;\n}\n.item-bg {\n  background: whitesmoke;\n}\n.item-shadow {\n  box-shadow: 0 0 2px 0 rgba(0, 0, 0, 0.1);\n}\n.item-radius {\n  border-radius: 15px;\n}\n.item-description {\n  font-size: 13px;\n  text-align: justify;\n}\n.item-rating {\n  position: absolute;\n  z-index: 2;\n  right: 10px;\n  top: 10px;\n  background: red;\n  padding: 5px 10px 5px 10px;\n  border-radius: 5px;\n  color: #fff;\n}\n.item-main {\n  max-height: 150px;\n  overflow: hidden;\n  border-radius: 5px;\n  margin: 10px;\n  position: relative;\n}\n.item-main > img {\n  display: table;\n  width: 100%;\n}\n.item-logo {\n  position: relative;\n  margin: -75px auto 0 auto;\n  width: 120px;\n}\n.item-logo > img {\n  border-radius: 80px;\n  border: 10px solid white;\n  background: #fff;\n  width: 100%;\n}\n.item-logo-default {\n  position: relative;\n  width: 100px;\n  float: left;\n  overflow: hidden;\n  border-radius: 100px;\n  box-shadow: 0 0 0 10px #fff;\n}\n.item-logo-default:before {\n  content: \"\";\n  float: left;\n  padding-top: 100%;\n}\n.item-logo-default > img {\n  width: 100%;\n  margin: 0;\n}\n.item-logo-default > div {\n  width: 100%;\n  height: 100%;\n  background: #fff no-repeat center;\n  background-size: 50%;\n  border-radius: 100px;\n}\n.text-desc {\n  font-size: 12px;\n}\n.text-btn {\n  background: #57a283;\n  border-radius: 50px;\n  height: auto;\n}\n.text-font {\n  font-size: 14px;\n}\n@media only screen and (max-width: 768px) {\n.item-rating {\n    padding: 2px 5px 2px 5px;\n    line-height: 1;\n    right: 5px;\n    top: 5px;\n}\n.item-radius {\n    border-radius: 10px;\n}\n.item-title {\n    font-size: 12px;\n    margin: 0;\n}\n.item-description {\n    font-size: 9px;\n    padding: 0 !important;\n    margin: 0 10px 10px 10px !important;\n}\n.item-logo {\n    margin: -35px auto 0 auto;\n    width: 50px;\n}\n.item-logo-default {\n    box-shadow: 0 0 0 5px #fff;\n}\n.item-logo > img {\n    border-radius: 80px;\n    border: 4px solid white;\n    background: #fff;\n}\n.text-btn {\n    background: #57a283;\n    border-radius: 50px;\n    height: 30px;\n}\n.text-font {\n    font-size: 11px;\n}\n}\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -21636,7 +21644,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, ".item-title {\n  font-size: 1.75rem;\n}\n.item-bg {\n  background: whitesmoke;\n}\n.item-shadow {\n  box-shadow: 0 0 2px 0 rgba(0, 0, 0, 0.1);\n}\n.item-radius {\n  border-radius: 15px;\n}\n.item-description {\n  font-size: 13px;\n  text-align: justify;\n}\n.item-rating {\n  position: absolute;\n  z-index: 2;\n  right: 10px;\n  top: 10px;\n  background: red;\n  padding: 5px 10px 5px 10px;\n  border-radius: 5px;\n  color: #fff;\n}\n.item-main {\n  max-height: 150px;\n  overflow: hidden;\n  border-radius: 5px;\n  margin: 10px;\n  position: relative;\n}\n.item-main > img {\n  display: table;\n  width: 100%;\n}\n.item-logo {\n  position: relative;\n  margin: -75px auto 0 auto;\n  width: 120px;\n}\n.item-logo > img {\n  border-radius: 80px;\n  border: 10px solid white;\n  background: #fff;\n  width: 100%;\n}\n.text-desc {\n  font-size: 12px;\n}\n.text-btn {\n  background: #57a283;\n  border-radius: 50px;\n  height: 44px;\n}\n.text-font {\n  font-size: 14px;\n}\n@media only screen and (max-width: 768px) {\n.item-rating {\n    padding: 2px 5px 2px 5px;\n    line-height: 1;\n    right: 5px;\n    top: 5px;\n}\n.item-radius {\n    border-radius: 10px;\n}\n.item-title {\n    font-size: 12px;\n    margin: 0;\n}\n.item-description {\n    font-size: 9px;\n    padding: 0 !important;\n    margin: 0 10px 10px 10px !important;\n}\n.item-logo {\n    margin: -35px auto 0 auto;\n    width: 50px;\n}\n.item-logo > img {\n    border-radius: 80px;\n    border: 4px solid white;\n    background: #fff;\n}\n}\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, ".item-title {\n  font-size: 1.75rem;\n}\n.item-bg {\n  background: whitesmoke;\n}\n.item-shadow {\n  box-shadow: 0 0 2px 0 rgba(0, 0, 0, 0.1);\n}\n.item-radius {\n  border-radius: 15px;\n}\n.item-description {\n  font-size: 13px;\n  text-align: justify;\n}\n.item-rating {\n  position: absolute;\n  z-index: 2;\n  right: 10px;\n  top: 10px;\n  background: red;\n  padding: 5px 10px 5px 10px;\n  border-radius: 5px;\n  color: #fff;\n}\n.item-main {\n  max-height: 150px;\n  overflow: hidden;\n  border-radius: 5px;\n  margin: 10px;\n  position: relative;\n}\n.item-main > img {\n  display: table;\n  width: 100%;\n}\n.item-logo {\n  position: relative;\n  margin: -75px auto 0 auto;\n  width: 120px;\n}\n.item-logo > img {\n  border-radius: 80px;\n  border: 10px solid white;\n  background: #fff;\n  width: 100%;\n}\n.item-logo-default {\n  position: relative;\n  width: 100px;\n  float: left;\n  overflow: hidden;\n  border-radius: 100px;\n  box-shadow: 0 0 0 10px #fff;\n}\n.item-logo-default:before {\n  content: \"\";\n  float: left;\n  padding-top: 100%;\n}\n.item-logo-default > img {\n  width: 100%;\n  margin: 0;\n}\n.item-logo-default > div {\n  width: 100%;\n  height: 100%;\n  background: #fff no-repeat center;\n  background-size: 50%;\n  border-radius: 100px;\n}\n.text-desc {\n  font-size: 12px;\n}\n.text-btn {\n  background: #57a283;\n  border-radius: 50px;\n  height: auto;\n}\n.text-font {\n  font-size: 14px;\n}\n@media only screen and (max-width: 768px) {\n.item-rating {\n    padding: 2px 5px 2px 5px;\n    line-height: 1;\n    right: 5px;\n    top: 5px;\n}\n.item-radius {\n    border-radius: 10px;\n}\n.item-title {\n    font-size: 12px;\n    margin: 0;\n}\n.item-description {\n    font-size: 9px;\n    padding: 0 !important;\n    margin: 0 10px 10px 10px !important;\n}\n.item-logo {\n    margin: -35px auto 0 auto;\n    width: 50px;\n}\n.item-logo-default {\n    box-shadow: 0 0 0 5px #fff;\n}\n.item-logo > img {\n    border-radius: 80px;\n    border: 4px solid white;\n    background: #fff;\n}\n.text-btn {\n    background: #57a283;\n    border-radius: 50px;\n    height: 30px;\n}\n.text-font {\n    font-size: 11px;\n}\n}\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 

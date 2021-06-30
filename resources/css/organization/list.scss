@@ -46,6 +46,30 @@
             background: #fff;
             width: 100%;
         }
+        &-default {
+            position: relative;
+            width: 100px;
+            float: left;
+            overflow: hidden;
+            border-radius: 100px;
+            box-shadow: 0 0 0 10px #fff;
+            &:before {
+                content: "";
+                float: left;
+                padding-top: 100%;
+            }
+            & > img {
+                width: 100%;
+                margin: 0;
+            }
+            & > div {
+                width: 100%;
+                height: 100%;
+                background: #fff no-repeat center;
+                background-size: 50%;
+                border-radius: 100px;
+            }
+        }
     }
 }
 .text {
@@ -55,7 +79,7 @@
     &-btn {
         background: #57a283;
         border-radius: 50px;
-        height: 44px;
+        height: auto;
     }
     &-font {
         font-size: 14px;
@@ -84,11 +108,27 @@
         &-logo {
             margin: -35px auto 0 auto;
             width: 50px;
+            &-default {
+                box-shadow: 0 0 0 5px #fff;
+            }
             & > img {
                 border-radius: 80px;
                 border: 4px solid white;
                 background: #fff;
             }
+        }
+    }
+    .text {
+        &-desc {
+
+        }
+        &-btn {
+            background: #57a283;
+            border-radius: 50px;
+            height: 30px;
+        }
+        &-font {
+            font-size: 11px;
         }
     }
 }

@@ -34,8 +34,8 @@
         border:  none !important;
         border-bottom: 4px solid transparent !important;
         &-sel {
-            color: #FF8008 !important;
-            border-bottom-color: #FF8008 !important;
+            color: #00a082 !important;
+            border-bottom-color: #00a082 !important;
         }
     }
     &-bg {
@@ -110,9 +110,9 @@
         border-radius: 30px;
         height: 44px;
         color: #000;
-        background: rgb(240,240,240);
+        background: #fff;
         &-sel, &:hover {
-            background: #FF8008;
+            background: #00a082;
             color: #fff;
         }
     }

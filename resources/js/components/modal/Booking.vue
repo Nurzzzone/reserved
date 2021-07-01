@@ -13,14 +13,29 @@
                     <template v-if="table.bookingStatus === 'free'">
                         <template v-if="status">
                             <template v-if="!storage.modal">
-                                <div class="col-12 mt-3">
-                                    <div class="form-group booking-time">
-                                        <div class="booking-time-item" v-for="(time,key) in date.time" :class="{'booking-time-item-sel':(key === date.timeIndex)}" :key="key" @click="date.timeIndex = key">{{time.time}}</div>
+                                <template v-if="date.time.length > 0">
+                                    <div class="col-12 mt-3">
+                                        <div class="form-group booking-time">
+                                            <div class="booking-time-item" v-for="(time,key) in date.time" :class="{'booking-time-item-sel':(key === date.timeIndex)}" :key="key" @click="date.timeIndex = key">{{time.time}}</div>
+                                        </div>
                                     </div>
-                                </div>
-                                <div class="col-12 mt-4 mb-2">
-                                    <button class="btn btn-block auth-register text-white" @click="storage.modal = true">Далее</button>
-                                </div>
+                                    <div class="col-12 mt-4 mb-2">
+                                        <button class="btn btn-block auth-register text-white" @click="storage.modal = true">Далее</button>
+                                    </div>
+                                </template>
+                                <template v-else>
+                                    <div class="col-12 mt-3">
+                                        <div class="form-group d-flex justify-content-center p-0">
+                                            <img src="/img/logo/oops.svg" width="100">
+                                        </div>
+                                    </div>
+                                    <div class="col-12 mt-3">
+                                        <div class="h6 text-center text-secondary font-weight-bold">Извините! На сегодня нельзя забронировать стол в этом заведении. Но вы можете выбрать другое заведение или другую дату.</div>
+                                    </div>
+                                    <div class="col-12 mt-4 mb-2">
+                                        <button class="btn btn-block auth-register text-white" data-dismiss="modal" aria-label="Close">Ок, понятно</button>
+                                    </div>
+                                </template>
                             </template>
                             <template v-else>
                                 <template v-if="cards.length > 0">
@@ -59,14 +74,29 @@
                         </template>
                         <template v-else>
                             <template v-if="!storage.modal">
-                                <div class="col-12 mt-3">
-                                    <div class="form-group booking-time">
-                                        <div class="booking-time-item" v-for="(time,key) in date.time" :class="{'booking-time-item-sel':(key === date.timeIndex)}" :key="key" @click="date.timeIndex = key">{{time.time}}</div>
+                                <template v-if="date.time.length > 0">
+                                    <div class="col-12 mt-3">
+                                        <div class="form-group booking-time">
+                                            <div class="booking-time-item" v-for="(time,key) in date.time" :class="{'booking-time-item-sel':(key === date.timeIndex)}" :key="key" @click="date.timeIndex = key">{{time.time}}</div>
+                                        </div>
                                     </div>
-                                </div>
-                                <div class="col-12 mt-4 mb-2">
-                                    <button class="btn btn-block auth-register text-white" @click="storage.modal = true">Далее</button>
-                                </div>
+                                    <div class="col-12 mt-4 mb-2">
+                                        <button class="btn btn-block auth-register text-white" @click="storage.modal = true">Далее</button>
+                                    </div>
+                                </template>
+                                <template v-else>
+                                    <div class="col-12 mt-3">
+                                        <div class="form-group d-flex justify-content-center p-0">
+                                            <img src="/img/logo/oops.svg" width="100">
+                                        </div>
+                                    </div>
+                                    <div class="col-12 mt-3">
+                                        <div class="h6 text-center text-secondary font-weight-bold">Извините! На сегодня нельзя забронировать стол в этом заведении. Но вы можете выбрать другое заведение или другую дату.</div>
+                                    </div>
+                                    <div class="col-12 mt-4 mb-2">
+                                        <button class="btn btn-block auth-register text-white" data-dismiss="modal" aria-label="Close">Ок, понятно</button>
+                                    </div>
+                                </template>
                             </template>
                             <template v-else>
                                 <template v-if="!guest.verify">
@@ -121,7 +151,7 @@
                     </template>
                     <template v-else>
                         <div class="col-12 mt-3">
-                            <div class="form-group d-flex justify-content-center">
+                            <div class="form-group d-flex justify-content-center p-0">
                                 <img src="/img/logo/oops.svg" width="100">
                             </div>
                         </div>

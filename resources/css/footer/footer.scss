@@ -16,11 +16,10 @@
 @media only screen and (max-width: 768px) {
     .footer {
         &-title {
-            font-size: 16px;
-            text-align: center;
+            font-size: 12px;
+            margin-top: 10px;
             &-sub {
-                font-size: 12px;
-                text-align: center;
+                font-size: 11px;
             }
         }
         &-mobile {

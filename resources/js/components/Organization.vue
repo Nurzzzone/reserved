@@ -390,6 +390,7 @@ export default {
             let timeToday   =   new Date(today.getFullYear(),today.getMonth(),today.getDate());
             let item;
             let start   =   week.start.split(':');
+            this.date.timeIndex =   0;
             this.date.time  =   [];
             if (timeToday.getTime() === date.getTime()) {
                 this.date.timeList.forEach(element => {

@@ -38,21 +38,6 @@
                                         </li>
                                     </template>
                                     <template v-else>
-                                        <li class="nav-item mx-3 ">
-                                            <a href="/home" class="btn nav-link font-weight-bold font-menu d-none d-md-block">
-                                                <div>Категории</div>
-                                            </a>
-                                        </li>
-                                        <li class="nav-item mx-3">
-                                            <a href="/top" class="btn nav-link font-weight-bold font-menu d-none d-md-block">
-                                                <div>Топ</div>
-                                            </a>
-                                        </li>
-                                        <li class="nav-item mx-3">
-                                            <a href="/favorite" class="btn nav-link font-weight-bold font-menu d-none d-md-block">
-                                                <div>Избранное</div>
-                                            </a>
-                                        </li>
                                         <li class="ml-3 header-main position-relative">
                                             <div class="header-profile" v-if="user.name">
                                                 <div class="header-profile-main font-weight-bold text-capitalize">

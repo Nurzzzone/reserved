@@ -252,6 +252,10 @@
         }
     }
     .wallpaper {
+        max-height: 200px;
         border-radius: 0;
+        &-screen {
+
+        }
     }
 }

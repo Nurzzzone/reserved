@@ -164,12 +164,12 @@ class PaymentService
         ];
         $card   =   $this->curl->post(self::CARD_ADD, $this->signatureCard($arr,MainContract::ADD));
         $xml    =   json_decode(json_encode(simplexml_load_string($card)),true);
-        if (array_key_exists('pg_redirect_url',$xml)) {
+        if ($xml && array_key_exists('pg_redirect_url',$xml)) {
             return $xml['pg_redirect_url'];
         } else {
             $card   =   $this->curl->post(self::CARD_ADD, $this->signatureCard($arr,MainContract::ADD));
             $xml    =   json_decode(json_encode(simplexml_load_string($card)),true);
-            if (array_key_exists('pg_redirect_url',$xml)) {
+            if ($xml && array_key_exists('pg_redirect_url',$xml)) {
                 return $xml['pg_redirect_url'];
             }
         }

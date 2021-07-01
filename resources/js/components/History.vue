@@ -70,6 +70,7 @@ export default {
     name: "History",
     data() {
         return {
+            status: true,
             items: [],
             user: false,
             paginate: 1
@@ -98,21 +99,24 @@ export default {
             }
         },
         getBookings: function() {
-            if (this.user) {
+            if (this.user && this.status) {
+                this.status =   false;
                 let self    =   this;
                 axios.get('/api/booking/user/'+this.user.id+'?paginate='+this.paginate)
                     .then(response => {
                         let data    =   response.data;
                         if (data.hasOwnProperty('data')) {
                             this.items  =   data.data;
+                            this.status =   true;
                             setTimeout(function() {
                                 self.getBookings();
-                            },1500);
+                            },2000);
                         }
                     }).catch(error => {
+                        this.status =   true;
                         setTimeout(function() {
                             self.getBookings();
-                        },1500);
+                        },2000);
                     });
             }
         }

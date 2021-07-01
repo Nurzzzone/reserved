@@ -102,6 +102,7 @@ class MainContract
     const UTC       =   'UTC';
     const JSON      =   'json';
     const TIME      =   'time';
+    const CAME      =   'came';
 
     const ON        =   'on';
     const OFF       =   'off';
@@ -116,6 +117,7 @@ class MainContract
     const DISABLED  =   'DISABLED';
     const CANCELED  =   'CANCELED';
     const DELETED   =   'DELETED';
+    const COMPLETED =   'COMPLETED';
 
     const STATUSES  =   [
         self::ENABLED,
@@ -131,7 +133,9 @@ class MainContract
     const STATUSES_BOOKING  =   [
         self::CHECKING,
         self::ON,
+        self::CAME,
         self::OFF,
+        self::COMPLETED,
     ];
 
     const STATUSES_REVIEWS  =   [

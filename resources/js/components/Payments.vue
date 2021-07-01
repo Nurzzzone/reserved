@@ -130,12 +130,12 @@ export default {
                         this.updateStatus   =   true;
                         setTimeout(function() {
                             self.cardUpdate();
-                        },1500);
+                        },2000);
                     }).catch(error => {
                         this.updateStatus   =   true;
                         setTimeout(function() {
                             self.cardUpdate();
-                        },1500);
+                        },2000);
                         console.log(error.response);
                     });
             }

@@ -128,7 +128,7 @@ class BookingRepositoryEloquent implements BookingRepositoryInterface
 
     public function cancel($id) {
         $booking    =   Booking::where(BookingContract::ID,$id)->first();
-        $booking->status    =   BookingContract::CANCELED;
+        $booking->status    =   BookingContract::OFF;
         $booking->save();
         return $booking;
     }

@@ -17147,6 +17147,7 @@ __webpack_require__.r(__webpack_exports__);
   name: "History",
   data: function data() {
     return {
+      status: true,
       items: [],
       user: false,
       paginate: 1
@@ -17178,21 +17179,24 @@ __webpack_require__.r(__webpack_exports__);
     getBookings: function getBookings() {
       var _this = this;
 
-      if (this.user) {
+      if (this.user && this.status) {
+        this.status = false;
         var self = this;
         axios.get('/api/booking/user/' + this.user.id + '?paginate=' + this.paginate).then(function (response) {
           var data = response.data;
 
           if (data.hasOwnProperty('data')) {
             _this.items = data.data;
+            _this.status = true;
             setTimeout(function () {
               self.getBookings();
-            }, 1500);
+            }, 2000);
           }
         })["catch"](function (error) {
+          _this.status = true;
           setTimeout(function () {
             self.getBookings();
-          }, 1500);
+          }, 2000);
         });
       }
     }
@@ -17682,12 +17686,12 @@ __webpack_require__.r(__webpack_exports__);
           _this.updateStatus = true;
           setTimeout(function () {
             self.cardUpdate();
-          }, 1500);
+          }, 2000);
         })["catch"](function (error) {
           _this.updateStatus = true;
           setTimeout(function () {
             self.cardUpdate();
-          }, 1500);
+          }, 2000);
           console.log(error.response);
         });
       }

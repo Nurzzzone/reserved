@@ -16834,9 +16834,43 @@ __webpack_require__.r(__webpack_exports__);
         var data = response.data.data;
 
         for (var i = 0; i < data.length; i++) {
+          data[i].timeTitle = _this.getTime(data[i]);
+
           _this.organizations.push(data[i]);
         }
       });
+    },
+    getTime: function getTime(organization) {
+      var today = new Date();
+      today = new Date(today.getFullYear(), today.getMonth(), today.getDate());
+      var weekDay = today.getDay();
+      var week;
+
+      if (weekDay === 0) {
+        week = organization.sunday;
+      } else if (weekDay === 1) {
+        week = organization.monday;
+      } else if (weekDay === 2) {
+        week = organization.tuesday;
+      } else if (weekDay === 3) {
+        week = organization.wednesday;
+      } else if (weekDay === 4) {
+        week = organization.thursday;
+      } else if (weekDay === 5) {
+        week = organization.friday;
+      } else if (weekDay === 6) {
+        week = organization.saturday;
+      }
+
+      if (week.start === week.end) {
+        return 'круглосуточно';
+      }
+
+      return this.timeConvert(week.start) + ' ' + this.timeConvert(week.end);
+    },
+    timeConvert: function timeConvert(time) {
+      var converted = time.split(':');
+      return converted[0] + '.' + converted[1];
     }
   }
 });
@@ -16901,9 +16935,43 @@ __webpack_require__.r(__webpack_exports__);
         var data = response.data.data;
 
         for (var i = 0; i < data.length; i++) {
+          data[i].timeTitle = _this.getTime(data[i]);
+
           _this.organizations.push(data[i]);
         }
       });
+    },
+    getTime: function getTime(organization) {
+      var today = new Date();
+      today = new Date(today.getFullYear(), today.getMonth(), today.getDate());
+      var weekDay = today.getDay();
+      var week;
+
+      if (weekDay === 0) {
+        week = organization.sunday;
+      } else if (weekDay === 1) {
+        week = organization.monday;
+      } else if (weekDay === 2) {
+        week = organization.tuesday;
+      } else if (weekDay === 3) {
+        week = organization.wednesday;
+      } else if (weekDay === 4) {
+        week = organization.thursday;
+      } else if (weekDay === 5) {
+        week = organization.friday;
+      } else if (weekDay === 6) {
+        week = organization.saturday;
+      }
+
+      if (week.start === week.end) {
+        return 'круглосуточно';
+      }
+
+      return this.timeConvert(week.start) + ' ' + this.timeConvert(week.end);
+    },
+    timeConvert: function timeConvert(time) {
+      var converted = time.split(':');
+      return converted[0] + '.' + converted[1];
     }
   }
 });
@@ -17003,6 +17071,8 @@ __webpack_require__.r(__webpack_exports__);
           var data = response.data.data;
 
           for (var i = 0; i < data.length; i++) {
+            data[i].timeTitle = _this.getTime(data[i]);
+
             _this.list.push(data[i]);
           }
         });
@@ -17010,6 +17080,38 @@ __webpack_require__.r(__webpack_exports__);
         this.storage.favorite = [];
         this.list = [];
       }
+    },
+    getTime: function getTime(organization) {
+      var today = new Date();
+      today = new Date(today.getFullYear(), today.getMonth(), today.getDate());
+      var weekDay = today.getDay();
+      var week;
+
+      if (weekDay === 0) {
+        week = organization.sunday;
+      } else if (weekDay === 1) {
+        week = organization.monday;
+      } else if (weekDay === 2) {
+        week = organization.tuesday;
+      } else if (weekDay === 3) {
+        week = organization.wednesday;
+      } else if (weekDay === 4) {
+        week = organization.thursday;
+      } else if (weekDay === 5) {
+        week = organization.friday;
+      } else if (weekDay === 6) {
+        week = organization.saturday;
+      }
+
+      if (week.start === week.end) {
+        return 'круглосуточно';
+      }
+
+      return this.timeConvert(week.start) + ' ' + this.timeConvert(week.end);
+    },
+    timeConvert: function timeConvert(time) {
+      var converted = time.split(':');
+      return converted[0] + '.' + converted[1];
     }
   }
 });
@@ -17271,13 +17373,35 @@ __webpack_require__.r(__webpack_exports__);
       section: 0,
       sections: [],
       date: {
+        timeTitle: '',
         before: false,
         after: true,
         title: '',
         data: '',
         timeIndex: 0,
-        time: [{
-          time: '10:00'
+        time: [],
+        timeList: [{
+          time: '00:00'
+        }, {
+          time: '01:00'
+        }, {
+          time: '02:00'
+        }, {
+          time: '03:00'
+        }, {
+          time: '03:00'
+        }, {
+          time: '04:00'
+        }, {
+          time: '05:00'
+        }, {
+          time: '06:00'
+        }, {
+          time: '07:00'
+        }, {
+          time: '08:00'
+        }, {
+          time: '09:00'
         }, {
           time: '11:00'
         }, {
@@ -17376,6 +17500,7 @@ __webpack_require__.r(__webpack_exports__);
           }
 
           this.updateStatus();
+          this.setTime();
         }
       }
     },
@@ -17390,6 +17515,7 @@ __webpack_require__.r(__webpack_exports__);
       this.date.data = year + '-' + (month + 1) + '-' + day;
       this.date.before = true;
       this.updateStatus();
+      this.setTime();
     },
     setDateTime: function setDateTime() {
       var date = new Date();
@@ -17399,39 +17525,96 @@ __webpack_require__.r(__webpack_exports__);
       this.date.title = day + ' ' + this.date.monthName[this.lang][month];
       this.date.data = year + '-' + (month + 1) + '-' + day;
     },
+    setTime: function setTime() {
+      var _this2 = this;
+
+      var date = this.date.data.split('-');
+      date = new Date(date[0], date[1] - 1, date[2]);
+      var weekDay = date.getDay();
+      var week;
+
+      if (weekDay === 0) {
+        week = this.organization.sunday;
+      } else if (weekDay === 1) {
+        week = this.organization.monday;
+      } else if (weekDay === 2) {
+        week = this.organization.tuesday;
+      } else if (weekDay === 3) {
+        week = this.organization.wednesday;
+      } else if (weekDay === 4) {
+        week = this.organization.thursday;
+      } else if (weekDay === 5) {
+        week = this.organization.friday;
+      } else if (weekDay === 6) {
+        week = this.organization.saturday;
+      }
+
+      var today = new Date();
+
+      if (week.start === week.end) {
+        this.date.timeTitle = 'круглосуточно';
+      } else {
+        this.date.timeTitle = this.timeConvert(week.start) + ' ' + this.timeConvert(week.end);
+      }
+
+      var timeToday = new Date(today.getFullYear(), today.getMonth(), today.getDate());
+      var item;
+      var start = week.start.split(':');
+      this.date.time = [];
+
+      if (timeToday.getTime() === date.getTime()) {
+        this.date.timeList.forEach(function (element) {
+          item = element.time.split(':');
+
+          if (today.getHours() < parseInt(item[0]) && today.getHours() > parseInt(start[0])) {
+            _this2.date.time.push(element);
+          }
+        });
+      } else {
+        this.date.time = this.date.timeList;
+      }
+    },
+    timeConvert: function timeConvert(time) {
+      var converted = time.split(':');
+      return converted[0] + '.' + converted[1];
+    },
     selTable: function selTable(key, tableKey) {
       this.updateStatus();
       this.storage.modal = false;
       this.table = this.sections[key].organization_tables[tableKey];
+      this.setTime();
     },
     getOrganization: function getOrganization() {
-      var _this2 = this;
+      var _this3 = this;
 
       axios.get('/api/organization/' + this.$route.params.id).then(function (response) {
         var data = response.data;
 
         if (data.hasOwnProperty('data')) {
-          _this2.organization = data.data;
-          _this2.name = _this2.organization.title;
+          _this3.organization = data.data;
 
-          _this2.getSections(_this2.organization.id);
+          _this3.setTime();
+
+          _this3.name = _this3.organization.title;
+
+          _this3.getSections(_this3.organization.id);
         }
 
-        _this2.loading = false;
+        _this3.loading = false;
       })["catch"](function (error) {
-        _this2.loading = false;
+        _this3.loading = false;
       });
     },
     getSections: function getSections(id) {
-      var _this3 = this;
+      var _this4 = this;
 
       axios.get('/api/organization/section/' + id).then(function (response) {
         var data = response.data;
 
         if (data.hasOwnProperty('data')) {
-          _this3.sections = data.data;
+          _this4.sections = data.data;
 
-          _this3.updateStatus();
+          _this4.updateStatus();
         }
       });
     }
@@ -17668,9 +17851,43 @@ __webpack_require__.r(__webpack_exports__);
         var data = response.data.data;
 
         for (var i = 0; i < data.length; i++) {
+          data[i].timeTitle = _this.getTime(data[i]);
+
           _this.restaurants.push(data[i]);
         }
       });
+    },
+    getTime: function getTime(organization) {
+      var today = new Date();
+      today = new Date(today.getFullYear(), today.getMonth(), today.getDate());
+      var weekDay = today.getDay();
+      var week;
+
+      if (weekDay === 0) {
+        week = organization.sunday;
+      } else if (weekDay === 1) {
+        week = organization.monday;
+      } else if (weekDay === 2) {
+        week = organization.tuesday;
+      } else if (weekDay === 3) {
+        week = organization.wednesday;
+      } else if (weekDay === 4) {
+        week = organization.thursday;
+      } else if (weekDay === 5) {
+        week = organization.friday;
+      } else if (weekDay === 6) {
+        week = organization.saturday;
+      }
+
+      if (week.start === week.end) {
+        return 'круглосуточно';
+      }
+
+      return this.timeConvert(week.start) + ' ' + this.timeConvert(week.end);
+    },
+    timeConvert: function timeConvert(time) {
+      var converted = time.split(':');
+      return converted[0] + '.' + converted[1];
     }
   }
 });
@@ -18426,7 +18643,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
     /* PROPS */
     , ["href"]), organization.description ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)("p", _hoisted_15, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(organization.description), 1
     /* TEXT */
-    )) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true)]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("li", _hoisted_16, [organization.time ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)("div", _hoisted_17, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(organization.time), 1
+    )) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true)]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("li", _hoisted_16, [organization.timeTitle ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)("div", _hoisted_17, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(organization.timeTitle), 1
     /* TEXT */
     )) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_18, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(organization.address), 1
     /* TEXT */
@@ -18583,7 +18800,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
     /* PROPS */
     , ["href"]), organization.description ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)("p", _hoisted_15, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(organization.description), 1
     /* TEXT */
-    )) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true)]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("li", _hoisted_16, [organization.time ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)("div", _hoisted_17, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(organization.time), 1
+    )) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true)]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("li", _hoisted_16, [organization.timeTitle ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)("div", _hoisted_17, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(organization.timeTitle), 1
     /* TEXT */
     )) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_18, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(organization.address), 1
     /* TEXT */
@@ -18770,7 +18987,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
     /* PROPS */
     , ["href"]), organization.description ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)("p", _hoisted_14, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(organization.description), 1
     /* TEXT */
-    )) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true)]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("li", _hoisted_15, [organization.time ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)("div", _hoisted_16, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(organization.time), 1
+    )) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true)]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("li", _hoisted_15, [organization.timeTitle ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)("div", _hoisted_16, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(organization.timeTitle), 1
     /* TEXT */
     )) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_17, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(organization.address), 1
     /* TEXT */
@@ -19490,7 +19707,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
   /* PROPS */
   , ["organization", "table", "date"]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_1, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_2, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_3, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_4, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_5, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_6, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_7, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($data.organization.address), 1
   /* TEXT */
-  ), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_8, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($data.organization.time), 1
+  ), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_8, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($data.date.timeTitle), 1
   /* TEXT */
   )]), $data.organization.wallpaper ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)("img", {
     key: 0,
@@ -20098,7 +20315,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
     /* PROPS */
     , ["href"]), restaurant.description ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)("p", _hoisted_14, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(restaurant.description), 1
     /* TEXT */
-    )) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true)]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("li", _hoisted_15, [restaurant.time ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)("div", _hoisted_16, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(restaurant.time), 1
+    )) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true)]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("li", _hoisted_15, [restaurant.timeTitle ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)("div", _hoisted_16, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(restaurant.timeTitle), 1
     /* TEXT */
     )) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_17, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(restaurant.address), 1
     /* TEXT */
@@ -20199,13 +20416,13 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.esm-bundler.js");
 
 var _hoisted_1 = {
-  "class": "container-fluid pt-5 text-white",
+  "class": "container-fluid pt-3 pt-md-5 text-white",
   style: {
     "background": "#1d1d1d"
   }
 };
 
-var _hoisted_2 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createStaticVNode)("<div class=\"container pb-5\"><div class=\"row mb-5\"><div class=\"col-12 col-md-6 col-lg-3\"><h3 class=\"font-weight-bold\">Reserved</h3><h6 class=\"mt-3\">Скачайте приложение</h6><div class=\"mt-4 main-thumbnail overflow-hidden\"><img src=\"/img/main/img-11.png\" class=\"img-thumbnail bg-white p-0\"></div><div class=\"mt-3 main-thumbnail overflow-hidden\"><img src=\"/img/main/img-10.png\" class=\"img-thumbnail bg-white p-0\"></div><h6 class=\"mt-4\">© Reserved 2020 - 2021</h6></div><div class=\"col-12 col-md-6 col-lg-3\"><h5 class=\"font-weight-bold mt-4\">Давайте сделаем это вместе</h5><ul class=\"list-group p-0 mt-4\"><li class=\"list-group-item bg-transparent border-0 px-0 py-2\">Для ресторанов</li><li class=\"list-group-item bg-transparent border-0 px-0 py-2\">Для компании</li><li class=\"list-group-item bg-transparent border-0 px-0 py-2\">Вакансии</li></ul></div><div class=\"col-12 col-md-6 col-lg-3\"><h5 class=\"font-weight-bold mt-4\">Ссылки Reserved</h5><ul class=\"list-group p-0 mt-4\"><li class=\"list-group-item bg-transparent border-0 px-0 py-2\">Контакты</li><li class=\"list-group-item bg-transparent border-0 px-0 py-2\">Поддержка</li><li class=\"list-group-item bg-transparent border-0 px-0 py-2\">Безопасность</li><li class=\"list-group-item bg-transparent border-0 px-0 py-2\">О нас</li><li class=\"list-group-item bg-transparent border-0 px-0 py-2\">Блог</li></ul></div><div class=\"col-12 col-md-6 col-lg-3\"><h5 class=\"font-weight-bold mt-4\">Мы в соц-сетях</h5><ul class=\"list-group p-0 mt-4\"><li class=\"list-group-item bg-transparent border-0 px-0 py-2\">Facebook</li><li class=\"list-group-item bg-transparent border-0 px-0 py-2\">Instagram</li><li class=\"list-group-item bg-transparent border-0 px-0 py-2\">Youtube</li><li class=\"list-group-item bg-transparent border-0 px-0 py-2\">Twitter</li><li class=\"list-group-item bg-transparent border-0 px-0 py-2\">LinkedIn</li></ul></div></div></div>", 1);
+var _hoisted_2 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createStaticVNode)("<div class=\"container pb-5 px-0\"><div class=\"row mb-5\"><div class=\"col-12 col-md-6 col-lg-3\"><h3 class=\"font-weight-bold footer-title\">Reserved</h3><h6 class=\"mt-2 mt-md-3 footer-title-sub\">Скачайте приложение</h6><div class=\"footer-mobile-main\"><div class=\"mt-1 mt-md-4 main-thumbnail overflow-hidden footer-mobile\"><img src=\"/img/main/img-11.png\" class=\"img-thumbnail bg-white p-0 footer-mobile-icon\"></div><div class=\"mt-1 mt-md-3 main-thumbnail overflow-hidden footer-mobile\"><img src=\"/img/main/img-10.png\" class=\"img-thumbnail bg-white p-0 footer-mobile-icon\"></div></div><h6 class=\"pt-3 mt-md-4 footer-company\">© Reserved 2020 - 2021</h6></div><div class=\"col-12 col-md-6 col-lg-3\"><h5 class=\"font-weight-bold mt-3 mt-md-4 footer-menu-title\">Давайте сделаем это вместе</h5><ul class=\"list-group p-0 mt-md-4 footer-menu-group\"><li class=\"list-group-item bg-transparent border-0 px-0 py-1 py-md-2\">Для ресторанов</li><li class=\"list-group-item bg-transparent border-0 px-0 py-1 py-md-2\">Для компании</li><li class=\"list-group-item bg-transparent border-0 px-0 py-1 py-md-2\">Вакансии</li></ul></div><div class=\"col-12 col-md-6 col-lg-3\"><h5 class=\"font-weight-bold mt-3 mt-md-4 footer-menu-title\">Ссылки Reserved</h5><ul class=\"list-group p-0 mt-md-4 footer-menu-group\"><li class=\"list-group-item bg-transparent border-0 px-0 py-1 py-md-2\">Контакты</li><li class=\"list-group-item bg-transparent border-0 px-0 py-1 py-md-2\">Поддержка</li><li class=\"list-group-item bg-transparent border-0 px-0 py-1 py-md-2\">Безопасность</li><li class=\"list-group-item bg-transparent border-0 px-0 py-1 py-md-2\">О нас</li><li class=\"list-group-item bg-transparent border-0 px-0 py-1 py-md-2\">Блог</li></ul></div><div class=\"col-12 col-md-6 col-lg-3\"><h5 class=\"font-weight-bold mt-3 mt-md-4 footer-menu-title\">Мы в соц-сетях</h5><ul class=\"list-group p-0 mt-md-4 footer-menu-group\"><li class=\"list-group-item bg-transparent border-0 px-0 py-2\">Facebook</li><li class=\"list-group-item bg-transparent border-0 px-0 py-2\">Instagram</li><li class=\"list-group-item bg-transparent border-0 px-0 py-2\">Youtube</li><li class=\"list-group-item bg-transparent border-0 px-0 py-2\">Twitter</li><li class=\"list-group-item bg-transparent border-0 px-0 py-2\">LinkedIn</li></ul></div></div></div>", 1);
 
 function render(_ctx, _cache, $props, $setup, $data, $options) {
   return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)("div", _hoisted_1, [_hoisted_2]);
@@ -21963,7 +22180,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, ".title {\n  color: #00a082;\n}\n.main-thumbnail {\n  max-width: 160px;\n  border-radius: 5px;\n}\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, ".footer-title {\n  font-size: 1.75rem;\n  text-transform: uppercase;\n}\n.footer-title-sub {\n  font-size: 1rem;\n}\n.main-thumbnail {\n  max-width: 160px;\n  border-radius: 5px;\n}\n@media only screen and (max-width: 768px) {\n.footer-title {\n    font-size: 16px;\n    text-align: center;\n}\n.footer-title-sub {\n    font-size: 12px;\n    text-align: center;\n}\n.footer-mobile {\n    width: 50%;\n    float: left;\n}\n.footer-mobile-main {\n    display: flex;\n    justify-content: space-between;\n}\n.footer-mobile-icon {\n    border-radius: 5px;\n    border: 2px solid white;\n}\n.footer-company {\n    clear: both;\n    text-align: center;\n    margin-bottom: 0;\n    font-size: 12px;\n}\n.footer-menu-title {\n    font-size: 14px;\n}\n.footer-menu-group {\n    display: grid;\n    grid-template-columns: repeat(3, 1fr);\n    margin-top: 10px !important;\n    font-size: 11px;\n}\n}\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -21987,7 +22204,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, ".title {\n  font-size: 8px;\n  margin-top: 2px;\n}\n.footer-fixed {\n  box-shadow: 0 0 5px 0 rgba(0, 0, 0, 0.1);\n  position: fixed;\n  right: 10px;\n  bottom: 30px;\n  left: 10px;\n  z-index: 1030;\n  margin: 0;\n  border-radius: 50px;\n}\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, ".title {\n  font-size: 8px;\n  margin-top: 2px;\n}\n.footer-fixed {\n  box-shadow: 0 0 5px 1px rgba(0, 0, 0, 0.1);\n  position: fixed;\n  right: 10px;\n  bottom: 30px;\n  left: 10px;\n  z-index: 1030;\n  margin: 0;\n  border-radius: 50px;\n}\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 

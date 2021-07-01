@@ -11,7 +11,7 @@
                             <div class="wallpaper">
                                 <div class="wallpaper-screen">
                                     <div class="organization-description text-center text-white">{{organization.address}}</div>
-                                    <div class="organization-description text-center text-white">{{organization.time}}</div>
+                                    <div class="organization-description text-center text-white">{{date.timeTitle}}</div>
                                 </div>
                                 <img v-if="organization.wallpaper" :src="organization.wallpaper">
                                 <img v-else src="/img/logo/wall.png">
@@ -190,14 +190,46 @@ export default {
             section: 0,
             sections: [],
             date: {
+                timeTitle: '',
                 before: false,
                 after: true,
                 title: '',
                 data: '',
                 timeIndex: 0,
-                time: [
+                time: [],
+                timeList: [
                     {
-                        time: '10:00',
+                        time: '00:00',
+                    },
+                    {
+                        time: '01:00',
+                    },
+                    {
+                        time: '02:00',
+                    },
+                    {
+                        time: '03:00',
+                    },
+                    {
+                        time: '03:00',
+                    },
+                    {
+                        time: '04:00',
+                    },
+                    {
+                        time: '05:00',
+                    },
+                    {
+                        time: '06:00',
+                    },
+                    {
+                        time: '07:00',
+                    },
+                    {
+                        time: '08:00',
+                    },
+                    {
+                        time: '09:00',
                     },
                     {
                         time: '11:00',
@@ -238,7 +270,7 @@ export default {
                     {
                         time: '23:00',
                     }
-                ],
+                    ],
                 monthName: {
                     ru: ['Января','Февраля','Марта','Апреля','Мая','Июня','Июля','Августа','Сентября','Октября','Ноября','Декабря'],
                     en: ['Январь','Февраль','Март','Апрель','Май','Июнь','Июль','Август','Сентябрь','Октябрь','Ноябрь','Декабрь']
@@ -303,6 +335,7 @@ export default {
                         this.date.before    =   false;
                     }
                     this.updateStatus();
+                    this.setTime();
                 }
             }
         },
@@ -317,6 +350,7 @@ export default {
             this.date.data  =   year+'-'+(month + 1)+'-'+day;
             this.date.before    =   true;
             this.updateStatus();
+            this.setTime();
         },
         setDateTime: function() {
             let date    =   new Date();
@@ -326,10 +360,57 @@ export default {
             this.date.title =   day+' '+this.date.monthName[this.lang][month];
             this.date.data  =   year+'-'+(month + 1)+'-'+day;
         },
+        setTime: function() {
+            let date    =   this.date.data.split('-');
+            date        =   new Date(date[0],(date[1]-1),date[2]);
+            let weekDay =   date.getDay();
+            let week;
+            if (weekDay === 0) {
+                week    =   this.organization.sunday;
+            } else if (weekDay === 1) {
+                week    =   this.organization.monday;
+            } else if (weekDay === 2) {
+                week    =   this.organization.tuesday;
+            } else if (weekDay === 3) {
+                week    =   this.organization.wednesday;
+            } else if (weekDay === 4) {
+                week    =   this.organization.thursday;
+            } else if (weekDay === 5) {
+                week    =   this.organization.friday;
+            } else if (weekDay === 6) {
+                week    =   this.organization.saturday;
+            }
+            let today   =   new Date();
+
+            if (week.start === week.end) {
+                this.date.timeTitle =   'круглосуточно';
+            } else {
+                this.date.timeTitle  =   this.timeConvert(week.start)+' '+this.timeConvert(week.end);
+            }
+            let timeToday   =   new Date(today.getFullYear(),today.getMonth(),today.getDate());
+            let item;
+            let start   =   week.start.split(':');
+            this.date.time  =   [];
+            if (timeToday.getTime() === date.getTime()) {
+                this.date.timeList.forEach(element => {
+                    item    =   element.time.split(':');
+                    if (today.getHours() < parseInt(item[0]) && today.getHours() > parseInt(start[0])) {
+                        this.date.time.push(element);
+                    }
+                });
+            } else {
+                this.date.time  =   this.date.timeList;
+            }
+        },
+        timeConvert: function(time) {
+            let converted   =   time.split(':');
+            return converted[0]+'.'+converted[1];
+        },
         selTable: function(key, tableKey) {
             this.updateStatus();
             this.storage.modal = false;
             this.table  =   this.sections[key].organization_tables[tableKey];
+            this.setTime();
         },
         getOrganization: function() {
             axios.get('/api/organization/'+this.$route.params.id)
@@ -337,6 +418,7 @@ export default {
                     let data    =   response.data;
                     if (data.hasOwnProperty('data')) {
                         this.organization   =   data.data;
+                        this.setTime();
                         this.name   =   this.organization.title;
                         this.getSections(this.organization.id);
                     }

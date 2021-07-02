@@ -50,6 +50,8 @@ class PaymentController extends Controller {
 
     public function result(PaymentResultRequest $paymentResultRequest):void
     {
+        Log::info('payment info',$paymentResultRequest->validated());
+        exit;
         $data   =   $paymentResultRequest->validated();
         //$this->paymentService->result($request->all());
         if ($this->bookingService->result($data)) {

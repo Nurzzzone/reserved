@@ -53,6 +53,14 @@ class BookingRepositoryEloquent implements BookingRepositoryInterface
             ])
             ->orWhere([
                 [BookingContract::ID,$id],
+                [BookingContract::STATUS,BookingContract::CAME],
+            ])
+            ->orWhere([
+                [BookingContract::ID,$id],
+                [BookingContract::STATUS,BookingContract::COMPLETED],
+            ])
+            ->orWhere([
+                [BookingContract::ID,$id],
                 [BookingContract::STATUS,BookingContract::CHECKING],
                 [BookingContract::CREATED_AT,'>=',$this->date]
             ])->first();
@@ -64,6 +72,14 @@ class BookingRepositoryEloquent implements BookingRepositoryInterface
             ->where([
                 [BookingContract::USER_ID,$userId],
                 [BookingContract::STATUS,BookingContract::ON]
+            ])
+            ->orWhere([
+                [BookingContract::USER_ID,$userId],
+                [BookingContract::STATUS,BookingContract::CAME],
+            ])
+            ->orWhere([
+                [BookingContract::USER_ID,$userId],
+                [BookingContract::STATUS,BookingContract::COMPLETED],
             ])
             ->orWhere([
                 [BookingContract::USER_ID,$userId],
@@ -84,6 +100,14 @@ class BookingRepositoryEloquent implements BookingRepositoryInterface
             ])
             ->orWhere([
                 [BookingContract::ORGANIZATION_ID,$organizationId],
+                [BookingContract::STATUS,BookingContract::CAME],
+            ])
+            ->orWhere([
+                [BookingContract::ORGANIZATION_ID,$organizationId],
+                [BookingContract::STATUS,BookingContract::COMPLETED],
+            ])
+            ->orWhere([
+                [BookingContract::ORGANIZATION_ID,$organizationId],
                 [BookingContract::STATUS,BookingContract::CHECKING],
                 [BookingContract::CREATED_AT,'>=',$this->date]
             ])
@@ -98,6 +122,14 @@ class BookingRepositoryEloquent implements BookingRepositoryInterface
             ->where([
                 [BookingContract::ORGANIZATION_TABLE_LIST_ID,$tableId],
                 [BookingContract::STATUS,BookingContract::ON]
+            ])
+            ->orWhere([
+                [BookingContract::ORGANIZATION_TABLE_LIST_ID,$tableId],
+                [BookingContract::STATUS,BookingContract::CAME],
+            ])
+            ->orWhere([
+                [BookingContract::ORGANIZATION_TABLE_LIST_ID,$tableId],
+                [BookingContract::STATUS,BookingContract::COMPLETED],
             ])
             ->orWhere([
                 [BookingContract::ORGANIZATION_TABLE_LIST_ID,$tableId],
@@ -118,6 +150,14 @@ class BookingRepositoryEloquent implements BookingRepositoryInterface
             ])
             ->orWhere([
                 [BookingContract::DATE,$date],
+                [BookingContract::STATUS,BookingContract::CAME],
+            ])
+            ->orWhere([
+                [BookingContract::DATE,$date],
+                [BookingContract::STATUS,BookingContract::COMPLETED],
+            ])
+            ->orWhere([
+                [BookingContract::DATE,$date],
                 [BookingContract::STATUS,BookingContract::CHECKING],
                 [BookingContract::CREATED_AT,'>=',$this->date]
             ])
@@ -129,6 +169,20 @@ class BookingRepositoryEloquent implements BookingRepositoryInterface
     public function cancel($id) {
         $booking    =   Booking::where(BookingContract::ID,$id)->first();
         $booking->status    =   BookingContract::OFF;
+        $booking->save();
+        return $booking;
+    }
+
+    public function came($id) {
+        $booking    =   Booking::where(BookingContract::ID,$id)->first();
+        $booking->status    =   BookingContract::CAME;
+        $booking->save();
+        return $booking;
+    }
+
+    public function completed($id) {
+        $booking    =   Booking::where(BookingContract::ID,$id)->first();
+        $booking->status    =   BookingContract::COMPLETED;
         $booking->save();
         return $booking;
     }
@@ -150,6 +204,14 @@ class BookingRepositoryEloquent implements BookingRepositoryInterface
             ->where([
                 [BookingContract::ORGANIZATION_TABLE_LIST_ID,$id],
                 [BookingContract::STATUS,BookingContract::ON]
+            ])
+            ->orWhere([
+                [BookingContract::ORGANIZATION_TABLE_LIST_ID,$id],
+                [BookingContract::STATUS,BookingContract::CAME],
+            ])
+            ->orWhere([
+                [BookingContract::ORGANIZATION_TABLE_LIST_ID,$id],
+                [BookingContract::STATUS,BookingContract::COMPLETED],
             ])
             ->orWhere([
                 [BookingContract::ORGANIZATION_TABLE_LIST_ID,$id],

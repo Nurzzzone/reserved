@@ -236,6 +236,8 @@ class MainContract
         self::DELETED       =>  'Удален',
         self::CANCELED      =>  'Отменен',
         self::ON            =>  'Активный',
+        self::CAME          =>  'Пришел',
+        self::COMPLETED     =>  'Завершен',
         self::OFF           =>  'Неактивный',
         'NOT_VERIFIED'      =>  'Не подтвержден',
         'VERIFIED'          =>  'Подтвержден',

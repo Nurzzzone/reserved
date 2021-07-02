@@ -66,6 +66,14 @@ class BookingService extends BaseService
         return $this->bookingRepository->cancel($id);
     }
 
+    public function came($id) {
+        return $this->bookingRepository->came($id);
+    }
+
+    public function completed($id) {
+        return $this->bookingRepository->completed($id);
+    }
+
     public function result($data):bool {
         if ((int) $data[BookingContract::PG_RESULT] === 1) {
             $this->bookingRepository->success($data[BookingContract::PG_ORDER_ID]);
@@ -100,6 +108,12 @@ class BookingService extends BaseService
                     BookingContract::TIME   =>  $booking[BookingContract::TIME],
                     BookingContract::ID     =>  $booking[BookingContract::ID],
                 ];
+            } elseif ($booking[BookingContract::STATUS] === BookingContract::CAME) {
+                return [
+                    BookingContract::STATUS =>  BookingContract::CAME,
+                    BookingContract::TIME   =>  $booking[BookingContract::TIME],
+                    BookingContract::ID     =>  $booking[BookingContract::ID],
+                ];
             }
         }
         return [
@@ -113,7 +127,9 @@ class BookingService extends BaseService
         }
         $status     =   $this->statusCheck($id,$date);
         if ($status[BookingContract::STATUS] === BookingContract::ON) {
-            return [BookingContract::ON,'<a class="btn btn-danger btn-block text-white font-weight-bold">Забронирован ('.$status[BookingContract::TIME].')</a><a class="btn btn-dark btn-block text-white font-weight-bold btn-booking" data-id="'.$status[BookingContract::ID].'">Отменить</a>',$status[BookingContract::ID]];
+            return [BookingContract::ON,'<a class="btn btn-danger btn-block text-white font-weight-bold">Забронирован ('.$status[BookingContract::TIME].')</a><a class="btn btn-success btn-block text-white font-weight-bold btn-booking-came">Гость пришел</a><a class="btn btn-dark btn-block text-white font-weight-bold btn-booking-completed">Завершен</a><a class="btn btn-dark btn-block text-white font-weight-bold btn-booking" data-id="'.$status[BookingContract::ID].'">Отменить</a>',$status[BookingContract::ID]];
+        } elseif ($status[BookingContract::STATUS] === BookingContract::CAME) {
+            return [BookingContract::CAME,'<a class="btn btn-info btn-block text-white font-weight-bold">Гость пришел('.$status[BookingContract::TIME].')</a><a class="btn btn-dark btn-block text-white font-weight-bold btn-booking-completed">Завершен</a><a class="btn btn-dark btn-block text-white font-weight-bold btn-booking" data-id="'.$status[BookingContract::ID].'">Отменить</a>',$status[BookingContract::ID]];
         } elseif ($status[BookingContract::STATUS] === BookingContract::CHECKING) {
             return [BookingContract::CHECKING,'<a class="btn btn-info btn-block text-white font-weight-bold">В резерве ('.$status[BookingContract::TIME].')</a><a class="btn btn-dark btn-block text-white font-weight-bold btn-booking" data-id="'.$status[BookingContract::ID].'">Отменить</a>',$status[BookingContract::ID]];
         }

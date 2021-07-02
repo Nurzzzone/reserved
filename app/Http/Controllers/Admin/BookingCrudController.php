@@ -179,9 +179,11 @@ class BookingCrudController extends CrudController
         CRUD::field(BookingContract::COMMENT)->label('Комментарии');
         CRUD::field(BookingContract::STATUS)->type('select_from_array')
             ->label('Статус')->options([
-                BookingContract::CHECKING    =>  BookingContract::TRANSLATE[BookingContract::CHECKING],
-                BookingContract::ON    =>  BookingContract::TRANSLATE[BookingContract::ON],
-                BookingContract::OFF   =>  BookingContract::TRANSLATE[BookingContract::OFF],
+                BookingContract::CHECKING   =>  BookingContract::TRANSLATE[BookingContract::CHECKING],
+                BookingContract::ON     =>  BookingContract::TRANSLATE[BookingContract::ON],
+                BookingContract::CAME   =>  BookingContract::TRANSLATE[BookingContract::CAME],
+                BookingContract::COMPLETED  =>  BookingContract::TRANSLATE[BookingContract::COMPLETED],
+                BookingContract::OFF    =>  BookingContract::TRANSLATE[BookingContract::OFF],
             ]);
     }
 
@@ -191,6 +193,14 @@ class BookingCrudController extends CrudController
 
     public function cancel($id) {
         $this->bookingService->cancel($id);
+    }
+
+    public function came($id) {
+        $this->bookingService->came($id);
+    }
+
+    public function completed($id) {
+        $this->bookingService->completed($id);
     }
 
     public function bookingStatus($date) {

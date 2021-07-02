@@ -2777,6 +2777,12 @@ $widgets['before_content'][] = [
         $(document.body).on('click', '.btn-booking', function() {
             $.get('booking/status/'+$(this).attr('data-id'));
         });
+        $(document.body).on('click', '.btn-booking-came', function() {
+            $.get('booking/status/came/'+$(this).attr('data-id'));
+        });
+        $(document.body).on('click', '.btn-booking-completed', function() {
+            $.get('booking/status/completed/'+$(this).attr('data-id'));
+        });
         $(document).ready(function() {
             function load() {
                 setTimeout(function () {

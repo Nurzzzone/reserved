@@ -83,6 +83,8 @@ Route::prefix('admin')->group(function () {
     Route::get('blocked_restricted',[UserController::class, 'restrictedUser'])->name('user.restricted');
     Route::get('booking/status_date/{date}',[BookingCrudController::class, 'bookingStatus']);
     Route::get('booking/status/{id}',[BookingCrudController::class, 'cancel']);
+    Route::get('booking/status/came/{id}',[BookingCrudController::class, 'came']);
+    Route::get('booking/status/completed/{id}',[BookingCrudController::class, 'completed']);
 });
 
 Route::get('form/{bookingId}', [PaymentController::class,'form'])->name('payment.form');

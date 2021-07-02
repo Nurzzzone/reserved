@@ -48,11 +48,10 @@ class PaymentController extends Controller {
         }
     }
 
-    public function result(Request $paymentResultRequest):void
+    public function result(PaymentResultRequest $paymentResultRequest):void
     {
-        Log::info('payment info',$paymentResultRequest->all());
-        exit;
         $data   =   $paymentResultRequest->validated();
+        Log::info('payment info',$data);
         //$this->paymentService->result($request->all());
         if ($this->bookingService->result($data)) {
             $this->apiService->booking($data[BookingContract::PG_ORDER_ID]);

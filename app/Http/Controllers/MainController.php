@@ -7,31 +7,37 @@ use App\Services\Organization\OrganizationService;
 use App\Services\OrganizationTable\OrganizationTableService;
 use App\Services\OrganizationTableList\OrganizationTableListService;
 use App\Services\Booking\BookingService;
-use mysql_xdevapi\Table;
+use App\Services\User\UserService;
 
 class MainController extends Controller
 {
-    protected $organization;
-    protected $organizationTable;
-    protected $organizationTableList;
-    protected $booking;
-    public function __construct(OrganizationService $organization, OrganizationTableService $organizationTable, OrganizationTableListService $organizationTableList, BookingService $booking) {
-        $this->organization             =   $organization;
-        $this->organizationTable        =   $organizationTable;
-        $this->organizationTableList    =   $organizationTableList;
-        $this->booking                  =   $booking;
+
+    protected $organizationService;
+    protected $organizationTableService;
+    protected $organizationTableListService;
+    protected $bookingService;
+    protected $userService;
+
+    public function __construct(OrganizationService $organizationService, OrganizationTableService $organizationTableService, OrganizationTableListService $organizationTableListService, BookingService $bookingService, UserService $userService) {
+        $this->organizationService  =   $organizationService;
+        $this->organizationTableService =   $organizationTableService;
+        $this->organizationTableListService =   $organizationTableListService;
+        $this->bookingService   =   $bookingService;
+        $this->userService  =   $userService;
     }
 
     public function dashboard() {
-        $organizations  =   $this->organization;
-        $sections       =   $this->organizationTable;
-        $tables         =   $this->organizationTableList;
-        $booking        =   $this->booking;
-        return view('vendor.backpack.base.dashboard',compact('organizations', 'sections','tables','booking'));
+        return view('vendor.backpack.base.dashboard',[
+            'userService'    =>  $this->userService,
+            'organizationService'   =>  $this->organizationService,
+            'organizationTableService'  =>  $this->organizationTableService,
+            'organizationTableListService'  =>  $this->organizationTableListService,
+            'bookingService'    =>  $this->bookingService
+        ]);
     }
 
     public function dashboardBooking($id) {
-        $table  =   $this->organizationTableList->getById($id);
+        $table  =   $this->organizationTableListService->getById($id);
         return view('vendor.backpack.base.booking',compact('table'));
     }
 

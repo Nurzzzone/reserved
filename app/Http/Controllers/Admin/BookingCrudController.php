@@ -16,8 +16,10 @@ use App\Domain\Repositories\Organization\OrganizationRepositoryEloquent as Organ
 
 use App\Services\Api\ApiService;
 use App\Services\Organization\OrganizationService;
+use App\Services\OrganizationTable\OrganizationTableService;
 use App\Services\OrganizationTableList\OrganizationTableListService;
 use App\Services\Booking\BookingService;
+use App\Services\User\UserService;
 
 use App\Jobs\BookingPayment;
 use http\Env\Request;
@@ -35,12 +37,16 @@ class BookingCrudController extends CrudController
     protected $organizationTableListService;
     protected $organizationService;
     protected $bookingService;
+    protected $organizationTableService;
+    protected $userService;
 
-    public function __construct(OrganizationTableListService $organizationTableListService, OrganizationService $organizationService, BookingService $bookingService) {
+    public function __construct(OrganizationTableService $organizationTableService, OrganizationTableListService $organizationTableListService, OrganizationService $organizationService, BookingService $bookingService, UserService $userService) {
         parent::__construct();
+        $this->organizationService  =   $organizationService;
         $this->organizationTableListService =   $organizationTableListService;
-        $this->organizationService          =   $organizationService;
-        $this->bookingService               =   $bookingService;
+        $this->bookingService   =   $bookingService;
+        $this->organizationTableService     =   $organizationTableService;
+        $this->userService  =   $userService;
     }
 
     public function setup() {
@@ -192,29 +198,26 @@ class BookingCrudController extends CrudController
     }
 
     public function cancel($id) {
-        $this->bookingService->cancel($id);
+        $this->bookingService->update($id,[BookingContract::STATUS =>  BookingContract::OFF]);
     }
 
     public function came($id) {
-        $this->bookingService->came($id);
+        $this->bookingService->update($id,[BookingContract::STATUS =>  BookingContract::CAME]);
     }
 
     public function completed($id) {
-        $this->bookingService->completed($id);
+        $this->bookingService->update($id,[BookingContract::STATUS =>  BookingContract::COMPLETED]);
     }
 
     public function bookingStatus($date) {
-        $arr    =   [];
-        $organizations  =   $this->organizationService->getByUserId(backpack_auth()->user()->id);
-        foreach ($organizations as &$organization) {
-            $tables =   $this->organizationTableListService->getByOrganizationId($organization->id);
-            foreach ($tables as &$table) {
-                $arr[]  =   [
-                    'id'        =>  $table->id,
-                    'status'    =>  $this->bookingService->status($table->id, $date)
-                ];
-            }
-        }
-        return $arr;
+        return view('vendor.backpack.base.card.list',[
+            'date'  =>  $date,
+            'user_id'   =>  backpack_auth()->user()->id,
+            'userService'   =>  $this->userService,
+            'organizationService'   =>  $this->organizationService,
+            'organizationTableService'    =>  $this->organizationTableService,
+            'organizationTableListService'      =>  $this->organizationTableListService,
+            'bookingService'    =>  $this->bookingService,
+        ]);
     }
 }

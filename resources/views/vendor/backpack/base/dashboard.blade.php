@@ -2729,7 +2729,6 @@ $widgets['before_content'][] = [
 @endsection
 @else
 @section('content')
-
     <div class="row justify-content-center">
         <div class="col-md-3 col-12">
             <div class="row mt-3">
@@ -2739,35 +2738,17 @@ $widgets['before_content'][] = [
             </div>
         </div>
     </div>
-    @foreach($organizations->getByUserId(backpack_auth()->user()->id) as &$organization)
-        <h1 class="my-3 text-center font-weight-bold text-primary">{{$organization->title}}</h1>
-        <p class="text-center h5 text-secondary">Выберите стол для бронирования</p>
-        @foreach($sections->getByOrganizationId($organization->id) as & $section)
-            <h3 class="my-3">{{$section->name}}</h3>
-            <div class="row">
-                @foreach($tables->getByTableId($section->id) as &$table)
-                    @php
-                        $status   =   $booking->status($table->id);
-                    @endphp
-                    <div class="col-xl-2 col-lg-4 col-md-6 col-6">
-                        <div class="card shadow border-0 overflow-hidden" data-card="{{$table->id}}" style="border-radius: 10px;">
-                            <div class="card-header @if($status[0] === \App\Domain\Contracts\BookingContract::CHECKING) bg-info @elseif($status[0] === \App\Domain\Contracts\BookingContract::ON) bg-danger @else bg-success @endif  font-weight-bold text-center h6 border-0">
-                                {{$table->title}} <span class="text-dark card-id">@if($status[0] === \App\Domain\Contracts\BookingContract::CHECKING || $status[0] === \App\Domain\Contracts\BookingContract::ON)#{{$status[2]}}@endif</span>
-                            </div>
-                            <ul class="list-group list-group-flush">
-                                <li class="list-group-item text-center text-secondary">
-                                    <a class="nav-link p-0"><i class="nav-icon la la-users h2"></i><br>Вместимость <span class="text-dark font-weight-bold">{{$table->limit}}</span></a>
-                                </li>
-                            </ul>
-                            <div class="card-body" data-id="{{$organization->id}}" data-user="{{backpack_user()->id}}">
-                                {!! $status[1] !!}
-                            </div>
-                        </div>
-                    </div>
-                @endforeach
-            </div>
-        @endforeach
-    @endforeach
+    <div id="tables">
+        @include('vendor.backpack.base.card.list', [
+            'date'      =>  date('Y-m-d'),
+            'user_id'   =>  backpack_auth()->user()->id,
+            'userService'   =>  $userService,
+            'organizationService'   =>  $organizationService,
+            'organizationTableService'    =>  $organizationTableService,
+            'organizationTableListService'      =>  $organizationTableListService,
+            'bookingService'    =>  $bookingService
+        ])
+    </div>
     <script>
         $(document.body).on('click', '.booking-new-btn', function() {
             $("#booking-modal").attr('data-id',$(this).attr('data-id'));
@@ -2783,33 +2764,23 @@ $widgets['before_content'][] = [
         $(document.body).on('click', '.btn-booking-completed', function() {
             $.get('booking/status/completed/'+$(this).attr('data-id'));
         });
+        let stat    =   true;
         $(document).ready(function() {
             function load() {
-                setTimeout(function () {
-                    $.ajax({
-                        url: 'booking/status_date/'+$("#datepicker").val(),
-                        type: "GET",
-                        success: function (result) {
-                            let size    =   result.length;
-                            for (let i=0;i<size;i++) {
-                                let item    =   $("[data-card='"+result[i].id+"']");
-                                item.find('.card-header').removeClass('bg-success bg-info bg-danger bg-warning');
-                                if (result[i].status[0] === 'CHECKING') {
-                                    item.find('.card-header').addClass('bg-info');
-                                    item.find('.card-id').html('#'+result[i].status[2]);
-                                } else if (result[i].status[0] === 'on') {
-                                    item.find('.card-header').addClass('bg-danger');
-                                    item.find('.card-id').html('#'+result[i].status[2]);
-                                } else {
-                                    item.find('.card-header').addClass('bg-success');
-                                    item.find('.card-id').html('');
-                                }
-                                item.find('.card-body').html(result[i].status[1]);
-                            }
-                        },
-                        complete: load
-                    });
-                }, 2000);
+                if (stat) {
+                    stat  =   false;
+                    setTimeout(function () {
+                        $.ajax({
+                            url: 'booking/status_date/'+$("#datepicker").val(),
+                            type: "GET",
+                            success: function (result) {
+                                $("#tables").html(result);
+                                stat    =   true;
+                            },
+                            complete: load
+                        });
+                    }, 2000);
+                }
             }
             load();
         });

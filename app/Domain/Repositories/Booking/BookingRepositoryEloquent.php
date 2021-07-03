@@ -166,27 +166,6 @@ class BookingRepositoryEloquent implements BookingRepositoryInterface
             ->take($this->take)->get();
     }
 
-    public function cancel($id) {
-        $booking    =   Booking::where(BookingContract::ID,$id)->first();
-        $booking->status    =   BookingContract::OFF;
-        $booking->save();
-        return $booking;
-    }
-
-    public function came($id) {
-        $booking    =   Booking::where(BookingContract::ID,$id)->first();
-        $booking->status    =   BookingContract::CAME;
-        $booking->save();
-        return $booking;
-    }
-
-    public function completed($id) {
-        $booking    =   Booking::where(BookingContract::ID,$id)->first();
-        $booking->status    =   BookingContract::COMPLETED;
-        $booking->save();
-        return $booking;
-    }
-
     public function success($id):void {
         Booking::where(BookingContract::ID,$id)->update([
             BookingContract::STATUS =>  BookingContract::ON

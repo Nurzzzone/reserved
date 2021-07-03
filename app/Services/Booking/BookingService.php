@@ -62,18 +62,6 @@ class BookingService extends BaseService
         $this->bookingRepository->update($id,$input);
     }
 
-    public function cancel($id) {
-        return $this->bookingRepository->cancel($id);
-    }
-
-    public function came($id) {
-        return $this->bookingRepository->came($id);
-    }
-
-    public function completed($id) {
-        return $this->bookingRepository->completed($id);
-    }
-
     public function result($data):bool {
         if ((int) $data[BookingContract::PG_RESULT] === 1) {
             $this->bookingRepository->success($data[BookingContract::PG_ORDER_ID]);
@@ -90,12 +78,9 @@ class BookingService extends BaseService
         return $dt->format($format);
     }
 
-    public function statusCheck($id, $date  =   '') {
-        if (!$date) {
-            $date   =   date('Y-m-d');
-        }
-        $booking    =   $this->bookingRepository->getLastByTableId($id,$date);
-        if ($booking) {
+    public function getLastByTableId($id, $date) {
+        return $this->bookingRepository->getLastByTableId($id,$date);
+/*        if ($booking) {
             if ($booking[BookingContract::STATUS] === BookingContract::ON) {
                 return [
                     BookingContract::STATUS =>  BookingContract::ON,
@@ -118,7 +103,7 @@ class BookingService extends BaseService
         }
         return [
             BookingContract::STATUS =>  'free',
-        ];
+        ];*/
     }
 
     public function status($id, $date   =   '') {
@@ -133,6 +118,6 @@ class BookingService extends BaseService
         } elseif ($status[BookingContract::STATUS] === BookingContract::CHECKING) {
             return [BookingContract::CHECKING,'<a class="btn btn-info btn-block text-white font-weight-bold">В резерве ('.$status[BookingContract::TIME].')</a><a class="btn btn-dark btn-block text-white font-weight-bold btn-booking" data-id="'.$status[BookingContract::ID].'">Отменить</a>',$status[BookingContract::ID]];
         }
-        return ['free','<a href="/admin/booking/create?table='.$id.'" class="btn btn-success btn-block text-white font-weight-bold booking-new-btn" data-toggle="modal" data-target="#booking-modal" data-id="'.$id.'">Свободно</a>'];
+        return ['free',''];
     }
 }

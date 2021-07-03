@@ -37,7 +37,7 @@ class OrganizationController extends Controller
     {
         $tables =   $this->organizationTableListService->getByOrganizationId($id);
         foreach ($tables as &$table) {
-            $table->bookingStatus   =   $this->bookingService->statusCheck($table->id,$date);
+            $table->bookingStatus   =   $this->bookingService->getLastByTableId($table->id,$date);
         }
         return $tables;
     }

@@ -31,6 +31,10 @@
         &-success {
             background: #00a082;
         }
+        &-review {
+            background: #1d1d1d;
+            cursor: pointer;
+        }
     }
 }
 @media only screen and (max-width: 768px) {

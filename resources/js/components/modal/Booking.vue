@@ -10,7 +10,7 @@
                         <h3 class="auth-title text-center">Бронирование стола</h3>
                         <h6 class="text-secondary text-center mt-3">{{table.title}}</h6>
                     </div>
-                    <template v-if="table.bookingStatus === 'free'">
+                    <template v-if="table.bookingStatus === null">
                         <template v-if="status">
                             <template v-if="!storage.modal">
                                 <template v-if="date.time.length > 0">
@@ -209,6 +209,15 @@ export default {
         this.setTime();
     },
     methods: {
+        open: function(url) {
+            let a = document.createElement("a");
+            document.body.appendChild(a);
+            a.target    =   '_blank';
+            a.style = 'display: none';
+            a.href = url;
+            a.click();
+            document.body.removeChild(a);
+        },
         setTime: function() {
             let today   =   new Date();
             today       =   new Date(today.getFullYear(),today.getMonth(),today.getDate());
@@ -241,7 +250,7 @@ export default {
                     let data = response.data.data;
                     this.storage.token  =   this.guest.user.api_token;
                     sessionStorage.user =   JSON.stringify(this.guest.user);
-                    window.open(data.payment,'_blank');
+                    this.open(data.payment);
                     window.location.href    =   '/profile/history';
                 }).catch(error => {
                     this.guest.codeCheck    =   false;
@@ -273,7 +282,7 @@ export default {
                 axios.get('/api/payment/card/'+this.user.id)
                     .then(response => {
                         this.cardLoading    =   false;
-                        window.open(response.data,'_blank');
+                        this.open(response.data);
                         this.cardUpdate();
                     }).catch(error => {
                         this.cardLoading    =   false;
@@ -313,7 +322,7 @@ export default {
                 .then(response => {
                     let data = response.data;
                     if (data.hasOwnProperty('data')) {
-                        window.open('/form/'+data.data.id,'_blank');
+                        this.open('/form/'+data.data.id);
                         window.location.href    =   '/profile/history';
                     }
                 }).catch(error => {

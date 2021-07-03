@@ -1,4 +1,4 @@
-@if($booking)
+@if($booking && $booking->status !== \App\Domain\Contracts\BookingContract::COMPLETED)
     @php
         $user =   $userService->getById($booking->user_id);
     @endphp

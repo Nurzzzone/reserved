@@ -86,10 +86,10 @@
                                                 <div class="organization-card">
                                                     <div class="row align-content-center pl-3">
                                                         <div class="organization-card-title w-100 font-weight-bold">{{table.title}}</div>
-                                                        <template v-if="!table.bookingStatus">
+                                                        <template v-if="table.bookingStatus === undefined">
                                                             <div class="lds-ellipsis"><div></div><div></div><div></div><div></div></div>
                                                         </template>
-                                                        <template v-else-if="table.bookingStatus === 'free'">
+                                                        <template v-else-if="table.bookingStatus === null">
                                                             <div class="organization-card-status organization-card-status-free">Свободно</div>
                                                         </template>
                                                         <template v-else>
@@ -303,11 +303,11 @@ export default {
                     let data    =   response.data;
                     let statuses    =   [];
                     data.forEach(element => {
-                        statuses[element.id]    =   element.bookingStatus.status;
+                        statuses[element.id]    =   element.bookingStatus;
                     });
                     this.sections.forEach(element => {
                         element.organization_tables.forEach(item => {
-                            if (statuses[item.id]) {
+                            if (typeof statuses[item.id] !== 'undefined') {
                                 item.bookingStatus  =   statuses[item.id];
                             }
                         });

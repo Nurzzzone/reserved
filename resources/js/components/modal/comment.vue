@@ -33,6 +33,7 @@
 
 <script>
 export default {
+    props: ['item'],
     name: "comment",
     data() {
         return {
@@ -42,7 +43,7 @@ export default {
     },
     methods: {
         leaveComment: function() {
-            console.log('here');
+            console.log(this.item);
         }
     }
 }

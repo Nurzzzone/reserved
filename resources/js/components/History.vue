@@ -1,7 +1,7 @@
 <template>
     <Header></Header>
     <profile-section></profile-section>
-    <comment></comment>
+    <comment :item="item"></comment>
     <div class="container-fluid mb-md-5">
         <div class="container p-0">
             <template v-if="items.length > 0">
@@ -77,6 +77,7 @@ export default {
     data() {
         return {
             status: true,
+            item: {},
             items: [],
             user: false,
             paginate: 1
@@ -90,7 +91,7 @@ export default {
     },
     methods: {
         comment: function(key) {
-            console.log(key);
+            this.item   =   this.items[key];
         },
         open: function(url) {
             let a = document.createElement("a");

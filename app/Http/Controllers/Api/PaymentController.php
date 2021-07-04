@@ -38,8 +38,7 @@ class PaymentController extends Controller {
     {
 
         $data   =   $paymentCardResultRequest->validated();
-        Log::info('card',$data);
-        if ($data[MainContract::PG_RESULT] === 1) {
+        if ($data[MainContract::PG_RESULT] === '1') {
             $this->bookingService->update($data[MainContract::PG_ORDER_ID],[
                 MainContract::STATUS    =>  MainContract::ON
             ]);

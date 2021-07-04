@@ -63,7 +63,7 @@ class UserRepositoryEloquent implements UserRepositoryInterface
     public function smsVerify($phone,$code)
     {
         $user   =   User::where(UserContract::PHONE,$phone)->first();
-        if ($user && ((int)$user->code === (int)$code)) {
+        if ($user && ($user->code === $code)) {
             $user->phone_verified_at    =   date('Y-m-d H:i:s');
             $user->save();
             return $user;

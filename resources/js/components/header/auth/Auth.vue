@@ -10,86 +10,86 @@
                         <template v-if="sms.check">
                             <div class="form-group">
                                 <h3 class="auth-title text-center">Смс подтверждение</h3>
-                                <h6 class="text-secondary text-center mt-3">На ваш номер был отправлен смс код.</h6>
+                                <h6 class="text-secondary text-center mt-3 auth-description">На ваш номер был отправлен смс код.</h6>
                             </div>
                             <div class="form-group p-0" v-if="sms.error">
                                 <div class="auth-error font-weight-bold text-center">Не код правильный код подтверждения.</div>
                             </div>
-                            <div class="form-row mx-3">
-                                <div class="col-12 mt-3">
-                                    <input type="text" class="form-control p-3 auth-input" v-maska="'######'" v-model="sms.code" placeholder="код смс" ref="phone_code">
+                            <div class="form-row mx-md-3">
+                                <div class="col-12 mt-md-3 auth-row">
+                                    <input type="text" class="form-control p-3 auth-input" v-maska="'######'" v-model="sms.code" placeholder="код смс" ref="phone_code" v-on:keyup.enter="sms_btn">
                                 </div>
-                                <div class="col-12 mt-4">
+                                <div class="col-12 mt-md-4 auth-row">
                                     <button class="btn btn-block auth-btn text-white" @click="sms_btn">
                                         <div v-if="sms.status">Подтвердить номер</div>
                                         <div class="spinner" v-else></div>
                                     </button>
                                 </div>
-                                <div class="col-12 mt-4">
-                                    <button class="btn btn-block auth-register text-white" @click="cancelSms()">Отмена</button>
+                                <div class="col-12 mt-md-4 auth-row">
+                                    <button class="btn btn-block auth-register text-white" @click="cancelSms">Отмена</button>
                                 </div>
                             </div>
                         </template>
                         <template v-else-if="storage.auth">
                             <div class="form-group">
-                                <h3 class="auth-title text-center">Войдите</h3>
-                                <h6 class="text-secondary text-center mt-3">Войдите или создайте новый аккаунт Reserved.</h6>
+                                <h3 class="text-center auth-title">Войдите</h3>
+                                <h6 class="text-secondary text-center mt-3 auth-description">Войдите или создайте новый аккаунт Reserved.</h6>
                             </div>
-                            <div class="form-group p-0" v-if="login.error">
+                            <div class="form-group p-0 m-0" v-if="login.error">
                                 <div class="auth-error font-weight-bold text-center">Не правильный логин или пароль.</div>
                             </div>
-                            <div class="form-row mx-3">
-                                <div class="col-12 mt-3">
+                            <div class="form-row mx-md-3">
+                                <div class="col-12 mt-md-3 auth-row">
                                     <div class="auth-phone-prefix">+7</div>
                                     <input type="text" class="form-control p-3 auth-input auth-phone" v-maska="'##########'" v-model="login.phone" ref="phone" v-on:keyup.enter="login_btn">
                                 </div>
-                                <div class="col-12 mt-3">
+                                <div class="col-12 mt-md-3 auth-row">
                                     <input type="password" class="form-control p-3 auth-input" v-model="login.password" placeholder="Пароль" ref="password" v-on:keyup.enter="login_btn">
                                 </div>
-                                <div class="col-12 mt-4">
+                                <div class="col-12 mt-md-4 auth-row">
                                     <button class="btn btn-block auth-btn text-white" @click="login_btn">
                                         <div v-if="login.status">Далее</div>
                                         <div class="spinner" v-else></div>
                                     </button>
                                 </div>
-                                <div class="col-12 mt-4">
+                                <div class="col-12 mt-md-4 auth-row">
                                     <button class="btn btn-block auth-register text-white" @click="storage.auth = false">Регистрация</button>
                                 </div>
                             </div>
                         </template>
                         <template v-else>
                             <div class="form-group">
-                                <h3 class="auth-title text-center">Регистрация</h3>
-                                <h6 class="text-secondary text-center mt-3">Войдите или создайте новый аккаунт Reserved.</h6>
+                                <h3 class="text-center auth-title">Регистрация</h3>
+                                <h6 class="text-secondary text-center mt-3 auth-description">Войдите или создайте новый аккаунт Reserved.</h6>
                             </div>
                             <div class="form-group p-0" v-if="register.error">
                                 <div class="auth-error font-weight-bold text-center" v-html="register.error_message"></div>
                             </div>
-                            <div class="form-row mx-3">
-                                <div class="col-12 mt-3">
+                            <div class="form-row mx-md-3">
+                                <div class="col-12 mt-md-3 auth-row">
                                     <input type="text" class="form-control p-3 auth-input" v-model="register.name" placeholder="Ваше имя" ref="name_register" v-on:keyup.enter="register_btn">
                                 </div>
-                                <div class="col-12 mt-3">
+                                <div class="col-12 mt-md-3 auth-row">
                                     <div class="auth-phone-prefix">+7</div>
                                     <input type="text" class="form-control p-3 auth-input auth-phone" v-maska="'##########'" v-model="register.phone" ref="phone_register" v-on:keyup.enter="register_btn">
                                 </div>
-                                <div class="col-12 mt-3">
+                                <div class="col-12 mt-md-3 auth-row">
                                     <input type="password" class="form-control p-3 auth-input" v-model="register.password" placeholder="Пароль" ref="password_register" v-on:keyup.enter="register_btn">
                                 </div>
-                                <div class="col-12 mt-4">
+                                <div class="col-12 mt-md-4 auth-row">
                                     <button class="btn btn-block auth-btn text-white" @click="register_btn">
                                         <div v-if="register.status">Регистрация</div>
                                         <div class="spinner" v-else></div>
                                     </button>
                                 </div>
-                                <div class="col-12 mt-4">
+                                <div class="col-12 mt-md-4 auth-row">
                                     <button class="btn btn-block auth-register text-white" @click="storage.auth = true">Войти</button>
                                 </div>
                             </div>
                         </template>
-                        <div class="form-row mt-4">
+                        <div class="form-row mt-2 mt-md-4">
                             <div class="col-12">
-                                <p class="text-secondary auth-txt text-center">
+                                <p class="text-secondary auth-txt text-center auth-footer-title">
                                     На сайте применяются Политика Конфиденциальности и Условия Пользования
                                 </p>
                             </div>
@@ -247,84 +247,5 @@ export default {
 </script>
 
 <style lang="scss">
-    .auth {
-        &-error {
-            color: red;
-        }
-    }
-    .spinner {
-        width: 25px;
-        height: 25px;
-        border: 4px transparent solid;
-        border-top: 4px #fff solid;
-        border-bottom: 4px #fff solid;
-        border-radius: 50%;
-        animation: sp-anime 0.5s infinite linear;
-        margin: 0 auto 0 auto;
-    }
-    @keyframes sp-anime {
-        100% {
-            transform: rotate(360deg);
-        }
-    }
-    .auth {
-        &-phone {
-            padding-left: 34px !important;
-            &-prefix {
-                position: absolute;
-                margin: 10px 0 0 18px;
-                font-size: 1rem;
-            }
-        }
-        &-txt {
-            font-size: 13px;
-        }
-        &-btn, &-register {
-            height: 44px;
-            background: #FF8008;
-            border-radius: 40px;
-        }
-        &-register {
-            background: #00a082;
-        }
-        &-input {
-            height: 44px;
-            border: 2px solid gainsboro;
-        }
-        &-title {
-            font-family: 'Lobster', cursive;
-        }
-        &-modal {
-            border-radius: 20px;
-        }
-        &-btn {
-            &-close {
-                width: 40px;
-                height: 40px;
-                background: gainsboro;
-                outline: none;
-                border: none;
-                border-radius: 40px;
-                position: relative;
-                display: grid !important;
-                &:before, &:after {
-                    content: '';
-                    position: absolute;
-                    width: 20px;
-                    height: 1px;
-                    background: #000;
-                    top: 50%;
-                    left: 50%;
-                    transform: translate(-50%,-50%) rotate(
-                            45deg
-                    );
-                }
-                &:after {
-                    transform: translate(-50%,-50%) rotate(
-                            -45deg
-                    );
-                }
-            }
-        }
-    }
+    @import '../../../../css/header/auth/auth.scss';
 </style>

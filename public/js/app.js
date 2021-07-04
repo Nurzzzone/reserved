@@ -20827,7 +20827,7 @@ var _hoisted_7 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("
 }, [/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("h3", {
   "class": "auth-title text-center"
 }, "Смс подтверждение"), /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("h6", {
-  "class": "text-secondary text-center mt-3"
+  "class": "text-secondary text-center mt-3 auth-description"
 }, "На ваш номер был отправлен смс код.")], -1
 /* HOISTED */
 );
@@ -20844,13 +20844,13 @@ var _hoisted_9 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("
 );
 
 var _hoisted_10 = {
-  "class": "form-row mx-3"
+  "class": "form-row mx-md-3"
 };
 var _hoisted_11 = {
-  "class": "col-12 mt-3"
+  "class": "col-12 mt-md-3 auth-row"
 };
 var _hoisted_12 = {
-  "class": "col-12 mt-4"
+  "class": "col-12 mt-md-4 auth-row"
 };
 var _hoisted_13 = {
   key: 0
@@ -20860,22 +20860,22 @@ var _hoisted_14 = {
   "class": "spinner"
 };
 var _hoisted_15 = {
-  "class": "col-12 mt-4"
+  "class": "col-12 mt-md-4 auth-row"
 };
 
 var _hoisted_16 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", {
   "class": "form-group"
 }, [/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("h3", {
-  "class": "auth-title text-center"
+  "class": "text-center auth-title"
 }, "Войдите"), /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("h6", {
-  "class": "text-secondary text-center mt-3"
+  "class": "text-secondary text-center mt-3 auth-description"
 }, "Войдите или создайте новый аккаунт Reserved.")], -1
 /* HOISTED */
 );
 
 var _hoisted_17 = {
   key: 0,
-  "class": "form-group p-0"
+  "class": "form-group p-0 m-0"
 };
 
 var _hoisted_18 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", {
@@ -20885,10 +20885,10 @@ var _hoisted_18 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(
 );
 
 var _hoisted_19 = {
-  "class": "form-row mx-3"
+  "class": "form-row mx-md-3"
 };
 var _hoisted_20 = {
-  "class": "col-12 mt-3"
+  "class": "col-12 mt-md-3 auth-row"
 };
 
 var _hoisted_21 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", {
@@ -20898,10 +20898,10 @@ var _hoisted_21 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(
 );
 
 var _hoisted_22 = {
-  "class": "col-12 mt-3"
+  "class": "col-12 mt-md-3 auth-row"
 };
 var _hoisted_23 = {
-  "class": "col-12 mt-4"
+  "class": "col-12 mt-md-4 auth-row"
 };
 var _hoisted_24 = {
   key: 0
@@ -20911,15 +20911,15 @@ var _hoisted_25 = {
   "class": "spinner"
 };
 var _hoisted_26 = {
-  "class": "col-12 mt-4"
+  "class": "col-12 mt-md-4 auth-row"
 };
 
 var _hoisted_27 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", {
   "class": "form-group"
 }, [/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("h3", {
-  "class": "auth-title text-center"
+  "class": "text-center auth-title"
 }, "Регистрация"), /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("h6", {
-  "class": "text-secondary text-center mt-3"
+  "class": "text-secondary text-center mt-3 auth-description"
 }, "Войдите или создайте новый аккаунт Reserved.")], -1
 /* HOISTED */
 );
@@ -20929,13 +20929,13 @@ var _hoisted_28 = {
   "class": "form-group p-0"
 };
 var _hoisted_29 = {
-  "class": "form-row mx-3"
+  "class": "form-row mx-md-3"
 };
 var _hoisted_30 = {
-  "class": "col-12 mt-3"
+  "class": "col-12 mt-md-3 auth-row"
 };
 var _hoisted_31 = {
-  "class": "col-12 mt-3"
+  "class": "col-12 mt-md-3 auth-row"
 };
 
 var _hoisted_32 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", {
@@ -20945,10 +20945,10 @@ var _hoisted_32 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(
 );
 
 var _hoisted_33 = {
-  "class": "col-12 mt-3"
+  "class": "col-12 mt-md-3 auth-row"
 };
 var _hoisted_34 = {
-  "class": "col-12 mt-4"
+  "class": "col-12 mt-md-4 auth-row"
 };
 var _hoisted_35 = {
   key: 0
@@ -20958,15 +20958,15 @@ var _hoisted_36 = {
   "class": "spinner"
 };
 var _hoisted_37 = {
-  "class": "col-12 mt-4"
+  "class": "col-12 mt-md-4 auth-row"
 };
 
 var _hoisted_38 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", {
-  "class": "form-row mt-4"
+  "class": "form-row mt-2 mt-md-4"
 }, [/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", {
   "class": "col-12"
 }, [/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("p", {
-  "class": "text-secondary auth-txt text-center"
+  "class": "text-secondary auth-txt text-center auth-footer-title"
 }, " На сайте применяются Политика Конфиденциальности и Условия Пользования ")])], -1
 /* HOISTED */
 );
@@ -20983,18 +20983,21 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
       return _ctx.sms.code = $event;
     }),
     placeholder: "код смс",
-    ref: "phone_code"
-  }, null, 512
-  /* NEED_PATCH */
+    ref: "phone_code",
+    onKeyup: _cache[2] || (_cache[2] = (0,vue__WEBPACK_IMPORTED_MODULE_0__.withKeys)(function () {
+      return $options.sms_btn && $options.sms_btn.apply($options, arguments);
+    }, ["enter"]))
+  }, null, 544
+  /* HYDRATE_EVENTS, NEED_PATCH */
   ), [[_directive_maska, '######'], [vue__WEBPACK_IMPORTED_MODULE_0__.vModelText, _ctx.sms.code]])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_12, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("button", {
     "class": "btn btn-block auth-btn text-white",
-    onClick: _cache[2] || (_cache[2] = function () {
+    onClick: _cache[3] || (_cache[3] = function () {
       return $options.sms_btn && $options.sms_btn.apply($options, arguments);
     })
   }, [_ctx.sms.status ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)("div", _hoisted_13, "Подтвердить номер")) : ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)("div", _hoisted_14))])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_15, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("button", {
     "class": "btn btn-block auth-register text-white",
-    onClick: _cache[3] || (_cache[3] = function ($event) {
-      return $options.cancelSms();
+    onClick: _cache[4] || (_cache[4] = function () {
+      return $options.cancelSms && $options.cancelSms.apply($options, arguments);
     })
   }, "Отмена")])])], 64
   /* STABLE_FRAGMENT */
@@ -21003,11 +21006,11 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
   }, [_hoisted_16, _ctx.login.error ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)("div", _hoisted_17, [_hoisted_18])) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_19, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_20, [_hoisted_21, (0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("input", {
     type: "text",
     "class": "form-control p-3 auth-input auth-phone",
-    "onUpdate:modelValue": _cache[4] || (_cache[4] = function ($event) {
+    "onUpdate:modelValue": _cache[5] || (_cache[5] = function ($event) {
       return _ctx.login.phone = $event;
     }),
     ref: "phone",
-    onKeyup: _cache[5] || (_cache[5] = (0,vue__WEBPACK_IMPORTED_MODULE_0__.withKeys)(function () {
+    onKeyup: _cache[6] || (_cache[6] = (0,vue__WEBPACK_IMPORTED_MODULE_0__.withKeys)(function () {
       return $options.login_btn && $options.login_btn.apply($options, arguments);
     }, ["enter"]))
   }, null, 544
@@ -21015,24 +21018,24 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
   ), [[_directive_maska, '##########'], [vue__WEBPACK_IMPORTED_MODULE_0__.vModelText, _ctx.login.phone]])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_22, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("input", {
     type: "password",
     "class": "form-control p-3 auth-input",
-    "onUpdate:modelValue": _cache[6] || (_cache[6] = function ($event) {
+    "onUpdate:modelValue": _cache[7] || (_cache[7] = function ($event) {
       return _ctx.login.password = $event;
     }),
     placeholder: "Пароль",
     ref: "password",
-    onKeyup: _cache[7] || (_cache[7] = (0,vue__WEBPACK_IMPORTED_MODULE_0__.withKeys)(function () {
+    onKeyup: _cache[8] || (_cache[8] = (0,vue__WEBPACK_IMPORTED_MODULE_0__.withKeys)(function () {
       return $options.login_btn && $options.login_btn.apply($options, arguments);
     }, ["enter"]))
   }, null, 544
   /* HYDRATE_EVENTS, NEED_PATCH */
   ), [[vue__WEBPACK_IMPORTED_MODULE_0__.vModelText, _ctx.login.password]])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_23, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("button", {
     "class": "btn btn-block auth-btn text-white",
-    onClick: _cache[8] || (_cache[8] = function () {
+    onClick: _cache[9] || (_cache[9] = function () {
       return $options.login_btn && $options.login_btn.apply($options, arguments);
     })
   }, [_ctx.login.status ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)("div", _hoisted_24, "Далее")) : ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)("div", _hoisted_25))])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_26, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("button", {
     "class": "btn btn-block auth-register text-white",
-    onClick: _cache[9] || (_cache[9] = function ($event) {
+    onClick: _cache[10] || (_cache[10] = function ($event) {
       return _ctx.storage.auth = false;
     })
   }, "Регистрация")])])], 64
@@ -21047,12 +21050,12 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
   , ["innerHTML"])])) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_29, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_30, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("input", {
     type: "text",
     "class": "form-control p-3 auth-input",
-    "onUpdate:modelValue": _cache[10] || (_cache[10] = function ($event) {
+    "onUpdate:modelValue": _cache[11] || (_cache[11] = function ($event) {
       return _ctx.register.name = $event;
     }),
     placeholder: "Ваше имя",
     ref: "name_register",
-    onKeyup: _cache[11] || (_cache[11] = (0,vue__WEBPACK_IMPORTED_MODULE_0__.withKeys)(function () {
+    onKeyup: _cache[12] || (_cache[12] = (0,vue__WEBPACK_IMPORTED_MODULE_0__.withKeys)(function () {
       return $options.register_btn && $options.register_btn.apply($options, arguments);
     }, ["enter"]))
   }, null, 544
@@ -21060,11 +21063,11 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
   ), [[vue__WEBPACK_IMPORTED_MODULE_0__.vModelText, _ctx.register.name]])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_31, [_hoisted_32, (0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("input", {
     type: "text",
     "class": "form-control p-3 auth-input auth-phone",
-    "onUpdate:modelValue": _cache[12] || (_cache[12] = function ($event) {
+    "onUpdate:modelValue": _cache[13] || (_cache[13] = function ($event) {
       return _ctx.register.phone = $event;
     }),
     ref: "phone_register",
-    onKeyup: _cache[13] || (_cache[13] = (0,vue__WEBPACK_IMPORTED_MODULE_0__.withKeys)(function () {
+    onKeyup: _cache[14] || (_cache[14] = (0,vue__WEBPACK_IMPORTED_MODULE_0__.withKeys)(function () {
       return $options.register_btn && $options.register_btn.apply($options, arguments);
     }, ["enter"]))
   }, null, 544
@@ -21072,24 +21075,24 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
   ), [[_directive_maska, '##########'], [vue__WEBPACK_IMPORTED_MODULE_0__.vModelText, _ctx.register.phone]])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_33, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("input", {
     type: "password",
     "class": "form-control p-3 auth-input",
-    "onUpdate:modelValue": _cache[14] || (_cache[14] = function ($event) {
+    "onUpdate:modelValue": _cache[15] || (_cache[15] = function ($event) {
       return _ctx.register.password = $event;
     }),
     placeholder: "Пароль",
     ref: "password_register",
-    onKeyup: _cache[15] || (_cache[15] = (0,vue__WEBPACK_IMPORTED_MODULE_0__.withKeys)(function () {
+    onKeyup: _cache[16] || (_cache[16] = (0,vue__WEBPACK_IMPORTED_MODULE_0__.withKeys)(function () {
       return $options.register_btn && $options.register_btn.apply($options, arguments);
     }, ["enter"]))
   }, null, 544
   /* HYDRATE_EVENTS, NEED_PATCH */
   ), [[vue__WEBPACK_IMPORTED_MODULE_0__.vModelText, _ctx.register.password]])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_34, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("button", {
     "class": "btn btn-block auth-btn text-white",
-    onClick: _cache[16] || (_cache[16] = function () {
+    onClick: _cache[17] || (_cache[17] = function () {
       return $options.register_btn && $options.register_btn.apply($options, arguments);
     })
   }, [_ctx.register.status ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)("div", _hoisted_35, "Регистрация")) : ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)("div", _hoisted_36))])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_37, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("button", {
     "class": "btn btn-block auth-register text-white",
-    onClick: _cache[17] || (_cache[17] = function ($event) {
+    onClick: _cache[18] || (_cache[18] = function ($event) {
       return _ctx.storage.auth = true;
     })
   }, "Войти")])])], 64
@@ -22667,7 +22670,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, ".auth-error {\n  color: red;\n}\n.spinner {\n  width: 25px;\n  height: 25px;\n  border: 4px transparent solid;\n  border-top: 4px #fff solid;\n  border-bottom: 4px #fff solid;\n  border-radius: 50%;\n  -webkit-animation: sp-anime 0.5s infinite linear;\n          animation: sp-anime 0.5s infinite linear;\n  margin: 0 auto 0 auto;\n}\n@-webkit-keyframes sp-anime {\n100% {\n    transform: rotate(360deg);\n}\n}\n@keyframes sp-anime {\n100% {\n    transform: rotate(360deg);\n}\n}\n.auth-phone {\n  padding-left: 34px !important;\n}\n.auth-phone-prefix {\n  position: absolute;\n  margin: 10px 0 0 18px;\n  font-size: 1rem;\n}\n.auth-txt {\n  font-size: 13px;\n}\n.auth-btn, .auth-register {\n  height: 44px;\n  background: #FF8008;\n  border-radius: 40px;\n}\n.auth-register {\n  background: #00a082;\n}\n.auth-input {\n  height: 44px;\n  border: 2px solid gainsboro;\n}\n.auth-title {\n  font-family: 'Lobster', cursive;\n}\n.auth-modal {\n  border-radius: 20px;\n}\n.auth-btn-close {\n  width: 40px;\n  height: 40px;\n  background: gainsboro;\n  outline: none;\n  border: none;\n  border-radius: 40px;\n  position: relative;\n  display: grid !important;\n}\n.auth-btn-close:before, .auth-btn-close:after {\n  content: '';\n  position: absolute;\n  width: 20px;\n  height: 1px;\n  background: #000;\n  top: 50%;\n  left: 50%;\n  transform: translate(-50%, -50%) rotate(45deg);\n}\n.auth-btn-close:after {\n  transform: translate(-50%, -50%) rotate(-45deg);\n}\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, ".spinner {\n  width: 25px;\n  height: 25px;\n  border: 4px transparent solid;\n  border-top: 4px #fff solid;\n  border-bottom: 4px #fff solid;\n  border-radius: 50%;\n  -webkit-animation: sp-anime 0.5s infinite linear;\n          animation: sp-anime 0.5s infinite linear;\n  margin: 0 auto 0 auto;\n}\n@-webkit-keyframes sp-anime {\n100% {\n    transform: rotate(360deg);\n}\n}\n@keyframes sp-anime {\n100% {\n    transform: rotate(360deg);\n}\n}\n.auth-error {\n  color: red;\n}\n.auth-phone {\n  padding-left: 34px !important;\n}\n.auth-phone-prefix {\n  position: absolute;\n  margin: 10px 0 0 18px;\n  font-size: 1rem;\n}\n.auth-txt {\n  font-size: 13px;\n}\n.auth-btn, .auth-register {\n  height: 44px;\n  background: #FF8008;\n  border-radius: 40px;\n}\n.auth-register {\n  background: #00a082;\n}\n.auth-input {\n  height: 44px;\n  border: 2px solid gainsboro;\n}\n.auth-title {\n  font-family: 'Lobster', cursive;\n}\n.auth-modal {\n  border-radius: 20px;\n}\n.auth-btn-close {\n  width: 40px;\n  height: 40px;\n  background: gainsboro;\n  outline: none;\n  border: none;\n  border-radius: 40px;\n  position: relative;\n  display: grid !important;\n}\n.auth-btn-close:before, .auth-btn-close:after {\n  content: '';\n  position: absolute;\n  width: 20px;\n  height: 1px;\n  background: #000;\n  top: 50%;\n  left: 50%;\n  transform: translate(-50%, -50%) rotate(45deg);\n}\n.auth-btn-close:after {\n  transform: translate(-50%, -50%) rotate(-45deg);\n}\n@media only screen and (max-width: 768px) {\n.auth-title {\n    font-size: 16px;\n}\n.auth-description {\n    font-size: 13px;\n}\n.auth-error {\n    font-size: 13px;\n    margin-bottom: 10px;\n}\n.auth-row {\n    margin: 5px 0 5px 0;\n}\n.auth-btn, .auth-register {\n    font-size: 13px;\n    height: 36px;\n}\n.auth-footer-title {\n    font-size: 10px;\n}\n}\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 

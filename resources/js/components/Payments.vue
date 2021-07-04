@@ -127,7 +127,6 @@ export default {
             a.style = 'display: none';
             a.href = url;
             a.click();
-            document.body.removeChild(a);
         },
         cardUpdate: function() {
             if (this.updateStatus) {

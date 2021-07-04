@@ -34,10 +34,12 @@ class PaymentController extends Controller {
         return response(['message'  =>  'Произошла ошибка'],400);
     }
 
-    public function cardResult(PaymentCardResultRequest $request):void
+    public function cardResult(PaymentCardResultRequest $paymentCardResultRequest):void
     {
-        $data   =   $request->validated();
-        if ((int)$data[MainContract::PG_RESULT] === 1) {
+
+        $data   =   $paymentCardResultRequest->validated();
+        Log::info('card',$data);
+        if ($data[MainContract::PG_RESULT] === 1) {
             $this->bookingService->update($data[MainContract::PG_ORDER_ID],[
                 MainContract::STATUS    =>  MainContract::ON
             ]);

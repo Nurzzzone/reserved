@@ -17692,6 +17692,15 @@ __webpack_require__.r(__webpack_exports__);
     this.getCards();
   },
   methods: {
+    open: function open(url) {
+      var a = document.createElement("a");
+      document.body.appendChild(a);
+      a.target = '_blank';
+      a.style = 'display: none';
+      a.href = url;
+      a.click();
+      document.body.removeChild(a);
+    },
     cardUpdate: function cardUpdate() {
       var _this = this;
 
@@ -17720,12 +17729,12 @@ __webpack_require__.r(__webpack_exports__);
         this.cardStatus = false;
         axios.get('/api/payment/card/' + this.user.id).then(function (response) {
           _this2.cardStatus = true;
-          window.open(response.data, '_blank');
+
+          _this2.open(response.data);
 
           _this2.cardUpdate();
         })["catch"](function (error) {
           _this2.cardStatus = true;
-          console.error(error.response.data);
         });
       }
     },
@@ -17751,7 +17760,6 @@ __webpack_require__.r(__webpack_exports__);
           _this3.cardLoading = false;
         })["catch"](function (error) {
           _this3.cardLoading = false;
-          console.log(error.response);
         });
       }
     },

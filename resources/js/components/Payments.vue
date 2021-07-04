@@ -120,6 +120,15 @@ export default {
         this.getCards();
     },
     methods: {
+        open: function(url) {
+            let a = document.createElement("a");
+            document.body.appendChild(a);
+            a.target    =   '_blank';
+            a.style = 'display: none';
+            a.href = url;
+            a.click();
+            document.body.removeChild(a);
+        },
         cardUpdate: function() {
             if (this.updateStatus) {
                 this.updateStatus   =   false;
@@ -146,11 +155,10 @@ export default {
                 axios.get('/api/payment/card/'+this.user.id)
                     .then(response => {
                         this.cardStatus =   true;
-                        window.open(response.data,'_blank');
+                        this.open(response.data);
                         this.cardUpdate();
                     }).catch(error => {
                         this.cardStatus =   true;
-                        console.error(error.response.data);
                     });
             }
         },
@@ -175,7 +183,6 @@ export default {
                         this.cardLoading    =   false;
                     }).catch(error => {
                         this.cardLoading    =   false;
-                        console.log(error.response);
                     });
             }
         },

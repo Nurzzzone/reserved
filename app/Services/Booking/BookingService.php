@@ -79,7 +79,8 @@ class BookingService extends BaseService
     }
 
     public function getLastByTableId($id, $date) {
-        return $this->bookingRepository->getLastByTableId($id,$date);
+        $date   =   date('Y-m-d',strtotime($date));
+        return $this->bookingRepository->getLastByTableId($id, $date);
 /*        if ($booking) {
             if ($booking[BookingContract::STATUS] === BookingContract::ON) {
                 return [

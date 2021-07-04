@@ -307,9 +307,14 @@ export default {
                     });
                     this.sections.forEach(element => {
                         element.organization_tables.forEach(item => {
-                            if (typeof statuses[item.id] !== 'undefined') {
+                            if (statuses[item.id]) {
+                                console.log('yse');
                                 item.bookingStatus  =   statuses[item.id];
+                            } else {
+                                console.log('no');
+                                item.bookingStatus  =   null;
                             }
+
                         });
                     });
                 }).catch(error => {

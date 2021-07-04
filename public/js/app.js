@@ -17490,8 +17490,12 @@ __webpack_require__.r(__webpack_exports__);
 
         _this.sections.forEach(function (element) {
           element.organization_tables.forEach(function (item) {
-            if (typeof statuses[item.id] !== 'undefined') {
+            if (statuses[item.id]) {
+              console.log('yse');
               item.bookingStatus = statuses[item.id];
+            } else {
+              console.log('no');
+              item.bookingStatus = null;
             }
           });
         });

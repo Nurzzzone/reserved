@@ -182,22 +182,25 @@ class BookingRepositoryEloquent implements BookingRepositoryInterface
         return Booking::with('organization','organizationTables')
             ->where([
                 [BookingContract::ORGANIZATION_TABLE_LIST_ID,$id],
-                [BookingContract::STATUS,BookingContract::ON]
+                [BookingContract::STATUS,BookingContract::ON],
+                [BookingContract::DATE,$date]
             ])
             ->orWhere([
                 [BookingContract::ORGANIZATION_TABLE_LIST_ID,$id],
                 [BookingContract::STATUS,BookingContract::CAME],
+                [BookingContract::DATE,$date]
             ])
             ->orWhere([
                 [BookingContract::ORGANIZATION_TABLE_LIST_ID,$id],
                 [BookingContract::STATUS,BookingContract::COMPLETED],
+                [BookingContract::DATE,$date]
             ])
             ->orWhere([
                 [BookingContract::ORGANIZATION_TABLE_LIST_ID,$id],
                 [BookingContract::STATUS,BookingContract::CHECKING],
-                [BookingContract::CREATED_AT,'>=',$this->date]
+                [BookingContract::CREATED_AT,'>=',$this->date],
+                [BookingContract::DATE,$date]
             ])
-            ->whereDate(BookingContract::DATE,$date)
             ->orderBy(BookingContract::ID,BookingContract::DESC)
             ->first();
     }

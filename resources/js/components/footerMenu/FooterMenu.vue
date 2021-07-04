@@ -21,12 +21,22 @@
                             <div class="title">Избранное</div>
                         </button>
                     </a>
-                    <a href="/profile" class="p-0 py-1 w-25">
-                        <button class="btn font-weight-bold w-100">
-                            <img src="/img/logo/profile.svg" width="20" height="20">
-                            <div class="title">Профиль</div>
-                        </button>
-                    </a>
+                    <template v-if="storage.token !== ''">
+                        <a href="/profile" class="p-0 py-1 w-25">
+                            <button class="btn font-weight-bold w-100">
+                                <img src="/img/logo/profile.svg" width="20" height="20">
+                                <div class="title">Профиль</div>
+                            </button>
+                        </a>
+                    </template>
+                    <template v-else>
+                        <a class="p-0 py-1 w-25" data-toggle="modal" data-target="#auth_modal">
+                            <button class="btn font-weight-bold w-100">
+                                <img src="/img/logo/profile.svg" width="20" height="20">
+                                <div class="title">Профиль</div>
+                            </button>
+                        </a>
+                    </template>
                 </div>
             </div>
         </div>

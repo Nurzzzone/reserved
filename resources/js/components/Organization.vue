@@ -108,7 +108,7 @@
                                 </div>
                             </div>
                             <div v-if="tab === 2">
-                                <div class="row justify-content-center">
+                                <div class="row justify-content-center" v-if="organization.images.length > 0">
                                     <div class="col-3 p-2" v-for="(image,imageKey) in organization.images" :key="imageKey">
                                         <div class="organization-image" :style="{'background-image':'url('+image.image+')'}">
                                             <div></div>

@@ -42,7 +42,7 @@ class PaymentService
     const CARD_FAILURE  =   'https://reserved-app.com/profile/payments';
 
     const CARD_POST =   'https://reserved-app.com/api/card/post';
-    const CARD_BACK =   'https://reserved-app.com/api/payment/card/back';
+    const CARD_BACK =   'https://reserved-app.com/profile/payments';
 
     const CURRENCY  =   'KZT';
     const CHECK_URL =   'https://reserved-app.com/api/payment/check';

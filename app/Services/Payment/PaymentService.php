@@ -113,8 +113,7 @@ class PaymentService
         ],MainContract::INIT));
 
         $xml    =   simplexml_load_string($payment);
-
-        if (property_exists($xml,MainContract::PG_PAYMENT_ID)) {
+        if ($xml && property_exists($xml,MainContract::PG_PAYMENT_ID)) {
             return json_decode(json_encode($xml),true);
         }
 

@@ -13,8 +13,8 @@ class OrganizationResource extends JsonResource
         return [
             OrganizationContract::ID        =>  $this->{OrganizationContract::ID},
             OrganizationContract::RATING    =>  $this->{OrganizationContract::RATING},
-            OrganizationContract::IMAGE     =>  $this->{OrganizationContract::IMAGE},
-            OrganizationContract::WALLPAPER =>  $this->{OrganizationContract::WALLPAPER},
+            OrganizationContract::IMAGE     =>  $this->{OrganizationContract::IMAGE}?$this->{OrganizationContract::IMAGE}:($this->{OrganizationContract::CATEGORY_ID}===1?'/img/logo/restaurant.svg':($this->{OrganizationContract::CATEGORY_ID}===2?'/img/logo/cafe.svg':'/img/logo/bar.svg')),
+            OrganizationContract::WALLPAPER =>  $this->{OrganizationContract::WALLPAPER}?$this->{OrganizationContract::WALLPAPER}:'/img/logo/wall.png',
             OrganizationContract::TITLE     =>  $this->{OrganizationContract::TITLE},
             OrganizationContract::TITLE_KZ  =>  $this->title_kz,
             OrganizationContract::TITLE_EN  =>  $this->title_en,

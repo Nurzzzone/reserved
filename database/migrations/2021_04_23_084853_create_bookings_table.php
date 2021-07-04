@@ -19,10 +19,12 @@ class CreateBookingsTable extends Migration
             $table->bigInteger( BookingContract::ORGANIZATION_TABLE_LIST_ID)->nullable();
             $table->time(BookingContract::TIME)->useCurrent();
             $table->date(BookingContract::DATE)->useCurrent();
-            $table->text(BookingContract::COMMENT)->nullable();
             $table->enum(BookingContract::STATUS,BookingContract::STATUSES_BOOKING)
                 ->default(BookingContract::CHECKING);
-
+            $table->enum(BookingContract::COMMENT,[
+                BookingContract::ON,
+                BookingContract::OFF
+            ])->default(BookingContract::ON);
             $table->string(BookingContract::PAYMENT_URL)->nullable();
             $table->bigInteger(BookingContract::PAYMENT_ID)->nullable();
             $table->string(BookingContract::PRICE)->nullable();

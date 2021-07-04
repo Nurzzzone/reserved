@@ -12,6 +12,7 @@ class CreateReviewsTable extends Migration
     {
         Schema::create(ReviewContract::TABLE, function (Blueprint $table) {
             $table->id();
+            $table->bigInteger(ReviewContract::BOOKING_ID)->unique();
             $table->bigInteger(ReviewContract::ORGANIZATION_ID);
             $table->bigInteger(ReviewContract::USER_ID);
             $table->float(ReviewContract::RATING)->nullable();

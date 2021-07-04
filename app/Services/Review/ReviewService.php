@@ -14,11 +14,13 @@ class ReviewService extends BaseService
         $this->reviewRepository =   $reviewRepository;
     }
 
-    public function create(array $data) {
+    public function create($data)
+    {
         return $this->reviewRepository->create($data);
     }
 
-    public function update(int $id,array $data) {
+    public function update(int $id,array $data)
+    {
         return $this->reviewRepository->update($id,$data);
     }
 

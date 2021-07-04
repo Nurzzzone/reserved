@@ -1,7 +1,7 @@
 <template>
     <Header></Header>
     <profile-section></profile-section>
-    <comment :item="item"></comment>
+    <comment :item="item" ></comment>
     <div class="container-fluid mb-md-5">
         <div class="container p-0">
             <template v-if="items.length > 0">
@@ -30,8 +30,11 @@
                                     <div class="history-status history-status-waiting" v-if="item.status === 'CHECKING'" @click="initPayment(key)">
                                         Ожидает оплаты {{item.price}} KZT
                                     </div>
-                                    <div class="history-status history-status-review" v-else-if="item.status === 'COMPLETED'" @click="comment(key)"  data-toggle="modal" data-target="#comment_modal">
-                                        Оставить отзыв
+                                    <div class="history-status history-status-review" v-else-if="item.status === 'COMPLETED' && item.comment === 'on'" @click="comment(key)"  data-toggle="modal" data-target="#comment_modal">
+                                        <div class="history-status-icon history-status-icon-pen"></div>Оставить отзыв
+                                    </div>
+                                    <div class="history-status history-status-last" v-else-if="item.status === 'COMPLETED'">
+                                        Завершено {{item.price}} KZT
                                     </div>
                                     <div class="history-status history-status-success" v-else>
                                         Забронировано {{item.price}} KZT
@@ -91,6 +94,7 @@ export default {
     },
     methods: {
         comment: function(key) {
+            this.storage.modal  =   true;
             this.item   =   this.items[key];
         },
         open: function(url) {

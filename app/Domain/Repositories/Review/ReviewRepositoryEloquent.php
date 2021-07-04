@@ -11,12 +11,7 @@ class ReviewRepositoryEloquent implements ReviewRepositoryInterface
     private $take   =   15;
     public function create($data)
     {
-        return Review::create([
-            ReviewContract::ORGANIZATION_ID   =>  $data[ReviewContract::ORGANIZATION_ID],
-            ReviewContract::USER_ID           =>  $data[ReviewContract::USER_ID],
-            ReviewContract::RATING            =>  $data[ReviewContract::RATING],
-            ReviewContract::COMMENT           =>  $data[ReviewContract::COMMENT],
-        ]);
+        return Review::create($data);
     }
 
     public function update($id,$data)

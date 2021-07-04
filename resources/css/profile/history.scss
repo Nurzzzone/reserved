@@ -24,6 +24,8 @@
         font-weight: bold;
         border-radius: 30px;
         font-size: 13px;
+        display: flex;
+        gap: 5px;
         &-waiting {
             cursor: pointer;
             background: #FF8008;
@@ -34,6 +36,19 @@
         &-review {
             background: #1d1d1d;
             cursor: pointer;
+        }
+        &-last {
+            cursor: pointer;
+            background: #6c757d;
+        }
+        &-icon {
+            width: 20px;
+            height: 20px;
+            background: no-repeat center;
+            background-size: contain;
+            &-pen {
+                background-image: url(/img/logo/quill-pen.svg);
+            }
         }
     }
 }

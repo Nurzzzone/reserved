@@ -31,7 +31,6 @@ Route::prefix('card')->group(function() {
 Route::prefix('booking')->group(function() {
 
     Route::post('create',[BookingController::class,'create'])->name('booking.create');
-
     Route::get('delete/{id}',[BookingController::class,'delete'])->name('booking.delete');
     Route::get('id/{id}',[BookingController::class,'getById'])->name('booking.id');
     Route::get('user/{userId}',[BookingController::class,'getByUserId'])->name('booking.user');
@@ -55,12 +54,11 @@ Route::prefix('payment')->group(function() {
 
 Route::prefix('review')->group(function () {
 
-    Route::post('/create/',[ReviewController::class,'create']);
-    Route::post('/update/{id}',[ReviewController::class,'update']);
-
-    Route::get('/delete/{id}',[ReviewController::class,'delete']);
-    Route::get('/list/organization/{id}',[ReviewController::class,'getByOrganizationId']);
-    Route::get('/list/user/{id}',[ReviewController::class,'getByUserId']);
+    Route::post('create',[ReviewController::class,'create']);
+    Route::post('update/{id}',[ReviewController::class,'update']);
+    Route::get('delete/{id}',[ReviewController::class,'delete']);
+    Route::get('list/organization/{id}',[ReviewController::class,'getByOrganizationId']);
+    Route::get('list/user/{id}',[ReviewController::class,'getByUserId']);
 
 });
 

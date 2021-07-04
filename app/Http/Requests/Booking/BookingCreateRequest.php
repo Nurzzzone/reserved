@@ -24,7 +24,6 @@ class BookingCreateRequest extends FormRequest
             BookingContract::TIMEZONE                   =>  'required',
             BookingContract::TIME                       =>  'required',
             BookingContract::DATE                       =>  'required|date',
-            BookingContract::COMMENT                    =>  'nullable',
             BookingContract::PRICE                      =>  'required',
             BookingContract::CURRENCY                   =>  'nullable',
             BookingContract::CARD_ID                    =>  'required|integer',

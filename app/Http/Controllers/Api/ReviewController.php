@@ -2,25 +2,39 @@
 
 namespace App\Http\Controllers\Api;
 
+use App\Domain\Contracts\BookingContract;
+use App\Domain\Contracts\ReviewContract;
 use App\Http\Controllers\Controller;
+
 use App\Http\Resources\ReviewCollection;
+
 use Illuminate\Http\Request;
+
 use App\Services\Review\ReviewService;
+use App\Services\Booking\BookingService;
+
 use App\Events\ReviewCreated;
+
 use App\Http\Resources\ReviewResource;
+use App\Http\Requests\Review\ReviewCreateRequest;
 
 class ReviewController extends Controller
 {
     protected $paginate =   1;
     protected $reviewService;
-    public function __construct(ReviewService $reviewService)
+    protected $bookingService;
+    public function __construct(ReviewService $reviewService, BookingService $bookingService)
     {
         $this->reviewService    =   $reviewService;
+        $this->bookingService   =   $bookingService;
     }
 
-    public function create(Request $request)
+    public function create(ReviewCreateRequest $reviewCreateRequest)
     {
-        $review =   $this->reviewService->create($request->all());
+        $review =   $this->reviewService->create($reviewCreateRequest->validated());
+        $this->bookingService->update($review->{ReviewContract::BOOKING_ID},[
+            BookingContract::COMMENT    =>  BookingContract::OFF
+        ]);
         event(new ReviewCreated($review));
         return new ReviewResource($this->reviewService->getById($review->id));
     }

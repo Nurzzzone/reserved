@@ -209,15 +209,6 @@ export default {
         this.setTime();
     },
     methods: {
-        open: function(url) {
-            let a = document.createElement("a");
-            document.body.appendChild(a);
-            a.target    =   '_blank';
-            a.style = 'display: none';
-            a.href = url;
-            a.click();
-            document.body.removeChild(a);
-        },
         setTime: function() {
             let today   =   new Date();
             today       =   new Date(today.getFullYear(),today.getMonth(),today.getDate());
@@ -245,12 +236,13 @@ export default {
                     price: this.organization.price,
                     code: this.guest.code,
                 };
+                let wind    =   window.open();
                 axios.post("/api/booking/guest", data)
                 .then(response => {
                     let data = response.data.data;
                     this.storage.token  =   this.guest.user.api_token;
                     sessionStorage.user =   JSON.stringify(this.guest.user);
-                    this.open(data.payment);
+                    wind.location = data.payment;
                     window.location.href    =   '/profile/history';
                 }).catch(error => {
                     this.guest.codeCheck    =   false;
@@ -279,14 +271,14 @@ export default {
         bookingAddCard: function() {
             if (!this.cardLoading) {
                 this.cardLoading    =   true;
+                let wind    =   window.open();
                 axios.get('/api/payment/card/'+this.user.id)
                     .then(response => {
                         this.cardLoading    =   false;
-                        this.open(response.data);
+                        wind.location   =   response.data;
                         this.cardUpdate();
                     }).catch(error => {
                         this.cardLoading    =   false;
-                        console.error(error.response.data);
                     });
             }
         },
@@ -318,11 +310,12 @@ export default {
                 };
                 this.cardStatus =   false;
                 this.cardError  =   false;
+                let wind    =   window.open();
                 axios.post("/api/booking/create", data)
                 .then(response => {
                     let data = response.data;
                     if (data.hasOwnProperty('data')) {
-                        this.open('/form/'+data.data.id);
+                        wind.location   =   '/form/'+data.data.id;
                         window.location.href    =   '/profile/history';
                     }
                 }).catch(error => {

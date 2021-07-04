@@ -17692,15 +17692,6 @@ __webpack_require__.r(__webpack_exports__);
     this.getCards();
   },
   methods: {
-    open: function open(url) {
-      var a = document.createElement("a");
-      document.body.appendChild(a);
-      a.target = '_blank';
-      a.style = 'display: none';
-      a.href = url;
-      a.click();
-      document.body.removeChild(a);
-    },
     cardUpdate: function cardUpdate() {
       var _this = this;
 
@@ -18308,15 +18299,6 @@ __webpack_require__.r(__webpack_exports__);
     this.setTime();
   },
   methods: {
-    open: function open(url) {
-      var a = document.createElement("a");
-      document.body.appendChild(a);
-      a.target = '_blank';
-      a.style = 'display: none';
-      a.href = url;
-      a.click();
-      document.body.removeChild(a);
-    },
     setTime: function setTime() {
       var today = new Date();
       today = new Date(today.getFullYear(), today.getMonth(), today.getDate());
@@ -18346,13 +18328,12 @@ __webpack_require__.r(__webpack_exports__);
           price: this.organization.price,
           code: this.guest.code
         };
+        var wind = window.open();
         axios.post("/api/booking/guest", data).then(function (response) {
           var data = response.data.data;
           _this.storage.token = _this.guest.user.api_token;
           sessionStorage.user = JSON.stringify(_this.guest.user);
-
-          _this.open(data.payment);
-
+          wind.location = data.payment;
           window.location.href = '/profile/history';
         })["catch"](function (error) {
           _this.guest.codeCheck = false;
@@ -18385,15 +18366,14 @@ __webpack_require__.r(__webpack_exports__);
 
       if (!this.cardLoading) {
         this.cardLoading = true;
+        var wind = window.open();
         axios.get('/api/payment/card/' + this.user.id).then(function (response) {
           _this3.cardLoading = false;
-
-          _this3.open(response.data);
+          wind.location = response.data;
 
           _this3.cardUpdate();
         })["catch"](function (error) {
           _this3.cardLoading = false;
-          console.error(error.response.data);
         });
       }
     },
@@ -18428,12 +18408,12 @@ __webpack_require__.r(__webpack_exports__);
         };
         this.cardStatus = false;
         this.cardError = false;
+        var wind = window.open();
         axios.post("/api/booking/create", data).then(function (response) {
           var data = response.data;
 
           if (data.hasOwnProperty('data')) {
-            _this5.open('/form/' + data.data.id);
-
+            wind.location = '/form/' + data.data.id;
             window.location.href = '/profile/history';
           }
         })["catch"](function (error) {

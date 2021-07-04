@@ -120,15 +120,6 @@ export default {
         this.getCards();
     },
     methods: {
-        open: function(url) {
-            let a = document.createElement("a");
-            document.body.appendChild(a);
-            a.target    =   '_blank';
-            a.style = 'display: none';
-            a.href = url;
-            a.click();
-            document.body.removeChild(a);
-        },
         cardUpdate: function() {
             if (this.updateStatus) {
                 this.updateStatus   =   false;

@@ -155,7 +155,7 @@ export default {
                 axios.get('/api/payment/card/'+this.user.id)
                     .then(response => {
                         this.cardStatus =   true;
-                        this.open(response.data);
+                        window.open().location = response.data;
                         this.cardUpdate();
                     }).catch(error => {
                         this.cardStatus =   true;

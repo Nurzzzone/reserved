@@ -8,6 +8,7 @@
                             <a class="navbar-brand text-uppercase font-weight-bold header-text" href="/">
                                 Reserved
                             </a>
+                            <div class="header-sign-out d-sm-block d-md-none" v-if="!login" @click="exit"></div>
                             <div id="navbarSupportedContent" class="collapse navbar-collapse">
                                 <ul class="navbar-nav ml-auto">
                                     <li class="nav-item mx-3 ">
@@ -54,7 +55,7 @@
                                                     <a href="/profile" class="list-group-item text-decoration-none">Мой профиль</a>
                                                     <a href="/profile/settings" class="list-group-item text-decoration-none">Настройки</a>
                                                     <a href="/profile/history" class="list-group-item text-decoration-none">История</a>
-                                                    <a class="list-group-item text-decoration-none" @click="exit()">Выйти</a>
+                                                    <a class="list-group-item text-decoration-none" @click="exit">Выйти</a>
                                                 </div>
                                             </div>
                                         </li>

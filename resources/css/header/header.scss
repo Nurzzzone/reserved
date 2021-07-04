@@ -1,4 +1,14 @@
 .header {
+    &-sign-out {
+        background: url(/img/logo/sign-out.svg) no-repeat center rgb(245,245,245);
+        background-size: 40%;
+        width: 40px;
+        height: 40px;
+        position: absolute;
+        right: 10px;
+        border-radius: 30px;
+        cursor: pointer;
+    }
     &-text {
         font-size: 20px;
     }

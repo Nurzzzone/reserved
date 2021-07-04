@@ -152,10 +152,10 @@ export default {
         newCard: function() {
             if (this.cardStatus) {
                 this.cardStatus =   false;
+                let wind    =   window.open();
                 axios.get('/api/payment/card/'+this.user.id)
                     .then(response => {
                         this.cardStatus =   true;
-                        let wind    =   window.open();
                         wind.location = response.data;
                         this.cardUpdate();
                     }).catch(error => {

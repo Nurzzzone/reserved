@@ -17727,9 +17727,9 @@ __webpack_require__.r(__webpack_exports__);
 
       if (this.cardStatus) {
         this.cardStatus = false;
+        var wind = window.open();
         axios.get('/api/payment/card/' + this.user.id).then(function (response) {
           _this2.cardStatus = true;
-          var wind = window.open();
           wind.location = response.data;
 
           _this2.cardUpdate();

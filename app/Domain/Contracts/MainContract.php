@@ -8,6 +8,8 @@ use Carbon\Carbon;
 
 class MainContract
 {
+    const OLD   =   'old';
+    const NEW   =   'new';
     const IDS   =   'ids';
     const ORGANIZATION__TABLES   =   'organizationTables';
     const PASS  =   'pass';

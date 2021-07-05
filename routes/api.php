@@ -83,6 +83,8 @@ Route::prefix('sms')->group(function() {
 
 
 Route::prefix('user')->group(function() {
+    Route::post('update/{id}',[UserController::class,'update'])->name('user.update');
+    Route::post('password/{id}',[UserController::class,'updatePassword'])->name('user.update.password');
     Route::get('/{id}',[UserController::class,'getById'])->name('user.id');
     Route::get('phone/{phone}',[UserController::class,'getByPhone'])->name('user.phone');
     Route::post('booking',[UserController::class,'booking'])->name('user.booking');

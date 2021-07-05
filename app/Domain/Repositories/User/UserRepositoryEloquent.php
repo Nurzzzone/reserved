@@ -34,6 +34,12 @@ class UserRepositoryEloquent implements UserRepositoryInterface
         ]);
     }
 
+    public function update($id, $input)
+    {
+        User::where(UserContract::ID,$id)->update($input);
+        return User::where(UserContract::ID,$id)->first();
+    }
+
     public function updatePhoneVerifiedAt() {
         $user   =   backpack_user();
         $user->phone_verified_at    =   date('Y-m-d G:i:s');

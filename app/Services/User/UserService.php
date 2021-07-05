@@ -22,6 +22,11 @@ class UserService extends BaseService
         return $this->userRepository->create($data);
     }
 
+    public function update($id, array $input)
+    {
+        return $this->userRepository->update($id, $input);
+    }
+
     public function smsVerify($phone,$code) {
         return $this->userRepository->smsVerify($phone,$code);
     }

@@ -312,7 +312,6 @@ export default {
                             } else {
                                 item.bookingStatus  =   null;
                             }
-
                         });
                     });
                 }).catch(error => {

@@ -29,6 +29,8 @@ use App\Helpers\Random\Random;
 
 use App\Http\Requests\User\UserCreateRequest;
 use App\Http\Requests\User\UserGuestRequest;
+use App\Http\Requests\User\UserUpdateRequest;
+use App\Http\Requests\User\UserPasswordRequest;
 
 class UserController extends Controller
 {
@@ -102,6 +104,27 @@ class UserController extends Controller
             return new UserResource($user);
         }
         return response(['message'  =>  'Пользователь не найден'],404);
+    }
+
+    public function update($id, UserUpdateRequest $userUpdateRequest)
+    {
+        return new UserResource($this->userService->update($id,$userUpdateRequest->validated()));
+    }
+
+    public function updatePassword($id, UserPasswordRequest $userPasswordRequest)
+    {
+        $data   =   $userPasswordRequest->validated();
+        $user   =   $this->userService->getById($id);
+        if (Hash::check($data[UserContract::OLD], $user->{UserContract::PASSWORD})) {
+            if (strlen($data[UserContract::NEW]) >= 8) {
+                $this->userService->update($id,[
+                    UserContract::PASSWORD  =>  Hash::make($data[UserContract::NEW])
+                ]);
+                return response(['message'  =>  'Ваш пароль успешно изменен'],200);
+            }
+            return response(['message'  =>  'Пароль должен содержать минимум из 8 символов'],400);
+        }
+        return response(['message'  =>  'Не правильный пароль'],400);
     }
 
     public function getById($id)

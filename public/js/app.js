@@ -17797,19 +17797,103 @@ __webpack_require__.r(__webpack_exports__);
   name: "Profile",
   data: function data() {
     return {
-      user: false
+      user: false,
+      save: true,
+      saveSuccess: false,
+      saveError: false,
+      name: '',
+      email: '',
+      passSave: true,
+      passSaveSuccess: false,
+      passSaveSuccessMessage: '',
+      passSaveError: false,
+      passSaveErrorMessage: '',
+      oldPass: '',
+      newPass: ''
     };
   },
   created: function created() {
     this.getUser();
   },
   methods: {
+    passChange: function passChange() {
+      var _this = this;
+
+      if (this.passSave) {
+        if (this.oldPass !== null && this.oldPass.trim().length === 0) {
+          return this.$refs.oldPass.focus();
+        } else if (this.newPass !== null && this.newPass.trim().length < 8) {
+          return this.$refs.newPass.focus();
+        }
+
+        this.passSave = false;
+        this.passSaveError = false;
+        this.passSaveSuccess = false;
+        axios.post("/api/user/password/" + this.user.id, {
+          old: this.oldPass.trim(),
+          "new": this.newPass.trim()
+        }).then(function (response) {
+          var data = response.data;
+          _this.passSaveSuccessMessage = data.message;
+          _this.passSave = true;
+          _this.passSaveSuccess = true;
+          _this.newPass = '';
+          _this.oldPass = '';
+        })["catch"](function (error) {
+          _this.passSaveErrorMessage = error.response.data.message;
+          _this.passSave = true;
+          _this.passSaveError = true;
+        });
+      }
+    },
+    saveUser: function saveUser() {
+      var _this2 = this;
+
+      if (this.save) {
+        if (this.name !== null && this.name.trim().length < 1) {
+          return this.$refs.name.focus();
+        } else if (this.email !== null && this.email !== '' && !this.validateEmail(this.email)) {
+          return this.$refs.email.focus();
+        }
+
+        this.save = false;
+        this.saveError = false;
+        this.saveSuccess = false;
+        axios.post("/api/user/update/" + this.user.id, {
+          name: this.name.trim(),
+          email: this.email
+        }).then(function (response) {
+          var data = response.data;
+
+          if (data.hasOwnProperty('data')) {
+            sessionStorage.user = JSON.stringify(data.data);
+            _this2.user = data.data;
+          }
+
+          _this2.save = true;
+          _this2.saveSuccess = true;
+        })["catch"](function (error) {
+          _this2.save = true;
+          _this2.saveError = true;
+        });
+      }
+    },
+    validateEmail: function validateEmail(email) {
+      var re = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+      return re.test(String(email).toLowerCase());
+    },
     getUser: function getUser() {
       if (this.storage.token && sessionStorage.user) {
         this.user = JSON.parse(sessionStorage.user);
+        this.setUser();
       } else {
         window.location.href = '/home';
       }
+    },
+    setUser: function setUser() {
+      var user = JSON.parse(sessionStorage.user);
+      this.name = user.name;
+      this.email = user.email;
     }
   }
 });
@@ -20168,34 +20252,34 @@ var _hoisted_1 = {
   "class": "container-fluid mb-5"
 };
 var _hoisted_2 = {
-  "class": "container"
+  "class": "container p-0"
 };
 
 var _hoisted_3 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", {
-  "class": "row mt-5"
+  "class": "row"
 }, [/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", {
   "class": "col-12"
 }, [/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("h2", {
-  "class": " top-title"
+  "class": "profile-title"
 }, "Личная информация"), /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("p", {
-  "class": "mt-5 h6 text-secondary text-justify"
-}, " Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin at felis mattis, tincidunt diam eget, venenatis erat. Proin at urna at est sollicitudin volutpat sit amet ut orci. Nunc faucibus neque a purus viverra, vitae aliquam massa tincidunt. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. ")])], -1
+  "class": "profile-description text-secondary text-justify"
+}, " Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin at felis mattis, tincidunt diam eget, venenatis erat. ")])], -1
 /* HOISTED */
 );
 
 var _hoisted_4 = {
-  "class": "row mt-5 justify-content-center"
+  "class": "row mt-md-5 justify-content-center"
 };
 var _hoisted_5 = {
   "class": "col-12 col-md-8"
 };
 var _hoisted_6 = {
-  "class": "form-group row"
+  "class": "form-group row profile-row"
 };
 
 var _hoisted_7 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("label", {
   "for": "name",
-  "class": "col-sm-4 col-form-label col-form-label-lg font-weight-bold"
+  "class": "col-sm-4 col-form-label font-weight-bold profile-title-input"
 }, "Имя", -1
 /* HOISTED */
 );
@@ -20204,12 +20288,12 @@ var _hoisted_8 = {
   "class": "col-sm-8"
 };
 var _hoisted_9 = {
-  "class": "form-group row"
+  "class": "form-group row profile-row"
 };
 
 var _hoisted_10 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("label", {
   "for": "phone",
-  "class": "col-sm-4 col-form-label col-form-label-lg font-weight-bold"
+  "class": "col-sm-4 col-form-label font-weight-bold profile-title-input"
 }, "Телефон", -1
 /* HOISTED */
 );
@@ -20218,12 +20302,12 @@ var _hoisted_11 = {
   "class": "col-sm-8"
 };
 var _hoisted_12 = {
-  "class": "form-group row"
+  "class": "form-group row profile-row"
 };
 
 var _hoisted_13 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("label", {
   "for": "email",
-  "class": "col-sm-4 col-form-label col-form-label-lg font-weight-bold"
+  "class": "col-sm-4 col-form-label font-weight-bold profile-title-input"
 }, "Эл.почта", -1
 /* HOISTED */
 );
@@ -20231,19 +20315,157 @@ var _hoisted_13 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(
 var _hoisted_14 = {
   "class": "col-sm-8"
 };
+var _hoisted_15 = {
+  key: 0,
+  "class": "form-group row profile-row"
+};
 
-var _hoisted_15 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", {
-  "class": "row"
-}, [/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", {
-  "class": "col d-flex justify-content-center mt-3"
-}, [/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("button", {
-  type: "submit",
-  "class": "btn profile-btn font-weight-bold text-white px-3  disabled"
-}, "Сохранить изменения")])], -1
+var _hoisted_16 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", {
+  "class": "col"
+}, [/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("p", {
+  "class": "profile-error text-right"
+}, "Эл.почта уже занята")], -1
 /* HOISTED */
 );
 
-var _hoisted_16 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createStaticVNode)("<div class=\"row mt-5\"><div class=\"col-12\"><h2 class=\" top-title\">Пароль</h2><p class=\"mt-5 h6 text-secondary text-justify\"> Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin at felis mattis, tincidunt diam eget, venenatis erat. Proin at urna at est sollicitudin volutpat sit amet ut orci. Nunc faucibus neque a purus viverra, vitae aliquam massa tincidunt. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. </p></div></div><div class=\"row mt-5 justify-content-center\"><div class=\"col-12 col-md-8\"><form><div class=\"form-group row\"><label for=\"old\" class=\"col-sm-4 col-form-label col-form-label-lg font-weight-bold\">Старый пароль</label><div class=\"col-sm-8\"><input type=\"password\" class=\"form-control form-control-lg profile-input\" id=\"old\"></div></div><div class=\"form-group row\"><label for=\"new\" class=\"col-sm-4 col-form-label col-form-label-lg font-weight-bold\">Новый пароль</label><div class=\"col-sm-8\"><input type=\"password\" class=\"form-control form-control-lg profile-input\" id=\"new\"></div></div><div class=\"row\"><div class=\"col d-flex justify-content-center mt-3\"><button type=\"submit\" class=\"btn profile-btn font-weight-bold text-white px-3  disabled\">Сохранить изменения</button></div></div></form></div></div>", 2);
+var _hoisted_17 = {
+  key: 1,
+  "class": "form-group row profile-row"
+};
+
+var _hoisted_18 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", {
+  "class": "col"
+}, [/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("p", {
+  "class": "profile-success text-right"
+}, "Изменения сохранены, обновите страницу")], -1
+/* HOISTED */
+);
+
+var _hoisted_19 = {
+  "class": "row"
+};
+var _hoisted_20 = {
+  "class": "col d-flex justify-content-center mt-3"
+};
+var _hoisted_21 = {
+  key: 0
+};
+var _hoisted_22 = {
+  key: 1,
+  "class": "loading-btn"
+};
+
+var _hoisted_23 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", null, null, -1
+/* HOISTED */
+);
+
+var _hoisted_24 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", null, null, -1
+/* HOISTED */
+);
+
+var _hoisted_25 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", null, null, -1
+/* HOISTED */
+);
+
+var _hoisted_26 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", null, null, -1
+/* HOISTED */
+);
+
+var _hoisted_27 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", {
+  "class": "row"
+}, [/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", {
+  "class": "col-12"
+}, [/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("h2", {
+  "class": "profile-title"
+}, "Пароль"), /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("p", {
+  "class": "profile-description text-secondary text-justify"
+}, " Lorem ipsum dolor sit amet, consectetur adipiscing elit. ")])], -1
+/* HOISTED */
+);
+
+var _hoisted_28 = {
+  "class": "row mt-md-5 justify-content-center"
+};
+var _hoisted_29 = {
+  "class": "col-12 col-md-8"
+};
+var _hoisted_30 = {
+  "class": "form-group row profile-row"
+};
+
+var _hoisted_31 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("label", {
+  "for": "old",
+  "class": "col-sm-4 col-form-label font-weight-bold profile-title-input"
+}, "Старый пароль", -1
+/* HOISTED */
+);
+
+var _hoisted_32 = {
+  "class": "col-sm-8"
+};
+var _hoisted_33 = {
+  "class": "form-group profile-row row"
+};
+
+var _hoisted_34 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("label", {
+  "for": "new",
+  "class": "col-sm-4 col-form-label font-weight-bold profile-title-input"
+}, "Новый пароль", -1
+/* HOISTED */
+);
+
+var _hoisted_35 = {
+  "class": "col-sm-8"
+};
+var _hoisted_36 = {
+  key: 0,
+  "class": "form-group row profile-row"
+};
+var _hoisted_37 = {
+  "class": "col"
+};
+var _hoisted_38 = {
+  "class": "profile-error text-right"
+};
+var _hoisted_39 = {
+  key: 1,
+  "class": "form-group row profile-row"
+};
+var _hoisted_40 = {
+  "class": "col"
+};
+var _hoisted_41 = {
+  "class": "profile-success text-right"
+};
+var _hoisted_42 = {
+  "class": "row profile-row"
+};
+var _hoisted_43 = {
+  "class": "col d-flex justify-content-center mt-3"
+};
+var _hoisted_44 = {
+  key: 0
+};
+var _hoisted_45 = {
+  key: 1,
+  "class": "loading-btn"
+};
+
+var _hoisted_46 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", null, null, -1
+/* HOISTED */
+);
+
+var _hoisted_47 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", null, null, -1
+/* HOISTED */
+);
+
+var _hoisted_48 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", null, null, -1
+/* HOISTED */
+);
+
+var _hoisted_49 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", null, null, -1
+/* HOISTED */
+);
 
 function render(_ctx, _cache, $props, $setup, $data, $options) {
   var _component_Header = (0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveComponent)("Header");
@@ -20258,33 +20480,81 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
     key: 0
   }, [_hoisted_3, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_4, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_5, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_6, [_hoisted_7, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_8, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("input", {
     type: "text",
-    "class": "form-control form-control-lg profile-input",
+    "class": "form-control profile-input",
     id: "name",
+    ref: "name",
     "onUpdate:modelValue": _cache[1] || (_cache[1] = function ($event) {
-      return $data.user.name = $event;
-    })
-  }, null, 512
-  /* NEED_PATCH */
-  ), [[vue__WEBPACK_IMPORTED_MODULE_0__.vModelText, $data.user.name]])])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_9, [_hoisted_10, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_11, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("input", {
-    type: "text",
-    "class": "form-control form-control-lg profile-input",
-    id: "phone",
-    "onUpdate:modelValue": _cache[2] || (_cache[2] = function ($event) {
-      return $data.user.phone = $event;
+      return $data.name = $event;
     }),
+    onKeyup: _cache[2] || (_cache[2] = (0,vue__WEBPACK_IMPORTED_MODULE_0__.withKeys)(function () {
+      return $options.saveUser && $options.saveUser.apply($options, arguments);
+    }, ["enter"]))
+  }, null, 544
+  /* HYDRATE_EVENTS, NEED_PATCH */
+  ), [[vue__WEBPACK_IMPORTED_MODULE_0__.vModelText, $data.name]])])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_9, [_hoisted_10, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_11, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("input", {
+    type: "text",
+    "class": "form-control profile-input",
+    id: "phone",
+    ref: "phone",
+    value: $data.user.phone,
     readonly: ""
-  }, null, 512
-  /* NEED_PATCH */
-  ), [[vue__WEBPACK_IMPORTED_MODULE_0__.vModelText, $data.user.phone]])])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_12, [_hoisted_13, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_14, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("input", {
+  }, null, 8
+  /* PROPS */
+  , ["value"])])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_12, [_hoisted_13, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_14, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("input", {
     type: "email",
-    "class": "form-control form-control-lg profile-input",
+    "class": "form-control profile-input",
     id: "email",
+    ref: "email",
     "onUpdate:modelValue": _cache[3] || (_cache[3] = function ($event) {
-      return $data.user.email = $event;
+      return $data.email = $event;
+    }),
+    onKeyup: _cache[4] || (_cache[4] = (0,vue__WEBPACK_IMPORTED_MODULE_0__.withKeys)(function () {
+      return $options.saveUser && $options.saveUser.apply($options, arguments);
+    }, ["enter"]))
+  }, null, 544
+  /* HYDRATE_EVENTS, NEED_PATCH */
+  ), [[vue__WEBPACK_IMPORTED_MODULE_0__.vModelText, $data.email]])])]), $data.saveError ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)("div", _hoisted_15, [_hoisted_16])) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true), $data.saveSuccess ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)("div", _hoisted_17, [_hoisted_18])) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_19, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_20, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("button", {
+    "class": "btn profile-btn text-white",
+    onClick: _cache[5] || (_cache[5] = function () {
+      return $options.saveUser && $options.saveUser.apply($options, arguments);
     })
-  }, null, 512
-  /* NEED_PATCH */
-  ), [[vue__WEBPACK_IMPORTED_MODULE_0__.vModelText, $data.user.email]])])]), _hoisted_15])]), _hoisted_16], 64
+  }, [$data.save ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)("span", _hoisted_21, "Сохранить изменения")) : ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)("div", _hoisted_22, [_hoisted_23, _hoisted_24, _hoisted_25, _hoisted_26]))])])])])]), _hoisted_27, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_28, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_29, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_30, [_hoisted_31, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_32, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("input", {
+    type: "password",
+    "class": "form-control profile-input",
+    id: "old",
+    "onUpdate:modelValue": _cache[6] || (_cache[6] = function ($event) {
+      return $data.oldPass = $event;
+    }),
+    ref: "oldPass",
+    onKeyup: _cache[7] || (_cache[7] = (0,vue__WEBPACK_IMPORTED_MODULE_0__.withKeys)(function () {
+      return $options.passChange && $options.passChange.apply($options, arguments);
+    }, ["enter"]))
+  }, null, 544
+  /* HYDRATE_EVENTS, NEED_PATCH */
+  ), [[vue__WEBPACK_IMPORTED_MODULE_0__.vModelText, $data.oldPass]])])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_33, [_hoisted_34, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_35, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("input", {
+    type: "password",
+    "class": "form-control profile-input",
+    id: "new",
+    "onUpdate:modelValue": _cache[8] || (_cache[8] = function ($event) {
+      return $data.newPass = $event;
+    }),
+    ref: "newPass",
+    onKeyup: _cache[9] || (_cache[9] = (0,vue__WEBPACK_IMPORTED_MODULE_0__.withKeys)(function () {
+      return $options.passChange && $options.passChange.apply($options, arguments);
+    }, ["enter"]))
+  }, null, 544
+  /* HYDRATE_EVENTS, NEED_PATCH */
+  ), [[vue__WEBPACK_IMPORTED_MODULE_0__.vModelText, $data.newPass]])])]), $data.passSaveError ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)("div", _hoisted_36, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_37, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("p", _hoisted_38, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($data.passSaveErrorMessage), 1
+  /* TEXT */
+  )])])) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true), $data.passSaveSuccess ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)("div", _hoisted_39, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_40, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("p", _hoisted_41, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($data.passSaveSuccessMessage), 1
+  /* TEXT */
+  )])])) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_42, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_43, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("button", {
+    type: "submit",
+    "class": "btn profile-btn text-white",
+    onClick: _cache[10] || (_cache[10] = function () {
+      return $options.passChange && $options.passChange.apply($options, arguments);
+    })
+  }, [$data.passSave ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)("span", _hoisted_44, "Сохранить изменения")) : ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)("div", _hoisted_45, [_hoisted_46, _hoisted_47, _hoisted_48, _hoisted_49]))])])])])])], 64
   /* STABLE_FRAGMENT */
   )) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true)])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_Footer_menu), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_Footer)], 64
   /* STABLE_FRAGMENT */
@@ -22516,7 +22786,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, ".profile-input {\n  border: 2px solid gainsboro;\n}\n.profile-btn {\n  background: #FF8008;\n  border-radius: 30px;\n  height: 44px;\n}\n.avatar {\n  overflow: hidden;\n  clear: both;\n  width: 56px;\n  height: 56px;\n  display: block;\n}\n.avatar-img {\n  width: 100%;\n  position: relative;\n  float: left;\n  color: #00a082;\n}\n.avatar-img > div {\n  font-size: 30px;\n  position: absolute;\n  transform: translate(-50%, -50%);\n  top: 50%;\n  left: 50%;\n}\n.avatar-img:before {\n  content: '';\n  float: left;\n  padding-top: 100%;\n}\n.top-bg {\n  background: #00a082;\n}\n.top-title {\n  font-family: 'Lobster', cursive;\n  margin: 0;\n}\n\n/*\n                font-size: 16px;\n            text-align: center;\n     */\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, ".loading {\n  display: inline-block;\n  position: relative;\n  width: 80px;\n  height: 40px;\n}\n.loading-text {\n  font-size: 20px !important;\n  color: #00a082 !important;\n  margin: 0;\n  font-weight: bold;\n  padding: 0 !important;\n}\n.loading div {\n  position: absolute;\n  top: 16px;\n  width: 13px;\n  height: 13px;\n  border-radius: 50%;\n  background: #00a082;\n  -webkit-animation-timing-function: cubic-bezier(0, 1, 1, 0);\n          animation-timing-function: cubic-bezier(0, 1, 1, 0);\n}\n.loading div:nth-child(1) {\n  left: 8px;\n  -webkit-animation: lds-ellipsis1 0.6s infinite;\n          animation: lds-ellipsis1 0.6s infinite;\n}\n.loading div:nth-child(2) {\n  left: 8px;\n  -webkit-animation: lds-ellipsis2 0.6s infinite;\n          animation: lds-ellipsis2 0.6s infinite;\n}\n.loading div:nth-child(3) {\n  left: 32px;\n  -webkit-animation: lds-ellipsis2 0.6s infinite;\n          animation: lds-ellipsis2 0.6s infinite;\n}\n.loading div:nth-child(4) {\n  left: 56px;\n  -webkit-animation: lds-ellipsis3 0.6s infinite;\n          animation: lds-ellipsis3 0.6s infinite;\n}\n@-webkit-keyframes lds-ellipsis1 {\n0% {\n    transform: scale(0);\n}\n100% {\n    transform: scale(1);\n}\n}\n@keyframes lds-ellipsis1 {\n0% {\n    transform: scale(0);\n}\n100% {\n    transform: scale(1);\n}\n}\n@-webkit-keyframes lds-ellipsis3 {\n0% {\n    transform: scale(1);\n}\n100% {\n    transform: scale(0);\n}\n}\n@keyframes lds-ellipsis3 {\n0% {\n    transform: scale(1);\n}\n100% {\n    transform: scale(0);\n}\n}\n@-webkit-keyframes lds-ellipsis2 {\n0% {\n    transform: translate(0, 0);\n}\n100% {\n    transform: translate(24px, 0);\n}\n}\n@keyframes lds-ellipsis2 {\n0% {\n    transform: translate(0, 0);\n}\n100% {\n    transform: translate(24px, 0);\n}\n}\n@media only screen and (max-width: 768px) {\n.loading {\n    transform: scale(0.7);\n}\n.loading-text {\n    font-size: 13px !important;\n}\n}\n.loading-btn {\n  display: block;\n  position: relative;\n  width: 80px;\n  height: 13px;\n  transform: scale(0.5);\n  margin: 0 auto 0 auto;\n}\n.loading-btn div {\n  position: absolute;\n  top: 0;\n  width: 13px;\n  height: 13px;\n  border-radius: 50%;\n  background: #fff;\n  -webkit-animation-timing-function: cubic-bezier(0, 1, 1, 0);\n          animation-timing-function: cubic-bezier(0, 1, 1, 0);\n}\n.loading-btn div:nth-child(1) {\n  left: 8px;\n  -webkit-animation: lds-ellipsis1 0.6s infinite;\n          animation: lds-ellipsis1 0.6s infinite;\n}\n.loading-btn div:nth-child(2) {\n  left: 8px;\n  -webkit-animation: lds-ellipsis2 0.6s infinite;\n          animation: lds-ellipsis2 0.6s infinite;\n}\n.loading-btn div:nth-child(3) {\n  left: 32px;\n  -webkit-animation: lds-ellipsis2 0.6s infinite;\n          animation: lds-ellipsis2 0.6s infinite;\n}\n.loading-btn div:nth-child(4) {\n  left: 56px;\n  -webkit-animation: lds-ellipsis3 0.6s infinite;\n          animation: lds-ellipsis3 0.6s infinite;\n}\n@keyframes lds-ellipsis1 {\n0% {\n    transform: scale(0);\n}\n100% {\n    transform: scale(1);\n}\n}\n@keyframes lds-ellipsis3 {\n0% {\n    transform: scale(1);\n}\n100% {\n    transform: scale(0);\n}\n}\n@keyframes lds-ellipsis2 {\n0% {\n    transform: translate(0, 0);\n}\n100% {\n    transform: translate(24px, 0);\n}\n}\n.profile-error {\n  color: red;\n  margin: 0;\n}\n.profile-success {\n  color: #00a082;\n  margin: 0;\n}\n.profile-title {\n  margin: 50px 0 10px 0;\n  font-weight: bold;\n  font-size: 24px;\n}\n.profile-description {\n  font-size: 16px;\n  margin: 0;\n}\n.profile-input {\n  border: 2px solid gainsboro;\n  outline: none !important;\n  box-shadow: none !important;\n}\n.profile-btn {\n  background-color: #FF8008;\n  border-radius: 30px;\n  height: 44px;\n  padding: 0 30px 0 30px;\n  min-width: 200px;\n}\n.avatar {\n  overflow: hidden;\n  clear: both;\n  width: 56px;\n  height: 56px;\n  display: block;\n}\n.avatar-img {\n  width: 100%;\n  position: relative;\n  float: left;\n  color: #00a082;\n}\n.avatar-img > div {\n  font-size: 30px;\n  position: absolute;\n  transform: translate(-50%, -50%);\n  top: 50%;\n  left: 50%;\n}\n.avatar-img:before {\n  content: '';\n  float: left;\n  padding-top: 100%;\n}\n@media only screen and (max-width: 768px) {\n.profile-title {\n    font-size: 16px;\n    margin: 20px 0 0 0;\n}\n.profile-title-input {\n    font-size: 12px !important;\n}\n.profile-row {\n    margin-bottom: 0;\n}\n.profile-input {\n    margin: 0 !important;\n    height: 38px;\n    font-size: 13px;\n}\n.profile-description {\n    font-size: 11px;\n    margin: 10px 0 0 0;\n}\n.profile-btn {\n    height: 30px;\n    padding: 0 10px 0 10px;\n    font-size: 12px !important;\n    min-width: 120px;\n}\n.profile-error {\n    font-size: 13px;\n}\n.profile-success {\n    font-size: 13px;\n}\n}\n.top-bg {\n  background: #00a082;\n}\n\n/*\n                font-size: 16px;\n            text-align: center;\n     */\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 

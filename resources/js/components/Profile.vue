@@ -70,13 +70,13 @@
                         <div class="form-group row profile-row">
                             <label for="old" class="col-sm-4 col-form-label font-weight-bold profile-title-input">Старый пароль</label>
                             <div class="col-sm-8">
-                                <input type="password" class="form-control profile-input" id="old" v-model="oldPass" ref="oldPass" v-on:keyup.enter="passChange">
+                                <input type="password" class="form-control profile-input" id="old" v-model="oldPass" ref="oldPass">
                             </div>
                         </div>
                         <div class="form-group profile-row row">
                             <label for="new" class="col-sm-4 col-form-label font-weight-bold profile-title-input">Новый пароль</label>
                             <div class="col-sm-8">
-                                <input type="password" class="form-control profile-input" id="new" v-model="newPass" ref="newPass" v-on:keyup.enter="passChange">
+                                <input type="password" class="form-control profile-input" id="new" v-model="newPass" ref="newPass">
                             </div>
                         </div>
                         <div class="form-group row profile-row" v-if="passSaveError">

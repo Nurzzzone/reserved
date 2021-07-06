@@ -7,7 +7,12 @@
         & > div {
             display: flex;
             align-items: center;
-            gap: 10px;
+            & > div {
+                margin-left: 10px;
+                &:first-child {
+                    margin-left: 0;
+                }
+            }
         }
         &-count {
             font-weight: bold;

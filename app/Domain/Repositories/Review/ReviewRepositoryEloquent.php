@@ -29,6 +29,18 @@ class ReviewRepositoryEloquent implements ReviewRepositoryInterface
         ]);
     }
 
+    public function getCountByOrganizationId($organizationId)
+    {
+        $reviews    =   Review::where([
+            [ReviewContract::ORGANIZATION_ID,$organizationId],
+            [ReviewContract::STATUS,ReviewContract::ENABLED],
+        ])->orWhere([
+            [ReviewContract::ORGANIZATION_ID,$organizationId],
+            [ReviewContract::STATUS,ReviewContract::CHECKING],
+        ])->get();
+        return sizeof($reviews);
+    }
+
     public function getByOrganizationId($id,$paginate)
     {
         return Review::with('organization','user')

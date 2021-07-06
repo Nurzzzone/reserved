@@ -28,6 +28,16 @@
                                 <div>{{organization.title}}</div>
                                 <div class="favorite-main" :class="{'favorite-main-off':(!storage.favorite.includes(organization.id)),'favorite-main-on':(storage.favorite.includes(organization.id))}" @click="favorite(organization.id)"></div>
                             </div>
+                            <div class="organization-rating">
+                                <div>
+                                    <div class="organization-rating-star" :class="{'organization-rating-star-sel':(organization.rating >= 0.5)}"></div>
+                                    <div class="organization-rating-star" :class="{'organization-rating-star-sel':(organization.rating >= 1.5)}"></div>
+                                    <div class="organization-rating-star" :class="{'organization-rating-star-sel':(organization.rating >= 2.5)}"></div>
+                                    <div class="organization-rating-star" :class="{'organization-rating-star-sel':(organization.rating >= 3.5)}"></div>
+                                    <div class="organization-rating-star" :class="{'organization-rating-star-sel':(organization.rating >= 4.5)}"></div>
+                                    <div class="organization-rating-count" v-if="organization.rating">{{organization.rating}}</div>
+                                </div>
+                            </div>
                             <div class="organization-description text-secondary text-center">{{organization.description}}</div>
                         </div>
                     </div>
@@ -56,7 +66,7 @@
                     </div>
                 </div>
             </div>
-            <div class="container-fluid pb-5 organization-bg">
+            <div class="container-fluid pb-3 pb-md-5 organization-bg">
                 <div class="container">
                     <div class="row pt-4">
                         <div class="col-12">
@@ -117,7 +127,79 @@
                                 </div>
                             </div>
                             <div v-if="tab === 3">
+                                <template v-if="reviewStatus">
+                                    <div class="row py-5">
+                                        <div class="col-12 d-flex justify-content-center">
+                                            <div class="loading">
+                                                <div></div>
+                                                <div></div>
+                                                <div></div>
+                                                <div></div>
+                                            </div>
+                                        </div>
+                                        <div class="col-12 d-flex justify-content-center">
+                                            <h4 class="loading-text">Загружаем данные</h4>
+                                        </div>
+                                    </div>
+                                </template>
+                                <template v-else>
+                                    <template v-if="reviews.length > 0">
+                                        <div>
+                                            <div class="row p-0 py-md-2">
+                                                <div class="col-12 p-0 d-flex justify-content-center">
+                                                    <div class=" organization-comment-count text-secondary">{{reviewCount}} отзыва</div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div>
+                                            <div class="row py-0 py-md-4 p-0 organization-comment-line" v-for="(review,key) in reviews" :key="key">
+                                                <div class="col-12 col-sm-6 col-md-3 p-0">
+                                                    <div class="organization-comment">
+                                                        <div class="organization-comment-icon">
+                                                            <div>{{review.user.name[0]}}</div>
+                                                        </div>
+                                                        <div class="organization-comment-detail">
+                                                            <div class="organization-comment-detail-name">
+                                                                <span class="organization-comment-detail-name-user">{{review.user.name}}</span>
+                                                                <span class="organization-comment-detail-dot text-secondary font-weight-normal">•</span>
+                                                                <span class="text-secondary font-weight-normal">{{review.created_at}}</span>
+                                                            </div>
+                                                            <div class="organization-comment-detail-stars">
+                                                                <div class="organization-comment-detail-star" :class="{'organization-comment-detail-star-sel':(review.rating >= 1)}"></div>
+                                                                <div class="organization-comment-detail-star" :class="{'organization-comment-detail-star-sel':(review.rating >= 2)}"></div>
+                                                                <div class="organization-comment-detail-star" :class="{'organization-comment-detail-star-sel':(review.rating >= 3)}"></div>
+                                                                <div class="organization-comment-detail-star" :class="{'organization-comment-detail-star-sel':(review.rating >= 4)}"></div>
+                                                                <div class="organization-comment-detail-star" :class="{'organization-comment-detail-star-sel':(review.rating >= 5)}"></div>
+                                                            </div>
+                                                            <div class="organization-comment-detail-status" v-if="review.status === 'CHECKING'">
+                                                                <div>На проверке</div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-12 col-sm-6 col-md-9 p-0 d-flex align-items-center">
+                                                    <div class="organization-comment-text">{{review.comment.replace(/\n/g, '<br />')}}</div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </template>
+                                    <template v-else>
 
+                                        <div class="container-fluid">
+                                            <div class="container pt-md-5">
+                                                <div class="col-12 d-flex justify-content-center mt-5 mb-3">
+                                                    <div>
+                                                        <img src="/img/logo/chat.svg" width="100">
+                                                    </div>
+                                                </div>
+                                                <div class="col-12 mt-3 mb-5">
+                                                    <h2 class="text-center organization-empty-title font-weight-bold">Пусто</h2>
+                                                    <p class="text-center organization-empty-description text-secondary">Еще никто не оставлял комментарий</p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </template>
+                                </template>
                             </div>
                         </div>
                     </div>
@@ -274,8 +356,19 @@ export default {
                 monthName: {
                     ru: ['Января','Февраля','Марта','Апреля','Мая','Июня','Июля','Августа','Сентября','Октября','Ноября','Декабря'],
                     en: ['Январь','Февраль','Март','Апрель','Май','Июнь','Июль','Август','Сентябрь','Октябрь','Ноябрь','Декабрь']
-                }
+                },
             },
+            reviewCount: 0,
+            reviewStatus: true,
+            reviewLoading: true,
+            reviews: []
+        }
+    },
+    watch: {
+        tab: function() {
+            if (this.tab === 3) {
+                this.getReviews();
+            }
         }
     },
     created() {
@@ -283,6 +376,28 @@ export default {
         this.getOrganization();
     },
     methods: {
+        getReviewCount: function() {
+            axios.get('/api/review/count/organization/'+this.organization.id)
+                .then(response => {
+                    this.reviewCount    =   response.data;
+                });
+        },
+        getReviews: function() {
+            if (this.reviewLoading) {
+                this.getReviewCount();
+                this.reviewLoading   =   false;
+                axios.get('/api/review/list/organization/'+this.organization.id)
+                .then(response => {
+                    this.reviewStatus   =   false;
+                    let data    =   response.data;
+                    if (data.hasOwnProperty('data')) {
+                        this.reviews    =   data.data;
+                    }
+                }).catch(error => {
+                    this.reviewStatus   =   false;
+                });
+            }
+        },
         favorite: function(id) {
             let len =   this.storage.favorite.length;
             let status  =   true;

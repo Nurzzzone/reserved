@@ -46,14 +46,18 @@
                 </div>
             </template>
             <template v-else>
-                <div class="col-12 d-flex justify-content-center my-5 pt-5">
-                    <div>
-                        <img src="/img/logo/calendar.svg" width="120">
+                <div class="container-fluid">
+                    <div class="container pt-md-5">
+                        <div class="col-12 d-flex justify-content-center mt-5 mb-3">
+                            <div>
+                                <img src="/img/logo/calendar.svg" width="100">
+                            </div>
+                        </div>
+                        <div class="col-12 mt-3 mb-5">
+                            <h2 class="text-center history-empty-title font-weight-bold">Список пуст</h2>
+                            <p class="text-center history-empty-description text-secondary">Ваша история заказов будет отображаться здесь</p>
+                        </div>
                     </div>
-                </div>
-                <div class="col-12 mt-3 mb-5 pb-5">
-                    <h2 class="text-center">Пусто</h2>
-                    <p class="text-center h5 text-secondary mt-2">Ваша история заказов будет отображаться здесь.</p>
                 </div>
             </template>
         </div>

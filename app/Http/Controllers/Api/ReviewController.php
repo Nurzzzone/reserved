@@ -53,6 +53,11 @@ class ReviewController extends Controller
         return new ReviewResource($review);
     }
 
+    public function getCountByOrganizationId($organizationId)
+    {
+        return $this->reviewService->getCountByOrganizationId($organizationId);
+    }
+
     public function getByOrganizationId(int $id, Request $request)
     {
         if ($request->has('paginate')) {

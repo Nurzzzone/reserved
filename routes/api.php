@@ -57,6 +57,7 @@ Route::prefix('review')->group(function () {
     Route::post('create',[ReviewController::class,'create']);
     Route::post('update/{id}',[ReviewController::class,'update']);
     Route::get('delete/{id}',[ReviewController::class,'delete']);
+    Route::get('count/organization/{organizationId}',[ReviewController::class,'getCountByOrganizationId']);
     Route::get('list/organization/{id}',[ReviewController::class,'getByOrganizationId']);
     Route::get('list/user/{id}',[ReviewController::class,'getByUserId']);
 

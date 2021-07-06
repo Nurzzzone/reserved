@@ -32,6 +32,11 @@ class ReviewService extends BaseService
         return $this->reviewRepository->getById($id);
     }
 
+    public function getCountByOrganizationId($organizationId)
+    {
+        return $this->reviewRepository->getCountByOrganizationId($organizationId);
+    }
+
     public function getByOrganizationId(int $id,$paginate) {
         return $this->reviewRepository->getByOrganizationId($id,$paginate);
     }

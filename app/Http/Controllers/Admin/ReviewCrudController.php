@@ -11,14 +11,36 @@ use App\Models\Review;
 use App\Domain\Contracts\ReviewContract;
 use App\Domain\Repositories\Organization\OrganizationRepositoryEloquent as OrganizationRepository;
 
+use App\Services\Review\ReviewService;
+
+use App\Events\ReviewCreated;
+
 class ReviewCrudController extends CrudController
 {
     use \Backpack\CRUD\app\Http\Controllers\Operations\ListOperation;
 //    use \Backpack\CRUD\app\Http\Controllers\Operations\CreateOperation;
-//    use \Backpack\CRUD\app\Http\Controllers\Operations\UpdateOperation;
+    use \Backpack\CRUD\app\Http\Controllers\Operations\UpdateOperation { update as traitUpdate; }
     use \Backpack\CRUD\app\Http\Controllers\Operations\ShowOperation;
     public $organizationsId;
+    protected $reviewService;
+    public function __construct(ReviewService $reviewService)
+    {
+        parent::__construct();
+        $this->reviewService    =   $reviewService;
+    }
 
+    public function update()
+    {
+        $response = $this->traitUpdate();
+        $parameter  =   (array) $this->crud->getRequest()->request;
+        foreach ($parameter as &$param) {
+            $parameter  =   $param;
+            break;
+        }
+        $review =   $this->reviewService->getById($parameter[ReviewContract::ID]);
+        event(new ReviewCreated($review));
+        return $response;
+    }
     public function setup()
     {
         CRUD::setModel(Review::class);
@@ -87,13 +109,11 @@ class ReviewCrudController extends CrudController
 
         CRUD::field(ReviewContract::RATING)->label('Реитинг');
         CRUD::field(ReviewContract::COMMENT)->label('Комментарии');
-        CRUD::field(BookingContract::STATUS)->type('select_from_array')
+        CRUD::field(ReviewContract::STATUS)->type('select_from_array')
             ->label('Статус')->options([
-                BookingContract::ENABLED    =>  BookingContract::TRANSLATE[BookingContract::ENABLED],
-                BookingContract::DISABLED   =>  BookingContract::TRANSLATE[BookingContract::DISABLED],
-                BookingContract::CANCELED   =>  BookingContract::TRANSLATE[BookingContract::CANCELED],
-                BookingContract::DELETED   =>  BookingContract::TRANSLATE[BookingContract::DELETED],
-                BookingContract::CHECKING   =>  BookingContract::TRANSLATE[BookingContract::CHECKING],
+                ReviewContract::ENABLED    =>  ReviewContract::TRANSLATE[ReviewContract::ENABLED],
+                ReviewContract::CANCELED   =>  ReviewContract::TRANSLATE[ReviewContract::CANCELED],
+                ReviewContract::CHECKING   =>  ReviewContract::TRANSLATE[ReviewContract::CHECKING],
             ]);
     }
 

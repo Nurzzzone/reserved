@@ -22,7 +22,8 @@ class ReviewResource extends JsonResource
             ReviewContract::USER            =>  new UserResource($this->user),
             ReviewContract::RATING          =>  $this->rating,
             ReviewContract::COMMENT         =>  $this->comment,
-            ReviewContract::STATUS          =>  $this->status,
+            ReviewContract::STATUS          =>  $this->{ReviewContract::STATUS},
+            ReviewContract::CREATED_AT      =>  \Carbon\Carbon::createFromTimeStamp(strtotime($this->{ReviewContract::CREATED_AT}))->diffForHumans()
         ];
     }
 }

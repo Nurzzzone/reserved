@@ -99,7 +99,9 @@
             }
             &-stars {
                 display: flex;
-                gap: 5px;
+                & > div {
+                    margin-right: 5px;
+                }
             }
             &-star, &-star-sel {
                 height: 16px;
@@ -365,7 +367,9 @@
                 }
                 &-stars {
                     display: flex;
-                    gap: 2px;
+                    & > div {
+                        margin-right: 2px;
+                    }
                 }
                 &-star, &-star-sel {
                     height: 10px;

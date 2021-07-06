@@ -311,7 +311,8 @@
         }
         &-comment {
             grid-template-columns: 40px auto;
-            grid-gap: 10px;
+            grid-gap: 0;
+            margin-top: 10px;
             &-count {
                 font-size: 12px;
             }

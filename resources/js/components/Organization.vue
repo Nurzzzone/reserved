@@ -147,7 +147,8 @@
                                         <div>
                                             <div class="row p-0 py-md-2">
                                                 <div class="col-12 p-0 d-flex justify-content-center">
-                                                    <div class=" organization-comment-count text-secondary">{{reviewCount}} отзыва</div>
+                                                    <div class=" organization-comment-count text-secondary" v-if="reviewCount === 1">{{reviewCount}} отзыв</div>
+                                                    <div class=" organization-comment-count text-secondary" v-else>{{reviewCount}} отзыва</div>
                                                 </div>
                                             </div>
                                         </div>

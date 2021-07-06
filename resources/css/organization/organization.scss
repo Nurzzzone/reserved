@@ -330,10 +330,11 @@
             }
             &-line {
                 padding: 10px 0 10px 0 !important;
-                gap: 10px;
             }
             &-text {
                 font-size: 13px;
+                margin-top: 10px;
+                padding: 0 5px 0 5px;
             }
             &-icon {
                 height: 40px;

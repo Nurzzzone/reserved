@@ -1,6 +1,6 @@
 <template>
     <Header></Header>
-    <profile-section :name="name"></profile-section>
+    <profile-section :name="name" :id="$route.params.id"></profile-section>
     <template v-if="!loading">
         <template v-if="organization">
             <Booking :organization="organization" :table="table" :date="date"></Booking>

@@ -63,10 +63,12 @@
 @media only screen and (max-width: 768px) {
     .history {
         &-icon {
-            margin-right: 10px;
+            width: 30px;
+            height: 30px;
+            margin-right: 5px;
         }
         &-status {
-            padding: 5px;
+            padding: 4px 6px 4px 6px;
             font-size: 11px;
         }
         &-title {
@@ -74,7 +76,7 @@
             margin: 20px 0 0 0;
         }
         &-font {
-            font-size: 12px;
+            font-size: 11px;
         }
         &-description {
             font-size: 11px;

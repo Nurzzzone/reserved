@@ -108,8 +108,8 @@ class PaymentService
             PaymentContract::PG_DESCRIPTION =>  'Бронирование столика №'.$booking->{BookingContract::ORGANIZATION_TABLE_LIST_ID},
             PaymentContract::PG_SALT        =>  rand(100000,999999),
             PaymentContract::PG_RESULT_URL  =>  self::CARD_RESULT,
-            PaymentContract::PG_SUCCESS_URL =>  self::CARD_SUCCESS,
-            PaymentContract::PG_FAILURE_URL =>  self::CARD_FAILURE
+            PaymentContract::PG_SUCCESS_URL =>  self::SUCCESS_URL,
+            PaymentContract::PG_FAILURE_URL =>  self::FAILURE_URL
         ],MainContract::INIT));
 
         $xml    =   simplexml_load_string($payment);

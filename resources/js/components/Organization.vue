@@ -118,13 +118,32 @@
                                 </div>
                             </div>
                             <div v-if="tab === 2">
-                                <div class="row justify-content-center" v-if="organization.images.length > 0">
-                                    <div class="col-3 p-2" v-for="(image,imageKey) in organization.images" :key="imageKey">
-                                        <div class="organization-image" :style="{'background-image':'url('+image.image+')'}">
-                                            <div></div>
+                                <template v-if="organization && organization.images">
+                                    <template v-if="organization.images.length === 0">
+                                        <div class="row justify-content-center" v-if="organization.images.length > 0">
+                                            <div class="col-3 p-2" v-for="(image,imageKey) in organization.images" :key="imageKey">
+                                                <div class="organization-image" :style="{'background-image':'url('+image.image+')'}" @click="showImg(imageKey)">
+                                                    <div></div>
+                                                </div>
+                                            </div>
                                         </div>
-                                    </div>
-                                </div>
+                                    </template>
+                                    <template v-else>
+                                        <div class="container-fluid">
+                                            <div class="container pt-md-5">
+                                                <div class="col-12 d-flex justify-content-center mt-5 mb-3">
+                                                    <div>
+                                                        <img src="/img/logo/no-photo.svg" width="100">
+                                                    </div>
+                                                </div>
+                                                <div class="col-12 mt-3 mb-5">
+                                                    <h2 class="text-center organization-empty-title font-weight-bold">Пусто</h2>
+                                                    <p class="text-center organization-empty-description text-secondary">Фотографии не найдено</p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </template>
+                                </template>
                             </div>
                             <div v-if="tab === 3">
                                 <template v-if="reviewStatus">
@@ -185,7 +204,6 @@
                                         </div>
                                     </template>
                                     <template v-else>
-
                                         <div class="container-fluid">
                                             <div class="container pt-md-5">
                                                 <div class="col-12 d-flex justify-content-center mt-5 mb-3">
@@ -222,6 +240,15 @@
                 </div>
             </div>
         </template>
+        <vue-easy-lightbox
+            scrollDisabled
+            escDisabled
+            moveDisabled
+            :visible="img.visible"
+            :imgs="img.list"
+            :index="img.index"
+            @hide="handleHide"
+        ></vue-easy-lightbox>
     </template>
     <template v-else>
         <div class="container-fluid">
@@ -252,17 +279,24 @@ import Footer from "./footer/Footer";
 import ProfileSection from './sections/ProfileSection';
 import FooterMenu from './footerMenu/FooterMenu';
 import Booking from './modal/Booking';
+import VueEasyLightbox from 'vue-easy-lightbox';
 export default {
     components: {
         Header,
         Footer,
         ProfileSection,
         FooterMenu,
-        Booking
+        Booking,
+        VueEasyLightbox
     },
     name: "Organization",
     data() {
         return {
+            img: {
+                visible: false,
+                index: 0,
+                list: [],
+            },
             loading: true,
             lang: 'ru',
             status: 0,
@@ -377,6 +411,13 @@ export default {
         this.getOrganization();
     },
     methods: {
+        showImg: function(index) {
+            this.img.index = index
+            this.img.visible = true
+        },
+        handleHide: function() {
+            this.img.visible = false
+        },
         getReviewCount: function() {
             axios.get('/api/review/count/organization/'+this.organization.id)
                 .then(response => {
@@ -537,6 +578,9 @@ export default {
                     let data    =   response.data;
                     if (data.hasOwnProperty('data')) {
                         this.organization   =   data.data;
+                        this.organization.images.forEach(element => {
+                            this.img.list.push(element.image);
+                        });
                         this.setTime();
                         this.name   =   this.organization.title;
                         this.getSections(this.organization.id);

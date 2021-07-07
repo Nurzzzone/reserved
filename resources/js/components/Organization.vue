@@ -119,7 +119,7 @@
                             </div>
                             <div v-if="tab === 2">
                                 <template v-if="organization && organization.images">
-                                    <template v-if="organization.images.length === 0">
+                                    <template v-if="organization.images.length > 0">
                                         <div class="row justify-content-center" v-if="organization.images.length > 0">
                                             <div class="col-3 p-2" v-for="(image,imageKey) in organization.images" :key="imageKey">
                                                 <div class="organization-image" :style="{'background-image':'url('+image.image+')'}" @click="showImg(imageKey)">

@@ -68,12 +68,16 @@
                         <ul class="breadcrumb">
                             <li><a href="/"><div class="breadcrumb-home"></div></a></li>
                             <li><div class="breadcrumb-arrow"></div></li>
+                            <li class="breadcrumb-link"><a href="/home">Категории</a></li>
+                            <li><div class="breadcrumb-arrow"></div></li>
                             <li class="breadcrumb-link"><a href="/home/restaurants">Рестораны</a></li>
                         </ul>
                     </template>
                     <template v-else-if="url === 'cafe'">
                         <ul class="breadcrumb">
                             <li><a href="/"><div class="breadcrumb-home"></div></a></li>
+                            <li><div class="breadcrumb-arrow"></div></li>
+                            <li class="breadcrumb-link"><a href="/home">Категории</a></li>
                             <li><div class="breadcrumb-arrow"></div></li>
                             <li class="breadcrumb-link"><a href="/home/cafe">Кафе</a></li>
                         </ul>
@@ -82,12 +86,16 @@
                         <ul class="breadcrumb">
                             <li><a href="/"><div class="breadcrumb-home"></div></a></li>
                             <li><div class="breadcrumb-arrow"></div></li>
+                            <li class="breadcrumb-link"><a href="/home">Категории</a></li>
+                            <li><div class="breadcrumb-arrow"></div></li>
                             <li class="breadcrumb-link"><a href="/home/bars">Бары</a></li>
                         </ul>
                     </template>
                     <template v-else-if="name && id">
                         <ul class="breadcrumb">
                             <li><a href="/"><div class="breadcrumb-home"></div></a></li>
+                            <li><div class="breadcrumb-arrow"></div></li>
+                            <li class="breadcrumb-link"><a href="/home">Категории</a></li>
                             <li><div class="breadcrumb-arrow"></div></li>
                             <li class="breadcrumb-link"><a :href="'/home/'+id">{{name}}</a></li>
                         </ul>

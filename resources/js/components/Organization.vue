@@ -103,6 +103,7 @@
                                                             <div class="organization-card-status organization-card-status-free">Свободно</div>
                                                         </template>
                                                         <template v-else>
+                                                            {{JSON.stringify(table.bookingStatus)}}
                                                             <div class="organization-card-status organization-card-status-reserved">Занято</div>
                                                         </template>
                                                     </div>

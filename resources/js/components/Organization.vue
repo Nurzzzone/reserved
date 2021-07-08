@@ -99,11 +99,10 @@
                                                         <template v-if="table.bookingStatus === undefined">
                                                             <div class="lds-ellipsis"><div></div><div></div><div></div><div></div></div>
                                                         </template>
-                                                        <template v-else-if="table.bookingStatus === null">
+                                                        <template v-else-if="table.bookingStatus === null || table.bookingStatus.status === 'COMPLETED'">
                                                             <div class="organization-card-status organization-card-status-free">Свободно</div>
                                                         </template>
                                                         <template v-else>
-                                                            {{JSON.stringify(table.bookingStatus)}}
                                                             <div class="organization-card-status organization-card-status-reserved">Занято</div>
                                                         </template>
                                                     </div>

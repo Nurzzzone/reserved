@@ -10,7 +10,6 @@
                         <h3 class="auth-title text-center">Бронирование стола</h3>
                         <h6 class="text-secondary text-center mt-3">{{table.title}}</h6>
                     </div>
-                    {{JSON.stringify(table.bookingStatus.status)}}
                     <template v-if="table.bookingStatus === null || (table.bookingStatus !== undefined && table.bookingStatus.status === 'COMPLETED')">
 
                         <template v-if="status">

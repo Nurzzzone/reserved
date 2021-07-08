@@ -465,6 +465,7 @@ export default {
                     this.sections.forEach(element => {
                         element.organization_tables.forEach(item => {
                             if (statuses[item.id]) {
+                                console.log(statuses[item.id]);
                                 item.bookingStatus  =   statuses[item.id];
                             } else {
                                 item.bookingStatus  =   null;

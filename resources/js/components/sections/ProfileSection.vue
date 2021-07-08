@@ -2,103 +2,107 @@
     <div class="container-fluid section-bg">
         <div class="container pt-5 pb-3 pb-md-4">
             <div class="row">
-                <div class="col-12 p-0" v-if="end === 'profile'">
-                    <template v-if="url === 'profile'">
-                        <ul class="breadcrumb">
-                            <li><a href="/"><div class="breadcrumb-home"></div></a></li>
-                            <li><div class="breadcrumb-arrow"></div></li>
-                            <li class="breadcrumb-link"><a href="/profile">Профиль</a></li>
-                        </ul>
+                <div class="col-12 co-md-8 p-0">
+                    <template v-if="end === 'profile'">
+                        <template v-if="url === 'profile'">
+                            <ul class="breadcrumb">
+                                <li><a href="/"><div class="breadcrumb-home"></div></a></li>
+                                <li><div class="breadcrumb-arrow"></div></li>
+                                <li class="breadcrumb-link"><a href="/profile">Профиль</a></li>
+                            </ul>
+                        </template>
+                        <template v-else-if="url === 'settings'">
+                            <ul class="breadcrumb">
+                                <li><a href="/"><div class="breadcrumb-home"></div></a></li>
+                                <li><div class="breadcrumb-arrow"></div></li>
+                                <li class="breadcrumb-link"><a href="/profile">Профиль</a></li>
+                                <li><div class="breadcrumb-arrow"></div></li>
+                                <li class="breadcrumb-link"><a href="/profile/settings">Настройки</a></li>
+                            </ul>
+                        </template>
+                        <template v-else-if="url === 'payments'">
+                            <ul class="breadcrumb">
+                                <li><a href="/"><div class="breadcrumb-home"></div></a></li>
+                                <li><div class="breadcrumb-arrow"></div></li>
+                                <li class="breadcrumb-link"><a href="/profile">Профиль</a></li>
+                                <li><div class="breadcrumb-arrow"></div></li>
+                                <li class="breadcrumb-link"><a href="/profile/payments">Способ оплаты</a></li>
+                            </ul>
+                        </template>
+                        <template v-else-if="url === 'history'">
+                            <ul class="breadcrumb">
+                                <li><a href="/"><div class="breadcrumb-home"></div></a></li>
+                                <li><div class="breadcrumb-arrow"></div></li>
+                                <li class="breadcrumb-link"><a href="/profile">Профиль</a></li>
+                                <li><div class="breadcrumb-arrow"></div></li>
+                                <li class="breadcrumb-link"><a href="/profile/history">История</a></li>
+                            </ul>
+                        </template>
                     </template>
-                    <template v-else-if="url === 'settings'">
-                        <ul class="breadcrumb">
-                            <li><a href="/"><div class="breadcrumb-home"></div></a></li>
-                            <li><div class="breadcrumb-arrow"></div></li>
-                            <li class="breadcrumb-link"><a href="/profile">Профиль</a></li>
-                            <li><div class="breadcrumb-arrow"></div></li>
-                            <li class="breadcrumb-link"><a href="/profile/settings">Настройки</a></li>
-                        </ul>
+                    <template v-else-if="end === 'favorite'">
+                        <div class="col-12">
+                            <template v-if="url === 'favorite'">
+                                <ul class="breadcrumb">
+                                    <li><a href="/"><div class="breadcrumb-home"></div></a></li>
+                                    <li><div class="breadcrumb-arrow"></div></li>
+                                    <li class="breadcrumb-link"><a href="/favorite">Избранное</a></li>
+                                </ul>
+                            </template>
+                        </div>
                     </template>
-                    <template v-else-if="url === 'payments'">
-                        <ul class="breadcrumb">
-                            <li><a href="/"><div class="breadcrumb-home"></div></a></li>
-                            <li><div class="breadcrumb-arrow"></div></li>
-                            <li class="breadcrumb-link"><a href="/profile">Профиль</a></li>
-                            <li><div class="breadcrumb-arrow"></div></li>
-                            <li class="breadcrumb-link"><a href="/profile/payments">Способ оплаты</a></li>
-                        </ul>
+                    <template v-else-if="end === 'top'">
+                        <template v-if="url === 'top'">
+                            <ul class="breadcrumb">
+                                <li><a href="/"><div class="breadcrumb-home"></div></a></li>
+                                <li><div class="breadcrumb-arrow"></div></li>
+                                <li class="breadcrumb-link"><a href="/top">Топ</a></li>
+                            </ul>
+                        </template>
                     </template>
-                    <template v-else-if="url === 'history'">
-                        <ul class="breadcrumb">
-                            <li><a href="/"><div class="breadcrumb-home"></div></a></li>
-                            <li><div class="breadcrumb-arrow"></div></li>
-                            <li class="breadcrumb-link"><a href="/profile">Профиль</a></li>
-                            <li><div class="breadcrumb-arrow"></div></li>
-                            <li class="breadcrumb-link"><a href="/profile/history">История</a></li>
-                        </ul>
-                    </template>
-                </div>
-                <div class="col-12" v-else-if="end === 'favorite'">
-                    <template v-if="url === 'favorite'">
-                        <ul class="breadcrumb">
-                            <li><a href="/"><div class="breadcrumb-home"></div></a></li>
-                            <li><div class="breadcrumb-arrow"></div></li>
-                            <li class="breadcrumb-link"><a href="/favorite">Избранное</a></li>
-                        </ul>
-                    </template>
-                </div>
-                <div class="col-12" v-else-if="end === 'top'">
-                    <template v-if="url === 'top'">
-                        <ul class="breadcrumb">
-                            <li><a href="/"><div class="breadcrumb-home"></div></a></li>
-                            <li><div class="breadcrumb-arrow"></div></li>
-                            <li class="breadcrumb-link"><a href="/top">Топ</a></li>
-                        </ul>
-                    </template>
-                </div>
-                <div class="col-12" v-else-if="end === 'home'">
-                    <template v-if="url === 'home'">
-                        <ul class="breadcrumb">
-                            <li><a href="/"><div class="breadcrumb-home"></div></a></li>
-                            <li><div class="breadcrumb-arrow"></div></li>
-                            <li class="breadcrumb-link"><a href="/home">Категории</a></li>
-                        </ul>
-                    </template>
-                    <template v-else-if="url === 'restaurants'">
-                        <ul class="breadcrumb">
-                            <li><a href="/"><div class="breadcrumb-home"></div></a></li>
-                            <li><div class="breadcrumb-arrow"></div></li>
-                            <li class="breadcrumb-link"><a href="/home">Категории</a></li>
-                            <li><div class="breadcrumb-arrow"></div></li>
-                            <li class="breadcrumb-link"><a href="/home/restaurants">Рестораны</a></li>
-                        </ul>
-                    </template>
-                    <template v-else-if="url === 'cafe'">
-                        <ul class="breadcrumb">
-                            <li><a href="/"><div class="breadcrumb-home"></div></a></li>
-                            <li><div class="breadcrumb-arrow"></div></li>
-                            <li class="breadcrumb-link"><a href="/home">Категории</a></li>
-                            <li><div class="breadcrumb-arrow"></div></li>
-                            <li class="breadcrumb-link"><a href="/home/cafe">Кафе</a></li>
-                        </ul>
-                    </template>
-                    <template v-else-if="url === 'bars'">
-                        <ul class="breadcrumb">
-                            <li><a href="/"><div class="breadcrumb-home"></div></a></li>
-                            <li><div class="breadcrumb-arrow"></div></li>
-                            <li class="breadcrumb-link"><a href="/home">Категории</a></li>
-                            <li><div class="breadcrumb-arrow"></div></li>
-                            <li class="breadcrumb-link"><a href="/home/bars">Бары</a></li>
-                        </ul>
-                    </template>
-                    <template v-else-if="name && id">
-                        <ul class="breadcrumb">
-                            <li><a href="/"><div class="breadcrumb-home"></div></a></li>
-                            <li><div class="breadcrumb-arrow"></div></li>
-                            <li class="breadcrumb-link"><a href="/home">Категории</a></li>
-                            <li><div class="breadcrumb-arrow"></div></li>
-                            <li class="breadcrumb-link"><a :href="'/home/'+id">{{name}}</a></li>
-                        </ul>
+                    <template v-else-if="end === 'home'">
+                        <template v-if="url === 'home'">
+                            <ul class="breadcrumb">
+                                <li><a href="/"><div class="breadcrumb-home"></div></a></li>
+                                <li><div class="breadcrumb-arrow"></div></li>
+                                <li class="breadcrumb-link"><a href="/home">Категории</a></li>
+                            </ul>
+                        </template>
+                        <template v-else-if="url === 'restaurants'">
+                            <ul class="breadcrumb">
+                                <li><a href="/"><div class="breadcrumb-home"></div></a></li>
+                                <li><div class="breadcrumb-arrow"></div></li>
+                                <li class="breadcrumb-link"><a href="/home">Категории</a></li>
+                                <li><div class="breadcrumb-arrow"></div></li>
+                                <li class="breadcrumb-link"><a href="/home/restaurants">Рестораны</a></li>
+                            </ul>
+                        </template>
+                        <template v-else-if="url === 'cafe'">
+                            <ul class="breadcrumb">
+                                <li><a href="/"><div class="breadcrumb-home"></div></a></li>
+                                <li><div class="breadcrumb-arrow"></div></li>
+                                <li class="breadcrumb-link"><a href="/home">Категории</a></li>
+                                <li><div class="breadcrumb-arrow"></div></li>
+                                <li class="breadcrumb-link"><a href="/home/cafe">Кафе</a></li>
+                            </ul>
+                        </template>
+                        <template v-else-if="url === 'bars'">
+                            <ul class="breadcrumb">
+                                <li><a href="/"><div class="breadcrumb-home"></div></a></li>
+                                <li><div class="breadcrumb-arrow"></div></li>
+                                <li class="breadcrumb-link"><a href="/home">Категории</a></li>
+                                <li><div class="breadcrumb-arrow"></div></li>
+                                <li class="breadcrumb-link"><a href="/home/bars">Бары</a></li>
+                            </ul>
+                        </template>
+                        <template v-else-if="name && id">
+                            <ul class="breadcrumb">
+                                <li><a href="/"><div class="breadcrumb-home"></div></a></li>
+                                <li><div class="breadcrumb-arrow"></div></li>
+                                <li class="breadcrumb-link"><a href="/home">Категории</a></li>
+                                <li><div class="breadcrumb-arrow"></div></li>
+                                <li class="breadcrumb-link"><a :href="'/home/'+id">{{name}}</a></li>
+                            </ul>
+                        </template>
                     </template>
                 </div>
             </div>

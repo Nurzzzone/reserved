@@ -39,7 +39,7 @@ class OrganizationService extends BaseService
         return $this->organizationRepository->searchByTitle($search,$paginate);
     }
 
-    public function getById(int $id)
+    public function getById($id)
     {
         return $this->organizationRepository->getById($id);
     }

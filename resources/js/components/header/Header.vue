@@ -1,10 +1,10 @@
 <template>
     <div class="container-fluid">
-        <div class="container">
+        <div class="container p-0">
             <div class="row">
                 <header class="header">
                     <nav class="navbar navbar-expand-lg fixed-top py-3">
-                        <div class="container">
+                        <div class="container p-0">
                             <a class="navbar-brand text-uppercase font-weight-bold header-text" href="/">
                                 Reserved
                             </a>

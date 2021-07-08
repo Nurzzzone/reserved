@@ -17542,8 +17542,7 @@ __webpack_require__.r(__webpack_exports__);
 
         _this3.sections.forEach(function (element) {
           element.organization_tables.forEach(function (item) {
-            if (statuses[item.id]) {
-              console.log(statuses[item.id]);
+            if (statuses[item.id] && statuses[item.id].status !== 'COMPLETED') {
               item.bookingStatus = statuses[item.id];
             } else {
               item.bookingStatus = null;

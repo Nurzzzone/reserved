@@ -111,7 +111,6 @@
                     $("#phone").val('');
                     $("#name").val('');
                     $("#time").val('');
-                    $("#comment").val('');
                     $(".close-booking").click();
 
                     status = true;

@@ -84,7 +84,6 @@ class UserController extends Controller
             BookingContract::ORGANIZATION_TABLE_LIST_ID  =>  $request->input(BookingContract::ORGANIZATION_TABLE_ID),
             BookingContract::TIME   =>  Time::toLocal(date('Y-m-d').' '.$request->input(BookingContract::TIME), $request->input(BookingContract::TIMEZONE)),
             BookingContract::DATE   =>  $request->input(BookingContract::DATE),
-            BookingContract::COMMENT    =>  $request->input(BookingContract::COMMENT),
             BookingContract::PRICE  =>  $organization->{BookingContract::PRICE}
         ]);
 

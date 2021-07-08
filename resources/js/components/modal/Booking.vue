@@ -11,7 +11,7 @@
                         <h6 class="text-secondary text-center mt-3">{{table.title}}</h6>
                     </div>
                     {{JSON.stringify(table.bookingStatus.status)}}
-                    <template v-if="table.bookingStatus === null || (table.bookingStatus && table.bookingStatus.status === 'COMPLETED')">
+                    <template v-if="table.bookingStatus === null || (table.bookingStatus !== undefined && table.bookingStatus.status === 'COMPLETED')">
 
                         <template v-if="status">
                             <template v-if="!storage.modal">

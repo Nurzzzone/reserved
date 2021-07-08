@@ -142,7 +142,7 @@ class PaymentService
             PaymentContract::PG_DESCRIPTION =>  $description,
             PaymentContract::PG_SALT        =>  rand(100000,999999),
             PaymentContract::PG_RESULT_URL  =>  self::RESULT_URL,
-            PaymentContract::PG_REQUEST_METHOD  =>  PaymentContract::GET,
+            PaymentContract::PG_REQUEST_METHOD  =>  PaymentContract::POST,
             PaymentContract::PG_SUCCESS_URL =>  self::SUCCESS_URL,
             PaymentContract::PG_SUCCESS_URL_METHOD  => PaymentContract::GET,
             PaymentContract::PG_FAILURE_URL =>  self::FAILURE_URL,

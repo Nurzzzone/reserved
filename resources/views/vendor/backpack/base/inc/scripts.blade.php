@@ -43,10 +43,6 @@
                             <input type="text" class="form-control radius" id="time">
                         </div>
                     </div>
-                    <div class="form-group">
-                        <label for="comment">Комментарии</label>
-                        <textarea class="form-control radius resize-none" id="comment" rows="3"></textarea>
-                    </div>
                 </form>
             </div>
             <div class="modal-footer">
@@ -101,7 +97,6 @@
                 name:  name.val().trim(),
                 date:  date.val().trim(),
                 time:  time.val().trim(),
-                comment: $("#comment").val().trim()
             };
 
             status = false;

@@ -18753,8 +18753,6 @@ __webpack_require__.r(__webpack_exports__);
     getCountry: function getCountry() {
       var _this = this;
 
-      this.storage.city = '';
-
       if (!sessionStorage.countries) {
         axios.get('/api/countries').then(function (response) {
           var data = response.data;
@@ -18777,6 +18775,8 @@ __webpack_require__.r(__webpack_exports__);
         if (this.storage.city === '') {
           this.storage.city = this.countries[0].city_id[0];
         }
+
+        alert('asdasd');
       }
     }
   }

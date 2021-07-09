@@ -219,7 +219,6 @@ export default {
                 if (this.storage.city === '') {
                     this.storage.city   =   this.countries[0].city_id[0];
                 }
-                alert('asdasd');
             }
         }
     }

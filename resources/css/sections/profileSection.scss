@@ -99,6 +99,10 @@
         &-main {
             display: none !important;
         }
+        &-country-item, &-city-item {
+            font-size: 12px;
+            padding: 8px 12px 8px 12px;
+        }
     }
     .section {
         &-bg {

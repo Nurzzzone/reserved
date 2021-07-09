@@ -12,6 +12,7 @@ class CityResource extends JsonResource
     {
         return [
             CityContract::ID         =>  $this->id,
+            CityContract::COUNTRY_ID    =>  $this->country_id,
             CityContract::TITLE      =>  $this->title,
             CityContract::TITLE_KZ   =>  $this->title_kz,
             CityContract::TITLE_EN   =>  $this->title_en,

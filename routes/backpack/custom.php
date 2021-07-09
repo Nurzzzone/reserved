@@ -19,7 +19,6 @@ Route::group([
     Route::crud('country', 'CountryCrudController');
     Route::crud('category', 'CategoryCrudController');
     Route::crud('organization', 'OrganizationCrudController');
-    Route::crud('organizationcity', 'OrganizationCityCrudController');
     Route::crud('booking', 'BookingCrudController');
     Route::crud('review', 'ReviewCrudController');
     Route::crud('organizationimage', 'OrganizationImageCrudController');

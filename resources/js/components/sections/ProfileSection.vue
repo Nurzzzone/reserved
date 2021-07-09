@@ -1,8 +1,9 @@
 <template>
+    <location :countries="countries"></location>
     <div class="container-fluid section-bg">
         <div class="container pt-5 pb-3 pb-md-4">
             <div class="row">
-                <div class="col-12 co-md-8 p-0">
+                <div class="col-12 col-md-9 p-0 d-flex align-items-center">
                     <template v-if="end === 'profile'">
                         <template v-if="url === 'profile'">
                             <ul class="breadcrumb">
@@ -40,15 +41,13 @@
                         </template>
                     </template>
                     <template v-else-if="end === 'favorite'">
-                        <div class="col-12">
-                            <template v-if="url === 'favorite'">
-                                <ul class="breadcrumb">
-                                    <li><a href="/"><div class="breadcrumb-home"></div></a></li>
-                                    <li><div class="breadcrumb-arrow"></div></li>
-                                    <li class="breadcrumb-link"><a href="/favorite">Избранное</a></li>
-                                </ul>
-                            </template>
-                        </div>
+                        <template v-if="url === 'favorite'">
+                            <ul class="breadcrumb">
+                                <li><a href="/"><div class="breadcrumb-home"></div></a></li>
+                                <li><div class="breadcrumb-arrow"></div></li>
+                                <li class="breadcrumb-link"><a href="/favorite">Избранное</a></li>
+                            </ul>
+                        </template>
                     </template>
                     <template v-else-if="end === 'top'">
                         <template v-if="url === 'top'">
@@ -104,6 +103,13 @@
                             </ul>
                         </template>
                     </template>
+                </div>
+                <div class="location-main col-md-3 p-0 d-flex justify-content-end">
+                    <div class="location" ref="location" data-toggle="modal" data-target="#location">
+                        <div class="location-title" v-if="storage.city">{{storage.city.title}}</div>
+                        <div class="location-title" v-else>Не выбрано</div>
+                        <div class="location-icon"></div>
+                    </div>
                 </div>
             </div>
         </div>
@@ -162,17 +168,23 @@
 </template>
 
 <script>
+import location from "../modal/location";
 export default {
     props: ['name','id'],
     name: "ProfileSection",
+    components: {
+        location
+    },
     data() {
         return {
             url: 'profile',
             end: '',
+            countries: [],
         }
     },
     created() {
         this.setEnd();
+        this.getCountry();
     },
     methods: {
         setEnd: function() {
@@ -186,6 +198,30 @@ export default {
                 }
             }
         },
+        getCountry: function() {
+            this.storage.city = '';
+            if (!sessionStorage.countries) {
+                axios.get('/api/countries')
+                    .then(response => {
+                        let data    =   response.data;
+                        if (data.hasOwnProperty('data')) {
+                            data    =   data.data;
+                            this.countries  =   data;
+                            sessionStorage.countries    =   JSON.stringify(data);
+                            if (this.storage.city === '') {
+                                this.storage.city   =   this.countries[0].city_id[0];
+                            }
+                        }
+                    }).catch(error => {
+                        console.log(error.response);
+                    });
+            } else {
+                this.countries  =   JSON.parse(sessionStorage.countries);
+                if (this.storage.city === '') {
+                    this.storage.city   =   this.countries[0].city_id[0];
+                }
+            }
+        }
     }
 }
 </script>

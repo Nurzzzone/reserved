@@ -168,7 +168,6 @@ return [
         App\Providers\UserServiceProvider::class,
         App\Providers\OrganizationServiceProvider::class,
         App\Providers\OrganizationTablesServiceProvider::class,
-        App\Providers\OrganizationCityServiceProvider::class,
         App\Providers\CategoryServiceProvider::class,
         App\Providers\CountryServiceProvider::class,
         App\Providers\CityServiceProvider::class,

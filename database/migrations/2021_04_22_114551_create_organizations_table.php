@@ -13,6 +13,7 @@ class CreateOrganizationsTable extends Migration
         Schema::create(OrganizationContract::TABLE, function (Blueprint $table) {
             $table->id();
             $table->bigInteger(OrganizationContract::USER_ID);
+            $table->bigInteger(OrganizationContract::CITY_ID);
             $table->bigInteger(OrganizationContract::CATEGORY_ID);
             $table->string(OrganizationContract::IIKO_ORGANIZATION_ID)->nullable();
             $table->bigInteger(OrganizationContract::IIKO_ID)->nullable();
@@ -54,6 +55,8 @@ class CreateOrganizationsTable extends Migration
             $table->enum(OrganizationContract::STATUS,OrganizationContract::STATUSES)
                 ->default(OrganizationContract::ENABLED);
             $table->timestamps();
+            $table->index(OrganizationContract::CITY_ID);
+            $table->index(OrganizationContract::CATEGORY_ID);
         });
     }
 

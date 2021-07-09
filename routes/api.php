@@ -69,13 +69,12 @@ Route::prefix('organization')->group(function() {
 });
 
 Route::get('/categories',[CategoryController::class,'list']);
-Route::get('/countries',[CountryController::class,'list']);
+Route::get('countries',[CountryController::class,'list']);
 Route::get('/organization/section/{id}',[OrganizationController::class,'getSectionsById']);
 
 Route::get('/organizations',[OrganizationController::class,'list']);
 Route::get('/organizations/{search}',[OrganizationController::class,'search']);
 Route::get('/organization/{id}',[OrganizationController::class,'getById']);
-Route::get('/city/organizations/{id}/',[OrganizationCityController::class,'getByCityId']);
 Route::get('/category/organizations/{id}',[OrganizationController::class,'getByCategoryId']);
 
 Route::prefix('sms')->group(function() {

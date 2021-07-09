@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Domain\Contracts\BookingContract;
 use App\Domain\Contracts\CategoryContract;
+use App\Domain\Contracts\CityContract;
 use App\Domain\Contracts\OrganizationContract;
 use App\Domain\Contracts\UserContract;
 use App\Http\Requests\OrganizationRequest;
@@ -75,6 +76,8 @@ class OrganizationCrudController extends CrudController
         $this->crud->set('show.setFromDb', false);
         CRUD::column(OrganizationContract::USER_ID)->type('select')->label('Пользователь')
             ->entity('user')->model('App\Models\User')->attribute(UserContract::NAME);
+        CRUD::column(OrganizationContract::CITY_ID)->type('select')->label('Город')
+            ->entity('city')->model('App\Models\City')->attribute(CityContract::TITLE);
         CRUD::column(OrganizationContract::CATEGORY_ID)->type('select')->label('Категория')
             ->entity('category')->model('App\Models\Category')->attribute(CategoryContract::TITLE);
         CRUD::column(OrganizationContract::TITLE)->label('Название');
@@ -182,6 +185,15 @@ class OrganizationCrudController extends CrudController
                 'minimum_input_length'  => '',
                 'attribute'             => UserContract::ID,
                 'data_source'           =>  url('users')
+            ]);
+
+            $this->crud->addField([
+                'name'      => OrganizationContract::CITY_ID,
+                'label'     => 'Город',
+                'type'      => 'select',
+                'entity'    => 'city',
+                'model'     => "App\Models\City",
+                'attribute' => OrganizationContract::TITLE,
             ]);
 
             $this->crud->addField([

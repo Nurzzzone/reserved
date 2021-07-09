@@ -35,6 +35,5 @@
         <li class='nav-item'><a class='nav-link' href='{{ backpack_url('organizationtables') }}'><i class='nav-icon la la-border-all'></i> Секции</a></li>
         <li class='nav-item'><a class='nav-link' href='{{ backpack_url('organizationtablelist') }}'><i class='nav-icon las la-table'></i> Столы</a></li>
         <li class='nav-item'><a class='nav-link' href='{{ backpack_url('organizationimage') }}'><i class='nav-icon las la-image'></i> Фото</a></li>
-        <li class='nav-item'><a class='nav-link' href='{{ backpack_url('organizationcity') }}'><i class='nav-icon las la-map-marker'></i> Города</a></li>
     </ul>
 </li>

@@ -10,8 +10,10 @@ class OrganizationContract extends MainContract
 
     const FILLABLE  =   [
         self::USER_ID,
+        self::CITY_ID,
         self::CATEGORY_ID,
         self::IIKO_ORGANIZATION_ID,
+        self::CITY_ID,
         self::IIKO_ID,
         self::API_KEY,
         self::API_ID,

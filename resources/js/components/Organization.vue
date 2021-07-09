@@ -248,7 +248,11 @@
             :imgs="img.list"
             :index="img.index"
             @hide="handleHide"
-        ></vue-easy-lightbox>
+        >
+            <template v-slot:toolbar="{ toolbarMethods }">
+
+            </template>
+        </vue-easy-lightbox>
     </template>
     <template v-else>
         <div class="container-fluid">
@@ -292,6 +296,7 @@ export default {
     name: "Organization",
     data() {
         return {
+            toolbarMethods: {},
             img: {
                 visible: false,
                 index: 0,

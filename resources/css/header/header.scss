@@ -1,13 +1,17 @@
 .header {
-    &-sign-out {
+    &-sign-out, &-location {
         background: url(/img/logo/sign-out.svg) no-repeat center rgb(245,245,245);
         background-size: 40%;
         width: 40px;
         height: 40px;
         position: absolute;
-        right: 10px;
+        right: 15px;
         border-radius: 30px;
         cursor: pointer;
+    }
+    &-location {
+        background-image: url(/img/logo/location-pin-green.svg);
+        left: 15px;
     }
     &-text {
         font-size: 20px;

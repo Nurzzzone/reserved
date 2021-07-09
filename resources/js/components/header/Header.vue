@@ -5,7 +5,8 @@
                 <header class="header">
                     <nav class="navbar navbar-expand-lg fixed-top py-3">
                         <div class="container p-0">
-                            <a class="navbar-brand text-uppercase font-weight-bold header-text" href="/">
+                            <div class="header-location d-sm-block d-md-none" data-toggle="modal" data-target="#location"></div>
+                            <a class="navbar-brand text-uppercase font-weight-bold header-text px-0" href="/">
                                 Reserved
                             </a>
                             <div class="header-sign-out d-sm-block d-md-none" v-if="!login" @click="exit"></div>

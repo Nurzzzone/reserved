@@ -1,9 +1,56 @@
+.location {
+    background: #008264;
+    padding: 9px 15px 9px 15px;
+    border-radius: 30px;
+    color: #fff;
+    cursor: pointer;
+    display: flex;
+    gap: 8px;
+    width: max-content;
+    &-main {
+
+    }
+    &-title {
+        font-size: 14px;
+        font-weight: bold;
+    }
+    &-icon {
+        background: url(/img/logo/location-pin.svg) no-repeat center;
+        background-size: contain;
+        width: 20px;
+    }
+    &-body {
+        display: flex;
+    }
+    &-country {
+        width: 50%;
+        border-right: 1px solid rgb(230,230,230);
+    }
+    &-city {
+        width: 50%;
+    }
+    &-country-item, &-city-item {
+        padding: 10px 15px 10px 15px;
+        font-size: 14px;
+        color: #00a082;
+        font-weight: bold;
+        margin: 0 5px 5px 5px;
+        cursor: pointer;
+        border-radius: 30px;
+        &:last-child {
+            margin-bottom: 0;
+        }
+    }
+    &-country-item:hover, &-city-item:hover, &-item-sel {
+        background: #00a082;
+        color: #fff;
+    }
+}
 .breadcrumb {
     background: transparent;
-    margin: 0;
-    padding: 0;
+    margin: 0 5px 0 5px;
+    padding: 0 0 5px 0;
     color: white;
-    padding-bottom: 5px;
     & > li {
         display: flex;
         align-items: center;
@@ -48,6 +95,11 @@
     }
 }
 @media only screen and (max-width: 768px) {
+    .location {
+        &-main {
+            display: none !important;
+        }
+    }
     .section {
         &-bg {
             padding-top: 32px !important;

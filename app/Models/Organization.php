@@ -35,16 +35,18 @@ class Organization extends Model
         return $this->belongsTo(User::class);
     }
 
-    public function category() {
+    public function category()
+    {
         return $this->belongsTo(Category::class);
+    }
+
+    public function city()
+    {
+        return $this->belongsTo(City::class);
     }
 
     public function images() {
         return $this->hasMany(OrganizationImage::class);
-    }
-
-    public function organizationCity() {
-        return $this->hasOne(OrganizationCity::class);
     }
 
     public function setImageAttribute($value) {

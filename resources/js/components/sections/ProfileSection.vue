@@ -199,7 +199,6 @@ export default {
             }
         },
         getCountry: function() {
-            this.storage.city = '';
             if (!sessionStorage.countries) {
                 axios.get('/api/countries')
                     .then(response => {

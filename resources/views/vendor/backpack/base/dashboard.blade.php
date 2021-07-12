@@ -2764,6 +2764,19 @@ $widgets['before_content'][] = [
         $(document.body).on('click', '.btn-booking-completed', function() {
             $.get('booking/status/completed/'+$(this).attr('data-id'));
         });
+        $(document.body).on('click', '.card-toggle-btn', function() {
+            let status  =   $(this).attr('data-status');
+            let id      =   $(this).attr('data-id');
+            if (status === 'ENABLED') {
+                $(this).removeClass('card-toggle-btn-success').addClass('card-toggle-btn-locked');
+                $(this).attr('data-status','FROZEN');
+                $.get('/api/table/status/lock/'+id);
+            } else {
+                $(this).removeClass('card-toggle-btn-locked').addClass('card-toggle-btn-success');
+                $(this).attr('data-status','ENABLED');
+                $.get('/api/table/status/unlock/'+id);
+            }
+        });
         let stat    =   true;
         $(document).ready(function() {
             function load() {
@@ -2785,5 +2798,26 @@ $widgets['before_content'][] = [
             load();
         });
     </script>
+    <style>
+        .card-toggle-btn {
+            position: absolute;
+            width: 40px;
+            height: 40px;
+            background: #fff;
+            box-shadow: 0 .5rem 1rem rgba(22,28,45,.15)!important;
+            right: -20px;
+            top: -20px;
+            border-radius: 40px;
+            cursor: pointer;
+        }
+        .card-toggle-btn-success {
+            background: #fff url('/img/logo/check-mark.svg') no-repeat center;
+            background-size: 50%;
+        }
+        .card-toggle-btn-locked {
+            background: #fff url('/img/logo/padlock.svg') no-repeat center;
+            background-size: 50%;
+        }
+    </style>
 @endsection
 @endif

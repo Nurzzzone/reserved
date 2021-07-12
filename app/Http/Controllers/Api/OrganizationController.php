@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Api;
 
 use App\Domain\Contracts\MainContract;
+use App\Domain\Contracts\OrganizationTableListContract;
 use App\Domain\Contracts\OrganizationTablesContract;
 
 use Illuminate\Http\Request;
@@ -31,6 +32,20 @@ class OrganizationController extends Controller
         $this->organizationService  =   $organizationService;
         $this->organizationTableListService =   $organizationTableListService;
         $this->bookingService   =   $bookingService;
+    }
+
+    public function tableLock($id)
+    {
+        $this->organizationTableListService->update($id,[
+            OrganizationTableListContract::STATUS   =>  OrganizationTableListContract::FROZEN
+        ]);
+    }
+
+    public function tableUnlock($id)
+    {
+        $this->organizationTableListService->update($id,[
+            OrganizationTableListContract::STATUS   =>  OrganizationTableListContract::ENABLED
+        ]);
     }
 
     public function status($id,$date)

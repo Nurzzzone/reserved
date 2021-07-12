@@ -120,10 +120,12 @@ class MainContract
     const CANCELED  =   'CANCELED';
     const DELETED   =   'DELETED';
     const COMPLETED =   'COMPLETED';
+    const FROZEN    =   'FROZEN';
 
     const STATUSES  =   [
         self::ENABLED,
-        self::DISABLED
+        self::FROZEN,
+        self::DISABLED,
     ];
 
     const PAYMENT_STATUSES  =   [

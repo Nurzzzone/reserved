@@ -26,6 +26,6 @@ class OrganizationTables extends Model
 
     public function organizationTables()
     {
-        return $this->hasMany(OrganizationTableList::class,OrganizationTableListContract::ORGANIZATION_TABLE_ID,OrganizationTablesContract::ID)->where(OrganizationTableListContract::STATUS,OrganizationTableListContract::ENABLED);
+        return $this->hasMany(OrganizationTableList::class,OrganizationTableListContract::ORGANIZATION_TABLE_ID,OrganizationTablesContract::ID)->where(OrganizationTableListContract::STATUS,'!=',OrganizationTableListContract::DISABLED);
     }
 }

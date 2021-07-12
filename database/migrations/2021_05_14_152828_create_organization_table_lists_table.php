@@ -7,11 +7,6 @@ use Illuminate\Support\Facades\Schema;
 
 class CreateOrganizationTableListsTable extends Migration
 {
-    /**
-     * Run the migrations.
-     *
-     * @return void
-     */
     public function up()
     {
         Schema::create(OrganizationTableListContract::TABLE, function (Blueprint $table) {
@@ -26,11 +21,6 @@ class CreateOrganizationTableListsTable extends Migration
         });
     }
 
-    /**
-     * Reverse the migrations.
-     *
-     * @return void
-     */
     public function down()
     {
         Schema::dropIfExists(OrganizationTableListContract::TABLE);

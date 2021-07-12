@@ -99,7 +99,7 @@
                                                         <template v-if="table.bookingStatus === undefined">
                                                             <div class="lds-ellipsis"><div></div><div></div><div></div><div></div></div>
                                                         </template>
-                                                        <template v-else-if="table.bookingStatus === null || table.bookingStatus.status === 'COMPLETED'">
+                                                        <template v-else-if="table.status === 'ENABLED' && (table.bookingStatus === null || table.bookingStatus.status === 'COMPLETED')">
                                                             <div class="organization-card-status organization-card-status-free">Свободно</div>
                                                         </template>
                                                         <template v-else>

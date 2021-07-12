@@ -7,6 +7,7 @@
             @foreach($organizationTableListService->getByTableId($section->id) as &$table)
                 <div class="col-xl-2 col-lg-4 col-md-6 col-6">
                     @include('vendor.backpack.base.card.card',[
+                        'table' =>  $table,
                         'userService'   =>  $userService,
                         'booking' => $bookingService->getLastByTableId($table->id, $date),
                         'organization' => $organization,

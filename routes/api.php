@@ -6,16 +6,20 @@ use App\Http\Controllers\Api\OrganizationController;
 use App\Http\Controllers\Api\UserController;
 use App\Http\Controllers\Api\CategoryController;
 use App\Http\Controllers\Api\CountryController;
-use App\Http\Controllers\Api\OrganizationCityController;
 use App\Http\Controllers\Api\BookingController;
 use App\Http\Controllers\Api\ReviewController;
 use App\Http\Controllers\Api\PaymentController;
 use App\Http\Controllers\Api\ContactController;
 use App\Http\Controllers\Api\CardController;
 
+Route::prefix('table')->group(function() {
+    Route::get('status/lock/{id}',[OrganizationController::class,'tableLock']);
+    Route::get('status/unlock/{id}',[OrganizationController::class,'tableUnlock']);
+});
+
 Route::prefix('contacts')->group(function() {
-    Route::get('/contracts',[ContactController::class,'contracts'])->name('contacts.contracts');
-    Route::get('/privacy',[ContactController::class,'privacy'])->name('contacts.privacy');
+    Route::get('contracts',[ContactController::class,'contracts'])->name('contacts.contracts');
+    Route::get('privacy',[ContactController::class,'privacy'])->name('contacts.privacy');
 });
 
 Route::prefix('card')->group(function() {

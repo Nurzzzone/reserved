@@ -14,6 +14,11 @@ class OrganizationTableListService extends BaseService
         $this->organizationTableListRepository  =   $organizationTableListRepository;
     }
 
+    public function update($id, $input)
+    {
+        return $this->organizationTableListRepository->update($id, $input);
+    }
+
     public function getByTableId($id) {
         return $this->organizationTableListRepository->getByTableId($id);
     }

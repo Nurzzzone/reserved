@@ -1,4 +1,59 @@
 .item {
+    &-filter {
+        gap: 10px;
+        position: relative;
+        &-list {
+            position: absolute;
+            background: #fff;
+            width: 100%;
+            margin: 0;
+            overflow: hidden;
+            font-size: 14px;
+            display: none;
+            z-index: 1;
+            &-option {
+                padding: 10px 15px 10px 15px;
+                &:hover {
+                    background: #57a283;
+                    color: #fff;
+                }
+            }
+        }
+        &-block, &-btn {
+            background: #fff;
+            font-size: 14px;
+            cursor: pointer;
+            position: relative;
+        }
+        &-block:hover {
+
+            & > .item-filter-list {
+                display: block;
+            }
+        }
+        &-dropdown {
+            padding: 10px 10px 10px 15px;
+            display: flex;
+            gap: 5px;
+            &-text {
+                font-size: 14px;
+            }
+            &-arrow {
+                width: 20px;
+                background: url(/img/logo/arrow-down.svg) no-repeat center;
+                background-size: 50%;
+            }
+        }
+        &-btn {
+            background: #57a283;
+            color: #fff;
+            &-text {
+                padding: 10px 15px 10px 15px;
+                min-width: 100px;
+                text-align: center;
+            }
+        }
+    }
     &-title {
         font-size: 1.75rem;
     }
@@ -19,12 +74,14 @@
     &-rating {
         position: absolute;
         z-index: 2;
-        right: 10px;
-        top: 10px;
-        background: red;
-        padding: 5px 10px 5px 10px;
-        border-radius: 5px;
-        color: #fff;
+        right: 0;
+        top: 0;
+        background: #fff;
+        padding: 6px 14px 6px 14px;
+        border-radius: 0 0 0 10px;
+        color: #57A282;
+        font-weight: bold;
+        font-size: 18px;
     }
     &-main {
         max-height: 150px;
@@ -88,14 +145,34 @@
 }
 @media only screen and (max-width: 768px) {
     .item {
+        &-filter {
+            &-dropdown {
+                padding: 5px 5px 5px 10px;
+                gap: 2px;
+                &-text {
+                    font-size: 11px;
+                }
+            }
+            &-btn {
+                &-text {
+                    font-size: 11px;
+                    padding: 5px 10px 5px 10px;
+                }
+            }
+            &-list {
+                font-size: 11px;
+                &-option {
+                    padding: 5px 10px 5px 10px;
+                }
+            }
+        }
         &-main {
             max-height: 80px;
         }
         &-rating {
-            padding: 2px 5px 2px 5px;
+            padding: 5px 8px 5px 8px;
             line-height: 1;
-            right: 5px;
-            top: 5px;
+            font-size: 11px;
         }
         &-radius {
             border-radius: 10px;

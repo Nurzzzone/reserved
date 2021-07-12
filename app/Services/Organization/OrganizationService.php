@@ -44,9 +44,14 @@ class OrganizationService extends BaseService
         return $this->organizationRepository->getById($id);
     }
 
-    public function getByCategoryId(int $id, int $paginate)
+    public function getByCategoryId($id, int $paginate)
     {
         return $this->organizationRepository->getByCategoryId($id,$paginate);
+    }
+
+    public function getByCategoryIdAndCityId($id, $cityId, $paginate)
+    {
+        return $this->organizationRepository->getByCategoryIdAndCityId($id, $cityId, $paginate);
     }
 
     public function getByUserId(int $id) {

@@ -51,10 +51,21 @@ class OrganizationRepositoryEloquent implements OrganizationRepositoryInterface
         ]);
     }
 
-    public function getByUserId(int $id) {
+    public function getByUserId(int $id)
+    {
         return Organization::where([
             OrganizationContract::USER_ID   =>  $id,
             OrganizationContract::STATUS    =>  OrganizationContract::ENABLED
+        ])->get();
+    }
+
+    public function getByCategoryIdAndCityId($id, $cityId, $paginate)
+    {
+        return Organization::with('user','category','images')
+        ->where([
+            [OrganizationContract::CATEGORY_ID,$id],
+            [OrganizationContract::CITY_ID,$cityId],
+            [OrganizationContract::STATUS,OrganizationContract::ENABLED]
         ])->get();
     }
 }

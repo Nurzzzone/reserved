@@ -1,6 +1,47 @@
 <template>
     <Header></Header>
     <profile-section></profile-section>
+    <div class="container-fluid pt-4 pt-md-5 item-bg" v-if="storage.city">
+        <div class="container">
+            <div class="row">
+                <div class="col-12 px-2">
+                    <div class="item-filter d-flex justify-content-end">
+                        <div class="item-filter-block item-radius item-shadow">
+                            <div class="item-filter-dropdown">
+                                <template v-for="(country,key) in data.countries" :key="key">
+                                    <div class="item-filter-dropdown-text" v-if="country.id === data.countryIndex">{{country.title}}</div>
+                                </template>
+                                <div class="item-filter-dropdown-arrow"></div>
+                            </div>
+                            <div class="item-filter-list item-radius item-shadow">
+                                <div class="item-filter-list-option" v-for="(country,key) in data.countries" :key="key" @click="data.countryIndex = country.id">{{country.title}}</div>
+                            </div>
+                        </div>
+                        <div class="item-filter-block item-radius item-shadow">
+                            <div class="item-filter-dropdown">
+                                <template v-for="(country,key) in data.countries" :key="key">
+                                    <template v-for="(city,cityKey) in country.city_id" :key="cityKey">
+                                        <div class="item-filter-dropdown-text" v-if="city.id === data.index">{{city.title}}</div>
+                                    </template>
+                                </template>
+                                <div class="item-filter-dropdown-arrow"></div>
+                            </div>
+                            <div class="item-filter-list item-radius item-shadow">
+                                <template v-for="(country,key) in data.countries" :key="key">
+                                    <template v-for="(city,cityKey) in country.city_id" :key="cityKey">
+                                        <div class="item-filter-list-option" v-if="city.country_id === data.countryIndex" @click="data.index = city.id">{{city.title}}</div>
+                                    </template>
+                                </template>
+                            </div>
+                        </div>
+                        <div class="item-filter-btn item-radius">
+                            <div class="item-filter-btn-text" @click="getRestaurants();">Поиск</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
     <div class="container-fluid py-3 py-md-5 item-bg">
         <div class="container">
             <div class="row">
@@ -75,13 +116,28 @@ export default {
     name: "Cafe",
     data() {
         return {
+            data: {
+                countries: [],
+                countryIndex: 1,
+                index: 1,
+            },
             organizations: []
         }
     },
     created() {
+        this.setFilter();
         this.getOrganizations();
     },
     methods: {
+        setFilter: function() {
+            if (this.storage.city) {
+                this.data.countryIndex  =   this.storage.city.country_id;
+                this.data.index =   this.storage.city.id;
+            }
+            if (sessionStorage.countries) {
+                this.data.countries =   JSON.parse(sessionStorage.countries);
+            }
+        },
         favorite: function(id) {
             let len =   this.storage.favorite.length;
             let status  =   true;
@@ -97,13 +153,13 @@ export default {
         },
         getOrganizations: function()
         {
-            axios.get('/api/category/organizations/2')
+            axios.get('/api/category/organizations/2/'+this.data.index)
                 .then(response => {
                     let data    =   response.data.data;
                     for (let i = 0; i < data.length; i++) {
                         data[i].timeTitle   =   this.getTime(data[i]);
-                        this.organizations.push(data[i]);
                     }
+                    this.organizations  =   data;
                 });
         },
         getTime: function(organization) {

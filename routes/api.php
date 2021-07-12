@@ -75,7 +75,12 @@ Route::get('/organization/section/{id}',[OrganizationController::class,'getSecti
 Route::get('/organizations',[OrganizationController::class,'list']);
 Route::get('/organizations/{search}',[OrganizationController::class,'search']);
 Route::get('/organization/{id}',[OrganizationController::class,'getById']);
-Route::get('/category/organizations/{id}',[OrganizationController::class,'getByCategoryId']);
+
+Route::prefix('category')->group(function() {
+    Route::get('organizations/{id}',[OrganizationController::class,'getByCategoryId']);
+    Route::get('organizations/{id}/{cityId}',[OrganizationController::class,'getByCategoryIdAndCityId']);
+});
+
 
 Route::prefix('sms')->group(function() {
     Route::get('{phone}/{code}',[UserController::class,'smsVerify']);

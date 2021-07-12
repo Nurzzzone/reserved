@@ -66,11 +66,20 @@ class OrganizationController extends Controller
         return new OrganizationTablesCollection(OrganizationTables::with('organizationTables')->where(OrganizationTablesContract::ORGANIZATION_ID,$id)->get());
     }
 
-    public function getByCategoryId($id, Request $request) {
+    public function getByCategoryId($id, Request $request)
+    {
         if ($request->has('paginate')) {
             $this->paginate =   (int)$request->input('paginate');
         }
         return new OrganizationCollection($this->organizationService->getByCategoryId($id,$this->paginate));
+    }
+
+    public function getByCategoryIdAndCityId($id, $cityId, Request $request)
+    {
+        if ($request->has('paginate')) {
+            $this->paginate =   (int)$request->input('paginate');
+        }
+        return new OrganizationCollection($this->organizationService->getByCategoryIdAndCityId($id, $cityId, $this->paginate));
     }
 
     public function getById($id) {

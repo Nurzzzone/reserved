@@ -117,6 +117,14 @@ class OrganizationCrudController extends CrudController
     {
         CRUD::setValidation(OrganizationRequest::class);
         if (backpack_user()->role === OrganizationContract::TRANSLATE[OrganizationContract::MODERATOR]) {
+            $this->crud->addField([
+                'name'      => OrganizationContract::CITY_ID,
+                'label'     => 'Город',
+                'type'      => 'select',
+                'entity'    => 'city',
+                'model'     => "App\Models\City",
+                'attribute' => OrganizationContract::TITLE,
+            ]);
 
             CRUD::field(OrganizationContract::TITLE)->label('Название')->attributes([
                 'required'  =>  'required'

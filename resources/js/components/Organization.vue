@@ -458,23 +458,22 @@ export default {
                 this.storage.favorite.push(id);
             }
         },
-        updateStatus: function() {
+        updateStatus: async function() {
             let self    =   this;
-            axios.get('/api/organization/status/'+this.$route.params.id+'/'+this.date.data)
+            return axios.get('/api/organization/status/'+this.$route.params.id+'/'+this.date.data)
                 .then(response => {
                     let data    =   response.data;
                     let statuses    =   [];
                     data.forEach(element => {
-                        statuses[element.id]    =   element.bookingStatus;
+                        if (!statuses[element.organization_table_id]) {
+                            statuses[element.organization_table_id]    =   [];
+                        }
+                        statuses[element.organization_table_id].push(element);
                     });
                     this.sections.forEach(element => {
-                        element.organization_tables.forEach(item => {
-                            if (statuses[item.id] && statuses[item.id].status !== 'COMPLETED') {
-                                item.bookingStatus  =   statuses[item.id];
-                            } else {
-                                item.bookingStatus  =   null;
-                            }
-                        });
+                        if (statuses[element.id]) {
+                            element.organization_tables =   statuses[element.id];
+                        }
                     });
                 }).catch(error => {
                     setTimeout(function() {
@@ -571,10 +570,10 @@ export default {
             let converted   =   time.split(':');
             return converted[0]+'.'+converted[1];
         },
-        selTable: function(key, tableKey) {
-            this.updateStatus();
+        selTable: async function (key, tableKey) {
+            await this.updateStatus();
             this.storage.modal = false;
-            this.table  =   this.sections[key].organization_tables[tableKey];
+            this.table = this.sections[key].organization_tables[tableKey];
             this.setTime();
         },
         getOrganization: function() {

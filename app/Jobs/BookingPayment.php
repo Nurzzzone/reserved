@@ -32,6 +32,7 @@ class BookingPayment implements ShouldQueue
         $payment        =   $paymentService->urlAdmin($this->data[BookingContract::ID],$organization->price,$organization->title,$user->phone);
         if (array_key_exists(PaymentContract::PG_REDIRECT_URL,$payment)) {
             $bookingService->update($this->data[BookingContract::ID],[
+                BookingContract::PAYMENT_ID     =>  $payment[PaymentContract::PG_PAYMENT_ID],
                 BookingContract::PAYMENT_URL    =>  $payment[PaymentContract::PG_REDIRECT_URL]
             ]);
             $smsService->sendBooking($user->phone,$organization->title,$payment[PaymentContract::PG_REDIRECT_URL]);

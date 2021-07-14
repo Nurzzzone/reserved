@@ -23,6 +23,7 @@ class MainContract
     const MESSAGE   =   'message';
     const DESC  =   'desc';
     const REMOVE    =   'remove';
+    const REVOKE    =   'revoke';
     const ADD   =   'add';
     const PG_CARD_3DS   =   'pg_card_3ds';
     const PG_COUNTRY    =   'pg_country';
@@ -150,6 +151,7 @@ class MainContract
         self::DELETED
     ];
 
+    const PG_REFUND_AMOUNT  =   'pg_refund_amount';
     const PG_PAYMENT_ID =   'pg_payment_id';
     const PG_CARD_ID    =   'pg_card_id';
     const PG_BACK_LINK  =   'pg_back_link';

@@ -22,7 +22,7 @@ use App\Services\Booking\BookingService;
 use App\Services\User\UserService;
 
 use App\Jobs\BookingPayment;
-use http\Env\Request;
+use App\Jobs\BookingPaymentRevoke;
 
 use App\Helpers\Time\Time;
 
@@ -199,6 +199,10 @@ class BookingCrudController extends CrudController
 
     public function cancel($id) {
         $this->bookingService->update($id,[BookingContract::STATUS =>  BookingContract::OFF]);
+        $booking    =   $this->bookingService->getById($id);
+        if ($booking) {
+            BookingPaymentRevoke::dispatch($booking);
+        }
     }
 
     public function came($id) {

@@ -2,7 +2,6 @@
 
 namespace App\Jobs;
 
-use App\Events\OrganizationProcessed;
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldBeUnique;
 use Illuminate\Contracts\Queue\ShouldQueue;
@@ -10,18 +9,21 @@ use Illuminate\Foundation\Bus\Dispatchable;
 use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Queue\SerializesModels;
 
-class OrganizationInfo implements ShouldQueue
+use App\Models\Booking;
+
+use App\Services\Payment\PaymentService;
+
+class BookingPaymentRevoke implements ShouldQueue
 {
     use Dispatchable, InteractsWithQueue, Queueable, SerializesModels;
-    protected $data;
-
-    public function __construct($data)
+    protected $booking;
+    public function __construct(Booking $booking)
     {
-        $this->data =   $data;
+        $this->booking  =   $booking;
     }
 
-    public function handle()
+    public function handle(PaymentService $paymentService)
     {
-        event(new OrganizationProcessed($this->data));
+        $paymentService->revoke($this->booking);
     }
 }

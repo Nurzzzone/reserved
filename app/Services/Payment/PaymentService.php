@@ -28,6 +28,7 @@ class PaymentService
 
     const STATUS    =   'get_status.php';
     const MAIN_URL  =   'https://api.paybox.money/init_payment.php';
+    const REVOKE_URL    =   'https://api.paybox.money/revoke.php';
 
     const PAY_URL       =   'https://api.paybox.money/v1/merchant/'.self::STATUS;
 
@@ -67,6 +68,16 @@ class PaymentService
     public function __construct(PaymentRepositoryInterface $paymentRepository, Curl $curl) {
         $this->paymentRepository    =   $paymentRepository;
         $this->curl =   $curl;
+    }
+
+    public function revoke(Booking $booking)
+    {
+        $this->curl->post(self::REVOKE_URL,$this->signatureCard([
+            PaymentContract::PG_MERCHANT_ID =>  self::ID,
+            PaymentContract::PG_PAYMENT_ID  =>  $booking->{BookingContract::PG_PAYMENT_ID},
+            PaymentContract::PG_REFUND_AMOUNT   =>  $booking->{PaymentContract::PRICE},
+            PaymentContract::PG_SALT        =>  rand(100000,999999),
+        ],MainContract::REVOKE.'.php'));
     }
 
     public static function paySignature($paymentId):array

@@ -202,7 +202,7 @@ class BookingRepositoryEloquent implements BookingRepositoryInterface
                 [BookingContract::DATE,$date]
             ])
             ->orderBy(BookingContract::ID,BookingContract::DESC)
-            ->first();
+            ->toSql();
         print_r($booking);
         echo 'asdasd'.$id.'|'.$date;
         exit;

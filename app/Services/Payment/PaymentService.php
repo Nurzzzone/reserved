@@ -79,8 +79,7 @@ class PaymentService
             PaymentContract::PG_REFUND_AMOUNT   =>  $booking->{PaymentContract::PRICE},
             PaymentContract::PG_SALT        =>  rand(100000,999999),
         ],MainContract::REVOKE.'.php'));
-        $xml    =   simplexml_load_string($revoke);
-        Log::info('remove',[$xml]);
+        Log::info('remove',[$revoke]);
     }
 
     public static function paySignature($paymentId):array

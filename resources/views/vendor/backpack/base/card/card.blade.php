@@ -1,7 +1,6 @@
 <div class="card shadow border-0" data-card="{{$table->id}}" style="border-radius: 10px;">
     <div class="card-toggle-btn @if($table->status === \App\Domain\Contracts\BookingContract::FROZEN) card-toggle-btn-locked @else card-toggle-btn-success @endif" data-id="{{$table->id}}" data-status="{{$table->status}}"></div>
 @if($booking && $booking->status !== \App\Domain\Contracts\BookingContract::COMPLETED)
-    {{json_encode($booking)}}
     @php
         $user =   $userService->getById($booking->user_id);
     @endphp

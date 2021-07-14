@@ -81,8 +81,8 @@ class BookingService extends BaseService
         return $dt->format($format);
     }
 
-    public function getLastByTableId($id, $date, $timezone) {
+    public function getLastByTableId($id, $date) {
         $date   =   date('Y-m-d',strtotime($date));
-        return $this->bookingRepository->getLastByTableId($id, $date, $timezone);
+        return $this->bookingRepository->getLastByTableId($id, $date);
     }
 }

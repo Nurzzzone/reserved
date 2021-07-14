@@ -179,7 +179,7 @@ class BookingRepositoryEloquent implements BookingRepositoryInterface
         ]);
     }
 
-    public function getLastByTableId($id,$date,$timezone) {
+    public function getLastByTableId($id,$date) {
 
         return Booking::with('organization','organizationTables')
             ->where([

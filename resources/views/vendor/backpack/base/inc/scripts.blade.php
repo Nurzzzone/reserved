@@ -36,7 +36,7 @@
                     <div class="form-row">
                         <div class="form-group col-md-6">
                             <label for="date">Дата</label>
-                            <input type="email" class="form-control radius" id="date" readonly value="{{date('Y-m-d')}}">
+                            <input type="email" class="form-control radius" id="date" readonly>
                         </div>
                         <div class="form-group col-md-6">
                             <label for="time">Время (00:00 - 23:59)</label>

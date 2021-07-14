@@ -2729,18 +2729,9 @@ $widgets['before_content'][] = [
 @endsection
 @else
 @section('content')
-    <div class="row justify-content-center">
-        <div class="col-md-3 col-12">
-            <div class="row mt-3">
-                <div class="col">
-                    <input type="text" class="form-control w-100 text-center border-0 shadow-sm bg-white font-weight-bold" readonly id="datepicker" value="{{date('Y-m-d')}}" >
-                </div>
-            </div>
-        </div>
-    </div>
     <div id="tables">
         @include('vendor.backpack.base.card.list', [
-            'date'      =>  date('Y-m-d'),
+            'date'      =>  '',
             'user_id'   =>  backpack_auth()->user()->id,
             'userService'   =>  $userService,
             'organizationService'   =>  $organizationService,

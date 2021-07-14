@@ -12,6 +12,13 @@ use DateTime;
 class BookingRepositoryEloquent implements BookingRepositoryInterface
 {
     protected $take =   15;
+    protected $date;
+    public function __construct()
+    {
+        $date = new DateTime;
+        $date->modify('-15 minutes');
+        $this->date =   $date->format('Y-m-d H:i:s');
+    }
 
     public function updateIikoId(int $id, string $iikoId):void
     {
@@ -193,7 +200,7 @@ class BookingRepositoryEloquent implements BookingRepositoryInterface
             ->orWhere([
                 [BookingContract::ORGANIZATION_TABLE_LIST_ID,$id],
                 [BookingContract::STATUS,BookingContract::CHECKING],
-                [BookingContract::CREATED_AT,'>=',Time::currentTimestampTimezone($timezone)],
+                [BookingContract::CREATED_AT,'>=',$this->date],
                 [BookingContract::DATE,$date]
             ])
             ->orderBy(BookingContract::ID,BookingContract::DESC)

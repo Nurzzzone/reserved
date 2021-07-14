@@ -10,6 +10,7 @@ use App\Domain\Contracts\PaymentContract;
 use App\Helpers\Curl\Curl;
 use App\Models\Card;
 use App\Models\Booking;
+use Illuminate\Support\Facades\Log;
 
 class PaymentService
 {
@@ -72,12 +73,14 @@ class PaymentService
 
     public function revoke(Booking $booking)
     {
-        $this->curl->post(self::REVOKE_URL,$this->signatureCard([
+        $revoke =   $this->curl->post(self::REVOKE_URL,$this->signatureCard([
             PaymentContract::PG_MERCHANT_ID =>  self::ID,
             PaymentContract::PG_PAYMENT_ID  =>  $booking->{BookingContract::PG_PAYMENT_ID},
             PaymentContract::PG_REFUND_AMOUNT   =>  $booking->{PaymentContract::PRICE},
             PaymentContract::PG_SALT        =>  rand(100000,999999),
         ],MainContract::REVOKE.'.php'));
+        $xml    =   simplexml_load_string($revoke);
+        Log::info('remove',[$xml]);
     }
 
     public static function paySignature($paymentId):array

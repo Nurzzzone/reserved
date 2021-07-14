@@ -214,14 +214,17 @@ class BookingCrudController extends CrudController
     }
 
     public function bookingStatus($date) {
-        return view('vendor.backpack.base.card.list',[
-            'date'  =>  $date,
-            'user_id'   =>  backpack_auth()->user()->id,
-            'userService'   =>  $this->userService,
-            'organizationService'   =>  $this->organizationService,
-            'organizationTableService'    =>  $this->organizationTableService,
-            'organizationTableListService'      =>  $this->organizationTableListService,
-            'bookingService'    =>  $this->bookingService,
-        ]);
+        $organization   =   $this->organizationService->getByUserId(backpack_auth()->user()->id);
+        if (sizeof($organization) > 0) {
+            return view('vendor.backpack.base.card.sections',[
+                'organizationTableListService'  =>  $this->organizationTableListService,
+                'organizationTableService'  =>  $this->organizationTableService,
+                'bookingService'    =>  $this->bookingService,
+                'userService'   =>  $this->userService,
+                'date'  =>  $date,
+                'organization'  =>  $organization[0],
+                'user_id'   =>  backpack_auth()->user()->id,
+            ]);
+        }
     }
 }

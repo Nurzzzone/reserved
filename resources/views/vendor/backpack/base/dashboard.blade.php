@@ -2778,7 +2778,7 @@ $widgets['before_content'][] = [
                             url: 'booking/status_date/'+$("#datepicker").val(),
                             type: "GET",
                             success: function (result) {
-                                $("#tables").html(result);
+                                $("#sections").html(result);
                                 stat    =   true;
                             },
                             complete: load

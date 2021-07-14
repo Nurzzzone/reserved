@@ -1,8 +1,9 @@
 @foreach($organizationTableService->getByOrganizationId($organization->id) as & $section)
     <h3 class="my-3">{{$section->name}}</h3>
-    {{json_encode($bookingService->getLastByTableId($table->id, $date))}}
+
     <div class="row">
         @foreach($organizationTableListService->getByTableId($section->id) as &$table)
+            {{json_encode($bookingService->getLastByTableId($table->id, $date))}}
             <div class="col-xl-2 col-lg-4 col-md-6 col-6">
                 @include('vendor.backpack.base.card.card',[
                     'table' =>  $table,

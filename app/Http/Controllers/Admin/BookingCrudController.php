@@ -199,10 +199,7 @@ class BookingCrudController extends CrudController
 
     public function cancel($id) {
         $this->bookingService->update($id,[BookingContract::STATUS =>  BookingContract::OFF]);
-        $booking    =   $this->bookingService->getById($id);
-        if ($booking) {
-            BookingPaymentRevoke::dispatch($booking);
-        }
+        BookingPaymentRevoke::dispatch($this->bookingService->getById($id));
     }
 
     public function came($id) {

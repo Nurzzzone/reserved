@@ -4,6 +4,7 @@
 namespace App\Domain\Repositories\Booking;
 
 use App\Domain\Contracts\BookingContract;
+use App\Helpers\Time\Time;
 use App\Models\Booking;
 use Carbon\Carbon;
 use DateTime;
@@ -141,7 +142,7 @@ class BookingRepositoryEloquent implements BookingRepositoryInterface
             ->take($this->take)->get();
     }
 
-    public function getByDate($date,$paginate):object
+    public function getByDate($date,$paginate,$organization):object
     {
         return Booking::with('organization','organizationTables')
             ->where([
@@ -178,7 +179,8 @@ class BookingRepositoryEloquent implements BookingRepositoryInterface
         ]);
     }
 
-    public function getLastByTableId($id,$date) {
+    public function getLastByTableId($id,$date,$timezone) {
+
         return Booking::with('organization','organizationTables')
             ->where([
                 [BookingContract::ORGANIZATION_TABLE_LIST_ID,$id],
@@ -198,7 +200,7 @@ class BookingRepositoryEloquent implements BookingRepositoryInterface
             ->orWhere([
                 [BookingContract::ORGANIZATION_TABLE_LIST_ID,$id],
                 [BookingContract::STATUS,BookingContract::CHECKING],
-                [BookingContract::CREATED_AT,'>=',$this->date],
+                [BookingContract::CREATED_AT,'>=',Time::currentTimestampTimezone($timezone)],
                 [BookingContract::DATE,$date]
             ])
             ->orderBy(BookingContract::ID,BookingContract::DESC)

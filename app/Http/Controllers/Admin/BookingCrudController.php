@@ -213,7 +213,7 @@ class BookingCrudController extends CrudController
         $this->bookingService->update($id,[BookingContract::STATUS =>  BookingContract::COMPLETED]);
     }
 
-    public function bookingStatus($date) {
+    public function bookingStatus($date, $organizationId) {
         $organization   =   $this->organizationService->getByUserId(backpack_auth()->user()->id);
         if (sizeof($organization) > 0) {
             return view('vendor.backpack.base.card.sections',[

@@ -9,7 +9,7 @@
                 @include('vendor.backpack.base.card.card',[
                     'table' =>  $table,
                     'userService'   =>  $userService,
-                    'booking' => $bookingService->getLastByTableId($table->id, $date),
+                    'booking' => $bookingService->getLastByTableId($table->id, $date, $organization->timezone),
                     'organization' => $organization,
                     'user_id' => $user_id
                 ])

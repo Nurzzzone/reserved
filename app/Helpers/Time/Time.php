@@ -27,4 +27,10 @@ class Time
         return $time->format('Y-m-d');
     }
 
+    public static function currentTimestampTimezone($timezone):string
+    {
+        $time   =   new \DateTime('now', new \DateTimeZone($timezone) );
+        return $time->format('Y-m-d H:i:s');
+    }
+
 }

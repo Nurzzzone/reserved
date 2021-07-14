@@ -7,6 +7,7 @@ namespace App\Services\Booking;
 use App\Services\BaseService;
 
 use App\Domain\Repositories\Booking\BookingRepositoryInterface;
+use App\Domain\Repositories\Organization\OrganizationRepositoryInterface;
 
 use App\Domain\Contracts\BookingContract;
 use App\Domain\Contracts\OrganizationContract;
@@ -16,10 +17,12 @@ use http\Env\Request;
 class BookingService extends BaseService
 {
     protected $bookingRepository;
+    protected $organizationRepository;
 
-    public function __construct(BookingRepositoryInterface $bookingRepository)
+    public function __construct(BookingRepositoryInterface $bookingRepository, OrganizationRepositoryInterface $organizationRepository)
     {
         $this->bookingRepository    =   $bookingRepository;
+        $this->organizationRepository   =   $organizationRepository;
     }
 
     public function delete($id):void
@@ -78,8 +81,8 @@ class BookingService extends BaseService
         return $dt->format($format);
     }
 
-    public function getLastByTableId($id, $date) {
+    public function getLastByTableId($id, $date, $timezone) {
         $date   =   date('Y-m-d',strtotime($date));
-        return $this->bookingRepository->getLastByTableId($id, $date);
+        return $this->bookingRepository->getLastByTableId($id, $date, $timezone);
     }
 }

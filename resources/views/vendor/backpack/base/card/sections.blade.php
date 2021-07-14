@@ -4,7 +4,7 @@
     <div class="row">
         @foreach($organizationTableListService->getByTableId($section->id) as &$table)
             {{$table->id.'='.$date}}
-            {{json_encode($bookingService->getLastByTableId($table->id, $date))}}
+            {{json_encode($bookingService->getLastByTableId($table->id, $date, $organization->timezone))}}
             <div class="col-xl-2 col-lg-4 col-md-6 col-6">
                 @include('vendor.backpack.base.card.card',[
                     'table' =>  $table,

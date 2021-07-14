@@ -179,33 +179,6 @@ class BookingRepositoryEloquent implements BookingRepositoryInterface
     }
 
     public function getLastByTableId($id,$date) {
-        $booking    =   Booking::with('organization','organizationTables')
-            ->where([
-                [BookingContract::ORGANIZATION_TABLE_LIST_ID,$id],
-                [BookingContract::STATUS,BookingContract::ON],
-                [BookingContract::DATE,$date]
-            ])
-            ->orWhere([
-                [BookingContract::ORGANIZATION_TABLE_LIST_ID,$id],
-                [BookingContract::STATUS,BookingContract::CAME],
-                [BookingContract::DATE,$date]
-            ])
-            ->orWhere([
-                [BookingContract::ORGANIZATION_TABLE_LIST_ID,$id],
-                [BookingContract::STATUS,BookingContract::COMPLETED],
-                [BookingContract::DATE,$date]
-            ])
-            ->orWhere([
-                [BookingContract::ORGANIZATION_TABLE_LIST_ID,$id],
-                [BookingContract::STATUS,BookingContract::CHECKING],
-                [BookingContract::CREATED_AT,'>=',$this->date],
-                [BookingContract::DATE,$date]
-            ])
-            ->orderBy(BookingContract::ID,BookingContract::DESC)
-            ->first();
-        print_r($booking);
-        echo 'asdasd'.$id.'|'.$date;
-        exit;
         return Booking::with('organization','organizationTables')
             ->where([
                 [BookingContract::ORGANIZATION_TABLE_LIST_ID,$id],

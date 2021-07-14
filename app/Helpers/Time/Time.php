@@ -30,6 +30,7 @@ class Time
     public static function currentTimestampTimezone($timezone):string
     {
         $time   =   new \DateTime('now', new \DateTimeZone($timezone) );
+        $time->modify('-15 minutes');
         return $time->format('Y-m-d H:i:s');
     }
 

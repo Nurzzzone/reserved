@@ -12,13 +12,6 @@ use DateTime;
 class BookingRepositoryEloquent implements BookingRepositoryInterface
 {
     protected $take =   15;
-    protected $date;
-    public function __construct()
-    {
-        $date = new DateTime;
-        $date->modify('-15 minutes');
-        $this->date =   $date->format('Y-m-d H:i:s');
-    }
 
     public function updateIikoId(int $id, string $iikoId):void
     {

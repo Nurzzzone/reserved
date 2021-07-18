@@ -17,6 +17,9 @@
         outline: none;
         box-shadow: none !important;
         background: transparent;
+        &:focus, :hover {
+            background: transparent !important;
+        }
     }
     &-form {
         width: 70px;

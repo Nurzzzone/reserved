@@ -10,6 +10,7 @@
         <ul class="nav-dropdown-items">
             <li class='nav-item'><a class='nav-link' href='{{ backpack_url('country') }}'><i class='nav-icon las la-flag'></i> Страны</a></li>
             <li class='nav-item'><a class='nav-link' href='{{ backpack_url('city') }}'><i class='nav-icon las la-map-marker'></i> Города</a></li>
+            <li class='nav-item'><a class='nav-link' href='{{ backpack_url('languages') }}'><i class='nav-icon las la-language'></i> Languages</a></li>
         </ul>
     </li>
 

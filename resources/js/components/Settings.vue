@@ -12,7 +12,7 @@
                         </p>
                     </div>
                 </div>
-                <div class="row mt-2 mt-md-5">
+                <div class="row mt-2 mt-md-4">
                     <div class="col-12">
                         <ul class="list-group list-group-flush" onselectstart="return false;">
                             <li class="list-group-item px-0 d-flex justify-content-between settings-item align-items-center">

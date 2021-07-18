@@ -129,37 +129,13 @@
                                         </div>
                                     </template>
                                     <template v-else>
-                                        <div class="container-fluid">
-                                            <div class="container pt-md-5">
-                                                <div class="col-12 d-flex justify-content-center mt-5 mb-3">
-                                                    <div>
-                                                        <img src="/img/logo/no-photo.svg" width="100">
-                                                    </div>
-                                                </div>
-                                                <div class="col-12 mt-3 mb-5">
-                                                    <h2 class="text-center organization-empty-title font-weight-bold">Пусто</h2>
-                                                    <p class="text-center organization-empty-description text-secondary">Фотографии не найдено</p>
-                                                </div>
-                                            </div>
-                                        </div>
+                                        <not-found :params="noPhoto"></not-found>
                                     </template>
                                 </template>
                             </div>
                             <div v-if="tab === 3">
                                 <template v-if="reviewStatus">
-                                    <div class="row py-5">
-                                        <div class="col-12 d-flex justify-content-center">
-                                            <div class="loading">
-                                                <div></div>
-                                                <div></div>
-                                                <div></div>
-                                                <div></div>
-                                            </div>
-                                        </div>
-                                        <div class="col-12 d-flex justify-content-center">
-                                            <h4 class="loading-text">Загружаем данные</h4>
-                                        </div>
-                                    </div>
+                                    <loading></loading>
                                 </template>
                                 <template v-else>
                                     <template v-if="reviews.length > 0">
@@ -204,19 +180,7 @@
                                         </div>
                                     </template>
                                     <template v-else>
-                                        <div class="container-fluid">
-                                            <div class="container pt-md-5">
-                                                <div class="col-12 d-flex justify-content-center mt-5 mb-3">
-                                                    <div>
-                                                        <img src="/img/logo/chat.svg" width="100">
-                                                    </div>
-                                                </div>
-                                                <div class="col-12 mt-3 mb-5">
-                                                    <h2 class="text-center organization-empty-title font-weight-bold">Пусто</h2>
-                                                    <p class="text-center organization-empty-description text-secondary">Еще никто не оставлял комментарий</p>
-                                                </div>
-                                            </div>
-                                        </div>
+                                        <not-found :params="noComment"></not-found>
                                     </template>
                                 </template>
                             </div>
@@ -226,19 +190,7 @@
             </div>
         </template>
         <template v-else>
-            <div class="container-fluid">
-                <div class="container pt-md-5">
-                    <div class="col-12 d-flex justify-content-center mt-5 mb-3">
-                        <div>
-                            <img src="/img/logo/table.svg" width="100">
-                        </div>
-                    </div>
-                    <div class="col-12 mt-3 mb-5">
-                        <h2 class="text-center organization-empty-title font-weight-bold">Заведение не найдено</h2>
-                        <p class="text-center organization-empty-description text-secondary">Возможно в данный момент заведение закрыт</p>
-                    </div>
-                </div>
-            </div>
+            <not-found :params="notFound"></not-found>
         </template>
         <vue-easy-lightbox
             scrollDisabled
@@ -284,6 +236,8 @@ import ProfileSection from './sections/ProfileSection';
 import FooterMenu from './footerMenu/FooterMenu';
 import Booking from './modal/Booking';
 import VueEasyLightbox from 'vue-easy-lightbox';
+import NotFound from './layout/Not-found'
+import Loading from './layout/Loading';
 export default {
     components: {
         Header,
@@ -291,11 +245,28 @@ export default {
         ProfileSection,
         FooterMenu,
         Booking,
-        VueEasyLightbox
+        VueEasyLightbox,
+        NotFound,
+        Loading
     },
     name: "Organization",
     data() {
         return {
+            notFound: {
+                img: '/img/logo/table.svg',
+                title: 'Заведение не найдено',
+                description: 'Возможно в данный момент заведение закрыт'
+            },
+            noComment: {
+                img: '/img/logo/chat.svg',
+                title: 'Пусто',
+                description: 'Еще никто не оставлял комментарий'
+            },
+            noPhoto: {
+                img: '/img/logo/no-photo.svg',
+                title: 'Пусто',
+                description: 'Фотографии не найдено'
+            },
             toolbarMethods: {},
             img: {
                 visible: false,

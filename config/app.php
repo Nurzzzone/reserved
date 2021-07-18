@@ -189,6 +189,7 @@ return [
         App\Providers\Repositories\ContractRepositoryProvider::class,
         App\Providers\Repositories\PrivacyRepositoryProvider::class,
         App\Providers\Repositories\CardRepositoryProvider::class,
+        App\Providers\Repositories\LanguagesRepositoryProvider::class,
     ],
 
     /*

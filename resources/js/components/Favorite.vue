@@ -43,15 +43,7 @@
                     </div>
                 </template>
                 <template v-else>
-                    <div class="col-12 d-flex justify-content-center my-5">
-                        <div>
-                            <img src="/img/logo/favorite-red.svg" width="100">
-                        </div>
-                    </div>
-                    <div class="col-12 mt-3 mb-5">
-                        <h2 class="text-center item-empty-title">Список пуст</h2>
-                        <p class="text-center text-secondary mt-2 item-empty-description">Здесь будет отображаться список добавленных вами заведении.</p>
-                    </div>
+                    <not-found :params="notFound"></not-found>
                 </template>
             </div>
         </div>
@@ -65,17 +57,24 @@ import Header from "./header/Header";
 import Footer from "./footer/Footer";
 import ProfileSection from './sections/ProfileSection';
 import FooterMenu from './footerMenu/FooterMenu';
+import NotFound from './layout/Not-found'
 export default {
     components: {
         Header,
         Footer,
         ProfileSection,
-        FooterMenu
+        FooterMenu,
+        NotFound
     },
     name: "Favorite",
     data() {
         return {
             list: [],
+            notFound: {
+                img: '/img/logo/favorite-red.svg',
+                title: 'Список пуст',
+                description: 'Здесь будет отображаться список добавленных вами заведении.'
+            }
         }
     },
     created() {

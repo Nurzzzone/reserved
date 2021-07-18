@@ -8,6 +8,9 @@ use Carbon\Carbon;
 
 class MainContract
 {
+    const PUSH_NOTIFICATION     =   'push_notification';
+    const EMAIL_NOTIFICATION    =   'email_notification';
+    const LANGUAGE_ID   =   'language_id';
     const OLD   =   'old';
     const NEW   =   'new';
     const IDS   =   'ids';

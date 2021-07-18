@@ -18,8 +18,11 @@ class UserUpdateRequest extends FormRequest
     public function rules()
     {
         return [
-            UserContract::NAME  =>  'required|min:2|max:255',
-            UserContract::EMAIL =>  'nullable|unique:users,email,'.$this->id,
+            UserContract::NAME  =>  'nullable|min:2|max:255',
+            UserContract::EMAIL =>  'nullable|unique:'.UserContract::TABLE.','.UserContract::EMAIL.','.$this->id,
+            UserContract::LANGUAGE_ID   =>  'nullable|exists:languages,id',
+            UserContract::EMAIL_NOTIFICATION    =>  'nullable',
+            UserContract::PUSH_NOTIFICATION     =>  'nullable',
         ];
     }
 

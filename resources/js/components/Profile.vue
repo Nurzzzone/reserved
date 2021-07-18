@@ -230,9 +230,4 @@ export default {
             background: #00a082;
         }
     }
-    /*
-                font-size: 16px;
-            text-align: center;
-     */
-
 </style>

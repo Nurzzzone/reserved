@@ -20,7 +20,10 @@ class UserContract extends MainContract
         self::EMAIL,
         self::EMAIL_VERIFIED_AT,
         self::PASSWORD,
-        self::API_TOKEN
+        self::API_TOKEN,
+        self::LANGUAGE_ID,
+        self::EMAIL_NOTIFICATION,
+        self::PUSH_NOTIFICATION,
     ];
 
     const HIDDEN    =   [

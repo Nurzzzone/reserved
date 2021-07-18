@@ -48,7 +48,6 @@
 }
 .breadcrumb {
     background: transparent;
-    margin: 0 5px 0 5px;
     padding: 0 0 5px 0;
     color: white;
     & > li {
@@ -63,7 +62,7 @@
         }
     }
     &-link {
-        line-height: 1.4;
+        line-height: 1.2;
         font-size: 16px;
         font-weight: bold;
     }

@@ -7,24 +7,22 @@ use App\Domain\Contracts\UserContract;
 
 class UserResource extends JsonResource
 {
-    /**
-     * Transform the resource into an array.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return array
-     */
+
     public function toArray($request)
     {
         return [
-            UserContract::ID    =>  $this->id,
-            UserContract::BLOCKED   =>  $this->blocked,
-            UserContract::NAME      =>  $this->name,
-            UserContract::AVATAR    =>  $this->avatar,
-            UserContract::PHONE     =>  $this->phone,
-            UserContract::PHONE_VERIFIED_AT =>  $this->phone_verified_at,
-            UserContract::EMAIL     =>  $this->email,
-            UserContract::EMAIL_VERIFIED_AT =>  $this->email_verified_at,
-            UserContract::API_TOKEN =>  $this->api_token
+            UserContract::ID    =>  $this->{UserContract::ID},
+            UserContract::BLOCKED   =>  $this->{UserContract::BLOCKED},
+            UserContract::NAME      =>  $this->{UserContract::NAME},
+            UserContract::AVATAR    =>  $this->{UserContract::AVATAR},
+            UserContract::PHONE     =>  $this->{UserContract::PHONE},
+            UserContract::PHONE_VERIFIED_AT =>  $this->{UserContract::PHONE_VERIFIED_AT},
+            UserContract::EMAIL     =>  $this->{UserContract::EMAIL},
+            UserContract::EMAIL_VERIFIED_AT =>  $this->{UserContract::EMAIL_VERIFIED_AT},
+            UserContract::API_TOKEN =>  $this->{UserContract::API_TOKEN},
+            UserContract::LANGUAGE_ID   =>  $this->{UserContract::LANGUAGE_ID},
+            UserContract::EMAIL_NOTIFICATION    =>  $this->{UserContract::EMAIL_NOTIFICATION},
+            UserContract::PUSH_NOTIFICATION     =>  $this->{UserContract::PUSH_NOTIFICATION},
         ];
     }
 }

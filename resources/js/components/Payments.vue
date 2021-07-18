@@ -37,19 +37,7 @@
                     </div>
                 </template>
                 <template v-else>
-                    <div class="container-fluid">
-                        <div class="container pt-md-5">
-                            <div class="col-12 d-flex justify-content-center mt-5 mb-3">
-                                <div>
-                                    <img src="/img/logo/card.svg" width="100">
-                                </div>
-                            </div>
-                            <div class="col-12 mt-3 mb-5">
-                                <h2 class="text-center payments-empty-title font-weight-bold">Список пуст</h2>
-                                <p class="text-center payments-empty-description text-secondary">Вы можете добавить карту</p>
-                            </div>
-                        </div>
-                    </div>
+                    <not-found :params="notFound"></not-found>
                 </template>
                 <div class="container-fluid">
                     <div class="container pb-5">
@@ -68,19 +56,7 @@
                 </div>
             </template>
             <template v-else>
-                <div class="row my-5 py-5">
-                    <div class="col-12 d-flex justify-content-center">
-                        <div class="loading">
-                            <div></div>
-                            <div></div>
-                            <div></div>
-                            <div></div>
-                        </div>
-                    </div>
-                    <div class="col-12 d-flex justify-content-center">
-                        <h4 class="loading-text">Загружаем данные</h4>
-                    </div>
-                </div>
+                <loading></loading>
             </template>
         </div>
     </div>
@@ -94,6 +70,8 @@ import Footer from "./footer/Footer";
 import ProfileSection from "./sections/ProfileSection";
 import FooterMenu from "./footerMenu/FooterMenu";
 import CardModal from '././modal/Card';
+import NotFound from './layout/Not-found';
+import Loading from './layout/Loading';
 export default {
     name: "Payments",
     components: {
@@ -101,10 +79,17 @@ export default {
         Footer,
         ProfileSection,
         FooterMenu,
-        CardModal
+        CardModal,
+        NotFound,
+        Loading
     },
     data() {
         return {
+            notFound: {
+                img: '/img/logo/card.svg',
+                title: 'Список пуст',
+                description: 'Вы можете добавить карту'
+            },
             cardStatus: true,
             cardLoading: true,
             cardModal: true,

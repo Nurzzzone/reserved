@@ -11,6 +11,7 @@ use App\Http\Controllers\Api\ReviewController;
 use App\Http\Controllers\Api\PaymentController;
 use App\Http\Controllers\Api\ContactController;
 use App\Http\Controllers\Api\CardController;
+use App\Http\Controllers\Api\LanguageController;
 
 Route::prefix('table')->group(function() {
     Route::get('status/lock/{id}',[OrganizationController::class,'tableLock']);
@@ -85,11 +86,13 @@ Route::prefix('category')->group(function() {
     Route::get('organizations/{id}/{cityId}',[OrganizationController::class,'getByCategoryIdAndCityId']);
 });
 
+Route::prefix('languages')->group(function() {
+    Route::get('list',[LanguageController::class ,'list'])->name('languages.list');
+});
 
 Route::prefix('sms')->group(function() {
     Route::get('{phone}/{code}',[UserController::class,'smsVerify']);
 });
-
 
 Route::prefix('user')->group(function() {
     Route::post('update/{id}',[UserController::class,'update'])->name('user.update');

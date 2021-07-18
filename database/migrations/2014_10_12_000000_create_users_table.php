@@ -35,6 +35,15 @@ class CreateUsersTable extends Migration
             $table->string(UserContract::API_TOKEN)->unique()
                 ->nullable()
                 ->default(null);
+            $table->bigInteger(UserContract::LANGUAGE_ID)->nullable();
+            $table->enum(UserContract::EMAIL_NOTIFICATION,[
+                UserContract::ON,
+                UserContract::OFF,
+            ])->default(UserContract::ON);
+            $table->enum(UserContract::PUSH_NOTIFICATION,[
+                UserContract::ON,
+                UserContract::OFF,
+            ])->default(UserContract::ON);
             $table->rememberToken();
             $table->softDeletes();
             $table->timestamps();

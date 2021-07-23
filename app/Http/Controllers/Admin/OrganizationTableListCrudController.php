@@ -16,6 +16,7 @@ use Illuminate\Http\Request;
 class OrganizationTableListCrudController extends CrudController
 {
     use \Backpack\CRUD\app\Http\Controllers\Operations\ListOperation;
+    use \Backpack\CRUD\app\Http\Controllers\Operations\CreateOperation;
     use \Backpack\CRUD\app\Http\Controllers\Operations\UpdateOperation;
     use \Backpack\CRUD\app\Http\Controllers\Operations\ShowOperation;
     public $organizationsId;
@@ -57,6 +58,10 @@ class OrganizationTableListCrudController extends CrudController
     protected function setupCreateOperation()
     {
         CRUD::setValidation(OrganizationTableListRequest::class);
+        CRUD::field(OrganizationTableListContract::ORGANIZATION_ID)->type('select')->label('Организация')
+            ->entity('organization')->model('App\Models\Organization')->attribute(OrganizationContract::TITLE);
+        CRUD::field(OrganizationTableListContract::ORGANIZATION_TABLE_ID)->type('select')->label('Секция')
+            ->entity('organizationTable')->model('App\Models\OrganizationTables')->attribute(OrganizationTablesContract::NAME);
         CRUD::field(OrganizationContract::TITLE)->label('Название стола');
         CRUD::field(OrganizationContract::LIMIT)->label('Лимит на человека');
         CRUD::field(OrganizationTableListContract::STATUS)->type('select_from_array')

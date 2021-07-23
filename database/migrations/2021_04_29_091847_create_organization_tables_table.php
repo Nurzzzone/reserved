@@ -17,7 +17,6 @@ class CreateOrganizationTablesTable extends Migration
             $table->enum(OrganizationTablesContract::STATUS,OrganizationTablesContract::STATUSES)->default(OrganizationTablesContract::ENABLED);
             $table->timestamps();
             $table->index(OrganizationTablesContract::ORGANIZATION_ID);
-            $table->index(OrganizationTablesContract::PARENT_ID);
         });
     }
 

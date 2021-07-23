@@ -36,7 +36,7 @@
                             </div>
                         </div>
                         <div class="item-filter-btn item-radius">
-                            <div class="item-filter-btn-text" @click="getRestaurants();">Поиск</div>
+                            <div class="item-filter-btn-text" @click="getOrganizations();">Поиск</div>
                         </div>
                     </div>
                 </div>

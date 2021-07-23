@@ -190,6 +190,9 @@ return [
         App\Providers\Repositories\PrivacyRepositoryProvider::class,
         App\Providers\Repositories\CardRepositoryProvider::class,
         App\Providers\Repositories\LanguagesRepositoryProvider::class,
+        App\Providers\Repositories\IikoRepositoryProvider::class,
+        App\Providers\Repositories\IikoTablesRepositoryProvider::class,
+        App\Providers\Repositories\IikoTableListRepositoryProvider::class,
     ],
 
     /*

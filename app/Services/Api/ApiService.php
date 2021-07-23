@@ -62,6 +62,7 @@ class ApiService extends BaseService
     }
 
     public function postTokenReserve($token,$booking) {
+
         $organizations  =   $this->getOrganizationList($token,$booking->organization->iiko_organization_id);
         $terminals      =   $this->getTerminalList($token,$organizations);
         $user           =   $this->userRepository->getById($booking->user_id);

@@ -8,6 +8,9 @@ use Carbon\Carbon;
 
 class MainContract
 {
+    const SEATING_CAPACITY  =   'seatingCapacity';
+    const IIKO_TABLE_ID =   'iiko_table_id';
+    const IIKO_MAIN_ID  =   'iiko_main_id';
     const PUSH_NOTIFICATION     =   'push_notification';
     const EMAIL_NOTIFICATION    =   'email_notification';
     const LANGUAGE_ID   =   'language_id';

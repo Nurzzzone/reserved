@@ -13,13 +13,7 @@ class CreateOrganizationTablesTable extends Migration
         Schema::create(OrganizationTablesContract::TABLE, function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger(OrganizationTablesContract::ORGANIZATION_ID);
-            $table->string(OrganizationTablesContract::KEY)->nullable();
             $table->string(OrganizationTablesContract::NAME)->nullable();
-            $table->unsignedTinyInteger(OrganizationTablesContract::LIMIT);
-            $table->integer(OrganizationTablesContract::PARENT_ID)->default(0)->nullable();
-            $table->integer(OrganizationTablesContract::LFT)->default(0);
-            $table->integer(OrganizationTablesContract::RGT)->default(0);
-            $table->integer(OrganizationTablesContract::DEPTH)->default(0);
             $table->enum(OrganizationTablesContract::STATUS,OrganizationTablesContract::STATUSES)->default(OrganizationTablesContract::ENABLED);
             $table->timestamps();
             $table->index(OrganizationTablesContract::ORGANIZATION_ID);

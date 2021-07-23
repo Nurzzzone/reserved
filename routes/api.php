@@ -71,15 +71,18 @@ Route::prefix('review')->group(function () {
 Route::prefix('organization')->group(function() {
     Route::get('/status/{id}/{date}',[OrganizationController::class,'status'])->name('organization.status');
     Route::post('/ids',[OrganizationController::class,'getByIds'])->name('organization.ids');
+    Route::get('section/{id}',[OrganizationController::class,'getSectionsById']);
+    Route::get('{id}',[OrganizationController::class,'getById']);
+    Route::get('user/{userId}',[OrganizationController::class,'getByUserId'])->name('organization.getByUserId');
 });
 
 Route::get('/categories',[CategoryController::class,'list']);
 Route::get('countries',[CountryController::class,'list']);
-Route::get('/organization/section/{id}',[OrganizationController::class,'getSectionsById']);
+
 
 Route::get('/organizations',[OrganizationController::class,'list']);
 Route::get('/organizations/{search}',[OrganizationController::class,'search']);
-Route::get('/organization/{id}',[OrganizationController::class,'getById']);
+
 
 Route::prefix('category')->group(function() {
     Route::get('organizations/{id}',[OrganizationController::class,'getByCategoryId']);

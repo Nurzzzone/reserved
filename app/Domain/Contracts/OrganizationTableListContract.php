@@ -11,7 +11,6 @@ class OrganizationTableListContract extends MainContract
     const FILLABLE  =   [
         self::ORGANIZATION_ID,
         self::ORGANIZATION_TABLE_ID,
-        self::KEY,
         self::TITLE,
         self::LIMIT,
         self::STATUS

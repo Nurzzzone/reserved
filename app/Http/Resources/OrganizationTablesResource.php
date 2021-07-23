@@ -11,11 +11,10 @@ class OrganizationTablesResource extends JsonResource
     public function toArray($request)
     {
         return [
-            OrganizationTablesContract::ID  =>  $this->id,
-            OrganizationTablesContract::NAME   =>  $this->name,
-            OrganizationTablesContract::LIMIT   =>  $this->limit,
-            OrganizationTablesContract::STATUS  =>  $this->status,
-            OrganizationTablesContract::ORGANIZATION_TABLES =>  new OrganizationTableListCollection($this->organizationTables)
+            OrganizationTablesContract::ID  =>  $this->{OrganizationTablesContract::ID},
+            OrganizationTablesContract::NAME   =>  $this->{OrganizationTablesContract::NAME},
+            OrganizationTablesContract::STATUS  =>  $this->{OrganizationTablesContract::STATUS},
+            OrganizationTablesContract::ORGANIZATION_TABLES =>  new OrganizationTableListCollection($this->{OrganizationTablesContract::ORGANIZATION__TABLES})
         ];
     }
 }

@@ -21,7 +21,7 @@ use App\Jobs\OrganizationInfo;
 class OrganizationCrudController extends CrudController
 {
     use \Backpack\CRUD\app\Http\Controllers\Operations\ListOperation;
-    use \Backpack\CRUD\app\Http\Controllers\Operations\CreateOperation { store as traitStore; }
+    use \Backpack\CRUD\app\Http\Controllers\Operations\CreateOperation;
     use \Backpack\CRUD\app\Http\Controllers\Operations\UpdateOperation;
     use \Backpack\CRUD\app\Http\Controllers\Operations\ShowOperation;
 
@@ -34,41 +34,6 @@ class OrganizationCrudController extends CrudController
             $this->crud->denyAccess((array)'create');
             $this->crud->setListView('backpack.organization.list');
         }
-    }
-
-    public function store(ApiService $apiService, OrganizationService $organizationService)
-    {
-        $this->crud->addField(['type' => 'hidden', 'name' => OrganizationContract::IIKO_ORGANIZATION_ID]);
-        $this->crud->addField(['type' => 'hidden', 'name' => OrganizationContract::TITLE]);
-        $this->crud->addField(['type' => 'hidden', 'name' => OrganizationContract::ADDRESS]);
-        $this->crud->addField(['type' => 'hidden', 'name' => OrganizationContract::EMAIL]);
-        $this->crud->addField(['type' => 'hidden', 'name' => OrganizationContract::PHONE]);
-        $this->crud->addField(['type' => 'hidden', 'name' => OrganizationContract::WEBSITE]);
-
-        $data           =   (array) $this->crud->getRequest()->request;
-        foreach ($data as &$param) {
-            $data  =   $param;
-            break;
-        }
-
-        $organizations  =   $apiService->getOrganizationId($data[OrganizationContract::API_ID],$data[OrganizationContract::API_SECRET]);
-
-        if (sizeof($organizations)>0) {
-
-            $this->crud->getRequest()->request->add([OrganizationContract::IIKO_ORGANIZATION_ID    =>  $organizations[OrganizationContract::ID]]);
-            $this->crud->getRequest()->request->add([OrganizationContract::TITLE    =>  $organizations[OrganizationContract::NAME]]);
-            $this->crud->getRequest()->request->add([OrganizationContract::ADDRESS  =>  $organizations[OrganizationContract::ADDRESS]]);
-            $this->crud->getRequest()->request->add([OrganizationContract::EMAIL  =>  $organizations['contact'][OrganizationContract::EMAIL]]);
-            $this->crud->getRequest()->request->add([OrganizationContract::PHONE  =>  $organizations['contact'][OrganizationContract::PHONE]]);
-            $this->crud->getRequest()->request->add([OrganizationContract::WEBSITE  =>  $organizations[OrganizationContract::WEBSITE]]);
-
-        }
-
-        $store  =   $this->traitStore();
-
-        OrganizationInfo::dispatch($organizationService->getById($this->crud->getCurrentEntry()->id));
-
-        return $store;
     }
 
     protected function setupShowOperation()
@@ -117,6 +82,13 @@ class OrganizationCrudController extends CrudController
     {
         CRUD::setValidation(OrganizationRequest::class);
         if (backpack_user()->role === OrganizationContract::TRANSLATE[OrganizationContract::MODERATOR]) {
+
+            $this->crud->addField([
+                'id'    =>  BookingContract::TIMEZONE,
+                'name'  =>  BookingContract::TIMEZONE,
+                'type'  =>  'hidden',
+            ]);
+
             $this->crud->addField([
                 'name'      => OrganizationContract::CITY_ID,
                 'label'     => 'Город',
@@ -178,6 +150,10 @@ class OrganizationCrudController extends CrudController
 
         } else {
 
+            CRUD::field(OrganizationContract::TITLE)->label('Название')->attributes([
+                'required'  =>  'required'
+            ]);
+
             $this->crud->addField([
                 'id'    =>  BookingContract::TIMEZONE,
                 'name'  =>  BookingContract::TIMEZONE,
@@ -211,21 +187,6 @@ class OrganizationCrudController extends CrudController
                 'entity'    => 'category',
                 'model'     => "App\Models\Category",
                 'attribute' => CategoryContract::TITLE,
-            ]);
-
-            CRUD::field(OrganizationContract::IIKO_ID)->label('IIKO ID')->attributes([
-                'required'  =>  'required'
-            ]);
-
-            CRUD::field(OrganizationContract::API_KEY)->label('IIKO API KEY')->attributes([
-                'required'  =>  'required'
-            ]);
-
-            CRUD::field(OrganizationContract::API_ID)->label('IIKO API ID')->attributes([
-                'required'  =>  'required'
-            ]);
-            CRUD::field(OrganizationContract::API_SECRET)->label('IIKO API SECRET')->attributes([
-                'required'  =>  'required'
             ]);
 
             CRUD::field(OrganizationContract::STATUS)->type('select_from_array')

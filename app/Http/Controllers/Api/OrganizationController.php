@@ -97,11 +97,19 @@ class OrganizationController extends Controller
         return new OrganizationCollection($this->organizationService->getByCategoryIdAndCityId($id, $cityId, $this->paginate));
     }
 
-    public function getById($id) {
+    public function getById($id)
+    {
         $organization   =   $this->organizationService->getById($id);
         if ($organization) {
             return new OrganizationResource($organization);
         }
         return response(['message'  =>  'Организация не найдено'],404);
     }
+
+    public function getByUserId($userId)
+    {
+        $organizations  =   $this->organizationService->getByUserId($userId);
+        return new OrganizationCollection($organizations);
+    }
+
 }

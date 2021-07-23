@@ -13,7 +13,6 @@ class OrganizationContract extends MainContract
         self::CITY_ID,
         self::CATEGORY_ID,
         self::IIKO_ORGANIZATION_ID,
-        self::CITY_ID,
         self::IIKO_ID,
         self::API_KEY,
         self::API_ID,

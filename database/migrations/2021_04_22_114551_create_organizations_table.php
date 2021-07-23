@@ -15,11 +15,6 @@ class CreateOrganizationsTable extends Migration
             $table->bigInteger(OrganizationContract::USER_ID);
             $table->bigInteger(OrganizationContract::CITY_ID);
             $table->bigInteger(OrganizationContract::CATEGORY_ID);
-            $table->string(OrganizationContract::IIKO_ORGANIZATION_ID)->nullable();
-            $table->bigInteger(OrganizationContract::IIKO_ID)->nullable();
-            $table->string(OrganizationContract::API_KEY)->nullable();
-            $table->string(OrganizationContract::API_ID)->nullable();
-            $table->string(OrganizationContract::API_SECRET)->nullable();
             $table->string(OrganizationContract::TITLE)->nullable();
             $table->string(OrganizationContract::TITLE_KZ)->nullable();
             $table->string(OrganizationContract::TITLE_EN)->nullable();
@@ -32,7 +27,7 @@ class CreateOrganizationsTable extends Migration
             $table->string(OrganizationContract::ADDRESS)->nullable();
             $table->string(OrganizationContract::ADDRESS_KZ)->nullable();
             $table->string(OrganizationContract::ADDRESS_EN)->nullable();
-            $table->string(OrganizationContract::PRICE)->nullable();
+            $table->string(OrganizationContract::PRICE)->default(0);
             $table->string(OrganizationContract::TIMEZONE)->nullable();
             $table->string(OrganizationContract::EMAIL)->nullable();
             $table->string(OrganizationContract::PHONE)->nullable();

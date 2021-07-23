@@ -15,13 +15,18 @@ use App\Domain\Contracts\BookingContract;
 use App\Http\Requests\Payment\PaymentCardResultRequest;
 use Illuminate\Support\Facades\Log;
 
+use App\Helpers\Iiko\Iiko;
+
 class PaymentController extends Controller {
 
+    protected $iiko;
     protected $paymentService;
     protected $bookingService;
     protected $apiService;
 
-    public function __construct(PaymentService $paymentService, BookingService $bookingService, ApiService $apiService) {
+    public function __construct(Iiko $iiko, PaymentService $paymentService, BookingService $bookingService, ApiService $apiService)
+    {
+        $this->iiko =   $iiko;
         $this->paymentService   =   $paymentService;
         $this->bookingService   =   $bookingService;
         $this->apiService       =   $apiService;
@@ -36,7 +41,6 @@ class PaymentController extends Controller {
 
     public function cardResult(PaymentCardResultRequest $paymentCardResultRequest):void
     {
-
         $data   =   $paymentCardResultRequest->validated();
         if ($data[MainContract::PG_RESULT] === '1') {
             $this->bookingService->update($data[MainContract::PG_ORDER_ID],[
@@ -54,7 +58,7 @@ class PaymentController extends Controller {
         $data   =   $paymentResultRequest->validated();
         Log::info('payment info',$data);
         if ($this->bookingService->result($data)) {
-            $this->apiService->booking($data[BookingContract::PG_ORDER_ID]);
+            $this->iiko->booking($data[BookingContract::PG_ORDER_ID]);
         }
     }
 

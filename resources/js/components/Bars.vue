@@ -1,7 +1,8 @@
 <template>
     <Header></Header>
     <profile-section></profile-section>
-    <div class="container-fluid pt-4 pt-md-5 item-bg" v-if="storage.city">
+    <div class="container-fluid pt-4 pt-md-5 item-bg" v-if="false">
+        <!--v-if="storage.city"-->
         <div class="container">
             <div class="row">
                 <div class="col-12 px-2">

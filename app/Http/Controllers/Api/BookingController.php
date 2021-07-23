@@ -40,7 +40,10 @@ class BookingController extends Controller
 
     public function create(BookingCreateRequest $bookingCreateRequest):object
     {
-        if ($booking    =   $this->paymentService->create($this->bookingService->create($bookingCreateRequest->validated()))) {
+        if ($booking    =   $this->bookingService->create($bookingCreateRequest->validated())) {
+            if ($booking->{BookingContract::PRICE} > 0) {
+                $booking    =   $this->paymentService->create($booking);
+            }
             return new BookingResource($booking);
         }
         return response([
@@ -100,16 +103,19 @@ class BookingController extends Controller
         $user->save();
         $booking    =   $this->bookingService->create($data);
 
-        $payment    =   $this->paymentService->urlAdmin(
-            $booking->{BookingContract::ID},
-            $booking->{BookingContract::PRICE},
-            $data[BookingContract::TITLE],
-            $user->{UserContract::PHONE}
-        );
+        if ($booking->{BookingContract::PRICE} > 0) {
 
-        if (array_key_exists(PaymentContract::PG_REDIRECT_URL,$payment)) {
-            $booking->{BookingContract::PAYMENT_URL}    =   $payment[PaymentContract::PG_REDIRECT_URL];
-            $booking->save();
+            $payment    =   $this->paymentService->urlAdmin(
+                $booking->{BookingContract::ID},
+                $booking->{BookingContract::PRICE},
+                $data[BookingContract::TITLE],
+                $user->{UserContract::PHONE}
+            );
+
+            if (array_key_exists(PaymentContract::PG_REDIRECT_URL,$payment)) {
+                $booking->{BookingContract::PAYMENT_URL}    =   $payment[PaymentContract::PG_REDIRECT_URL];
+                $booking->save();
+            }
         }
 
         return new BookingResource($booking);

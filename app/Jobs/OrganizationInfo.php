@@ -10,18 +10,22 @@ use Illuminate\Foundation\Bus\Dispatchable;
 use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Queue\SerializesModels;
 
+use App\Models\Iiko;
+
+use App\Helpers\Iiko\Iiko as IikoHelper;
+
 class OrganizationInfo implements ShouldQueue
 {
     use Dispatchable, InteractsWithQueue, Queueable, SerializesModels;
-    protected $data;
+    protected $iiko;
 
-    public function __construct($data)
+    public function __construct(Iiko $iiko)
     {
-        $this->data =   $data;
+        $this->iiko =   $iiko;
     }
 
-    public function handle()
+    public function handle(IikoHelper $iiko)
     {
-        event(new OrganizationProcessed($this->data));
+        $iiko->getRooms($this->iiko);
     }
 }

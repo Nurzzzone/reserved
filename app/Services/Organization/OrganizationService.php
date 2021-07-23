@@ -3,6 +3,7 @@
 
 namespace App\Services\Organization;
 
+use App\Domain\Contracts\OrganizationContract;
 use App\Services\BaseService;
 use App\Domain\Repositories\Organization\OrganizationRepositoryInterface;
 use App\Domain\Repositories\Review\ReviewRepositoryInterface;
@@ -54,7 +55,22 @@ class OrganizationService extends BaseService
         return $this->organizationRepository->getByCategoryIdAndCityId($id, $cityId, $paginate);
     }
 
-    public function getByUserId(int $id) {
+    public function getByUserId(int $id)
+    {
         return $this->organizationRepository->getByUserId($id);
+    }
+
+    public function getIdsByUserId($userId)
+    {
+        return $this->clearArray($this->organizationRepository->getIdsByUserId($userId),OrganizationContract::ID);
+    }
+
+    public function clearArray($array, $key): array
+    {
+        $arr    =   [];
+        foreach ($array as &$value) {
+            $arr[]  =   $value[$key];
+        }
+        return $arr;
     }
 }

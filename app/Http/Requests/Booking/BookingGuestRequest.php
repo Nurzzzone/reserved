@@ -35,6 +35,9 @@ class BookingGuestRequest extends FormRequest
     {
         $request = $this->validator->validated();
         $request[BookingContract::TIME] =   \App\Helpers\Time\Time::toLocal($request[BookingContract::DATE].' '.$request[BookingContract::TIME],$request[BookingContract::TIMEZONE]);
+        if ($request[BookingContract::PRICE] === 0) {
+            $request[BookingContract::STATUS]   =   BookingContract::ON;
+        }
         return $request;
     }
 

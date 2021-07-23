@@ -20,7 +20,7 @@
                                         </div>
                                     </div>
                                     <div class="col-12 mt-4 mb-2">
-                                        <button class="btn btn-block auth-register text-white" @click="storage.modal = true">Далее</button>
+                                        <button class="btn btn-block auth-register text-white" @click="storageModal(true)">Далее</button>
                                     </div>
                                 </template>
                                 <template v-else>
@@ -209,6 +209,13 @@ export default {
         this.setTime();
     },
     methods: {
+        storageModal: function(status) {
+            if (parseInt(this.organization.price) === 0) {
+                this.bookingAuthFinish();
+            } else {
+                this.storage.modal = true;
+            }
+        },
         setTime: function() {
             let today   =   new Date();
             today       =   new Date(today.getFullYear(),today.getMonth(),today.getDate());
@@ -236,13 +243,17 @@ export default {
                     price: this.organization.price,
                     code: this.guest.code,
                 };
-                let wind    =   window.open();
+                if (this.organization.price > 0) {
+                    let wind    =   window.open();
+                }
                 axios.post("/api/booking/guest", data)
                 .then(response => {
                     let data = response.data.data;
                     this.storage.token  =   this.guest.user.api_token;
                     sessionStorage.user =   JSON.stringify(this.guest.user);
-                    wind.location = data.payment;
+                    if (this.organization.price > 0) {
+                        wind.location = data.payment;
+                    }
                     window.location.href    =   '/profile/history';
                 }).catch(error => {
                     this.guest.codeCheck    =   false;
@@ -306,16 +317,20 @@ export default {
                     time: this.date.time[ this.date.timeIndex ].time,
                     date: this.date.data,
                     price: this.organization.price,
-                    card_id: this.cards[ this.cardIndex ].card_id
+                    card_id: this.organization.price>0?this.cards[ this.cardIndex ].card_id:0
                 };
                 this.cardStatus =   false;
                 this.cardError  =   false;
-                let wind    =   window.open();
+                if (this.organization.price > 0) {
+                    let wind    =   window.open();
+                }
                 axios.post("/api/booking/create", data)
                 .then(response => {
                     let data = response.data;
                     if (data.hasOwnProperty('data')) {
-                        wind.location   =   '/form/'+data.data.id;
+                        if (this.organization.price > 0) {
+                            wind.location   =   '/form/'+data.data.id;
+                        }
                         window.location.href    =   '/profile/history';
                     }
                 }).catch(error => {

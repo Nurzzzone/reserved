@@ -18,12 +18,6 @@ class OrganizationTablesCrudController extends CrudController
     use \Backpack\CRUD\app\Http\Controllers\Operations\ShowOperation;
     public $organizationsId;
 
-    protected function setupReorderOperation()
-    {
-        $this->crud->set('reorder.label', OrganizationTablesContract::TITLE);
-        $this->crud->set('reorder.max_level', 1);
-    }
-
     public function setup()
     {
         CRUD::setModel(\App\Models\OrganizationTables::class);

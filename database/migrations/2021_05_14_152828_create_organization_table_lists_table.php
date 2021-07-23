@@ -13,11 +13,11 @@ class CreateOrganizationTableListsTable extends Migration
             $table->id();
             $table->bigInteger(OrganizationTableListContract::ORGANIZATION_ID);
             $table->bigInteger(OrganizationTableListContract::ORGANIZATION_TABLE_ID);
-            $table->string(OrganizationTableListContract::KEY)->nullable();
             $table->string(OrganizationTableListContract::TITLE)->nullable();
             $table->integer(OrganizationTableListContract::LIMIT)->default(2);
             $table->enum(OrganizationTableListContract::STATUS,OrganizationTableListContract::STATUSES)->default(OrganizationTableListContract::ENABLED);
             $table->timestamps();
+            $table->index(OrganizationTableListContract::ORGANIZATION_ID);
         });
     }
 

@@ -37,7 +37,7 @@
                                         Завершено {{item.price}} KZT
                                     </div>
                                     <div class="history-status history-status-success" v-else>
-                                        Забронировано {{item.price}} KZT
+                                        Забронировано <span v-if="item.price > 0">{{item.price}} KZT</span>
                                     </div>
                                 </div>
                             </li>

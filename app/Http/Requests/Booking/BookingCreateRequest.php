@@ -26,7 +26,7 @@ class BookingCreateRequest extends FormRequest
             BookingContract::DATE                       =>  'required|date',
             BookingContract::PRICE                      =>  'required',
             BookingContract::CURRENCY                   =>  'nullable',
-            BookingContract::CARD_ID                    =>  'required|integer',
+            BookingContract::CARD_ID                    =>  'nullable|integer',
         ];
     }
 
@@ -34,6 +34,9 @@ class BookingCreateRequest extends FormRequest
     {
         $request = $this->validator->validated();
         $request[BookingContract::TIME] =   \App\Helpers\Time\Time::toLocal($request[BookingContract::DATE].' '.$request[BookingContract::TIME],$request[BookingContract::TIMEZONE]);
+        if ((int)$request[BookingContract::PRICE] === 0) {
+            $request[BookingContract::STATUS]   =   BookingContract::ON;
+        }
         return $request;
     }
 

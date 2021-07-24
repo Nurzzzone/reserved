@@ -21,7 +21,7 @@
                                     <div class="history-card-icon history-icon mr-md-3"></div>
                                     <div>
                                         <div class="history-font font-weight-bold" v-if="item.organization">
-                                            <a :href="'/home/'+item.organization.id" class="p-0 text-dark">{{item.organization.title}}</a> • <span class="text-secondary" v-if="item.organization_tables.title">{{item.organization_tables.title}}</span>
+                                            <a :href="'/home/'+item.organization.id" class="p-0 text-dark">{{item.organization.title}}</a> • <span class="text-secondary" v-if="item.organization_tables">{{item.organization_tables.title}}</span>
                                         </div>
                                         <p class="history-font text-secondary m-0">{{item.date}} • {{item.time}}</p>
                                     </div>
@@ -127,9 +127,14 @@ export default {
                 axios.get('/api/booking/user/'+this.user.id+'?paginate='+this.paginate)
                     .then(response => {
                         let data    =   response.data;
-                        return console.log(data);
                         if (data.hasOwnProperty('data')) {
-                            this.items  =   data.data;
+                            let arr =   [];
+                            data.data.forEach(element => {
+                                if (element.organization_tables) {
+                                    arr.push(element);
+                                }
+                            });
+                            this.items  =   arr;
                             this.status =   true;
                             setTimeout(function() {
                                 self.getBookings();

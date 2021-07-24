@@ -17260,10 +17260,15 @@ __webpack_require__.r(__webpack_exports__);
         var self = this;
         axios.get('/api/booking/user/' + this.user.id + '?paginate=' + this.paginate).then(function (response) {
           var data = response.data;
-          return console.log(data);
 
           if (data.hasOwnProperty('data')) {
-            _this.items = data.data;
+            var arr = [];
+            data.data.forEach(function (element) {
+              if (element.organization_tables) {
+                arr.push(element);
+              }
+            });
+            _this.items = arr;
             _this.status = true;
             setTimeout(function () {
               self.getBookings();
@@ -19841,7 +19846,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
       "class": "p-0 text-dark"
     }, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(item.organization.title), 9
     /* TEXT, PROPS */
-    , ["href"]), _hoisted_10, item.organization_tables.title ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)("span", _hoisted_11, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(item.organization_tables.title), 1
+    , ["href"]), _hoisted_10, item.organization_tables ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)("span", _hoisted_11, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(item.organization_tables.title), 1
     /* TEXT */
     )) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true)])) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("p", _hoisted_12, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(item.date) + " • " + (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(item.time), 1
     /* TEXT */

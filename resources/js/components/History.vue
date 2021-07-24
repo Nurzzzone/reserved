@@ -20,7 +20,7 @@
                                 <div class="d-flex" v-if="item">
                                     <div class="history-card-icon history-icon mr-md-3"></div>
                                     <div>
-                                        <div class="history-font font-weight-bold">
+                                        <div class="history-font font-weight-bold" v-if="item.organization">
                                             <a :href="'/home/'+item.organization.id" class="p-0 text-dark">{{item.organization.title}}</a> • <span class="text-secondary" v-if="item.organization_tables.title">{{item.organization_tables.title}}</span>
                                         </div>
                                         <p class="history-font text-secondary m-0">{{item.date}} • {{item.time}}</p>
@@ -46,19 +46,7 @@
                 </div>
             </template>
             <template v-else>
-                <div class="container-fluid">
-                    <div class="container pt-md-5">
-                        <div class="col-12 d-flex justify-content-center mt-5 mb-3">
-                            <div>
-                                <img src="/img/logo/calendar.svg" width="100">
-                            </div>
-                        </div>
-                        <div class="col-12 mt-3 mb-5">
-                            <h2 class="text-center history-empty-title font-weight-bold">Список пуст</h2>
-                            <p class="text-center history-empty-description text-secondary">Ваша история заказов будет отображаться здесь</p>
-                        </div>
-                    </div>
-                </div>
+                <not-found :params="notFound"></not-found>
             </template>
         </div>
     </div>
@@ -72,13 +60,15 @@ import Footer from "./footer/Footer";
 import ProfileSection from './sections/ProfileSection';
 import FooterMenu from './footerMenu/FooterMenu';
 import Comment from './modal/comment';
+import NotFound from '/layout/Not-found';
 export default {
     components: {
         Header,
         Footer,
         ProfileSection,
         FooterMenu,
-        Comment
+        Comment,
+        NotFound
     },
     name: "History",
     data() {
@@ -87,7 +77,12 @@ export default {
             item: {},
             items: [],
             user: false,
-            paginate: 1
+            paginate: 1,
+            notFound: {
+                img: '/img/logo/calendar.svg',
+                title: 'Список пуст',
+                description: 'Ваша история заказов будет отображаться здесь'
+            }
         }
     },
     created() {

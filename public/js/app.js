@@ -17260,7 +17260,7 @@ __webpack_require__.r(__webpack_exports__);
         var self = this;
         axios.get('/api/booking/user/' + this.user.id + '?paginate=' + this.paginate).then(function (response) {
           var data = response.data;
-          console.log(data);
+          return console.log(data);
 
           if (data.hasOwnProperty('data')) {
             _this.items = data.data;

@@ -17185,7 +17185,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _sections_ProfileSection__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./sections/ProfileSection */ "./resources/js/components/sections/ProfileSection.vue");
 /* harmony import */ var _footerMenu_FooterMenu__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./footerMenu/FooterMenu */ "./resources/js/components/footerMenu/FooterMenu.vue");
 /* harmony import */ var _modal_comment__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./modal/comment */ "./resources/js/components/modal/comment.vue");
-Object(function webpackMissingModule() { var e = new Error("Cannot find module '/layout/Not-found'"); e.code = 'MODULE_NOT_FOUND'; throw e; }());
+/* harmony import */ var _layout_Not_found__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./layout/Not-found */ "./resources/js/components/layout/Not-found.vue");
 
 
 
@@ -17199,7 +17199,7 @@ Object(function webpackMissingModule() { var e = new Error("Cannot find module '
     ProfileSection: _sections_ProfileSection__WEBPACK_IMPORTED_MODULE_2__.default,
     FooterMenu: _footerMenu_FooterMenu__WEBPACK_IMPORTED_MODULE_3__.default,
     Comment: _modal_comment__WEBPACK_IMPORTED_MODULE_4__.default,
-    NotFound: Object(function webpackMissingModule() { var e = new Error("Cannot find module '/layout/Not-found'"); e.code = 'MODULE_NOT_FOUND'; throw e; }())
+    NotFound: _layout_Not_found__WEBPACK_IMPORTED_MODULE_5__.default
   },
   name: "History",
   data: function data() {

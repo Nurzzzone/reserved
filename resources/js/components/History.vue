@@ -60,7 +60,7 @@ import Footer from "./footer/Footer";
 import ProfileSection from './sections/ProfileSection';
 import FooterMenu from './footerMenu/FooterMenu';
 import Comment from './modal/comment';
-import NotFound from '/layout/Not-found';
+import NotFound from './layout/Not-found';
 export default {
     components: {
         Header,

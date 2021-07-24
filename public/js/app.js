@@ -17252,6 +17252,7 @@ __webpack_require__.r(__webpack_exports__);
         var self = this;
         axios.get('/api/booking/user/' + this.user.id + '?paginate=' + this.paginate).then(function (response) {
           var data = response.data;
+          console.log(data);
 
           if (data.hasOwnProperty('data')) {
             _this.items = data.data;
@@ -17740,6 +17741,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 
       if (timeToday.getTime() === date.getTime()) {
         this.date.timeList.forEach(function (element) {
+          console.log(element);
           item = element.time.split(':');
 
           if (parseInt(today.getHours()) < parseInt(item[0]) && parseInt(today.getHours()) > parseInt(start[0])) {

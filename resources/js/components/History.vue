@@ -132,6 +132,7 @@ export default {
                 axios.get('/api/booking/user/'+this.user.id+'?paginate='+this.paginate)
                     .then(response => {
                         let data    =   response.data;
+                        console.log(data);
                         if (data.hasOwnProperty('data')) {
                             this.items  =   data.data;
                             this.status =   true;

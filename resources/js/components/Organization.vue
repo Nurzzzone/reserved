@@ -528,6 +528,7 @@ export default {
             this.date.time  =   [];
             if (timeToday.getTime() === date.getTime()) {
                 this.date.timeList.forEach(element => {
+                    console.log(element);
                     item    =   element.time.split(':');
                     if (parseInt(today.getHours()) < parseInt(item[0]) && parseInt(today.getHours()) > parseInt(start[0])) {
                         this.date.time.push(element);

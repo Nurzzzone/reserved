@@ -10,8 +10,6 @@
                         <h3 class="auth-title text-center">Бронирование стола</h3>
                         <h6 class="text-secondary text-center mt-3">{{table.title}}</h6>
                     </div>
-                    {{table.status}}<br>
-                    {{JSON.stringify(table.bookingStatus)}}
                     <template v-if="table.status === 'ENABLED' && (table.bookingStatus === null || table.bookingStatus.status === 'COMPLETED')">
                         <template v-if="status">
                             <template v-if="!storage.modal">

@@ -21973,126 +21973,131 @@ var _hoisted_7 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("
 var _hoisted_8 = {
   "class": "text-secondary text-center mt-3"
 };
-var _hoisted_9 = {
+
+var _hoisted_9 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("br", null, null, -1
+/* HOISTED */
+);
+
+var _hoisted_10 = {
   "class": "col-12 mt-3"
 };
-var _hoisted_10 = {
+var _hoisted_11 = {
   "class": "form-group booking-time"
 };
-var _hoisted_11 = {
+var _hoisted_12 = {
   "class": "col-12 mt-4 mb-2"
 };
 
-var _hoisted_12 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createStaticVNode)("<div class=\"col-12 mt-3\"><div class=\"form-group d-flex justify-content-center p-0\"><img src=\"/img/logo/oops.svg\" width=\"100\"></div></div><div class=\"col-12 mt-3\"><div class=\"h6 text-center text-secondary font-weight-bold\">Извините! На сегодня нельзя забронировать стол в этом заведении. Но вы можете выбрать другое заведение или другую дату.</div></div><div class=\"col-12 mt-4 mb-2\"><button class=\"btn btn-block auth-register text-white\" data-dismiss=\"modal\" aria-label=\"Close\">Ок, понятно</button></div>", 3);
+var _hoisted_13 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createStaticVNode)("<div class=\"col-12 mt-3\"><div class=\"form-group d-flex justify-content-center p-0\"><img src=\"/img/logo/oops.svg\" width=\"100\"></div></div><div class=\"col-12 mt-3\"><div class=\"h6 text-center text-secondary font-weight-bold\">Извините! На сегодня нельзя забронировать стол в этом заведении. Но вы можете выбрать другое заведение или другую дату.</div></div><div class=\"col-12 mt-4 mb-2\"><button class=\"btn btn-block auth-register text-white\" data-dismiss=\"modal\" aria-label=\"Close\">Ок, понятно</button></div>", 3);
 
-var _hoisted_15 = {
+var _hoisted_16 = {
   key: 0,
   "class": "form-group mx-3 booking-card-list"
 };
 
-var _hoisted_16 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("h5", {
+var _hoisted_17 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("h5", {
   "class": "text-danger text-center"
 }, "Произошла ошибка, попробуите заново!", -1
 /* HOISTED */
 );
 
-var _hoisted_17 = {
+var _hoisted_18 = {
   "class": "form-group mx-3 booking-card-list"
 };
 
-var _hoisted_18 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", {
+var _hoisted_19 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", {
   "class": "booking-card-icon"
 }, null, -1
 /* HOISTED */
 );
 
-var _hoisted_19 = {
+var _hoisted_20 = {
   "class": "booking-card-detail"
 };
-var _hoisted_20 = {
+var _hoisted_21 = {
   "class": "booking-card-detail-title"
 };
-var _hoisted_21 = {
+var _hoisted_22 = {
   "class": "booking-card-detail-num"
 };
-var _hoisted_22 = {
+var _hoisted_23 = {
   key: 1,
   "class": "booking-empty mt-3"
 };
 
-var _hoisted_23 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", {
+var _hoisted_24 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", {
   "class": "booking-empty-icon"
 }, null, -1
 /* HOISTED */
 );
 
-var _hoisted_24 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", {
+var _hoisted_25 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", {
   "class": "booking-empty-title"
 }, "У вас нет карт", -1
 /* HOISTED */
 );
 
-var _hoisted_25 = {
+var _hoisted_26 = {
   "class": "col-12 mt-4"
 };
-var _hoisted_26 = {
+var _hoisted_27 = {
   key: 0
 };
-var _hoisted_27 = {
+var _hoisted_28 = {
   key: 1,
   "class": "spinner"
 };
-var _hoisted_28 = {
+var _hoisted_29 = {
   "class": "col-12 mt-4"
 };
-var _hoisted_29 = {
-  "class": "col-12 mt-4 mb-2"
-};
 var _hoisted_30 = {
-  "class": "col-12 mt-3"
+  "class": "col-12 mt-4 mb-2"
 };
 var _hoisted_31 = {
-  "class": "form-group booking-time"
+  "class": "col-12 mt-3"
 };
 var _hoisted_32 = {
+  "class": "form-group booking-time"
+};
+var _hoisted_33 = {
   "class": "col-12 mt-4 mb-2"
 };
 
-var _hoisted_33 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createStaticVNode)("<div class=\"col-12 mt-3\"><div class=\"form-group d-flex justify-content-center p-0\"><img src=\"/img/logo/oops.svg\" width=\"100\"></div></div><div class=\"col-12 mt-3\"><div class=\"h6 text-center text-secondary font-weight-bold\">Извините! На сегодня нельзя забронировать стол в этом заведении. Но вы можете выбрать другое заведение или другую дату.</div></div><div class=\"col-12 mt-4 mb-2\"><button class=\"btn btn-block auth-register text-white\" data-dismiss=\"modal\" aria-label=\"Close\">Ок, понятно</button></div>", 3);
+var _hoisted_34 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createStaticVNode)("<div class=\"col-12 mt-3\"><div class=\"form-group d-flex justify-content-center p-0\"><img src=\"/img/logo/oops.svg\" width=\"100\"></div></div><div class=\"col-12 mt-3\"><div class=\"h6 text-center text-secondary font-weight-bold\">Извините! На сегодня нельзя забронировать стол в этом заведении. Но вы можете выбрать другое заведение или другую дату.</div></div><div class=\"col-12 mt-4 mb-2\"><button class=\"btn btn-block auth-register text-white\" data-dismiss=\"modal\" aria-label=\"Close\">Ок, понятно</button></div>", 3);
 
-var _hoisted_36 = {
-  "class": "col-12 mt-3"
-};
 var _hoisted_37 = {
-  "class": "form-group"
+  "class": "col-12 mt-3"
 };
 var _hoisted_38 = {
-  "class": "col-12 mt-3"
+  "class": "form-group"
 };
 var _hoisted_39 = {
+  "class": "col-12 mt-3"
+};
+var _hoisted_40 = {
   "class": "form-group"
 };
 
-var _hoisted_40 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", {
+var _hoisted_41 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", {
   "class": "auth-phone-prefix"
 }, "+7", -1
 /* HOISTED */
 );
 
-var _hoisted_41 = {
+var _hoisted_42 = {
   "class": "col-12 mt-4 mb-2 d-flex",
   style: {
     "gap": "20px"
   }
 };
-var _hoisted_42 = {
+var _hoisted_43 = {
   "class": "w-50"
 };
-var _hoisted_43 = {
+var _hoisted_44 = {
   "class": " w-50"
 };
 
-var _hoisted_44 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", {
+var _hoisted_45 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", {
   "class": "form-group"
 }, [/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("h6", {
   "class": "text-secondary text-center mt-3"
@@ -22100,43 +22105,43 @@ var _hoisted_44 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(
 /* HOISTED */
 );
 
-var _hoisted_45 = {
+var _hoisted_46 = {
   key: 0,
   "class": "form-group p-0"
 };
 
-var _hoisted_46 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", {
+var _hoisted_47 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", {
   "class": "auth-error font-weight-bold text-center"
 }, "Не код правильный код подтверждения.", -1
 /* HOISTED */
 );
 
-var _hoisted_47 = {
+var _hoisted_48 = {
   "class": "form-row mx-3"
 };
-var _hoisted_48 = {
+var _hoisted_49 = {
   "class": "col-12 mt-3"
 };
-var _hoisted_49 = {
+var _hoisted_50 = {
   "class": "col-12 mt-4"
 };
-var _hoisted_50 = {
+var _hoisted_51 = {
   key: 0
 };
-var _hoisted_51 = {
+var _hoisted_52 = {
   key: 1,
   "class": "spinner"
 };
-var _hoisted_52 = {
+var _hoisted_53 = {
   "class": "col-12 mt-4"
 };
-var _hoisted_53 = {
+var _hoisted_54 = {
   key: 1,
   "class": "btn btn-block auth-register text-white",
   disabled: ""
 };
 
-var _hoisted_54 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", {
+var _hoisted_55 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", {
   "class": "col-12 mt-4"
 }, [/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("p", {
   "class": "text-secondary auth-txt text-center"
@@ -22144,14 +22149,18 @@ var _hoisted_54 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(
 /* HOISTED */
 );
 
-var _hoisted_55 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createStaticVNode)("<div class=\"col-12 mt-3\"><div class=\"form-group d-flex justify-content-center p-0\"><img src=\"/img/logo/oops.svg\" width=\"100\"></div></div><div class=\"col-12 mt-3\"><div class=\"h6 text-center text-secondary font-weight-bold\">Извините, этот стол уже забронирован. Попробуите выбрать другой стол или другую дату.</div></div><div class=\"col-12 mt-4 mb-2\"><button class=\"btn btn-block auth-register text-white\" data-dismiss=\"modal\" aria-label=\"Close\">Ок, понятно</button></div>", 3);
+var _hoisted_56 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createStaticVNode)("<div class=\"col-12 mt-3\"><div class=\"form-group d-flex justify-content-center p-0\"><img src=\"/img/logo/oops.svg\" width=\"100\"></div></div><div class=\"col-12 mt-3\"><div class=\"h6 text-center text-secondary font-weight-bold\">Извините, этот стол уже забронирован. Попробуите выбрать другой стол или другую дату.</div></div><div class=\"col-12 mt-4 mb-2\"><button class=\"btn btn-block auth-register text-white\" data-dismiss=\"modal\" aria-label=\"Close\">Ок, понятно</button></div>", 3);
 
 function render(_ctx, _cache, $props, $setup, $data, $options) {
   var _directive_maska = (0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveDirective)("maska");
 
   return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)("div", _hoisted_1, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_2, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_3, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_4, [_hoisted_5, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_6, [_hoisted_7, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("h6", _hoisted_8, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($props.table.title), 1
   /* TEXT */
-  )]), $props.table.status === 'ENABLED' && $props.table.bookingStatus === null ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)(vue__WEBPACK_IMPORTED_MODULE_0__.Fragment, {
+  )]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)(" " + (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($props.table.status), 1
+  /* TEXT */
+  ), _hoisted_9, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)(" " + (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(JSON.stringify($props.table.bookingStatus)) + " ", 1
+  /* TEXT */
+  ), $props.table.status === 'ENABLED' && $props.table.bookingStatus === null ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)(vue__WEBPACK_IMPORTED_MODULE_0__.Fragment, {
     key: 0
   }, [$data.status ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)(vue__WEBPACK_IMPORTED_MODULE_0__.Fragment, {
     key: 0
@@ -22159,7 +22168,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
     key: 0
   }, [$props.date.time.length > 0 ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)(vue__WEBPACK_IMPORTED_MODULE_0__.Fragment, {
     key: 0
-  }, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_9, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_10, [((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)(vue__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.renderList)($props.date.time, function (time, key) {
+  }, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_10, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_11, [((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)(vue__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.renderList)($props.date.time, function (time, key) {
     return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)("div", {
       "class": ["booking-time-item", {
         'booking-time-item-sel': key === $props.date.timeIndex
@@ -22173,7 +22182,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
     , ["onClick"]);
   }), 128
   /* KEYED_FRAGMENT */
-  ))])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_11, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("button", {
+  ))])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_12, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("button", {
     "class": "btn btn-block auth-register text-white",
     onClick: _cache[1] || (_cache[1] = function ($event) {
       return $options.storageModal(true);
@@ -22182,7 +22191,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
   /* STABLE_FRAGMENT */
   )) : ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)(vue__WEBPACK_IMPORTED_MODULE_0__.Fragment, {
     key: 1
-  }, [_hoisted_12], 64
+  }, [_hoisted_13], 64
   /* STABLE_FRAGMENT */
   ))], 2112
   /* STABLE_FRAGMENT, DEV_ROOT_FRAGMENT */
@@ -22190,7 +22199,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
     key: 1
   }, [$data.cards.length > 0 ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)(vue__WEBPACK_IMPORTED_MODULE_0__.Fragment, {
     key: 0
-  }, [$data.cardError ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)("div", _hoisted_15, [_hoisted_16])) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_17, [((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)(vue__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.renderList)($data.cards, function (item, key) {
+  }, [$data.cardError ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)("div", _hoisted_16, [_hoisted_17])) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_18, [((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)(vue__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.renderList)($data.cards, function (item, key) {
     return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)("div", {
       "class": ["booking-card", {
         'booking-card-sel': key === $data.cardIndex
@@ -22199,9 +22208,9 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
       onClick: function onClick($event) {
         return $data.cardIndex = key;
       }
-    }, [_hoisted_18, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_19, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_20, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(item.bank), 1
+    }, [_hoisted_19, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_20, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_21, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(item.bank), 1
     /* TEXT */
-    ), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_21, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(item.hash), 1
+    ), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_22, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(item.hash), 1
     /* TEXT */
     )])], 10
     /* CLASS, PROPS */
@@ -22210,7 +22219,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
   /* KEYED_FRAGMENT */
   ))])], 64
   /* STABLE_FRAGMENT */
-  )) : ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)("div", _hoisted_22, [_hoisted_23, _hoisted_24])), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_25, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("button", {
+  )) : ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)("div", _hoisted_23, [_hoisted_24, _hoisted_25])), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_26, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("button", {
     "class": "btn btn-block bg-light text-dark",
     onClick: _cache[2] || (_cache[2] = function ($event) {
       return $options.bookingAddCard();
@@ -22219,7 +22228,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
       "border-radius": "30px",
       "height": "44px"
     }
-  }, [!$data.cardLoading ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)("div", _hoisted_26, "Добавить карту карту")) : ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)("div", _hoisted_27))])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_28, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("button", {
+  }, [!$data.cardLoading ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)("div", _hoisted_27, "Добавить карту карту")) : ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)("div", _hoisted_28))])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_29, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("button", {
     "class": "btn btn-block auth-register text-white",
     onClick: _cache[3] || (_cache[3] = function ($event) {
       return $options.bookingAuthFinish();
@@ -22227,7 +22236,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
     disabled: $data.cards.length === 0
   }, "Оплатить " + (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($props.organization.price) + " KZT", 9
   /* TEXT, PROPS */
-  , ["disabled"])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_29, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("button", {
+  , ["disabled"])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_30, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("button", {
     "class": "btn btn-block auth-register text-white",
     onClick: _cache[4] || (_cache[4] = function ($event) {
       return _ctx.storage.modal = false;
@@ -22242,7 +22251,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
     key: 0
   }, [$props.date.time.length > 0 ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)(vue__WEBPACK_IMPORTED_MODULE_0__.Fragment, {
     key: 0
-  }, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_30, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_31, [((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)(vue__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.renderList)($props.date.time, function (time, key) {
+  }, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_31, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_32, [((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)(vue__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.renderList)($props.date.time, function (time, key) {
     return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)("div", {
       "class": ["booking-time-item", {
         'booking-time-item-sel': key === $props.date.timeIndex
@@ -22256,7 +22265,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
     , ["onClick"]);
   }), 128
   /* KEYED_FRAGMENT */
-  ))])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_32, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("button", {
+  ))])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_33, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("button", {
     "class": "btn btn-block auth-register text-white",
     onClick: _cache[5] || (_cache[5] = function ($event) {
       return _ctx.storage.modal = true;
@@ -22265,7 +22274,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
   /* STABLE_FRAGMENT */
   )) : ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)(vue__WEBPACK_IMPORTED_MODULE_0__.Fragment, {
     key: 1
-  }, [_hoisted_33], 64
+  }, [_hoisted_34], 64
   /* STABLE_FRAGMENT */
   ))], 2112
   /* STABLE_FRAGMENT, DEV_ROOT_FRAGMENT */
@@ -22273,7 +22282,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
     key: 1
   }, [!$data.guest.verify ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)(vue__WEBPACK_IMPORTED_MODULE_0__.Fragment, {
     key: 0
-  }, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_36, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_37, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("input", {
+  }, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_37, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_38, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("input", {
     type: "text",
     "class": "form-control p-3 auth-input",
     placeholder: "Ваше имя",
@@ -22286,7 +22295,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
     }, ["enter"]))
   }, null, 544
   /* HYDRATE_EVENTS, NEED_PATCH */
-  ), [[vue__WEBPACK_IMPORTED_MODULE_0__.vModelText, $data.guest.name]])])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_38, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_39, [_hoisted_40, (0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("input", {
+  ), [[vue__WEBPACK_IMPORTED_MODULE_0__.vModelText, $data.guest.name]])])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_39, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_40, [_hoisted_41, (0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("input", {
     type: "text",
     "class": "form-control p-3 auth-input auth-phone",
     "onUpdate:modelValue": _cache[8] || (_cache[8] = function ($event) {
@@ -22298,12 +22307,12 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
     }, ["enter"]))
   }, null, 544
   /* HYDRATE_EVENTS, NEED_PATCH */
-  ), [[_directive_maska, '##########'], [vue__WEBPACK_IMPORTED_MODULE_0__.vModelText, $data.guest.phone]])])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_41, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_42, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("button", {
+  ), [[_directive_maska, '##########'], [vue__WEBPACK_IMPORTED_MODULE_0__.vModelText, $data.guest.phone]])])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_42, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_43, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("button", {
     "class": "btn btn-block auth-btn text-white",
     onClick: _cache[10] || (_cache[10] = function ($event) {
       return _ctx.storage.modal = false;
     })
-  }, "Назад")]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_43, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("button", {
+  }, "Назад")]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_44, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("button", {
     "class": "btn btn-block auth-register text-white",
     onClick: _cache[11] || (_cache[11] = function () {
       return $options.guestAuth && $options.guestAuth.apply($options, arguments);
@@ -22312,7 +22321,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
   /* STABLE_FRAGMENT */
   )) : ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)(vue__WEBPACK_IMPORTED_MODULE_0__.Fragment, {
     key: 1
-  }, [_hoisted_44, $data.guest.codeError ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)("div", _hoisted_45, [_hoisted_46])) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_47, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_48, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("input", {
+  }, [_hoisted_45, $data.guest.codeError ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)("div", _hoisted_46, [_hoisted_47])) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_48, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_49, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("input", {
     type: "text",
     "class": "form-control p-3 auth-input",
     "onUpdate:modelValue": _cache[12] || (_cache[12] = function ($event) {
@@ -22322,22 +22331,22 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
     ref: "sms_code"
   }, null, 512
   /* NEED_PATCH */
-  ), [[_directive_maska, '######'], [vue__WEBPACK_IMPORTED_MODULE_0__.vModelText, $data.guest.code]])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_49, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("button", {
+  ), [[_directive_maska, '######'], [vue__WEBPACK_IMPORTED_MODULE_0__.vModelText, $data.guest.code]])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_50, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("button", {
     "class": "btn btn-block auth-btn text-white",
     onClick: _cache[13] || (_cache[13] = function ($event) {
       return $options.bookingGuest();
     })
-  }, [!$data.guest.codeCheck ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)("div", _hoisted_50, "Подтвердить и оплатить " + (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($props.organization.price) + " KZT", 1
+  }, [!$data.guest.codeCheck ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)("div", _hoisted_51, "Подтвердить и оплатить " + (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($props.organization.price) + " KZT", 1
   /* TEXT */
-  )) : ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)("div", _hoisted_51))])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_52, [!$data.guest.codeCheck ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)("button", {
+  )) : ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)("div", _hoisted_52))])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_53, [!$data.guest.codeCheck ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)("button", {
     key: 0,
     "class": "btn btn-block auth-register text-white",
     onClick: _cache[14] || (_cache[14] = function ($event) {
       return $data.guest.verify = false;
     })
-  }, "Отмена")) : ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)("button", _hoisted_53, "Отмена"))])])], 64
+  }, "Отмена")) : ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)("button", _hoisted_54, "Отмена"))])])], 64
   /* STABLE_FRAGMENT */
-  )), _hoisted_54], 64
+  )), _hoisted_55], 64
   /* STABLE_FRAGMENT */
   ))], 2112
   /* STABLE_FRAGMENT, DEV_ROOT_FRAGMENT */
@@ -22345,7 +22354,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
   /* STABLE_FRAGMENT, DEV_ROOT_FRAGMENT */
   )) : ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)(vue__WEBPACK_IMPORTED_MODULE_0__.Fragment, {
     key: 1
-  }, [_hoisted_55], 64
+  }, [_hoisted_56], 64
   /* STABLE_FRAGMENT */
   ))])])])]);
 }

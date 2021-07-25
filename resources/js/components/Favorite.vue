@@ -1,53 +1,9 @@
 <template>
     <Header></Header>
     <profile-section></profile-section>
-    <div class="container-fluid py-3 py-md-5 item-bg">
-        <div class="container">
-            <div class="row">
-                <template v-if="list.length > 0">
-                    <div class="col-6 col-xl-4 p-0 p-md-2" v-for="(organization,key) in list" :key="key">
-                        <div class="card border-0 item-shadow overflow-hidden m-2 m-md-0 item-radius">
-                            <div class="item-main">
-                                <div class="favorite-category" :class="{'favorite-main-off':(!storage.favorite.includes(organization.id)),'favorite-main-on':(storage.favorite.includes(organization.id))}" @click="favorite(organization.id)"></div>
-                                <div class="item-rating" v-if="organization.rating">
-                                    <span>{{organization.rating}}</span>
-                                </div>
-                                <img v-if="organization.wallpaper" :src="organization.wallpaper">
-                                <img v-else src="/img/logo/wall.png">
-                            </div>
-                            <div class="item-logo mb-md-2 d-flex justify-content-center">
-                                <div class="item-logo-default">
-                                    <img v-if="organization.image" :src="organization.image">
-                                    <div style="background-image: url('/img/logo/restaurant.svg')"></div>
-                                </div>
-
-                            </div>
-                            <ul class="list-group list-group-flush">
-                                <li class="list-group-item text-center p-0">
-                                    <a :href="'/home/'+organization.id" class="text-dark">
-                                        <h3 class=" font-weight-bold item-title">{{organization.title}}</h3>
-                                    </a>
-                                    <p class="item-description text-secondary mx-3 my-0" v-if="organization.description">{{organization.description}}</p>
-                                </li>
-                                <li class="list-group-item text-center bg-light">
-                                    <div class="h6 text-secondary text-font" v-if="organization.timeTitle">{{organization.timeTitle}}</div>
-                                    <div class="text-center mb-0 mt-2 h6 text-secondary text-font">{{organization.address}}</div>
-                                </li>
-                                <li class="list-group-item">
-                                    <a :href="'/home/'+organization.id" class="btn w-100 text-white text-btn text-font font-weight-bold d-flex justify-content-center align-content-center">
-                                        <div class="py-md-1">Подробнее</div>
-                                    </a>
-                                </li>
-                            </ul>
-                        </div>
-                    </div>
-                </template>
-                <template v-else>
-                    <not-found :params="notFound"></not-found>
-                </template>
-            </div>
-        </div>
-    </div>
+    <loading v-if="Loading"></loading>
+    <organization v-else-if="list.length > 0 && storage.favorite.length > 0" :organizations="list"></organization>
+    <not-found v-else :params="notFound"></not-found>
     <Footer-menu></Footer-menu>
     <Footer></Footer>
 </template>
@@ -57,19 +13,24 @@ import Header from "./header/Header";
 import Footer from "./footer/Footer";
 import ProfileSection from './sections/ProfileSection';
 import FooterMenu from './footerMenu/FooterMenu';
-import NotFound from './layout/Not-found'
+import NotFound from './layout/Not-found';
+import Organization from './layout/Organization';
+import Loading from './layout/Loading';
 export default {
     components: {
         Header,
         Footer,
         ProfileSection,
         FooterMenu,
-        NotFound
+        NotFound,
+        Organization,
+        Loading
     },
     name: "Favorite",
     data() {
         return {
             list: [],
+            Loading: true,
             notFound: {
                 img: '/img/logo/favorite-red.svg',
                 title: 'Список пуст',
@@ -81,36 +42,26 @@ export default {
         this.getOrganizations();
     },
     methods: {
-        favorite: function(id) {
-            let len =   this.storage.favorite.length;
-            let status  =   true;
-            for (let i = 0; i < len; i++) {
-                if (this.storage.favorite[i] === id) {
-                    this.storage.favorite.splice(i,1);
-                    status  =   false;
-                    this.getOrganizations();
-                }
-            }
-            if (status) {
-                this.storage.favorite.push(id);
-            }
-        },
         getOrganizations: function() {
-            if (this.storage.favorite.length > 0) {
-                axios.post('/api/organization/ids',{
-                    ids: this.storage.favorite
-                })
-                    .then(response => {
-                        let data    =   response.data.data;
-                        for (let i = 0; i < data.length; i++) {
-                            data[i].timeTitle   =   this.getTime(data[i]);
-                            this.list.push(data[i]);
-                        }
-                    });
-            } else {
+            axios.post('/api/organization/ids',{
+                ids: this.storage.favorite
+            })
+            .then(response => {
+                let data    =   response.data.data;
+                for (let i = 0; i < data.length; i++) {
+                    data[i].timeTitle   =   this.getTime(data[i]);
+                    this.list.push(data[i]);
+                }
+                if (data.length === 0) {
+                    this.storage.favorite   =   [];
+                    this.list   =   [];
+                }
+                this.Loading    =   false;
+            }).catch(error => {
                 this.storage.favorite   =   [];
                 this.list   =   [];
-            }
+                this.Loading    =   false;
+            });
         },
         getTime: function(organization) {
             let today   =   new Date();

@@ -50,7 +50,10 @@ export default {
               }
         },
         citySel: function(city) {
-            this.storage.city   =   city;
+            if (this.storage.city.id !== city.id) {
+                this.storage.city   =   city;
+                window.location.reload();
+            }
         }
     }
 }

@@ -34,7 +34,7 @@
                                         <div class="history-status-icon history-status-icon-pen"></div>Оставить отзыв
                                     </div>
                                     <div class="history-status history-status-last" v-else-if="item.status === 'COMPLETED'">
-                                        Завершено {{item.price}} KZT
+                                        Завершено <span v-if="item.price > 0">{{item.price}} KZT</span>
                                     </div>
                                     <div class="history-status history-status-success" v-else>
                                         Забронировано <span v-if="item.price > 0">{{item.price}} KZT</span>

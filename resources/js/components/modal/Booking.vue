@@ -12,7 +12,7 @@
                     </div>
                     {{table.status}}<br>
                     {{JSON.stringify(table.bookingStatus)}}
-                    <template v-if="table.status === 'ENABLED' && table.bookingStatus === null">
+                    <template v-if="table.status === 'ENABLED' && (table.bookingStatus === null || table.bookingStatus.status === 'COMPLETED')">
                         <template v-if="status">
                             <template v-if="!storage.modal">
                                 <template v-if="date.time.length > 0">

@@ -146,9 +146,12 @@ class UserCrudController extends CrudController
     public function list(Request $request)
     {
         if ($request->has('q')) {
-            return User::where(UserContract::ID, $request->input('q'))->paginate(10);
+            return User::where([
+                [UserContract::ID, $request->input('q')],
+                [UserContract::ROLE,UserContract::MODERATOR]
+            ])->paginate(10);
         }
 
-        return User::paginate(10);
+        return User::where(UserContract::ROLE,UserContract::MODERATOR)->paginate(10);
     }
 }

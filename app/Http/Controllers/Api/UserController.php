@@ -78,14 +78,20 @@ class UserController extends Controller
 
         $organization   =   $this->organizationService->getById($request->input(BookingContract::ORGANIZATION_ID));
 
-        $booking    =   $this->bookingService->create([
+        $booking    =   [
             BookingContract::USER_ID    =>  $user->{UserContract::ID},
             BookingContract::ORGANIZATION_ID    =>  $request->input(BookingContract::ORGANIZATION_ID),
             BookingContract::ORGANIZATION_TABLE_LIST_ID  =>  $request->input(BookingContract::ORGANIZATION_TABLE_ID),
             BookingContract::TIME   =>  Time::toLocal($request->input(BookingContract::DATE).' '.$request->input(BookingContract::TIME), $request->input(BookingContract::TIMEZONE)),
             BookingContract::DATE   =>  $request->input(BookingContract::DATE),
             BookingContract::PRICE  =>  $organization->{BookingContract::PRICE}
-        ]);
+        ];
+
+        if (intVal($organization->{BookingContract::PRICE}) === 0) {
+            $booking[BookingContract::STATUS]   =   BookingContract::ON;
+        }
+
+        $booking    =   $this->bookingService->create($booking);
 
         BookingPayment::dispatch([
             BookingContract::ID =>  $booking->id,

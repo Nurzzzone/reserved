@@ -78,7 +78,7 @@ class OrganizationTableListCrudController extends CrudController
             'data_source'   =>  url('organizationTables'),
             'placeholder'   =>  'Выберите заведение',
             'minimum_input_length' => 0,
-            'include_all_form_fields' => true,
+            'include_all_form_fields' => false,
             'dependencies'  => ['organization'],
         ]);
 

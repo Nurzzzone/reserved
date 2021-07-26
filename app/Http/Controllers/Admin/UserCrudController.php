@@ -104,28 +104,6 @@ class UserCrudController extends CrudController
             'required'  =>  'required'
         ]);
 
-        CRUD::field(UserContract::PHONE)->label('Номер телефона')->attributes([
-            'required'  =>  'required',
-            'id'    =>  UserContract::PHONE
-        ]);
-
-        $rand   =   rand(100000,999999);
-        CRUD::field(UserContract::CODE)->type('hidden')->attributes([
-            'required'  =>  'required',
-            'default'  =>  $rand,
-        ])->value($rand);
-
-        $time   =   date('Y-m-d h:i:s');
-        CRUD::field(UserContract::PHONE_VERIFIED_AT)->type('hidden')->attributes([
-            'required'  =>  'required',
-            'default'  =>  $time,
-        ])->value($time);
-
-        $password   =   $this->generateRandomString(8);
-        CRUD::field(UserContract::PASSWORD)->type('hidden')->attributes([
-            'required'  =>  'required',
-            'default'  =>  $password,
-        ])->value($password);
     }
 
     function generateRandomString($length = 10) {

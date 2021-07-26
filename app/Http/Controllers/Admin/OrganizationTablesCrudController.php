@@ -81,23 +81,6 @@ class OrganizationTablesCrudController extends CrudController
     }
 
     public function list(Request $request) {
-        if ($request->has('form')) {
-            $form   =   $request->input('form');
-            $organization   =   '';
-            foreach ($form as &$value) {
-                if ($value[OrganizationTablesContract::NAME] === 'organization_id') {
-                    $organization   =   $value[OrganizationTablesContract::VALUE];
-                }
-            }
-            print_r($request->getContent());
-            echo 'asd';
-            exit;
-            if ($organization) {
-                return OrganizationTables::where(OrganizationTablesContract::ORGANIZATION_ID,$organization)->paginate(10);
-            }
-        }
-        print_r($request->getContent());
-        exit('asdasd');
-        return [];
+        return OrganizationTables::whereIn(OrganizationTablesContract::ORGANIZATION_ID,$this->organizationsId)->paginate(10);
     }
 }

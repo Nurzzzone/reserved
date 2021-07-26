@@ -58,6 +58,9 @@ class OrganizationTableListCrudController extends CrudController
     protected function setupCreateOperation()
     {
         CRUD::setValidation(OrganizationTableListRequest::class);
+        if (backpack_user()->role === OrganizationTableListContract::TRANSLATE[OrganizationTableListContract::MODERATOR]) {
+            $this->crud->addClause('whereIn', OrganizationTableListContract::ORGANIZATION_ID,$this->organizationsId);
+        }
         CRUD::field(OrganizationTableListContract::ORGANIZATION_ID)->type('select')->label('Организация')
             ->entity('organization')->model('App\Models\Organization')->attribute(OrganizationContract::TITLE);
         CRUD::field(OrganizationTableListContract::ORGANIZATION_TABLE_ID)->type('select')->label('Секция')

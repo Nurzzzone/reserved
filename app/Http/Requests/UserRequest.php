@@ -28,7 +28,6 @@ class UserRequest extends FormRequest
     {
         return [
             // 'name' => 'required|min:5|max:255',
-            UserContract::PHONE =>  'required|unique:users',
         ];
     }
 

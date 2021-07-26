@@ -95,6 +95,7 @@ class OrganizationTablesCrudController extends CrudController
                 return OrganizationTables::where(OrganizationTablesContract::ORGANIZATION_ID,$organization)->paginate(10);
             }
         }
+        exit('asdasd');
         return [];
     }
 }

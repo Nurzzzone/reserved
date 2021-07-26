@@ -24,6 +24,12 @@ class OrganizationTablesCrudController extends CrudController
         CRUD::setModel(\App\Models\OrganizationTables::class);
         CRUD::setRoute(config('backpack.base.route_prefix') . '/organizationtables');
         CRUD::setEntityNameStrings('Комнату', 'Комнаты');
+        if (backpack_user()->role === OrganizationTablesContract::TRANSLATE[OrganizationTablesContract::MODERATOR]) {
+            $organizations   =   (new OrganizationRepository())->getIdsByUserId(backpack_user()->id);
+            foreach ($organizations as &$organization) {
+                $this->organizationsId[]    =   $organization[OrganizationContract::ID];
+            }
+        }
     }
 
     protected function setupShowOperation()
@@ -38,6 +44,7 @@ class OrganizationTablesCrudController extends CrudController
 
     protected function setupListOperation()
     {
+        $this->crud->addClause('whereIn', OrganizationTablesContract::ORGANIZATION_ID,$this->organizationsId);
         CRUD::column(OrganizationTablesContract::ORGANIZATION_ID)->type('select')->label('Организация')
             ->entity('organization')->model('App\Models\Organization')->attribute(OrganizationContract::TITLE);
         CRUD::column(OrganizationTablesContract::NAME)->label('Название секции');

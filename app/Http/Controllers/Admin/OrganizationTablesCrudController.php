@@ -23,11 +23,7 @@ class OrganizationTablesCrudController extends CrudController
     {
         CRUD::setModel(\App\Models\OrganizationTables::class);
         CRUD::setRoute(config('backpack.base.route_prefix') . '/organizationtables');
-        CRUD::setEntityNameStrings('Комната', 'Комнаты');
-        if (backpack_user()->role === OrganizationTablesContract::TRANSLATE[OrganizationTablesContract::MODERATOR]) {
-            $this->organizationsId  =   (new OrganizationRepository())->getIdsByUserId(backpack_user()->id);
-            $this->crud->addClause('whereIn', OrganizationTablesContract::ORGANIZATION_ID,$this->organizationsId);
-        }
+        CRUD::setEntityNameStrings('Комнату', 'Комнаты');
     }
 
     protected function setupShowOperation()
@@ -51,11 +47,18 @@ class OrganizationTablesCrudController extends CrudController
     protected function setupCreateOperation()
     {
         CRUD::setValidation(OrganizationTablesRequest::class);
-        if (backpack_user()->role === OrganizationTablesContract::TRANSLATE[OrganizationTablesContract::MODERATOR]) {
-            $this->crud->addClause('whereIn', OrganizationTablesContract::ORGANIZATION_ID,$this->organizationsId);
-        }
-        CRUD::field(OrganizationTablesContract::ORGANIZATION_ID)->type('select')->label('Организация')
-            ->entity('organization')->model('App\Models\Organization')->attribute(OrganizationContract::TITLE);
+
+        $this->crud->addField([
+            'label'         => 'Организация',
+            'type'          => 'select2_from_ajax',
+            'name'          => OrganizationTablesContract::ORGANIZATION_ID,
+            'entity'        => 'organization',
+            'placeholder'   => '',
+            'minimum_input_length'  => '',
+            'attribute'     => OrganizationContract::TITLE,
+            'data_source'   =>  url('api/organization/user/'.backpack_user()->id)
+        ]);
+
         CRUD::field(OrganizationTablesContract::NAME)->label('Название секции');
         CRUD::field(OrganizationTablesContract::STATUS)->type('select_from_array')
             ->label('Статус')->options([
@@ -68,5 +71,21 @@ class OrganizationTablesCrudController extends CrudController
     protected function setupUpdateOperation()
     {
         $this->setupCreateOperation();
+    }
+
+    public function list(Request $request) {
+        if ($request->has('form')) {
+            $form   =   $request->input('form');
+            $organization   =   '';
+            foreach ($form as &$value) {
+                if ($value[OrganizationTablesContract::NAME] === 'organization_id') {
+                    $organization   =   $value[OrganizationTablesContract::VALUE];
+                }
+            }
+            if ($organization) {
+                return OrganizationTables::where(OrganizationTablesContract::ORGANIZATION_ID,$organization)->paginate(10);
+            }
+        }
+        return [];
     }
 }

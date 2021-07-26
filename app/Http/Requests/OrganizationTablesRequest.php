@@ -2,31 +2,24 @@
 
 namespace App\Http\Requests;
 
+use App\Domain\Contracts\OrganizationTablesContract;
 use App\Http\Requests\Request;
 use Illuminate\Foundation\Http\FormRequest;
 
 class OrganizationTablesRequest extends FormRequest
 {
-    /**
-     * Determine if the user is authorized to make this request.
-     *
-     * @return bool
-     */
+
     public function authorize()
     {
         // only allow updates if the user is logged in
         return backpack_auth()->check();
     }
 
-    /**
-     * Get the validation rules that apply to the request.
-     *
-     * @return array
-     */
     public function rules()
     {
         return [
-            // 'name' => 'required|min:5|max:255'
+            OrganizationTablesContract::ORGANIZATION_ID => 'required|exists:organizations,id',
+            OrganizationTablesContract::NAME    =>  'required'
         ];
     }
 
@@ -50,7 +43,9 @@ class OrganizationTablesRequest extends FormRequest
     public function messages()
     {
         return [
-            //
+            OrganizationTablesContract::ORGANIZATION_ID.'.required' =>  'Выберите организацию',
+            OrganizationTablesContract::ORGANIZATION_ID.'.exists' =>  'Организации не существует',
+            OrganizationTablesContract::NAME.'.required'    =>  'Укажите название секции'
         ];
     }
 }

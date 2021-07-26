@@ -58,13 +58,30 @@ class OrganizationTableListCrudController extends CrudController
     protected function setupCreateOperation()
     {
         CRUD::setValidation(OrganizationTableListRequest::class);
-        if (backpack_user()->role === OrganizationTableListContract::TRANSLATE[OrganizationTableListContract::MODERATOR]) {
-            $this->crud->addClause('whereIn', OrganizationTableListContract::ORGANIZATION_ID,$this->organizationsId);
-        }
-        CRUD::field(OrganizationTableListContract::ORGANIZATION_ID)->type('select')->label('Организация')
-            ->entity('organization')->model('App\Models\Organization')->attribute(OrganizationContract::TITLE);
-        CRUD::field(OrganizationTableListContract::ORGANIZATION_TABLE_ID)->type('select')->label('Секция')
-            ->entity('organizationTable')->model('App\Models\OrganizationTables')->attribute(OrganizationTablesContract::NAME);
+        $this->crud->addField([
+            'label'         => 'Организация',
+            'type'          => 'select2_from_ajax',
+            'name'          => OrganizationTableListContract::ORGANIZATION_ID,
+            'entity'        => 'organization',
+            'placeholder'   => '',
+            'minimum_input_length'  => '',
+            'attribute'     => OrganizationContract::TITLE,
+            'data_source'   =>  url('api/organization/user/'.backpack_user()->id)
+        ]);
+
+        $this->crud->addField([
+            'label' =>  'Секция',
+            'type'  =>  'select2_from_ajax',
+            'name'  =>  OrganizationTableListContract::ORGANIZATION_TABLE_ID,
+            'entity'    =>  'organizationTable',
+            'attribute' =>  OrganizationTablesContract::NAME,
+            'data_source'   =>  url('organizationTables'),
+            'placeholder'   =>  'Выберите заведение',
+            'minimum_input_length' => 0,
+            'include_all_form_fields' => true,
+            'dependencies'  => ['organization'],
+        ]);
+
         CRUD::field(OrganizationContract::TITLE)->label('Название стола');
         CRUD::field(OrganizationContract::LIMIT)->label('Лимит на человека');
         CRUD::field(OrganizationTableListContract::STATUS)->type('select_from_array')

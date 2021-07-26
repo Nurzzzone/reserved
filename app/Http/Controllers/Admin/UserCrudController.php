@@ -146,7 +146,7 @@ class UserCrudController extends CrudController
     public function list(Request $request)
     {
         if ($request->has('q')) {
-            return User::where(UserContract::PHONE, 'LIKE', $request->input('q').'%')->paginate(10);
+            return User::where(UserContract::ID, $request->input('q'))->paginate(10);
         }
         return User::paginate(10);
     }

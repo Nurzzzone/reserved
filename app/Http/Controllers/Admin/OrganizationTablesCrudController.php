@@ -81,6 +81,6 @@ class OrganizationTablesCrudController extends CrudController
     }
 
     public function list(Request $request) {
-        return OrganizationTables::whereIn(OrganizationTablesContract::ORGANIZATION_ID,$this->organizationsId)->paginate(10);
+        return OrganizationTables::whereIn(OrganizationTablesContract::ORGANIZATION_ID,$this->organizationsId)->orderBy(OrganizationTablesContract::ID,'desc')->paginate(10);
     }
 }

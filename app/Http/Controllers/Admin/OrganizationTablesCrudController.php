@@ -89,13 +89,14 @@ class OrganizationTablesCrudController extends CrudController
                     $organization   =   $value[OrganizationTablesContract::VALUE];
                 }
             }
-            print_r($_GET);
+            print_r($request->all());
+            echo 'asd';
             exit;
             if ($organization) {
                 return OrganizationTables::where(OrganizationTablesContract::ORGANIZATION_ID,$organization)->paginate(10);
             }
         }
-        print_r($_GET);
+        print_r($request->all());
         exit('asdasd');
         return [];
     }

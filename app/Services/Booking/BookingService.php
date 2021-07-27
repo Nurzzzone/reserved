@@ -55,6 +55,11 @@ class BookingService extends BaseService
         return $this->bookingRepository->getByDate($date, $paginate);
     }
 
+    public function getCompletedByUserId($userId)
+    {
+        return $this->bookingRepository->getCompletedByUserId($userId);
+    }
+
     public function create(array $input)
     {
         return $this->bookingRepository->create($input);

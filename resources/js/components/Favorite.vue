@@ -43,25 +43,31 @@ export default {
     },
     methods: {
         getOrganizations: function() {
-            axios.post('/api/organization/ids',{
-                ids: this.storage.favorite
-            })
-            .then(response => {
-                let data    =   response.data.data;
-                for (let i = 0; i < data.length; i++) {
-                    data[i].timeTitle   =   this.getTime(data[i]);
-                    this.list.push(data[i]);
-                }
-                if (data.length === 0) {
-                    this.storage.favorite   =   [];
-                    this.list   =   [];
-                }
-                this.Loading    =   false;
-            }).catch(error => {
+            if (this.storage.favorite.length > 0) {
+                axios.post('/api/organization/ids',{
+                    ids: this.storage.favorite
+                })
+                    .then(response => {
+                        let data    =   response.data.data;
+                        for (let i = 0; i < data.length; i++) {
+                            data[i].timeTitle   =   this.getTime(data[i]);
+                            this.list.push(data[i]);
+                        }
+                        if (data.length === 0) {
+                            this.storage.favorite   =   [];
+                            this.list   =   [];
+                        }
+                        this.Loading    =   false;
+                    }).catch(error => {
+                        this.storage.favorite   =   [];
+                        this.list   =   [];
+                        this.Loading    =   false;
+                    });
+            } else {
                 this.storage.favorite   =   [];
                 this.list   =   [];
                 this.Loading    =   false;
-            });
+            }
         },
         getTime: function(organization) {
             let today   =   new Date();

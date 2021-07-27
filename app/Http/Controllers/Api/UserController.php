@@ -65,7 +65,7 @@ class UserController extends Controller
         $user   =   $this->userService->getByPhone($request->input(UserContract::PHONE));
 
         if (!$user) {
-            $password   =   Random::generate(8);
+            $password   =   Random::generate(6);
             $user   =   $this->userService->adminCreate([
                 UserContract::USER_ID   =>  $request->input(UserContract::USER_ID),
                 UserContract::NAME  =>  $request->input(UserContract::NAME),

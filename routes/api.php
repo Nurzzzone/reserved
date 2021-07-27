@@ -35,6 +35,7 @@ Route::prefix('card')->group(function() {
 
 Route::prefix('booking')->group(function() {
 
+    Route::get('completed/{userId}',[BookingController::class,'getCompletedByUserId'])->name('booking.status.user');
     Route::post('create',[BookingController::class,'create'])->name('booking.create');
     Route::get('delete/{id}',[BookingController::class,'delete'])->name('booking.delete');
     Route::get('id/{id}',[BookingController::class,'getById'])->name('booking.id');

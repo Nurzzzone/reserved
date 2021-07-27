@@ -38,6 +38,11 @@ class BookingController extends Controller
         $this->organizationService  =   $organizationService;
     }
 
+    public function getCompletedByUserId($userId): BookingCollection
+    {
+        return new BookingCollection($this->bookingService->getCompletedByUserId($userId));
+    }
+
     public function create(BookingCreateRequest $bookingCreateRequest):object
     {
         if ($booking    =   $this->bookingService->create($bookingCreateRequest->validated())) {

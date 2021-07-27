@@ -27,6 +27,15 @@ class BookingRepositoryEloquent implements BookingRepositoryInterface
         ]);
     }
 
+    public function getCompletedByUserId($userId)
+    {
+        return Booking::where([
+            [BookingContract::USER_ID,$userId],
+            [BookingContract::STATUS,BookingContract::COMPLETED],
+            [BookingContract::COMMENT,BookingContract::ON]
+        ])->get();
+    }
+
     public function create(array $data)
     {
         $booking    =   Booking::create($data);

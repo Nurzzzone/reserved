@@ -38,23 +38,26 @@
                                 </li>
                             </template>
                             <template v-else>
-                                <li class="ml-3 header-main position-relative">
-                                    <div class="header-profile" v-if="user.name">
-                                        <div class="header-profile-main font-weight-bold text-capitalize">
-                                            <div class="header-profile-main-content">
-                                                <div>{{user.name}}</div>
+                                <li class="ml-3 d-flex">
+                                    <div class="header-notification header-notification-icon-message"  @click="view(1)"></div>
+                                    <div class="header-main position-relative">
+                                        <div class="header-profile" v-if="user.name">
+                                            <div class="header-profile-main font-weight-bold text-capitalize">
+                                                <div class="header-profile-main-content">
+                                                    <div>{{user.name}}</div>
+                                                </div>
+                                            </div>
+                                            <div class="header-profile-icon">
+                                                <div class="text-white font-weight-bold">{{user.name[0]}}</div>
                                             </div>
                                         </div>
-                                        <div class="header-profile-icon">
-                                            <div class="text-white font-weight-bold">{{user.name[0]}}</div>
-                                        </div>
-                                    </div>
-                                    <div class="header-dropdown overflow-hidden">
-                                        <div class="list-group list-group-flush header-dropdown-ul">
-                                            <a href="/profile" class="list-group-item text-decoration-none">Мой профиль</a>
-                                            <a href="/profile/settings" class="list-group-item text-decoration-none">Настройки</a>
-                                            <a href="/profile/history" class="list-group-item text-decoration-none">История</a>
-                                            <a class="list-group-item text-decoration-none" @click="exit">Выйти</a>
+                                        <div class="header-dropdown overflow-hidden">
+                                            <div class="list-group list-group-flush header-dropdown-ul">
+                                                <a href="/profile" class="list-group-item text-decoration-none">Мой профиль</a>
+                                                <a href="/profile/settings" class="list-group-item text-decoration-none">Настройки</a>
+                                                <a href="/profile/history" class="list-group-item text-decoration-none">История</a>
+                                                <a class="list-group-item text-decoration-none" @click="exit">Выйти</a>
+                                            </div>
                                         </div>
                                     </div>
                                 </li>
@@ -65,26 +68,47 @@
             </div>
         </nav>
     </header>
+    <sidebar :view="sidebar" @closeSide="closeSidebar"></sidebar>
     <Auth></Auth>
 </template>
 
 <script>
 import Auth from "./auth/Auth";
+import Sidebar from '../layout/Sidebar';
 export default {
     name: "Header",
     components: {
-        Auth
+        Auth,
+        Sidebar
     },
     data() {
         return {
+            notification: false,
+            sidebar: {
+                show: false,
+                view: 0
+            },
             login: false,
-            user: {}
+            user: false
         }
     },
     created() {
+        this.notificationView();
         this.auth();
     },
     methods: {
+        notificationView: function() {
+            if (window.location.pathname !== '/profile/history') {
+                this.notification   =   true;
+            }
+        },
+        closeSidebar: function() {
+              this.sidebar.show =   false;
+        },
+        view: function(index) {
+            this.sidebar.view   =   index;
+            this.sidebar.show   =   true;
+        },
         exit: function() {
             this.login  =   true;
             this.storage.token  =   '';

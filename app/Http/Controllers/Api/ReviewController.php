@@ -4,10 +4,12 @@ namespace App\Http\Controllers\Api;
 
 use App\Domain\Contracts\BookingContract;
 use App\Domain\Contracts\ReviewContract;
+use App\Events\BookingNotification;
 use App\Http\Controllers\Controller;
 
 use App\Http\Resources\ReviewCollection;
 
+use App\Models\Booking;
 use Illuminate\Http\Request;
 
 use App\Services\Review\ReviewService;
@@ -36,6 +38,7 @@ class ReviewController extends Controller
             BookingContract::COMMENT    =>  BookingContract::OFF
         ]);
         event(new ReviewCreated($review));
+        event(new BookingNotification(Booking::with('organization','organizationTables')->where(BookingContract::ID,$review->{ReviewContract::BOOKING_ID})->first()));
         return new ReviewResource($this->reviewService->getById($review->id));
     }
 

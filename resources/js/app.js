@@ -17,6 +17,7 @@ app.use(ReactiveStorage, {
     favorite: [],
     city: '',
     notifications: [],
+    booking: '',
 });
 
 app.mount('#app');

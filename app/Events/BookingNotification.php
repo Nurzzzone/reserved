@@ -11,14 +11,12 @@ use Illuminate\Contracts\Broadcasting\ShouldBroadcast;
 use Illuminate\Foundation\Events\Dispatchable;
 use Illuminate\Queue\SerializesModels;
 
-use App\Models\Booking;
-
 class BookingNotification implements ShouldBroadcast
 {
     use Dispatchable, InteractsWithSockets, SerializesModels;
     public $booking;
 
-    public function __construct(Booking $booking)
+    public function __construct($booking)
     {
         $this->booking  =   $booking;
     }

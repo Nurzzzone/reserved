@@ -18,11 +18,12 @@
                     </div>
                 </div>
                 <!--@click="comment(key)"  data-toggle="modal" data-target="#comment_modal"-->
-                <a href="/profile/history" class="w-100"><button class="sidebar-notification-comment w-100" >Оставить комментарии</button></a>
+                <a class="w-100 p-0" @click="comment(key)" data-toggle="modal" data-target="#comment_modal"><button class="sidebar-notification-comment w-100" >Оставить комментарии</button></a>
             </div>
         </div>
         <div class="sidebar-empty" v-else></div>
     </div>
+    <comment></comment>
 </template>
 
 <script>
@@ -54,6 +55,8 @@ export default {
     methods: {
         comment: function(key) {
             this.item   =   this.notifications[key];
+            this.storage.booking    =   this.item;
+            this.storage.modal  =   true;
         },
         getUser: function() {
             if (this.storage.token && sessionStorage.user) {
@@ -62,16 +65,25 @@ export default {
         },
         notification: function(data) {
             let status  =   true;
+            let index   =   0;
+            let remove  =   -1;
             this.notifications.forEach(element => {
                 if (element.id === data.booking.id) {
                     status  =   false;
+                    if (data.booking.comment === 'off') {
+                        remove  =   index;
+                    }
                 }
+                index++;
             });
             if (status) {
-                document.getElementById('notification').play();
                 this.notifications.unshift(data.booking);
-                console.log(data.booking);
+                this.storage.notifications.push(data.booking.id);
+                document.getElementById('notification').play();
+            } else if (remove > -1) {
+                this.notifications.splice(remove,1);
             }
+            this.$emit('updateNotifications',this.notifications.length);
         },
         getBookings: function() {
             if (this.user && this.status) {

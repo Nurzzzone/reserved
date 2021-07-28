@@ -210,7 +210,7 @@ class BookingCrudController extends CrudController
 
     public function completed($id) {
         $this->bookingService->update($id,[BookingContract::STATUS =>  BookingContract::COMPLETED]);
-        event(new BookingNotification(Booking::where(BookingContract::ID,$id)->first()));
+        event(new BookingNotification(Booking::with('organization','organizationTables')->where(BookingContract::ID,$id)->first()));
     }
 
     public function bookingStatus($date) {

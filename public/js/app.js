@@ -17217,6 +17217,7 @@ __webpack_require__.r(__webpack_exports__);
     comment: function comment(key) {
       this.storage.modal = true;
       this.item = this.items[key];
+      this.storage.booking = this.item;
     },
     open: function open(url) {
       var a = document.createElement("a");
@@ -17745,7 +17746,6 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 
       if (timeToday.getTime() === date.getTime()) {
         this.date.timeList.forEach(function (element) {
-          console.log(element);
           item = element.time.split(':');
 
           if (parseInt(today.getHours()) < parseInt(item[0]) && parseInt(today.getHours()) > parseInt(start[0])) {
@@ -18749,6 +18749,8 @@ __webpack_require__.r(__webpack_exports__);
   methods: {
     comment: function comment(key) {
       this.item = this.notifications[key];
+      this.storage.booking = this.item;
+      this.storage.modal = true;
     },
     getUser: function getUser() {
       if (this.storage.token && sessionStorage.user) {
@@ -18757,17 +18759,29 @@ __webpack_require__.r(__webpack_exports__);
     },
     notification: function notification(data) {
       var status = true;
+      var index = 0;
+      var remove = -1;
       this.notifications.forEach(function (element) {
         if (element.id === data.booking.id) {
           status = false;
+
+          if (data.booking.comment === 'off') {
+            remove = index;
+          }
         }
+
+        index++;
       });
 
       if (status) {
-        document.getElementById('notification').play();
         this.notifications.unshift(data.booking);
-        console.log(data.booking);
+        this.storage.notifications.push(data.booking.id);
+        document.getElementById('notification').play();
+      } else if (remove > -1) {
+        this.notifications.splice(remove, 1);
       }
+
+      this.$emit('updateNotifications', this.notifications.length);
     },
     getBookings: function getBookings() {
       var _this2 = this;
@@ -19073,7 +19087,6 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
-  props: ['item'],
   name: "comment",
   data: function data() {
     return {
@@ -19094,9 +19107,9 @@ __webpack_require__.r(__webpack_exports__);
 
         this.status = false;
         axios.post("/api/review/create", {
-          booking_id: this.item.id,
-          organization_id: this.item.organization_id,
-          user_id: this.item.user_id,
+          booking_id: this.storage.booking.id,
+          organization_id: this.storage.booking.organization_id,
+          user_id: this.storage.booking.user_id,
           rating: this.stars,
           comment: this.comment.replace(/(\r\n|\r|\n){2}/g, '$1').replace(/(\r\n|\r|\n){3,}/g, '$1\n')
         }).then(function (response) {
@@ -19537,19 +19550,13 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
 
   var _component_profile_section = (0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveComponent)("profile-section");
 
-  var _component_comment = (0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveComponent)("comment");
-
   var _component_not_found = (0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveComponent)("not-found");
 
   var _component_Footer_menu = (0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveComponent)("Footer-menu");
 
   var _component_Footer = (0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveComponent)("Footer");
 
-  return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)(vue__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_Header), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_profile_section), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_comment, {
-    item: $data.item
-  }, null, 8
-  /* PROPS */
-  , ["item"]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_1, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_2, [$data.items.length > 0 ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)(vue__WEBPACK_IMPORTED_MODULE_0__.Fragment, {
+  return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)(vue__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_Header), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_profile_section), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_1, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_2, [$data.items.length > 0 ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)(vue__WEBPACK_IMPORTED_MODULE_0__.Fragment, {
     key: 0
   }, [_hoisted_3, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_4, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_5, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("ul", _hoisted_6, [((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)(vue__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.renderList)($data.items, function (item, key) {
     return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)("li", {
@@ -22139,12 +22146,9 @@ var _hoisted_11 = {
   "class": "sidebar-notification-detail-description text-white"
 };
 
-var _hoisted_12 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("a", {
-  href: "/profile/history",
-  "class": "w-100"
-}, [/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("button", {
+var _hoisted_12 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("button", {
   "class": "sidebar-notification-comment w-100"
-}, "Оставить комментарии")], -1
+}, "Оставить комментарии", -1
 /* HOISTED */
 );
 
@@ -22153,6 +22157,8 @@ var _hoisted_13 = {
   "class": "sidebar-empty"
 };
 function render(_ctx, _cache, $props, $setup, $data, $options) {
+  var _component_comment = (0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveComponent)("comment");
+
   return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)(vue__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("    <comment :item=\"item\" ></comment>"), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", {
     "class": ["sidebar", {
       'sidebar-view': $props.view.show
@@ -22175,13 +22181,22 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
     /* TEXT */
     )) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true)]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_11, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(notification.date) + " • " + (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(notification.time), 1
     /* TEXT */
-    )])) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true)]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("@click=\"comment(key)\"  data-toggle=\"modal\" data-target=\"#comment_modal\""), _hoisted_12]);
+    )])) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true)]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("@click=\"comment(key)\"  data-toggle=\"modal\" data-target=\"#comment_modal\""), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("a", {
+      "class": "w-100 p-0",
+      onClick: function onClick($event) {
+        return $options.comment(key);
+      },
+      "data-toggle": "modal",
+      "data-target": "#comment_modal"
+    }, [_hoisted_12], 8
+    /* PROPS */
+    , ["onClick"])]);
   }), 128
   /* KEYED_FRAGMENT */
   ))])) : ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)("div", _hoisted_13))], 2
   /* CLASS */
-  )], 2112
-  /* STABLE_FRAGMENT, DEV_ROOT_FRAGMENT */
+  ), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_comment)], 64
+  /* STABLE_FRAGMENT */
   );
 }
 
@@ -22755,6 +22770,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.esm-bundler.js");
 
 var _hoisted_1 = {
+  key: 0,
   "class": "modal fade",
   id: "comment_modal",
   tabindex: "-1",
@@ -22874,23 +22890,23 @@ var _hoisted_27 = {
 var _hoisted_28 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createStaticVNode)("<div class=\"col-12 pt-3 comment-bg\"><div class=\"form-group d-flex justify-content-center p-0 m-0\"><img src=\"/img/logo/gratitude.svg\" width=\"100\" class=\"m-0\"></div></div><div class=\"col-12 pt-3 comment-bg\"><div class=\"h6 text-center text-secondary m-0\">Спасибо за отзыв! Ваш отзыв находиться на проверке у админинстратора.</div></div><div class=\"col-12 py-3 comment-bg\"><button class=\"btn btn-block auth-register text-white\" data-dismiss=\"modal\" aria-label=\"Close\">Закрыть</button></div>", 3);
 
 function render(_ctx, _cache, $props, $setup, $data, $options) {
-  return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)("div", _hoisted_1, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_2, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_3, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_4, [_hoisted_5, $props.item.organization ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)("div", _hoisted_6, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_7, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("img", {
-    src: $props.item.organization.wallpaper,
-    alt: $props.item.organization.title
+  return _ctx.storage.booking ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)("div", _hoisted_1, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_2, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_3, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_4, [_hoisted_5, _ctx.storage.booking.organization ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)("div", _hoisted_6, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_7, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("img", {
+    src: _ctx.storage.booking.organization.wallpaper,
+    alt: _ctx.storage.booking.organization.title
   }, null, 8
   /* PROPS */
   , ["src", "alt"])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_8, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("img", {
-    src: $props.item.organization.image,
-    alt: $props.item.organization.title
+    src: _ctx.storage.booking.organization.image,
+    alt: _ctx.storage.booking.organization.title
   }, null, 8
   /* PROPS */
-  , ["src", "alt"])])])) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true), $props.item.organization ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)("div", _hoisted_9, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_10, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_11, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($props.item.organization.title), 1
+  , ["src", "alt"])])])) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true), _ctx.storage.booking.organization ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)("div", _hoisted_9, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_10, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_11, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(_ctx.storage.booking.organization.title), 1
   /* TEXT */
-  ), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_12, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_13, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($props.item.organization_tables.title), 1
+  ), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_12, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_13, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(_ctx.storage.booking.organization_tables.title), 1
   /* TEXT */
-  ), _hoisted_14, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_15, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($props.item.date), 1
+  ), _hoisted_14, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_15, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(_ctx.storage.booking.date), 1
   /* TEXT */
-  ), _hoisted_16, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_17, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($props.item.time), 1
+  ), _hoisted_16, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_17, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(_ctx.storage.booking.time), 1
   /* TEXT */
   )])])])) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true), _ctx.storage.modal ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)(vue__WEBPACK_IMPORTED_MODULE_0__.Fragment, {
     key: 2
@@ -22962,7 +22978,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
     key: 3
   }, [_hoisted_28], 64
   /* STABLE_FRAGMENT */
-  ))])])])]);
+  ))])])])])) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true);
 }
 
 /***/ }),
@@ -23424,7 +23440,8 @@ app.use((vue_reactive_localstorage__WEBPACK_IMPORTED_MODULE_4___default()), {
   modal: false,
   favorite: [],
   city: '',
-  notifications: []
+  notifications: [],
+  booking: ''
 });
 app.mount('#app');
 

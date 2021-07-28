@@ -49,6 +49,10 @@ class Organization extends Model
         return $this->hasMany(OrganizationImage::class);
     }
 
+    public function getImageAttribute() {
+        return $this->{OrganizationContract::IMAGE}?$this->{OrganizationContract::IMAGE}:($this->{OrganizationContract::CATEGORY_ID}===1?'/img/logo/restaurant.svg':($this->{OrganizationContract::CATEGORY_ID}===2?'/img/logo/cafe.svg':'/img/logo/bar.svg'));
+    }
+
     public function setImageAttribute($value) {
 
         $disk               =   config('backpack.base.root_disk_name');

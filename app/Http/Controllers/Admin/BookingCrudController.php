@@ -7,6 +7,7 @@ use App\Domain\Contracts\OrganizationContract;
 use App\Domain\Contracts\OrganizationTableListContract;
 use App\Domain\Contracts\OrganizationTablesContract;
 use App\Domain\Contracts\UserContract;
+use App\Events\BookingNotification;
 use App\Http\Requests\BookingRequest;
 
 use Backpack\CRUD\app\Http\Controllers\CrudController;
@@ -209,6 +210,7 @@ class BookingCrudController extends CrudController
 
     public function completed($id) {
         $this->bookingService->update($id,[BookingContract::STATUS =>  BookingContract::COMPLETED]);
+        event(new BookingNotification(Booking::where(BookingContract::ID,$id)->first()));
     }
 
     public function bookingStatus($date) {

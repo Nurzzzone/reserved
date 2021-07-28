@@ -65,7 +65,7 @@ class UserController extends Controller
         $user   =   $this->userService->getByPhone($request->input(UserContract::PHONE));
 
         if (!$user) {
-            $password   =   Random::generate(6);
+            $password   =   rand(100000,999999);
             $user   =   $this->userService->adminCreate([
                 UserContract::USER_ID   =>  $request->input(UserContract::USER_ID),
                 UserContract::NAME  =>  $request->input(UserContract::NAME),
@@ -93,11 +93,13 @@ class UserController extends Controller
 
         $booking    =   $this->bookingService->create($booking);
 
-        BookingPayment::dispatch([
-            BookingContract::ID =>  $booking->id,
-            BookingContract::ORGANIZATION_ID    =>  $request->input(BookingContract::ORGANIZATION_ID),
-            BookingContract::USER_ID    =>  $user->{UserContract::ID}
-        ]);
+        if (intVal($organization->{BookingContract::PRICE}) > 0) {
+            BookingPayment::dispatch([
+                BookingContract::ID =>  $booking->id,
+                BookingContract::ORGANIZATION_ID    =>  $request->input(BookingContract::ORGANIZATION_ID),
+                BookingContract::USER_ID    =>  $user->{UserContract::ID}
+            ]);
+        }
 
         return $booking;
     }

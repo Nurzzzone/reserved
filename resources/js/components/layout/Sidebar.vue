@@ -42,6 +42,12 @@ export default {
         }
     },
     created() {
+        Echo.private('booking.notification')
+            .listen('BookingNotification', (e) => {
+                alert('Has been published now');
+                console.log(e)
+                console.log("Loaded")
+            });
         this.getUser();
         this.getBookings();
     },
@@ -70,19 +76,20 @@ export default {
                                 play    =   true;
                             }
                         }
+                        this.$emit('updateNotifications',arr.length);
                         this.notifications  =   arr;
                         if (play) {
                             document.getElementById('notification').play();
                         }
                         this.status =   true;
                         setTimeout(function() {
-                            self.getBookings();
+                            //self.getBookings();
                         },1600);
                     }
                 }).catch(error => {
                     this.status =   true;
                     setTimeout(function() {
-                        self.getBookings();
+                        //self.getBookings();
                     },1600);
                 });
             }

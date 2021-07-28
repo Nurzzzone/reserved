@@ -23443,25 +23443,7 @@ window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
  */
 
 
-/*window.io=require('socket.io-client');
-
-window.Echo=new Echo({
-    broadcaster: 'socket.io',
-    host: window.location.hostname + ':6001'
-});*/
-
 window.Pusher = __webpack_require__(/*! pusher-js */ "./node_modules/pusher-js/dist/web/pusher.js");
-/*window.Echo = new Echo({
-    broadcaster: 'pusher',
-    key: 'e23697fdbb3e80ef3f02',
-    cluster: 'ap2',
-    auth: {
-        headers: {
-            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-        }
-    },
-});*/
-
 var user = sessionStorage.getItem('user');
 
 if (user !== null) {

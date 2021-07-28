@@ -18740,8 +18740,10 @@ __webpack_require__.r(__webpack_exports__);
     this.getBookings();
   },
   mounted: function mounted() {
+    var _this = this;
+
     window.Echo["private"]('booking.notification').listen('.booking.completed', function (e) {
-      document.getElementById('notification').play();
+      _this.notification(e);
     });
   },
   methods: {
@@ -18753,8 +18755,22 @@ __webpack_require__.r(__webpack_exports__);
         this.user = JSON.parse(sessionStorage.user);
       }
     },
+    notification: function notification(data) {
+      var status = true;
+      this.notifications.forEach(function (element) {
+        if (element.id === data.booking.id) {
+          status = false;
+        }
+      });
+
+      if (status) {
+        document.getElementById('notification').play();
+        this.notifications.unshift(data.booking);
+        console.log(data.booking);
+      }
+    },
     getBookings: function getBookings() {
-      var _this = this;
+      var _this2 = this;
 
       if (this.user && this.status) {
         this.status = false;
@@ -18769,29 +18785,25 @@ __webpack_require__.r(__webpack_exports__);
             for (var i = 0; i < data.data.length; i++) {
               arr.push(data.data[i]);
 
-              if (!_this.storage.notifications.includes(data.data[i].id)) {
-                _this.storage.notifications.push(data.data[i].id);
+              if (!_this2.storage.notifications.includes(data.data[i].id)) {
+                _this2.storage.notifications.push(data.data[i].id);
 
                 play = true;
               }
             }
 
-            _this.$emit('updateNotifications', arr.length);
+            _this2.$emit('updateNotifications', arr.length);
 
-            _this.notifications = arr;
+            _this2.notifications = arr;
 
             if (play) {
               document.getElementById('notification').play();
             }
 
-            _this.status = true;
-            setTimeout(function () {//self.getBookings();
-            }, 1600);
+            _this2.status = true;
           }
         })["catch"](function (error) {
-          _this.status = true;
-          setTimeout(function () {//self.getBookings();
-          }, 1600);
+          _this2.status = true;
         });
       }
     },

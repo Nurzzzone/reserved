@@ -48,7 +48,7 @@ export default {
     mounted() {
         window.Echo.private('booking.notification')
             .listen('.booking.completed', (e) => {
-                document.getElementById('notification').play();
+                this.notification(e);
             });
         },
     methods: {
@@ -58,6 +58,19 @@ export default {
         getUser: function() {
             if (this.storage.token && sessionStorage.user) {
                 this.user   =   JSON.parse(sessionStorage.user);
+            }
+        },
+        notification: function(data) {
+            let status  =   true;
+            this.notifications.forEach(element => {
+                if (element.id === data.booking.id) {
+                    status  =   false;
+                }
+            });
+            if (status) {
+                document.getElementById('notification').play();
+                this.notifications.unshift(data.booking);
+                console.log(data.booking);
             }
         },
         getBookings: function() {
@@ -82,15 +95,9 @@ export default {
                             document.getElementById('notification').play();
                         }
                         this.status =   true;
-                        setTimeout(function() {
-                            //self.getBookings();
-                        },1600);
                     }
                 }).catch(error => {
                     this.status =   true;
-                    setTimeout(function() {
-                        //self.getBookings();
-                    },1600);
                 });
             }
         },

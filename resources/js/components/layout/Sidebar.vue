@@ -42,15 +42,16 @@ export default {
         }
     },
     created() {
-        Echo.private('booking.notification')
-            .listen('BookingNotification', (e) => {
-                alert('Has been published now');
-                console.log(e)
-                console.log("Loaded")
-            });
         this.getUser();
         this.getBookings();
     },
+    mounted() {
+        console.log('there');
+        window.Echo.private('booking.notification')
+            .listen('BookingNotification', (e) => {
+                alert('Has been published now');
+            });
+        },
     methods: {
         comment: function(key) {
             this.item   =   this.notifications[key];

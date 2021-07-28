@@ -18736,13 +18736,14 @@ __webpack_require__.r(__webpack_exports__);
     };
   },
   created: function created() {
-    Echo["private"]('booking.notification').listen('BookingNotification', function (e) {
-      alert('Has been published now');
-      console.log(e);
-      console.log("Loaded");
-    });
     this.getUser();
     this.getBookings();
+  },
+  mounted: function mounted() {
+    console.log('there');
+    window.Echo["private"]('booking.notification').listen('BookingNotification', function (e) {
+      alert('Has been published now');
+    });
   },
   methods: {
     comment: function comment(key) {
@@ -23443,13 +23444,36 @@ window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
  */
 
 
+/*window.io=require('socket.io-client');
+
+window.Echo=new Echo({
+    broadcaster: 'socket.io',
+    host: window.location.hostname + ':6001'
+});*/
+
 window.Pusher = __webpack_require__(/*! pusher-js */ "./node_modules/pusher-js/dist/web/pusher.js");
-window.Echo = new laravel_echo__WEBPACK_IMPORTED_MODULE_0__.default({
-  broadcaster: 'pusher',
-  key: "",
-  cluster: "mt1",
-  forceTLS: true
-});
+/*window.Echo = new Echo({
+    broadcaster: 'pusher',
+    key: 'e23697fdbb3e80ef3f02',
+    cluster: 'ap2',
+    auth: {
+        headers: {
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        }
+    },
+});*/
+
+var user = sessionStorage.getItem('user');
+
+if (user !== null) {
+  user = JSON.parse(user);
+  window.Echo = new laravel_echo__WEBPACK_IMPORTED_MODULE_0__.default({
+    broadcaster: 'pusher',
+    key: 'e23697fdbb3e80ef3f02',
+    cluster: 'ap2',
+    authEndpoint: '/api/token/' + user.api_token
+  });
+}
 
 /***/ }),
 

@@ -113,6 +113,7 @@ Route::get('/register',[UserController::class,'register']);
 Route::post('/register',[UserController::class,'register']);
 
 Route::get('/token/{token}', [UserController::class,'token']);
+Route::post('/token/{token}', [UserController::class,'token']);
 
 Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();

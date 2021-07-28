@@ -8,12 +8,13 @@ use Illuminate\Broadcasting\InteractsWithSockets;
 use Illuminate\Broadcasting\PresenceChannel;
 use Illuminate\Broadcasting\PrivateChannel;
 use Illuminate\Contracts\Broadcasting\ShouldBroadcast;
+use Illuminate\Contracts\Broadcasting\ShouldBroadcastNow;
 use Illuminate\Foundation\Events\Dispatchable;
 use Illuminate\Queue\SerializesModels;
 
 use App\Models\Booking;
 
-class BookingNotification implements ShouldBroadcast
+class BookingNotification implements ShouldBroadcastNow
 {
     use Dispatchable, InteractsWithSockets, SerializesModels;
     public $booking;
@@ -25,7 +26,7 @@ class BookingNotification implements ShouldBroadcast
 
     public function broadcastOn()
     {
-        return new PrivateChannel('booking.notification');
+        return new Channel('booking.notification');
     }
 
     public function broadcastAs(): string

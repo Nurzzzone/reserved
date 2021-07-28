@@ -166,7 +166,8 @@ class UserController extends Controller
     {
         $user   =   $this->userService->getByApiToken($token);
         if ($user) {
-            return new UserResource($user);
+            Auth::login($user);
+            return Auth::user();
         }
         return response(['message'  =>  'token expired'],404);
     }

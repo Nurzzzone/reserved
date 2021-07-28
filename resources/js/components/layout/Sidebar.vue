@@ -197,4 +197,9 @@ export default {
             border: none;
         }
     }
+    @media only screen and (max-width: 768px) {
+        .sidebar {
+            display: none;
+        }
+    }
 </style>

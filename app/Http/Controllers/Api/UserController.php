@@ -60,6 +60,16 @@ class UserController extends Controller
         return $user;
     }
 
+    public function authToken($token)
+    {
+        $user   =   $this->userService->getByApiToken($token);
+        if ($user) {
+            Auth::login($user);
+            return Auth::user();
+        }
+        return response(['message'  =>  'Пользователь не найден'],404);
+    }
+
     public function booking(Request $request)
     {
         $user   =   $this->userService->getByPhone($request->input(UserContract::PHONE));
@@ -166,8 +176,7 @@ class UserController extends Controller
     {
         $user   =   $this->userService->getByApiToken($token);
         if ($user) {
-            Auth::login($user);
-            return Auth::user();
+            return new UserResource($user);
         }
         return response(['message'  =>  'token expired'],404);
     }

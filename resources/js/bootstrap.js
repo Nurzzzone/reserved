@@ -45,6 +45,6 @@ if (user !== null) {
         broadcaster: 'pusher',
         key: 'e23697fdbb3e80ef3f02',
         cluster: 'ap2',
-        authEndpoint: '/api/token/'+user.api_token,
+        authEndpoint: '/api/user/token/'+user.api_token,
     });
 }

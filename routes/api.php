@@ -105,6 +105,7 @@ Route::prefix('user')->group(function() {
     Route::get('phone/{phone}',[UserController::class,'getByPhone'])->name('user.phone');
     Route::post('booking',[UserController::class,'booking'])->name('user.booking');
     Route::post('new',[UserController::class,'guest'])->name('user.guest');
+    Route::post('token/{token}',[UserController::class,'authToken'])->name('user.authToken');
 });
 
 Route::get('/sms_resend/{phone}',[UserController::class,'smsResend']);

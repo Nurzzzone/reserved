@@ -31,6 +31,7 @@ use App\Http\Requests\User\UserCreateRequest;
 use App\Http\Requests\User\UserGuestRequest;
 use App\Http\Requests\User\UserUpdateRequest;
 use App\Http\Requests\User\UserPasswordRequest;
+use Pusher\Pusher;
 
 class UserController extends Controller
 {
@@ -60,12 +61,12 @@ class UserController extends Controller
         return $user;
     }
 
-    public function authToken($token)
+    public function authToken($token, Request $request)
     {
         $user   =   $this->userService->getByApiToken($token);
         if ($user) {
-            Auth::login($user);
-            return Auth::user();
+            $pusher =   new Pusher('e23697fdbb3e80ef3f02', '2ea1521a812e703e95df', '1241620');
+            return $pusher->socket_auth($request->get('channel_name'), $request->get('socket_id'));
         }
         return response(['message'  =>  'Пользователь не найден'],404);
     }

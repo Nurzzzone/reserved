@@ -46,10 +46,9 @@ export default {
         this.getBookings();
     },
     mounted() {
-        console.log('there');
         window.Echo.private('booking.notification')
-            .listen('BookingNotification', (e) => {
-                alert('Has been published now');
+            .listen('.booking.completed', (e) => {
+                document.getElementById('notification').play();
             });
         },
     methods: {

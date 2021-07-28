@@ -18740,9 +18740,8 @@ __webpack_require__.r(__webpack_exports__);
     this.getBookings();
   },
   mounted: function mounted() {
-    console.log('there');
-    window.Echo["private"]('booking.notification').listen('BookingNotification', function (e) {
-      alert('Has been published now');
+    window.Echo["private"]('booking.notification').listen('.booking.completed', function (e) {
+      document.getElementById('notification').play();
     });
   },
   methods: {

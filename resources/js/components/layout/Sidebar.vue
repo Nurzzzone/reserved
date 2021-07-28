@@ -64,6 +64,7 @@ export default {
             }
         },
         notification: function(data) {
+            console.log(data);
             let status  =   true;
             let index   =   0;
             let remove  =   -1;

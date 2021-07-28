@@ -18758,6 +18758,7 @@ __webpack_require__.r(__webpack_exports__);
       }
     },
     notification: function notification(data) {
+      console.log(data);
       var status = true;
       var index = 0;
       var remove = -1;

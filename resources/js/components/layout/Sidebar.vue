@@ -180,7 +180,7 @@ export default {
             }
         }
         &-view {
-            right: 0;
+            right: -10px;
         }
         &-empty {
             background: url(/img/logo/bell-green.svg) no-repeat center;

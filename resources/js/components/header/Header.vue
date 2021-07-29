@@ -39,7 +39,7 @@
                             </template>
                             <template v-else>
                                 <li class="ml-3 d-flex">
-                                    <div class="header-notification" :class="{'header-notification-icon-message':(notifications > 0),'header-notification-icon':(notifications === 0)}"  @click="view(1)"></div>
+                                    <div class="header-notification" :class="{'header-notification-icon-message':(storage.sidebar.notifications > 0),'header-notification-icon':(storage.sidebar.notifications === 0)}"  @click="view(1)"></div>
                                     <div class="header-main position-relative">
                                         <div class="header-profile" v-if="user.name">
                                             <div class="header-profile-main font-weight-bold text-capitalize">
@@ -68,8 +68,8 @@
             </div>
         </nav>
     </header>
-    <sidebar :view="sidebar" @closeSide="closeSidebar" @updateNotifications="updateNotifications"></sidebar>
     <Auth></Auth>
+    <sidebar></sidebar>
 </template>
 
 <script>
@@ -83,12 +83,7 @@ export default {
     },
     data() {
         return {
-            notifications: 0,
             notification: false,
-            sidebar: {
-                show: false,
-                view: 0
-            },
             login: false,
             user: false
         }
@@ -98,20 +93,14 @@ export default {
         this.auth();
     },
     methods: {
-        updateNotifications: function(value) {
-            this.notifications  =   value;
-        },
         notificationView: function() {
             if (window.location.pathname !== '/profile/history') {
                 this.notification   =   true;
             }
         },
-        closeSidebar: function() {
-              this.sidebar.show =   false;
-        },
         view: function(index) {
-            this.sidebar.view   =   index;
-            this.sidebar.show   =   true;
+            this.storage.sidebar.view   =   index;
+            this.storage.sidebar.show   =   true;
         },
         exit: function() {
             this.login  =   true;

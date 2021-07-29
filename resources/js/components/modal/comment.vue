@@ -9,7 +9,6 @@
                     <div class="form-group m-0" v-if="storage.booking.organization">
                         <div class="comment-wallpaper">
                             <img :src="storage.booking.organization.wallpaper" :alt="storage.booking.organization.title" v-if="storage.booking.organization.wallpaper">
-                            <img :src="" :alt="storage.booking.organization.title">
                         </div>
                         <div class="comment-logo">
                             <img :src="storage.booking.organization.image" :alt="storage.booking.organization.title">

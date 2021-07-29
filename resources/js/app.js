@@ -18,6 +18,11 @@ app.use(ReactiveStorage, {
     city: '',
     notifications: [],
     booking: '',
+    sidebar: {
+        show: false,
+        view: 0,
+        notifications: 0,
+    }
 });
 
 app.mount('#app');

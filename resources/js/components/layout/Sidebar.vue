@@ -1,11 +1,11 @@
 <template>
 <!--    <comment :item="item" ></comment>-->
-    <div class="sidebar" :class="{'sidebar-view':view.show}">
+    <div class="sidebar" :class="{'sidebar-view':this.storage.sidebar.show}">
         <div class="sidebar-header">
-            <div class="sidebar-close" @click="closeSidebar()"></div>
+            <div class="sidebar-close" @click="this.storage.sidebar.show =   false"></div>
             <button class="sidebar-title">Уведомления</button>
         </div>
-        <audio src="/audio/notification.wav" autoload="true" id="notification" mute="true"></audio>
+        <audio src="/audio/notification.wav" :autoload="true" id="notification" :mute="true"></audio>
         <div class="sidebar-notifications" v-if="notifications.length > 0">
             <div class="sidebar-notification-main" v-for="(notification,key) in notifications" :key="key">
                 <div class="sidebar-notification">
@@ -17,8 +17,7 @@
                         <div class="sidebar-notification-detail-description text-white">{{notification.date}} • {{notification.time}}</div>
                     </div>
                 </div>
-                <!--@click="comment(key)"  data-toggle="modal" data-target="#comment_modal"-->
-                <a class="w-100 p-0" @click="comment(key)" data-toggle="modal" data-target="#comment_modal"><button class="sidebar-notification-comment w-100" >Оставить комментарии</button></a>
+                <a class="sidebar-notification-link p-0" @click="comment(key)" data-toggle="modal" data-target="#comment_modal"><button class="sidebar-notification-comment sidebar-notification-link" >Оставить комментарии</button></a>
             </div>
         </div>
         <div class="sidebar-empty" v-else></div>
@@ -48,15 +47,16 @@ export default {
     },
     mounted() {
         window.Echo.private('booking.notification')
-            .listen('.booking.completed', (e) => {
-                this.notification(e);
-            });
-        },
+        .listen('.booking.completed', (e) => {
+            this.notification(e);
+        });
+    },
     methods: {
         comment: function(key) {
             this.item   =   this.notifications[key];
             this.storage.booking    =   this.item;
             this.storage.modal  =   true;
+            this.storage.sidebar.show =   false
         },
         getUser: function() {
             if (this.storage.token && sessionStorage.user) {
@@ -64,7 +64,6 @@ export default {
             }
         },
         notification: function(data) {
-            console.log(data);
             let status  =   true;
             let index   =   0;
             let remove  =   -1;
@@ -80,16 +79,20 @@ export default {
             if (status) {
                 this.notifications.unshift(data.booking);
                 this.storage.notifications.push(data.booking.id);
-                document.getElementById('notification').play();
+                this.play();
             } else if (remove > -1) {
                 this.notifications.splice(remove,1);
             }
-            this.$emit('updateNotifications',this.notifications.length);
+            this.storage.sidebar.notifications  =   this.notifications.length;
+        },
+        play: function(play = true) {
+            if (play && this.user.push_notification === 'on') {
+                document.getElementById('notification').play();
+            }
         },
         getBookings: function() {
             if (this.user && this.status) {
                 this.status =   false;
-                let self    =   this;
                 axios.get('/api/booking/completed/'+this.user.id).then(response => {
                     let data    =   response.data;
                     if (data.hasOwnProperty('data')) {
@@ -102,21 +105,16 @@ export default {
                                 play    =   true;
                             }
                         }
-                        this.$emit('updateNotifications',arr.length);
                         this.notifications  =   arr;
-                        if (play) {
-                            document.getElementById('notification').play();
-                        }
+                        this.storage.sidebar.notifications  =   arr.length;
                         this.status =   true;
+                        this.play(play);
                     }
                 }).catch(error => {
                     this.status =   true;
                 });
             }
         },
-        closeSidebar: function() {
-            this.$emit('closeSide');
-        }
     }
 }
 </script>
@@ -142,6 +140,9 @@ export default {
             gap: 10px;
             flex-basis: auto;
             align-items: center;
+            &-link {
+                width: 100%;
+            }
             &-main {
                 margin-top: 15px;
                 background: #008264;
@@ -218,7 +219,48 @@ export default {
     }
     @media only screen and (max-width: 768px) {
         .sidebar {
-            display: none;
+            z-index: 10000;
+            width: 100%;
+            &-header {
+                margin: 10px;
+                gap: 10px;
+            }
+            &-title {
+                font-size: 12px;
+            }
+            &-notifications {
+                margin: 10px;
+            }
+            &-notification {
+                gap: 5px;
+                &-icon {
+                    width: 35px;
+                    height: 35px;
+                }
+                &-detail {
+                    &-title {
+                        font-size: 11px;
+                    }
+                    &-description {
+                        font-size: 10px;
+                    }
+                }
+                &-link {
+                    width: auto;
+                }
+                &-main {
+                    margin-top: 5px;
+                    padding: 10px;
+                    display: flex;
+                    align-items: center;
+                    justify-content: space-between;
+                }
+                &-comment {
+                    font-size: 10px;
+                    margin-top: 0;
+                    height: 30px;
+                }
+            }
         }
     }
 </style>

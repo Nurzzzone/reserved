@@ -127,7 +127,7 @@ export default {
         overflow: auto;
         width: 400px;
         height: 100%;
-        right: -100%;
+        right: -120%;
         top: 0;
         bottom: 0;
         z-index: 1000;
@@ -180,7 +180,7 @@ export default {
             }
         }
         &-view {
-            right: -10px;
+            right: 0;
         }
         &-empty {
             background: url(/img/logo/bell-green.svg) no-repeat center;

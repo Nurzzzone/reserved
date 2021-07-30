@@ -122,7 +122,6 @@ class BookingController extends Controller
                 $booking->save();
             }
         }
-
         return new BookingResource($booking);
     }
 

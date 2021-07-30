@@ -46,10 +46,12 @@ export default {
         this.getBookings();
     },
     mounted() {
-        window.Echo.private('booking.notification')
-        .listen('.booking.completed', (e) => {
-            this.notification(e);
-        });
+        if (this.user) {
+            window.Echo.private('booking.notification')
+            .listen('.booking.completed', (e) => {
+                this.notification(e);
+            });
+        }
     },
     methods: {
         comment: function(key) {

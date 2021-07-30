@@ -18740,9 +18740,11 @@ __webpack_require__.r(__webpack_exports__);
   mounted: function mounted() {
     var _this = this;
 
-    window.Echo["private"]('booking.notification').listen('.booking.completed', function (e) {
-      _this.notification(e);
-    });
+    if (this.user) {
+      window.Echo["private"]('booking.notification').listen('.booking.completed', function (e) {
+        _this.notification(e);
+      });
+    }
   },
   methods: {
     comment: function comment(key) {

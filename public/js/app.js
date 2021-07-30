@@ -18741,7 +18741,7 @@ __webpack_require__.r(__webpack_exports__);
     var _this = this;
 
     if (this.user) {
-      window.Echo["private"]('booking.notification').listen('.booking.completed', function (e) {
+      window.Echo["private"]('booking.notification.' + this.user.id).listen('.booking.completed', function (e) {
         _this.notification(e);
       });
     }

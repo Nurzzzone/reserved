@@ -17,6 +17,6 @@ Broadcast::channel('App.Models.User.{id}', function ($user, $id) {
     return (int) $user->id === (int) $id;
 });
 
-Broadcast::channel('private-booking.notification', function ($user,$booking) {
-    return false;
+Broadcast::channel('private-booking.notification.{id}', function ($user,$booking) {
+    return true;
 });

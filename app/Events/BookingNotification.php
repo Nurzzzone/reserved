@@ -23,7 +23,7 @@ class BookingNotification implements ShouldBroadcast
 
     public function broadcastOn()
     {
-        return new PrivateChannel('booking.notification');
+        return new PrivateChannel('booking.notification.'.$this->booking->user_id);
     }
 
     public function broadcastAs(): string

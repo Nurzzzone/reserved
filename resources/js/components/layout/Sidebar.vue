@@ -47,7 +47,7 @@ export default {
     },
     mounted() {
         if (this.user) {
-            window.Echo.private('booking.notification')
+            window.Echo.private('booking.notification.'+this.user.id)
             .listen('.booking.completed', (e) => {
                 this.notification(e);
             });

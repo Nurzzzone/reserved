@@ -105,8 +105,8 @@ export default {
         exit: function() {
             this.login  =   true;
             this.storage.token  =   '';
-            sessionStorage.user =   '';
-            this.user   =   {};
+            sessionStorage.removeItem('user');
+            this.user   =   false;
             window.location.href    = '/';
         },
         auth: function() {

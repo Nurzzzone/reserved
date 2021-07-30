@@ -18433,8 +18433,8 @@ __webpack_require__.r(__webpack_exports__);
     exit: function exit() {
       this.login = true;
       this.storage.token = '';
-      sessionStorage.user = '';
-      this.user = {};
+      sessionStorage.removeItem('user');
+      this.user = false;
       window.location.href = '/';
     },
     auth: function auth() {

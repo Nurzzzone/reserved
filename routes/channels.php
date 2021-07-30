@@ -18,5 +18,5 @@ Broadcast::channel('App.Models.User.{id}', function ($user, $id) {
 });
 
 Broadcast::channel('private-booking.notification', function ($user,$booking) {
-    return true;
+    return false;
 });

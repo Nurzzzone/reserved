@@ -30,4 +30,5 @@ Route::group([
     Route::crud('iiko', 'IikoCrudController');
     Route::crud('iikotables', 'IikoTablesCrudController');
     Route::crud('iikotablelist', 'IikoTableListCrudController');
+    Route::crud('telegram', 'TelegramCrudController');
 }); // this should be the absolute last line of this file

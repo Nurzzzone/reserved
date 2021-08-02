@@ -54,3 +54,5 @@
 
 
 
+
+<li class='nav-item'><a class='nav-link' href='{{ backpack_url('telegram') }}'><i class='nav-icon lab la-telegram'></i> Телеграм</a></li>

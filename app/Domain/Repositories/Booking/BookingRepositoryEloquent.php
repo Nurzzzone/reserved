@@ -9,6 +9,8 @@ use App\Models\Booking;
 use Carbon\Carbon;
 use DateTime;
 
+use App\Jobs\TelegramNotification;
+
 class BookingRepositoryEloquent implements BookingRepositoryInterface
 {
     protected $take =   15;
@@ -42,12 +44,20 @@ class BookingRepositoryEloquent implements BookingRepositoryInterface
     public function create(array $data)
     {
         $booking    =   Booking::create($data);
+        if ($booking->{BookingContract::STATUS} === BookingContract::ON) {
+            TelegramNotification::dispatch($booking);
+        }
         return $this->getById($booking->{BookingContract::ID});
     }
 
     public function update($id, array $input)
     {
         Booking::where(BookingContract::ID,$id)->update($input);
+        if (array_key_exists(BookingContract::STATUS,$input)) {
+            if ($input[BookingContract::STATUS] === BookingContract::ON) {
+                TelegramNotification::dispatch($this->getById($id));
+            }
+        }
     }
 
     public function delete($id):void
@@ -183,6 +193,7 @@ class BookingRepositoryEloquent implements BookingRepositoryInterface
         Booking::where(BookingContract::ID,$id)->update([
             BookingContract::STATUS =>  BookingContract::ON
         ]);
+        TelegramNotification::dispatch($this->getById($id));
     }
 
     public function failure($id):void {

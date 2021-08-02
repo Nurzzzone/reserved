@@ -8,6 +8,9 @@ use Carbon\Carbon;
 
 class MainContract
 {
+    const BOOKINGS  =   'bookings';
+    const REVIEWS   =   'reviews';
+    const ALL   =   'all';
     const SEATING_CAPACITY  =   'seatingCapacity';
     const IIKO_TABLE_ID =   'iiko_table_id';
     const IIKO_MAIN_ID  =   'iiko_main_id';

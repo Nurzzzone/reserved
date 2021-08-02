@@ -12,10 +12,16 @@ use App\Http\Controllers\Api\PaymentController;
 use App\Http\Controllers\Api\ContactController;
 use App\Http\Controllers\Api\CardController;
 use App\Http\Controllers\Api\LanguageController;
+use App\Http\Controllers\Api\TelegramController;
 
 Route::prefix('table')->group(function() {
     Route::get('status/lock/{id}',[OrganizationController::class,'tableLock']);
     Route::get('status/unlock/{id}',[OrganizationController::class,'tableUnlock']);
+});
+
+Route::prefix('telegram')->group(function() {
+    Route::get('user/{userId}',[TelegramController::class,'getByUserId'])->name('telegram.user.id');
+    Route::get('id/{id}',[TelegramController::class,'getById'])->name('telegram.id');
 });
 
 Route::prefix('contacts')->group(function() {

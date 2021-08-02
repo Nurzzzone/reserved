@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers\Api;
 
-
 use App\Domain\Contracts\OrganizationContract;
 use App\Domain\Contracts\PaymentContract;
 use App\Domain\Contracts\UserContract;

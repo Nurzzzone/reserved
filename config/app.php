@@ -193,6 +193,7 @@ return [
         App\Providers\Repositories\IikoRepositoryProvider::class,
         App\Providers\Repositories\IikoTablesRepositoryProvider::class,
         App\Providers\Repositories\IikoTableListRepositoryProvider::class,
+        App\Providers\Repositories\TelegramRepositoryProvider::class,
     ],
 
     /*

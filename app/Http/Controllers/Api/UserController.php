@@ -98,13 +98,13 @@ class UserController extends Controller
             BookingContract::PRICE  =>  $organization->{BookingContract::PRICE}
         ];
 
-        if (intVal($organization->{BookingContract::PRICE}) === 0) {
+        if ((int)$organization->{BookingContract::PRICE} === 0) {
             $booking[BookingContract::STATUS]   =   BookingContract::ON;
         }
 
         $booking    =   $this->bookingService->create($booking);
 
-        if (intVal($organization->{BookingContract::PRICE}) !== 0) {
+        if ((int)$organization->{BookingContract::PRICE} > 0) {
             BookingPayment::dispatch([
                 BookingContract::ID =>  $booking->id,
                 BookingContract::ORGANIZATION_ID    =>  $request->input(BookingContract::ORGANIZATION_ID),

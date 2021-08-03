@@ -9,11 +9,7 @@ use App\Domain\Repositories\Telegram\TelegramRepositoryInterface;
 
 class TelegramRepositoryProvider extends ServiceProvider
 {
-    /**
-     * Register services.
-     *
-     * @return void
-     */
+
     public function register()
     {
         $this->app->bind(
@@ -22,11 +18,6 @@ class TelegramRepositoryProvider extends ServiceProvider
         );
     }
 
-    /**
-     * Bootstrap services.
-     *
-     * @return void
-     */
     public function boot()
     {
         //

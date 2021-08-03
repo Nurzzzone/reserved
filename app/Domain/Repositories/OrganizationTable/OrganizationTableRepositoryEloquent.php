@@ -24,4 +24,12 @@ class OrganizationTableRepositoryEloquent implements OrganizationTableRepository
             [OrganizationTablesContract::STATUS,OrganizationTablesContract::ENABLED]
         ])->get();
     }
+
+    public function getById($id)
+    {
+        return OrganizationTables::where([
+            [OrganizationTablesContract::ID,$id],
+            [OrganizationTablesContract::STATUS,OrganizationTablesContract::ENABLED]
+        ])->first();
+    }
 }

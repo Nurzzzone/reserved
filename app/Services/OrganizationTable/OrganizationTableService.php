@@ -17,4 +17,9 @@ class OrganizationTableService extends BaseService
     public function getByOrganizationId($id) {
         return $this->organizationTableRepository->getByOrganizationId($id);
     }
+
+    public function getById($id)
+    {
+        return $this->organizationTableRepository->getById($id);
+    }
 }

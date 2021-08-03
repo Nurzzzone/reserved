@@ -20,6 +20,8 @@ use App\Events\ReviewCreated;
 use App\Http\Resources\ReviewResource;
 use App\Http\Requests\Review\ReviewCreateRequest;
 
+use App\Jobs\TelegramReviewNotification;
+
 class ReviewController extends Controller
 {
     protected $paginate =   1;
@@ -33,12 +35,14 @@ class ReviewController extends Controller
 
     public function create(ReviewCreateRequest $reviewCreateRequest)
     {
-        $review =   $this->reviewService->create($reviewCreateRequest->validated());
+        $review     =   $this->reviewService->create($reviewCreateRequest->validated());
         $this->bookingService->update($review->{ReviewContract::BOOKING_ID},[
             BookingContract::COMMENT    =>  BookingContract::OFF
         ]);
         event(new ReviewCreated($review));
-        event(new BookingNotification(Booking::with('organization','organizationTables')->where(BookingContract::ID,$review->{ReviewContract::BOOKING_ID})->first()));
+        $booking    =   Booking::with('organization','organizationTables')->where(BookingContract::ID,$review->{ReviewContract::BOOKING_ID})->first();
+        event(new BookingNotification($booking));
+        TelegramReviewNotification::dispatch($review, $booking);
         return new ReviewResource($this->reviewService->getById($review->id));
     }
 

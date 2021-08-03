@@ -84,8 +84,6 @@ class Telegram
     {
         $telegramChats  =   $this->telegramChatService->getByTelegramId($telegram->{TelegramContract::ID});
         $arr    =   [];
-        print_r($telegramChats);
-        exit;
         foreach ($telegramChats as &$telegramChat) {
             $arr[]  =   $telegramChat->{TelegramChatContract::TELEGRAM_CHAT_ID};
         }

@@ -96,6 +96,11 @@ class Telegram
             $message    .=  '📌 Секция: '.$section->{OrganizationTablesContract::NAME}."\n\n";
         }
 
+        $user   =   $this->userService->getById($booking->{BookingContract::USER_ID});
+
+        $message    .=  '✏️Имя: '.$user->{UserContract::NAME}."\n";
+        $message    .=  '📞 Телефон: +'.$user->{UserContract::PHONE}."\n\n";
+
         $message    .=  'Рейтинг: '.str_repeat('⭐ ', $review->rating);
         $message    .=  "\n\n";
         $message    .=  'Комментарии: '.$review->comment;

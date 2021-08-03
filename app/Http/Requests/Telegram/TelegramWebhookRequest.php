@@ -19,7 +19,6 @@ class TelegramWebhookRequest extends FormRequest
     {
         return [
             TelegramContract::MESSAGE   =>  'required',
-            TelegramContract::TEXT      =>  'nullable'
         ];
     }
 

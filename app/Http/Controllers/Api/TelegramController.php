@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Api;
 
+use App\Domain\Contracts\TelegramContract;
 use App\Http\Controllers\Controller;
 use App\Http\Resources\Telegram\TelegramResource;
 use Illuminate\Http\Request;
@@ -34,8 +35,10 @@ class TelegramController extends Controller
         return response(['message'  =>  'Телеграм не найден'],404);
     }
 
-    public function webhook(TelegramWebhookRequest $telegramWebhookRequest)
+    public function webhook($id, TelegramWebhookRequest $telegramWebhookRequest)
     {
-        Log::info('telegram',$telegramWebhookRequest->validated());
+        $data   =   $telegramWebhookRequest->validated();
+        Log::info('telegram',$data[TelegramContract::MESSAGE]);
     }
+
 }

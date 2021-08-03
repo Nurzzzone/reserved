@@ -37,8 +37,9 @@ class TelegramController extends Controller
 
     public function webhook($id, TelegramWebhookRequest $telegramWebhookRequest)
     {
-        $data   =   $telegramWebhookRequest->validated();
-        Log::info('telegram',$data[TelegramContract::MESSAGE]);
+        $data   =   $telegramWebhookRequest->validated()[TelegramContract::MESSAGE];
+        $chat   =   $data[TelegramContract::CHAT][TelegramContract::ID];
+        Log::info('telegram',$chat);
     }
 
 }

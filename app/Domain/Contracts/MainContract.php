@@ -33,6 +33,7 @@ class MainContract
     const CURRENCY  =   'currency';
     const PAYMENT_URL   =   'payment';
     const MESSAGE   =   'message';
+    const CHAT  =   'chat';
     const DESC  =   'desc';
     const REMOVE    =   'remove';
     const REVOKE    =   'revoke';

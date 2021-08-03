@@ -30,6 +30,11 @@ class Telegram
         $this->organizationTableService =   $organizationTableService;
     }
 
+    public function setWebhook($id, $token)
+    {
+        $this->curl->getSend($this->urlHook($id, $token));
+    }
+
     public function booking($telegrams, Booking $booking)
     {
         foreach ($telegrams as &$telegram) {
@@ -139,7 +144,6 @@ class Telegram
             $message    .=  '📌 Секция: '.$section->{OrganizationTablesContract::NAME}."\n\n";
         }
 
-
         $message    .=  '✏️Имя: '.$user->{UserContract::NAME}."\n";
         $message    .=  '📞 Телефон: +'.$user->{UserContract::PHONE};
         return $message;
@@ -153,6 +157,11 @@ class Telegram
     public function urlUpdates($telegram)
     {
         return 'https://api.telegram.org/bot'.$telegram->{TelegramContract::API_TOKEN}.'/getUpdates';
+    }
+
+    public function urlHook($id,$token)
+    {
+        return 'https://api.telegram.org/bot'.$token.'/setWebhook?url=https://reserved-app.com/api/telegram/webhook/'.$id;
     }
 
 }

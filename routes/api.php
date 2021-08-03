@@ -22,6 +22,7 @@ Route::prefix('table')->group(function() {
 Route::prefix('telegram')->group(function() {
     Route::get('user/{userId}',[TelegramController::class,'getByUserId'])->name('telegram.user.id');
     Route::get('id/{id}',[TelegramController::class,'getById'])->name('telegram.id');
+    Route::post('webhook/{id}',[TelegramController::class,'webhook'])->name('telegram.webhook');
 });
 
 Route::prefix('contacts')->group(function() {

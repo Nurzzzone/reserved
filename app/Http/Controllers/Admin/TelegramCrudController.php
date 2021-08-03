@@ -6,6 +6,7 @@ use App\Http\Requests\TelegramRequest;
 use Backpack\CRUD\app\Http\Controllers\CrudController;
 use Backpack\CRUD\app\Library\CrudPanel\CrudPanelFacade as CRUD;
 use App\Domain\Contracts\TelegramContract;
+use App\Helpers\Telegram\Telegram;
 
 class TelegramCrudController extends CrudController
 {
@@ -23,11 +24,13 @@ class TelegramCrudController extends CrudController
             $this->crud->addClause('where', TelegramContract::USER_ID, '=',backpack_user()->id);
         }
     }
-    public function store()
+    public function store(Telegram $telegram)
     {
         $this->crud->addField(['type' => 'hidden', 'name' => TelegramContract::USER_ID]);
         $this->crud->getRequest()->request->add([TelegramContract::USER_ID  =>  backpack_user()->id]);
-        return $this->traitStore();
+        $store  =   $this->traitStore();
+        $telegram->setWebhook($this->crud->getCurrentEntry()->{TelegramContract::ID},$this->crud->getCurrentEntry()->{TelegramContract::API_TOKEN});
+        return $store;
     }
 
     protected function setupShowOperation()

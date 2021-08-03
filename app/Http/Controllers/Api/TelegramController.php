@@ -8,6 +8,7 @@ use Illuminate\Http\Request;
 use App\Services\Telegram\TelegramService;
 
 use App\Http\Resources\Telegram\TelegramCollection;
+use Illuminate\Support\Facades\Log;
 
 class TelegramController extends Controller
 {
@@ -28,5 +29,10 @@ class TelegramController extends Controller
            return new TelegramResource($telegram);
        }
         return response(['message'  =>  'Телеграм не найден'],404);
+    }
+
+    public function webhook(Request $request)
+    {
+        Log::info('telegram',$request->all());
     }
 }

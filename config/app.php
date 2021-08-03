@@ -194,6 +194,7 @@ return [
         App\Providers\Repositories\IikoTablesRepositoryProvider::class,
         App\Providers\Repositories\IikoTableListRepositoryProvider::class,
         App\Providers\Repositories\TelegramRepositoryProvider::class,
+        App\Providers\Repositories\TelegramChatRepositoryProvider::class,
     ],
 
     /*

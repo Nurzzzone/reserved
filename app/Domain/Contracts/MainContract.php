@@ -8,6 +8,8 @@ use Carbon\Carbon;
 
 class MainContract
 {
+    const TELEGRAM_ID   =   'telegram_id';
+    const TELEGRAM_CHAT_ID  =   'telegram_chat_id';
     const BOOKINGS  =   'bookings';
     const REVIEWS   =   'reviews';
     const ALL   =   'all';

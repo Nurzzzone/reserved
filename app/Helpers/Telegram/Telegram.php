@@ -94,7 +94,7 @@ class Telegram
     {
         $message    =   $this->ratingEmoji($review->rating).' Новый отзыв'."\n\n";
 
-        $message    .=   '🍽 '.$booking->organizationTables->{BookingContract::TITLE}."\n";
+        $message    .=  '🍽 '.$booking->organizationTables->{BookingContract::TITLE}."\n";
         $message    .=  '📋 ID: '.$booking->{BookingContract::ID}."\n";
         $message    .=  '📅 Дата: '.$booking->{BookingContract::DATE}."\n";
         $message    .=  '⏰ Время: '.$booking->{BookingContract::TIME}."\n";

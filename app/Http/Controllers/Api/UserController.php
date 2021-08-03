@@ -9,6 +9,7 @@ use App\Http\Controllers\Controller;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Auth;
@@ -104,6 +105,8 @@ class UserController extends Controller
 
         $booking    =   $this->bookingService->create($booking);
         if ($organization->{BookingContract::PRICE} > 0) {
+            Log::info('here',$organization->{BookingContract::PRICE});
+            exit('herere');
             BookingPayment::dispatch([
                 BookingContract::ID =>  $booking->id,
                 BookingContract::ORGANIZATION_ID    =>  $request->input(BookingContract::ORGANIZATION_ID),

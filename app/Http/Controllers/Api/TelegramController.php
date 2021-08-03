@@ -43,8 +43,8 @@ class TelegramController extends Controller
     {
         $data   =   $telegramWebhookRequest->validated()[TelegramContract::MESSAGE];
         $chat   =   $data[TelegramContract::CHAT][TelegramContract::ID];
-        if (!$telegramChat = $this->telegramChatService->getByTelegramId($id)) {
-            $telegramChat   =   $this->telegramChatService->create([
+        if (!$this->telegramChatService->getByTelegramId($id)) {
+            $this->telegramChatService->create([
                 TelegramChatContract::TELEGRAM_ID   =>  $id,
                 TelegramChatContract::TELEGRAM_CHAT_ID  =>  $chat,
             ]);
@@ -55,7 +55,6 @@ class TelegramController extends Controller
                 ]);
             }
         }
-
     }
 
 }

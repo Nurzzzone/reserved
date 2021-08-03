@@ -5,6 +5,7 @@ namespace App\Helpers\Telegram;
 use App\Domain\Contracts\BookingContract;
 use App\Domain\Contracts\OrganizationTableListContract;
 use App\Domain\Contracts\OrganizationTablesContract;
+use App\Domain\Contracts\TelegramChatContract;
 use App\Domain\Contracts\TelegramContract;
 use App\Domain\Contracts\UserContract;
 use App\Helpers\Curl\Curl;
@@ -15,19 +16,23 @@ use App\Services\OrganizationTableList\OrganizationTableListService;
 use App\Models\Booking;
 use App\Models\Review;
 
+use App\Services\TelegramChat\TelegramChatService;
+
 class Telegram
 {
     protected $curl;
     protected $userService;
     protected $organizationTableListService;
     protected $organizationTableService;
+    protected $telegramChatService;
 
-    public function __construct(Curl $curl, UserService $userService, OrganizationTableListService $organizationTableListService, OrganizationTableService $organizationTableService)
+    public function __construct(Curl $curl, UserService $userService, OrganizationTableListService $organizationTableListService, OrganizationTableService $organizationTableService, TelegramChatService $telegramChatService)
     {
         $this->curl =   $curl;
         $this->userService  =   $userService;
         $this->organizationTableListService =   $organizationTableListService;
         $this->organizationTableService =   $organizationTableService;
+        $this->telegramChatService  =   $telegramChatService;
     }
 
     public function setWebhook($id, $token)
@@ -77,12 +82,10 @@ class Telegram
 
     public function getChatIds($telegram)
     {
-        $arr        =   [];
-        $chatIds    =   json_decode($this->curl->getSend($this->urlUpdates($telegram)),true);
-        if (array_key_exists('result', $chatIds)) {
-            foreach ($chatIds['result'] as &$chatId) {
-                $arr[]  =   $chatId['message']['chat']['id'];
-            }
+        $telegramChats  =   $this->telegramChatService->getByTelegramId($telegram->{TelegramContract::TELEGRAM_ID});
+        $arr    =   [];
+        foreach ($telegramChats as &$telegramChat) {
+            $arr[]  =   $telegramChat->{TelegramChatContract::TELEGRAM_CHAT_ID};
         }
         return array_unique($arr);
     }

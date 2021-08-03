@@ -103,8 +103,6 @@ class UserController extends Controller
         }
 
         $booking    =   $this->bookingService->create($booking);
-        print_r($organization->{BookingContract::PRICE});
-        exit;
         if ((int)$organization->{BookingContract::PRICE} > 0) {
             BookingPayment::dispatch([
                 BookingContract::ID =>  $booking->id,

@@ -98,7 +98,7 @@ class UserController extends Controller
             BookingContract::PRICE  =>  $organization->{BookingContract::PRICE}
         ];
 
-        if ((int)$organization->{BookingContract::PRICE} === 0) {
+        if ((int)$organization->{BookingContract::PRICE} == 0) {
             $booking[BookingContract::STATUS]   =   BookingContract::ON;
         }
 

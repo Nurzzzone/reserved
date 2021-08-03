@@ -22,7 +22,7 @@ class TelegramChatRepositoryEloquent implements TelegramChatRepositoryInterface
 
     public function update($chatId,$data)
     {
-        TelegramChat::where(TelegramChatContract::TELEGRAM_CHAT_ID,$chatId)->update($data)->limit(1);
+        TelegramChat::where(TelegramChatContract::TELEGRAM_CHAT_ID,$chatId)->update($data);
     }
 
 

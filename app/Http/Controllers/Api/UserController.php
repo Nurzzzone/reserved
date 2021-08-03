@@ -105,6 +105,7 @@ class UserController extends Controller
 
         $booking    =   $this->bookingService->create($booking);
         if ($organization->{BookingContract::PRICE} > 0) {
+            Log::info('why',$organization->{BookingContract::PRICE});
             BookingPayment::dispatch([
                 BookingContract::ID =>  $booking->id,
                 BookingContract::ORGANIZATION_ID    =>  $request->input(BookingContract::ORGANIZATION_ID),

@@ -99,8 +99,7 @@ class UserController extends Controller
             BookingContract::PRICE  =>  (int)$organization->{BookingContract::PRICE}
         ];
 
-        print_r($booking);
-        exit;
+
 
         if ($organization->{BookingContract::PRICE} < 1) {
             $booking[BookingContract::STATUS]   =   BookingContract::ON;

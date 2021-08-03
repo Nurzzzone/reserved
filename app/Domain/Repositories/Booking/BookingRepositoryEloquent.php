@@ -44,7 +44,9 @@ class BookingRepositoryEloquent implements BookingRepositoryInterface
     public function create(array $data)
     {
         $booking    =   Booking::create($data);
-        if ($booking->{BookingContract::STATUS} === BookingContract::ON) {
+        if ($booking->{BookingContract::STATUS} == BookingContract::ON) {
+            print_r($booking);
+            exit;
             TelegramNotification::dispatch($booking);
         }
         return $this->getById($booking->{BookingContract::ID});

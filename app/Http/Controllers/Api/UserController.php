@@ -95,7 +95,7 @@ class UserController extends Controller
             BookingContract::ORGANIZATION_TABLE_LIST_ID  =>  $request->input(BookingContract::ORGANIZATION_TABLE_ID),
             BookingContract::TIME   =>  Time::toLocal($request->input(BookingContract::DATE).' '.$request->input(BookingContract::TIME), $request->input(BookingContract::TIMEZONE)),
             BookingContract::DATE   =>  $request->input(BookingContract::DATE),
-            BookingContract::PRICE  =>  $organization->{BookingContract::PRICE}
+            BookingContract::PRICE  =>  (int)$organization->{BookingContract::PRICE}
         ];
 
         if ((int)$organization->{BookingContract::PRICE} == 0) {
@@ -103,7 +103,7 @@ class UserController extends Controller
         }
 
         $booking    =   $this->bookingService->create($booking);
-        if ((int)$organization->{BookingContract::PRICE} > 0) {
+        if ($organization->{BookingContract::PRICE} != 0) {
             BookingPayment::dispatch([
                 BookingContract::ID =>  $booking->id,
                 BookingContract::ORGANIZATION_ID    =>  $request->input(BookingContract::ORGANIZATION_ID),

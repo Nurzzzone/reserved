@@ -23,6 +23,11 @@ class TelegramChatService extends BaseService
         return $this->telegramChatRepository->getByTelegramId($telegramId);
     }
 
+    public function getByChatId($chatId)
+    {
+        return $this->telegramChatRepository->getByChatId($chatId);
+    }
+
     public function update($chatId,$data)
     {
         $this->telegramChatRepository->update($chatId,$data);

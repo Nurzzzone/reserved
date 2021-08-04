@@ -20,6 +20,14 @@ class TelegramChatRepositoryEloquent implements TelegramChatRepositoryInterface
         ])->get();
     }
 
+    public function getByChatId($chatId)
+    {
+        return TelegramChat::where([
+            [TelegramChatContract::TELEGRAM_CHAT_ID,$chatId],
+            [TelegramChatContract::STATUS,TelegramChatContract::ON]
+        ])->get();
+    }
+
     public function update($chatId,$data)
     {
         TelegramChat::where(TelegramChatContract::TELEGRAM_CHAT_ID,$chatId)->update($data);

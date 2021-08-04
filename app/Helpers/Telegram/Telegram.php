@@ -88,7 +88,7 @@ class Telegram
         foreach ($telegramChats as &$telegramChat) {
             $arr[]  =   $telegramChat->{TelegramChatContract::TELEGRAM_CHAT_ID};
         }
-        Log::info('chats',$arr);
+        Log::info('chats',json_encode($telegram));
         return $arr;
     }
 

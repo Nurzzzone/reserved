@@ -4,6 +4,7 @@ namespace App\Http\Resources;
 
 use App\Domain\Contracts\OrganizationContract;
 use Illuminate\Http\Resources\Json\JsonResource;
+use App\Http\Resources\Menu\MenuCollection;
 
 class OrganizationResource extends JsonResource
 {
@@ -59,7 +60,8 @@ class OrganizationResource extends JsonResource
             OrganizationContract::STATUS        =>  $this->status,
             OrganizationContract::USER_ID       =>  new UserResource($this->user),
             OrganizationContract::CATEGORY_ID   =>  new CategoryResource($this->category),
-            OrganizationContract::IMAGES        =>  new OrganizationImageCollection($this->images)
+            OrganizationContract::IMAGES        =>  new OrganizationImageCollection($this->images),
+            OrganizationContract::MENUS         =>  new MenuCollection($this->menus)
         ];
     }
 }

@@ -111,7 +111,11 @@
                     <i class='nav-icon las la-image'></i> Фото
                 </a>
             </li>
-
+            <li class='nav-item'>
+                <a class='nav-link' href='{{ backpack_url('menu') }}'>
+                    <i class='nav-icon las la-utensils'></i> Меню
+                </a>
+            </li>
         @endif
 
     </ul>

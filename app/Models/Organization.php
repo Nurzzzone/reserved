@@ -49,6 +49,10 @@ class Organization extends Model
         return $this->hasMany(OrganizationImage::class);
     }
 
+    public function menus() {
+        return $this->hasMany(Menu::class);
+    }
+
     public function getImageAttribute() {
         return $this->attributes[OrganizationContract::IMAGE]?$this->attributes[OrganizationContract::IMAGE]:($this->attributes[OrganizationContract::CATEGORY_ID]===1?'/img/logo/restaurant.svg':($this->attributes[OrganizationContract::CATEGORY_ID]===2?'/img/logo/cafe.svg':'/img/logo/bar.svg'));
     }

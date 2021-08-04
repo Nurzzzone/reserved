@@ -13,6 +13,7 @@ use App\Http\Controllers\Api\ContactController;
 use App\Http\Controllers\Api\CardController;
 use App\Http\Controllers\Api\LanguageController;
 use App\Http\Controllers\Api\TelegramController;
+use App\Http\Controllers\Api\MenuController;
 
 Route::prefix('table')->group(function() {
     Route::get('status/lock/{id}',[OrganizationController::class,'tableLock']);
@@ -74,6 +75,10 @@ Route::prefix('review')->group(function () {
     Route::get('list/organization/{id}',[ReviewController::class,'getByOrganizationId']);
     Route::get('list/user/{id}',[ReviewController::class,'getByUserId']);
 
+});
+
+Route::prefix('menu')->group(function() {
+    Route::get('list/{organizationId}',[MenuController::class,'getByOrganizationId'])->name('menu.organization.id');
 });
 
 Route::prefix('organization')->group(function() {

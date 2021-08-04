@@ -43,8 +43,8 @@
                     </div>
                 </div>
             </div>
-            <div class="container-fluid organization-shadow-main">
-                <div class="container">
+            <div class="container-fluid organization-shadow-main px-0">
+                <div class="container py-0">
                     <div class="row pt-2">
                         <div class="col d-flex justify-content-center">
                             <div class="card text-center bg-transparent border-0">
@@ -58,6 +58,9 @@
                                         </li>
                                         <li class="nav-item">
                                             <a class="nav-link h6 text-secondary bg-transparent organization-tab py-3 px-0 d-block" :class="{active: (tab === 3), 'organization-tab-sel': (tab === 3)}" role="button" @click="tab = 3">Отзывы</a>
+                                        </li>
+                                        <li class="nav-item">
+                                            <a class="nav-link h6 text-secondary bg-transparent organization-tab py-3 px-0 d-block" :class="{active: (tab === 4), 'organization-tab-sel': (tab === 4)}" role="button" @click="tab = 4">Меню</a>
                                         </li>
                                     </ul>
                                 </div>
@@ -184,6 +187,22 @@
                                     </template>
                                 </template>
                             </div>
+                            <div v-if="tab === 4">
+                                <template v-if="organization && organization.menus">
+                                    <template v-if="organization.menus.length > 0">
+                                        <div class="row justify-content-center" v-if="organization.menus.length > 0">
+                                            <div class="col-3 p-2" v-for="(image,imageKey) in organization.menus" :key="imageKey">
+                                                <div class="organization-image" :style="{'background-image':'url('+image.image+')'}" @click="showMenu(imageKey)">
+                                                    <div></div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </template>
+                                    <template v-else>
+                                        <not-found :params="noPhoto"></not-found>
+                                    </template>
+                                </template>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -200,6 +219,19 @@
             :imgs="img.list"
             :index="img.index"
             @hide="handleHide"
+        >
+            <template v-slot:toolbar="{ toolbarMethods }">
+
+            </template>
+        </vue-easy-lightbox>
+        <vue-easy-lightbox
+            scrollDisabled
+            escDisabled
+            moveDisabled
+            :visible="menu.visible"
+            :imgs="menu.list"
+            :index="menu.index"
+            @hide="handleHideMenu"
         >
             <template v-slot:toolbar="{ toolbarMethods }">
 
@@ -269,6 +301,11 @@ export default {
             },
             toolbarMethods: {},
             img: {
+                visible: false,
+                index: 0,
+                list: [],
+            },
+            menu: {
                 visible: false,
                 index: 0,
                 list: [],
@@ -392,7 +429,14 @@ export default {
             this.img.visible = true
         },
         handleHide: function() {
-            this.img.visible = false
+            this.img.visible    =   false
+        },
+        showMenu: function(index) {
+            this.menu.index = index
+            this.menu.visible = true
+        },
+        handleHideMenu: function() {
+            this.menu.visible   =   false;
         },
         getReviewCount: function() {
             axios.get('/api/review/count/organization/'+this.organization.id)
@@ -555,6 +599,9 @@ export default {
                         this.organization   =   data.data;
                         this.organization.images.forEach(element => {
                             this.img.list.push(element.image);
+                        });
+                        this.organization.menus.forEach(element => {
+                            this.menu.list.push(element.image);
                         });
                         this.setTime();
                         this.name   =   this.organization.title;

@@ -96,6 +96,7 @@ class MainContract
     const START     =   'start';
     const END       =   'end';
     const IMAGES    =   'images';
+    const MENUS     =   'menus';
     const WEBSITE   =   'website';
     const VALUE     =   'value';
     const URL       =   'url';

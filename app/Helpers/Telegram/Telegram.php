@@ -17,6 +17,7 @@ use App\Models\Booking;
 use App\Models\Review;
 
 use App\Services\TelegramChat\TelegramChatService;
+use Illuminate\Support\Facades\Log;
 
 class Telegram
 {
@@ -87,7 +88,8 @@ class Telegram
         foreach ($telegramChats as &$telegramChat) {
             $arr[]  =   $telegramChat->{TelegramChatContract::TELEGRAM_CHAT_ID};
         }
-        return array_unique($arr);
+        Log::info('chats',$telegramChats);
+        return $arr;
     }
 
     public function reviewText(Review $review, $booking)

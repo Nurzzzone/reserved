@@ -17915,41 +17915,23 @@ __webpack_require__.r(__webpack_exports__);
   },
   methods: {
     cardUpdate: function cardUpdate(data) {
-      var _this2 = this;
-
-      return console.log(data);
-
-      if (this.updateStatus) {
-        this.updateStatus = false;
-        var self = this;
-        axios.get('/api/card/user/' + this.user.id).then(function (response) {
-          _this2.cards = response.data.data;
-          _this2.updateStatus = true;
-          setTimeout(function () {
-            self.cardUpdate();
-          }, 2000);
-        })["catch"](function (error) {
-          _this2.updateStatus = true;
-          setTimeout(function () {
-            self.cardUpdate();
-          }, 2000);
-          console.log(error.response);
-        });
+      if (data !== undefined) {
+        this.cards.push(data.card);
       }
     },
     newCard: function newCard() {
-      var _this3 = this;
+      var _this2 = this;
 
       if (this.cardStatus) {
         this.cardStatus = false;
         var wind = window.open();
         axios.get('/api/payment/card/' + this.user.id).then(function (response) {
-          _this3.cardStatus = true;
+          _this2.cardStatus = true;
           wind.location = response.data;
 
-          _this3.cardUpdate();
+          _this2.cardUpdate();
         })["catch"](function (error) {
-          _this3.cardStatus = true;
+          _this2.cardStatus = true;
         });
       }
     },
@@ -17967,14 +17949,14 @@ __webpack_require__.r(__webpack_exports__);
       this.key = key;
     },
     getCards: function getCards() {
-      var _this4 = this;
+      var _this3 = this;
 
       if (this.user) {
         axios.get('/api/card/user/' + this.user.id).then(function (response) {
-          _this4.cards = response.data.data;
-          _this4.cardLoading = false;
+          _this3.cards = response.data.data;
+          _this3.cardLoading = false;
         })["catch"](function (error) {
-          _this4.cardLoading = false;
+          _this3.cardLoading = false;
         });
       }
     },

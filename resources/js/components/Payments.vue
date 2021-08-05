@@ -114,24 +114,8 @@ export default {
     },
     methods: {
         cardUpdate: function(data) {
-            return console.log(data);
-            if (this.updateStatus) {
-                this.updateStatus   =   false;
-                let self    =   this;
-                axios.get('/api/card/user/'+this.user.id)
-                    .then(response => {
-                        this.cards  =   response.data.data;
-                        this.updateStatus   =   true;
-                        setTimeout(function() {
-                            self.cardUpdate();
-                        },2000);
-                    }).catch(error => {
-                        this.updateStatus   =   true;
-                        setTimeout(function() {
-                            self.cardUpdate();
-                        },2000);
-                        console.log(error.response);
-                    });
+            if (data !== undefined) {
+                this.cards.push(data.card);
             }
         },
         newCard: function() {

@@ -2,7 +2,6 @@
 
 namespace App\Events;
 
-use App\Domain\Contracts\BookingContract;
 use Illuminate\Broadcasting\Channel;
 use Illuminate\Broadcasting\InteractsWithSockets;
 use Illuminate\Broadcasting\PresenceChannel;
@@ -11,23 +10,22 @@ use Illuminate\Contracts\Broadcasting\ShouldBroadcast;
 use Illuminate\Foundation\Events\Dispatchable;
 use Illuminate\Queue\SerializesModels;
 
-class BookingNotification implements ShouldBroadcast
+class CardNotification implements ShouldBroadcast
 {
     use Dispatchable, InteractsWithSockets, SerializesModels;
-    public $booking;
-
-    public function __construct($booking)
+    public $card;
+    public function __construct($card)
     {
-        $this->booking  =   $booking;
+        $this->card =   $card;
     }
 
     public function broadcastOn(): PrivateChannel
     {
-        return new PrivateChannel('booking.notification.'.$this->booking->user_id);
+        return new PrivateChannel('new.card.'.$this->card->user_id);
     }
 
     public function broadcastAs(): string
     {
-        return 'booking.completed';
+        return 'new.card';
     }
 }

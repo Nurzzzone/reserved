@@ -33,7 +33,7 @@ Route::prefix('contacts')->group(function() {
 
 Route::prefix('card')->group(function() {
 
-    Route::post('post',[CardController::class,'post'])->name('card.post');
+    Route::post('post',[CardController::class,'create'])->name('card.post');
     Route::post('update/{id}',[CardController::class,'update'])->name('card.update');
     Route::get('delete/{id}',[CardController::class,'delete'])->name('card.delete');
     Route::get('id/{id}',[CardController::class,'getById'])->name('card.id');

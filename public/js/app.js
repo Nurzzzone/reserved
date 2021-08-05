@@ -17904,21 +17904,32 @@ __webpack_require__.r(__webpack_exports__);
     this.getUser();
     this.getCards();
   },
+  mounted: function mounted() {
+    var _this = this;
+
+    if (this.user) {
+      window.Echo["private"]('new.card.' + this.user.id).listen('.new.card', function (e) {
+        _this.cardUpdate(e);
+      });
+    }
+  },
   methods: {
-    cardUpdate: function cardUpdate() {
-      var _this = this;
+    cardUpdate: function cardUpdate(data) {
+      var _this2 = this;
+
+      return console.log(data);
 
       if (this.updateStatus) {
         this.updateStatus = false;
         var self = this;
         axios.get('/api/card/user/' + this.user.id).then(function (response) {
-          _this.cards = response.data;
-          _this.updateStatus = true;
+          _this2.cards = response.data.data;
+          _this2.updateStatus = true;
           setTimeout(function () {
             self.cardUpdate();
           }, 2000);
         })["catch"](function (error) {
-          _this.updateStatus = true;
+          _this2.updateStatus = true;
           setTimeout(function () {
             self.cardUpdate();
           }, 2000);
@@ -17927,18 +17938,18 @@ __webpack_require__.r(__webpack_exports__);
       }
     },
     newCard: function newCard() {
-      var _this2 = this;
+      var _this3 = this;
 
       if (this.cardStatus) {
         this.cardStatus = false;
         var wind = window.open();
         axios.get('/api/payment/card/' + this.user.id).then(function (response) {
-          _this2.cardStatus = true;
+          _this3.cardStatus = true;
           wind.location = response.data;
 
-          _this2.cardUpdate();
+          _this3.cardUpdate();
         })["catch"](function (error) {
-          _this2.cardStatus = true;
+          _this3.cardStatus = true;
         });
       }
     },
@@ -17956,14 +17967,14 @@ __webpack_require__.r(__webpack_exports__);
       this.key = key;
     },
     getCards: function getCards() {
-      var _this3 = this;
+      var _this4 = this;
 
       if (this.user) {
         axios.get('/api/card/user/' + this.user.id).then(function (response) {
-          _this3.cards = response.data;
-          _this3.cardLoading = false;
+          _this4.cards = response.data.data;
+          _this4.cardLoading = false;
         })["catch"](function (error) {
-          _this3.cardLoading = false;
+          _this4.cardLoading = false;
         });
       }
     },

@@ -17,18 +17,18 @@ abstract class BaseService
     {
         return $this->repo->paginated(config('paginate'));
     }
-    public function create(array $input)
+    public function create(array $data)
     {
-        return $this->repo->create($input);
+        return $this->repo->create($data);
     }
     public function find($id)
     {
         return $this->repo->find($id);
     }
 
-    public function update(int $id, array $input)
+    public function update(int $id, array $data)
     {
-        return $this->repo->update($id, $input);
+        return $this->repo->update($id, $data);
     }
 
     public function destroy($id)

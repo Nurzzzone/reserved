@@ -60,7 +60,8 @@ class MenuCrudController extends CrudController
         ]);
 
         CRUD::field(MenuContract::IMAGE)->type('image')->label('Фото');
-        CRUD::field(MenuContract::STATUS)->type('select_from_array')
+        CRUD::field(MenuContract::STATUS)
+            ->type('select_from_array')
             ->label('Статус')->options([
                 MenuContract::ON    =>  MenuContract::TRANSLATE[MenuContract::ON],
                 MenuContract::OFF   =>  MenuContract::TRANSLATE[MenuContract::OFF],

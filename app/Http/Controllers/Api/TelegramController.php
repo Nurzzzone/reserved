@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Api;
 
+use App\Domain\Contracts\MainContract;
 use App\Domain\Contracts\TelegramChatContract;
 use App\Domain\Contracts\TelegramContract;
 use App\Http\Controllers\Controller;
@@ -14,19 +15,20 @@ use App\Http\Resources\Telegram\TelegramCollection;
 
 use App\Http\Requests\Telegram\TelegramWebhookRequest;
 use App\Services\TelegramChat\TelegramChatService;
-use Illuminate\Support\Facades\Log;
 
 class TelegramController extends Controller
 {
+
     protected $telegramService;
     protected $telegramChatService;
+
     public function __construct(TelegramService $telegramService, TelegramChatService $telegramChatService)
     {
         $this->telegramService  =   $telegramService;
         $this->telegramChatService  =   $telegramChatService;
     }
 
-    public function getByUserId($userId)
+    public function getByUserId($userId): TelegramCollection
     {
         return new TelegramCollection($this->telegramService->getByUserId($userId));
     }
@@ -41,20 +43,17 @@ class TelegramController extends Controller
 
     public function webhook($id, TelegramWebhookRequest $telegramWebhookRequest)
     {
-        $data   =   $telegramWebhookRequest->validated()[TelegramContract::MESSAGE];
-        Log::info('info',$data);
-        $chat   =   $data[TelegramContract::CHAT][TelegramContract::ID];
+        $data   =   $telegramWebhookRequest->validated()[MainContract::MESSAGE];
+        $chat   =   $data[MainContract::CHAT][MainContract::ID];
         if (!$this->telegramChatService->getByChatId($chat)) {
             $this->telegramChatService->create([
-                TelegramChatContract::TELEGRAM_ID   =>  $id,
-                TelegramChatContract::TELEGRAM_CHAT_ID  =>  $chat,
+                MainContract::TELEGRAM_ID       =>  $id,
+                MainContract::TELEGRAM_CHAT_ID  =>  $chat,
             ]);
-        } elseif (array_key_exists(TelegramContract::TEXT,$data)) {
-            if ($data[TelegramContract::TEXT] === '/start') {
-                $this->telegramChatService->update($chat,[
-                    TelegramContract::STATUS    =>  TelegramContract::ON
-                ]);
-            }
+        } elseif (array_key_exists(MainContract::TEXT,$data) && $data[MainContract::TEXT] === '/start') {
+            $this->telegramChatService->update($chat,[
+                MainContract::STATUS    =>  MainContract::ON
+            ]);
         }
     }
 

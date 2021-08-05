@@ -2,29 +2,37 @@
 
 namespace App\Http\Requests\Card;
 
+use App\Domain\Contracts\MainContract;
 use Illuminate\Contracts\Validation\Validator;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Http\Exceptions\HttpResponseException;
-use App\Domain\Contracts\CardContract;
+use Illuminate\Validation\ValidationException;
 
 class CardUpdateRequest extends FormRequest
 {
 
-    public function authorize()
+    public function authorize(): bool
     {
         return true;
     }
 
-    public function rules()
+    public function rules(): array
     {
         return [
-            CardContract::NAME  =>  'required'
+            MainContract::NAME      =>  'nullable',
+            MainContract::STATUS    =>  'nullable'
         ];
     }
 
+    /**
+     * @throws ValidationException
+     */
     public function validated(): array
     {
-        $request = $this->validator->validated();
+        $request    =   $this->validator->validated();
+        if (array_key_exists(MainContract::ID,$request)) {
+            unset($request[MainContract::ID]);
+        }
         return $request;
     }
 

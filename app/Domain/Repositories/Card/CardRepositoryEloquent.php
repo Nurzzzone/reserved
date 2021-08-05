@@ -3,45 +3,42 @@
 
 namespace App\Domain\Repositories\Card;
 
+use App\Domain\Contracts\MainContract;
 use App\Models\Card;
 use App\Domain\Contracts\CardContract;
+use Illuminate\Support\Collection;
+use Illuminate\Support\Facades\DB;
 
 class CardRepositoryEloquent implements CardRepositoryInterface
 {
-    public function create(array $input)
+    public function create(array $data)
     {
-        return Card::create($input);
+        return Card::create($data);
     }
 
-    public function update($id, array $input):void
+    public function update($id, array $data):void
     {
-        if (array_key_exists(CardContract::ID,$input)) {
-            unset($input[CardContract::ID]);
-        }
-        Card::where(CardContract::ID,$id)->update($input);
-    }
-
-    public function delete($id)
-    {
-        Card::where(CardContract::ID,$id)->update([
-            CardContract::STATUS    =>  CardContract::OFF
-        ]);
+        DB::table(CardContract::TABLE)
+            ->where(MainContract::ID,$id)
+            ->update($data);
     }
 
     public function getById($id)
     {
-        return Card::where([
-            [CardContract::ID,$id],
-            [CardContract::STATUS,CardContract::ON]
-        ])->first();
+        return DB::table(CardContract::TABLE)
+            ->where([
+                [MainContract::ID,$id],
+                [MainContract::STATUS, MainContract::ON]
+            ])->first();
     }
 
-    public function getByUserId($userId)
+    public function getByUserId($userId):Collection
     {
-        return Card::where([
-            [CardContract::USER_ID,$userId],
-            [CardContract::STATUS,CardContract::ON]
-        ])->get();
+        return DB::table(CardContract::TABLE)
+            ->where([
+                [MainContract::USER_ID,$userId],
+                [MainContract::STATUS, MainContract::ON]
+            ])->get();
     }
 
 }

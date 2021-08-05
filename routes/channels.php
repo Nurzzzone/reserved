@@ -20,3 +20,7 @@ Broadcast::channel('App.Models.User.{id}', function ($user, $id) {
 Broadcast::channel('private-booking.notification.{id}', function ($user,$booking) {
     return true;
 });
+
+Broadcast::channel('private-new.card.{id}', function($user, $booking) {
+    return true;
+});

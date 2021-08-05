@@ -104,14 +104,23 @@ export default {
         this.getUser();
         this.getCards();
     },
+    mounted() {
+        if (this.user) {
+            window.Echo.private('new.card.'+this.user.id)
+                .listen('.new.card', (e) => {
+                    this.cardUpdate(e);
+                });
+        }
+    },
     methods: {
-        cardUpdate: function() {
+        cardUpdate: function(data) {
+            return console.log(data);
             if (this.updateStatus) {
                 this.updateStatus   =   false;
                 let self    =   this;
                 axios.get('/api/card/user/'+this.user.id)
                     .then(response => {
-                        this.cards  =   response.data;
+                        this.cards  =   response.data.data;
                         this.updateStatus   =   true;
                         setTimeout(function() {
                             self.cardUpdate();
@@ -156,7 +165,7 @@ export default {
             if (this.user) {
                 axios.get('/api/card/user/'+this.user.id)
                     .then(response => {
-                        this.cards  =   response.data;
+                        this.cards  =   response.data.data;
                         this.cardLoading    =   false;
                     }).catch(error => {
                         this.cardLoading    =   false;

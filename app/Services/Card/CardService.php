@@ -5,6 +5,7 @@ namespace App\Services\Card;
 
 use App\Services\BaseService;
 use App\Domain\Repositories\Card\CardRepositoryInterface;
+use Illuminate\Support\Collection;
 
 class CardService extends BaseService
 {
@@ -14,19 +15,14 @@ class CardService extends BaseService
         $this->cardRepository   =   $cardRepository;
     }
 
-    public function create(array $input)
+    public function create(array $data)
     {
-        return $this->cardRepository->create($input);
+        return $this->cardRepository->create($data);
     }
 
-    public function update($id, array $input):void
+    public function update($id, array $data):void
     {
-        $this->cardRepository->update($id, $input);
-    }
-
-    public function delete($id)
-    {
-        $this->cardRepository->delete($id);
+        $this->cardRepository->update($id, $data);
     }
 
     public function getById($id)
@@ -34,7 +30,7 @@ class CardService extends BaseService
         return $this->cardRepository->getById($id);
     }
 
-    public function getByUserId($userId)
+    public function getByUserId($userId): Collection
     {
         return $this->cardRepository->getByUserId($userId);
     }

@@ -51,8 +51,8 @@ class CardController extends Controller
      */
     public function update($id, CardUpdateRequest $request)
     {
-        $this->cardService->update($id, $request->validated());
         if ($card   =   $this->cardService->getById($id)) {
+            $this->cardService->update($id, $request->validated());
             if ($card->{MainContract::STATUS} === MainContract::OFF) {
                 CardDelete::dispatch($card);
             }

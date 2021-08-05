@@ -17941,7 +17941,11 @@ __webpack_require__.r(__webpack_exports__);
       this.key = key;
     },
     deleteCardReady: function deleteCardReady(key) {
+      var card = this.cards[key];
       this.cards.splice(key, 1);
+      axios.post('/api/card/update/' + card.id, {
+        status: 'off'
+      });
     },
     deleteCard: function deleteCard(key) {
       this.cardModal = false;

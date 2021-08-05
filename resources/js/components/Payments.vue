@@ -138,7 +138,11 @@ export default {
             this.key        =   key;
         },
         deleteCardReady: function(key) {
+            let card    =   this.cards[key];
             this.cards.splice(key,1);
+            axios.post('/api/card/update/'+card.id, {
+                status: 'off'
+            });
         },
         deleteCard: function(key) {
             this.cardModal  =   false;
@@ -148,12 +152,12 @@ export default {
         getCards: function() {
             if (this.user) {
                 axios.get('/api/card/user/'+this.user.id)
-                    .then(response => {
-                        this.cards  =   response.data.data;
-                        this.cardLoading    =   false;
-                    }).catch(error => {
-                        this.cardLoading    =   false;
-                    });
+                .then(response => {
+                    this.cards  =   response.data.data;
+                    this.cardLoading    =   false;
+                }).catch(error => {
+                    this.cardLoading    =   false;
+                });
             }
         },
         getUser: function() {

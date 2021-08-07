@@ -18865,7 +18865,7 @@ __webpack_require__.r(__webpack_exports__);
     return {
       lang: 'ru',
       status: false,
-      user: {},
+      user: false,
       cardStatus: true,
       cardError: false,
       cardLoading: false,

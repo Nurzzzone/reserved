@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Api;
 
 use App\Domain\Contracts\BookingContract;
+use App\Domain\Contracts\MainContract;
 use App\Domain\Contracts\ReviewContract;
 use App\Events\BookingNotification;
 use App\Http\Controllers\Controller;
@@ -21,6 +22,7 @@ use App\Http\Resources\ReviewResource;
 use App\Http\Requests\Review\ReviewCreateRequest;
 
 use App\Jobs\TelegramReviewNotification;
+use Illuminate\Validation\ValidationException;
 
 class ReviewController extends Controller
 {
@@ -33,14 +35,17 @@ class ReviewController extends Controller
         $this->bookingService   =   $bookingService;
     }
 
+    /**
+     * @throws ValidationException
+     */
     public function create(ReviewCreateRequest $reviewCreateRequest)
     {
         $review     =   $this->reviewService->create($reviewCreateRequest->validated());
-        $this->bookingService->update($review->{ReviewContract::BOOKING_ID},[
-            BookingContract::COMMENT    =>  BookingContract::OFF
+        $this->bookingService->update($review->{MainContract::BOOKING_ID},[
+            MainContract::COMMENT    =>  MainContract::OFF
         ]);
+        $booking    =   Booking::with('organization','organizationTables')->where(MainContract::ID,$review->{MainContract::BOOKING_ID})->first();
         event(new ReviewCreated($review));
-        $booking    =   Booking::with('organization','organizationTables')->where(BookingContract::ID,$review->{ReviewContract::BOOKING_ID})->first();
         event(new BookingNotification($booking));
         TelegramReviewNotification::dispatch($review, $booking);
         return new ReviewResource($this->reviewService->getById($review->id));

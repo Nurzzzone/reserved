@@ -208,6 +208,14 @@ export default {
         this.setUser();
         this.setTime();
     },
+    mounted() {
+        if (this.user) {
+            window.Echo.private('new.card.'+this.user.id)
+                .listen('.new.card', (e) => {
+                    this.cardUpdate(e);
+                });
+        }
+    },
     methods: {
         storageModal: function(status) {
             if (parseInt(this.organization.price) === 0) {
@@ -232,7 +240,10 @@ export default {
                 }
                 this.guest.codeCheck    =   true;
                 this.guest.codeError    =   false;
-                let data    =   {
+                if (this.organization.price > 0) {
+                    let wind    =   window.open();
+                }
+                axios.post("/api/booking/guest", {
                     user_id: this.guest.user.id,
                     title: this.organization.title,
                     organization_id: this.organization.id,
@@ -242,11 +253,7 @@ export default {
                     date: this.date.data,
                     price: this.organization.price,
                     code: this.guest.code,
-                };
-                if (this.organization.price > 0) {
-                    let wind    =   window.open();
-                }
-                axios.post("/api/booking/guest", data)
+                })
                 .then(response => {
                     let data = response.data.data;
                     this.storage.token  =   this.guest.user.api_token;
@@ -293,23 +300,14 @@ export default {
                     });
             }
         },
-        cardUpdate: function() {
-            if (!this.cardLoading) {
-                axios.get('/api/card/user/'+this.user.id)
-                    .then(response => {
-                        this.cards  =   response.data;
-                        let self    =   this;
-                        setTimeout(function() {
-                            self.cardUpdate();
-                        },2000);
-                    }).catch(error => {
-                        this.cardUpdate();
-                    });
-            }
-        },
         bookingAuthFinish: function() {
             if (this.cardStatus) {
-                let data    =   {
+                this.cardStatus =   false;
+                this.cardError  =   false;
+                if (this.organization.price > 0) {
+                    let wind    =   window.open();
+                }
+                axios.post("/api/booking/create", {
                     user_id: this.user.id,
                     organization_id: this.organization.id,
                     organization_table_list_id: this.table.id,
@@ -318,13 +316,7 @@ export default {
                     date: this.date.data,
                     price: this.organization.price,
                     card_id: this.organization.price>0?this.cards[ this.cardIndex ].card_id:0
-                };
-                this.cardStatus =   false;
-                this.cardError  =   false;
-                if (this.organization.price > 0) {
-                    let wind    =   window.open();
-                }
-                axios.post("/api/booking/create", data)
+                })
                 .then(response => {
                     let data = response.data;
                     if (data.hasOwnProperty('data')) {
@@ -350,11 +342,16 @@ export default {
         cardList: function() {
             axios.get('/api/card/user/'+this.user.id)
             .then(response => {
-                this.cards  =   response.data;
+                this.cards  =   response.data.data;
             }).catch(error => {
                 console.log(error.response.data);
             });
-        }
+        },
+        cardUpdate: function(data) {
+            if (data !== undefined) {
+                this.cards.push(data.card);
+            }
+        },
     }
 }
 </script>

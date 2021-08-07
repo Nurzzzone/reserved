@@ -6,22 +6,26 @@ use App\Domain\Contracts\MainContract;
 use Illuminate\Contracts\Validation\Validator;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Http\Exceptions\HttpResponseException;
+use Illuminate\Validation\ValidationException;
 
 class BookingPaginateRequest extends FormRequest
 {
 
-    public function authorize()
+    public function authorize(): bool
     {
         return true;
     }
 
-    public function rules()
+    public function rules(): array
     {
         return [
             MainContract::PAGINATE  =>  'nullable|integer'
         ];
     }
 
+    /**
+     * @throws ValidationException
+     */
     public function validated(): array
     {
         $request = $this->validator->validated();

@@ -16,6 +16,7 @@ use App\Http\Requests\Payment\PaymentCardResultRequest;
 use Illuminate\Support\Facades\Log;
 
 use App\Helpers\Iiko\Iiko;
+use Illuminate\Validation\ValidationException;
 
 class PaymentController extends Controller {
 
@@ -39,10 +40,13 @@ class PaymentController extends Controller {
         return response(['message'  =>  'Произошла ошибка'],400);
     }
 
+    /**
+     * @throws ValidationException
+     */
     public function cardResult(PaymentCardResultRequest $paymentCardResultRequest):void
     {
         $data   =   $paymentCardResultRequest->validated();
-        if ($data[MainContract::PG_RESULT] === '1') {
+        if ((int)$data[MainContract::PG_RESULT] === 1) {
             $this->bookingService->update($data[MainContract::PG_ORDER_ID],[
                 MainContract::STATUS    =>  MainContract::ON
             ]);
@@ -53,20 +57,15 @@ class PaymentController extends Controller {
         }
     }
 
+    /**
+     * @throws ValidationException
+     */
     public function result(PaymentResultRequest $paymentResultRequest):void
     {
         $data   =   $paymentResultRequest->validated();
         Log::info('payment info',$data);
         if ($this->bookingService->result($data)) {
-            $this->iiko->booking($data[BookingContract::PG_ORDER_ID]);
+            $this->iiko->booking($data[MainContract::PG_ORDER_ID]);
         }
-    }
-
-    public function post(Request $request) {
-        $this->paymentService->post($request->all());
-    }
-
-    public function check(Request $request) {
-        $this->paymentService->check($request->all());
     }
 }

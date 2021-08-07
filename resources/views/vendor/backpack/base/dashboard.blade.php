@@ -2746,28 +2746,39 @@ $widgets['before_content'][] = [
             $("#booking-modal").attr('data-organization',$(this).closest('.card-body').attr('data-id'));
             $("#booking-modal").attr('data-user',$(this).closest('.card-body').attr('data-user'));
         });
+
         $(document.body).on('click', '.btn-booking', function() {
             $.get('booking/status/'+$(this).attr('data-id'));
         });
+
         $(document.body).on('click', '.btn-booking-came', function() {
-            $.get('booking/status/came/'+$(this).attr('data-id'));
+            $.post('/api/booking/update/'+$(this).attr('data-id'), {
+                'status':'came'
+            });
         });
+
         $(document.body).on('click', '.btn-booking-completed', function() {
-            $.get('booking/status/completed/'+$(this).attr('data-id'));
+            $.post('/api/booking/update/'+$(this).attr('data-id'), {
+                'status':'COMPLETED'
+            });
         });
+
         $(document.body).on('click', '.card-toggle-btn', function() {
             let status  =   $(this).attr('data-status');
             let id      =   $(this).attr('data-id');
             if (status === 'ENABLED') {
-                $(this).removeClass('card-toggle-btn-success').addClass('card-toggle-btn-locked');
-                $(this).attr('data-status','FROZEN');
-                $.get('/api/table/status/lock/'+id);
+                $(this).attr('data-status','FROZEN').removeClass('card-toggle-btn-success').addClass('card-toggle-btn-locked');
+                $.post('/api/table/update/'+id, {
+                    'status':'FROZEN'
+                });
             } else {
-                $(this).removeClass('card-toggle-btn-locked').addClass('card-toggle-btn-success');
-                $(this).attr('data-status','ENABLED');
-                $.get('/api/table/status/unlock/'+id);
+                $(this).attr('data-status','ENABLED').removeClass('card-toggle-btn-locked').addClass('card-toggle-btn-success');
+                $.post('/api/table/update/'+id, {
+                    'status':'ENABLED'
+                });
             }
         });
+
         let stat    =   true;
         $(document).ready(function() {
             function load() {

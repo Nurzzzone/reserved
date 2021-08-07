@@ -9,25 +9,34 @@ use App\Domain\Repositories\OrganizationTableList\OrganizationTableListRepositor
 class OrganizationTableListService extends BaseService
 {
     protected $organizationTableListRepository;
+
     public function __construct(OrganizationTableListRepositoryInterface $organizationTableListRepository)
     {
         $this->organizationTableListRepository  =   $organizationTableListRepository;
     }
 
-    public function update($id, $input)
+    public function create($data)
     {
-        return $this->organizationTableListRepository->update($id, $input);
+        return $this->organizationTableListRepository->create($data);
     }
 
-    public function getByTableId($id) {
-        return $this->organizationTableListRepository->getByTableId($id);
+    public function update($id, array $data):void
+    {
+        $this->organizationTableListRepository->update($id, $data);
     }
 
-    public function getById($id) {
+    public function getById($id)
+    {
         return $this->organizationTableListRepository->getById($id);
     }
 
-    public function getByOrganizationId($id) {
+    public function getByTableId($id): object
+    {
+        return $this->organizationTableListRepository->getByTableId($id);
+    }
+
+    public function getByOrganizationId($id): object
+    {
         return $this->organizationTableListRepository->getByOrganizationId($id);
     }
 }

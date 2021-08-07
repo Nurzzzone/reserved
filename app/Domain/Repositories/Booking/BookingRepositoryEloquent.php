@@ -1,233 +1,159 @@
 <?php
 
-
 namespace App\Domain\Repositories\Booking;
 
-use App\Domain\Contracts\BookingContract;
+use App\Events\BookingNotification;
+use App\Jobs\TelegramNotification;
+use App\Domain\Contracts\MainContract;
 use App\Helpers\Time\Time;
 use App\Models\Booking;
-use Carbon\Carbon;
-use DateTime;
-
-use App\Jobs\TelegramNotification;
 
 class BookingRepositoryEloquent implements BookingRepositoryInterface
 {
     protected $take =   15;
     protected $date;
-    public function __construct()
+
+    public function __construct(Time $time)
     {
-        $date = new DateTime;
-        $date->modify('-15 minutes');
-        $this->date =   $date->format('Y-m-d H:i:s');
+        $this->date =   $time->modify('-15 minutes');
     }
 
     public function updateIikoId(int $id, string $iikoId):void
     {
-        Booking::where(BookingContract::ID,$id)->update([
-            BookingContract::IIKO_BOOKING_ID    =>  $iikoId
+        Booking::where(MainContract::ID,$id)->update([
+            MainContract::IIKO_BOOKING_ID    =>  $iikoId
         ]);
-    }
-
-    public function getCompletedByUserId($userId)
-    {
-        return Booking::with('organization','organizationTables')
-            ->where([
-                [BookingContract::USER_ID,$userId],
-                [BookingContract::STATUS,BookingContract::COMPLETED],
-                [BookingContract::COMMENT,BookingContract::ON]
-            ])
-            ->orderBy(BookingContract::ID,BookingContract::DESC)
-            ->get();
     }
 
     public function create(array $data)
     {
         $booking    =   Booking::create($data);
-        if ($booking->{BookingContract::STATUS} == BookingContract::ON) {
+        if ($booking->{MainContract::STATUS} == MainContract::ON) {
             TelegramNotification::dispatch($booking);
         }
-        return $this->getById($booking->{BookingContract::ID});
+        return $booking;
     }
 
-    public function update($id, array $input)
+    public function update($id, array $data):void
     {
-        Booking::where(BookingContract::ID,$id)->update($input);
-        if (array_key_exists(BookingContract::STATUS,$input)) {
-            if ($input[BookingContract::STATUS] === BookingContract::ON) {
+        if (array_key_exists(MainContract::STATUS,$data)) {
+            if ($data[MainContract::STATUS] === MainContract::ON) {
                 TelegramNotification::dispatch($this->getById($id));
+            } else if ($data[MainContract::STATUS] === MainContract::COMPLETED) {
+                event(new BookingNotification($this->getById($id)));
             }
         }
+        Booking::where(MainContract::ID,$id)->update($data);
     }
 
-    public function delete($id):void
+    public function getCompletedByUserId($userId):object
     {
-        Booking::where(BookingContract::ID,$id)->update([
-            BookingContract::STATUS =>  BookingContract::OFF
-        ]);
+        return Booking::with('organization','organizationTables')
+            ->where([
+                [MainContract::USER_ID,$userId],
+                [MainContract::STATUS, MainContract::COMPLETED],
+                [MainContract::COMMENT, MainContract::ON]
+            ])
+            ->orderBy(MainContract::ID, MainContract::DESC)
+            ->get();
+    }
+
+    public function getLastByTableId($id,$date)
+    {
+        return $this->getOneMultiple([MainContract::ORGANIZATION_TABLE_LIST_ID,$id],[MainContract::DATE,$date]);
+    }
+    public function getOneMultiple($query, $query2)
+    {
+        return Booking::with('organization','organizationTables')
+            ->where([
+                $query,
+                $query2,
+                [MainContract::STATUS, MainContract::ON],
+            ])
+            ->orWhere([
+                $query,
+                $query2,
+                [MainContract::STATUS, MainContract::CAME],
+            ])
+            ->orWhere([
+                $query,
+                $query2,
+                [MainContract::STATUS, MainContract::COMPLETED],
+            ])
+            ->orWhere([
+                $query,
+                $query2,
+                [MainContract::STATUS, MainContract::CHECKING],
+            ])
+            ->orderBy(MainContract::ID, MainContract::DESC)
+            ->first();
     }
 
     public function getById($id)
     {
+        return $this->getOne([MainContract::ID,$id]);
+    }
+    public function getOne($query)
+    {
         return Booking::with('organization','organizationTables')
             ->where([
-                [BookingContract::ID,$id],
-                [BookingContract::STATUS,BookingContract::ON]
+                $query,
+                [MainContract::STATUS, MainContract::ON]
             ])
             ->orWhere([
-                [BookingContract::ID,$id],
-                [BookingContract::STATUS,BookingContract::CAME],
+                $query,
+                [MainContract::STATUS, MainContract::CAME],
             ])
             ->orWhere([
-                [BookingContract::ID,$id],
-                [BookingContract::STATUS,BookingContract::COMPLETED],
+                $query,
+                [MainContract::STATUS, MainContract::COMPLETED],
             ])
             ->orWhere([
-                [BookingContract::ID,$id],
-                [BookingContract::STATUS,BookingContract::CHECKING],
-                [BookingContract::CREATED_AT,'>=',$this->date]
+                $query,
+                [MainContract::STATUS, MainContract::CHECKING],
+                [MainContract::CREATED_AT,'>=',$this->date]
             ])->first();
     }
 
     public function getByUserId($userId,$paginate):object
     {
-        return Booking::with('organization','organizationTables')
-            ->where([
-                [BookingContract::USER_ID,$userId],
-                [BookingContract::STATUS,BookingContract::ON]
-            ])
-            ->orWhere([
-                [BookingContract::USER_ID,$userId],
-                [BookingContract::STATUS,BookingContract::CAME],
-            ])
-            ->orWhere([
-                [BookingContract::USER_ID,$userId],
-                [BookingContract::STATUS,BookingContract::COMPLETED],
-            ])
-            ->orWhere([
-                [BookingContract::USER_ID,$userId],
-                [BookingContract::STATUS,BookingContract::CHECKING],
-                [BookingContract::CREATED_AT,'>=',$this->date]
-            ])
-            ->orderBy(BookingContract::ID,BookingContract::DESC)
-            ->skip($paginate * $this->take)
-            ->take($this->take)->get();
+        return $this->get([MainContract::USER_ID,$userId],$paginate);
     }
-
     public function getByOrganizationId($organizationId,$paginate):object
     {
-        return Booking::with('organization','organizationTables')
-            ->where([
-                [BookingContract::ORGANIZATION_ID,$organizationId],
-                [BookingContract::STATUS,BookingContract::ON]
-            ])
-            ->orWhere([
-                [BookingContract::ORGANIZATION_ID,$organizationId],
-                [BookingContract::STATUS,BookingContract::CAME],
-            ])
-            ->orWhere([
-                [BookingContract::ORGANIZATION_ID,$organizationId],
-                [BookingContract::STATUS,BookingContract::COMPLETED],
-            ])
-            ->orWhere([
-                [BookingContract::ORGANIZATION_ID,$organizationId],
-                [BookingContract::STATUS,BookingContract::CHECKING],
-                [BookingContract::CREATED_AT,'>=',$this->date]
-            ])
-            ->orderBy(BookingContract::ID,BookingContract::DESC)
-            ->skip($paginate * $this->take)
-            ->take($this->take)->get();
+        return $this->get([MainContract::ORGANIZATION_ID,$organizationId],$paginate);
     }
-
     public function getByTableId($tableId,$paginate):object
     {
-        return Booking::with('organization','organizationTables')
-            ->where([
-                [BookingContract::ORGANIZATION_TABLE_LIST_ID,$tableId],
-                [BookingContract::STATUS,BookingContract::ON]
-            ])
-            ->orWhere([
-                [BookingContract::ORGANIZATION_TABLE_LIST_ID,$tableId],
-                [BookingContract::STATUS,BookingContract::CAME],
-            ])
-            ->orWhere([
-                [BookingContract::ORGANIZATION_TABLE_LIST_ID,$tableId],
-                [BookingContract::STATUS,BookingContract::COMPLETED],
-            ])
-            ->orWhere([
-                [BookingContract::ORGANIZATION_TABLE_LIST_ID,$tableId],
-                [BookingContract::STATUS,BookingContract::CHECKING],
-                [BookingContract::CREATED_AT,'>=',$this->date]
-            ])
-            ->orderBy(BookingContract::ID,BookingContract::DESC)
-            ->skip($paginate * $this->take)
-            ->take($this->take)->get();
+        return $this->get([MainContract::ORGANIZATION_TABLE_LIST_ID,$tableId],$paginate);
     }
-
-    public function getByDate($date,$paginate,$organization):object
+    public function getByDate($date,$paginate):object
+    {
+        return $this->get([MainContract::DATE,$date],$paginate);
+    }
+    public function get($query, $paginate):object
     {
         return Booking::with('organization','organizationTables')
             ->where([
-                [BookingContract::DATE,$date],
-                [BookingContract::STATUS,BookingContract::ON]
+                $query,
+                [MainContract::STATUS, MainContract::ON]
             ])
             ->orWhere([
-                [BookingContract::DATE,$date],
-                [BookingContract::STATUS,BookingContract::CAME],
+                $query,
+                [MainContract::STATUS, MainContract::CAME],
             ])
             ->orWhere([
-                [BookingContract::DATE,$date],
-                [BookingContract::STATUS,BookingContract::COMPLETED],
+                $query,
+                [MainContract::STATUS, MainContract::COMPLETED],
             ])
             ->orWhere([
-                [BookingContract::DATE,$date],
-                [BookingContract::STATUS,BookingContract::CHECKING],
-                [BookingContract::CREATED_AT,'>=',$this->date]
+                $query,
+                [MainContract::STATUS, MainContract::CHECKING],
+                [MainContract::CREATED_AT,'>=',$this->date]
             ])
-            ->orderBy(BookingContract::ID,BookingContract::DESC)
+            ->orderBy(MainContract::ID, MainContract::DESC)
             ->skip($paginate * $this->take)
             ->take($this->take)->get();
-    }
-
-    public function success($id):void {
-        Booking::where(BookingContract::ID,$id)->update([
-            BookingContract::STATUS =>  BookingContract::ON
-        ]);
-        TelegramNotification::dispatch($this->getById($id));
-    }
-
-    public function failure($id):void {
-        Booking::where(BookingContract::ID,$id)->update([
-            BookingContract::STATUS =>  BookingContract::OFF
-        ]);
-    }
-
-    public function getLastByTableId($id,$date) {
-
-        return Booking::with('organization','organizationTables')
-            ->where([
-                [BookingContract::ORGANIZATION_TABLE_LIST_ID,$id],
-                [BookingContract::STATUS,BookingContract::ON],
-                [BookingContract::DATE,$date]
-            ])
-            ->orWhere([
-                [BookingContract::ORGANIZATION_TABLE_LIST_ID,$id],
-                [BookingContract::STATUS,BookingContract::CAME],
-                [BookingContract::DATE,$date]
-            ])
-            ->orWhere([
-                [BookingContract::ORGANIZATION_TABLE_LIST_ID,$id],
-                [BookingContract::STATUS,BookingContract::COMPLETED],
-                [BookingContract::DATE,$date]
-            ])
-            ->orWhere([
-                [BookingContract::ORGANIZATION_TABLE_LIST_ID,$id],
-                [BookingContract::STATUS,BookingContract::CHECKING],
-                [BookingContract::CREATED_AT,'>=',$this->date],
-                [BookingContract::DATE,$date]
-            ])
-            ->orderBy(BookingContract::ID,BookingContract::DESC)
-            ->first();
     }
 
 }

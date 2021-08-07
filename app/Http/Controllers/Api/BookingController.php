@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers\Api;
 
-use App\Domain\Contracts\OrganizationContract;
 use App\Domain\Contracts\PaymentContract;
 use App\Domain\Contracts\UserContract;
 use App\Http\Controllers\Controller;
@@ -18,9 +17,11 @@ use App\Services\Organization\OrganizationService;
 use App\Http\Requests\Booking\BookingCreateRequest;
 use App\Http\Requests\Booking\BookingPaginateRequest;
 use App\Http\Requests\Booking\BookingGuestRequest;
+use App\Http\Requests\Booking\BookingUpdateRequest;
 
 use App\Domain\Contracts\BookingContract;
 use App\Domain\Contracts\MainContract;
+use Illuminate\Validation\ValidationException;
 
 class BookingController extends Controller
 {
@@ -42,85 +43,101 @@ class BookingController extends Controller
         return new BookingCollection($this->bookingService->getCompletedByUserId($userId));
     }
 
+    /**
+     * @throws ValidationException
+     */
     public function create(BookingCreateRequest $bookingCreateRequest):object
     {
         if ($booking    =   $this->bookingService->create($bookingCreateRequest->validated())) {
-            if ($booking->{BookingContract::PRICE} > 0) {
+            if ($booking->{MainContract::PRICE} > 0) {
                 $booking    =   $this->paymentService->create($booking);
             }
             return new BookingResource($booking);
         }
-        return response([
-            MainContract::MESSAGE  =>  'Something Goes Wrong'
-        ],400);
+        return response([MainContract::MESSAGE  =>  'Something Goes Wrong'],400);
     }
 
-    public function delete($id):void
+    /**
+     * @throws ValidationException
+     */
+    public function update($id, BookingUpdateRequest $bookingUpdateRequest):void
     {
-        $this->bookingService->delete($id);
+        $this->bookingService->update($id, $bookingUpdateRequest->validated());
     }
 
     public function getById($id)
     {
-        if ($booking    =   $this->bookingService->getById($id)) {
+        if ($booking = $this->bookingService->getById($id)) {
             return new BookingResource($booking);
         }
-        return response([
-            MainContract::MESSAGE  =>  'Booking Not Found'
-        ],404);
+        return response([MainContract::MESSAGE  =>  'Booking Not Found'],404);
     }
 
+    /**
+     * @throws ValidationException
+     */
     public function getByUserId($userId, BookingPaginateRequest $bookingPaginateRequest):object
     {
-        $paginate   =   $bookingPaginateRequest->validated();
-        return new BookingCollection($this->bookingService->getByUserId($userId,$paginate[BookingContract::PAGINATE]));
+        return new BookingCollection($this->bookingService->getByUserId($userId,$bookingPaginateRequest->validated()[MainContract::PAGINATE]));
     }
 
+    /**
+     * @throws ValidationException
+     */
     public function getByOrganizationId($organizationId, BookingPaginateRequest $request):object
     {
-        $booking    =   $this->bookingService->getByOrganizationId($organizationId, $request->validated()[BookingContract::PAGINATE]);
-        return new BookingCollection($booking);
+        return new BookingCollection($this->bookingService->getByOrganizationId($organizationId, $request->validated()[MainContract::PAGINATE]));
     }
 
+    /**
+     * @throws ValidationException
+     */
     public function getByTableId($tableId, BookingPaginateRequest $bookingPaginateRequest):object
     {
-        $data   =   $bookingPaginateRequest->validated();
-        return new BookingCollection($this->bookingService->getByTableId($tableId, $data[BookingContract::PAGINATE]));
+        return new BookingCollection($this->bookingService->getByTableId($tableId, $bookingPaginateRequest->validated()[MainContract::PAGINATE]));
     }
 
+    /**
+     * @throws ValidationException
+     */
     public function getByDate($date, BookingPaginateRequest $bookingPaginateRequest):object
     {
-        $data   =   $bookingPaginateRequest->validated();
-        return new BookingCollection($this->bookingService->getByDate($date, $data[BookingContract::PAGINATE]));
+        return new BookingCollection($this->bookingService->getByDate($date, $bookingPaginateRequest->validated()[MainContract::PAGINATE]));
     }
 
+    /**
+     * @throws ValidationException
+     */
     public function guest(BookingGuestRequest $bookingGuestRequest)
     {
         $data   =   $bookingGuestRequest->validated();
-        $user   =   $this->userService->getById($data[BookingContract::USER_ID]);
-        if ($user->{UserContract::CODE} !== $data[BookingContract::CODE]) {
-            return response([
-                MainContract::MESSAGE  =>  'Не правильный код'
-            ],400);
+        $user   =   $this->userService->getById($data[MainContract::USER_ID]);
+
+        if ($user->{MainContract::CODE} !== $data[MainContract::CODE]) {
+            return response([MainContract::MESSAGE  =>  'Не правильный код'],400);
         }
-        $user->{UserContract::PHONE_VERIFIED_AT}    =   date('Y-m-d H:i:s');
+
+        $user->{MainContract::PHONE_VERIFIED_AT}    =   date('Y-m-d H:i:s');
         $user->save();
+
         $booking    =   $this->bookingService->create($data);
 
-        if ($booking->{BookingContract::PRICE} > 0) {
+        if ($booking->{MainContract::PRICE} > 0) {
 
             $payment    =   $this->paymentService->urlAdmin(
-                $booking->{BookingContract::ID},
-                $booking->{BookingContract::PRICE},
-                $data[BookingContract::TITLE],
-                $user->{UserContract::PHONE}
+                $booking->{MainContract::ID},
+                $booking->{MainContract::PRICE},
+                $data[MainContract::TITLE],
+                $user->{MainContract::PHONE}
             );
 
-            if (array_key_exists(PaymentContract::PG_REDIRECT_URL,$payment)) {
-                $booking->{BookingContract::PAYMENT_URL}    =   $payment[PaymentContract::PG_REDIRECT_URL];
+            if (array_key_exists(MainContract::PG_REDIRECT_URL,$payment)) {
+                $booking->{MainContract::PAYMENT_URL}    =   $payment[MainContract::PG_REDIRECT_URL];
                 $booking->save();
             }
+
         }
+
         return new BookingResource($booking);
     }
 

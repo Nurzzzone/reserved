@@ -34,18 +34,9 @@ class OrganizationController extends Controller
         $this->bookingService   =   $bookingService;
     }
 
-    public function tableLock($id)
+    public function tableUpdate($id, $data)
     {
-        $this->organizationTableListService->update($id,[
-            OrganizationTableListContract::STATUS   =>  OrganizationTableListContract::FROZEN
-        ]);
-    }
 
-    public function tableUnlock($id)
-    {
-        $this->organizationTableListService->update($id,[
-            OrganizationTableListContract::STATUS   =>  OrganizationTableListContract::ENABLED
-        ]);
     }
 
     public function status($id,$date)

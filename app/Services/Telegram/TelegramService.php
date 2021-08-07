@@ -4,6 +4,7 @@ namespace App\Services\Telegram;
 
 use App\Services\BaseService;
 use App\Domain\Repositories\Telegram\TelegramRepositoryInterface;
+use Illuminate\Support\Collection;
 
 class TelegramService extends BaseService
 {
@@ -13,7 +14,7 @@ class TelegramService extends BaseService
         $this->telegramRepository   =   $telegramRepository;
     }
 
-    public function getByUserId($userId)
+    public function getByUserId($userId): Collection
     {
         return $this->telegramRepository->getByUserId($userId);
     }

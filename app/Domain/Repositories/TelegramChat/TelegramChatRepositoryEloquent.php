@@ -2,8 +2,11 @@
 
 namespace App\Domain\Repositories\TelegramChat;
 
+use App\Domain\Contracts\MainContract;
 use App\Models\TelegramChat;
 use App\Domain\Contracts\TelegramChatContract;
+use Illuminate\Support\Collection;
+use Illuminate\Support\Facades\DB;
 
 class TelegramChatRepositoryEloquent implements TelegramChatRepositoryInterface
 {
@@ -12,26 +15,27 @@ class TelegramChatRepositoryEloquent implements TelegramChatRepositoryInterface
         return TelegramChat::create($data);
     }
 
-    public function getByTelegramId($telegramId)
+    public function getByTelegramId($telegramId): Collection
     {
-        return TelegramChat::where([
-            [TelegramChatContract::TELEGRAM_ID,$telegramId],
-            [TelegramChatContract::STATUS,TelegramChatContract::ON]
+        return DB::table(TelegramChatContract::TABLE)->where([
+            [MainContract::TELEGRAM_ID,$telegramId],
+            [MainContract::STATUS, MainContract::ON]
         ])->get();
     }
 
     public function getByChatId($chatId)
     {
-        return TelegramChat::where([
-            [TelegramChatContract::TELEGRAM_CHAT_ID,$chatId],
-            [TelegramChatContract::STATUS,TelegramChatContract::ON]
+        return DB::table(TelegramChatContract::TABLE)->where([
+            [MainContract::TELEGRAM_CHAT_ID,$chatId],
+            [MainContract::STATUS, MainContract::ON]
         ])->first();
     }
 
-    public function update($chatId,$data)
+    public function update($chatId,$data):void
     {
-        TelegramChat::where(TelegramChatContract::TELEGRAM_CHAT_ID,$chatId)->update($data);
+        DB::table(TelegramChatContract::TABLE)
+            ->where(MainContract::TELEGRAM_CHAT_ID,$chatId)
+            ->update($data);
     }
-
 
 }

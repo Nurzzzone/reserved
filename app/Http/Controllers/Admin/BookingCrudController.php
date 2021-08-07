@@ -204,15 +204,6 @@ class BookingCrudController extends CrudController
         BookingPaymentRevoke::dispatch($booking);
     }
 
-    public function came($id) {
-        $this->bookingService->update($id,[BookingContract::STATUS =>  BookingContract::CAME]);
-    }
-
-    public function completed($id) {
-        $this->bookingService->update($id,[BookingContract::STATUS =>  BookingContract::COMPLETED]);
-        event(new BookingNotification(Booking::with('organization','organizationTables')->where(BookingContract::ID,$id)->first()));
-    }
-
     public function bookingStatus($date) {
         $organization   =   $this->organizationService->getByUserId(backpack_auth()->user()->id);
         if (sizeof($organization) > 0) {

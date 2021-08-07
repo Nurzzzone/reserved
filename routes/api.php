@@ -13,28 +13,43 @@ use App\Http\Controllers\Api\ContactController;
 use App\Http\Controllers\Api\CardController;
 use App\Http\Controllers\Api\LanguageController;
 use App\Http\Controllers\Api\TelegramController;
+use App\Http\Controllers\Api\TelegramChatController;
 use App\Http\Controllers\Api\MenuController;
+use App\Http\Controllers\Api\OrganizationTableListController;
 
 Route::prefix('table')->group(function() {
-    Route::get('status/lock/{id}',[OrganizationController::class,'tableLock']);
-    Route::get('status/unlock/{id}',[OrganizationController::class,'tableUnlock']);
+
+    Route::post('create',[OrganizationTableListController::class,'create'])->name('table.create');
+    Route::post('update/{id}',[OrganizationTableListController::class,'update'])->name('table.update');
+
+    Route::get('id/{id}',[OrganizationTableListController::class,'getById'])->name('table.id');
+    Route::get('table/{tableId}',[OrganizationTableListController::class,'getByTableId'])->name('table.table');
+    Route::get('organization/{organizationId}',[OrganizationTableListController::class,'getByOrganizationId'])->name('table.organization');
+
 });
 
 Route::prefix('telegram')->group(function() {
+
+    Route::post('webhook/{id}',[TelegramChatController::class,'create'])->name('telegram_chat.create');
+    Route::post('update/{id}',[TelegramController::class,'update'])->name('telegram.update');
+
     Route::get('user/{userId}',[TelegramController::class,'getByUserId'])->name('telegram.user.id');
     Route::get('id/{id}',[TelegramController::class,'getById'])->name('telegram.id');
-    Route::post('webhook/{id}',[TelegramController::class,'webhook'])->name('telegram.webhook');
+
 });
 
-Route::prefix('contacts')->group(function() {
-    Route::get('contracts',[ContactController::class,'contracts'])->name('contacts.contracts');
-    Route::get('privacy',[ContactController::class,'privacy'])->name('contacts.privacy');
+Route::prefix('telegram_chat')->group(function() {
+
+    Route::post('create/{id}',[TelegramChatController::class,'create'])->name('telegram_chat.create');
+    Route::post('update/{id}',[TelegramChatController::class,'update'])->name('telegram_chat.update');
+
 });
 
 Route::prefix('card')->group(function() {
 
     Route::post('post',[CardController::class,'create'])->name('card.post');
     Route::post('update/{id}',[CardController::class,'update'])->name('card.update');
+
     Route::get('id/{id}',[CardController::class,'getById'])->name('card.id');
     Route::get('user/{userId}',[CardController::class,'getByUserId'])->name('card.user');
 
@@ -42,33 +57,39 @@ Route::prefix('card')->group(function() {
 
 Route::prefix('booking')->group(function() {
 
-    Route::get('completed/{userId}',[BookingController::class,'getCompletedByUserId'])->name('booking.status.user');
+    Route::post('guest',[BookingController::class,'guest'])->name('booking.guest');
     Route::post('create',[BookingController::class,'create'])->name('booking.create');
-    Route::get('delete/{id}',[BookingController::class,'delete'])->name('booking.delete');
+    Route::post('update/{id}',[BookingController::class,'update'])->name('booking.update');
+
     Route::get('id/{id}',[BookingController::class,'getById'])->name('booking.id');
     Route::get('user/{userId}',[BookingController::class,'getByUserId'])->name('booking.user');
     Route::get('organization/{organizationId}',[BookingController::class,'getByOrganizationId'])->name('booking.organization');
     Route::get('table/{tableId}',[BookingController::class,'getByTableId'])->name('booking.table');
     Route::get('date/{date}',[BookingController::class,'getByDate'])->name('booking.date');
-    Route::post('guest',[BookingController::class,'guest'])->name('booking.guest');
+    Route::get('completed/{userId}',[BookingController::class,'getCompletedByUserId'])->name('booking.status.user');
 
 });
 
 Route::prefix('payment')->group(function() {
 
     Route::post('card/result',[PaymentController::class,'cardResult'])->name('payment.card.result');
-    Route::get('card/result',[PaymentController::class,'cardResult'])->name('payment.card.result');
-    Route::get('card/{id}',[PaymentController::class,'card']);
     Route::post('result',[PaymentController::class,'result']);
-    Route::get('post',[PaymentController::class,'post']);
-    Route::get('check',[PaymentController::class,'check']);
 
+    Route::get('card/result',[PaymentController::class,'cardResult'])->name('payment.card.result');
+    Route::get('card/{id}',[PaymentController::class,'card'])->name('payment.card.user');
+
+});
+
+Route::prefix('contacts')->group(function() {
+    Route::get('contracts',[ContactController::class,'contracts'])->name('contacts.contracts');
+    Route::get('privacy',[ContactController::class,'privacy'])->name('contacts.privacy');
 });
 
 Route::prefix('review')->group(function () {
 
-    Route::post('create',[ReviewController::class,'create']);
+    Route::post('create',[ReviewController::class,'create'])->name('review.create');
     Route::post('update/{id}',[ReviewController::class,'update']);
+
     Route::get('delete/{id}',[ReviewController::class,'delete']);
     Route::get('count/organization/{organizationId}',[ReviewController::class,'getCountByOrganizationId']);
     Route::get('list/organization/{id}',[ReviewController::class,'getByOrganizationId']);
@@ -81,11 +102,13 @@ Route::prefix('menu')->group(function() {
 });
 
 Route::prefix('organization')->group(function() {
-    Route::get('/status/{id}/{date}',[OrganizationController::class,'status'])->name('organization.status');
-    Route::post('/ids',[OrganizationController::class,'getByIds'])->name('organization.ids');
+
+    Route::get('status/{id}/{date}',[OrganizationController::class,'status'])->name('organization.status');
+    Route::post('ids',[OrganizationController::class,'getByIds'])->name('organization.ids');
     Route::get('section/{id}',[OrganizationController::class,'getSectionsById']);
     Route::get('{id}',[OrganizationController::class,'getById']);
     Route::get('user/{userId}',[OrganizationController::class,'getByUserId'])->name('organization.getByUserId');
+
 });
 
 Route::prefix('user')->group(function() {

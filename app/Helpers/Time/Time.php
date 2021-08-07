@@ -4,6 +4,7 @@
 namespace App\Helpers\Time;
 
 use App\Domain\Contracts\MainContract;
+use DateTime;
 
 class Time
 {
@@ -32,6 +33,13 @@ class Time
         $time   =   new \DateTime('now', new \DateTimeZone($timezone) );
         $time->modify('-15 minutes');
         return $time->format('Y-m-d H:i:s');
+    }
+
+    public function modify($time)
+    {
+        $date   =   new DateTime;
+        $date->modify($time);
+        return $date->format('Y-m-d H:i:s');
     }
 
 }

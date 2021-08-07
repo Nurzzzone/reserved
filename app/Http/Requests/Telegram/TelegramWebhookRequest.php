@@ -2,26 +2,30 @@
 
 namespace App\Http\Requests\Telegram;
 
-use App\Domain\Contracts\TelegramContract;
+use App\Domain\Contracts\MainContract;
 use Illuminate\Contracts\Validation\Validator;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Http\Exceptions\HttpResponseException;
+use Illuminate\Validation\ValidationException;
 
 class TelegramWebhookRequest extends FormRequest
 {
 
-    public function authorize()
+    public function authorize(): bool
     {
         return true;
     }
 
-    public function rules()
+    public function rules(): array
     {
         return [
-            TelegramContract::MESSAGE   =>  'required',
+            MainContract::MESSAGE   =>  'required',
         ];
     }
 
+    /**
+     * @throws ValidationException
+     */
     public function validated(): array
     {
         return $this->validator->validated();

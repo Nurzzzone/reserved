@@ -2,11 +2,11 @@
 
 namespace App\Http\Requests\Review;
 
+use App\Domain\Contracts\MainContract;
 use Illuminate\Contracts\Validation\Validator;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Http\Exceptions\HttpResponseException;
-
-use App\Domain\Contracts\ReviewContract;
+use Illuminate\Validation\ValidationException;
 
 class ReviewCreateRequest extends FormRequest
 {
@@ -19,18 +19,20 @@ class ReviewCreateRequest extends FormRequest
     public function rules()
     {
         return [
-            ReviewContract::BOOKING_ID        =>  'required|exists:bookings,id',
-            ReviewContract::ORGANIZATION_ID   =>  'required|exists:organizations,id',
-            ReviewContract::USER_ID           =>  'required|exists:users,id',
-            ReviewContract::RATING            =>  'required|integer',
-            ReviewContract::COMMENT           =>  'required',
+            MainContract::BOOKING_ID        =>  'required|exists:bookings,id',
+            MainContract::ORGANIZATION_ID   =>  'required|exists:organizations,id',
+            MainContract::USER_ID           =>  'required|exists:users,id',
+            MainContract::RATING            =>  'required|integer',
+            MainContract::COMMENT           =>  'required',
         ];
     }
 
+    /**
+     * @throws ValidationException
+     */
     public function validated(): array
     {
-        $request = $this->validator->validated();
-        return $request;
+        return $this->validator->validated();
     }
 
     protected function failedValidation(Validator $validator)

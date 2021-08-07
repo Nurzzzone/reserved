@@ -3,52 +3,42 @@
 
 namespace App\Domain\Repositories\OrganizationTableList;
 
-use App\Domain\Contracts\OrganizationTableListContract;
+use App\Domain\Contracts\MainContract;
 use App\Models\OrganizationTableList;
 
 class OrganizationTableListRepositoryEloquent implements OrganizationTableListRepositoryInterface
 {
-    public function create(int $organizationId, int $sectionId, string $key, string $title, int $limit = 0)
+    public function create(array $data)
     {
-        return OrganizationTableList::create([
-            OrganizationTableListContract::ORGANIZATION_ID  =>  $organizationId,
-            OrganizationTableListContract::ORGANIZATION_TABLE_ID   =>  $sectionId,
-            OrganizationTableListContract::KEY  =>  $key,
-            OrganizationTableListContract::TITLE    =>  $title,
-            OrganizationTableListContract::LIMIT    =>  $limit,
-        ]);
+        return OrganizationTableList::create($data);
     }
 
-    public function update($id, $input)
+    public function update($id, $data)
     {
-        OrganizationTableList::where(OrganizationTableListContract::ID,$id)->update($input);
-        return OrganizationTableList::where([
-            [OrganizationTableListContract::ID,$id],
-            [OrganizationTableListContract::STATUS,'!=',OrganizationTableListContract::DISABLED]
-        ])->first();
-    }
-
-    public function getByTableId($id)
-    {
-        return OrganizationTableList::with('organization')->where([
-            [OrganizationTableListContract::ORGANIZATION_TABLE_ID,$id],
-            [OrganizationTableListContract::STATUS,'!=',OrganizationTableListContract::DISABLED]
-        ])->get();
+        OrganizationTableList::where(MainContract::ID,$id)->update($data);
     }
 
     public function getById($id)
     {
         return OrganizationTableList::with('organization','organizationTable')->where([
-            [OrganizationTableListContract::ID,$id],
-            [OrganizationTableListContract::STATUS,'!=',OrganizationTableListContract::DISABLED]
+            [MainContract::ID,$id],
+            [MainContract::STATUS,'!=', MainContract::DISABLED]
         ])->first();
     }
 
-    public function getByOrganizationId($id)
+    public function getByTableId($id):object
+    {
+        return OrganizationTableList::with('organization','organizationTable')->where([
+            [MainContract::ORGANIZATION_TABLE_ID,$id],
+            [MainContract::STATUS,'!=', MainContract::DISABLED]
+        ])->get();
+    }
+
+    public function getByOrganizationId($id):object
     {
         return OrganizationTableList::with('organizationTable')->where([
-            [OrganizationTableListContract::ORGANIZATION_ID,$id],
-            [OrganizationTableListContract::STATUS,'!=',OrganizationTableListContract::DISABLED]
+            [MainContract::ORGANIZATION_ID,$id],
+            [MainContract::STATUS,'!=', MainContract::DISABLED]
         ])->get();
     }
 }

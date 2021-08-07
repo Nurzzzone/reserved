@@ -5,6 +5,8 @@ namespace App\Domain\Repositories\Telegram;
 use App\Domain\Contracts\MainContract;
 use App\Domain\Contracts\TelegramContract;
 use App\Models\Telegram;
+use Illuminate\Support\Collection;
+use Illuminate\Support\Facades\DB;
 
 class TelegramRepositoryEloquent implements TelegramRepositoryInterface
 {
@@ -19,20 +21,22 @@ class TelegramRepositoryEloquent implements TelegramRepositoryInterface
         return $this->getById($id);
     }
 
-    public function getByUserId($userId)
+    public function getByUserId($userId): Collection
     {
-        return Telegram::where([
-            [MainContract::USER_ID,$userId],
-            [MainContract::STATUS,'!=', MainContract::OFF]
-        ])->get();
+        return DB::table(TelegramContract::TABLE)
+            ->where([
+                [MainContract::USER_ID,$userId],
+                [MainContract::STATUS,'!=', MainContract::OFF]
+            ])->get();
     }
 
     public function getById($id)
     {
-        return Telegram::where([
-            [MainContract::ID,$id],
-            [MainContract::STATUS,'!=', MainContract::OFF]
-        ])->first();
+        return DB::table(TelegramContract::TABLE)
+            ->where([
+                [MainContract::ID,$id],
+                [MainContract::STATUS,'!=', MainContract::OFF]
+            ])->first();
     }
 
 }

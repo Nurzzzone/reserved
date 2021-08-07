@@ -8,6 +8,7 @@ use App\Domain\Contracts\MainContract;
 use App\Domain\Repositories\Payment\PaymentRepositoryInterface;
 use App\Domain\Contracts\PaymentContract;
 use App\Helpers\Curl\Curl;
+use App\Helpers\Xml\Xml;
 use App\Models\Card;
 use App\Models\Booking;
 use Illuminate\Support\Facades\Log;
@@ -16,6 +17,7 @@ class PaymentService
 {
     protected $paymentRepository;
     protected $curl;
+    protected $xml;
 
     const ID    =   538109;
     const KEY   =   'UVwuMp4af1xBXYCe';
@@ -66,9 +68,10 @@ class PaymentService
 
     const RECURRING_LIFETIME    =   156;
 
-    public function __construct(PaymentRepositoryInterface $paymentRepository, Curl $curl) {
+    public function __construct(PaymentRepositoryInterface $paymentRepository, Curl $curl, Xml $xml) {
         $this->paymentRepository    =   $paymentRepository;
         $this->curl =   $curl;
+        $this->xml  =   $xml;
     }
 
     public function revoke(Booking $booking)
@@ -97,13 +100,13 @@ class PaymentService
     public function create(Booking $booking, $card = true)
     {
         if ($card) {
-            if ($payment    =   $this->paymentCard($booking)) {
-                $booking->{BookingContract::PAYMENT_URL}    =   self::CARD_PAY;
-                $booking->{BookingContract::PAYMENT_ID}     =   $payment[MainContract::PG_PAYMENT_ID];
+            if ($payment = $this->paymentCard($booking)) {
+                $booking->{MainContract::PAYMENT_URL}   =   self::CARD_PAY;
+                $booking->{MainContract::PAYMENT_ID}    =   $payment[MainContract::PG_PAYMENT_ID];
                 $booking->save();
                 return $booking;
             }
-            $booking->{BookingContract::STATUS}         =   BookingContract::OFF;
+            $booking->{MainContract::STATUS}    =   MainContract::OFF;
             $booking->save();
             return false;
         }
@@ -136,10 +139,10 @@ class PaymentService
     public function cardDelete(Card $card)
     {
         $this->curl->post(self::CARD_DELETE,$this->signatureCard([
-            PaymentContract::PG_MERCHANT_ID =>  self::ID,
-            PaymentContract::PG_USER_ID     =>  $card->{PaymentContract::USER_ID},
-            PaymentContract::PG_CARD_ID     =>  $card->{PaymentContract::CARD_ID},
-            PaymentContract::PG_SALT        =>  rand(100000,999999),
+            MainContract::PG_MERCHANT_ID =>  self::ID,
+            MainContract::PG_USER_ID     =>  $card->{MainContract::USER_ID},
+            MainContract::PG_CARD_ID     =>  $card->{MainContract::CARD_ID},
+            MainContract::PG_SALT        =>  rand(100000,999999),
         ],MainContract::REMOVE));
     }
 
@@ -147,45 +150,39 @@ class PaymentService
         return self::MAIN_URL.'?'.http_build_query($this->params($id, $price, $description, $userId, $cardId));
     }
 
-    public function urlAdmin($id, $price, $description, $phone) {
-        $xml    =   $this->curl->post(self::MAIN_URL,$this->signature([
-            PaymentContract::PG_ORDER_ID    =>  $id,
-            PaymentContract::PG_MERCHANT_ID =>  self::ID,
-            PaymentContract::PG_AMOUNT      =>  $price,
-            PaymentContract::PG_DESCRIPTION =>  $description,
-            PaymentContract::PG_SALT        =>  rand(100000,999999),
-            PaymentContract::PG_RESULT_URL  =>  self::RESULT_URL,
-            PaymentContract::PG_REQUEST_METHOD  =>  PaymentContract::POST,
-            PaymentContract::PG_SUCCESS_URL =>  self::SUCCESS_URL,
-            PaymentContract::PG_SUCCESS_URL_METHOD  => PaymentContract::GET,
-            PaymentContract::PG_FAILURE_URL =>  self::FAILURE_URL,
-            PaymentContract::PG_FAILURE_URL_METHOD  => PaymentContract::GET,
-            PaymentContract::PG_REDIRECT_URL    =>  self::REDIRECT_URL.'?id='.$id,
-            PaymentContract::PG_USER_PHONE  =>  $phone
-        ]));
-        return json_decode(json_encode(simplexml_load_string($xml)),true);
+    public function urlAdmin($id, $price, $description, $phone)
+    {
+        return $this->xml->enc($this->xml->loadFromString($this->curl->post(self::MAIN_URL,$this->signature([
+            MainContract::PG_ORDER_ID    =>  $id,
+            MainContract::PG_MERCHANT_ID =>  self::ID,
+            MainContract::PG_AMOUNT      =>  $price,
+            MainContract::PG_DESCRIPTION =>  $description,
+            MainContract::PG_SALT        =>  rand(100000,999999),
+            MainContract::PG_RESULT_URL  =>  self::RESULT_URL,
+            MainContract::PG_REQUEST_METHOD  =>  MainContract::POST,
+            MainContract::PG_SUCCESS_URL =>  self::SUCCESS_URL,
+            MainContract::PG_SUCCESS_URL_METHOD  => MainContract::GET,
+            MainContract::PG_FAILURE_URL =>  self::FAILURE_URL,
+            MainContract::PG_FAILURE_URL_METHOD  => MainContract::GET,
+            MainContract::PG_REDIRECT_URL    =>  self::REDIRECT_URL.'?id='.$id,
+            MainContract::PG_USER_PHONE  =>  $phone
+        ]))));
     }
 
-    public function cardAdd($userId) {
+    public function cardAdd($userId)
+    {
         $arr    =   [
-            PaymentContract::PG_MERCHANT_ID =>  self::ID,
-            PaymentContract::PG_USER_ID =>  $userId,
-            PaymentContract::PG_SALT    =>  rand(100000,99999),
-            PaymentContract::PG_POST_LINK   =>  self::CARD_POST,
-            PaymentContract::PG_BACK_LINK   =>  self::CARD_BACK,
+            MainContract::PG_MERCHANT_ID    =>  self::ID,
+            MainContract::PG_USER_ID        =>  $userId,
+            MainContract::PG_SALT           =>  rand(100000,99999),
+            MainContract::PG_POST_LINK      =>  self::CARD_POST,
+            MainContract::PG_BACK_LINK      =>  self::CARD_BACK,
         ];
-        $card   =   $this->curl->post(self::CARD_ADD, $this->signatureCard($arr,MainContract::ADD));
-        $xml    =   json_decode(json_encode(simplexml_load_string($card)),true);
-        if ($xml && array_key_exists('pg_redirect_url',$xml)) {
-            return $xml['pg_redirect_url'];
-        } else {
-            $card   =   $this->curl->post(self::CARD_ADD, $this->signatureCard($arr,MainContract::ADD));
-            $xml    =   json_decode(json_encode(simplexml_load_string($card)),true);
-            if ($xml && array_key_exists('pg_redirect_url',$xml)) {
-                return $xml['pg_redirect_url'];
-            }
+        $xml    =   $this->xml->enc($this->xml->loadFromString($this->curl->post(self::CARD_ADD, $this->signatureCard($arr,MainContract::ADD))));
+        if ($xml && array_key_exists(MainContract::PG_REDIRECT_URL,$xml)) {
+            return $xml[MainContract::PG_REDIRECT_URL];
         }
-        return false;
+        return $this->cardAdd($userId);
     }
 
     public static function signatureCard($request, $type)
@@ -215,11 +212,6 @@ class PaymentService
             PaymentContract::PG_USER_IP =>  $_SERVER[PaymentContract::REMOTE_ADDR],
             PaymentContract::PG_USER_ID =>  $userId,
             PaymentContract::PG_CARD_ID =>  $cardId,
-            //PaymentContract::PG_USER_ID =>  self::ID,
-            //PaymentContract::PG_PARAM1  =>  '',
-            //PaymentContract::PG_PARAM2  =>  '',
-            //PaymentContract::PG_PARAM3  =>  '',
-
             PaymentContract::PG_ORDER_ID    =>  $id,
             PaymentContract::PG_MERCHANT_ID =>  self::ID,
             PaymentContract::PG_DESCRIPTION =>  'Бронирование в '.$description,
@@ -274,22 +266,13 @@ class PaymentService
         return $arr;
     }
 
-
     public function result($data):void {
-        if (array_key_exists(PaymentContract::PG_RESULT,$data)) {
-            if ((int) $data[PaymentContract::PG_RESULT] === 1) {
-                $this->paymentRepository->success($data[PaymentContract::PG_ORDER_ID]);
+        if (array_key_exists(MainContract::PG_RESULT,$data)) {
+            if ((int) $data[MainContract::PG_RESULT] === 1) {
+                $this->paymentRepository->success($data[MainContract::PG_ORDER_ID]);
             } else {
-                $this->paymentRepository->failure($data[PaymentContract::PG_ORDER_ID]);
+                $this->paymentRepository->failure($data[MainContract::PG_ORDER_ID]);
             }
         }
-    }
-
-    public function post($data) {
-
-    }
-
-    public function check($data) {
-
     }
 }

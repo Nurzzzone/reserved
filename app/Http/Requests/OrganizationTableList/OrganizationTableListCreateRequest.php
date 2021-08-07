@@ -1,15 +1,14 @@
 <?php
 
-namespace App\Http\Requests\Card;
+namespace App\Http\Requests\OrganizationTableList;
 
 use App\Domain\Contracts\MainContract;
 use Illuminate\Contracts\Validation\Validator;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Http\Exceptions\HttpResponseException;
-use App\Domain\Contracts\CardContract;
 use Illuminate\Validation\ValidationException;
 
-class CardPostRequest extends FormRequest
+class OrganizationTableListCreateRequest extends FormRequest
 {
 
     public function authorize(): bool
@@ -20,7 +19,11 @@ class CardPostRequest extends FormRequest
     public function rules(): array
     {
         return [
-            MainContract::PG_XML    =>  'required'
+            MainContract::ORGANIZATION_ID   =>  'required:exists:organizations,id',
+            MainContract::ORGANIZATION_TABLE_ID =>  'required|exists:organization_tables,id',
+            MainContract::KEY   =>  'required',
+            MainContract::TITLE =>  'required',
+            MainContract::LIMIT =>  'required'
         ];
     }
 
@@ -29,9 +32,7 @@ class CardPostRequest extends FormRequest
      */
     public function validated(): array
     {
-        $request    =   $this->validator->validated();
-        $request[MainContract::PG_XML]  =    json_decode(json_encode(simplexml_load_string($request[MainContract::PG_XML])),true);
-        return $request;
+        return $this->validator->validated();
     }
 
     protected function failedValidation(Validator $validator)
@@ -44,5 +45,4 @@ class CardPostRequest extends FormRequest
         ];
         throw new HttpResponseException(response()->json($response, 400));
     }
-
 }

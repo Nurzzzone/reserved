@@ -4,6 +4,7 @@
 namespace App\Services\Booking;
 
 
+use App\Domain\Contracts\MainContract;
 use App\Services\BaseService;
 
 use App\Domain\Repositories\Booking\BookingRepositoryInterface;
@@ -23,11 +24,6 @@ class BookingService extends BaseService
     {
         $this->bookingRepository    =   $bookingRepository;
         $this->organizationRepository   =   $organizationRepository;
-    }
-
-    public function delete($id):void
-    {
-        $this->bookingRepository->delete($id);
     }
 
     public function getById($id)
@@ -55,39 +51,37 @@ class BookingService extends BaseService
         return $this->bookingRepository->getByDate($date, $paginate);
     }
 
-    public function getCompletedByUserId($userId)
+    public function getCompletedByUserId($userId): object
     {
         return $this->bookingRepository->getCompletedByUserId($userId);
     }
 
-    public function create(array $input)
+    public function create(array $data)
     {
-        return $this->bookingRepository->create($input);
+        return $this->bookingRepository->create($data);
     }
 
-    public function update($id, array $input)
+    public function update($id, array $data):void
     {
-        $this->bookingRepository->update($id,$input);
+        $this->bookingRepository->update($id, $data);
     }
 
-    public function result($data):bool {
-        if ((int) $data[BookingContract::PG_RESULT] === 1) {
-            $this->bookingRepository->success($data[BookingContract::PG_ORDER_ID]);
+    public function result($data):bool
+    {
+        if ((int) $data[MainContract::PG_RESULT] === 1) {
+            $this->bookingRepository->update($data[MainContract::PG_ORDER_ID],[
+                MainContract::STATUS    =>  MainContract::ON
+            ]);
             return true;
         }
-        $this->bookingRepository->failure($data[BookingContract::PG_ORDER_ID]);
+        $this->bookingRepository->update($data[MainContract::PG_ORDER_ID],[
+            MainContract::STATUS    =>  MainContract::OFF
+        ]);
         return false;
     }
 
-    public function convertDate($timezone,$format) {
-        $timestamp = time();
-        $dt = new \DateTime(date('Y-m-d'), new \DateTimeZone($timezone));
-        $dt->setTimestamp($timestamp);
-        return $dt->format($format);
+    public function getLastByTableId($id, $date) {
+        return $this->bookingRepository->getLastByTableId($id, date('Y-m-d',strtotime($date)));
     }
 
-    public function getLastByTableId($id, $date) {
-        $date   =   date('Y-m-d',strtotime($date));
-        return $this->bookingRepository->getLastByTableId($id, $date);
-    }
 }

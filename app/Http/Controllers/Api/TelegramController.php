@@ -14,7 +14,9 @@ use App\Services\Telegram\TelegramService;
 use App\Http\Resources\Telegram\TelegramCollection;
 
 use App\Http\Requests\Telegram\TelegramWebhookRequest;
+
 use App\Services\TelegramChat\TelegramChatService;
+use Illuminate\Validation\ValidationException;
 
 class TelegramController extends Controller
 {
@@ -39,22 +41,6 @@ class TelegramController extends Controller
            return new TelegramResource($telegram);
        }
         return response(['message'  =>  'Телеграм не найден'],404);
-    }
-
-    public function webhook($id, TelegramWebhookRequest $telegramWebhookRequest)
-    {
-        $data   =   $telegramWebhookRequest->validated()[MainContract::MESSAGE];
-        $chat   =   $data[MainContract::CHAT][MainContract::ID];
-        if (!$this->telegramChatService->getByChatId($chat)) {
-            $this->telegramChatService->create([
-                MainContract::TELEGRAM_ID       =>  $id,
-                MainContract::TELEGRAM_CHAT_ID  =>  $chat,
-            ]);
-        } elseif (array_key_exists(MainContract::TEXT,$data) && $data[MainContract::TEXT] === '/start') {
-            $this->telegramChatService->update($chat,[
-                MainContract::STATUS    =>  MainContract::ON
-            ]);
-        }
     }
 
 }

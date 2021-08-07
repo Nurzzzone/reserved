@@ -18895,6 +18895,15 @@ __webpack_require__.r(__webpack_exports__);
     this.setUser();
     this.setTime();
   },
+  mounted: function mounted() {
+    var _this = this;
+
+    if (this.user) {
+      window.Echo["private"]('new.card.' + this.user.id).listen('.new.card', function (e) {
+        _this.cardUpdate(e);
+      });
+    }
+  },
   methods: {
     storageModal: function storageModal(status) {
       if (parseInt(this.organization.price) === 0) {
@@ -18912,7 +18921,7 @@ __webpack_require__.r(__webpack_exports__);
       if (today.getTime() === current.getTime()) {}
     },
     bookingGuest: function bookingGuest() {
-      var _this = this;
+      var _this2 = this;
 
       if (!this.guest.codeCheck) {
         if (this.guest.code.trim().length !== 6) {
@@ -18921,7 +18930,12 @@ __webpack_require__.r(__webpack_exports__);
 
         this.guest.codeCheck = true;
         this.guest.codeError = false;
-        var data = {
+
+        if (this.organization.price > 0) {
+          var _wind = window.open();
+        }
+
+        axios.post("/api/booking/guest", {
           user_id: this.guest.user.id,
           title: this.organization.title,
           organization_id: this.organization.id,
@@ -18931,30 +18945,24 @@ __webpack_require__.r(__webpack_exports__);
           date: this.date.data,
           price: this.organization.price,
           code: this.guest.code
-        };
-
-        if (this.organization.price > 0) {
-          var _wind = window.open();
-        }
-
-        axios.post("/api/booking/guest", data).then(function (response) {
+        }).then(function (response) {
           var data = response.data.data;
-          _this.storage.token = _this.guest.user.api_token;
-          sessionStorage.user = JSON.stringify(_this.guest.user);
+          _this2.storage.token = _this2.guest.user.api_token;
+          sessionStorage.user = JSON.stringify(_this2.guest.user);
 
-          if (_this.organization.price > 0) {
+          if (_this2.organization.price > 0) {
             wind.location = data.payment;
           }
 
           window.location.href = '/profile/history';
         })["catch"](function (error) {
-          _this.guest.codeCheck = false;
-          _this.guest.codeError = true;
+          _this2.guest.codeCheck = false;
+          _this2.guest.codeError = true;
         });
       }
     },
     guestAuth: function guestAuth() {
-      var _this2 = this;
+      var _this3 = this;
 
       if (this.guest.name.trim().length < 2) {
         return this.$refs.guest_name.focus();
@@ -18966,15 +18974,15 @@ __webpack_require__.r(__webpack_exports__);
         name: this.guest.name,
         phone: '7' + this.guest.phone
       }).then(function (response) {
-        _this2.guest.user = response.data;
-        _this2.guest.verify = true;
-        _this2.guest.codeError = false;
+        _this3.guest.user = response.data;
+        _this3.guest.verify = true;
+        _this3.guest.codeError = false;
       })["catch"](function (error) {
         console.error(error.response);
       });
     },
     bookingAddCard: function bookingAddCard() {
-      var _this3 = this;
+      var _this4 = this;
 
       if (!this.cardLoading) {
         this.cardLoading = true;
@@ -18982,27 +18990,12 @@ __webpack_require__.r(__webpack_exports__);
         var _wind2 = window.open();
 
         axios.get('/api/payment/card/' + this.user.id).then(function (response) {
-          _this3.cardLoading = false;
+          _this4.cardLoading = false;
           _wind2.location = response.data;
 
-          _this3.cardUpdate();
-        })["catch"](function (error) {
-          _this3.cardLoading = false;
-        });
-      }
-    },
-    cardUpdate: function cardUpdate() {
-      var _this4 = this;
-
-      if (!this.cardLoading) {
-        axios.get('/api/card/user/' + this.user.id).then(function (response) {
-          _this4.cards = response.data;
-          var self = _this4;
-          setTimeout(function () {
-            self.cardUpdate();
-          }, 2000);
-        })["catch"](function (error) {
           _this4.cardUpdate();
+        })["catch"](function (error) {
+          _this4.cardLoading = false;
         });
       }
     },
@@ -19010,7 +19003,14 @@ __webpack_require__.r(__webpack_exports__);
       var _this5 = this;
 
       if (this.cardStatus) {
-        var data = {
+        this.cardStatus = false;
+        this.cardError = false;
+
+        if (this.organization.price > 0) {
+          var _wind3 = window.open();
+        }
+
+        axios.post("/api/booking/create", {
           user_id: this.user.id,
           organization_id: this.organization.id,
           organization_table_list_id: this.table.id,
@@ -19019,15 +19019,7 @@ __webpack_require__.r(__webpack_exports__);
           date: this.date.data,
           price: this.organization.price,
           card_id: this.organization.price > 0 ? this.cards[this.cardIndex].card_id : 0
-        };
-        this.cardStatus = false;
-        this.cardError = false;
-
-        if (this.organization.price > 0) {
-          var _wind3 = window.open();
-        }
-
-        axios.post("/api/booking/create", data).then(function (response) {
+        }).then(function (response) {
           var data = response.data;
 
           if (data.hasOwnProperty('data')) {
@@ -19055,10 +19047,15 @@ __webpack_require__.r(__webpack_exports__);
       var _this6 = this;
 
       axios.get('/api/card/user/' + this.user.id).then(function (response) {
-        _this6.cards = response.data;
+        _this6.cards = response.data.data;
       })["catch"](function (error) {
         console.log(error.response.data);
       });
+    },
+    cardUpdate: function cardUpdate(data) {
+      if (data !== undefined) {
+        this.cards.push(data.card);
+      }
     }
   }
 });

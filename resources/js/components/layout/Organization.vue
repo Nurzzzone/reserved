@@ -29,7 +29,7 @@
                                 <div class="text-center mb-0 mt-2 h6 text-secondary text-font">{{organization.address}}</div>
                             </li>
                             <li class="list-group-item">
-                                <a :href="'/home/'+organization.id" class="btn w-100 text-white text-btn text-font font-weight-bold d-flex justify-content-center align-content-center">
+                                <a :href="'/home/'+category.slug+'/'+organization.id" class="btn w-100 text-white text-btn text-font font-weight-bold d-flex justify-content-center align-content-center">
                                     <div class="py-md-1">Подробнее</div>
                                 </a>
                             </li>
@@ -43,7 +43,7 @@
 
 <script>
 export default {
-    props: ['organizations'],
+    props: ['category','organizations'],
     name: "Organization",
     methods: {
         favorite: function(id) {

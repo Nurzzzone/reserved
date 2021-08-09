@@ -8,7 +8,7 @@
                     <div class="col-12">
                         <h2 class="profile-title">Личная информация</h2>
                         <p class="profile-description text-secondary text-justify">
-                            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin at felis mattis, tincidunt diam eget, venenatis erat.
+                            Ваши контактные данные
                         </p>
                     </div>
                 </div>
@@ -61,7 +61,7 @@
                     <div class="col-12">
                         <h2 class="profile-title">Пароль</h2>
                         <p class="profile-description text-secondary text-justify">
-                            Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+                            Здесь вы можете сменить ваш пароль
                         </p>
                     </div>
                 </div>

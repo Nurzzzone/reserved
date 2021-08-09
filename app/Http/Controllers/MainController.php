@@ -2,12 +2,14 @@
 
 namespace App\Http\Controllers;
 
+use App\Domain\Contracts\MainContract;
 use Illuminate\Http\Request;
 use App\Services\Organization\OrganizationService;
 use App\Services\OrganizationTable\OrganizationTableService;
 use App\Services\OrganizationTableList\OrganizationTableListService;
 use App\Services\Booking\BookingService;
 use App\Services\User\UserService;
+use App\Services\Category\CategoryService;
 
 class MainController extends Controller
 {
@@ -17,13 +19,15 @@ class MainController extends Controller
     protected $organizationTableListService;
     protected $bookingService;
     protected $userService;
+    protected $categoryService;
 
-    public function __construct(OrganizationService $organizationService, OrganizationTableService $organizationTableService, OrganizationTableListService $organizationTableListService, BookingService $bookingService, UserService $userService) {
+    public function __construct(OrganizationService $organizationService, OrganizationTableService $organizationTableService, OrganizationTableListService $organizationTableListService, BookingService $bookingService, UserService $userService, CategoryService $categoryService) {
         $this->organizationService  =   $organizationService;
         $this->organizationTableService =   $organizationTableService;
         $this->organizationTableListService =   $organizationTableListService;
         $this->bookingService   =   $bookingService;
         $this->userService  =   $userService;
+        $this->categoryService  =   $categoryService;
     }
 
     public function dashboard() {
@@ -36,56 +40,78 @@ class MainController extends Controller
         ]);
     }
 
-    public function dashboardBooking($id) {
+    public function dashboardBooking($id)
+    {
         $table  =   $this->organizationTableListService->getById($id);
         return view('vendor.backpack.base.booking',compact('table'));
     }
 
-    public function index() {
-        return view('index');
-    }
-
-    public function favorite() {
-        return view('index');
-    }
-
-    public function top() {
-        return view('index');
-    }
-
-    public function home() {
-        return view('index');
-    }
-
-    public function homeRestaurants()
+    public function index()
     {
-        return view('index');
+        return view('index',['title'=>'Reserved | Добро пожаловать']);
     }
 
-    public function homeCafe()
+    public function favorite()
     {
-        return view('index');
+        return view('index', ['title'=>'Избранное']);
     }
 
-    public function homeBars()
+    public function top()
     {
-        return view('index');
+        return view('index', ['title'=>'Новости']);
     }
 
-    public function profile() {
-        return view('index');
+    public function home()
+    {
+        return view('index', ['title'=>'Категории']);
     }
 
-    public function profileSettings() {
-        return view('index');
+    public function category($slug)
+    {
+        $category   =   $this->categoryService->getBySlug($slug);
+        if ($category) {
+            return view('index', ['title'=>$category->{MainContract::TITLE}]);
+        }
+        return view('index',[
+            'title'=>'Не найдено'
+        ]);
     }
 
-    public function profilePayments() {
-        return view('index');
+    public function getOrganizationById($slug,$id)
+    {
+        $category   =   $this->categoryService->getBySlug($slug);
+        $organization   =   $this->organizationService->getById($id);
+        if ($category && $organization) {
+            return view('index', [
+                'title'=>$organization->{MainContract::TITLE}
+            ]);
+        }
+        return view('index',['title'=>'Не найдено']);
     }
 
-    public function profileHistory() {
-        return view('index');
+    public function profile()
+    {
+        return view('index', ['title'=>'Профиль']);
+    }
+
+    public function form()
+    {
+        return view('index', ['title'=>'Заявка для ресторанов']);
+    }
+
+    public function profileSettings()
+    {
+        return view('index', ['title'=>'Уведомления']);
+    }
+
+    public function profilePayments()
+    {
+        return view('index', ['title'=>'Способ оплаты']);
+    }
+
+    public function profileHistory()
+    {
+        return view('index', ['title'=>'История бронирования']);
     }
 
 }

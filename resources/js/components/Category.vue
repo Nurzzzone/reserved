@@ -1,8 +1,8 @@
 <template>
     <Header></Header>
-    <profile-section></profile-section>
+    <profile-section :category="category"></profile-section>
     <loading v-if="Loading"></loading>
-    <organization v-else-if="organizations.length > 0" :organizations="organizations"></organization>
+    <organization v-else-if="organizations.length > 0" :organizations="organizations" :category="category"></organization>
     <not-found v-else :params="NotFound"></not-found>
     <Footer-menu></Footer-menu>
     <Footer></Footer>
@@ -13,35 +13,36 @@ import Header from "./header/Header";
 import Footer from "./footer/Footer";
 import ProfileSection from './sections/ProfileSection';
 import FooterMenu from './footerMenu/FooterMenu';
-import Organization from './layout/Organization';
 import NotFound from './layout/Not-found';
 import Loading from './layout/Loading';
+import Organization from './layout/Organization';
 export default {
+    name: "Category",
     components: {
         Header,
         Footer,
         ProfileSection,
         FooterMenu,
-        Organization,
         NotFound,
+        Organization,
         Loading
     },
-    name: "Restaurants",
     data() {
         return {
             Loading: true,
             NotFound: {
-                img: '/img/logo/restaurant.svg',
-                title: 'Список пуст',
-                description: 'Возможно в данный момент все заведения закрыты. Попробуите обновить страницу позднее.'
+                img: '/img/logo/reserved.png',
+                title: 'Категория не найдено',
+                description: 'Возможно категория которую вы искали называется иначе.'
             },
             city: 1,
-            organizations: []
+            category: false,
+            organizations: [],
         }
     },
     created() {
         this.setFilter();
-        this.getRestaurants();
+        this.getCategoryBySlug();
     },
     methods: {
         setFilter: function() {
@@ -49,18 +50,27 @@ export default {
                 this.city =   this.storage.city.id;
             }
         },
-        getRestaurants: function() {
-            axios.get('/api/category/organizations/1/'+this.city)
-            .then(response => {
-                let data    =   response.data.data;
-                for (let i = 0; i < data.length; i++) {
-                    data[i].timeTitle   =   this.getTime(data[i]);
-                }
-                this.organizations    =   data;
-                this.Loading    =   false;
-            }).catch(error => {
-                this.Loading    =   false;
-            });
+        getCategoryBySlug: function() {
+            axios.get('/api/category/slug/'+this.$route.params.category)
+                .then(response => {
+                    this.category   =   response.data.data;
+                    this.getOrganizationsByCategoryId();
+                });
+        },
+        getOrganizationsByCategoryId: function() {
+            if (this.category) {
+                axios.get('/api/category/organizations/'+this.category.id+'/'+this.city)
+                    .then(response => {
+                        let data    =   response.data.data;
+                        for (let i = 0; i < data.length; i++) {
+                            data[i].timeTitle   =   this.getTime(data[i]);
+                        }
+                        this.organizations    =   data;
+                        this.Loading    =   false;
+                    }).catch(error => {
+                    this.Loading    =   false;
+                });
+            }
         },
         getTime: function(organization) {
             let today   =   new Date();
@@ -89,13 +99,12 @@ export default {
         },
         timeConvert: function(time) {
             let converted   =   time.split(':');
-            return converted[0]+'.'+converted[1];
+            return 'с '+converted[0]+' до '+converted[1];
         },
     }
 }
 </script>
 
-<style lang="scss">
-    @import '../../css/favorite/favorite.scss';
-    @import '../../css/organization/list.scss';
+<style scoped>
+
 </style>

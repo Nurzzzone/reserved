@@ -1,6 +1,6 @@
 <template>
     <Header></Header>
-    <profile-section :name="name" :id="$route.params.id"></profile-section>
+    <profile-section :name="name" :id="$route.params.id" :category="category"></profile-section>
     <template v-if="!loading">
         <template v-if="organization">
             <Booking :organization="organization" :table="table" :date="date"></Booking>
@@ -14,14 +14,10 @@
                                     <div class="organization-description text-center text-white">{{date.timeTitle}}</div>
                                 </div>
                                 <img v-if="organization.wallpaper" :src="organization.wallpaper">
-                                <img v-else src="/img/logo/wall.png">
                             </div>
                             <div class="d-flex justify-content-center organization-photo">
                                 <div class="organization-logo">
                                     <img v-if="organization.image" :src="organization.image">
-                                    <div v-else-if="organization.category_id.id === 1" class="organization-logo-default organization-logo-default-restaurant"></div>
-                                    <div v-else-if="organization.category_id.id === 2" class="organization-logo-default organization-logo-default-cafe"></div>
-                                    <div v-else-if="organization.category_id.id === 3" class="organization-logo-default organization-logo-default-bar"></div>
                                 </div>
                             </div>
                             <div class="organization-title text-dark font-weight-bold text-center">
@@ -99,15 +95,14 @@
                                                 <div class="organization-card">
                                                     <div class="row align-content-center pl-3">
                                                         <div class="organization-card-title w-100 font-weight-bold">{{table.title}}</div>
-                                                        <template v-if="table.bookingStatus === undefined">
-                                                            <div class="lds-ellipsis"><div></div><div></div><div></div><div></div></div>
-                                                        </template>
-                                                        <template v-else-if="table.status === 'ENABLED' && (table.bookingStatus === null || table.bookingStatus.status === 'COMPLETED')">
-                                                            <div class="organization-card-status organization-card-status-free">Свободно</div>
-                                                        </template>
-                                                        <template v-else>
-                                                            <div class="organization-card-status organization-card-status-reserved">Занято</div>
-                                                        </template>
+                                                        <div class="lds-ellipsis" v-if="table.bookingStatus === undefined">
+                                                            <div></div>
+                                                            <div></div>
+                                                            <div></div>
+                                                            <div></div>
+                                                        </div>
+                                                        <div class="organization-card-status organization-card-status-free" v-else-if="table.status === 'ENABLED' && (table.bookingStatus === null || table.bookingStatus.status === 'COMPLETED')">Свободно</div>
+                                                        <div class="organization-card-status organization-card-status-reserved" v-else>Занято</div>
                                                     </div>
                                                     <div>
                                                         <div class="organization-card-icon"></div>
@@ -131,15 +126,11 @@
                                             </div>
                                         </div>
                                     </template>
-                                    <template v-else>
-                                        <not-found :params="noPhoto"></not-found>
-                                    </template>
+                                    <not-found v-else :params="noPhoto"></not-found>
                                 </template>
                             </div>
                             <div v-if="tab === 3">
-                                <template v-if="reviewStatus">
-                                    <loading></loading>
-                                </template>
+                                <loading v-if="reviewStatus"></loading>
                                 <template v-else>
                                     <template v-if="reviews.length > 0">
                                         <div>
@@ -182,9 +173,7 @@
                                             </div>
                                         </div>
                                     </template>
-                                    <template v-else>
-                                        <not-found :params="noComment"></not-found>
-                                    </template>
+                                    <not-found v-else :params="noComment"></not-found>
                                 </template>
                             </div>
                             <div v-if="tab === 4">
@@ -198,9 +187,7 @@
                                             </div>
                                         </div>
                                     </template>
-                                    <template v-else>
-                                        <not-found :params="noPhoto"></not-found>
-                                    </template>
+                                    <not-found v-else :params="noPhoto"></not-found>
                                 </template>
                             </div>
                         </div>
@@ -208,9 +195,7 @@
                 </div>
             </div>
         </template>
-        <template v-else>
-            <not-found :params="notFound"></not-found>
-        </template>
+        <not-found v-else :params="notFound"></not-found>
         <vue-easy-lightbox
             scrollDisabled
             escDisabled
@@ -221,7 +206,6 @@
             @hide="handleHide"
         >
             <template v-slot:toolbar="{ toolbarMethods }">
-
             </template>
         </vue-easy-lightbox>
         <vue-easy-lightbox
@@ -234,29 +218,10 @@
             @hide="handleHideMenu"
         >
             <template v-slot:toolbar="{ toolbarMethods }">
-
             </template>
         </vue-easy-lightbox>
     </template>
-    <template v-else>
-        <div class="container-fluid">
-            <div class="container">
-                <div class="row my-5 py-5">
-                    <div class="col-12 d-flex justify-content-center">
-                        <div class="loading">
-                            <div></div>
-                            <div></div>
-                            <div></div>
-                            <div></div>
-                        </div>
-                    </div>
-                    <div class="col-12 d-flex justify-content-center">
-                        <h4 class="loading-text">Загружаем данные</h4>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </template>
+    <loading v-else></loading>
     <Footer-menu></Footer-menu>
     <Footer></Footer>
 </template>
@@ -284,6 +249,7 @@ export default {
     name: "Organization",
     data() {
         return {
+            category: false,
             notFound: {
                 img: '/img/logo/table.svg',
                 title: 'Заведение не найдено',
@@ -299,7 +265,10 @@ export default {
                 title: 'Пусто',
                 description: 'Фотографии не найдено'
             },
-            toolbarMethods: {},
+            toolbarMethods: {
+                loop: true,
+                moveDisabled: true,
+            },
             img: {
                 visible: false,
                 index: 0,
@@ -421,9 +390,16 @@ export default {
     },
     created() {
         this.setDateTime();
+        this.getCategoryBySlug();
         this.getOrganization();
     },
     methods: {
+        getCategoryBySlug: function() {
+            axios.get('/api/category/slug/'+this.$route.params.category)
+                .then(response => {
+                    this.category   =   response.data.data;
+                });
+        },
         showImg: function(index) {
             this.img.index = index
             this.img.visible = true
@@ -563,7 +539,7 @@ export default {
             if (week.start === week.end) {
                 this.date.timeTitle =   'круглосуточно';
             } else {
-                this.date.timeTitle  =   this.timeConvert(week.start)+' '+this.timeConvert(week.end);
+                this.date.timeTitle  =   'c '+this.timeConvert(week.start)+' до '+this.timeConvert(week.end);
             }
             let timeToday   =   new Date(today.getFullYear(),today.getMonth(),today.getDate());
             let item;

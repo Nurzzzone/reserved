@@ -12,11 +12,11 @@ import Favorite from "../components/Favorite";
 import Top from "../components/Top";
 
 import Home from "../components/Home";
-import Restaurants from "../components/Restaurants";
-import Cafe from "../components/Cafe";
-import Bars from "../components/Bars";
+import Category from '../components/Category';
+
 import Organization from '../components/Organization';
 import CardSuccess from '../components/Card/Success';
+import Form from '../components/Form';
 
 const routes = [
     {
@@ -35,24 +35,14 @@ const routes = [
         component: Home
     },
     {
-        path: '/home/:id',
+        path: '/home/:category',
+        name: 'Category',
+        component: Category
+    },
+    {
+        path: '/home/:category/:id',
         name: 'Organization',
         component: Organization
-    },
-    {
-        path: '/home/restaurants',
-        name: 'Restaurants',
-        component: Restaurants
-    },
-    {
-        path: '/home/cafe',
-        name: 'Cafe',
-        component: Cafe
-    },
-    {
-        path: '/home/bars',
-        name: 'Bars',
-        component: Bars
     },
     {
         path: '/top',
@@ -63,6 +53,11 @@ const routes = [
         path: '/favorite',
         name: 'Favorite',
         component: Favorite
+    },
+    {
+        path: '/form',
+        name: 'Form',
+        component: Form
     },
     {
         path: '/profile',

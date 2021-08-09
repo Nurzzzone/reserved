@@ -2,24 +2,24 @@
 
 namespace App\Http\Resources;
 
+use App\Domain\Contracts\MainContract;
 use Illuminate\Http\Resources\Json\JsonResource;
-use App\Domain\Contracts\CategoryContract;
 
 class CategoryResource extends JsonResource
 {
-    /**
-     * Transform the resource into an array.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return array
-     */
-    public function toArray($request)
+    public function toArray($request): array
     {
         return [
-            CategoryContract::ID    =>  $this->id,
-            CategoryContract::TITLE =>  $this->title,
-            CategoryContract::TITLE_KZ  =>  $this->title_kz,
-            CategoryContract::TITLE_EN  =>  $this->title_en
+            MainContract::ID    =>  $this->{MainContract::ID},
+            MainContract::TITLE =>  $this->{MainContract::TITLE},
+            MainContract::TITLE_KZ  =>  $this->{MainContract::TITLE_KZ},
+            MainContract::TITLE_EN  =>  $this->{MainContract::TITLE_EN},
+            MainContract::SLUG  =>  $this->{MainContract::SLUG},
+            MainContract::DESCRIPTION   =>  $this->{MainContract::DESCRIPTION},
+            MainContract::DESCRIPTION_KZ    =>  $this->{MainContract::DESCRIPTION_KZ},
+            MainContract::DESCRIPTION_EN    =>  $this->{MainContract::DESCRIPTION_EN},
+            MainContract::IMAGE =>  $this->{MainContract::IMAGE},
+            MainContract::WALLPAPER =>  $this->{MainContract::WALLPAPER},
         ];
     }
 }

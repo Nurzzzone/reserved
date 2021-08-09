@@ -29,6 +29,10 @@ Route::get('/',function() {
 });
 //Route::get('/', [MainController::class, 'index'])->name('index');
 
+Route::prefix('form')->group(function() {
+    Route::get('/',[MainController::class,'form'])->name('form');
+});
+
 Route::prefix('profile')->group(function() {
     Route::get('/',[MainController::class, 'profile'])->name('profile');
     Route::get('settings',[MainController::class, 'profileSettings'])->name('profile.settings');
@@ -41,11 +45,9 @@ Route::prefix('favorite')->group(function() {
 });
 
 Route::prefix('home')->group(function() {
-    Route::get('/',[MainController::class, 'home'])->name('home');
-    Route::get('/{id}',[MainController::class, 'home'])->name('home');
-    Route::get('/restaurants',[MainController::class, 'homeRestaurants'])->name('home.restaurants');
-    Route::get('/cafe',[MainController::class, 'homeCafe'])->name('home.cafe');
-    Route::get('/bars',[MainController::class, 'homeBars'])->name('home.bars');
+    Route::get('',[MainController::class, 'home'])->name('home');
+    Route::get('{slug}',[MainController::class, 'category'])->name('home.category');
+    Route::get('{slug}/{id}',[MainController::class, 'getOrganizationById'])->name('home.organization');
 });
 
 Route::prefix('top')->group(function() {

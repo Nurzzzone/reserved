@@ -8,7 +8,7 @@
                     <div class="col-12">
                         <h2 class="settings-title">Уведомления</h2>
                         <p class="settings-description text-secondary text-justify">
-                            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin at felis mattis, tincidunt diam eget, venenatis erat. Proin at urna at est sollicitudin volutpat sit amet ut orci. Nunc faucibus neque a purus viverra, vitae aliquam massa tincidunt. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos.
+                            Здесь вы можете настроить Reserved-app во вашему устомтрению
                         </p>
                     </div>
                 </div>
@@ -30,7 +30,7 @@
                             <li class="list-group-item px-0 d-flex justify-content-between settings-item align-content-center">
                                 <div>
                                     <div class="h6 settings-list-title font-weight-bold">Push Уведомление</div>
-                                    <p class="h6 settings-list-description text-secondary">Получать маркетинговые уведомление</p>
+                                    <p class="h6 settings-list-description text-secondary">Получать системные, маркетинговые уведомление</p>
                                 </div>
                                 <div class="settings-switcher">
                                     <div class="d-flex settings-form" :class="{'settings-form-active':(user.push_notification === 'on')}" @click="pushSwitcher()">

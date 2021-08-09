@@ -10,7 +10,7 @@
                         <div class="col-12">
                             <h2 class="payments-title">Ваши карточки</h2>
                             <p class="payments-description text-secondary text-justify">
-                                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin at felis mattis, tincidunt diam eget, venenatis erat.
+                                Здесь храниться список банковских карт которых вы привязали к вашему аккаунту
                             </p>
                         </div>
                     </div>

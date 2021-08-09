@@ -1,119 +1,5 @@
 <template>
-    <location :countries="countries"></location>
-    <div class="container-fluid section-bg">
-        <div class="container pt-5 pb-3 pb-md-4">
-            <div class="row">
-                <div class="col-12 col-md-9 p-0 d-flex align-items-center">
-                    <template v-if="end === 'profile'">
-                        <template v-if="url === 'profile'">
-                            <ul class="breadcrumb">
-                                <li><a href="/"><div class="breadcrumb-home"></div></a></li>
-                                <li><div class="breadcrumb-arrow"></div></li>
-                                <li class="breadcrumb-link"><a href="/profile">Профиль</a></li>
-                            </ul>
-                        </template>
-                        <template v-else-if="url === 'settings'">
-                            <ul class="breadcrumb">
-                                <li><a href="/"><div class="breadcrumb-home"></div></a></li>
-                                <li><div class="breadcrumb-arrow"></div></li>
-                                <li class="breadcrumb-link"><a href="/profile">Профиль</a></li>
-                                <li><div class="breadcrumb-arrow"></div></li>
-                                <li class="breadcrumb-link"><a href="/profile/settings">Настройки</a></li>
-                            </ul>
-                        </template>
-                        <template v-else-if="url === 'payments'">
-                            <ul class="breadcrumb">
-                                <li><a href="/"><div class="breadcrumb-home"></div></a></li>
-                                <li><div class="breadcrumb-arrow"></div></li>
-                                <li class="breadcrumb-link"><a href="/profile">Профиль</a></li>
-                                <li><div class="breadcrumb-arrow"></div></li>
-                                <li class="breadcrumb-link"><a href="/profile/payments">Способ оплаты</a></li>
-                            </ul>
-                        </template>
-                        <template v-else-if="url === 'history'">
-                            <ul class="breadcrumb">
-                                <li><a href="/"><div class="breadcrumb-home"></div></a></li>
-                                <li><div class="breadcrumb-arrow"></div></li>
-                                <li class="breadcrumb-link"><a href="/profile">Профиль</a></li>
-                                <li><div class="breadcrumb-arrow"></div></li>
-                                <li class="breadcrumb-link"><a href="/profile/history">История</a></li>
-                            </ul>
-                        </template>
-                    </template>
-                    <template v-else-if="end === 'favorite'">
-                        <template v-if="url === 'favorite'">
-                            <ul class="breadcrumb">
-                                <li><a href="/"><div class="breadcrumb-home"></div></a></li>
-                                <li><div class="breadcrumb-arrow"></div></li>
-                                <li class="breadcrumb-link"><a href="/favorite">Избранное</a></li>
-                            </ul>
-                        </template>
-                    </template>
-                    <template v-else-if="end === 'top'">
-                        <template v-if="url === 'top'">
-                            <ul class="breadcrumb">
-                                <li><a href="/"><div class="breadcrumb-home"></div></a></li>
-                                <li><div class="breadcrumb-arrow"></div></li>
-                                <li class="breadcrumb-link"><a href="/top">Топ</a></li>
-                            </ul>
-                        </template>
-                    </template>
-                    <template v-else-if="end === 'home'">
-                        <template v-if="url === 'home'">
-                            <ul class="breadcrumb">
-                                <li><a href="/"><div class="breadcrumb-home"></div></a></li>
-                                <li><div class="breadcrumb-arrow"></div></li>
-                                <li class="breadcrumb-link"><a href="/home">Категории</a></li>
-                            </ul>
-                        </template>
-                        <template v-else-if="url === 'restaurants'">
-                            <ul class="breadcrumb">
-                                <li><a href="/"><div class="breadcrumb-home"></div></a></li>
-                                <li><div class="breadcrumb-arrow"></div></li>
-                                <li class="breadcrumb-link"><a href="/home">Категории</a></li>
-                                <li><div class="breadcrumb-arrow"></div></li>
-                                <li class="breadcrumb-link"><a href="/home/restaurants">Рестораны</a></li>
-                            </ul>
-                        </template>
-                        <template v-else-if="url === 'cafe'">
-                            <ul class="breadcrumb">
-                                <li><a href="/"><div class="breadcrumb-home"></div></a></li>
-                                <li><div class="breadcrumb-arrow"></div></li>
-                                <li class="breadcrumb-link"><a href="/home">Категории</a></li>
-                                <li><div class="breadcrumb-arrow"></div></li>
-                                <li class="breadcrumb-link"><a href="/home/cafe">Кафе</a></li>
-                            </ul>
-                        </template>
-                        <template v-else-if="url === 'bars'">
-                            <ul class="breadcrumb">
-                                <li><a href="/"><div class="breadcrumb-home"></div></a></li>
-                                <li><div class="breadcrumb-arrow"></div></li>
-                                <li class="breadcrumb-link"><a href="/home">Категории</a></li>
-                                <li><div class="breadcrumb-arrow"></div></li>
-                                <li class="breadcrumb-link"><a href="/home/bars">Бары</a></li>
-                            </ul>
-                        </template>
-                        <template v-else-if="name && id">
-                            <ul class="breadcrumb">
-                                <li><a href="/"><div class="breadcrumb-home"></div></a></li>
-                                <li><div class="breadcrumb-arrow"></div></li>
-                                <li class="breadcrumb-link"><a href="/home">Категории</a></li>
-                                <li><div class="breadcrumb-arrow"></div></li>
-                                <li class="breadcrumb-link"><a :href="'/home/'+id">{{name}}</a></li>
-                            </ul>
-                        </template>
-                    </template>
-                </div>
-                <div class="location-main col-md-3 p-0 d-flex justify-content-end">
-                    <div class="location" ref="location" data-toggle="modal" data-target="#location">
-                        <div class="location-title" v-if="storage.city">{{storage.city.title}}</div>
-                        <div class="location-title" v-else>Не выбрано</div>
-                        <div class="location-icon"></div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
+    <breadcrumb :breadcrumb="breadcrumb"></breadcrumb>
     <div class="container-fluid section-bg-main" v-if="end === 'profile'">
         <div class="container">
             <div class="row">
@@ -165,26 +51,41 @@
             </div>
         </div>
     </div>
+    <div class="container-fluid section-bg-main" v-else-if="end === 'form'">
+        <div class="container">
+            <div class="row py-2">
+
+            </div>
+        </div>
+    </div>
 </template>
 
 <script>
-import location from "../modal/location";
+import Breadcrumb from '../layout/Breadcrumb';
 export default {
-    props: ['name','id'],
+    props: ['category','name','id'],
     name: "ProfileSection",
     components: {
-        location
+        Breadcrumb
     },
     data() {
         return {
-            url: 'profile',
+            url: '',
             end: '',
-            countries: [],
+            breadcrumb: []
+        }
+    },
+    watch: {
+        category: function() {
+            this.setBreadcrumb();
+        },
+        name: function() {
+            this.setBreadcrumb();
         }
     },
     created() {
         this.setEnd();
-        this.getCountry();
+        this.setBreadcrumb();
     },
     methods: {
         setEnd: function() {
@@ -198,29 +99,73 @@ export default {
                 }
             }
         },
-        getCountry: function() {
-            if (!sessionStorage.countries) {
-                axios.get('/api/countries')
-                    .then(response => {
-                        let data    =   response.data;
-                        if (data.hasOwnProperty('data')) {
-                            data    =   data.data;
-                            this.countries  =   data;
-                            sessionStorage.countries    =   JSON.stringify(data);
-                            if (this.storage.city === '') {
-                                this.storage.city   =   this.countries[0].city_id[0];
-                            }
-                        }
-                    }).catch(error => {
-                        console.log(error.response);
+        setBreadcrumb: function() {
+            this.breadcrumb =   [];
+            let link    =   '';
+            if (this.end === 'form') {
+                this.breadcrumb.push({
+                    title: 'Заявка для ресторанов',
+                    link: link+'form'
+                });
+            } else if (this.end === 'profile') {
+                this.breadcrumb.push({
+                    title: 'Профиль',
+                    link: link+'profile'
+                });
+                link    +=  'profile/';
+                if (this.url === 'settings') {
+                    this.breadcrumb.push({
+                        title: 'Настройки',
+                        link: link+'settings'
                     });
-            } else {
-                this.countries  =   JSON.parse(sessionStorage.countries);
-                if (this.storage.city === '') {
-                    this.storage.city   =   this.countries[0].city_id[0];
+                    link    +=  'settings/';
+                } else if (this.url === 'history') {
+                    this.breadcrumb.push({
+                        title: 'История',
+                        link: link+'history'
+                    });
+                    link    +=  'history/';
+                } else if (this.url === 'payments') {
+                    this.breadcrumb.push({
+                        title: 'Способ оплаты',
+                        link: link+'payments'
+                    });
+                    link    +=  'payments/';
+                }
+            } else if (this.end === 'favorite') {
+                this.breadcrumb.push({
+                    title: 'Избранное',
+                    link: link+'favorite'
+                });
+                link    +=  'favorite/';
+            } else if (this.end === 'top') {
+                this.breadcrumb.push({
+                    title: 'Новости',
+                    link: link+'top'
+                });
+                link    +=  'top/';
+            } else if (this.end === 'home') {
+                this.breadcrumb.push({
+                    title: 'Категории',
+                    link: link+'home'
+                });
+                link    +=  'home/';
+                if (this.category) {
+                    this.breadcrumb.push({
+                        title: this.category.title,
+                        link: link+this.category.slug
+                    });
+                    link    +=  this.category.slug+'/';
+                }
+                if (this.id) {
+                    this.breadcrumb.push({
+                        title: this.name,
+                        link: link+this.id
+                    });
+                    link    +=  this.id+'/';
                 }
             }
-        }
+        },
     }
 }
 </script>

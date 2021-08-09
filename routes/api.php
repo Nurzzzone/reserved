@@ -121,9 +121,13 @@ Route::prefix('user')->group(function() {
     Route::post('token/{token}',[UserController::class,'authToken'])->name('user.authToken');
 });
 
+Route::prefix('category')->group(function() {
+    Route::get('list',[CategoryController::class,'list'])->name('category.list');
+    Route::get('slug/{slug}',[CategoryController::class,'getBySlug'])->name('category.slug');
+});
+
 Route::get('/categories',[CategoryController::class,'list']);
 Route::get('countries',[CountryController::class,'list']);
-
 
 Route::get('/organizations',[OrganizationController::class,'list']);
 Route::get('/organizations/{search}',[OrganizationController::class,'search']);

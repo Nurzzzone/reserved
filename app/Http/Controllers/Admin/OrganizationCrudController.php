@@ -73,7 +73,7 @@ class OrganizationCrudController extends CrudController
         CRUD::column(OrganizationContract::CATEGORY_ID)->type('select')->label('Категория')
             ->entity('category')->model('App\Models\Category')->attribute(CategoryContract::TITLE);
         CRUD::column(OrganizationContract::TITLE)->label('Название');
-        CRUD::column(OrganizationContract::RATING)->label('Реитинг');
+        CRUD::column(OrganizationContract::RATING)->label('Рейтинг');
         CRUD::column(OrganizationContract::ADDRESS)->label('Адрес');
         CRUD::column(OrganizationContract::STATUS)->label('Статус');
     }

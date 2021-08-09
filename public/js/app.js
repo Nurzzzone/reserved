@@ -16867,7 +16867,10 @@ __webpack_require__.r(__webpack_exports__);
       organizations: []
     };
   },
-  created: function created() {},
+  created: function created() {
+    this.setFilter();
+    this.getCategoryBySlug();
+  },
   methods: {
     setFilter: function setFilter() {
       if (this.storage.city) {

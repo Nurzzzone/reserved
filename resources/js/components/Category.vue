@@ -41,7 +41,8 @@ export default {
         }
     },
     created() {
-
+        this.setFilter();
+        this.getCategoryBySlug();
     },
     methods: {
         setFilter: function() {

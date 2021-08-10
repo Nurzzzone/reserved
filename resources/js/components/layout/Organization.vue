@@ -19,7 +19,10 @@
                         </div>
                         <ul class="list-group list-group-flush">
                             <li class="list-group-item text-center p-0">
-                                <a :href="'/home/'+organization.id" class="text-dark">
+                                <a v-if="category" :href="'/home/'+category.slug+'/'+organization.id" class="text-dark">
+                                    <h3 class=" font-weight-bold item-title">{{organization.title}}</h3>
+                                </a>
+                                <a v-else :href="'/home/'+organization.category_id.slug+'/'+organization.id" class="text-dark">
                                     <h3 class=" font-weight-bold item-title">{{organization.title}}</h3>
                                 </a>
                                 <p class="item-description text-secondary mx-3 my-0" v-if="organization.description">{{organization.description}}</p>
@@ -29,7 +32,10 @@
                                 <div class="text-center mb-0 mt-2 h6 text-secondary text-font">{{organization.address}}</div>
                             </li>
                             <li class="list-group-item">
-                                <a :href="'/home/'+category.slug+'/'+organization.id" class="btn w-100 text-white text-btn text-font font-weight-bold d-flex justify-content-center align-content-center">
+                                <a v-if="category" :href="'/home/'+category.slug+'/'+organization.id" class="btn w-100 text-white text-btn text-font font-weight-bold d-flex justify-content-center align-content-center">
+                                    <div class="py-md-1">Подробнее</div>
+                                </a>
+                                <a v-else :href="'/home/'+organization.category_id.slug+'/'+organization.id" class="btn w-100 text-white text-btn text-font font-weight-bold d-flex justify-content-center align-content-center">
                                     <div class="py-md-1">Подробнее</div>
                                 </a>
                             </li>

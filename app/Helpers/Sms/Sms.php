@@ -9,7 +9,7 @@ use App\Helpers\Curl\Curl;
 
 class Sms
 {
-    protected $link     =   'https://reserved-app.com';
+    protected $link     =   'https://reserved-app.kz';
     protected $login    =   'An-technology';
     protected $password =   'ygABGazD55XJ4NcesmBo';
     protected $url      =   'https://smsc.kz/sys/send.php';

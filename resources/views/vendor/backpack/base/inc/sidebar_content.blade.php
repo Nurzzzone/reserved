@@ -10,7 +10,11 @@
     <li class="nav-title">
         <span class="text-primary">Администратор</span>
     </li>
-
+    <li class='nav-item'>
+        <a class='nav-link' href='{{ backpack_url('organizationrequest') }}'>
+            <i class='nav-icon lab la-wpforms'></i> Запросы
+        </a>
+    </li>
     <li class='nav-item'>
         <a class='nav-link' href='{{ backpack_url('user') }}'>
             <i class='nav-icon la la-users'></i> Пользователи

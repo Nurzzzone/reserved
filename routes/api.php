@@ -16,6 +16,14 @@ use App\Http\Controllers\Api\TelegramController;
 use App\Http\Controllers\Api\TelegramChatController;
 use App\Http\Controllers\Api\MenuController;
 use App\Http\Controllers\Api\OrganizationTableListController;
+use App\Http\Controllers\Api\OrganizationRequestController;
+
+Route::prefix('organizationRequest')->group(function() {
+
+    Route::post('create',[OrganizationRequestController::class,'create'])->name('organizationRequest.create');
+    Route::get('phone/{phone}',[OrganizationRequestController::class,'getByPhone'])->name('organizationRequest.phone');
+
+});
 
 Route::prefix('table')->group(function() {
 

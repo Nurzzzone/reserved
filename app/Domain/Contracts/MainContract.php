@@ -8,6 +8,8 @@ use Carbon\Carbon;
 
 class MainContract
 {
+    const REJECTED  =   'rejected';
+    const ORGANIZATION_NAME =   'organization_name';
     const TEXT  =   'text';
     const TELEGRAM_ID   =   'telegram_id';
     const TELEGRAM_CHAT_ID  =   'telegram_chat_id';
@@ -259,6 +261,7 @@ class MainContract
         self::CAME          =>  'Пришел',
         self::COMPLETED     =>  'Завершен',
         self::OFF           =>  'Неактивный',
+        self::REJECTED      =>  'Отклонен',
         'NOT_VERIFIED'      =>  'Не подтвержден',
         'VERIFIED'          =>  'Подтвержден',
         'NOT_SPECIFIED'     =>  '',

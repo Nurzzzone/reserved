@@ -226,7 +226,7 @@
 }
 @media only screen and (max-width: 768px) {
     .entity-main {
-        padding: 10px 0 10px 20px;
+        padding: 10px 0 10px 10px;
     }
     .entity-wallpaper {
         width: 118px;
@@ -258,7 +258,8 @@
     }
     .entity-single {
         display: block;
-        padding-top: 10px;
+        padding: 10px;
+        padding-top: 5px;
     }
     .entity-blocks {
         display: block;
@@ -276,19 +277,33 @@
         padding: 5px;
     }
     .entity-single-header {
-        font-size: 14px;
-        margin-top: 10px;
+        margin-bottom: 5px;
+        margin-top: 5px;
+        font-size: 11px;
     }
     .entity-block-title {
-        font-size: 14px;
+        font-size: 11px;
+        margin: 10px 10px 0 10px;
     }
     .entity-block-description {
-        font-size: 12px;
+        font-size: 11px;
+        margin: 0 10px 0 10px;
+    }
+    .entity-block-body {
+        margin: 10px;
     }
     .entity-block-item {
-        font-size: 12px;
+        font-size: 11px;
         padding-bottom: 5px;
         margin-bottom: 5px;
+    }
+    .entity-footer-title {
+        font-size: 11px;
+    }
+    .entity-footer-btn > button {
+        height: 30px;
+        font-size: 11px;
+        padding: 0 15px 0 15px;
     }
     .entity-block-item-input-double-text > input {
         font-size: 12px;
@@ -299,7 +314,7 @@
     }
     .entity-block-item-input > select {
         height: 25px;
-        font-size: 12px;
+        font-size: 11px;
         padding: 0 5px 0 5px;
         border-radius: 2px;
     }
@@ -311,20 +326,20 @@
     }
     .entity-single-input > input {
         height: 25px;
-        font-size: 12px;
+        font-size: 11px;
         padding: 0 5px 0 5px;
         border-radius: 2px;
         width: 33.3%;
     }
     .entity-single-input > select {
         width: 33.3%;
-        font-size: 12px;
+        font-size: 11px;
         height: 25px;
         padding: 0 5px 0 5px;
+        border-radius: 2px;
     }
     .entity-single-input {
-
         flex-direction: initial;
-
+        gap: 5px;
     }
 }

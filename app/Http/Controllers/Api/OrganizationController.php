@@ -3,11 +3,11 @@
 namespace App\Http\Controllers\Api;
 
 use App\Domain\Contracts\MainContract;
-use App\Domain\Contracts\OrganizationTableListContract;
 use App\Domain\Contracts\OrganizationTablesContract;
 
 use Illuminate\Http\Request;
 use App\Http\Requests\Organization\OrganizationIdsRequest;
+use App\Http\Requests\Organization\OrganizationUpdateRequest;
 
 use App\Http\Controllers\Controller;
 
@@ -19,6 +19,7 @@ use App\Models\OrganizationTables;
 use App\Services\Organization\OrganizationService;
 use App\Services\OrganizationTableList\OrganizationTableListService;
 use App\Services\Booking\BookingService;
+use Illuminate\Validation\ValidationException;
 
 class OrganizationController extends Controller
 {
@@ -34,10 +35,14 @@ class OrganizationController extends Controller
         $this->bookingService   =   $bookingService;
     }
 
-    public function tableUpdate($id, $data)
+    /**
+     * @throws ValidationException
+     */
+    public function update($id, OrganizationUpdateRequest $organizationUpdateRequest)
     {
-
+        $this->organizationService->update($id, $organizationUpdateRequest->validated());
     }
+
 
     public function status($id,$date)
     {

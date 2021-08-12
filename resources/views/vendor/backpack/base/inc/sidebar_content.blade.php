@@ -5,7 +5,7 @@
     </a>
 </li>
 
-@if(backpack_user()->role === \App\Domain\Contracts\UserContract::TRANSLATE[\App\Domain\Contracts\UserContract::ADMINISTRATOR])
+@if(backpack_user()->role === \App\Domain\Contracts\MainContract::TRANSLATE[\App\Domain\Contracts\MainContract::ADMINISTRATOR])
 
     <li class="nav-title">
         <span class="text-primary">Администратор</span>
@@ -72,34 +72,56 @@
 
         </ul>
     </li>
+
+    <li class='nav-item'>
+        <a class='nav-link' href='{{ backpack_url('booking') }}'>
+            <i class='nav-icon las la-sort'></i> Бронирование
+        </a>
+    </li>
+
+    <li class='nav-item'>
+        <a class='nav-link' href='{{ backpack_url('review') }}'>
+            <i class='nav-icon las la-comment'></i> Отзывы
+        </a>
+    </li>
+
+
+    <li class="nav-item nav-dropdown">
+        <a class="nav-link nav-dropdown-toggle font-weight-normal" href="#">
+            <i class='nav-icon las la-building'></i> Организации
+        </a>
+        <ul class="nav-dropdown-items">
+            <li class='nav-item'>
+                <a class='nav-link' href='{{ backpack_url('organization') }}'>
+                    <i class='nav-icon las la-building'></i> Организации</a>
+            </li>
+        </ul>
+    </li>
 @else
     <li class="nav-title"><span class="text-primary">Модератор</span></li>
-@endif
 
-<li class='nav-item'>
-    <a class='nav-link' href='{{ backpack_url('booking') }}'>
-        <i class='nav-icon las la-sort'></i> Бронирование
-    </a>
-</li>
+    <li class='nav-item'>
+        <a class='nav-link' href='{{ backpack_url('booking') }}'>
+            <i class='nav-icon las la-sort'></i> Бронирование
+        </a>
+    </li>
 
-<li class='nav-item'>
-    <a class='nav-link' href='{{ backpack_url('review') }}'>
-        <i class='nav-icon las la-comment'></i> Отзывы
-    </a>
-</li>
+    <li class='nav-item'>
+        <a class='nav-link' href='{{ backpack_url('review') }}'>
+            <i class='nav-icon las la-comment'></i> Отзывы
+        </a>
+    </li>
 
-<li class="nav-item nav-dropdown">
-    <a class="nav-link nav-dropdown-toggle font-weight-normal" href="#">
-        <i class='nav-icon las la-building'></i> Организации
-    </a>
-    <ul class="nav-dropdown-items">
-        <li class='nav-item'>
-            <a class='nav-link' href='{{ backpack_url('organization') }}'>
-                <i class='nav-icon las la-building'></i> Организации</a>
-        </li>
 
-        @if(backpack_user()->role === \App\Domain\Contracts\UserContract::TRANSLATE[\App\Domain\Contracts\UserContract::MODERATOR])
-
+    <li class="nav-item nav-dropdown">
+        <a class="nav-link nav-dropdown-toggle font-weight-normal" href="#">
+            <i class='nav-icon las la-building'></i> Организации
+        </a>
+        <ul class="nav-dropdown-items">
+            <li class='nav-item'>
+                <a class='nav-link' href='{{ backpack_url('entity') }}'>
+                    <i class='nav-icon las la-building'></i> Организации</a>
+            </li>
             <li class='nav-item'>
                 <a class='nav-link' href='{{ backpack_url('organizationtables') }}'>
                     <i class='nav-icon la la-border-all'></i> Секции
@@ -120,10 +142,10 @@
                     <i class='nav-icon las la-utensils'></i> Меню
                 </a>
             </li>
-        @endif
 
-    </ul>
-</li>
+        </ul>
+    </li>
+@endif
 
 <li class="nav-title">
     <span class="text-primary">Сервисы</span>

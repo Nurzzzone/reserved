@@ -18,8 +18,6 @@ class OrganizationContract extends MainContract
         self::API_ID,
         self::API_SECRET,
         self::TITLE,
-        self::TITLE_KZ,
-        self::TITLE_EN,
         self::RATING,
         self::WALLPAPER,
         self::IMAGE,

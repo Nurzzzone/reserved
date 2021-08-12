@@ -40,6 +40,90 @@ class Organization extends Model
         return $this->belongsTo(Category::class);
     }
 
+    public function getStartMondayAttribute($value): string
+    {
+        $split  =   explode(':',$value);
+        return $split[0].':'.$split[1];
+    }
+
+    public function getEndMondayAttribute($value): string
+    {
+        $split  =   explode(':',$value);
+        return $split[0].':'.$split[1];
+    }
+
+    public function getStartTuesdayAttribute($value): string
+    {
+        $split  =   explode(':',$value);
+        return $split[0].':'.$split[1];
+    }
+
+    public function getEndTuesdayAttribute($value): string
+    {
+        $split  =   explode(':',$value);
+        return $split[0].':'.$split[1];
+    }
+
+    public function getStartWednesdayAttribute($value): string
+    {
+        $split  =   explode(':',$value);
+        return $split[0].':'.$split[1];
+    }
+
+    public function getEndWednesdayAttribute($value): string
+    {
+        $split  =   explode(':',$value);
+        return $split[0].':'.$split[1];
+    }
+
+    public function getStartThursdayAttribute($value): string
+    {
+        $split  =   explode(':',$value);
+        return $split[0].':'.$split[1];
+    }
+
+    public function getEndThursdayAttribute($value): string
+    {
+        $split  =   explode(':',$value);
+        return $split[0].':'.$split[1];
+    }
+
+    public function getStartFridayAttribute($value): string
+    {
+        $split  =   explode(':',$value);
+        return $split[0].':'.$split[1];
+    }
+
+    public function getEndFridayAttribute($value): string
+    {
+        $split  =   explode(':',$value);
+        return $split[0].':'.$split[1];
+    }
+
+    public function getStartSaturdayAttribute($value): string
+    {
+        $split  =   explode(':',$value);
+        return $split[0].':'.$split[1];
+    }
+
+    public function getEndSaturdayAttribute($value): string
+    {
+        $split  =   explode(':',$value);
+        return $split[0].':'.$split[1];
+    }
+
+    public function getStartSundayAttribute($value): string
+    {
+        $split  =   explode(':',$value);
+        return $split[0].':'.$split[1];
+    }
+
+    public function getEndSundayAttribute($value): string
+    {
+        $split  =   explode(':',$value);
+        return $split[0].':'.$split[1];
+    }
+
     public function city()
     {
         return $this->belongsTo(City::class);

@@ -40,6 +40,11 @@ class MainController extends Controller
         ]);
     }
 
+    public function entity()
+    {
+        return view('backpack.entity.entity');
+    }
+
     public function dashboardBooking($id)
     {
         $table  =   $this->organizationTableListService->getById($id);

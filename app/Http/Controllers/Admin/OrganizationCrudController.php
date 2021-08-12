@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Domain\Contracts\BookingContract;
 use App\Domain\Contracts\CategoryContract;
 use App\Domain\Contracts\CityContract;
+use App\Domain\Contracts\MainContract;
 use App\Domain\Contracts\OrganizationContract;
 use App\Domain\Contracts\UserContract;
 use App\Http\Requests\OrganizationRequest;
@@ -30,7 +31,7 @@ class OrganizationCrudController extends CrudController
         CRUD::setModel(Organization::class);
         CRUD::setRoute(config('backpack.base.route_prefix') . '/organization');
         CRUD::setEntityNameStrings('организацию', 'Организации');
-        if (backpack_user() && backpack_user()->role === OrganizationContract::TRANSLATE[OrganizationContract::MODERATOR]) {
+        if (backpack_user() && backpack_user()->role === MainContract::TRANSLATE[MainContract::MODERATOR]) {
             $this->crud->denyAccess((array)'create');
             $this->crud->setListView('backpack.organization.list');
         }
@@ -101,8 +102,6 @@ class OrganizationCrudController extends CrudController
             CRUD::field(OrganizationContract::TITLE)->label('Название')->attributes([
                 'required'  =>  'required'
             ]);
-            CRUD::field(OrganizationContract::TITLE_KZ)->label('Название на казахском');
-            CRUD::field(OrganizationContract::TITLE_EN)->label('Название на англииском');
 
             CRUD::field(OrganizationContract::WALLPAPER)->label('Обложка')->type('image')->attributes([
                 'accept'    =>  'image/png, image/jpeg, image/jpg',

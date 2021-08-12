@@ -24,7 +24,7 @@ return [
     // ----
 
     // Project name. Shown in the window title.
-    'project_name' => 'Reserved',
+    'project_name' => 'RESERVED',
 
     // When clicking on the admin panel's top-left logo/name,
     // where should the user be redirected?
@@ -71,7 +71,7 @@ return [
     // ------
 
     // Menu logo. You can replace this with an <img> tag if you have a logo.
-    'project_logo'   => 'Reserved',
+    'project_logo'   => '<span style="color: #57a283; font-weight: bold;">RESERVED</span>',
 
     // Show / hide breadcrumbs on admin panel pages.
     'breadcrumbs' => true,

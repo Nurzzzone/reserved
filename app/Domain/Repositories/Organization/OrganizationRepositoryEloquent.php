@@ -3,8 +3,10 @@
 
 namespace App\Domain\Repositories\Organization;
 
+use App\Domain\Contracts\MainContract;
 use App\Domain\Contracts\OrganizationContract;
 use App\Models\Organization;
+use Illuminate\Support\Facades\DB;
 
 class OrganizationRepositoryEloquent implements OrganizationRepositoryInterface
 {
@@ -14,6 +16,11 @@ class OrganizationRepositoryEloquent implements OrganizationRepositoryInterface
     public function getByIds($ids)
     {
         return Organization::with('user','category','images','menus')->where(OrganizationContract::STATUS,OrganizationContract::ENABLED)->whereIn(OrganizationContract::ID,$ids)->get();
+    }
+
+    public function update($id,$data)
+    {
+        DB::table(OrganizationContract::TABLE)->where(MainContract::ID,$id)->update($data);
     }
 
     public function getIdsByUserId(int $userId)

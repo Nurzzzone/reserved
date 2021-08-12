@@ -25,6 +25,11 @@ class OrganizationService extends BaseService
         $this->organizationRepository->updateRating($id,$average);
     }
 
+    public function update($id,$data)
+    {
+        $this->organizationRepository->update($id,$data);
+    }
+
     public function getByIds($ids)
     {
         return $this->organizationRepository->getByIds($ids);

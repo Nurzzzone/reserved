@@ -2,17 +2,16 @@
 
 namespace App\Http\Requests\Organization;
 
+use App\Domain\Contracts\MainContract;
 use Illuminate\Contracts\Validation\Validator;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Http\Exceptions\HttpResponseException;
-
-use App\Domain\Contracts\MainContract;
 use Illuminate\Validation\ValidationException;
 
-class OrganizationIdsRequest extends FormRequest
+class OrganizationUpdateRequest extends FormRequest
 {
 
-    public function authorize()
+    public function authorize(): bool
     {
         return true;
     }
@@ -20,7 +19,12 @@ class OrganizationIdsRequest extends FormRequest
     public function rules(): array
     {
         return [
-            MainContract::IDS   =>  'required|array'
+            MainContract::TITLE =>  'nullable|min:1',
+            MainContract::DESCRIPTION   =>  'nullable',
+            MainContract::DESCRIPTION_KZ    =>  'nullable',
+            MainContract::DESCRIPTION_EN    =>  'nullable',
+            MainContract::START_MONDAY  =>  'nullable',
+            MainContract::END_MONDAY    =>  'nullable',
         ];
     }
 

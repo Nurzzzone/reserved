@@ -24,7 +24,7 @@ class Sms
     {
         $this->curl->get($this->url.'?'.$this->parameters([
             'phones'    =>  $user->{UserContract::PHONE},
-            'mes'       =>  $_SERVER['SERVER_NAME'].' Ваш код: '.$user->{UserContract::CODE}
+            'mes'       =>  'Reserved-app Ваш код: '.$user->{UserContract::CODE}
         ]));
     }
 
@@ -32,7 +32,7 @@ class Sms
     {
         $this->curl->get($this->url.'?'.$this->parameters([
             'phones'    =>  $user->{UserContract::PHONE},
-            'mes'       =>  $_SERVER['SERVER_NAME'].' ваш пароль: '.$password.' для входа, никому не сообщайте'
+            'mes'       =>  'Reserved-app ваш пароль: '.$password.' для входа, никому не сообщайте'
         ]));
     }
 

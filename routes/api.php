@@ -111,6 +111,7 @@ Route::prefix('menu')->group(function() {
 
 Route::prefix('organization')->group(function() {
 
+    Route::post('update/{id}',[OrganizationController::class,'update'])->name('organization.update');
     Route::get('status/{id}/{date}',[OrganizationController::class,'status'])->name('organization.status');
     Route::post('ids',[OrganizationController::class,'getByIds'])->name('organization.ids');
     Route::get('section/{id}',[OrganizationController::class,'getSectionsById']);

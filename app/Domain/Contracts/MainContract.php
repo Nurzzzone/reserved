@@ -100,6 +100,7 @@ class MainContract
     const IMAGES    =   'images';
     const MENUS     =   'menus';
     const WEBSITE   =   'website';
+    const CATEGORY  =   'category';
     const VALUE     =   'value';
     const URL       =   'url';
     const PG_AMOUNT =   'pg_amount';

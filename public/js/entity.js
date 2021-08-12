@@ -8,6 +8,8 @@ let app = new Vue({
             organization: '',
             categories: [],
             cities: [],
+            status: true,
+            success: false,
         };
     },
     created() {
@@ -17,9 +19,18 @@ let app = new Vue({
         this.getOrganization();
     },
     methods: {
+        categoryChange: function() {
+            this.categories.forEach(category => {
+                if (category.id === this.organization.category) {
+                    this.organization.category_id   =   category;
+                }
+            });
+        },
         saveOrganization: function() {
             if (this.organization.title.trim() === '') {
                 return this.$refs.organization_title.focus();
+            } else if (this.organization.price.trim() === '') {
+                return this.$refs.price.focus();
             } else if (this.timeCheck(this.organization.monday.start)) {
                 return this.$refs.organization_monday_start.focus();
             } else if (this.timeCheck(this.organization.monday.end)) {
@@ -49,21 +60,42 @@ let app = new Vue({
             } else if (this.timeCheck(this.organization.sunday.end)) {
                 return this.$refs.organization_sunday_end.focus();
             }
-            console.log(this.organization);
-            axios.post('/api/organization/update/'+this.id,{
-                title: this.organization.title.trim(),
-                description: this.organization.description,
-                description_kz: this.organization.description_kz,
-                description_en: this.organization.description_en,
-                price: this.organization.price,
-                start_monday: this.organization.monday.start,
-                end_monday: this.organization.monday.end,
-
-            }).then(response => {
-                console.log(response.data);
-            }).catch(element => {
-                console.log(element);
-            });
+            if (this.status) {
+                this.status = false;
+                this.success    =   false;
+                axios.post('/api/organization/update/'+this.id,{
+                    title: this.organization.title.trim(),
+                    description: this.organization.description,
+                    description_kz: this.organization.description_kz,
+                    description_en: this.organization.description_en,
+                    price: this.organization.price,
+                    start_monday: this.organization.monday.start,
+                    end_monday: this.organization.monday.end,
+                    start_tuesday: this.organization.tuesday.start,
+                    end_tuesday: this.organization.tuesday.end,
+                    start_wednesday: this.organization.wednesday.start,
+                    end_wednesday: this.organization.wednesday.end,
+                    start_thursday: this.organization.thursday.start,
+                    end_thursday: this.organization.thursday.end,
+                    start_friday: this.organization.friday.start,
+                    end_friday: this.organization.friday.end,
+                    start_sunday: this.organization.sunday.start,
+                    end_sunday: this.organization.sunday.end,
+                    start_saturday: this.organization.saturday.start,
+                    end_saturday: this.organization.saturday.end,
+                    address: this.organization.address,
+                    phone: this.organization.phone,
+                    email: this.organization.email,
+                    website: this.organization.website,
+                    city_id: this.organization.city_id,
+                    category_id: this.organization.category
+                }).then(response => {
+                    this.success    =   true;
+                    this.status =   true;
+                }).catch(element => {
+                    this.status =   true;
+                });
+            }
         },
         timeCheck: function(time) {
             let split   =   time.split(':');

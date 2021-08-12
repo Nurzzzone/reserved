@@ -16,8 +16,8 @@
                     </div>
                     <div class="entity-rating" v-if="organization.rating">@{{ organization.rating }}</div>
                 </div>
-                <a href="https://{{$_SERVER['SERVER_NAME']}}/home/bars/2" target="_blank" class="entity-link">
-                    <div class="entity-description">{{$_SERVER['SERVER_NAME']}}/home/bars/2</div>
+                <a v-if="organization" :href="'https://{{$_SERVER['SERVER_NAME']}}/home/'+this.organization.category_id.slug+'/2'" target="_blank" class="entity-link">
+                    <div class="entity-description">{{$_SERVER['SERVER_NAME']}}/home/@{{this.organization.category_id.slug}}/2</div>
                 </a>
             </div>
             <div class="entity-wallpaper">
@@ -32,7 +32,7 @@
                     <select >
                         <option>KZT</option>
                     </select>
-                    <input type="text" placeholder="Цена" v-model="organization.price" maxlength="255">
+                    <input type="text" placeholder="Цена" v-model="organization.price" maxlength="255" v-mask="'#################'" ref="price">
                 </div>
             </div>
             <div class="entity-single-description">
@@ -201,23 +201,23 @@
                     <div class="entity-block-item">
                         <div class="entity-block-item-title">Категория</div>
                         <div class="entity-block-item-input">
-                            <select>
-                                <option v-for="(category,key) in categories" :key="key">@{{category.title}}</option>
+                            <select v-model="organization.category" ref="category" @change="categoryChange()">
+                                <option v-for="(category,key) in categories" :key="key" :value="category.id" :selected="category.id === organization.category">@{{category.title}}</option>
                             </select>
                         </div>
                     </div>
                     <div class="entity-block-item">
                         <div class="entity-block-item-title">Город</div>
                         <div class="entity-block-item-input">
-                            <select>
-                                <option v-for="(city,key) in cities" :key="key">@{{city.title}}</option>
+                            <select v-model="organization.city_id" ref="city">
+                                <option v-for="(city,key) in cities" :key="key" :value="city.id" :selected="key === organization.city_id">@{{city.title}}</option>
                             </select>
                         </div>
                     </div>
                     <div class="entity-block-item">
                         <div class="entity-block-item-title">Адрес</div>
                         <div class="entity-block-item-input">
-                            <input type="text" v-model="organization.address" v-mask="'+# (###) ###-##-##'">
+                            <input type="text" v-model="organization.address">
                         </div>
                     </div>
                     <div class="entity-block-item">
@@ -248,6 +248,7 @@
             </div>
         </div>
         <div class="entity-footer">
+            <div class="entity-footer-title" v-show="success">Изменения сохранены</div>
             <div class="entity-footer-btn">
                 <button @click="saveOrganization">Сохранить</button>
             </div>

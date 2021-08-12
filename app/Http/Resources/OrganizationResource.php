@@ -2,6 +2,7 @@
 
 namespace App\Http\Resources;
 
+use App\Domain\Contracts\MainContract;
 use App\Domain\Contracts\OrganizationContract;
 use Illuminate\Http\Resources\Json\JsonResource;
 use App\Http\Resources\Menu\MenuCollection;
@@ -18,9 +19,11 @@ class OrganizationResource extends JsonResource
             OrganizationContract::IMAGE     =>  $this->{OrganizationContract::IMAGE}?$this->{OrganizationContract::IMAGE}:($this->{OrganizationContract::CATEGORY_ID}===1?'/img/logo/restaurant.svg':($this->{OrganizationContract::CATEGORY_ID}===2?'/img/logo/cafe.svg':'/img/logo/bar.svg')),
             OrganizationContract::WALLPAPER =>  $this->{OrganizationContract::WALLPAPER}?$this->{OrganizationContract::WALLPAPER}:'/img/logo/wall.png',
             OrganizationContract::TITLE     =>  $this->{OrganizationContract::TITLE},
-            OrganizationContract::TITLE_KZ  =>  $this->title_kz,
-            OrganizationContract::TITLE_EN  =>  $this->title_en,
-            OrganizationContract::TIME      =>  '09.00 - 18.00',
+            OrganizationContract::TIME      =>  '-',
+            MainContract::PHONE =>  $this->{MainContract::PHONE},
+            MainContract::EMAIL =>  $this->{MainContract::EMAIL},
+            MainContract::WEBSITE   =>  $this->{MainContract::WEBSITE},
+            MainContract::CATEGORY  =>  $this->{MainContract::CATEGORY_ID},
             OrganizationContract::DESCRIPTION   =>  $this->description,
             OrganizationContract::DESCRIPTION_KZ    =>  $this->description_kz,
             OrganizationContract::DESCRIPTION_EN    =>  $this->description_en,

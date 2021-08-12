@@ -23,10 +23,15 @@
 }
 .entity-footer {
     padding: 20px;
+    justify-content: flex-end;
+    gap: 20px;
+}
+.entity-footer-title {
+    color: #57a283;
+    font-weight: bold;
 }
 .entity-footer-btn {
     overflow: hidden;
-    width: 100%;
 }
 .entity-footer-btn > button {
     color: #fff;

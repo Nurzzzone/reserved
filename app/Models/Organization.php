@@ -40,6 +40,69 @@ class Organization extends Model
         return $this->belongsTo(Category::class);
     }
 
+    public function setStartMondayAttribute($value): string
+    {
+        return $value.':00';
+    }
+    public function setEndMondayAttribute($value): string
+    {
+        return $value.':00';
+    }
+
+    public function setStartTuesdayAttribute($value): string
+    {
+        return $value.':00';
+    }
+    public function setEndTuesdayAttribute($value): string
+    {
+        return $value.':00';
+    }
+
+    public function setStartWednesdayAttribute($value): string
+    {
+        return $value.':00';
+    }
+    public function setEndWednesdayAttribute($value): string
+    {
+        return $value.':00';
+    }
+
+    public function setStartThursdayAttribute($value): string
+    {
+        return $value.':00';
+    }
+    public function setEndThursdayAttribute($value): string
+    {
+        return $value.':00';
+    }
+
+    public function setStartFridayAttribute($value): string
+    {
+        return $value.':00';
+    }
+    public function setEndFridayAttribute($value): string
+    {
+        return $value.':00';
+    }
+
+    public function setStartSaturdayAttribute($value): string
+    {
+        return $value.':00';
+    }
+    public function setEndSaturdayAttribute($value): string
+    {
+        return $value.':00';
+    }
+
+    public function setStartSundayAttribute($value): string
+    {
+        return $value.':00';
+    }
+    public function setEndSundayAttribute($value): string
+    {
+        return $value.':00';
+    }
+
     public function getStartMondayAttribute($value): string
     {
         $split  =   explode(':',$value);

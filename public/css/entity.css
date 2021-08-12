@@ -229,19 +229,20 @@
         padding: 10px 0 10px 20px;
     }
     .entity-wallpaper {
-        width: 182px;
-        height: 57px;
+        width: 118px;
+        height: 54px;
+        background-size: cover;
     }
     .entity-logo {
-        width: 35px;
-        height: 35px;
-        margin: 10px 0 0 -18px;
+        width: 30px;
+        height: 30px;
+        margin: 12px 0 0 -14px;
     }
     .entity-title {
         font-size: 14px;
     }
     .entity-description {
-        font-size: 11px;
+        font-size: 9px;
     }
     .entity-header {
         gap: 5px;

@@ -224,3 +224,106 @@
     border-radius: 50px;
     margin: 15px 0 0 -35px;
 }
+@media only screen and (max-width: 768px) {
+    .entity-main {
+        padding: 10px 0 10px 20px;
+    }
+    .entity-wallpaper {
+        width: 182px;
+        height: 57px;
+    }
+    .entity-logo {
+        width: 35px;
+        height: 35px;
+        margin: 10px 0 0 -18px;
+    }
+    .entity-title {
+        font-size: 14px;
+    }
+    .entity-description {
+        font-size: 11px;
+    }
+    .entity-header {
+        gap: 5px;
+    }
+    .entity-star {
+        width: 10px;
+        height: 10px;
+    }
+    .entity-rating {
+        font-size: 9px;
+        padding: 0 4px 0 4px;
+        border-radius: 2px;
+    }
+    .entity-single {
+        display: block;
+        padding-top: 10px;
+    }
+    .entity-blocks {
+        display: block;
+    }
+    .entity-block {
+        width: 100%;
+    }
+    .entity-single-title, .entity-single-description {
+        width: 100% !important;
+    }
+    .entity-single-input > textarea {
+        height: 50px;
+        font-size: 12px;
+        border-radius: 2px;
+        padding: 5px;
+    }
+    .entity-single-header {
+        font-size: 14px;
+        margin-top: 10px;
+    }
+    .entity-block-title {
+        font-size: 14px;
+    }
+    .entity-block-description {
+        font-size: 12px;
+    }
+    .entity-block-item {
+        font-size: 12px;
+        padding-bottom: 5px;
+        margin-bottom: 5px;
+    }
+    .entity-block-item-input-double-text > input {
+        font-size: 12px;
+        width: 60px;
+        height: 25px;
+        padding: 0 5px 0 5px;
+        border-radius: 2px;
+    }
+    .entity-block-item-input > select {
+        height: 25px;
+        font-size: 12px;
+        padding: 0 5px 0 5px;
+        border-radius: 2px;
+    }
+    .entity-block-item-input > input {
+        height: 25px;
+        padding: 0 5px 0 5px;
+        font-size: 12px;
+        border-radius: 2px;
+    }
+    .entity-single-input > input {
+        height: 25px;
+        font-size: 12px;
+        padding: 0 5px 0 5px;
+        border-radius: 2px;
+        width: 33.3%;
+    }
+    .entity-single-input > select {
+        width: 33.3%;
+        font-size: 12px;
+        height: 25px;
+        padding: 0 5px 0 5px;
+    }
+    .entity-single-input {
+
+        flex-direction: initial;
+
+    }
+}

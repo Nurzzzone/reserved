@@ -300,6 +300,10 @@
     .entity-footer-title {
         font-size: 11px;
     }
+    .entity-footer {
+        padding: 10px;
+        gap: 10px;
+    }
     .entity-footer-btn > button {
         height: 30px;
         font-size: 11px;

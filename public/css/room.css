@@ -1,0 +1,14 @@
+#app {
+    margin-bottom: 100px;
+}
+.room {
+    margin: 20px 0 0 0;
+    background: #fff;
+    box-shadow: 0 .125rem .25rem rgba(22,28,45,.075)!important;
+    border-radius: 5px;
+    display: flex;
+    align-items: center;
+    position: relative;
+    overflow: hidden;
+    justify-content: space-between;
+}

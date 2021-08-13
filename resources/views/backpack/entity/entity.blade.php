@@ -3,7 +3,7 @@
     <link href="{{ asset('css/entity.css') }}" rel="stylesheet">
     <div id="app" v-if="organization">
         <div class="entity">
-            <input type="hidden" id="organization" value="1">
+            <input type="hidden" id="organization" value="{{$id}}">
             <div class="entity-main">
                 <div class="entity-header">
                     <div class="entity-title">@{{ organization.title }}</div>
@@ -16,8 +16,8 @@
                     </div>
                     <div class="entity-rating" v-if="organization.rating">@{{ organization.rating }}</div>
                 </div>
-                <a v-if="organization" :href="'https://{{$_SERVER['SERVER_NAME']}}/home/'+this.organization.category_id.slug+'/2'" target="_blank" class="entity-link">
-                    <div class="entity-description">{{$_SERVER['SERVER_NAME']}}/home/@{{this.organization.category_id.slug}}/2</div>
+                <a v-if="organization" :href="'https://reserved-app.kz/home/'+this.organization.category_id.slug+'/{{$id}}'" target="_blank" class="entity-link">
+                    <div class="entity-description">reserved-app.kz/home/@{{this.organization.category_id.slug}}/{{$id}}</div>
                 </a>
             </div>
             <div class="entity-wallpaper">
@@ -254,8 +254,6 @@
             </div>
         </div>
     </div>
-    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/v-mask/dist/v-mask.min.js"></script>
+    @include('backpack.scripts')
     <script src="{{ asset('js/entity.js') }}" type="module"></script>
 @endsection

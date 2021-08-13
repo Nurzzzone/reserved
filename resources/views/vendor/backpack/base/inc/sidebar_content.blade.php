@@ -1,15 +1,6 @@
 <!-- This file is used to store sidebar items, starting with Backpack\Base 0.9.0 -->
-<li class="nav-item">
-    <a class="nav-link" href="{{ backpack_url('dashboard') }}">
-        <i class="la la-home nav-icon"></i> Главная
-    </a>
-</li>
 
 @if(backpack_user()->role === \App\Domain\Contracts\MainContract::TRANSLATE[\App\Domain\Contracts\MainContract::ADMINISTRATOR])
-
-    <li class="nav-title">
-        <span class="text-primary">Администратор</span>
-    </li>
     <li class='nav-item'>
         <a class='nav-link' href='{{ backpack_url('organizationrequest') }}'>
             <i class='nav-icon lab la-wpforms'></i> Запросы
@@ -98,7 +89,12 @@
         </ul>
     </li>
 @else
-    <li class="nav-title"><span class="text-primary">Модератор</span></li>
+
+    <li class="nav-item">
+        <a class="nav-link" href="{{ backpack_url('dashboard') }}">
+            <i class="la la-home nav-icon"></i> Резервы
+        </a>
+    </li>
 
     <li class='nav-item'>
         <a class='nav-link' href='{{ backpack_url('booking') }}'>
@@ -112,38 +108,38 @@
         </a>
     </li>
 
+    <li class="nav-title">
+        <span class="text-primary">Основное</span>
+    </li>
 
-    <li class="nav-item nav-dropdown">
-        <a class="nav-link nav-dropdown-toggle font-weight-normal" href="#">
-            <i class='nav-icon las la-building'></i> Организации
+    <li class='nav-item'>
+        <a class='nav-link' href='{{ backpack_url('entity') }}'>
+            <i class='nav-icon las la-building'></i> Заведение
         </a>
-        <ul class="nav-dropdown-items">
-            <li class='nav-item'>
-                <a class='nav-link' href='{{ backpack_url('entity') }}'>
-                    <i class='nav-icon las la-building'></i> Организации</a>
-            </li>
-            <li class='nav-item'>
-                <a class='nav-link' href='{{ backpack_url('organizationtables') }}'>
-                    <i class='nav-icon la la-border-all'></i> Секции
-                </a>
-            </li>
-            <li class='nav-item'>
-                <a class='nav-link' href='{{ backpack_url('organizationtablelist') }}'>
-                    <i class='nav-icon las la-table'></i> Столы
-                </a>
-            </li>
-            <li class='nav-item'>
-                <a class='nav-link' href='{{ backpack_url('organizationimage') }}'>
-                    <i class='nav-icon las la-image'></i> Фото
-                </a>
-            </li>
-            <li class='nav-item'>
-                <a class='nav-link' href='{{ backpack_url('menu') }}'>
-                    <i class='nav-icon las la-utensils'></i> Меню
-                </a>
-            </li>
+    </li>
 
-        </ul>
+    <li class='nav-item'>
+        <a class='nav-link' href='{{ backpack_url('room') }}'>
+            <i class='nav-icon la la-border-all'></i> Помещение
+        </a>
+    </li>
+
+    <li class='nav-item'>
+        <a class='nav-link' href='{{ backpack_url('organizationtablelist') }}'>
+            <i class='nav-icon las la-table'></i> Столы
+        </a>
+    </li>
+
+    <li class='nav-item'>
+        <a class='nav-link' href='{{ backpack_url('organizationimage') }}'>
+            <i class='nav-icon las la-image'></i> Фото
+        </a>
+    </li>
+
+    <li class='nav-item'>
+        <a class='nav-link' href='{{ backpack_url('menu') }}'>
+            <i class='nav-icon las la-utensils'></i> Меню
+        </a>
     </li>
 @endif
 

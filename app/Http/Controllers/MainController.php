@@ -42,7 +42,16 @@ class MainController extends Controller
 
     public function entity()
     {
-        return view('backpack.entity.entity');
+        if (!backpack_auth()->user()->id) {
+            redirect('/home/login');
+        }
+        $organization   =   $this->organizationService->getByUserId(backpack_auth()->user()->id);
+        return view('backpack.entity.entity',['id'=>$organization->id]);
+    }
+
+    public function room()
+    {
+        return view('backpack.room.room');
     }
 
     public function dashboardBooking($id)

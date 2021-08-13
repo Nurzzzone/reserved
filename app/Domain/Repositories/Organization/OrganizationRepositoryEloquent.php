@@ -63,7 +63,7 @@ class OrganizationRepositoryEloquent implements OrganizationRepositoryInterface
         return Organization::where([
             OrganizationContract::USER_ID   =>  $id,
             OrganizationContract::STATUS    =>  OrganizationContract::ENABLED
-        ])->get();
+        ])->first();
     }
 
     public function getByCategoryIdAndCityId($id, $cityId, $paginate)

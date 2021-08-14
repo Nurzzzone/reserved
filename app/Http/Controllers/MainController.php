@@ -51,7 +51,11 @@ class MainController extends Controller
 
     public function room()
     {
-        return view('backpack.room.room');
+        if (!backpack_auth()->user()->id) {
+            redirect('/home/login');
+        }
+        $organization   =   $this->organizationService->getByUserId(backpack_auth()->user()->id);
+        return view('backpack.room.room',['id'=>$organization->id]);
     }
 
     public function dashboardBooking($id)

@@ -6,9 +6,95 @@
     background: #fff;
     box-shadow: 0 .125rem .25rem rgba(22,28,45,.075)!important;
     border-radius: 5px;
+    overflow: hidden;
+}
+.room-main {
+    overflow: hidden;
+}
+.room-title {
+    font-size: 24px;
+    margin: 20px;
+    position: relative;
+}
+.room-title > span {
+    color: grey;
+}
+.room-table {
+
+}
+.room-table-body {
+
+}
+.room-table-item-id {
+    width: 70px;
+}
+.room-table-item-name {
+    width: 400px;
+}
+.room-table-item-status {
+    width: 100px;
+}
+.room-table-item-created {
+    width: 150px;
+}
+.room-table-item-action {
+    width: auto;
+    margin-left: auto;
+    display: flex;
+    gap: 20px;
+}
+.room-table-item-delete, .room-table-item-edit, .room-table-item-statistics, .room-table-item-duplicate, .room-table-item-unlocked {
+    width: 18px;
+    height: 18px;
+    background: url('/img/logo/lock.png') no-repeat center;
+    background-size: contain;
+    cursor: pointer;
+}
+.room-table-item-edit {
+    background-image: url('/img/logo/pencil.png');
+}
+.room-table-item-statistics {
+    background-image: url('/img/logo/statistics.png');
+}
+.room-table-item-duplicate {
+    background-image: url('/img/logo/duplicate.png');
+}
+.room-table-item-unlocked {
+    background-image: url('/img/logo/unlocked.png');
+}
+.room-table-list {
+    overflow: hidden;
     display: flex;
     align-items: center;
-    position: relative;
-    overflow: hidden;
-    justify-content: space-between;
+    padding: 15px 20px 15px 20px;
+    gap: 20px;
+    font-size: 14px;
+    border-bottom: 1px solid rgb(245,245,245);
+    color: grey;
+}
+.room-table-list:last-child {
+    border-bottom: none;
+}
+.room-table-header {
+    border-top: 1px solid rgb(245,245,245);
+    border-bottom: 1px solid rgb(245,245,245);
+    padding: 15px 20px 15px 20px;
+    display: flex;
+    background: rgba(0,0,0,.02);
+    font-size: 14px;
+    gap: 20px;
+    font-weight: bold;
+}
+.room-btn {
+    position: absolute;
+    font-size: 14px;
+    border: none;
+    right: 0;
+    height: 35px;
+    min-width: 120px;
+    padding: 0 15px 0 15px;
+    border-radius: 35px;
+    background: #57a283;
+    outline: none !important;
+    color: #fff;
 }

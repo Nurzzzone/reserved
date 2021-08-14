@@ -2732,6 +2732,7 @@ $widgets['before_content'][] = [
     <div id="tables">
         @include('vendor.backpack.base.card.list', [
             'date'      =>  '',
+            'organization'  =>  $organizationService->getByUserId(backpack_auth()->user()->id),
             'user_id'   =>  backpack_auth()->user()->id,
             'userService'   =>  $userService,
             'organizationService'   =>  $organizationService,

@@ -2,8 +2,9 @@
 
 namespace App\Http\Resources;
 
+use App\Domain\Contracts\MainContract;
 use Illuminate\Http\Resources\Json\JsonResource;
-use App\Domain\Contracts\OrganizationTablesContract;
+use Carbon\Carbon;
 
 class OrganizationTablesResource extends JsonResource
 {
@@ -11,10 +12,11 @@ class OrganizationTablesResource extends JsonResource
     public function toArray($request)
     {
         return [
-            OrganizationTablesContract::ID  =>  $this->{OrganizationTablesContract::ID},
-            OrganizationTablesContract::NAME   =>  $this->{OrganizationTablesContract::NAME},
-            OrganizationTablesContract::STATUS  =>  $this->{OrganizationTablesContract::STATUS},
-            OrganizationTablesContract::ORGANIZATION_TABLES =>  new OrganizationTableListCollection($this->{OrganizationTablesContract::ORGANIZATION__TABLES})
+            MainContract::ID  =>  $this->{MainContract::ID},
+            MainContract::NAME   =>  $this->{MainContract::NAME},
+            MainContract::STATUS  =>  $this->{MainContract::STATUS},
+            MainContract::CREATED_AT    =>  Carbon::createFromTimeStamp(strtotime($this->{MainContract::CREATED_AT}))->diffForHumans(),
+            MainContract::ORGANIZATION_TABLES =>  new OrganizationTableListCollection($this->{MainContract::ORGANIZATION__TABLES})
         ];
     }
 }

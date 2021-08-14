@@ -120,13 +120,7 @@
 
     <li class='nav-item'>
         <a class='nav-link' href='{{ backpack_url('room') }}'>
-            <i class='nav-icon la la-border-all'></i> Помещение
-        </a>
-    </li>
-
-    <li class='nav-item'>
-        <a class='nav-link' href='{{ backpack_url('organizationtablelist') }}'>
-            <i class='nav-icon las la-table'></i> Столы
+            <i class='nav-icon la la-border-all'></i> Комнаты и столы
         </a>
     </li>
 

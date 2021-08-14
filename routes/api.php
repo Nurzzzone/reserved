@@ -16,6 +16,7 @@ use App\Http\Controllers\Api\TelegramController;
 use App\Http\Controllers\Api\TelegramChatController;
 use App\Http\Controllers\Api\MenuController;
 use App\Http\Controllers\Api\OrganizationTableListController;
+use App\Http\Controllers\Api\OrganizationTableController;
 use App\Http\Controllers\Api\OrganizationRequestController;
 
 Route::prefix('organizationRequest')->group(function() {
@@ -23,6 +24,12 @@ Route::prefix('organizationRequest')->group(function() {
     Route::post('create',[OrganizationRequestController::class,'create'])->name('organizationRequest.create');
     Route::get('phone/{phone}',[OrganizationRequestController::class,'getByPhone'])->name('organizationRequest.phone');
 
+});
+
+Route::prefix('section')->group(function() {
+
+    Route::get('organization/{organizationId}',[OrganizationTableController::class,'getByOrganizationId'])->name('section.organization');
+    Route::post('create',[OrganizationTableController::class,'create'])->name('section.name');
 });
 
 Route::prefix('table')->group(function() {

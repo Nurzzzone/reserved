@@ -15,6 +15,7 @@ class OrganizationTableListResource extends JsonResource
             MainContract::TITLE =>  $this->{MainContract::TITLE},
             MainContract::ORGANIZATION_ID  =>  $this->{MainContract::ORGANIZATION_ID},
             MainContract::ORGANIZATION_TABLE_ID =>  $this->{MainContract::ORGANIZATION_TABLE_ID},
+            MainContract::PRICE =>  $this->{MainContract::PRICE},
             MainContract::LIMIT   =>  $this->{MainContract::LIMIT},
             MainContract::STATUS   =>  $this->{MainContract::STATUS},
         ];

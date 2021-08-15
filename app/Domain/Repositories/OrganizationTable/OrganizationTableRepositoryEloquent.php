@@ -3,33 +3,37 @@
 
 namespace App\Domain\Repositories\OrganizationTable;
 
+use App\Domain\Contracts\MainContract;
 use App\Domain\Contracts\OrganizationTablesContract;
 use App\Models\OrganizationTables;
+use Illuminate\Support\Facades\DB;
 
 class OrganizationTableRepositoryEloquent implements OrganizationTableRepositoryInterface
 {
-    public function create(int $organizationId, string $key, string $name, int $limit = 0)
+    public function create($data)
     {
-        return OrganizationTables::create([
-            OrganizationTablesContract::ORGANIZATION_ID =>  $organizationId,
-            OrganizationTablesContract::KEY             =>  $key,
-            OrganizationTablesContract::NAME            =>  $name,
-            OrganizationTablesContract::LIMIT           =>  $limit
-        ]);
+        return OrganizationTables::create($data);
+    }
+
+    public function update($id,$data)
+    {
+        DB::table(OrganizationTablesContract::TABLE)
+            ->where(MainContract::ID,$id)
+            ->update($data);
     }
 
     public function getByOrganizationId($id) {
         return OrganizationTables::where([
-            [OrganizationTablesContract::ORGANIZATION_ID,$id],
-            [OrganizationTablesContract::STATUS,OrganizationTablesContract::ENABLED]
+            [MainContract::ORGANIZATION_ID,$id],
+            [MainContract::STATUS,'!=', MainContract::DISABLED]
         ])->get();
     }
 
     public function getById($id)
     {
         return OrganizationTables::where([
-            [OrganizationTablesContract::ID,$id],
-            [OrganizationTablesContract::STATUS,OrganizationTablesContract::ENABLED]
+            [MainContract::ID,$id],
+            [MainContract::STATUS,'!=',MainContract::DISABLED]
         ])->first();
     }
 }

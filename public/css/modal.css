@@ -76,7 +76,15 @@
 .modal-input {
     width: 50%;
 }
-
+.modal-100 {
+    width: 50%;
+    display: flex;
+    gap: 10px;
+    flex-direction: column;
+}
+.modal-100 > div {
+    width: 100%;
+}
 .modal-input > div {
     font-size: 16px;
     margin-bottom: 5px;
@@ -151,4 +159,55 @@
 .modal-leave-active .modal-container {
     -webkit-transform: scale(1.1);
     transform: scale(1.1);
+}
+@media only screen and (max-width: 768px) {
+    .modal-mask {
+
+    }
+    .modal-wrapper {
+        margin: 150px 50px 100px 50px;
+        width: auto;
+    }
+    .modal-header {
+        padding: 10px;
+        font-size: 14px;
+    }
+    .modal-close {
+        width: 20px;
+        height: 20px;
+        background-size: 10px;
+    }
+    .modal-inputs {
+        padding: 10px;
+        gap: 10px;
+    }
+    .modal-input > div {
+        font-size: 12px;
+    }
+    .modal-input > input {
+        height: 30px;
+        font-size: 11px;
+        border-radius: 3px;
+    }
+    .modal-input > select {
+        font-size: 11px;
+        border-radius: 3px;
+        height: 30px;
+    }
+    .modal-default-button, .modal-additional-button {
+        height: 25px;
+        padding: 0 10px 0 10px;
+        font-size: 11px;
+    }
+    .modal-footer {
+        padding: 10px;
+    }
+    .modal-100 {
+        gap: 5px;
+    }
+    .modal-input-close {
+        top: 8px;
+        right: 10px;
+        background-size: 10px;
+    }
 }

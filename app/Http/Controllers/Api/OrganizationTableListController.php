@@ -4,10 +4,15 @@ namespace App\Http\Controllers\Api;
 
 use App\Domain\Contracts\MainContract;
 use App\Http\Controllers\Controller;
+
 use App\Services\OrganizationTableList\OrganizationTableListService;
+
 use App\Http\Requests\OrganizationTableList\OrganizationTableListUpdateRequest;
 use App\Http\Requests\OrganizationTableList\OrganizationTableListCreateRequest;
+use App\Http\Requests\OrganizationTableList\OrganizationTableListArrayRequest;
+
 use Illuminate\Validation\ValidationException;
+
 use App\Http\Resources\OrganizationTableList\OrganizationTableListResource;
 use App\Http\Resources\OrganizationTableList\OrganizationTableListCollection;
 
@@ -18,6 +23,25 @@ class OrganizationTableListController extends Controller
     public function __construct(OrganizationTableListService $organizationTableListService)
     {
         $this->organizationTableListService =   $organizationTableListService;
+    }
+
+    /**
+     * @throws ValidationException
+     */
+    public function array(OrganizationTableListArrayRequest $organizationTableListArrayRequest)
+    {
+        $data   =   $organizationTableListArrayRequest->validated();
+        foreach ($data[MainContract::TABLES] as &$table) {
+            $this->organizationTableListService->create([
+                MainContract::ORGANIZATION_ID   =>  $data[MainContract::ORGANIZATION_ID],
+                MainContract::ORGANIZATION_TABLE_ID   =>  $data[MainContract::ORGANIZATION_TABLE_ID],
+                MainContract::TITLE =>  $table[MainContract::TITLE],
+                MainContract::LIMIT =>  $table[MainContract::LIMIT],
+                MainContract::PRICE =>  $table[MainContract::PRICE],
+                MainContract::STATUS    =>  $table[MainContract::STATUS],
+            ]);
+        }
+        return new OrganizationTableListCollection($this->organizationTableListService->getByTableId($data[MainContract::ORGANIZATION_TABLE_ID]));
     }
 
     /**

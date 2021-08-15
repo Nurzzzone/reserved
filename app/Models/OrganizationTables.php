@@ -2,10 +2,12 @@
 
 namespace App\Models;
 
-use App\Domain\Contracts\OrganizationTableListContract;
+use App\Domain\Contracts\MainContract;
 use App\Domain\Contracts\OrganizationTablesContract;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class OrganizationTables extends Model
 {
@@ -14,18 +16,13 @@ class OrganizationTables extends Model
 
     protected $fillable =   OrganizationTablesContract::FILLABLE;
 
-    public function organization()
+    public function organization(): BelongsTo
     {
         return $this->belongsTo(Organization::class);
     }
 
-    public function getStatusAttribute($value)
+    public function organizationTables(): HasMany
     {
-        return OrganizationTablesContract::TRANSLATE[$value];
-    }
-
-    public function organizationTables()
-    {
-        return $this->hasMany(OrganizationTableList::class,OrganizationTableListContract::ORGANIZATION_TABLE_ID,OrganizationTablesContract::ID)->where(OrganizationTableListContract::STATUS,'!=',OrganizationTableListContract::DISABLED);
+        return $this->hasMany(OrganizationTableList::class, MainContract::ORGANIZATION_TABLE_ID, MainContract::ID)->where(MainContract::STATUS,'!=', MainContract::DISABLED);
     }
 }

@@ -1,5 +1,6 @@
 <?php
 
+use App\Domain\Contracts\MainContract;
 use App\Domain\Contracts\OrganizationTableListContract;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
@@ -11,13 +12,14 @@ class CreateOrganizationTableListsTable extends Migration
     {
         Schema::create(OrganizationTableListContract::TABLE, function (Blueprint $table) {
             $table->id();
-            $table->bigInteger(OrganizationTableListContract::ORGANIZATION_ID);
-            $table->bigInteger(OrganizationTableListContract::ORGANIZATION_TABLE_ID);
-            $table->string(OrganizationTableListContract::TITLE)->nullable();
-            $table->integer(OrganizationTableListContract::LIMIT)->default(2);
-            $table->enum(OrganizationTableListContract::STATUS,OrganizationTableListContract::STATUSES)->default(OrganizationTableListContract::ENABLED);
+            $table->bigInteger(MainContract::ORGANIZATION_ID);
+            $table->bigInteger(MainContract::ORGANIZATION_TABLE_ID);
+            $table->string(MainContract::TITLE)->nullable();
+            $table->string(MainContract::PRICE)->default(0);
+            $table->integer(MainContract::LIMIT)->default(2);
+            $table->enum(MainContract::STATUS,MainContract::STATUSES)->default(MainContract::ENABLED);
             $table->timestamps();
-            $table->index(OrganizationTableListContract::ORGANIZATION_ID);
+            $table->index(MainContract::ORGANIZATION_ID);
         });
     }
 

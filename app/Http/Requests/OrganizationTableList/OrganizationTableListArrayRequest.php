@@ -8,8 +8,9 @@ use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Http\Exceptions\HttpResponseException;
 use Illuminate\Validation\ValidationException;
 
-class OrganizationTableListUpdateRequest extends FormRequest
+class OrganizationTableListArrayRequest extends FormRequest
 {
+
     public function authorize(): bool
     {
         return true;
@@ -18,10 +19,9 @@ class OrganizationTableListUpdateRequest extends FormRequest
     public function rules(): array
     {
         return [
-            MainContract::TITLE =>  'nullable',
-            MainContract::PRICE =>  'nullable',
-            MainContract::LIMIT =>  'nullable',
-            MainContract::STATUS    =>  'nullable'
+            MainContract::ORGANIZATION_ID   =>  'nullable',
+            MainContract::ORGANIZATION_TABLE_ID =>  'nullable',
+            MainContract::TABLES    =>  'nullable'
         ];
     }
 

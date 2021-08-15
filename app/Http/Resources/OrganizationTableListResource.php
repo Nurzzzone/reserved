@@ -15,6 +15,7 @@ class OrganizationTableListResource extends JsonResource
             OrganizationTableListContract::ORGANIZATION_ID  =>  $this->{OrganizationTableListContract::ORGANIZATION_ID},
             OrganizationTableListContract::ORGANIZATION_TABLE_ID    =>  $this->{OrganizationTableListContract::ORGANIZATION_TABLE_ID},
             OrganizationTableListContract::LIMIT   =>  $this->{OrganizationTableListContract::LIMIT},
+            OrganizationTableListContract::PRICE   =>  $this->{OrganizationTableListContract::PRICE},
             OrganizationTableListContract::STATUS   =>  $this->{OrganizationTableListContract::STATUS},
         ];
     }

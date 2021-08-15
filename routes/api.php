@@ -30,10 +30,13 @@ Route::prefix('section')->group(function() {
 
     Route::get('organization/{organizationId}',[OrganizationTableController::class,'getByOrganizationId'])->name('section.organization');
     Route::post('create',[OrganizationTableController::class,'create'])->name('section.name');
+    Route::post('update/{id}',[OrganizationTableController::class,'update'])->name('section.update');
+
 });
 
 Route::prefix('table')->group(function() {
 
+    Route::post('array',[OrganizationTableListController::class,'array'])->name('table.array');
     Route::post('create',[OrganizationTableListController::class,'create'])->name('table.create');
     Route::post('update/{id}',[OrganizationTableListController::class,'update'])->name('table.update');
 

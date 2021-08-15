@@ -22,6 +22,14 @@
 .room-table {
 
 }
+
+.room-table-empty {
+    margin: 40px auto 40px auto;
+    text-align: center;
+    font-size: 14px;
+    color: grey;
+}
+
 .room-table-body {
 
 }
@@ -33,6 +41,7 @@
 }
 .room-table-item-status {
     width: 100px;
+    cursor: pointer;
 }
 .room-table-item-created {
     width: 150px;
@@ -61,6 +70,15 @@
 }
 .room-table-item-unlocked {
     background-image: url('/img/logo/unlocked.png');
+}
+.bg-enabled, .bg-disabled {
+    background: #57a283;
+    color: #fff;
+    text-align: center;
+    border-radius: 3px;
+}
+.bg-disabled {
+    background: #FF8008;
 }
 .room-table-list {
     overflow: hidden;
@@ -97,4 +115,45 @@
     background: #57a283;
     outline: none !important;
     color: #fff;
+}
+@media only screen and (max-width: 768px) {
+    .room-title {
+        font-size: 14px;
+        margin: 10px;
+    }
+    .room-btn {
+        font-size: 9px;
+        height: 20px;
+        min-width: 90px;
+        padding: 0 10px 0 10px;
+    }
+    .room-table-header {
+        gap: 5px;
+        font-size: 9px;
+        padding: 5px 10px 5px 10px;
+    }
+    .room-table-list {
+        gap: 5px;
+        padding: 5px 10px 5px 10px;
+        font-size: 9px;
+    }
+    .room-table-item-id {
+        width: 25px;
+    }
+    .room-table-item-name {
+        width: 150px;
+    }
+    .room-table-item-action {
+        gap: 5px;
+    }
+    .room-table-item-delete, .room-table-item-edit, .room-table-item-statistics, .room-table-item-duplicate, .room-table-item-unlocked {
+        width: 9px;
+        height: 9px;
+    }
+    .room-table-item-status {
+        width: 50px;
+    }
+    .room-table-item-created {
+        width: 70px;
+    }
 }

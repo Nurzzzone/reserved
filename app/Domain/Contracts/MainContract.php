@@ -219,6 +219,7 @@ class MainContract
     const ROLE_ID           =   'role_id';
     const COUNTRY_ID        =   'country_id';
     const CATEGORY_ID       =   'category_id';
+    const SECTIONS          =   'sections';
 
     const START_MONDAY      =   'start_monday';
     const START_TUESDAY     =   'start_tuesday';

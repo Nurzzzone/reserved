@@ -5,6 +5,7 @@ namespace App\Http\Resources;
 use App\Domain\Contracts\MainContract;
 use Illuminate\Http\Resources\Json\JsonResource;
 use Carbon\Carbon;
+use App\Http\Resources\OrganizationTableList\OrganizationTableListCollection;
 
 class OrganizationTablesResource extends JsonResource
 {

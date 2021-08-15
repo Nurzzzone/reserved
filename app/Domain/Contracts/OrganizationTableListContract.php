@@ -12,6 +12,7 @@ class OrganizationTableListContract extends MainContract
         self::ORGANIZATION_ID,
         self::ORGANIZATION_TABLE_ID,
         self::TITLE,
+        self::PRICE,
         self::LIMIT,
         self::STATUS
     ];

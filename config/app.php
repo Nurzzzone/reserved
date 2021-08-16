@@ -197,6 +197,8 @@ return [
         App\Providers\Repositories\TelegramChatRepositoryProvider::class,
         App\Providers\Repositories\MenuRepositoryProvider::class,
         App\Providers\Repositories\OrganizationRequestRepositoryProvider::class,
+        App\Providers\Repositories\OrganizationImageRepositoryProvider::class,
+
     ],
 
     /*

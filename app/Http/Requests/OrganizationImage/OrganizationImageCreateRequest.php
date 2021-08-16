@@ -1,15 +1,14 @@
 <?php
 
-namespace App\Http\Requests\User;
+namespace App\Http\Requests\OrganizationImage;
 
+use App\Domain\Contracts\MainContract;
 use Illuminate\Contracts\Validation\Validator;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Http\Exceptions\HttpResponseException;
-
-use App\Domain\Contracts\UserContract;
 use Illuminate\Validation\ValidationException;
 
-class UserCreateRequest extends FormRequest
+class OrganizationImageCreateRequest extends FormRequest
 {
 
     public function authorize(): bool
@@ -20,9 +19,8 @@ class UserCreateRequest extends FormRequest
     public function rules(): array
     {
         return [
-            UserContract::NAME  =>  'required|min:2|max:255',
-            UserContract::PHONE =>  'required|max:255|unique:users,phone',
-            UserContract::PASSWORD  =>  'required|min:8',
+            MainContract::ORGANIZATION_ID   =>  'nullable',
+            MainContract::IMAGE =>  'nullable|string'
         ];
     }
 
@@ -44,4 +42,5 @@ class UserCreateRequest extends FormRequest
         ];
         throw new HttpResponseException(response()->json($response, 400));
     }
+
 }

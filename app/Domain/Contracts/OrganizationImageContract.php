@@ -12,9 +12,5 @@ class OrganizationImageContract extends MainContract
         self::ORGANIZATION_ID,
         self::IMAGE,
         self::STATUS,
-        self::PARENT_ID,
-        self::LFT,
-        self::RGT,
-        self::DEPTH
     ];
 }

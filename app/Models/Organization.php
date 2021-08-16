@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Domain\Contracts\MainContract;
 use App\Domain\Contracts\OrganizationContract;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
@@ -193,62 +194,56 @@ class Organization extends Model
     }
 
     public function images() {
-        return $this->hasMany(OrganizationImage::class);
+        return $this->hasMany(OrganizationImage::class)->where(MainContract::STATUS,MainContract::ON);
     }
 
     public function menus() {
-        return $this->hasMany(Menu::class);
+        return $this->hasMany(Menu::class)->where(MainContract::STATUS,MainContract::ON);
     }
 
     public function getImageAttribute() {
-        return $this->attributes[OrganizationContract::IMAGE]?$this->attributes[OrganizationContract::IMAGE]:($this->attributes[OrganizationContract::CATEGORY_ID]===1?'/img/logo/restaurant.svg':($this->attributes[OrganizationContract::CATEGORY_ID]===2?'/img/logo/cafe.svg':'/img/logo/bar.svg'));
+        return $this->attributes[MainContract::IMAGE]?$this->attributes[MainContract::IMAGE]:($this->attributes[MainContract::CATEGORY_ID]===1?'/img/logo/restaurant.svg':($this->attributes[OrganizationContract::CATEGORY_ID]===2?'/img/logo/cafe.svg':'/img/logo/bar.svg'));
     }
 
-    public function setImageAttribute($value) {
+    public function setImageAttribute($value)
+    {
 
         $disk               =   config('backpack.base.root_disk_name');
         $destination_path   =   'public/uploads';
 
         if ($value  ==  null) {
-
-            Storage::disk($disk)->delete($this->{OrganizationContract::IMAGE});
-            $this->attributes[OrganizationContract::IMAGE] = null;
-
+            Storage::disk($disk)->delete($this->{MainContract::IMAGE});
+            $this->attributes[MainContract::IMAGE] = null;
         }
 
         if (Str::startsWith($value, 'data:image')) {
-
             $image      =   Image::make($value)->encode('jpg', 90);
             $filename   =   md5($value.time()).'.jpg';
             Storage::disk($disk)->put($destination_path.'/'.$filename, $image->stream());
-            Storage::disk($disk)->delete($this->{OrganizationContract::IMAGE});
+            Storage::disk($disk)->delete($this->{MainContract::IMAGE});
             $public_destination_path = Str::replaceFirst('public/', '', $destination_path);
-            $this->attributes[OrganizationContract::IMAGE] = '/'.$public_destination_path.'/'.$filename;
-
+            $this->attributes[MainContract::IMAGE] = '/'.$public_destination_path.'/'.$filename;
         }
     }
 
-    public function setWallpaperAttribute($value) {
+    public function setWallpaperAttribute($value)
+    {
 
         $disk               =   config('backpack.base.root_disk_name');
         $destination_path   =   'public/uploads/wallpaper';
 
         if ($value  ==  null) {
-
-            Storage::disk($disk)->delete($this->{OrganizationContract::WALLPAPER});
-            $this->attributes[OrganizationContract::WALLPAPER] = null;
-
+            Storage::disk($disk)->delete($this->{MainContract::WALLPAPER});
+            $this->attributes[MainContract::WALLPAPER] = null;
         }
 
         if (Str::startsWith($value, 'data:image')) {
-
             $image      =   Image::make($value)->encode('jpg', 90);
             $filename   =   md5($value.time()).'.jpg';
             Storage::disk($disk)->put($destination_path.'/'.$filename, $image->stream());
-            Storage::disk($disk)->delete($this->{OrganizationContract::WALLPAPER});
+            Storage::disk($disk)->delete($this->{MainContract::WALLPAPER});
             $public_destination_path = Str::replaceFirst('public/', '', $destination_path);
-            $this->attributes[OrganizationContract::WALLPAPER] = '/'.$public_destination_path.'/'.$filename;
-
+            $this->attributes[MainContract::WALLPAPER] = '/'.$public_destination_path.'/'.$filename;
         }
     }
 

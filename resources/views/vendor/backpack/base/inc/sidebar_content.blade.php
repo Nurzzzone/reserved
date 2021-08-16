@@ -125,14 +125,14 @@
     </li>
 
     <li class='nav-item'>
-        <a class='nav-link' href='{{ backpack_url('organizationimage') }}'>
+        <a class='nav-link' href='{{ backpack_url('photos') }}'>
             <i class='nav-icon las la-image'></i> Фото
         </a>
     </li>
 
     <li class='nav-item'>
-        <a class='nav-link' href='{{ backpack_url('menu') }}'>
-            <i class='nav-icon las la-utensils'></i> Меню
+        <a class='nav-link' href='{{ backpack_url('menus') }}'>
+            <i class='nav-icon las la-image'></i> Меню
         </a>
     </li>
 @endif

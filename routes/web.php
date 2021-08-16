@@ -80,6 +80,8 @@ Route::prefix('admin')->group(function () {
     Route::get('dashboard/booking/{id}',[MainController::class, 'dashboardBooking'])->name('dashboard.booking');
     Route::get('entity',[MainController::class,'entity'])->name('entity');
     Route::get('room',[MainController::class,'room'])->name('room');
+    Route::get('photos',[MainController::class,'photos'])->name('photos');
+    Route::get('menus',[MainController::class,'menus'])->name('menus');
     Route::get('register',[RegisterController::class, 'showRegistrationForm'])->name('backpack.auth.register');
     Route::post('register',[RegisterController::class, 'register'])->name('backpack.auth.register');
     Route::get('phone_verify',[UserController::class, 'phoneVerify'])->name('phone.verify');

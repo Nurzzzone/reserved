@@ -18,6 +18,7 @@ use App\Http\Controllers\Api\MenuController;
 use App\Http\Controllers\Api\OrganizationTableListController;
 use App\Http\Controllers\Api\OrganizationTableController;
 use App\Http\Controllers\Api\OrganizationRequestController;
+use App\Http\Controllers\Api\OrganizationImageController;
 
 Route::prefix('organizationRequest')->group(function() {
 
@@ -43,6 +44,15 @@ Route::prefix('table')->group(function() {
     Route::get('id/{id}',[OrganizationTableListController::class,'getById'])->name('table.id');
     Route::get('table/{tableId}',[OrganizationTableListController::class,'getByTableId'])->name('table.table');
     Route::get('organization/{organizationId}',[OrganizationTableListController::class,'getByOrganizationId'])->name('table.organization');
+
+});
+
+Route::prefix('image')->group(function() {
+
+    Route::get('organization/{organizationId}',[OrganizationImageController::class,'getByOrganizationId'])->name('image.organization');
+
+    Route::post('create',[OrganizationImageController::class,'create'])->name('image.create');
+    Route::post('update/{id}',[OrganizationImageController::class,'update'])->name('image.update');
 
 });
 

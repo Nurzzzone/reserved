@@ -49,9 +49,27 @@ class MainController extends Controller
         return view('backpack.entity.entity',['id'=>$organization->id]);
     }
 
+    public function menus()
+    {
+        if (!backpack_auth()->user()) {
+            redirect('/home/login');
+        }
+        $organization   =   $this->organizationService->getByUserId(backpack_auth()->user()->id);
+        return view('backpack.menus.menus',['id'=>$organization->id]);
+    }
+
+    public function photos()
+    {
+        if (!backpack_auth()->user()) {
+            redirect('/home/login');
+        }
+        $organization   =   $this->organizationService->getByUserId(backpack_auth()->user()->id);
+        return view('backpack.photos.photos',['id'=>$organization->id]);
+    }
+
     public function room()
     {
-        if (!backpack_auth()->user()->id) {
+        if (!backpack_auth()->user()) {
             redirect('/home/login');
         }
         $organization   =   $this->organizationService->getByUserId(backpack_auth()->user()->id);

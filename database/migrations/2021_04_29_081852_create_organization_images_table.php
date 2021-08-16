@@ -1,5 +1,6 @@
 <?php
 
+use App\Domain\Contracts\MainContract;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
@@ -12,16 +13,14 @@ class CreateOrganizationImagesTable extends Migration
     {
         Schema::create(OrganizationImageContract::TABLE, function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger(OrganizationImageContract::ORGANIZATION_ID);
-            $table->string(OrganizationImageContract::IMAGE)->nullable();
-            $table->enum(OrganizationImageContract::STATUS,OrganizationImageContract::STATUSES)->default(OrganizationImageContract::ENABLED);
-            $table->integer(OrganizationImageContract::PARENT_ID)->default(0)->nullable();
-            $table->integer(OrganizationImageContract::LFT)->default(0);
-            $table->integer(OrganizationImageContract::RGT)->default(0);
-            $table->integer(OrganizationImageContract::DEPTH)->default(0);
+            $table->unsignedBigInteger(MainContract::ORGANIZATION_ID);
+            $table->string(MainContract::IMAGE)->nullable();
+            $table->enum(MainContract::STATUS,[
+                MainContract::ON,
+                MainContract::OFF
+            ])->default(MainContract::ON);
             $table->timestamps();
-            $table->index(OrganizationImageContract::ORGANIZATION_ID);
-            $table->index(OrganizationImageContract::PARENT_ID);
+            $table->index(MainContract::ORGANIZATION_ID);
         });
     }
 

@@ -6,6 +6,7 @@ use App\Domain\Contracts\MainContract;
 use App\Domain\Contracts\OrganizationContract;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
 use Intervention\Image\ImageManagerStatic as Image;
@@ -193,11 +194,13 @@ class Organization extends Model
         return $this->belongsTo(City::class);
     }
 
-    public function images() {
+    public function images(): HasMany
+    {
         return $this->hasMany(OrganizationImage::class)->where(MainContract::STATUS,MainContract::ON);
     }
 
-    public function menus() {
+    public function menus(): HasMany
+    {
         return $this->hasMany(Menu::class)->where(MainContract::STATUS,MainContract::ON);
     }
 
@@ -207,7 +210,6 @@ class Organization extends Model
 
     public function setImageAttribute($value)
     {
-
         $disk               =   config('backpack.base.root_disk_name');
         $destination_path   =   'public/uploads';
 

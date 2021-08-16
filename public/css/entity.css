@@ -212,8 +212,9 @@
     width: 318px;
     height: 100px;
     background: #f4f4f5 url('/img/logo/wall.png') no-repeat center;
-    background-size: contain;
+    background-size: cover;
     position: relative;
+    cursor: pointer;
 }
 .entity-logo {
     width: 70px;
@@ -223,6 +224,8 @@
     background-size: contain;
     border-radius: 50px;
     margin: 15px 0 0 -35px;
+    box-shadow: 0 0 0 5px #fff;
+    cursor: pointer;
 }
 @media only screen and (max-width: 768px) {
     .entity-main {

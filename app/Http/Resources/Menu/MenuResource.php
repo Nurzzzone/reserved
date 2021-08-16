@@ -2,19 +2,18 @@
 
 namespace App\Http\Resources\Menu;
 
+use App\Domain\Contracts\MainContract;
 use Illuminate\Http\Resources\Json\JsonResource;
-
-use App\Domain\Contracts\MenuContract;
 
 class MenuResource extends JsonResource
 {
-    public function toArray($request)
+    public function toArray($request): array
     {
         return [
-            MenuContract::ID    =>  $this->{MenuContract::ID},
-            MenuContract::ORGANIZATION_ID   =>  $this->{MenuContract::ORGANIZATION_ID},
-            MenuContract::IMAGE =>  $this->{MenuContract::IMAGE},
-            MenuContract::STATUS    =>  $this->{MenuContract::STATUS},
+            MainContract::ID    =>  $this->{MainContract::ID},
+            MainContract::ORGANIZATION_ID   =>  $this->{MainContract::ORGANIZATION_ID},
+            MainContract::IMAGE =>  $this->{MainContract::IMAGE},
+            MainContract::STATUS    =>  $this->{MainContract::STATUS},
         ];
     }
 }

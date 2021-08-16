@@ -1,9 +1,43 @@
 Vue.use(VueMask.VueMaskPlugin);
 
+function getMimeType(file, fallback = null) {
+    const byteArray = (new Uint8Array(file)).subarray(0, 4);
+    let header = '';
+    for (let i = 0; i < byteArray.length; i++) {
+        header += byteArray[i].toString(16);
+    }
+    switch (header) {
+        case "89504e47":
+            return "image/png";
+        case "47494638":
+            return "image/gif";
+        case "ffd8ffe0":
+        case "ffd8ffe1":
+        case "ffd8ffe2":
+        case "ffd8ffe3":
+        case "ffd8ffe8":
+            return "image/jpeg";
+        default:
+            return fallback;
+    }
+}
+
 let app = new Vue({
     el: "#app",
     data() {
         return {
+            showModal: false,
+            modalIndex: null,
+            img: {
+                src: null,
+                type: null
+            },
+            image: null,
+            wallpaper: {
+                src: null,
+                type: null
+            },
+            wall: null,
             id: 0,
             organization: '',
             categories: [],
@@ -19,6 +53,76 @@ let app = new Vue({
         this.getOrganization();
     },
     methods: {
+        uploadImage: function() {
+            if (this.image) {
+                this.organization.image =   this.image;
+                this.showModal  =   false;
+                axios.post('/api/organization/update/'+this.id,{
+                    image: this.image,
+                });
+            }
+        },
+        uploadWallpaper: function() {
+            if (this.wall) {
+                this.organization.wallpaper =   this.wall;
+                this.showModal  =   false;
+                axios.post('/api/organization/update/'+this.id,{
+                    wallpaper: this.wall,
+                });
+            }
+        },
+        changeWallpaper: function({coordinates, canvas}) {
+            const ctx = canvas.getContext('2d');
+            let imageData = ctx.getImageData(coordinates.left, coordinates.top, coordinates.width, coordinates.height);
+            this.wall  =   canvas.toDataURL();
+        },
+        loadWallpaper: function(event) {
+            const { files } = event.target;
+            if (files && files[0]) {
+                if (this.wallpaper.src) {
+                    URL.revokeObjectURL(this.wallpaper.src);
+                }
+                const blob = URL.createObjectURL(files[0]);
+                const reader = new FileReader();
+                reader.onload = (e) => {
+                    this.wallpaper = {
+                        src: blob,
+                        type: getMimeType(e.target.result, files[0].type),
+                    };
+                };
+                reader.readAsArrayBuffer(files[0]);
+            }
+        },
+        setWallpaper: function() {
+            this.modalIndex =   1;
+            this.showModal  =   true;
+        },
+        setPhoto: function() {
+            this.modalIndex =   0;
+            this.showModal  =   true;
+        },
+        loadImage(event) {
+            const { files } = event.target;
+            if (files && files[0]) {
+                if (this.img.src) {
+                    URL.revokeObjectURL(this.img.src);
+                }
+                const blob = URL.createObjectURL(files[0]);
+                const reader = new FileReader();
+                reader.onload = (e) => {
+                    this.img = {
+                        src: blob,
+                        type: getMimeType(e.target.result, files[0].type),
+                    };
+                };
+                reader.readAsArrayBuffer(files[0]);
+            }
+        },
+        change({coordinates, canvas}) {
+            const ctx = canvas.getContext('2d');
+            let imageData = ctx.getImageData(coordinates.left, coordinates.top, coordinates.width, coordinates.height);
+            this.image  =   canvas.toDataURL();
+        },
         categoryChange: function() {
             this.categories.forEach(category => {
                 if (category.id === this.organization.category) {

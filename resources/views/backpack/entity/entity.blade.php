@@ -20,8 +20,8 @@
                     <div class="entity-description">reserved-app.kz/home/@{{this.organization.category_id.slug}}/{{$id}}</div>
                 </a>
             </div>
-            <div class="entity-wallpaper">
-                <div class="entity-logo" :style="{'background-image':'url('+organization.image+')'}"></div>
+            <div class="entity-wallpaper" @click.self="setWallpaper()" :style="{'background-image':'url('+organization.wallpaper+')'}">
+                <div class="entity-logo" :style="{'background-image':'url('+organization.image+')'}" @click="setPhoto()"></div>
             </div>
         </div>
         <div class="entity-single">
@@ -253,6 +253,7 @@
                 <button @click="saveOrganization">Сохранить</button>
             </div>
         </div>
+        @include('backpack.modal.organization_photos')
     </div>
     @include('backpack.scripts')
     <script src="{{ asset('js/entity.js') }}" type="module"></script>

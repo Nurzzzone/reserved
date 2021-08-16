@@ -8,7 +8,7 @@ use App\Services\BaseService;
 use App\Domain\Repositories\Organization\OrganizationRepositoryInterface;
 use App\Domain\Repositories\Review\ReviewRepositoryInterface;
 
-class OrganizationService extends BaseService
+class OrganizationService
 {
     protected $organizationRepository;
     protected $reviewRepository;

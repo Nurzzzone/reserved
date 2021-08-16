@@ -38,13 +38,13 @@ class OrganizationController extends Controller
     /**
      * @throws ValidationException
      */
-    public function update($id, OrganizationUpdateRequest $organizationUpdateRequest)
+    public function update($id, OrganizationUpdateRequest $organizationUpdateRequest):void
     {
         $this->organizationService->update($id, $organizationUpdateRequest->validated());
     }
 
 
-    public function status($id,$date)
+    public function status($id,$date): object
     {
         $tables =   $this->organizationTableListService->getByOrganizationId($id);
         foreach ($tables as &$table) {
@@ -53,31 +53,37 @@ class OrganizationController extends Controller
         return $tables;
     }
 
-    public function getByIds(OrganizationIdsRequest $organizationIdsRequest)
+    /**
+     * @throws ValidationException
+     */
+    public function getByIds(OrganizationIdsRequest $organizationIdsRequest): OrganizationCollection
     {
         $data   =   $organizationIdsRequest->validated();
         return new OrganizationCollection($this->organizationService->getByIds($data[MainContract::IDS]));
     }
 
-    public function list(Request $request) {
+    public function list(Request $request): OrganizationCollection
+    {
         if ($request->has('paginate')) {
             $this->paginate =   (int)$request->input('paginate');
         }
         return new OrganizationCollection($this->organizationService->list($this->paginate));
     }
 
-    public function search($search, Request $request) {
+    public function search($search, Request $request): OrganizationCollection
+    {
         if ($request->has('paginate')) {
             $this->paginate =   (int)$request->input('paginate');
         }
         return new OrganizationCollection($this->organizationService->search($search,$this->paginate));
     }
 
-    public function getSectionsById($id) {
-        return new OrganizationTablesCollection(OrganizationTables::with('organizationTables')->where(OrganizationTablesContract::ORGANIZATION_ID,$id)->get());
+    public function getSectionsById($id): OrganizationTablesCollection
+    {
+        return new OrganizationTablesCollection(OrganizationTables::with('organizationTables')->where(MainContract::ORGANIZATION_ID,$id)->get());
     }
 
-    public function getByCategoryId($id, Request $request)
+    public function getByCategoryId($id, Request $request): OrganizationCollection
     {
         if ($request->has('paginate')) {
             $this->paginate =   (int)$request->input('paginate');
@@ -85,7 +91,7 @@ class OrganizationController extends Controller
         return new OrganizationCollection($this->organizationService->getByCategoryId($id,$this->paginate));
     }
 
-    public function getByCategoryIdAndCityId($id, $cityId, Request $request)
+    public function getByCategoryIdAndCityId($id, $cityId, Request $request): OrganizationCollection
     {
         if ($request->has('paginate')) {
             $this->paginate =   (int)$request->input('paginate');
@@ -102,10 +108,9 @@ class OrganizationController extends Controller
         return response(['message'  =>  'Организация не найдено'],404);
     }
 
-    public function getByUserId($userId)
+    public function getByUserId($userId): OrganizationResource
     {
-        $organizations  =   $this->organizationService->getByUserId($userId);
-        return new OrganizationCollection($organizations);
+        return new OrganizationResource($this->organizationService->getByUserId($userId));
     }
 
 }

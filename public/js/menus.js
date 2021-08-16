@@ -48,7 +48,7 @@ let app = new Vue({
             let id  =   this.photos[this.imageIndex].id;
             this.photos.splice(this.imageIndex,1);
             this.showModal  =   false;
-            axios.post('/api/menus/update/'+id, {
+            axios.post('/api/menu/update/'+id, {
                 status: 'off'
             });
         },
@@ -92,7 +92,7 @@ let app = new Vue({
         },
         uploadImage() {
             if (this.image) {
-                axios.post('/api/menus/create',{
+                axios.post('/api/menu/create',{
                     organization_id: this.id,
                     image: this.image,
                     status: 'on',
@@ -107,7 +107,7 @@ let app = new Vue({
             }
         },
         getPhotos: function() {
-            axios.get('/api/menus/organization/'+this.id)
+            axios.get('/api/menu/list/'+this.id)
                 .then(response => {
                     this.photos =   response.data.data;
                 });

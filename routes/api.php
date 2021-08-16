@@ -49,10 +49,19 @@ Route::prefix('table')->group(function() {
 
 Route::prefix('image')->group(function() {
 
-    Route::get('organization/{organizationId}',[OrganizationImageController::class,'getByOrganizationId'])->name('image.organization');
-
     Route::post('create',[OrganizationImageController::class,'create'])->name('image.create');
     Route::post('update/{id}',[OrganizationImageController::class,'update'])->name('image.update');
+
+    Route::get('organization/{organizationId}',[OrganizationImageController::class,'getByOrganizationId'])->name('image.organization');
+
+});
+
+Route::prefix('menu')->group(function() {
+
+    Route::post('update/{id}',[MenuController::class,'update'])->name('menu.update');
+    Route::post('create',[MenuController::class,'create'])->name('menu.create');
+
+    Route::get('list/{organizationId}',[MenuController::class,'getByOrganizationId'])->name('menu.organization.id');
 
 });
 
@@ -123,10 +132,6 @@ Route::prefix('review')->group(function () {
     Route::get('list/organization/{id}',[ReviewController::class,'getByOrganizationId']);
     Route::get('list/user/{id}',[ReviewController::class,'getByUserId']);
 
-});
-
-Route::prefix('menu')->group(function() {
-    Route::get('list/{organizationId}',[MenuController::class,'getByOrganizationId'])->name('menu.organization.id');
 });
 
 Route::prefix('organization')->group(function() {

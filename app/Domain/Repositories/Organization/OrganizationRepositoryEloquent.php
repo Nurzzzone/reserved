@@ -4,9 +4,7 @@
 namespace App\Domain\Repositories\Organization;
 
 use App\Domain\Contracts\MainContract;
-use App\Domain\Contracts\OrganizationContract;
 use App\Models\Organization;
-use Illuminate\Support\Facades\DB;
 
 class OrganizationRepositoryEloquent implements OrganizationRepositoryInterface
 {
@@ -15,54 +13,64 @@ class OrganizationRepositoryEloquent implements OrganizationRepositoryInterface
 
     public function getByIds($ids)
     {
-        return Organization::with('user','category','images','menus')->where(OrganizationContract::STATUS,OrganizationContract::ENABLED)->whereIn(OrganizationContract::ID,$ids)->get();
+        return Organization::with('user','category','images','menus')->where(MainContract::STATUS,MainContract::ENABLED)->whereIn(MainContract::ID,$ids)->get();
     }
 
-    public function update($id,$data)
+    public function update($id,$data):void
     {
-        DB::table(OrganizationContract::TABLE)->where(MainContract::ID,$id)->update($data);
+        Organization::find($id)->update($data);
     }
 
     public function getIdsByUserId(int $userId)
     {
-        return Organization::where(OrganizationContract::USER_ID,$userId)->get()->toArray();
+        return Organization::where(MainContract::USER_ID,$userId)->get()->toArray();
     }
 
     public function list(int $paginate)
     {
-        return Organization::with('user','category','images','menus')->skip(--$paginate * $this->take)->take($this->take)->get();
+        return Organization::with('user','category','images','menus')
+            ->skip(--$paginate * $this->take)
+            ->take($this->take)
+            ->get();
     }
 
     public function searchByTitle(string $search, int $paginate)
     {
         return Organization::with('user','category','images','menus')
-        ->where(OrganizationContract::TITLE, 'like', '%'.$search.'%')
-        ->orWhere(OrganizationContract::TITLE_KZ, 'like', '%'.$search.'%')
-        ->orWhere(OrganizationContract::TITLE_EN, 'like', '%'.$search.'%')->skip(--$paginate * $this->take)->take($this->take)->get();
+            ->where(MainContract::TITLE, 'like', '%'.$search.'%')
+            ->skip(--$paginate * $this->take)
+            ->take($this->take)
+            ->get();
     }
 
     public function getById($id)
     {
-        return Organization::with('user','category','images','menus')->where(OrganizationContract::ID,$id)->first();
+        return Organization::with('user','category','images','menus')
+            ->where(MainContract::ID,$id)
+            ->first();
     }
 
     public function getByCategoryId($id, $paginate)
     {
-        return Organization::with('user','category','images','menus')->where(OrganizationContract::CATEGORY_ID,$id)->skip(--$paginate * $this->take)->take($this->take)->get();
+        return Organization::with('user','category','images','menus')
+            ->where(MainContract::CATEGORY_ID,$id)
+            ->skip(--$paginate * $this->take)
+            ->take($this->take)
+            ->get();
     }
 
     public function updateRating($id,$rating)
     {
-        return Organization::where(OrganizationContract::ID,$id)->update([
-            OrganizationContract::RATING    =>  $rating
+        return Organization::where(MainContract::ID,$id)->update([
+            MainContract::RATING    =>  $rating
         ]);
     }
 
     public function getByUserId(int $id)
     {
         return Organization::where([
-            OrganizationContract::USER_ID   =>  $id,
-            OrganizationContract::STATUS    =>  OrganizationContract::ENABLED
+            MainContract::USER_ID   =>  $id,
+            MainContract::STATUS    =>  MainContract::ENABLED
         ])->first();
     }
 
@@ -70,9 +78,9 @@ class OrganizationRepositoryEloquent implements OrganizationRepositoryInterface
     {
         return Organization::with('user','category','images','menus')
         ->where([
-            [OrganizationContract::CATEGORY_ID,$id],
-            [OrganizationContract::CITY_ID,$cityId],
-            [OrganizationContract::STATUS,OrganizationContract::ENABLED]
+            [MainContract::CATEGORY_ID,$id],
+            [MainContract::CITY_ID,$cityId],
+            [MainContract::STATUS,MainContract::ENABLED]
         ])->get();
     }
 }

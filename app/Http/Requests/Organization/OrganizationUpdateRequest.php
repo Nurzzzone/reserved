@@ -44,6 +44,8 @@ class OrganizationUpdateRequest extends FormRequest
             MainContract::PRICE =>  'nullable',
             MainContract::CITY_ID   =>  'nullable',
             MainContract::CATEGORY_ID   =>  'nullable',
+            MainContract::IMAGE =>  'nullable',
+            MainContract::WALLPAPER =>  'nullable'
         ];
     }
 

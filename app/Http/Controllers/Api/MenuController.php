@@ -3,8 +3,12 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
-use Illuminate\Http\Request;
+use App\Http\Requests\Menu\MenuCreateRequest;
+use App\Http\Requests\Menu\MenuUpdateRequest;
 use App\Services\Menu\MenuService;
+use Illuminate\Validation\ValidationException;
+use App\Http\Resources\Menu\MenuCollection;
+use App\Http\Resources\Menu\MenuResource;
 
 class MenuController extends Controller
 {
@@ -14,8 +18,24 @@ class MenuController extends Controller
         $this->menuService  =   $menuService;
     }
 
-    public function getByOrganizationId($organizationId)
+    public function getByOrganizationId($organizationId): MenuCollection
     {
-        return  $this->menuService->getByOrganizationId($organizationId);
+        return new MenuCollection($this->menuService->getByOrganizationId($organizationId));
+    }
+
+    /**
+     * @throws ValidationException
+     */
+    public function create(MenuCreateRequest $menuCreateRequest): MenuResource
+    {
+        return new MenuResource($this->menuService->create($menuCreateRequest->validated()));
+    }
+
+    /**
+     * @throws ValidationException
+     */
+    public function update($id, MenuUpdateRequest $menuUpdateRequest):void
+    {
+        $this->menuService->update($id, $menuUpdateRequest->validated());
     }
 }

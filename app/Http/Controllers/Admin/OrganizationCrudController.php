@@ -161,13 +161,13 @@ class OrganizationCrudController extends CrudController
 
             $this->crud->addField([
                 'label'                 => 'ID пользователя',
-                'type'                  => 'select2_from_ajax',
+                'type'                  => 'text',
                 'name'                  => OrganizationContract::USER_ID,
-                'entity'                => 'user',
-                'placeholder'           => '',
-                'minimum_input_length'  => '',
-                'attribute'             => UserContract::ID,
-                'data_source'           =>  url('users')
+//                'entity'                => 'user',
+//                'placeholder'           => '',
+//                'minimum_input_length'  => '',
+//                'attribute'             => UserContract::ID,
+//                'data_source'           =>  url('users')
             ]);
 
             $this->crud->addField([

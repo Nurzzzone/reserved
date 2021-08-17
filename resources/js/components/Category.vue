@@ -68,8 +68,8 @@ export default {
                         this.organizations    =   data;
                         this.Loading    =   false;
                     }).catch(error => {
-                    this.Loading    =   false;
-                });
+                        this.Loading    =   false;
+                    });
             }
         },
         getTime: function(organization) {
@@ -95,11 +95,11 @@ export default {
             if (week.start === week.end) {
                 return 'круглосуточно';
             }
-            return this.timeConvert(week.start)+' '+this.timeConvert(week.end);
+            return 'c '+this.timeConvert(week.start)+' до '+this.timeConvert(week.end);
         },
         timeConvert: function(time) {
             let converted   =   time.split(':');
-            return 'с '+converted[0]+' до '+converted[1];
+            return converted[0]+':'+converted[1];
         },
     }
 }

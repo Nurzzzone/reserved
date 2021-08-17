@@ -33,10 +33,10 @@
                             </li>
                             <li class="list-group-item">
                                 <a v-if="category" :href="'/home/'+category.slug+'/'+organization.id" class="btn w-100 text-white text-btn text-font font-weight-bold d-flex justify-content-center align-content-center">
-                                    <div class="py-md-1">Подробнее</div>
+                                    <div class="py-md-1">Забронировать</div>
                                 </a>
                                 <a v-else :href="'/home/'+organization.category_id.slug+'/'+organization.id" class="btn w-100 text-white text-btn text-font font-weight-bold d-flex justify-content-center align-content-center">
-                                    <div class="py-md-1">Подробнее</div>
+                                    <div class="py-md-1">Забронировать</div>
                                 </a>
                             </li>
                         </ul>

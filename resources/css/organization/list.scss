@@ -71,6 +71,9 @@
         font-size: 13px;
         text-align: justify;
         margin-bottom: 15px !important;
+        text-overflow: ellipsis;
+        overflow: hidden;
+        white-space: nowrap;
     }
     &-rating {
         position: absolute;
@@ -85,8 +88,7 @@
         font-size: 18px;
     }
     &-main {
-        max-height: 150px;
-        overflow: hidden;
+        max-height: 172px;
         border-radius: 5px;
         margin: 10px;
         position: relative;

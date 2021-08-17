@@ -42,67 +42,74 @@ class Organization extends Model
         return $this->belongsTo(Category::class);
     }
 
-    public function setStartMondayAttribute($value): string
+    public function setStartMondayAttribute($value)
     {
-        return $value.':00';
-    }
-    public function setEndMondayAttribute($value): string
-    {
-        return $value.':00';
+        $this->attributes[MainContract::START_MONDAY] =   $value.':00';
     }
 
-    public function setStartTuesdayAttribute($value): string
+    public function setEndMondayAttribute($value)
     {
-        return $value.':00';
-    }
-    public function setEndTuesdayAttribute($value): string
-    {
-        return $value.':00';
+        $this->attributes[MainContract::END_MONDAY] =   $value.':00';
     }
 
-    public function setStartWednesdayAttribute($value): string
+    public function setStartTuesdayAttribute($value)
     {
-        return $value.':00';
-    }
-    public function setEndWednesdayAttribute($value): string
-    {
-        return $value.':00';
+        $this->attributes[MainContract::START_TUESDAY] =   $value.':00';
     }
 
-    public function setStartThursdayAttribute($value): string
+    public function setEndTuesdayAttribute($value)
     {
-        return $value.':00';
-    }
-    public function setEndThursdayAttribute($value): string
-    {
-        return $value.':00';
+        $this->attributes[MainContract::END_TUESDAY] =   $value.':00';
     }
 
-    public function setStartFridayAttribute($value): string
+    public function setStartWednesdayAttribute($value)
     {
-        return $value.':00';
-    }
-    public function setEndFridayAttribute($value): string
-    {
-        return $value.':00';
+        $this->attributes[MainContract::START_WEDNESDAY] =   $value.':00';
     }
 
-    public function setStartSaturdayAttribute($value): string
+    public function setEndWednesdayAttribute($value)
     {
-        return $value.':00';
-    }
-    public function setEndSaturdayAttribute($value): string
-    {
-        return $value.':00';
+        $this->attributes[MainContract::END_WEDNESDAY] =   $value.':00';
     }
 
-    public function setStartSundayAttribute($value): string
+    public function setStartThursdayAttribute($value)
     {
-        return $value.':00';
+        $this->attributes[MainContract::START_THURSDAY] =   $value.':00';
     }
-    public function setEndSundayAttribute($value): string
+
+    public function setEndThursdayAttribute($value)
     {
-        return $value.':00';
+        $this->attributes[MainContract::END_THURSDAY] =   $value.':00';
+    }
+
+    public function setStartFridayAttribute($value)
+    {
+        $this->attributes[MainContract::START_FRIDAY] =   $value.':00';
+    }
+
+    public function setEndFridayAttribute($value)
+    {
+        $this->attributes[MainContract::END_FRIDAY] =   $value.':00';
+    }
+
+    public function setStartSaturdayAttribute($value)
+    {
+        $this->attributes[MainContract::START_SATURDAY] =   $value.':00';
+    }
+
+    public function setEndSaturdayAttribute($value)
+    {
+        $this->attributes[MainContract::END_SATURDAY] =   $value.':00';
+    }
+
+    public function setStartSundayAttribute($value)
+    {
+        $this->attributes[MainContract::START_SUNDAY] =   $value.':00';
+    }
+
+    public function setEndSundayAttribute($value)
+    {
+        $this->attributes[MainContract::END_SUNDAY] =   $value.':00';
     }
 
     public function getStartMondayAttribute($value): string

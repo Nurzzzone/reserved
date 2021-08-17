@@ -2729,6 +2729,98 @@ $widgets['before_content'][] = [
 @endsection
 @else
 @section('content')
+    <div id="tables">
+        @include('vendor.backpack.base.card.list', [
+            'date'      =>  '',
+            'organization'  =>  $organizationService->getByUserId(backpack_auth()->user()->id),
+            'user_id'   =>  backpack_auth()->user()->id,
+            'userService'   =>  $userService,
+            'organizationService'   =>  $organizationService,
+            'organizationTableService'    =>  $organizationTableService,
+            'organizationTableListService'      =>  $organizationTableListService,
+            'bookingService'    =>  $bookingService
+        ])
+    </div>
+    <script>
+        $(document.body).on('click', '.booking-new-btn', function() {
+            $("#booking-modal").attr('data-id',$(this).attr('data-id'));
+            $("#booking-modal").attr('data-organization',$(this).closest('.card-body').attr('data-id'));
+            $("#booking-modal").attr('data-user',$(this).closest('.card-body').attr('data-user'));
+        });
 
+        $(document.body).on('click', '.btn-booking', function() {
+            $.get('booking/status/'+$(this).attr('data-id'));
+        });
+
+        $(document.body).on('click', '.btn-booking-came', function() {
+            $.post('/api/booking/update/'+$(this).attr('data-id'), {
+                'status':'came'
+            });
+        });
+
+        $(document.body).on('click', '.btn-booking-completed', function() {
+            $.post('/api/booking/update/'+$(this).attr('data-id'), {
+                'status':'COMPLETED'
+            });
+        });
+
+        $(document.body).on('click', '.card-toggle-btn', function() {
+            let status  =   $(this).attr('data-status');
+            let id      =   $(this).attr('data-id');
+            if (status === 'ENABLED') {
+                $(this).attr('data-status','FROZEN').removeClass('card-toggle-btn-success').addClass('card-toggle-btn-locked');
+                $.post('/api/table/update/'+id, {
+                    'status':'FROZEN'
+                });
+            } else {
+                $(this).attr('data-status','ENABLED').removeClass('card-toggle-btn-locked').addClass('card-toggle-btn-success');
+                $.post('/api/table/update/'+id, {
+                    'status':'ENABLED'
+                });
+            }
+        });
+
+        let stat    =   true;
+        $(document).ready(function() {
+            function load() {
+                if (stat) {
+                    stat  =   false;
+                    setTimeout(function () {
+                        $.ajax({
+                            url: 'booking/status_date/'+$("#datepicker").val(),
+                            type: "GET",
+                            success: function (result) {
+                                $("#sections").html(result);
+                                stat    =   true;
+                            },
+                            complete: load
+                        });
+                    }, 2000);
+                }
+            }
+            load();
+        });
+    </script>
+    <style>
+        .card-toggle-btn {
+            position: absolute;
+            width: 40px;
+            height: 40px;
+            background: #fff;
+            box-shadow: 0 .5rem 1rem rgba(22,28,45,.15)!important;
+            right: -20px;
+            top: -20px;
+            border-radius: 40px;
+            cursor: pointer;
+        }
+        .card-toggle-btn-success {
+            background: #fff url('/img/logo/check-mark.svg') no-repeat center;
+            background-size: 50%;
+        }
+        .card-toggle-btn-locked {
+            background: #fff url('/img/logo/padlock.svg') no-repeat center;
+            background-size: 50%;
+        }
+    </style>
 @endsection
 @endif

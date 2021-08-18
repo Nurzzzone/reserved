@@ -28,13 +28,11 @@ class TelegramChatController extends Controller
         $message    =   $telegramChatCreateRequest->validated()[MainContract::MESSAGE];
         $chat       =   $message[MainContract::CHAT][MainContract::ID];
         if (!$this->telegramChatService->getByChatId($chat)) {
-            Log::info('telegram_created',[$id,$chat]);
             $this->telegramChatService->create([
                 MainContract::TELEGRAM_ID       =>  $id,
                 MainContract::TELEGRAM_CHAT_ID  =>  $chat,
             ]);
         } elseif (array_key_exists(MainContract::TEXT,$message) && $message[MainContract::TEXT] === '/start') {
-            Log::info('telegram_updated',[$id,$chat]);
             $this->telegramChatService->update($chat, [
                 MainContract::STATUS    =>  MainContract::ON
             ]);

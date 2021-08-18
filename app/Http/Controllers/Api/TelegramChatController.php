@@ -7,6 +7,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\TelegramChat\TelegramChatUpdateRequest;
 use App\Http\Requests\TelegramChat\TelegramChatCreateRequest;
 use App\Services\TelegramChat\TelegramChatService;
+use http\Env\Request;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Validation\ValidationException;
 
@@ -22,9 +23,10 @@ class TelegramChatController extends Controller
     /**
      * @throws ValidationException
      */
-    public function create($id, TelegramChatCreateRequest $telegramChatCreateRequest)
+    public function create($id, Request $telegramChatCreateRequest)
     {
-        Log::info('telegram_chat',$telegramChatCreateRequest->validated());
+        Log::info('telegram_chat',$telegramChatCreateRequest->all());
+        exit;
         $message    =   $telegramChatCreateRequest->validated()[MainContract::MESSAGE];
         $chat       =   $message[MainContract::CHAT][MainContract::ID];
         if (!$this->telegramChatService->getByChatId($chat)) {

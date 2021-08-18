@@ -89,7 +89,7 @@ export default {
                 }
             } else if (data.booking.status === 'off') {
                 this.notifications.forEach(element => {
-                    if (data.booking.comment === 'off') {
+                    if (element.id === data.booking.id) {
                         remove  =   index;
                     }
                     index++;

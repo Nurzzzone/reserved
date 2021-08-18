@@ -19414,7 +19414,7 @@ __webpack_require__.r(__webpack_exports__);
         }
       } else if (data.booking.status === 'off') {
         this.notifications.forEach(function (element) {
-          if (data.booking.comment === 'off') {
+          if (element.id === data.booking.id) {
             remove = index;
           }
 

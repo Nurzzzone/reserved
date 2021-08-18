@@ -19600,6 +19600,8 @@ __webpack_require__.r(__webpack_exports__);
 
         if (this.organization.price > 0) {
           var _wind3 = window.open();
+
+          console.log('start');
         }
 
         axios.post("/api/booking/create", {
@@ -19612,6 +19614,7 @@ __webpack_require__.r(__webpack_exports__);
           price: this.organization.price,
           card_id: this.organization.price > 0 ? this.cards[this.cardIndex].card_id : 0
         }).then(function (response) {
+          console.log('asdasd');
           var data = response.data.data;
 
           if (_this5.organization.price > 0) {
@@ -19620,6 +19623,7 @@ __webpack_require__.r(__webpack_exports__);
 
           window.location.href = '/profile/history';
         })["catch"](function (error) {
+          console.log('error', error.response.data);
           _this5.cardStatus = true;
           _this5.cardError = true;
         });

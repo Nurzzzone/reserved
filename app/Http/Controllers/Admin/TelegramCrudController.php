@@ -2,11 +2,13 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Domain\Contracts\MainContract;
 use App\Http\Requests\TelegramRequest;
 use Backpack\CRUD\app\Http\Controllers\CrudController;
 use Backpack\CRUD\app\Library\CrudPanel\CrudPanelFacade as CRUD;
 use App\Domain\Contracts\TelegramContract;
 use App\Helpers\Telegram\Telegram;
+use Illuminate\Support\Facades\Log;
 
 class TelegramCrudController extends CrudController
 {
@@ -26,10 +28,11 @@ class TelegramCrudController extends CrudController
     }
     public function store(Telegram $telegram)
     {
-        $this->crud->addField(['type' => 'hidden', 'name' => TelegramContract::USER_ID]);
-        $this->crud->getRequest()->request->add([TelegramContract::USER_ID  =>  backpack_user()->id]);
+        $this->crud->addField(['type' => 'hidden', 'name' => MainContract::USER_ID]);
+        $this->crud->getRequest()->request->add([MainContract::USER_ID  =>  backpack_user()->id]);
         $store  =   $this->traitStore();
-        $telegram->setWebhook($this->crud->getCurrentEntry()->{TelegramContract::ID},$this->crud->getCurrentEntry()->{TelegramContract::API_TOKEN});
+        Log::info('telegram_id',$this->crud->getCurrentEntry()->{MainContract::ID});
+        $telegram->setWebhook($this->crud->getCurrentEntry()->{MainContract::ID},$this->crud->getCurrentEntry()->{MainContract::API_TOKEN});
         return $store;
     }
 

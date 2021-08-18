@@ -38,6 +38,7 @@ class Telegram
 
     public function setWebhook($id, $token)
     {
+        Log::info('telegram_curl',$token);
         $this->curl->getSend($this->urlHook($id, $token));
     }
 

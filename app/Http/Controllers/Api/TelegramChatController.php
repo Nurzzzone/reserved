@@ -23,10 +23,8 @@ class TelegramChatController extends Controller
     /**
      * @throws ValidationException
      */
-    public function create($id, Request $telegramChatCreateRequest)
+    public function create($id, TelegramChatCreateRequest $telegramChatCreateRequest)
     {
-        Log::info('telegram_chat',$telegramChatCreateRequest->all());
-        exit;
         $message    =   $telegramChatCreateRequest->validated()[MainContract::MESSAGE];
         $chat       =   $message[MainContract::CHAT][MainContract::ID];
         if (!$this->telegramChatService->getByChatId($chat)) {

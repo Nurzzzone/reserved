@@ -7,7 +7,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\TelegramChat\TelegramChatUpdateRequest;
 use App\Http\Requests\TelegramChat\TelegramChatCreateRequest;
 use App\Services\TelegramChat\TelegramChatService;
-use http\Env\Request;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Validation\ValidationException;
 

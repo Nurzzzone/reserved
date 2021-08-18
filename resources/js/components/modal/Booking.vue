@@ -304,11 +304,9 @@ export default {
             if (this.cardStatus) {
                 this.cardStatus =   false;
                 this.cardError  =   false;
+                let wind;
                 if (this.organization.price > 0) {
-                    let wind    =   window.open();
-                    console.log('start');
-                } else {
-                    console.log(this.organization.price+"||here");
+                    wind    =   window.open();
                 }
                 axios.post("/api/booking/create", {
                     user_id: this.user.id,
@@ -321,14 +319,13 @@ export default {
                     card_id: this.organization.price>0?this.cards[ this.cardIndex ].card_id:0
                 })
                 .then(response => {
-                    console.log('asdasd');
                     let data = response.data.data;
                     if (this.organization.price > 0) {
                         wind.location   =   '/form/'+data.id;
                     }
                     window.location.href    =   '/profile/history';
                 }).catch(error => {
-                    console.log('error', error.response.data);
+                    console.log('error', error.response);
                     this.cardStatus =   true;
                     this.cardError  =   true;
                 });

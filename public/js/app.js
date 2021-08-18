@@ -19404,14 +19404,12 @@ __webpack_require__.r(__webpack_exports__);
           index++;
         });
 
-        if (status && this.storage.notification.includes(data.booking.id)) {
+        if (status && this.storage.notifications.includes(data.booking.id)) {
           this.notifications.unshift(data.booking);
           this.storage.notifications.push(data.booking.id);
           this.play();
-          console.log('play', data.booking);
         } else if (remove > -1) {
           this.notifications.splice(remove, 1);
-          console.log('remove', data.booking);
         }
       } else if (data.booking.status === 'off') {
         this.notifications.forEach(function (element) {

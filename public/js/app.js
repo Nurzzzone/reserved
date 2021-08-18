@@ -19404,7 +19404,7 @@ __webpack_require__.r(__webpack_exports__);
           index++;
         });
 
-        if (status && this.storage.notifications.includes(data.booking.id)) {
+        if (status && !this.storage.notifications.includes(data.booking.id)) {
           this.notifications.unshift(data.booking);
           this.storage.notifications.push(data.booking.id);
           this.play();

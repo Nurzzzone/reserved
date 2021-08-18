@@ -80,7 +80,7 @@ export default {
                     }
                     index++;
                 });
-                if (status) {
+                if (status && this.storage.notification.includes(data.booking.id)) {
                     this.notifications.unshift(data.booking);
                     this.storage.notifications.push(data.booking.id);
                     this.play();

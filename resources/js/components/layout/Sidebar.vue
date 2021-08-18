@@ -69,7 +69,7 @@ export default {
             let status  =   true;
             let index   =   0;
             let remove  =   -1;
-            console.log('sidebar',data.booking);
+
             if (data.booking.status === 'COMPLETED') {
                 this.notifications.forEach(element => {
                     if (element.id === data.booking.id) {
@@ -84,8 +84,10 @@ export default {
                     this.notifications.unshift(data.booking);
                     this.storage.notifications.push(data.booking.id);
                     this.play();
+                    console.log('play',data.booking);
                 } else if (remove > -1) {
                     this.notifications.splice(remove,1);
+                    console.log('remove',data.booking);
                 }
             } else if (data.booking.status === 'off') {
                 this.notifications.forEach(element => {

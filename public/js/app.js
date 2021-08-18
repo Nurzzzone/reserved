@@ -19390,7 +19390,6 @@ __webpack_require__.r(__webpack_exports__);
       var status = true;
       var index = 0;
       var remove = -1;
-      console.log('sidebar', data.booking);
 
       if (data.booking.status === 'COMPLETED') {
         this.notifications.forEach(function (element) {
@@ -19409,8 +19408,10 @@ __webpack_require__.r(__webpack_exports__);
           this.notifications.unshift(data.booking);
           this.storage.notifications.push(data.booking.id);
           this.play();
+          console.log('play', data.booking);
         } else if (remove > -1) {
           this.notifications.splice(remove, 1);
+          console.log('remove', data.booking);
         }
       } else if (data.booking.status === 'off') {
         this.notifications.forEach(function (element) {

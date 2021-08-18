@@ -18550,7 +18550,16 @@ __webpack_require__.r(__webpack_exports__);
   methods: {
     cardUpdate: function cardUpdate(data) {
       if (data !== undefined) {
-        this.cards.push(data.card);
+        var status = true;
+        this.cards.forEach(function (card) {
+          if (card.id === data.card.id) {
+            status = false;
+          }
+        });
+
+        if (status) {
+          this.cards.push(data.card);
+        }
       }
     },
     newCard: function newCard() {

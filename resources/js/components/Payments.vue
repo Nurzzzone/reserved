@@ -115,7 +115,15 @@ export default {
     methods: {
         cardUpdate: function(data) {
             if (data !== undefined) {
-                this.cards.push(data.card);
+                let status  =   true;
+                this.cards.forEach(card => {
+                    if (card.id === data.card.id) {
+                        status  =   false;
+                    }
+                });
+                if (status) {
+                    this.cards.push(data.card);
+                }
             }
         },
         newCard: function() {

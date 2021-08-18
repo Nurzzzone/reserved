@@ -17824,9 +17824,35 @@ __webpack_require__.r(__webpack_exports__);
     this.getUser();
   },
   mounted: function mounted() {
+    var _this = this;
+
     this.getBookings();
+
+    if (this.user) {
+      window.Echo["private"]('booking.notification.' + this.user.id).listen('.booking.completed', function (e) {
+        _this.bookingUpdate(e);
+      });
+    }
   },
   methods: {
+    bookingUpdate: function bookingUpdate(data) {
+      var status = true;
+      this.items.forEach(function (item, index, arr) {
+        if (item.id === data.booking.id) {
+          status = false;
+
+          if (data.booking.status !== 'off') {
+            arr[index] = data.booking;
+          } else {
+            arr.splice(index, 1);
+          }
+        }
+      });
+
+      if (status && data.booking.status !== 'off') {
+        this.items.unshift(data.booking);
+      }
+    },
     comment: function comment(key) {
       this.storage.modal = true;
       this.item = this.items[key];
@@ -17858,7 +17884,7 @@ __webpack_require__.r(__webpack_exports__);
       }
     },
     getBookings: function getBookings() {
-      var _this = this;
+      var _this2 = this;
 
       if (this.user && this.status) {
         this.status = false;
@@ -17873,14 +17899,11 @@ __webpack_require__.r(__webpack_exports__);
                 arr.push(element);
               }
             });
-            _this.items = arr;
-            _this.status = true;
-            setTimeout(function () {
-              self.getBookings();
-            }, 2000);
+            _this2.items = arr;
+            _this2.status = true;
           }
         })["catch"](function (error) {
-          _this.status = true;
+          _this2.status = true;
           setTimeout(function () {
             self.getBookings();
           }, 2000);
@@ -19367,23 +19390,36 @@ __webpack_require__.r(__webpack_exports__);
       var status = true;
       var index = 0;
       var remove = -1;
-      this.notifications.forEach(function (element) {
-        if (element.id === data.booking.id) {
-          status = false;
+      console.log('sidebar', data.booking);
 
+      if (data.booking.status === 'COMPLETED') {
+        this.notifications.forEach(function (element) {
+          if (element.id === data.booking.id) {
+            status = false;
+
+            if (data.booking.comment === 'off') {
+              remove = index;
+            }
+          }
+
+          index++;
+        });
+
+        if (status) {
+          this.notifications.unshift(data.booking);
+          this.storage.notifications.push(data.booking.id);
+          this.play();
+        } else if (remove > -1) {
+          this.notifications.splice(remove, 1);
+        }
+      } else if (data.booking.status === 'off') {
+        this.notifications.forEach(function (element) {
           if (data.booking.comment === 'off') {
             remove = index;
           }
-        }
 
-        index++;
-      });
-
-      if (status) {
-        this.notifications.unshift(data.booking);
-        this.storage.notifications.push(data.booking.id);
-        this.play();
-      } else if (remove > -1) {
+          index++;
+        });
         this.notifications.splice(remove, 1);
       }
 

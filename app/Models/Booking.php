@@ -2,13 +2,13 @@
 
 namespace App\Models;
 
-use App\Domain\Contracts\OrganizationContract;
-use App\Domain\Contracts\OrganizationTableListContract;
+use App\Domain\Contracts\MainContract;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use App\Domain\Contracts\BookingContract;
 
-use App\Events\BookingNotification;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasOne;
 
 class Booking extends Model
 {
@@ -18,23 +18,27 @@ class Booking extends Model
     protected $fillable =   BookingContract::FILLABLE;
 
 
-    public function getTimeAttribute($value) {
-        $date   =   explode(' ',$this->created_at);
-        $time   =   new \DateTime($date[0].' '.$value, new \DateTimeZone(BookingContract::UTC));
+    public function getTimeAttribute($value): string
+    {
+        $date   =   explode(' ',$this->{MainContract::CREATED_AT});
+        $time   =   new \DateTime($date[0].' '.$value, new \DateTimeZone(MainContract::UTC));
         $time->setTimezone(new \DateTimeZone($this->organization->timezone));
         return $time->format('H:i');
     }
 
-    public function user() {
+    public function user(): BelongsTo
+    {
         return $this->belongsTo(User::class);
     }
 
-    public function organization() {
-        return $this->belongsTo(Organization::class,BookingContract::ORGANIZATION_ID,OrganizationContract::ID);
+    public function organization(): BelongsTo
+    {
+        return $this->belongsTo(Organization::class, MainContract::ORGANIZATION_ID,MainContract::ID);
     }
 
-    public function organizationTables() {
-        return $this->hasOne(OrganizationTableList::class,OrganizationTableListContract::ID,BookingContract::ORGANIZATION_TABLE_LIST_ID);
+    public function organizationTables(): HasOne
+    {
+        return $this->hasOne(OrganizationTableList::class,MainContract::ID,MainContract::ORGANIZATION_TABLE_LIST_ID);
     }
 
 }

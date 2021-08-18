@@ -31,18 +31,17 @@ class BookingRepositoryEloquent implements BookingRepositoryInterface
         if ($booking->{MainContract::STATUS} == MainContract::ON) {
             TelegramNotification::dispatch($booking);
         }
+        event(new BookingNotification($this->getById($booking->id)));
         return $booking;
     }
 
     public function update($id, array $data):void
     {
-        if (array_key_exists(MainContract::STATUS,$data)) {
-            if ($data[MainContract::STATUS] === MainContract::ON) {
-                TelegramNotification::dispatch($this->getById($id));
-            } else if ($data[MainContract::STATUS] === MainContract::COMPLETED) {
-                event(new BookingNotification($this->getById($id)));
-            }
+        $booking    =   $this->getById($id);
+        if (array_key_exists(MainContract::STATUS,$data) && $data[MainContract::STATUS] === MainContract::ON) {
+            TelegramNotification::dispatch($booking);
         }
+        event(new BookingNotification($booking));
         Booking::where(MainContract::ID,$id)->update($data);
     }
 
@@ -93,6 +92,7 @@ class BookingRepositoryEloquent implements BookingRepositoryInterface
     {
         return $this->getOne([MainContract::ID,$id]);
     }
+
     public function getOne($query)
     {
         return Booking::with('organization','organizationTables')

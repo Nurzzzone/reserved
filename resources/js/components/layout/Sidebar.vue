@@ -69,20 +69,31 @@ export default {
             let status  =   true;
             let index   =   0;
             let remove  =   -1;
-            this.notifications.forEach(element => {
-                if (element.id === data.booking.id) {
-                    status  =   false;
+            console.log('sidebar',data.booking);
+            if (data.booking.status === 'COMPLETED') {
+                this.notifications.forEach(element => {
+                    if (element.id === data.booking.id) {
+                        status  =   false;
+                        if (data.booking.comment === 'off') {
+                            remove  =   index;
+                        }
+                    }
+                    index++;
+                });
+                if (status) {
+                    this.notifications.unshift(data.booking);
+                    this.storage.notifications.push(data.booking.id);
+                    this.play();
+                } else if (remove > -1) {
+                    this.notifications.splice(remove,1);
+                }
+            } else if (data.booking.status === 'off') {
+                this.notifications.forEach(element => {
                     if (data.booking.comment === 'off') {
                         remove  =   index;
                     }
-                }
-                index++;
-            });
-            if (status) {
-                this.notifications.unshift(data.booking);
-                this.storage.notifications.push(data.booking.id);
-                this.play();
-            } else if (remove > -1) {
+                    index++;
+                });
                 this.notifications.splice(remove,1);
             }
             this.storage.sidebar.notifications  =   this.notifications.length;

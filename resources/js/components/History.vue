@@ -89,8 +89,30 @@ export default {
     },
     mounted() {
         this.getBookings();
+        if (this.user) {
+            window.Echo.private('booking.notification.'+this.user.id)
+                .listen('.booking.completed', (e) => {
+                    this.bookingUpdate(e);
+                });
+        }
     },
     methods: {
+        bookingUpdate: function(data) {
+            let status  =   true;
+            this.items.forEach(function(item, index, arr) {
+                if (item.id === data.booking.id) {
+                    status  =   false;
+                    if (data.booking.status !== 'off') {
+                        arr[index] = data.booking;
+                    } else {
+                        arr.splice(index,1);
+                    }
+                }
+            });
+            if (status && data.booking.status !== 'off') {
+                this.items.unshift(data.booking);
+            }
+        },
         comment: function(key) {
             this.storage.modal  =   true;
             this.item   =   this.items[key];
@@ -136,9 +158,6 @@ export default {
                             });
                             this.items  =   arr;
                             this.status =   true;
-                            setTimeout(function() {
-                                self.getBookings();
-                            },2000);
                         }
                     }).catch(error => {
                         this.status =   true;

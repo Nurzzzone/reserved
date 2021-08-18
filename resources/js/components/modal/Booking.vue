@@ -307,6 +307,8 @@ export default {
                 if (this.organization.price > 0) {
                     let wind    =   window.open();
                     console.log('start');
+                } else {
+                    console.log(this.organization.price+"||here");
                 }
                 axios.post("/api/booking/create", {
                     user_id: this.user.id,

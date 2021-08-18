@@ -19602,6 +19602,8 @@ __webpack_require__.r(__webpack_exports__);
           var _wind3 = window.open();
 
           console.log('start');
+        } else {
+          console.log(this.organization.price + "||here");
         }
 
         axios.post("/api/booking/create", {

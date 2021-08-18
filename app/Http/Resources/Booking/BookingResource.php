@@ -2,34 +2,33 @@
 
 namespace App\Http\Resources\Booking;
 
+use App\Domain\Contracts\MainContract;
 use App\Http\Resources\OrganizationResource;
-use App\Http\Resources\OrganizationTableListResource;
-use App\Models\OrganizationTableList;
+use App\Http\Resources\OrganizationTableList\OrganizationTableListResource;
 use Illuminate\Http\Resources\Json\JsonResource;
-use App\Domain\Contracts\BookingContract;
 use App\Services\Payment\PaymentService;
 
 class BookingResource extends JsonResource
 {
-    public function toArray($request)
+    public function toArray($request): array
     {
         return [
-            BookingContract::ID =>  $this->{BookingContract::ID},
-            BookingContract::USER_ID    =>  $this->{BookingContract::USER_ID},
-            BookingContract::ORGANIZATION_ID    =>  $this->{BookingContract::ORGANIZATION_ID},
-            BookingContract::ORGANIZATION_TABLE_LIST_ID =>  $this->{BookingContract::ORGANIZATION_TABLE_LIST_ID},
-            BookingContract::TIME   =>  $this->{BookingContract::TIME},
-            BookingContract::DATE   =>  $this->{BookingContract::DATE},
-            BookingContract::COMMENT    =>  $this->{BookingContract::COMMENT},
-            BookingContract::PAYMENT_URL    =>  $this->{BookingContract::PAYMENT_URL},
-            BookingContract::PAYMENT_ID =>  $this->{BookingContract::PAYMENT_ID},
-            BookingContract::CARD_ID    =>  $this->{BookingContract::CARD_ID},
-            BookingContract::PRICE  =>  $this->{BookingContract::PRICE},
-            BookingContract::CURRENCY   =>  $this->{BookingContract::CURRENCY},
-            BookingContract::PG_SIG =>  PaymentService::paySignature($this->{BookingContract::PAYMENT_ID}),
-            BookingContract::ORGANIZATION   =>  new OrganizationResource($this->{BookingContract::ORGANIZATION}),
-            BookingContract::ORGANIZATION_TABLES    =>  new OrganizationTableListResource($this->{BookingContract::ORGANIZATION__TABLES}),
-            BookingContract::STATUS =>  $this->{BookingContract::STATUS}
+            MainContract::ID =>  $this->{MainContract::ID},
+            MainContract::USER_ID    =>  $this->{MainContract::USER_ID},
+            MainContract::ORGANIZATION_ID    =>  $this->{MainContract::ORGANIZATION_ID},
+            MainContract::ORGANIZATION_TABLE_LIST_ID =>  $this->{MainContract::ORGANIZATION_TABLE_LIST_ID},
+            MainContract::TIME   =>  $this->{MainContract::TIME},
+            MainContract::DATE   =>  $this->{MainContract::DATE},
+            MainContract::COMMENT    =>  $this->{MainContract::COMMENT},
+            MainContract::PAYMENT_URL    =>  $this->{MainContract::PAYMENT_URL},
+            MainContract::PAYMENT_ID =>  $this->{MainContract::PAYMENT_ID},
+            MainContract::CARD_ID    =>  $this->{MainContract::CARD_ID},
+            MainContract::PRICE  =>  $this->{MainContract::PRICE},
+            MainContract::CURRENCY   =>  $this->{MainContract::CURRENCY},
+            MainContract::PG_SIG =>  PaymentService::paySignature($this->{MainContract::PAYMENT_ID}),
+            MainContract::ORGANIZATION   =>  new OrganizationResource($this->{MainContract::ORGANIZATION}),
+            MainContract::ORGANIZATION_TABLES    =>  new OrganizationTableListResource($this->{MainContract::ORGANIZATION__TABLES}),
+            MainContract::STATUS =>  $this->{MainContract::STATUS}
         ];
     }
 }

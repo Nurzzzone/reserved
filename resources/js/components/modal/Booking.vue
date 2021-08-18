@@ -318,13 +318,11 @@ export default {
                     card_id: this.organization.price>0?this.cards[ this.cardIndex ].card_id:0
                 })
                 .then(response => {
-                    let data = response.data;
-                    if (data.hasOwnProperty('data')) {
-                        if (this.organization.price > 0) {
-                            wind.location   =   '/form/'+data.data.id;
-                        }
-                        window.location.href    =   '/profile/history';
+                    let data = response.data.data;
+                    if (this.organization.price > 0) {
+                        wind.location   =   '/form/'+data.id;
                     }
+                    window.location.href    =   '/profile/history';
                 }).catch(error => {
                     this.cardStatus =   true;
                     this.cardError  =   true;

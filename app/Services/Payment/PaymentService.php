@@ -22,7 +22,7 @@ class PaymentService
     const ID    =   538109;
     const KEY   =   'UVwuMp4af1xBXYCe';
 
-    const SITE  =   'https://reserved-app.com';
+    const SITE  =   'https://reserved-app.kz';
     const PHONE =   '+77021366697';
     const EMAIL =   'antechnology@bk.ru';
 
@@ -41,25 +41,25 @@ class PaymentService
     const CARD_PAYMENT  =   'https://api.paybox.money/v1/merchant/'.self::ID.'/card/init';
     const CARD_PAY      =   'https://api.paybox.money/v1/merchant/'.self::ID.'/card/pay';
 
-    const CARD_RESULT   =   'https://reserved-app.com/api/payment/card/result';
-    const CARD_SUCCESS  =   'https://reserved-app.com/profile/payments';
-    const CARD_FAILURE  =   'https://reserved-app.com/profile/payments';
+    const CARD_RESULT   =   'https://reserved-app.kz/api/payment/card/result';
+    const CARD_SUCCESS  =   'https://reserved-app.kz/profile/payments';
+    const CARD_FAILURE  =   'https://reserved-app.kz/profile/payments';
 
-    const CARD_POST =   'https://reserved-app.com/api/card/post';
-    const CARD_BACK =   'https://reserved-app.com/profile/payments';
+    const CARD_POST =   'https://reserved-app.kz/api/card/post';
+    const CARD_BACK =   'https://reserved-app.kz/profile/payments';
 
     const CURRENCY  =   'KZT';
-    const CHECK_URL =   'https://reserved-app.com/api/payment/check';
-    const POST_URL  =   'https://reserved-app.com/api/payment/post';
-    const STATE_URL =   'https://reserved-app.com/state';
+    const CHECK_URL =   'https://reserved-app.kz/api/payment/check';
+    const POST_URL  =   'https://reserved-app.kz/api/payment/post';
+    const STATE_URL =   'https://reserved-app.kz/state';
     const LIFETIME  =   86400;
     const LANGUAGE  =   'ru';
 
-    const REDIRECT_URL  =   'https://reserved-app.com/payment/success';
-    const RESULT_URL    =   'https://reserved-app.com/api/payment/result';
-    const SUCCESS_URL   =   'https://reserved-app.com/profile/history';
-    const FAILURE_URL   =   'https://reserved-app.com/profile/history';
-    const RETURN_URL    =   'https://reserved-app.com/return';
+    const REDIRECT_URL  =   'https://reserved-app.kz/payment/success';
+    const RESULT_URL    =   'https://reserved-app.kz/api/payment/result';
+    const SUCCESS_URL   =   'https://reserved-app.kz/profile/history';
+    const FAILURE_URL   =   'https://reserved-app.kz/profile/history';
+    const RETURN_URL    =   'https://reserved-app.kz/return';
     const PAYMENT_ROUTE =   'frame';
 
 

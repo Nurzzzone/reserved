@@ -16,7 +16,7 @@ class TelegramChatController extends Controller
 
     public function __construct(TelegramChatService $telegramChatService)
     {
-        $this->$telegramChatService =   $telegramChatService;
+        $this->telegramChatService =   $telegramChatService;
     }
 
     /**

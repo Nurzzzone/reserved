@@ -166,7 +166,7 @@ class Telegram
 
     public function urlHook($id,$token)
     {
-        return 'https://api.telegram.org/bot'.$token.'/setWebhook?url=https://reserved-app.com/api/telegram_chat/create/'.$id;
+        return 'https://api.telegram.org/bot'.$token.'/setWebhook?url=https://reserved-app.kz/api/telegram_chat/create/'.$id;
     }
 
 }

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Domain\Contracts\MainContract;
 use Illuminate\Http\Request;
 use App\Services\Payment\PaymentService;
 use App\Services\Booking\BookingService;
@@ -21,8 +22,8 @@ class PaymentController extends Controller
     public function form($bookingId)
     {
         if ($booking    =   $this->bookingService->getById($bookingId)) {
-            if ($booking->{BookingContract::PAYMENT_ID}) {
-                $payment    =   PaymentService::paySignature($booking->{BookingContract::PAYMENT_ID});
+            if ($booking->{MainContract::PAYMENT_ID}) {
+                $payment    =   PaymentService::paySignature($booking->{MainContract::PAYMENT_ID});
                 return view('payment.form',compact('payment','booking'));
             }
             return response(['message'  =>  'Booking Payment Id Not Found'],404);

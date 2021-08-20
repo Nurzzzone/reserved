@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Validation\ValidationException;
 use App\Services\Card\CardService;
 use App\Services\Payment\PaymentService;
@@ -34,6 +35,7 @@ class CardController extends Controller
      */
     public function booking($bookingId, CardPostRequest $cardPostRequest)
     {
+        Log::info($bookingId,$cardPostRequest->validated());
         $cardPostRequest    =   $cardPostRequest->validated()[MainContract::PG_XML];
         if ($cardPostRequest && array_key_exists(MainContract::PG_STATUS,$cardPostRequest) && $cardPostRequest[MainContract::PG_STATUS] === MainContract::SUCCESS) {
             $card   =   $this->cardService->create([

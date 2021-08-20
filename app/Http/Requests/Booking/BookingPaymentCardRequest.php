@@ -28,6 +28,7 @@ class BookingPaymentCardRequest extends FormRequest
             MainContract::DATE                       =>  'required|date',
             MainContract::PRICE                      =>  'required',
             MainContract::CURRENCY                   =>  'nullable',
+            MainContract::CARD_ID                    =>  'nullable|int'
         ];
     }
 

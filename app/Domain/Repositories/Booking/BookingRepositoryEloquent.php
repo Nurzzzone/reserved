@@ -31,7 +31,9 @@ class BookingRepositoryEloquent implements BookingRepositoryInterface
         if ($booking->{MainContract::STATUS} == MainContract::ON) {
             TelegramNotification::dispatch($booking);
         }
-        event(new BookingNotification($this->getById($booking->id)));
+        if ($booking->{MainContract::STATUS} != MainContract::OFF) {
+            event(new BookingNotification($this->getById($booking->id)));
+        }
         return $booking;
     }
 

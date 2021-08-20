@@ -111,7 +111,6 @@ class PaymentService
             }
             $booking->{MainContract::STATUS}    =   MainContract::OFF;
             $booking->save();
-            return false;
         }
         return false;
     }

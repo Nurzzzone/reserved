@@ -19557,9 +19557,10 @@ __webpack_require__.r(__webpack_exports__);
 
         this.guest.codeCheck = true;
         this.guest.codeError = false;
+        var wind;
 
         if (this.organization.price > 0) {
-          var _wind = window.open();
+          wind = window.open();
         }
 
         axios.post("/api/booking/guest", {
@@ -19637,11 +19638,10 @@ __webpack_require__.r(__webpack_exports__);
       if (this.cardStatus) {
         this.cardStatus = false;
         this.cardError = false;
-
-        var _wind2;
+        var wind;
 
         if (this.organization.price > 0) {
-          _wind2 = window.open();
+          wind = window.open();
         }
 
         axios.post("/api/booking/create", {
@@ -19657,7 +19657,7 @@ __webpack_require__.r(__webpack_exports__);
           var data = response.data.data;
 
           if (_this5.organization.price > 0) {
-            _wind2.location = '/form/' + data.id;
+            wind.location = '/form/' + data.id;
           }
 
           window.location.href = '/profile/history';

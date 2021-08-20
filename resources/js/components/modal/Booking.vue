@@ -240,8 +240,9 @@ export default {
                 }
                 this.guest.codeCheck    =   true;
                 this.guest.codeError    =   false;
+                let wind;
                 if (this.organization.price > 0) {
-                    let wind    =   window.open();
+                    wind    =   window.open();
                 }
                 axios.post("/api/booking/guest", {
                     user_id: this.guest.user.id,

@@ -7,6 +7,7 @@ use App\Domain\Contracts\BookingContract;
 use App\Domain\Contracts\IikoContract;
 use App\Domain\Contracts\IikoTableListContract;
 use App\Domain\Contracts\IikoTablesContract;
+use App\Domain\Contracts\MainContract;
 use App\Domain\Contracts\UserContract;
 use App\Helpers\Curl\Curl;
 
@@ -56,21 +57,21 @@ class Iiko
     public function booking($id)
     {
         if ($booking    =   $this->bookingService->getById($id)) {
-            $reserve    =   json_decode($this->postTokenReserve($this->getSessionToken($booking->{BookingContract::ORGANIZATION}->{BookingContract::API_KEY}),$booking),true);
+            $reserve    =   json_decode($this->postTokenReserve($this->getSessionToken($booking->{MainContract::ORGANIZATION}->{MainContract::API_KEY}),$booking),true);
         }
     }
 
     public function postTokenReserve($token,$booking)
     {
 
-        $iiko   =   $this->iikoService->getByOrganizationId($booking->{BookingContract::ORGANIZATION_ID});
-        $table  =   $this->iikoTableListService->getByOrganizationTableListId($booking->{BookingContract::ORGANIZATION_TABLE_LIST_ID});
+        $iiko   =   $this->iikoService->getByOrganizationId($booking->{MainContract::ORGANIZATION_ID});
+        $table  =   $this->iikoTableListService->getByOrganizationTableListId($booking->{MainContract::ORGANIZATION_TABLE_LIST_ID});
 
         if (sizeof($iiko) > 0 && $table) {
 
-            $organizations  =   $this->getOrganizationList($token,$iiko->{IikoContract::IIKO_ORGANIZATION_ID});
+            $organizations  =   $this->getOrganizationList($token,$iiko->{MainContract::IIKO_ORGANIZATION_ID});
             $terminals      =   $this->getTerminalList($token, $organizations);
-            $user           =   $this->userService->getById($booking->{BookingContract::USER_ID});
+            $user           =   $this->userService->getById($booking->{MainContract::USER_ID});
 
             return $this->curl->postTokenReserve(self::RESERVE,$token,[
                 'organizationId'    =>  $organizations[0],

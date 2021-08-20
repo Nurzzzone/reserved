@@ -65,7 +65,7 @@ class PaymentController extends Controller {
         $data   =   $paymentResultRequest->validated();
         Log::info('payment info',$data);
         if ($this->bookingService->result($data)) {
-            $this->iiko->booking($data[MainContract::PG_ORDER_ID]);
+            //$this->iiko->booking($data[MainContract::PG_ORDER_ID]);
         }
     }
 }

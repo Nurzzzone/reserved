@@ -84,7 +84,7 @@ Route::prefix('telegram_chat')->group(function() {
 
 Route::prefix('card')->group(function() {
 
-    Route::get('post/booking/{id}',[CardController::class,'booking'])->name('card.booking');
+    Route::post('post/booking/{id}',[CardController::class,'booking'])->name('card.booking');
     Route::post('post',[CardController::class,'create'])->name('card.post');
     Route::post('update/{id}',[CardController::class,'update'])->name('card.update');
 

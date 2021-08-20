@@ -19623,7 +19623,6 @@ __webpack_require__.r(__webpack_exports__);
           date: this.date.data,
           price: this.organization.price
         }).then(function (response) {
-          return console.log(response.data);
           window.location.href = response.data;
           _this4.cardLoading = false;
         })["catch"](function (error) {

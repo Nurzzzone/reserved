@@ -300,7 +300,6 @@ export default {
                     price: this.organization.price,
                 })
                     .then(response => {
-                        return console.log(response.data);
                         window.location.href    =   response.data;
                         this.cardLoading    =   false;
                     }).catch(error => {

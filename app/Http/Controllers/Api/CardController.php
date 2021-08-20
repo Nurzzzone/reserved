@@ -34,10 +34,8 @@ class CardController extends Controller
     /**
      * @throws ValidationException
      */
-    public function booking($bookingId, Request $request/*,CardPostRequest $cardPostRequest*/)
+    public function booking($bookingId, CardPostRequest $cardPostRequest)
     {
-        Log::info($bookingId,$request->all());
-        exit;
         $cardPostRequest    =   $cardPostRequest->validated()[MainContract::PG_XML];
         if ($cardPostRequest && array_key_exists(MainContract::PG_STATUS,$cardPostRequest) && $cardPostRequest[MainContract::PG_STATUS] === MainContract::SUCCESS) {
             $card   =   $this->cardService->create([

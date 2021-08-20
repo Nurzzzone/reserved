@@ -46,7 +46,7 @@ class CardController extends Controller
                 MainContract::COUNTRY   =>  $cardPostRequest[MainContract::PG_COUNTRY],
                 MainContract::CARD_3D   =>  $cardPostRequest[MainContract::PG_CARD_3DS],
             ]);
-            $this->bookingService->update($bookingId, [
+            Booking::where(MainContract::ID,$bookingId)->update([
                 MainContract::CARD_ID   =>  $cardPostRequest[MainContract::PG_CARD_ID],
                 MainContract::STATUS    =>  MainContract::CHECKING
             ]);

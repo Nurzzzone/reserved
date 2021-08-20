@@ -289,13 +289,21 @@ export default {
         bookingAddCard: function() {
             if (!this.cardLoading) {
                 this.cardLoading    =   true;
-                let wind    =   window.open();
-                axios.get('/api/payment/card/'+this.user.id)
+                this.cardStatus     =   false;
+                axios.post('/api/booking/card/', {
+                    user_id: this.user.id,
+                    organization_id: this.organization.id,
+                    organization_table_list_id: this.table.id,
+                    timezone: Intl.DateTimeFormat().resolvedOptions().timeZone,
+                    time: this.date.time[ this.date.timeIndex ].time,
+                    date: this.date.data,
+                    price: this.organization.price,
+                })
                     .then(response => {
+                        window.location.href    =   response.data;
                         this.cardLoading    =   false;
-                        wind.location   =   response.data;
-                        this.cardUpdate();
                     }).catch(error => {
+                        this.cardStatus     =   true;
                         this.cardLoading    =   false;
                     });
             }

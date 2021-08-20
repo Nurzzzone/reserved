@@ -84,6 +84,7 @@ Route::prefix('telegram_chat')->group(function() {
 
 Route::prefix('card')->group(function() {
 
+    Route::post('post/booking/{$bookingId}',[CardController::class,'booking'])->name('card.booking');
     Route::post('post',[CardController::class,'create'])->name('card.post');
     Route::post('update/{id}',[CardController::class,'update'])->name('card.update');
 
@@ -97,6 +98,7 @@ Route::prefix('booking')->group(function() {
     Route::post('guest',[BookingController::class,'guest'])->name('booking.guest');
     Route::post('create',[BookingController::class,'create'])->name('booking.create');
     Route::post('update/{id}',[BookingController::class,'update'])->name('booking.update');
+    Route::post('card',[BookingController::class,'card'])->name('booking.card');
 
     Route::get('id/{id}',[BookingController::class,'getById'])->name('booking.id');
     Route::get('user/{userId}',[BookingController::class,'getByUserId'])->name('booking.user');

@@ -18,6 +18,7 @@ use App\Http\Requests\Booking\BookingCreateRequest;
 use App\Http\Requests\Booking\BookingPaginateRequest;
 use App\Http\Requests\Booking\BookingGuestRequest;
 use App\Http\Requests\Booking\BookingUpdateRequest;
+use App\Http\Requests\Booking\BookingPaymentCardRequest;
 
 use App\Domain\Contracts\BookingContract;
 use App\Domain\Contracts\MainContract;
@@ -55,6 +56,18 @@ class BookingController extends Controller
             return new BookingResource($booking);
         }
         return response([MainContract::MESSAGE  =>  'Something Goes Wrong'],400);
+    }
+
+    /**
+     * @throws ValidationException
+     */
+    public function card(BookingPaymentCardRequest $bookingPaymentCardRequest)
+    {
+        $booking    =   $this->bookingService->create($bookingPaymentCardRequest->validated());
+        if ($card   =   $this->paymentService->cardAddBooking($booking->{MainContract::USER_ID},$booking->{MainContract::ID})) {
+            return $card;
+        }
+        return response(['message'  =>  'Произошла ошибка'],400);
     }
 
     /**

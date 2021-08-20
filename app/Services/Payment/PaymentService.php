@@ -48,6 +48,9 @@ class PaymentService
     const CARD_POST =   'https://reserved-app.kz/api/card/post';
     const CARD_BACK =   'https://reserved-app.kz/profile/payments';
 
+    const CARD_ADD_POST =   'https://reserved-app.kz/api/card/post/booking/';
+    const CARD_ADD_BACK =   'https://reserved-app.kz/form/';
+
     const CURRENCY  =   'KZT';
     const CHECK_URL =   'https://reserved-app.kz/api/payment/check';
     const POST_URL  =   'https://reserved-app.kz/api/payment/post';
@@ -77,10 +80,10 @@ class PaymentService
     public function revoke(Booking $booking)
     {
         $revoke =   $this->curl->post(self::REVOKE_URL,$this->signatureCard([
-            PaymentContract::PG_MERCHANT_ID =>  self::ID,
-            PaymentContract::PG_PAYMENT_ID  =>  $booking->{BookingContract::PAYMENT_ID},
-            PaymentContract::PG_REFUND_AMOUNT   =>  $booking->{PaymentContract::PRICE},//pg_refund_amount
-            PaymentContract::PG_SALT        =>  rand(100000,999999),
+            MainContract::PG_MERCHANT_ID =>  self::ID,
+            MainContract::PG_PAYMENT_ID  =>  $booking->{MainContract::PAYMENT_ID},
+            MainContract::PG_REFUND_AMOUNT   =>  $booking->{MainContract::PRICE},//pg_refund_amount
+            MainContract::PG_SALT        =>  rand(100000,999999),
         ],MainContract::REVOKE.'.php'));
         Log::info('remove',[$revoke]);
     }
@@ -146,7 +149,8 @@ class PaymentService
         ],MainContract::REMOVE));
     }
 
-    public function url($id, $price, $description, $userId, $cardId) {
+    public function url($id, $price, $description, $userId, $cardId): string
+    {
         return self::MAIN_URL.'?'.http_build_query($this->params($id, $price, $description, $userId, $cardId));
     }
 
@@ -167,6 +171,22 @@ class PaymentService
             MainContract::PG_REDIRECT_URL    =>  self::REDIRECT_URL.'?id='.$id,
             MainContract::PG_USER_PHONE  =>  $phone
         ]))));
+    }
+
+    public function cardAddBooking($userId, $bookingId)
+    {
+        $arr    =   [
+            MainContract::PG_MERCHANT_ID    =>  self::ID,
+            MainContract::PG_USER_ID        =>  $userId,
+            MainContract::PG_SALT           =>  rand(100000,99999),
+            MainContract::PG_POST_LINK      =>  self::CARD_ADD_POST.$bookingId,
+            MainContract::PG_BACK_LINK      =>  self::CARD_ADD_BACK.$bookingId,
+        ];
+        $xml    =   $this->xml->enc($this->xml->loadFromString($this->curl->post(self::CARD_ADD, $this->signatureCard($arr,MainContract::ADD))));
+        if ($xml && array_key_exists(MainContract::PG_REDIRECT_URL,$xml)) {
+            return $xml[MainContract::PG_REDIRECT_URL];
+        }
+        return $this->cardAddBooking($userId, $bookingId);
     }
 
     public function cardAdd($userId)

@@ -19670,7 +19670,14 @@ __webpack_require__.r(__webpack_exports__);
     },
     setUser: function setUser() {
       if (this.storage.token) {
-        var user = JSON.parse(sessionStorage.user);
+        var user;
+
+        try {
+          user = JSON.parse(sessionStorage.user);
+        } catch (e) {
+          user = JSON.parse(sessionStorage.user);
+        }
+
         this.status = true;
         this.user = user;
         this.cardList();

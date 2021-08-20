@@ -342,7 +342,12 @@ export default {
         },
         setUser: function() {
             if (this.storage.token) {
-                let user    =   JSON.parse(sessionStorage.user);
+                let user;
+                try {
+                    user    =   JSON.parse(sessionStorage.user);
+                } catch (e) {
+                    user    =   JSON.parse(sessionStorage.user);
+                }
                 this.status =   true;
                 this.user   =   user;
                 this.cardList();

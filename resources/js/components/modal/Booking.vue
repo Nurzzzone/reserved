@@ -217,6 +217,14 @@ export default {
         }
     },
     methods: {
+        getPrice: function() {
+            if (this.table.price > 0) {
+                return this.table.price;
+            } else if (this.organization.price > 0) {
+                return this.organization.price;
+            }
+            return 0;
+        },
         storageModal: function(status) {
             if (parseInt(this.organization.price) === 0) {
                 this.bookingAuthFinish();
@@ -252,7 +260,7 @@ export default {
                     timezone: Intl.DateTimeFormat().resolvedOptions().timeZone,
                     time: this.date.time[ this.date.timeIndex ].time,
                     date: this.date.data,
-                    price: this.organization.price,
+                    price: this.getPrice(),
                     code: this.guest.code,
                 })
                 .then(response => {
@@ -298,7 +306,7 @@ export default {
                     timezone: Intl.DateTimeFormat().resolvedOptions().timeZone,
                     time: this.date.time[ this.date.timeIndex ].time,
                     date: this.date.data,
-                    price: this.organization.price,
+                    price: this.getPrice(),
                 })
                     .then(response => {
                         window.location.href    =   response.data;
@@ -324,7 +332,7 @@ export default {
                     timezone: Intl.DateTimeFormat().resolvedOptions().timeZone,
                     time: this.date.time[ this.date.timeIndex ].time,
                     date: this.date.data,
-                    price: this.organization.price,
+                    price: this.getPrice(),
                     card_id: this.organization.price>0?this.cards[ this.cardIndex ].card_id:0
                 })
                 .then(response => {

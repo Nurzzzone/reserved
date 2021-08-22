@@ -78,6 +78,17 @@
 }
 @media only screen and (max-width: 768px) {
     .auth {
+        &-input {
+            font-size: 12px;
+            height: 36px;
+        }
+        &-phone {
+            padding-left: 30px !important;
+            &-prefix {
+                margin: 9px 0 0 18px;
+                font-size: 12px;
+            }
+        }
         &-title {
             font-size: 16px;
         }

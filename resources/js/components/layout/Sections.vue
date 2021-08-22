@@ -15,43 +15,54 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="row justify-content-center mt-3">
-                            <div>
-                                <div class="d-flex">
-                                    <button type="button" class="btn organization-btn font-weight-bold mx-2" v-for="(item,key) in sections || []" :key="key" :class="{'organization-btn-sel':(key === section)}" @click="section = key">{{item.name}}</button>
+                        <template v-if="!isWorking">
+                            <div class="locked">
+                                <div class="locked-icon"></div>
+                                <div class="locked-info">
+                                    <div class="locked-title">Заведение закрыто</div>
+                                    <div class="locked-desc">Возможно в данный момент заведение закрыто или не работает.</div>
                                 </div>
                             </div>
-                        </div>
-                        <div class="row justify-content-center mt-4"  v-for="(item,key) in sections || []" :key="key" :class="{'d-none':(key !== section)}">
-                            <div class="col-6 col-lg-3 p-md-2 p-1" v-for="(table,tableKey) in item.organization_tables || []" :key="tableKey" @click="selTable(key,tableKey)">
-                                <div class="card border-0 organization-shadow" data-toggle="modal" data-target="#booking_modal">
-                                    <div class="card-body organization-card-main">
-                                        <div class="organization-card">
-                                            <div class="row align-content-center pl-3">
-                                                <div class="organization-card-title w-100 font-weight-bold">{{table.title}}</div>
-                                                <div class="lds-ellipsis" v-if="table.bookingStatus === undefined">
-                                                    <div></div>
-                                                    <div></div>
-                                                    <div></div>
-                                                    <div></div>
+                        </template>
+                        <template v-else>
+                            <div class="row justify-content-center mt-3">
+                                <div>
+                                    <div class="d-flex">
+                                        <button type="button" class="btn organization-btn font-weight-bold mx-2" v-for="(item,key) in sections || []" :key="key" :class="{'organization-btn-sel':(key === section)}" @click="section = key">{{item.name}}</button>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row justify-content-center mt-4"  v-for="(item,key) in sections || []" :key="key" :class="{'d-none':(key !== section)}">
+                                <div class="col-6 col-lg-3 p-md-2 p-1" v-for="(table,tableKey) in item.organization_tables || []" :key="tableKey" @click="selTable(key,tableKey)">
+                                    <div class="card border-0 organization-shadow" data-toggle="modal" data-target="#booking_modal">
+                                        <div class="card-body organization-card-main">
+                                            <div class="organization-card">
+                                                <div class="row align-content-center pl-3">
+                                                    <div class="organization-card-title w-100 font-weight-bold">{{table.title}}</div>
+                                                    <div class="lds-ellipsis" v-if="table.bookingStatus === undefined">
+                                                        <div></div>
+                                                        <div></div>
+                                                        <div></div>
+                                                        <div></div>
+                                                    </div>
+                                                    <div class="organization-card-status organization-card-status-free" v-else-if="table.status === 'ENABLED' && (table.bookingStatus === null || table.bookingStatus.status === 'COMPLETED')">
+                                                        <span v-if="table.price > 0">Предоплата {{table.price}} ₸</span>
+                                                        <span v-else-if="organization.price > 0">Предоплата {{organization.price}} ₸</span>
+                                                        <span v-else>Свободно</span>
+                                                    </div>
+                                                    <div class="organization-card-status organization-card-status-reserved" v-else>Занято</div>
                                                 </div>
-                                                <div class="organization-card-status organization-card-status-free" v-else-if="table.status === 'ENABLED' && (table.bookingStatus === null || table.bookingStatus.status === 'COMPLETED')">
-                                                    <span v-if="table.price > 0">цена {{table.price}} ₸</span>
-                                                    <span v-else-if="organization.price > 0">цена {{organization.price}} ₸</span>
-                                                    <span v-else>Свободно</span>
+                                                <div>
+                                                    <div class="organization-card-icon"></div>
+                                                    <div class="organization-card-limit text-secondary text-center">{{table.limit}} чл.</div>
                                                 </div>
-                                                <div class="organization-card-status organization-card-status-reserved" v-else>Занято</div>
+                                                <div class="organization-card-arr"></div>
                                             </div>
-                                            <div>
-                                                <div class="organization-card-icon"></div>
-                                                <div class="organization-card-limit text-secondary text-center">{{table.limit}} чл.</div>
-                                            </div>
-                                            <div class="organization-card-arr"></div>
                                         </div>
                                     </div>
                                 </div>
                             </div>
-                        </div>
+                        </template>
                     </div>
                 </div>
             </div>
@@ -69,6 +80,7 @@ export default {
     name: "Sections",
     data() {
         return {
+            isWorking:  true,
             date: {
                 timeTitle: '',
                 before: false,
@@ -111,6 +123,7 @@ export default {
                             element.organization_tables =   statuses[element.id];
                         }
                     });
+                    this.setTime();
                 }).catch(error => {
                     setTimeout(function() {
                         self.updateStatus();
@@ -141,18 +154,25 @@ export default {
             let week;
             if (weekDay === 0) {
                 week    =   this.organization.sunday;
+                this.isWorking = this.organization.sunday.work === 'on';
             } else if (weekDay === 1) {
                 week    =   this.organization.monday;
+                this.isWorking = this.organization.monday.work === 'on';
             } else if (weekDay === 2) {
                 week    =   this.organization.tuesday;
+                this.isWorking = this.organization.tuesday.work === 'on';
             } else if (weekDay === 3) {
                 week    =   this.organization.wednesday;
+                this.isWorking = this.organization.wednesday.work === 'on';
             } else if (weekDay === 4) {
                 week    =   this.organization.thursday;
+                this.isWorking = this.organization.thursday.work === 'on';
             } else if (weekDay === 5) {
                 week    =   this.organization.friday;
+                this.isWorking = this.organization.friday.work === 'on';
             } else if (weekDay === 6) {
                 week    =   this.organization.saturday;
+                this.isWorking = this.organization.saturday.work === 'on';
             }
             let today   =   new Date();
 
@@ -224,5 +244,40 @@ export default {
 </script>
 
 <style lang="scss">
+    .locked {
+        display: flex;
+        max-width: 350px;
+        font-size: 14px;
+        margin: 50px auto 0 auto;
+        padding: 10px;
+        align-items: center;
+        gap: 10px;
+        background: #fff;
+        border-radius: 10px;
+        box-shadow: 0 0 1px 1px rgba(0,0,0,.05);
+        &-icon {
+            width: 60px;
+            height: 60px;
+            background: url('/img/logo/locked.png') no-repeat center;
+            background-size: contain;
+        }
+        &-info {
 
+        }
+        &-title {
+            font-size: 14px;
+            color: black;
+            font-weight: bold;
+        }
+        &-desc {
+            font-size: 11px;
+            color: grey;
+        }
+    }
+    @media only screen and (max-width: 768px) {
+        .locked {
+            margin-top: 40px;
+            margin-bottom: 20px;
+        }
+    }
 </style>

@@ -53,6 +53,51 @@ let app = new Vue({
         this.getOrganization();
     },
     methods: {
+        workDay: function(key) {
+            if (key === 0) {
+                if (this.organization.monday.work === 'on') {
+                    this.organization.monday.work   =   'off';
+                } else {
+                    this.organization.monday.work   =   'on';
+                }
+            } else if (key === 1) {
+                if (this.organization.tuesday.work === 'on') {
+                    this.organization.tuesday.work   =   'off';
+                } else {
+                    this.organization.tuesday.work   =   'on';
+                }
+            } else if (key === 2) {
+                if (this.organization.wednesday.work === 'on') {
+                    this.organization.wednesday.work   =   'off';
+                } else {
+                    this.organization.wednesday.work   =   'on';
+                }
+            } else if (key === 3) {
+                if (this.organization.thursday.work === 'on') {
+                    this.organization.thursday.work   =   'off';
+                } else {
+                    this.organization.thursday.work   =   'on';
+                }
+            } else if (key === 4) {
+                if (this.organization.friday.work === 'on') {
+                    this.organization.friday.work   =   'off';
+                } else {
+                    this.organization.friday.work   =   'on';
+                }
+            } else if (key === 5) {
+                if (this.organization.saturday.work === 'on') {
+                    this.organization.saturday.work   =   'off';
+                } else {
+                    this.organization.saturday.work   =   'on';
+                }
+            } else if (key === 6) {
+                if (this.organization.sunday.work === 'on') {
+                    this.organization.sunday.work   =   'off';
+                } else {
+                    this.organization.sunday.work   =   'on';
+                }
+            }
+        },
         uploadImage: function() {
             if (this.image) {
                 this.organization.image =   this.image;
@@ -173,20 +218,35 @@ let app = new Vue({
                     description_kz: this.organization.description_kz,
                     description_en: this.organization.description_en,
                     price: this.organization.price,
+
                     start_monday: this.organization.monday.start,
                     end_monday: this.organization.monday.end,
+                    work_monday: this.organization.monday.work,
+
                     start_tuesday: this.organization.tuesday.start,
                     end_tuesday: this.organization.tuesday.end,
+                    work_tuesday: this.organization.tuesday.work,
+
                     start_wednesday: this.organization.wednesday.start,
                     end_wednesday: this.organization.wednesday.end,
+                    work_wednesday: this.organization.wednesday.work,
+
                     start_thursday: this.organization.thursday.start,
                     end_thursday: this.organization.thursday.end,
+                    work_thursday: this.organization.thursday.work,
+
                     start_friday: this.organization.friday.start,
                     end_friday: this.organization.friday.end,
+                    work_friday: this.organization.friday.work,
+
                     start_sunday: this.organization.sunday.start,
                     end_sunday: this.organization.sunday.end,
+                    work_sunday: this.organization.sunday.work,
+
                     start_saturday: this.organization.saturday.start,
                     end_saturday: this.organization.saturday.end,
+                    work_saturday: this.organization.saturday.work,
+
                     address: this.organization.address,
                     phone: this.organization.phone,
                     email: this.organization.email,

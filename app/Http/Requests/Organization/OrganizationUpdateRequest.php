@@ -26,19 +26,32 @@ class OrganizationUpdateRequest extends FormRequest
 
             MainContract::START_MONDAY  =>  'nullable',
             MainContract::END_MONDAY    =>  'nullable',
+            MainContract::WORK_MONDAY   =>  'nullable',
 
             MainContract::START_TUESDAY =>  'nullable',
             MainContract::END_TUESDAY   =>  'nullable',
+            MainContract::WORK_TUESDAY  =>  'nullable',
+
             MainContract::START_WEDNESDAY   =>  'nullable',
-            MainContract::END_WEDNESDAY =>  'nullable',
+            MainContract::END_WEDNESDAY     =>  'nullable',
+            MainContract::WORK_WEDNESDAY    =>  'nullable',
+
             MainContract::START_THURSDAY    =>  'nullable',
-            MainContract::END_THURSDAY  =>  'nullable',
+            MainContract::END_THURSDAY      =>  'nullable',
+            MainContract::WORK_THURSDAY     =>  'nullable',
+
             MainContract::START_FRIDAY  =>  'nullable',
             MainContract::END_FRIDAY    =>  'nullable',
+            MainContract::WORK_FRIDAY   =>  'nullable',
+
             MainContract::START_SATURDAY    =>  'nullable',
             MainContract::END_SATURDAY  =>  'nullable',
+            MainContract::WORK_SATURDAY =>  'nullable',
+
             MainContract::START_SUNDAY  =>  'nullable',
             MainContract::END_SUNDAY    =>  'nullable',
+            MainContract::WORK_SUNDAY   =>  'nullable',
+
             MainContract::ADDRESS   =>  'nullable',
             MainContract::PHONE =>  'nullable',
             MainContract::EMAIL =>  'nullable',

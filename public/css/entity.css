@@ -157,6 +157,32 @@
     align-items: center;
     gap: 10px;
 }
+.entity-block-item-input-double-block-switcher {
+    width: 55px;
+    height: 100%;
+    background: #f4f4f5;
+    border-radius: 30px;
+    cursor: pointer;
+    transition: all .3s linear;
+    position: relative;
+}
+.entity-block-item-input-double-block-switcher-btn {
+    width: 25px;
+    height: 25px;
+    background: #fff;
+    border-radius: 30px;
+    position: absolute;
+    top: 5px;
+    left: 5px;
+    transition: all 1s linear;
+}
+.entity-block-item-input-double-block-switcher-on {
+    background: #57a283;
+}
+.entity-block-item-input-double-block-switcher-on > .entity-block-item-input-double-block-switcher-btn {
+    left: auto;
+    right: 5px;
+}
 .entity-block-item-input-double-text > input {
     width: 70px;
     text-align: center;

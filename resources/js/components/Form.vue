@@ -367,7 +367,7 @@ export default {
             z-index: 2;
             height: 600px;
             border-radius: 10px;
-            box-shadow: 0 0 5px 0 rgba(0,0,0,.3);
+            box-shadow: 0 0 2px 0 rgba(0,0,0,.1);
             overflow: hidden;
         }
         &-bg {

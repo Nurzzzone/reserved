@@ -36,24 +36,31 @@ class OrganizationContract extends MainContract
 
         self::START_MONDAY,
         self::END_MONDAY,
+        self::WORK_MONDAY,
 
         self::START_TUESDAY,
         self::END_TUESDAY,
+        self::WORK_TUESDAY,
 
         self::START_WEDNESDAY,
         self::END_WEDNESDAY,
+        self::WORK_WEDNESDAY,
 
         self::START_THURSDAY,
         self::END_THURSDAY,
+        self::WORK_THURSDAY,
 
         self::START_FRIDAY,
         self::END_FRIDAY,
+        self::WORK_FRIDAY,
 
         self::START_SATURDAY,
         self::END_SATURDAY,
+        self::WORK_SATURDAY,
 
         self::START_SUNDAY,
         self::END_SUNDAY,
+        self::WORK_SUNDAY,
 
         self::STATUS
     ];

@@ -97,6 +97,7 @@ class MainContract
     const SUNDAY    =   'sunday';
     const START     =   'start';
     const END       =   'end';
+    const WORK      =   'work';
     const IMAGES    =   'images';
     const MENUS     =   'menus';
     const WEBSITE   =   'website';
@@ -220,6 +221,14 @@ class MainContract
     const COUNTRY_ID        =   'country_id';
     const CATEGORY_ID       =   'category_id';
     const SECTIONS          =   'sections';
+
+    const WORK_MONDAY       =   'work_monday';
+    const WORK_TUESDAY      =   'work_tuesday';
+    const WORK_WEDNESDAY    =   'work_wednesday';
+    const WORK_THURSDAY     =   'work_thursday';
+    const WORK_FRIDAY       =   'work_friday';
+    const WORK_SATURDAY     =   'work_saturday';
+    const WORK_SUNDAY       =   'work_sunday';
 
     const START_MONDAY      =   'start_monday';
     const START_TUESDAY     =   'start_tuesday';

@@ -33,30 +33,37 @@ class OrganizationResource extends JsonResource
             MainContract::MONDAY    =>  [
                 MainContract::START =>  $this->{MainContract::START_MONDAY},
                 MainContract::END   =>  $this->{MainContract::END_MONDAY},
+                MainContract::WORK  =>  $this->{MainContract::WORK_MONDAY},
             ],
             MainContract::TUESDAY   =>  [
                 MainContract::START =>  $this->{MainContract::START_TUESDAY},
                 MainContract::END   =>  $this->{MainContract::END_TUESDAY},
+                MainContract::WORK  =>  $this->{MainContract::WORK_TUESDAY},
             ],
             MainContract::WEDNESDAY =>  [
                 MainContract::START =>  $this->{MainContract::START_WEDNESDAY},
-                MainContract::END   =>  $this->{MainContract::END_WEDNESDAY}
+                MainContract::END   =>  $this->{MainContract::END_WEDNESDAY},
+                MainContract::WORK  =>  $this->{MainContract::WORK_WEDNESDAY},
             ],
             MainContract::THURSDAY  =>  [
                 MainContract::START =>  $this->{MainContract::START_THURSDAY},
                 MainContract::END   =>  $this->{MainContract::END_THURSDAY},
+                MainContract::WORK  =>  $this->{MainContract::WORK_THURSDAY},
             ],
             MainContract::FRIDAY    =>  [
                 MainContract::START =>  $this->{MainContract::START_FRIDAY},
-                MainContract::END   =>  $this->{MainContract::END_FRIDAY}
+                MainContract::END   =>  $this->{MainContract::END_FRIDAY},
+                MainContract::WORK  =>  $this->{MainContract::WORK_FRIDAY},
             ],
             MainContract::SATURDAY  =>  [
                 MainContract::START =>  $this->{MainContract::START_SATURDAY},
                 MainContract::END   =>  $this->{MainContract::END_SATURDAY},
+                MainContract::WORK  =>  $this->{MainContract::WORK_SATURDAY},
             ],
             MainContract::SUNDAY    =>  [
-                MainContract::START     =>  $this->{MainContract::START_SUNDAY},
-                MainContract::END       =>  $this->{MainContract::END_SUNDAY}
+                MainContract::START =>  $this->{MainContract::START_SUNDAY},
+                MainContract::END   =>  $this->{MainContract::END_SUNDAY},
+                MainContract::WORK  =>  $this->{MainContract::WORK_SUNDAY},
             ],
             MainContract::STATUS        =>  $this->{MainContract::STATUS},
             MainContract::CATEGORY_ID   =>  new CategoryResource($this->{MainContract::CATEGORY}),

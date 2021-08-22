@@ -75,6 +75,11 @@
                                         <input type="text" class="entity-block-item-input-double" v-model="organization.monday.end" v-mask="'##:##'" ref="organization_monday_end">
                                     </div>
                                 </div>
+                                <div class="entity-block-item-input-double-block">
+                                    <div class="entity-block-item-input-double-block-switcher" :class="{'entity-block-item-input-double-block-switcher-on':(organization.monday.work === 'on')}" @click="workDay(0)">
+                                        <div class="entity-block-item-input-double-block-switcher-btn"></div>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -92,6 +97,11 @@
                                     <div class="entity-block-item-input-double-title">До</div>
                                     <div class="entity-block-item-input-double-text">
                                         <input type="text" class="entity-block-item-input-double" v-model="organization.tuesday.end" v-mask="'##:##'" ref="organization_tuesday_end">
+                                    </div>
+                                </div>
+                                <div class="entity-block-item-input-double-block">
+                                    <div class="entity-block-item-input-double-block-switcher" :class="{'entity-block-item-input-double-block-switcher-on':(organization.tuesday.work === 'on')}" @click="workDay(1)">
+                                        <div class="entity-block-item-input-double-block-switcher-btn"></div>
                                     </div>
                                 </div>
                             </div>
@@ -113,6 +123,11 @@
                                         <input type="text" class="entity-block-item-input-double" v-model="organization.wednesday.end" v-mask="'##:##'" ref="organization_wednesday_end">
                                     </div>
                                 </div>
+                                <div class="entity-block-item-input-double-block">
+                                    <div class="entity-block-item-input-double-block-switcher" :class="{'entity-block-item-input-double-block-switcher-on':(organization.wednesday.work === 'on')}" @click="workDay(2)">
+                                        <div class="entity-block-item-input-double-block-switcher-btn"></div>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -130,6 +145,11 @@
                                     <div class="entity-block-item-input-double-title">До</div>
                                     <div class="entity-block-item-input-double-text">
                                         <input type="text" class="entity-block-item-input-double" v-model="organization.thursday.end" v-mask="'##:##'" ref="organization_thursday_end">
+                                    </div>
+                                </div>
+                                <div class="entity-block-item-input-double-block">
+                                    <div class="entity-block-item-input-double-block-switcher" :class="{'entity-block-item-input-double-block-switcher-on':(organization.thursday.work === 'on')}" @click="workDay(3)">
+                                        <div class="entity-block-item-input-double-block-switcher-btn"></div>
                                     </div>
                                 </div>
                             </div>
@@ -151,6 +171,11 @@
                                         <input type="text" class="entity-block-item-input-double" v-model="organization.friday.end" v-mask="'##:##'" ref="organization_friday_end">
                                     </div>
                                 </div>
+                                <div class="entity-block-item-input-double-block">
+                                    <div class="entity-block-item-input-double-block-switcher" :class="{'entity-block-item-input-double-block-switcher-on':(organization.friday.work === 'on')}" @click="workDay(4)">
+                                        <div class="entity-block-item-input-double-block-switcher-btn"></div>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -170,6 +195,11 @@
                                         <input type="text" class="entity-block-item-input-double" v-model="organization.saturday.end" v-mask="'##:##'" ref="organization_saturday_end">
                                     </div>
                                 </div>
+                                <div class="entity-block-item-input-double-block">
+                                    <div class="entity-block-item-input-double-block-switcher" :class="{'entity-block-item-input-double-block-switcher-on':(organization.saturday.work === 'on')}" @click="workDay(5)">
+                                        <div class="entity-block-item-input-double-block-switcher-btn"></div>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -187,6 +217,11 @@
                                     <div class="entity-block-item-input-double-title">До</div>
                                     <div class="entity-block-item-input-double-text">
                                         <input type="text" class="entity-block-item-input-double" v-model="organization.sunday.end" v-mask="'##:##'" ref="organization_sunday_end">
+                                    </div>
+                                </div>
+                                <div class="entity-block-item-input-double-block">
+                                    <div class="entity-block-item-input-double-block-switcher" :class="{'entity-block-item-input-double-block-switcher-on':(organization.sunday.work === 'on')}" @click="workDay(6)">
+                                        <div class="entity-block-item-input-double-block-switcher-btn"></div>
                                     </div>
                                 </div>
                             </div>

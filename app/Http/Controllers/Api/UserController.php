@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Api;
 
 use App\Domain\Contracts\BookingContract;
+use App\Domain\Contracts\MainContract;
 use App\Domain\Contracts\UserContract;
 
 use App\Http\Controllers\Controller;
@@ -18,6 +19,7 @@ use App\Services\User\UserService;
 use App\Services\Organization\OrganizationService;
 use App\Services\Sms\SmsService;
 use App\Services\Booking\BookingService;
+use App\Services\OrganizationTableList\OrganizationTableListService;
 
 use App\Http\Resources\UserResource;
 
@@ -41,22 +43,24 @@ class UserController extends Controller
     protected $smsService;
     protected $bookingService;
     protected $organizationService;
+    protected $organizationTableListService;
 
-    public function __construct(UserService $userService, OrganizationService $organizationService, SmsService $smsService, BookingService $bookingService)
+    public function __construct(UserService $userService, OrganizationService $organizationService, SmsService $smsService, BookingService $bookingService, OrganizationTableListService $organizationTableListService)
     {
         $this->userService  =   $userService;
         $this->smsService   =   $smsService;
         $this->bookingService   =   $bookingService;
         $this->organizationService  =   $organizationService;
+        $this->organizationTableListService =   $organizationTableListService;
     }
 
     public function guest(UserGuestRequest $userGuestRequest)
     {
         $data   =   $userGuestRequest->validated();
-        $user   =   $this->userService->smsResend($data[UserContract::PHONE]);
+        $user   =   $this->userService->smsResend($data[MainContract::PHONE]);
         if (!$user) {
             $user   =   $this->userService->create($data);
-            UserPassword::dispatch($user,$data[UserContract::PASSWORD]);
+            UserPassword::dispatch($user,$data[MainContract::PASSWORD]);
         }
         UserCode::dispatch($user);
         return $user;
@@ -74,41 +78,44 @@ class UserController extends Controller
 
     public function booking(Request $request)
     {
-        $user   =   $this->userService->getByPhone($request->input(UserContract::PHONE));
+        $user   =   $this->userService->getByPhone($request->input(MainContract::PHONE));
 
         if (!$user) {
             $password   =   rand(100000,999999);
             $user   =   $this->userService->adminCreate([
-                UserContract::USER_ID   =>  $request->input(UserContract::USER_ID),
-                UserContract::NAME  =>  $request->input(UserContract::NAME),
-                UserContract::PHONE =>  $request->input(UserContract::PHONE),
-                UserContract::PHONE_VERIFIED_AT =>  date('Y-m-d H:i:s'),
-                UserContract::PASSWORD  =>  $password
+                MainContract::USER_ID   =>  $request->input(MainContract::USER_ID),
+                MainContract::NAME  =>  $request->input(MainContract::NAME),
+                MainContract::PHONE =>  $request->input(MainContract::PHONE),
+                MainContract::PHONE_VERIFIED_AT =>  date('Y-m-d H:i:s'),
+                MainContract::PASSWORD  =>  $password
             ]);
             UserPassword::dispatch($user,$password);
         }
 
-        $organization   =   $this->organizationService->getById($request->input(BookingContract::ORGANIZATION_ID));
+        $organization   =   $this->organizationService->getById($request->input(MainContract::ORGANIZATION_ID));
+        $table          =   $this->organizationTableListService->getById($request->input(MainContract::ORGANIZATION_TABLE_ID));
+
+        $price          =   $table->{MainContract::PRICE} > 0?$table->{MainContract::PRICE}:$organization->{MainContract::PRICE};
 
         $booking    =   [
-            BookingContract::USER_ID    =>  $user->{UserContract::ID},
-            BookingContract::ORGANIZATION_ID    =>  $request->input(BookingContract::ORGANIZATION_ID),
-            BookingContract::ORGANIZATION_TABLE_LIST_ID  =>  $request->input(BookingContract::ORGANIZATION_TABLE_ID),
-            BookingContract::TIME   =>  Time::toLocal($request->input(BookingContract::DATE).' '.$request->input(BookingContract::TIME), $request->input(BookingContract::TIMEZONE)),
-            BookingContract::DATE   =>  $request->input(BookingContract::DATE),
-            BookingContract::PRICE  =>  (int)$organization->{BookingContract::PRICE}
+            MainContract::USER_ID    =>  $user->{MainContract::ID},
+            MainContract::ORGANIZATION_ID    =>  $request->input(MainContract::ORGANIZATION_ID),
+            MainContract::ORGANIZATION_TABLE_LIST_ID  =>  $request->input(MainContract::ORGANIZATION_TABLE_ID),
+            MainContract::TIME   =>  Time::toLocal($request->input(MainContract::DATE).' '.$request->input(MainContract::TIME), $request->input(MainContract::TIMEZONE)),
+            MainContract::DATE   =>  $request->input(MainContract::DATE),
+            MainContract::PRICE  =>  $price
         ];
 
-        if ($organization->{BookingContract::PRICE} < 1) {
-            $booking[BookingContract::STATUS]   =   BookingContract::ON;
+        if ($price < 1) {
+            $booking[MainContract::STATUS]   =   MainContract::ON;
         }
 
         $booking    =   $this->bookingService->create($booking);
-        if ($organization->{BookingContract::PRICE} > 0) {
+        if ($price > 0) {
             BookingPayment::dispatch([
-                BookingContract::ID =>  $booking->id,
-                BookingContract::ORGANIZATION_ID    =>  $request->input(BookingContract::ORGANIZATION_ID),
-                BookingContract::USER_ID    =>  $user->{UserContract::ID}
+                MainContract::ID =>  $booking->id,
+                MainContract::ORGANIZATION_ID    =>  $request->input(MainContract::ORGANIZATION_ID),
+                MainContract::USER_ID    =>  $user->{MainContract::ID}
             ]);
         }
 

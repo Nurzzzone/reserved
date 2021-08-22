@@ -19640,12 +19640,6 @@ __webpack_require__.r(__webpack_exports__);
 
         this.guest.codeCheck = true;
         this.guest.codeError = false;
-        var wind;
-
-        if (this.organization.price > 0) {
-          wind = window.open();
-        }
-
         axios.post("/api/booking/guest", {
           user_id: this.guest.user.id,
           title: this.organization.title,
@@ -19660,12 +19654,7 @@ __webpack_require__.r(__webpack_exports__);
           var data = response.data.data;
           _this2.storage.token = _this2.guest.user.api_token;
           sessionStorage.user = JSON.stringify(_this2.guest.user);
-
-          if (_this2.organization.price > 0) {
-            wind.location = data.payment;
-          }
-
-          window.location.href = '/profile/history';
+          window.location.href = data.payment;
         })["catch"](function (error) {
           _this2.guest.codeCheck = false;
           _this2.guest.codeError = true;
@@ -19721,12 +19710,6 @@ __webpack_require__.r(__webpack_exports__);
       if (this.cardStatus) {
         this.cardStatus = false;
         this.cardError = false;
-        var wind;
-
-        if (this.organization.price > 0) {
-          wind = window.open();
-        }
-
         axios.post("/api/booking/create", {
           user_id: this.user.id,
           organization_id: this.organization.id,
@@ -19735,15 +19718,10 @@ __webpack_require__.r(__webpack_exports__);
           time: this.date.time[this.date.timeIndex].time,
           date: this.date.data,
           price: this.getPrice(),
-          card_id: this.organization.price > 0 ? this.cards[this.cardIndex].card_id : 0
+          card_id: this.getPrice() > 0 ? this.cards[this.cardIndex].card_id : 0
         }).then(function (response) {
           var data = response.data.data;
-
-          if (_this5.organization.price > 0) {
-            wind.location = '/form/' + data.id;
-          }
-
-          window.location.href = '/profile/history';
+          window.location.href = '/form/' + data.id;
         })["catch"](function (error) {
           console.log('error', error.response);
           _this5.cardStatus = true;

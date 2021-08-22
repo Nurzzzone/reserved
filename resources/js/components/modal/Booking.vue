@@ -248,10 +248,6 @@ export default {
                 }
                 this.guest.codeCheck    =   true;
                 this.guest.codeError    =   false;
-                let wind;
-                if (this.organization.price > 0) {
-                    wind    =   window.open();
-                }
                 axios.post("/api/booking/guest", {
                     user_id: this.guest.user.id,
                     title: this.organization.title,
@@ -267,10 +263,7 @@ export default {
                     let data = response.data.data;
                     this.storage.token  =   this.guest.user.api_token;
                     sessionStorage.user =   JSON.stringify(this.guest.user);
-                    if (this.organization.price > 0) {
-                        wind.location = data.payment;
-                    }
-                    window.location.href    =   '/profile/history';
+                    window.location.href    =   data.payment;
                 }).catch(error => {
                     this.guest.codeCheck    =   false;
                     this.guest.codeError    =   true;
@@ -321,10 +314,6 @@ export default {
             if (this.cardStatus) {
                 this.cardStatus =   false;
                 this.cardError  =   false;
-                let wind;
-                if (this.organization.price > 0) {
-                    wind    =   window.open();
-                }
                 axios.post("/api/booking/create", {
                     user_id: this.user.id,
                     organization_id: this.organization.id,
@@ -333,14 +322,11 @@ export default {
                     time: this.date.time[ this.date.timeIndex ].time,
                     date: this.date.data,
                     price: this.getPrice(),
-                    card_id: this.organization.price>0?this.cards[ this.cardIndex ].card_id:0
+                    card_id: this.getPrice()>0?this.cards[ this.cardIndex ].card_id:0
                 })
                 .then(response => {
                     let data = response.data.data;
-                    if (this.organization.price > 0) {
-                        wind.location   =   '/form/'+data.id;
-                    }
-                    window.location.href    =   '/profile/history';
+                    window.location.href    =   '/form/'+data.id;
                 }).catch(error => {
                     console.log('error', error.response);
                     this.cardStatus =   true;

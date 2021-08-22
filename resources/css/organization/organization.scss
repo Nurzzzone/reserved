@@ -3,12 +3,12 @@
 .organization {
     &-rating {
         display: table;
-        margin: 20px auto 0 auto;
+        margin: 10px auto 0 auto;
         & > div {
             display: flex;
             align-items: center;
             & > div {
-                margin-left: 10px;
+                margin-left: 5px;
                 &:first-child {
                     margin-left: 0;
                 }
@@ -16,14 +16,14 @@
         }
         &-count {
             font-weight: bold;
-            font-size: 17px;
+            font-size: 15px;
             line-height: 1;
-            color: #00a082;
-            margin-left: 15px !important;
+            color: #FF8008;
+            margin-left: 10px !important;
         }
         &-star {
-            width: 30px;
-            height: 30px;
+            width: 20px;
+            height: 20px;
             background: url('/img/logo/star-whitesmoke.svg') no-repeat center;
             background-size: contain;
             &-sel {
@@ -130,17 +130,17 @@
         }
     }
     &-title {
-        margin-top: 40px;
-        font-size: 30px;
-        margin-left: 10px;
-        margin-right: 10px;
+        margin-top: 20px;
+        font-size: 20px;
+        margin-left: 20px;
+        margin-right: 20px;
         display: flex;
         justify-content: center;
         align-items: center;
     }
     &-description {
-        font-size: 16px;
-        margin-top: 30px;
+        font-size: 14px;
+        margin-top: 20px;
         margin-left: 20px;
         margin-right: 20px;
     }
@@ -148,6 +148,7 @@
         padding: 10px 15px 10px 15px !important;
         border:  none !important;
         border-bottom: 4px solid transparent !important;
+        font-size: 14px !important;
         &-sel {
             color: #00a082 !important;
             border-bottom-color: #00a082 !important;

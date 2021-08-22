@@ -92,7 +92,7 @@ class MainController extends Controller
         return view('index', ['title'=>'Избранное']);
     }
 
-    public function top()
+    public function news()
     {
         return view('index', ['title'=>'Новости']);
     }

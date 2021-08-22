@@ -52,11 +52,7 @@
         </div>
     </div>
     <div class="container-fluid section-bg-main" v-else-if="end === 'form'">
-        <div class="container">
-            <div class="row py-2">
 
-            </div>
-        </div>
     </div>
 </template>
 

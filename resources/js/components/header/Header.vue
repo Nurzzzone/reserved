@@ -16,8 +16,8 @@
                                 </a>
                             </li>
                             <li class="nav-item mx-3">
-                                <a href="/top" class="btn nav-link font-weight-bold font-menu">
-                                    <div>Топ</div>
+                                <a href="/news" class="btn nav-link font-weight-bold font-menu">
+                                    <div>Новости</div>
                                 </a>
                             </li>
                             <li class="nav-item mx-3">

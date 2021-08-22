@@ -9,7 +9,7 @@ import History from "../components/History";
 
 import Favorite from "../components/Favorite";
 
-import Top from "../components/Top";
+import News from "../components/News";
 
 import Home from "../components/Home";
 import Category from '../components/Category';
@@ -45,9 +45,9 @@ const routes = [
         component: Organization
     },
     {
-        path: '/top',
-        name: 'Top',
-        component: Top
+        path: '/news',
+        name: 'News',
+        component: News
     },
     {
         path: '/favorite',

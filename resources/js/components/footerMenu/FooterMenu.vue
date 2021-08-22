@@ -9,7 +9,7 @@
                             <div class="title">Категории</div>
                         </button>
                     </a>
-                    <a href="/top" class="footer-icon p-0 py-1">
+                    <a href="/news" class="footer-icon p-0 py-1">
                         <button class="btn font-weight-bold w-100">
                             <img src="/img/logo/newspaper.svg" class="footer-img">
                             <div class="title">Новости</div>

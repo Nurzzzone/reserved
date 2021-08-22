@@ -50,8 +50,8 @@ Route::prefix('home')->group(function() {
     Route::get('{slug}/{id}',[MainController::class, 'getOrganizationById'])->name('home.organization');
 });
 
-Route::prefix('top')->group(function() {
-    Route::get('/',[MainController::class, 'top'])->name('top');
+Route::prefix('news')->group(function() {
+    Route::get('/',[MainController::class, 'news'])->name('news');
 });
 
 Route::prefix('contacts')->group(function() {

@@ -92,6 +92,7 @@
         border-radius: 5px;
         margin: 10px;
         position: relative;
+        overflow: hidden;
         & > img {
             display: table;
             width: 100%;
@@ -114,6 +115,7 @@
             overflow: hidden;
             border-radius: 100px;
             box-shadow: 0 0 0 10px #fff;
+            background: #fff;
             &:before {
                 content: "";
                 float: left;

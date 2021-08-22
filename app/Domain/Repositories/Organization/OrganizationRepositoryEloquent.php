@@ -13,7 +13,7 @@ class OrganizationRepositoryEloquent implements OrganizationRepositoryInterface
 
     public function getByIds($ids)
     {
-        return Organization::with('user','category','images','menus')->where(MainContract::STATUS,MainContract::ENABLED)->whereIn(MainContract::ID,$ids)->get();
+        return Organization::with('user','category')->where(MainContract::STATUS,MainContract::ENABLED)->whereIn(MainContract::ID,$ids)->get();
     }
 
     public function update($id,$data):void
@@ -28,7 +28,7 @@ class OrganizationRepositoryEloquent implements OrganizationRepositoryInterface
 
     public function list(int $paginate)
     {
-        return Organization::with('user','category','images','menus')
+        return Organization::with('category')
             ->skip(--$paginate * $this->take)
             ->take($this->take)
             ->get();
@@ -36,7 +36,7 @@ class OrganizationRepositoryEloquent implements OrganizationRepositoryInterface
 
     public function searchByTitle(string $search, int $paginate)
     {
-        return Organization::with('user','category','images','menus')
+        return Organization::with('category')
             ->where(MainContract::TITLE, 'like', '%'.$search.'%')
             ->skip(--$paginate * $this->take)
             ->take($this->take)
@@ -45,14 +45,14 @@ class OrganizationRepositoryEloquent implements OrganizationRepositoryInterface
 
     public function getById($id)
     {
-        return Organization::with('user','category','images','menus')
+        return Organization::with('category')
             ->where(MainContract::ID,$id)
             ->first();
     }
 
     public function getByCategoryId($id, $paginate)
     {
-        return Organization::with('user','category','images','menus')
+        return Organization::with('category')
             ->where(MainContract::CATEGORY_ID,$id)
             ->skip(--$paginate * $this->take)
             ->take($this->take)
@@ -76,7 +76,7 @@ class OrganizationRepositoryEloquent implements OrganizationRepositoryInterface
 
     public function getByCategoryIdAndCityId($id, $cityId, $paginate)
     {
-        return Organization::with('user','category','images','menus')
+        return Organization::with('category')
         ->where([
             [MainContract::CATEGORY_ID,$id],
             [MainContract::CITY_ID,$cityId],

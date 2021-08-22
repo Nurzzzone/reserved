@@ -1,7 +1,7 @@
 <template>
     <location :countries="countries"></location>
     <div class="container-fluid section-bg">
-        <div class="container pt-5 pb-3 pb-md-4">
+        <div class="container pt-5 pb-3 pb-md-5">
             <div class="row">
                 <div class="col-12 col-md-9 p-0 d-flex align-items-center">
                     <ul class="breadcrumb">

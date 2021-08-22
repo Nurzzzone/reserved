@@ -291,7 +291,9 @@
     max-height: 350px;
     position: relative;
     overflow: hidden;
-    border-radius: 0 0 20px 20px;
+    border-radius: 10px 10px 20px 20px;
+    margin-top: -15px;
+    box-shadow: 0 0 0 10px #fff;
     & > img {
         width: 100%;
     }
@@ -450,6 +452,8 @@
     .wallpaper {
         max-height: 200px;
         border-radius: 0;
+        box-shadow: none;
+        margin-top: 0;
         &-screen {
 
         }

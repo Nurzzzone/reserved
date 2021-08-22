@@ -9,8 +9,7 @@
                             <div class="item-rating" v-if="organization.rating">
                                 <span>{{organization.rating}}</span>
                             </div>
-                            <img v-if="organization.wallpaper" :src="organization.wallpaper">
-                            <img v-else src="/img/logo/wall.png">
+                            <img :src="organization.wallpaper">
                         </div>
                         <div class="item-logo mb-md-2 d-flex justify-content-center">
                             <div class="item-logo-default">

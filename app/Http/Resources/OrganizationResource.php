@@ -3,68 +3,63 @@
 namespace App\Http\Resources;
 
 use App\Domain\Contracts\MainContract;
-use App\Domain\Contracts\OrganizationContract;
 use Illuminate\Http\Resources\Json\JsonResource;
-use App\Http\Resources\Menu\MenuCollection;
 
 class OrganizationResource extends JsonResource
 {
 
-    public function toArray($request)
+    public function toArray($request): array
     {
         return [
-            OrganizationContract::ID        =>  $this->{OrganizationContract::ID},
-            OrganizationContract::CITY_ID   =>  $this->{OrganizationContract::CITY_ID},
-            OrganizationContract::RATING    =>  $this->{OrganizationContract::RATING},
-            OrganizationContract::IMAGE     =>  $this->{OrganizationContract::IMAGE}?$this->{OrganizationContract::IMAGE}:($this->{OrganizationContract::CATEGORY_ID}===1?'/img/logo/restaurant.svg':($this->{OrganizationContract::CATEGORY_ID}===2?'/img/logo/cafe.svg':'/img/logo/bar.svg')),
-            OrganizationContract::WALLPAPER =>  $this->{OrganizationContract::WALLPAPER}?$this->{OrganizationContract::WALLPAPER}:'/img/logo/wall.png',
-            OrganizationContract::TITLE     =>  $this->{OrganizationContract::TITLE},
-            OrganizationContract::TIME      =>  '-',
-            MainContract::PHONE =>  $this->{MainContract::PHONE},
-            MainContract::EMAIL =>  $this->{MainContract::EMAIL},
+            MainContract::ID        =>  $this->{MainContract::ID},
+            MainContract::CITY_ID   =>  $this->{MainContract::CITY_ID},
+            MainContract::RATING    =>  $this->{MainContract::RATING},
+            MainContract::IMAGE     =>  $this->{MainContract::IMAGE}?:'/img/logo/reserved-logo.png',
+            MainContract::WALLPAPER =>  $this->{MainContract::WALLPAPER}?:'/img/logo/wall.png',
+            MainContract::TITLE     =>  $this->{MainContract::TITLE},
+            MainContract::TIME      =>  '-',
+            MainContract::PHONE     =>  $this->{MainContract::PHONE},
+            MainContract::EMAIL     =>  $this->{MainContract::EMAIL},
             MainContract::WEBSITE   =>  $this->{MainContract::WEBSITE},
             MainContract::CATEGORY  =>  $this->{MainContract::CATEGORY_ID},
-            OrganizationContract::DESCRIPTION   =>  $this->description,
-            OrganizationContract::DESCRIPTION_KZ    =>  $this->description_kz,
-            OrganizationContract::DESCRIPTION_EN    =>  $this->description_en,
-            OrganizationContract::ADDRESS   =>  $this->address,
-            OrganizationContract::ADDRESS_KZ    =>  $this->address_kz,
-            OrganizationContract::ADDRESS_EN    =>  $this->address_en,
-            OrganizationContract::PRICE =>  $this->price,
-            OrganizationContract::TABLES    =>  $this->tables,
-            OrganizationContract::MONDAY    =>  [
-                OrganizationContract::START =>  $this->start_monday,
-                OrganizationContract::END   =>  $this->end_monday
+            MainContract::DESCRIPTION       =>  $this->{MainContract::DESCRIPTION},
+            MainContract::DESCRIPTION_KZ    =>  $this->{MainContract::DESCRIPTION_KZ},
+            MainContract::DESCRIPTION_EN    =>  $this->{MainContract::DESCRIPTION_EN},
+            MainContract::ADDRESS       =>  $this->{MainContract::ADDRESS},
+            MainContract::ADDRESS_KZ    =>  $this->{MainContract::ADDRESS_KZ},
+            MainContract::ADDRESS_EN    =>  $this->{MainContract::ADDRESS_EN},
+            MainContract::PRICE     =>  $this->{MainContract::PRICE},
+            MainContract::TABLES    =>  $this->{MainContract::TABLES},
+            MainContract::MONDAY    =>  [
+                MainContract::START =>  $this->{MainContract::START_MONDAY},
+                MainContract::END   =>  $this->{MainContract::END_MONDAY},
             ],
-            OrganizationContract::TUESDAY   =>  [
-                OrganizationContract::START =>  $this->start_tuesday,
-                OrganizationContract::END   =>  $this->end_tuesday
+            MainContract::TUESDAY   =>  [
+                MainContract::START =>  $this->{MainContract::START_TUESDAY},
+                MainContract::END   =>  $this->{MainContract::END_TUESDAY},
             ],
-            OrganizationContract::WEDNESDAY =>  [
-                OrganizationContract::START =>  $this->start_wednesday,
-                OrganizationContract::END   =>  $this->end_wednesday
+            MainContract::WEDNESDAY =>  [
+                MainContract::START =>  $this->{MainContract::START_WEDNESDAY},
+                MainContract::END   =>  $this->{MainContract::END_WEDNESDAY}
             ],
-            OrganizationContract::THURSDAY  =>  [
-                OrganizationContract::START =>  $this->start_thursday,
-                OrganizationContract::END   =>  $this->end_thursday
+            MainContract::THURSDAY  =>  [
+                MainContract::START =>  $this->{MainContract::START_THURSDAY},
+                MainContract::END   =>  $this->{MainContract::END_THURSDAY},
             ],
-            OrganizationContract::FRIDAY    =>  [
-                OrganizationContract::START =>  $this->start_friday,
-                OrganizationContract::END   =>  $this->end_friday
+            MainContract::FRIDAY    =>  [
+                MainContract::START =>  $this->{MainContract::START_FRIDAY},
+                MainContract::END   =>  $this->{MainContract::END_FRIDAY}
             ],
-            OrganizationContract::SATURDAY  =>  [
-                OrganizationContract::START =>  $this->start_saturday,
-                OrganizationContract::END   =>  $this->end_saturday
+            MainContract::SATURDAY  =>  [
+                MainContract::START =>  $this->{MainContract::START_SATURDAY},
+                MainContract::END   =>  $this->{MainContract::END_SATURDAY},
             ],
-            OrganizationContract::SUNDAY    =>  [
-                OrganizationContract::START     =>  $this->start_sunday,
-                OrganizationContract::END       =>  $this->end_sunday
+            MainContract::SUNDAY    =>  [
+                MainContract::START     =>  $this->{MainContract::START_SUNDAY},
+                MainContract::END       =>  $this->{MainContract::END_SUNDAY}
             ],
-            OrganizationContract::STATUS        =>  $this->status,
-            OrganizationContract::USER_ID       =>  new UserResource($this->user),
-            OrganizationContract::CATEGORY_ID   =>  new CategoryResource($this->category),
-            OrganizationContract::IMAGES        =>  new OrganizationImageCollection($this->images),
-            OrganizationContract::MENUS         =>  new MenuCollection($this->menus)
+            MainContract::STATUS        =>  $this->{MainContract::STATUS},
+            MainContract::CATEGORY_ID   =>  new CategoryResource($this->{MainContract::CATEGORY}),
         ];
     }
 }

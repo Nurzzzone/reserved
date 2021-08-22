@@ -254,6 +254,13 @@
     cursor: pointer;
 }
 @media only screen and (max-width: 768px) {
+    .entity-block-item-input-double-block-switcher {
+        width: 40px;
+    }
+    .entity-block-item-input-double-block-switcher-btn {
+        width: 15px;
+        height: 15px;
+    }
     .entity-main {
         padding: 10px 0 10px 10px;
     }

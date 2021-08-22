@@ -23633,7 +23633,7 @@ var _hoisted_24 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(
 );
 
 var _hoisted_25 = {
-  "class": "col-12 mt-4"
+  "class": "col-12 mt-2 mt-md-4"
 };
 var _hoisted_26 = {
   key: 0
@@ -23643,10 +23643,10 @@ var _hoisted_27 = {
   "class": "spinner"
 };
 var _hoisted_28 = {
-  "class": "col-12 mt-4"
+  "class": "col-12 mt-2 mt-md-4"
 };
 var _hoisted_29 = {
-  "class": "col-12 mt-4 mb-2"
+  "class": "col-12 mt-2 mt-md-4 mb-2"
 };
 var _hoisted_30 = {
   "class": "col-12 mt-3"
@@ -25195,7 +25195,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, ".booking-empty {\n  display: grid;\n  grid-gap: 15px;\n}\n.booking-empty-icon {\n  width: 70px;\n  height: 70px;\n  background: url(\"/img/logo/card.svg\") no-repeat center;\n  background-size: cover;\n  margin: 0 auto 0 auto;\n}\n.booking-empty-title {\n  font-size: 20px;\n  font-weight: bold;\n  text-align: center;\n  color: darkgrey;\n}\n.booking-card {\n  display: grid;\n  grid-template-columns: 40px auto;\n  grid-gap: 15px;\n  background: #fafafa;\n  border-radius: 10px;\n  padding: 10px 15px 10px 15px;\n  cursor: pointer;\n  color: grey;\n}\n.booking-card:hover, .booking-card-sel {\n  background: #FF8008;\n  color: #fff;\n}\n.booking-card-list {\n  display: grid;\n  gap: 15px;\n}\n.booking-card-icon {\n  width: 40px;\n  background: url(\"/img/logo/card.svg\") no-repeat center;\n  background-size: contain;\n}\n.booking-card-detail-title {\n  font-size: 18px;\n  font-weight: bold;\n}\n.booking-card-detail-num {\n  font-size: 12px;\n}\n.booking-time {\n  display: grid;\n  grid-template-columns: repeat(5, auto);\n  gap: 10px;\n}\n.booking-time-item {\n  float: left;\n  padding: 10px 0 10px 0;\n  border-right: 30px;\n  background: #fafafa;\n  text-align: center;\n  border-radius: 20px;\n  font-size: 14px;\n  font-weight: bold;\n  cursor: pointer;\n}\n.booking-time-item:hover, .booking-time-item-sel {\n  background: #00a082;\n  color: #fff;\n}\n.booking-input {\n  color: #00a082;\n  outline: none !important;\n  font-size: 20px;\n  background: transparent;\n}\na {\n  text-decoration: none;\n  display: inline-block;\n  padding: 8px 16px;\n}\n.round {\n  border-radius: 50%;\n}\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, ".booking-empty {\n  display: grid;\n  grid-gap: 15px;\n}\n.booking-empty-icon {\n  width: 70px;\n  height: 70px;\n  background: url(\"/img/logo/card.svg\") no-repeat center;\n  background-size: cover;\n  margin: 0 auto 0 auto;\n}\n.booking-empty-title {\n  font-size: 20px;\n  font-weight: bold;\n  text-align: center;\n  color: darkgrey;\n}\n.booking-card {\n  display: grid;\n  grid-template-columns: 40px auto;\n  grid-gap: 15px;\n  background: #fafafa;\n  border-radius: 10px;\n  padding: 10px 15px 10px 15px;\n  cursor: pointer;\n  color: grey;\n}\n.booking-card:hover, .booking-card-sel {\n  background: #FF8008;\n  color: #fff;\n}\n.booking-card-list {\n  display: grid;\n  gap: 15px;\n}\n.booking-card-icon {\n  width: 40px;\n  background: url(\"/img/logo/card.svg\") no-repeat center;\n  background-size: contain;\n}\n.booking-card-detail-title {\n  font-size: 18px;\n  font-weight: bold;\n}\n.booking-card-detail-num {\n  font-size: 12px;\n}\n.booking-time {\n  display: grid;\n  grid-template-columns: repeat(5, auto);\n  gap: 10px;\n}\n.booking-time-item {\n  float: left;\n  padding: 10px 0 10px 0;\n  border-right: 30px;\n  background: #fafafa;\n  text-align: center;\n  border-radius: 20px;\n  font-size: 14px;\n  font-weight: bold;\n  cursor: pointer;\n}\n.booking-time-item:hover, .booking-time-item-sel {\n  background: #00a082;\n  color: #fff;\n}\n.booking-input {\n  color: #00a082;\n  outline: none !important;\n  font-size: 20px;\n  background: transparent;\n}\na {\n  text-decoration: none;\n  display: inline-block;\n  padding: 8px 16px;\n}\n.round {\n  border-radius: 50%;\n}\n@media only screen and (max-width: 768px) {\n.booking-time-item {\n    padding: 8px 0 8px 0;\n    font-size: 12px;\n}\n.booking-empty-title {\n    font-size: 12px;\n}\n}\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 

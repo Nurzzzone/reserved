@@ -58,16 +58,16 @@
                                         <div class="booking-empty-title">У вас нет карт</div>
                                     </div>
                                 </template>
-                                <div class="col-12 mt-4">
+                                <div class="col-12 mt-2 mt-md-4">
                                     <button class="btn btn-block bg-light text-dark" @click="bookingAddCard()" style="border-radius: 30px; height: 44px;">
                                         <div v-if="!cardLoading">Добавить карту карту</div>
                                         <div class="spinner" v-else></div>
                                     </button>
                                 </div>
-                                <div class="col-12 mt-4">
+                                <div class="col-12 mt-2 mt-md-4">
                                     <button class="btn btn-block auth-register text-white" @click="bookingAuthFinish()" :disabled="cards.length === 0">Оплатить {{organization.price}} KZT</button>
                                 </div>
-                                <div class="col-12 mt-4 mb-2">
+                                <div class="col-12 mt-2 mt-md-4 mb-2">
                                     <button class="btn btn-block auth-register text-white" @click="storage.modal = false">Назад</button>
                                 </div>
                             </template>
@@ -465,5 +465,20 @@ a {
 
 .round {
     border-radius: 50%;
+}
+@media only screen and (max-width: 768px) {
+    .booking {
+        &-time {
+            &-item {
+                padding: 8px 0 8px 0;
+                font-size: 12px;
+            }
+        }
+        &-empty {
+            &-title {
+                font-size: 12px;
+            }
+        }
+    }
 }
 </style>

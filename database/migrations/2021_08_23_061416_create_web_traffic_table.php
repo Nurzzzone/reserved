@@ -19,7 +19,7 @@ class CreateWebTrafficTable extends Migration
             $table->enum(MainContract::STATUS,[
                 MainContract::ON,
                 MainContract::OFF
-            ])->default(MainContract::OFF);
+            ])->default(MainContract::ON);
             $table->timestamps();
         });
     }

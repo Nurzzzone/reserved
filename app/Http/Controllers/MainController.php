@@ -10,6 +10,7 @@ use App\Services\OrganizationTableList\OrganizationTableListService;
 use App\Services\Booking\BookingService;
 use App\Services\User\UserService;
 use App\Services\Category\CategoryService;
+use App\Services\WebTraffic\WebTrafficService;
 
 class MainController extends Controller
 {
@@ -20,14 +21,16 @@ class MainController extends Controller
     protected $bookingService;
     protected $userService;
     protected $categoryService;
+    protected $webTrafficService;
 
-    public function __construct(OrganizationService $organizationService, OrganizationTableService $organizationTableService, OrganizationTableListService $organizationTableListService, BookingService $bookingService, UserService $userService, CategoryService $categoryService) {
+    public function __construct(OrganizationService $organizationService, OrganizationTableService $organizationTableService, OrganizationTableListService $organizationTableListService, BookingService $bookingService, UserService $userService, CategoryService $categoryService, WebTrafficService $webTrafficService) {
         $this->organizationService  =   $organizationService;
         $this->organizationTableService =   $organizationTableService;
         $this->organizationTableListService =   $organizationTableListService;
         $this->bookingService   =   $bookingService;
         $this->userService  =   $userService;
         $this->categoryService  =   $categoryService;
+        $this->webTrafficService    =   $webTrafficService;
     }
 
     public function dashboard() {
@@ -122,11 +125,25 @@ class MainController extends Controller
         ]);
     }
 
+    public function getRealIpAddress()
+    {
+        if (!empty($_SERVER['HTTP_CLIENT_IP'])) {
+            $ip =   $_SERVER['HTTP_CLIENT_IP'];
+        } elseif (!empty($_SERVER['HTTP_X_FORWARDED_FOR'])) {
+            $ip =   $_SERVER['HTTP_X_FORWARDED_FOR'];
+        } else {
+            $ip =   $_SERVER['REMOTE_ADDR'];
+        }
+        return $ip;
+    }
+
     public function getOrganizationById($slug,$id)
     {
-        $category   =   $this->categoryService->getBySlug($slug);
         $organization   =   $this->organizationService->getById($id);
-        if ($category && $organization) {
+        $webTraffic =   $this->webTrafficService->getByOrganizationId($id);
+        echo $_SERVER['HTTP_REFERER'];
+        exit;
+        if ($organization) {
             return view('index', [
                 'title'=>$organization->{MainContract::TITLE}
             ]);

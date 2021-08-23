@@ -19,6 +19,17 @@ use App\Http\Controllers\Api\OrganizationTableListController;
 use App\Http\Controllers\Api\OrganizationTableController;
 use App\Http\Controllers\Api\OrganizationRequestController;
 use App\Http\Controllers\Api\OrganizationImageController;
+use App\Http\Controllers\Api\WebTrafficController;
+
+Route::prefix('webTraffic')->group(function() {
+
+    Route::post('create',[WebTrafficController::class,'create'])->name('webTraffic.create');
+
+    Route::get('organization/{organizationId}',[WebTrafficController::class,'getByOrganizationId'])->name('webTraffic.organization');
+    Route::get('organization/{organizationId}/{date}',[WebTrafficController::class,'getByOrganizationIdAndDate'])->name('webTraffic.organizationDate');
+    Route::get('date/{date}/{organizationId}/{ip}',[WebTrafficController::class,'getByDateAndOrganizationIdAndIp'])->name('webTraffic.dateOrganizationIp');
+
+});
 
 Route::prefix('organizationRequest')->group(function() {
 

@@ -198,6 +198,7 @@ return [
         App\Providers\Repositories\MenuRepositoryProvider::class,
         App\Providers\Repositories\OrganizationRequestRepositoryProvider::class,
         App\Providers\Repositories\OrganizationImageRepositoryProvider::class,
+        App\Providers\Repositories\WebTrafficRepositoryProvider::class,
 
     ],
 

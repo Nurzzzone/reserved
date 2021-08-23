@@ -1,29 +1,27 @@
 <?php
 
-namespace App\Http\Requests\User;
+namespace App\Http\Requests\WebTraffic;
 
-use App\Domain\Contracts\UserContract;
+use App\Domain\Contracts\MainContract;
 use Illuminate\Contracts\Validation\Validator;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Http\Exceptions\HttpResponseException;
 use Illuminate\Validation\ValidationException;
 
-class UserUpdateRequest extends FormRequest
+class WebTrafficCreateRequest extends FormRequest
 {
 
-    public function authorize()
+    public function authorize(): bool
     {
         return true;
     }
 
-    public function rules()
+    public function rules(): array
     {
         return [
-            UserContract::NAME  =>  'nullable|min:2|max:255',
-            UserContract::EMAIL =>  'nullable|unique:'.UserContract::TABLE.','.UserContract::EMAIL.','.$this->id,
-            UserContract::LANGUAGE_ID   =>  'nullable|exists:languages,id',
-            UserContract::EMAIL_NOTIFICATION    =>  'nullable',
-            UserContract::PUSH_NOTIFICATION     =>  'nullable',
+            MainContract::ORGANIZATION_ID   =>  'nullable',
+            MainContract::WEBSITE   =>  'nullable',
+            MainContract::IP    =>  'nullable',
         ];
     }
 

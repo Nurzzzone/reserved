@@ -1,20 +1,9 @@
 <template>
-    <div class="container-fluid pb-3 pb-md-5 organization-bg">
+    <div class="container-fluid pb-3 pb-md-5 organization-bg" v-if="organization">
         <div class="container">
             <div class="row pt-4">
                 <div class="col-12">
                     <div>
-                        <div class="row justify-content-center mt-md-3">
-                            <div class="col-12 col-md-6 col-lg-4 p-0">
-                                <div class="form-group organization-date" onselectstart="return false;">
-                                    <a class="text-decoration-none cursor-pointer" :class="{'organization-arr-btn':date.before}" @click="previousDay()">&#8249;</a>
-                                    <div type="text" class="border-0 organization-input text-dark text-center font-weight-bold" :data-date="date.data">
-                                        <div>{{date.title}}</div>
-                                    </div>
-                                    <a class="text-decoration-none cursor-pointer" :class="{'organization-arr-btn':date.after}" @click="nextDay()">&#8250;</a>
-                                </div>
-                            </div>
-                        </div>
                         <template v-if="!isWorking">
                             <div class="locked">
                                 <div class="locked-icon"></div>
@@ -25,6 +14,17 @@
                             </div>
                         </template>
                         <template v-else>
+                            <div class="row justify-content-center mt-md-3">
+                                <div class="col-12 col-md-6 col-lg-4 p-0">
+                                    <div class="form-group organization-date" onselectstart="return false;">
+                                        <a class="text-decoration-none cursor-pointer" :class="{'organization-arr-btn':date.before}" @click="previousDay()">&#8249;</a>
+                                        <div type="text" class="border-0 organization-input text-dark text-center font-weight-bold" :data-date="date.data">
+                                            <div>{{date.title}}</div>
+                                        </div>
+                                        <a class="text-decoration-none cursor-pointer" :class="{'organization-arr-btn':date.after}" @click="nextDay()">&#8250;</a>
+                                    </div>
+                                </div>
+                            </div>
                             <div class="row justify-content-center mt-3">
                                 <div>
                                     <div class="d-flex">
@@ -68,7 +68,7 @@
             </div>
         </div>
     </div>
-    <Booking :organization="organization" :table="table" :date="date"></Booking>
+    <Booking v-if="organization" :organization="organization" :table="table" :date="date"></Booking>
 </template>
 <script>
 import Booking from '../modal/Booking';

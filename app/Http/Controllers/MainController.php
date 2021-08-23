@@ -141,7 +141,11 @@ class MainController extends Controller
     {
         $organization   =   $this->organizationService->getById($id);
         $webTraffic =   $this->webTrafficService->getByOrganizationId($id);
-        echo $_SERVER['HTTP_REFERER'];
+        if (isset($_SERVER['HTTP_REFERER'])) {
+            $url    =   parse_url($_SERVER['HTTP_REFERER'],PHP_URL_HOST);
+            echo $url;
+        }
+
         exit;
         if ($organization) {
             return view('index', [

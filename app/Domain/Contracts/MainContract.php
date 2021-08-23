@@ -8,6 +8,8 @@ use Carbon\Carbon;
 
 class MainContract
 {
+    const TYPE  =   'type';
+    const IP    =   'ip';
     const REJECTED  =   'rejected';
     const ORGANIZATION_NAME =   'organization_name';
     const TEXT  =   'text';

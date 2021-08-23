@@ -58,6 +58,15 @@ class MainController extends Controller
         return view('backpack.menus.menus',['id'=>$organization->id]);
     }
 
+    public function statistics()
+    {
+        if (!backpack_auth()->user()) {
+            redirect('/home/login');
+        }
+        $organization   =   $this->organizationService->getByUserId(backpack_auth()->user()->id);
+        return view('backpack.statistics.statistics',['id'=>$organization->id]);
+    }
+
     public function photos()
     {
         if (!backpack_auth()->user()) {

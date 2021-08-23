@@ -263,7 +263,11 @@ export default {
                     let data = response.data.data;
                     this.storage.token  =   this.guest.user.api_token;
                     sessionStorage.user =   JSON.stringify(this.guest.user);
-                    window.location.href    =   data.payment;
+                    if (this.getPrice() > 0) {
+                        window.location.href    =   data.payment;
+                    } else {
+                        window.location.href    =   '/profile/payments';
+                    }
                 }).catch(error => {
                     this.guest.codeCheck    =   false;
                     this.guest.codeError    =   true;
@@ -326,7 +330,12 @@ export default {
                 })
                 .then(response => {
                     let data = response.data.data;
-                    window.location.href    =   '/form/'+data.id;
+                    if (this.getPrice() > 0) {
+                        window.location.href    =   '/form/'+data.id;
+                    } else {
+                        window.location.href    =   '/profile/history';
+                    }
+
                 }).catch(error => {
                     console.log('error', error.response);
                     this.cardStatus =   true;

@@ -88,6 +88,7 @@
             </li>
         </ul>
     </li>
+
 @else
 
     <li class="nav-item">
@@ -105,6 +106,12 @@
     <li class='nav-item'>
         <a class='nav-link' href='{{ backpack_url('review') }}'>
             <i class='nav-icon las la-comment'></i> Отзывы
+        </a>
+    </li>
+
+    <li class='nav-item'>
+        <a class='nav-link' href='{{ backpack_url('statistics') }}'>
+            <i class='nav-icon las la-chart-bar'></i> Статистика
         </a>
     </li>
 
@@ -135,35 +142,37 @@
             <i class='nav-icon las la-image'></i> Меню
         </a>
     </li>
+
+    <li class="nav-title">
+        <span class="text-primary">Сервисы</span>
+    </li>
+
+    <li class="nav-item nav-dropdown">
+        <a class="nav-link nav-dropdown-toggle font-weight-normal">
+            <i class='nav-icon las la-cog'></i> Iiko
+        </a>
+        <ul class="nav-dropdown-items">
+            <li class='nav-item'>
+                <a class='nav-link' href='{{ backpack_url('iiko') }}'>
+                    <i class='nav-icon las la-cogs'></i> Iiko
+                </a>
+            </li>
+            <li class='nav-item'><a class='nav-link' href='{{ backpack_url('iikotables') }}'>
+                    <i class='nav-icon las la-cogs'></i> Iiko комнаты
+                </a>
+            </li>
+            <li class='nav-item'>
+                <a class='nav-link' href='{{ backpack_url('iikotablelist') }}'>
+                    <i class='nav-icon las la-cogs'></i> Iiko столы
+                </a>
+            </li>
+        </ul>
+    </li>
+    <li class='nav-item'>
+        <a class='nav-link' href='{{ backpack_url('telegram') }}'>
+            <i class='nav-icon lab la-telegram'></i> Телеграм
+        </a>
+    </li>
 @endif
 
-<li class="nav-title">
-    <span class="text-primary">Сервисы</span>
-</li>
 
-<li class="nav-item nav-dropdown">
-    <a class="nav-link nav-dropdown-toggle font-weight-normal">
-        <i class='nav-icon las la-cog'></i> Iiko
-    </a>
-    <ul class="nav-dropdown-items">
-        <li class='nav-item'>
-            <a class='nav-link' href='{{ backpack_url('iiko') }}'>
-                <i class='nav-icon las la-cogs'></i> Iiko
-            </a>
-        </li>
-        <li class='nav-item'><a class='nav-link' href='{{ backpack_url('iikotables') }}'>
-                <i class='nav-icon las la-cogs'></i> Iiko комнаты
-            </a>
-        </li>
-        <li class='nav-item'>
-            <a class='nav-link' href='{{ backpack_url('iikotablelist') }}'>
-                <i class='nav-icon las la-cogs'></i> Iiko столы
-            </a>
-        </li>
-    </ul>
-</li>
-<li class='nav-item'>
-    <a class='nav-link' href='{{ backpack_url('telegram') }}'>
-        <i class='nav-icon lab la-telegram'></i> Телеграм
-    </a>
-</li>

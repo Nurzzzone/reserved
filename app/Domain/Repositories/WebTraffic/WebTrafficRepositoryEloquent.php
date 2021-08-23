@@ -6,12 +6,13 @@ use App\Domain\Contracts\MainContract;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\DB;
 use App\Domain\Contracts\WebTrafficContract;
+use App\Models\webTraffic;
 
 class WebTrafficRepositoryEloquent implements WebTrafficRepositoryInterface
 {
     public function create($data)
     {
-        return DB::table(WebTrafficContract::TABLE)->create($data);
+        return webTraffic::create($data);
     }
 
     public function getByOrganizationIdAndDate($organizationId, $date): Collection

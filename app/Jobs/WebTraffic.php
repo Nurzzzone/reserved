@@ -32,7 +32,7 @@ class WebTraffic implements ShouldQueue
     public function handle(WebTrafficService $webTrafficService)
     {
         $this->webTrafficService    =   $webTrafficService;
-        if (!$webTraffic =   $this->webTrafficService->getByDateAndOrganizationIdAndIpAndWeb($this->date,$this->id,$this->ip,$this->url)) {
+        if (!$this->webTrafficService->getByDateAndOrganizationIdAndIpAndWeb($this->date,$this->id,$this->ip,$this->url)) {
             $this->webTrafficService->create([
                 MainContract::ORGANIZATION_ID   =>  $this->id,
                 MainContract::WEBSITE   =>  $this->url,

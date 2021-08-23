@@ -129,17 +129,16 @@ class MainController extends Controller
         $organization   =   $this->organizationService->getById($id);
 
         if ($organization) {
+            WebTraffic::dispatch(
+                date('Y-m-d'),
+                $id,
+                $this->webTrafficService->getRealIpAddress(),
+                $this->webTrafficService->getReferer()
+            );
             return view('index', [
                 'title' =>  $organization->{MainContract::TITLE}
             ]);
         }
-
-        WebTraffic::dispatch(
-            date('Y-m-d'),
-            $id,
-            $this->webTrafficService->getRealIpAddress(),
-            $this->webTrafficService->getReferer()
-        );
 
         return view('index',[
             'title' =>  'Не найдено'

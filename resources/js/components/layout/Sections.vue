@@ -32,8 +32,8 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="row justify-content-center mt-4"  v-for="(item,key) in sections || []" :key="key" :class="{'d-none':(key !== section)}">
-                                <div class="col-6 col-lg-3 p-md-2 p-1" v-for="(table,tableKey) in item.organization_tables || []" :key="tableKey" @click="selTable(key,tableKey)">
+                            <div class="row justify-content-center mt-4"  v-for="(item,key) in sections" :key="key" :class="{'d-none':(key !== section)}">
+                                <div class="col-6 col-lg-3 p-md-2 p-1" v-for="(table,tableKey) in item.organization_tables" :key="tableKey" @mousedown="selTable(key,tableKey)">
                                     <div class="card border-0 organization-shadow" data-toggle="modal" data-target="#booking_modal">
                                         <div class="card-body organization-card-main">
                                             <div class="organization-card">
@@ -68,7 +68,7 @@
             </div>
         </div>
     </div>
-    <Booking v-if="organization" :organization="organization" :table="table" :date="date"></Booking>
+    <Booking v-if="table" :organization="organization" :table="table" :date="date"></Booking>
 </template>
 <script>
 import Booking from '../modal/Booking';
@@ -95,7 +95,7 @@ export default {
                     en: ['Январь','Февраль','Март','Апрель','Май','Июнь','Июль','Август','Сентябрь','Октябрь','Ноябрь','Декабрь']
                 },
             },
-            table: '',
+            table: false,
             section: 0,
             sections: [],
             lang: 'ru',

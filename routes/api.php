@@ -27,7 +27,7 @@ Route::prefix('webTraffic')->group(function() {
 
     Route::get('organization/{organizationId}',[WebTrafficController::class,'getByOrganizationId'])->name('webTraffic.organization');
     Route::get('organization/{organizationId}/{date}',[WebTrafficController::class,'getByOrganizationIdAndDate'])->name('webTraffic.organizationDate');
-    Route::get('date/{date}/{organizationId}/{ip}',[WebTrafficController::class,'getByDateAndOrganizationIdAndIp'])->name('webTraffic.dateOrganizationIp');
+    Route::get('date/{date}/{organizationId}/{ip}/{website}',[WebTrafficController::class,'getByDateAndOrganizationIdAndIp'])->name('webTraffic.dateOrganizationIp');
 
 });
 

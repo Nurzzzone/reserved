@@ -34,8 +34,8 @@ class WebTrafficController extends Controller
         return $this->webTrafficService->getByOrganizationId($organizationId);
     }
 
-    public function getByDateAndOrganizationIdAndIp($date,$organizationId,$ip): Collection
+    public function getByDateAndOrganizationIdAndIpAndWeb($date,$organizationId,$ip,$website)
     {
-        return $this->webTrafficService->getByDateAndOrganizationIdAndIp($date,$organizationId,$ip);
+        return $this->webTrafficService->getByDateAndOrganizationIdAndIpAndWeb($date,$organizationId,$ip,$website);
     }
 }

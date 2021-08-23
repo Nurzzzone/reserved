@@ -28,8 +28,29 @@ class WebTrafficService
         return $this->webTrafficRepository->getByOrganizationId($organizationId);
     }
 
-    public function getByDateAndOrganizationIdAndIp($date,$organizationId,$ip): Collection
+    public function getByDateAndOrganizationIdAndIpAndWeb($date,$organizationId,$ip,$website)
     {
-        return $this->webTrafficRepository->getByDateAndOrganizationIdAndIp($date,$organizationId,$ip);
+        return $this->webTrafficRepository->getByDateAndOrganizationIdAndIpAndWeb($date,$organizationId,$ip,$website);
+    }
+
+    public function getRealIpAddress()
+    {
+        if (!empty($_SERVER['HTTP_CLIENT_IP'])) {
+            $ip =   $_SERVER['HTTP_CLIENT_IP'];
+        } elseif (!empty($_SERVER['HTTP_X_FORWARDED_FOR'])) {
+            $ip =   $_SERVER['HTTP_X_FORWARDED_FOR'];
+        } else {
+            $ip =   $_SERVER['REMOTE_ADDR'];
+        }
+        return $ip;
+    }
+
+    public function getReferer()
+    {
+        $url    =   'reserved-app.kz';
+        if (isset($_SERVER['HTTP_REFERER'])) {
+            $url    =   parse_url($_SERVER['HTTP_REFERER'],PHP_URL_HOST);
+        }
+        return $url;
     }
 }

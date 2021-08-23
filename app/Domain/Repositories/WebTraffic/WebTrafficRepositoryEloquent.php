@@ -35,16 +35,17 @@ class WebTrafficRepositoryEloquent implements WebTrafficRepositoryInterface
             ->get();
     }
 
-    public function getByDateAndOrganizationIdAndIp($date,$organizationId,$ip): Collection
+    public function getByDateAndOrganizationIdAndIpAndWeb($date,$organizationId,$ip,$website)
     {
         return DB::table(WebTrafficContract::TABLE)
             ->where([
                 [MainContract::ORGANIZATION_ID,$organizationId],
+                [MainContract::WEBSITE,$website],
                 [MainContract::IP,$ip],
                 [MainContract::STATUS,MainContract::ON]
             ])
             ->whereDate(MainContract::CREATED_AT,'=',$date)
-            ->get();
+            ->first();
     }
 
 }

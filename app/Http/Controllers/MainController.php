@@ -125,34 +125,29 @@ class MainController extends Controller
         ]);
     }
 
-    public function getRealIpAddress()
-    {
-        if (!empty($_SERVER['HTTP_CLIENT_IP'])) {
-            $ip =   $_SERVER['HTTP_CLIENT_IP'];
-        } elseif (!empty($_SERVER['HTTP_X_FORWARDED_FOR'])) {
-            $ip =   $_SERVER['HTTP_X_FORWARDED_FOR'];
-        } else {
-            $ip =   $_SERVER['REMOTE_ADDR'];
-        }
-        return $ip;
-    }
-
     public function getOrganizationById($slug,$id)
     {
         $organization   =   $this->organizationService->getById($id);
-        $webTraffic =   $this->webTrafficService->getByOrganizationId($id);
-        if (isset($_SERVER['HTTP_REFERER'])) {
-            $url    =   parse_url($_SERVER['HTTP_REFERER'],PHP_URL_HOST);
-            echo $url;
-        }
 
-        exit;
         if ($organization) {
             return view('index', [
                 'title'=>$organization->{MainContract::TITLE}
             ]);
         }
-        return view('index',['title'=>'Не найдено']);
+        $date   =   date('Y-m-d');
+        $ip     =   $this->webTrafficService->getRealIpAddress();
+        $url    =   $this->webTrafficService->getReferer();
+        if (!$webTraffic =   $this->webTrafficService->getByDateAndOrganizationIdAndIpAndWeb($date,$id,$ip,$url)) {
+            $this->webTrafficService->create([
+                MainContract::ORGANIZATION_ID   =>  $id,
+                MainContract::WEBSITE   =>  $url,
+                MainContract::IP    =>  $ip,
+            ]);
+        }
+
+        return view('index',[
+            'title' =>  'Не найдено'
+        ]);
     }
 
     public function profile()

@@ -19668,7 +19668,7 @@ __webpack_require__.r(__webpack_exports__);
           if (_this2.getPrice() > 0) {
             window.location.href = data.payment;
           } else {
-            window.location.href = '/profile/payments';
+            window.location.href = '/profile/history';
           }
         })["catch"](function (error) {
           _this2.guest.codeCheck = false;

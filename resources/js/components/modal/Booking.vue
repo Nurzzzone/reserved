@@ -133,7 +133,7 @@
                                         </div>
                                         <div class="col-12 mt-4">
                                             <button class="btn btn-block auth-btn text-white" @click="bookingGuest()">
-                                                <div v-if="!guest.codeCheck">Подтвердить и оплатить {{organization.price}} KZT</div>
+                                                <div v-if="!guest.codeCheck">Подтвердить<span v-if="getPrice() > 0"> и оплатить {{organization.price}} KZT</span></div>
                                                 <div class="spinner" v-else></div>
                                             </button>
                                         </div>
@@ -266,7 +266,7 @@ export default {
                     if (this.getPrice() > 0) {
                         window.location.href    =   data.payment;
                     } else {
-                        window.location.href    =   '/profile/payments';
+                        window.location.href    =   '/profile/history';
                     }
                 }).catch(error => {
                     this.guest.codeCheck    =   false;

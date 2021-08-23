@@ -10,7 +10,7 @@ use App\Services\OrganizationTableList\OrganizationTableListService;
 use App\Services\Booking\BookingService;
 use App\Services\User\UserService;
 use App\Services\Category\CategoryService;
-use App\Services\WebTraffic\WebTrafficService;
+use App\Jobs\WebTraffic;
 
 class MainController extends Controller
 {
@@ -23,14 +23,13 @@ class MainController extends Controller
     protected $categoryService;
     protected $webTrafficService;
 
-    public function __construct(OrganizationService $organizationService, OrganizationTableService $organizationTableService, OrganizationTableListService $organizationTableListService, BookingService $bookingService, UserService $userService, CategoryService $categoryService, WebTrafficService $webTrafficService) {
+    public function __construct(OrganizationService $organizationService, OrganizationTableService $organizationTableService, OrganizationTableListService $organizationTableListService, BookingService $bookingService, UserService $userService, CategoryService $categoryService) {
         $this->organizationService  =   $organizationService;
         $this->organizationTableService =   $organizationTableService;
         $this->organizationTableListService =   $organizationTableListService;
         $this->bookingService   =   $bookingService;
         $this->userService  =   $userService;
         $this->categoryService  =   $categoryService;
-        $this->webTrafficService    =   $webTrafficService;
     }
 
     public function dashboard() {
@@ -131,19 +130,16 @@ class MainController extends Controller
 
         if ($organization) {
             return view('index', [
-                'title'=>$organization->{MainContract::TITLE}
+                'title' =>  $organization->{MainContract::TITLE}
             ]);
         }
-        $date   =   date('Y-m-d');
-        $ip     =   $this->webTrafficService->getRealIpAddress();
-        $url    =   $this->webTrafficService->getReferer();
-        if (!$webTraffic =   $this->webTrafficService->getByDateAndOrganizationIdAndIpAndWeb($date,$id,$ip,$url)) {
-            $this->webTrafficService->create([
-                MainContract::ORGANIZATION_ID   =>  $id,
-                MainContract::WEBSITE   =>  $url,
-                MainContract::IP    =>  $ip,
-            ]);
-        }
+
+        WebTraffic::dispatch(
+            date('Y-m-d'),
+            $id,
+            $this->webTrafficService->getRealIpAddress(),
+            $this->webTrafficService->getReferer()
+        );
 
         return view('index',[
             'title' =>  'Не найдено'

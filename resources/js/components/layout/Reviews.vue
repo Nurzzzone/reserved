@@ -4,7 +4,7 @@
             <div class="row pt-4">
                 <div class="col-12">
                     <Loading v-if="status"></Loading>
-                    <template v-if="reviews.length">
+                    <template v-else-if="reviews.length > 0">
                         <div>
                             <div class="row p-0 py-md-2">
                                 <div class="col-12 p-0 d-flex justify-content-center">

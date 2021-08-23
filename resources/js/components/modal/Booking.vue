@@ -133,7 +133,7 @@
                                         </div>
                                         <div class="col-12 mt-4">
                                             <button class="btn btn-block auth-btn text-white" @click="bookingGuest()">
-                                                <div v-if="!guest.codeCheck">Подтвердить<span v-if="getPrice() > 0"> и оплатить {{organization.price}} KZT</span></div>
+                                                <div v-if="!guest.codeCheck">Подтвердить<span v-if="getPrice() > 0"> и оплатить {{getPrice()}} KZT</span></div>
                                                 <div class="spinner" v-else></div>
                                             </button>
                                         </div>

@@ -29,6 +29,11 @@ class WebTrafficController extends Controller
         return $this->webTrafficService->getByOrganizationIdAndDate($organization,$date);
     }
 
+    public function getByBetweenDateAndOrganizationId($start, $end, $organization): Collection
+    {
+        return $this->webTrafficService->getByBetweenDateAndOrganizationId($start, $end, $organization);
+    }
+
     public function getByOrganizationId($organizationId): Collection
     {
         return $this->webTrafficService->getByOrganizationId($organizationId);

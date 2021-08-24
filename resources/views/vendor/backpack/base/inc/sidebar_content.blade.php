@@ -1,6 +1,24 @@
 <!-- This file is used to store sidebar items, starting with Backpack\Base 0.9.0 -->
-
+<style>
+    .text-reserved {
+        color: #57a283 !important;
+        display: flex !important;
+        align-items: center;
+        gap: 10px;
+    }
+    .reserved-icon {
+        display: inline-block;
+        transform: scale(.8);
+    }
+    .reserved-rounded {
+        border-radius: 20px;
+    }
+    .sidebar.sidebar-pills .nav-link.active, .sidebar.sidebar-pills .nav-link:hover {
+        background: rgba(87,162,131,.15) !important;
+    }
+</style>
 @if(backpack_user()->role === \App\Domain\Contracts\MainContract::TRANSLATE[\App\Domain\Contracts\MainContract::ADMINISTRATOR])
+
     <li class='nav-item'>
         <a class='nav-link' href='{{ backpack_url('organizationrequest') }}'>
             <i class='nav-icon lab la-wpforms'></i> Запросы
@@ -92,64 +110,64 @@
 @else
 
     <li class="nav-item">
-        <a class="nav-link" href="{{ backpack_url('dashboard') }}">
-            <i class="la la-home nav-icon"></i> Резервы
+        <a class="nav-link text-reserved" style="color: #57a283 !important;" href="{{ backpack_url('dashboard') }}">
+            <img src="/img/logo/reception.png" class="reserved-icon" width="24" height="24"> Резервы
         </a>
     </li>
 
     <li class='nav-item'>
-        <a class='nav-link' href='{{ backpack_url('booking') }}'>
-            <i class='nav-icon las la-sort'></i> Бронирование
+        <a class='nav-link text-reserved' style="color: #57a283 !important;" href='{{ backpack_url('booking') }}'>
+            <img src="/img/logo/calendar.png" class="reserved-icon" width="24" height="24"> Бронирование
         </a>
     </li>
 
     <li class='nav-item'>
-        <a class='nav-link' href='{{ backpack_url('review') }}'>
-            <i class='nav-icon las la-comment'></i> Отзывы
+        <a class='nav-link text-reserved' style="color: #57a283 !important;" href='{{ backpack_url('review') }}'>
+            <img src="/img/logo/chat.png" class="reserved-icon" width="24" height="24"> Отзывы
         </a>
     </li>
 
     <li class='nav-item'>
-        <a class='nav-link' href='{{ backpack_url('statistics') }}'>
-            <i class='nav-icon las la-chart-bar'></i> Статистика
+        <a class='nav-link text-reserved' style="color: #57a283 !important;" href='{{ backpack_url('statistics') }}'>
+            <img src="/img/logo/pie-chart.png" class="reserved-icon" width="24" height="24"> Статистика
         </a>
     </li>
 
     <li class="nav-title">
-        <span class="text-primary">Основное</span>
+        <span class="color-reserved">Основное</span>
     </li>
 
     <li class='nav-item'>
-        <a class='nav-link' href='{{ backpack_url('entity') }}'>
-            <i class='nav-icon las la-building'></i> Заведение
+        <a class='nav-link text-reserved' style="color: #57a283 !important;" href='{{ backpack_url('entity') }}'>
+            <img src="/favicon/favicon-32x32.png" class="reserved-icon" width="24" height="24"> Заведение
         </a>
     </li>
 
     <li class='nav-item'>
-        <a class='nav-link' href='{{ backpack_url('room') }}'>
-            <i class='nav-icon la la-border-all'></i> Комнаты и столы
+        <a class='nav-link text-reserved' style="color: #57a283 !important;" href='{{ backpack_url('room') }}'>
+            <img src="/img/logo/wedding-dinner.png" class="reserved-icon" width="24" height="24"> Комнаты и столы
         </a>
     </li>
 
     <li class='nav-item'>
-        <a class='nav-link' href='{{ backpack_url('photos') }}'>
-            <i class='nav-icon las la-image'></i> Фото
+        <a class='nav-link text-reserved' style="color: #57a283 !important;" href='{{ backpack_url('photos') }}'>
+            <img src="/img/logo/gallery.png" class="reserved-icon" width="24" height="24"> Фото
         </a>
     </li>
 
     <li class='nav-item'>
-        <a class='nav-link' href='{{ backpack_url('menus') }}'>
-            <i class='nav-icon las la-image'></i> Меню
+        <a class='nav-link text-reserved' style="color: #57a283 !important;" href='{{ backpack_url('menus') }}'>
+            <img src="/img/logo/hot-food.png" class="reserved-icon" width="24" height="24"> Меню
         </a>
     </li>
 
     <li class="nav-title">
-        <span class="text-primary">Сервисы</span>
+        <span class="color-reserved">Сервисы</span>
     </li>
 
     <li class="nav-item nav-dropdown">
-        <a class="nav-link nav-dropdown-toggle font-weight-normal">
-            <i class='nav-icon las la-cog'></i> Iiko
+        <a class="nav-link nav-dropdown-toggle font-weight-normal text-reserved" style="color: #57a283 !important;">
+            <img src="/img/logo/iiko.ico" class="reserved-icon reserved-rounded" width="24" height="24"> Iiko
         </a>
         <ul class="nav-dropdown-items">
             <li class='nav-item'>
@@ -168,9 +186,10 @@
             </li>
         </ul>
     </li>
+
     <li class='nav-item'>
-        <a class='nav-link' href='{{ backpack_url('telegram') }}'>
-            <i class='nav-icon lab la-telegram'></i> Телеграм
+        <a class='nav-link text-reserved' style="color: #57a283 !important;" href='{{ backpack_url('telegram') }}'>
+            <img src="/img/logo/telegram.png" class="reserved-icon" width="24" height="24"> Телеграм
         </a>
     </li>
 @endif

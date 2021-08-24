@@ -23,6 +23,11 @@ class WebTrafficService
         return $this->webTrafficRepository->getByOrganizationIdAndDate($organizationId,$date);
     }
 
+    public function getByBetweenDateAndOrganizationId($start, $end, $organization): Collection
+    {
+        return $this->webTrafficRepository->getByBetweenDateAndOrganizationId($start, $end, $organization);
+    }
+
     public function getByOrganizationId($organizationId): Collection
     {
         return $this->webTrafficRepository->getByOrganizationId($organizationId);

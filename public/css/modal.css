@@ -9,7 +9,12 @@
     transition: all 0.5s ease;
     overflow: auto;
 }
-
+.modal-calendar {
+    border: none;
+    background: transparent;
+    border-radius: 0;
+    width: 100%;
+}
 .modal-photo, .modal-photo-view {
     min-height: 200px;
     background: rgba(0,0,0,.02) url('/img/logo/cloud-computing.png') no-repeat center;

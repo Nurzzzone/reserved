@@ -26,6 +26,19 @@ class WebTrafficRepositoryEloquent implements WebTrafficRepositoryInterface
             ->get();
     }
 
+    public function getByBetweenDateAndOrganizationId($start, $end, $organization): Collection
+    {
+        return DB::table(WebTrafficContract::TABLE)
+            ->select(MainContract::WEBSITE,DB::raw('DATE('.MainContract::CREATED_AT.') as '.MainContract::DATE),DB::raw('count(*) as total'))
+            ->where([
+                [MainContract::ORGANIZATION_ID,$organization]
+            ])
+            ->whereDate(MainContract::CREATED_AT,'>=',date('Y-m-d',strtotime($start)))
+            ->whereDate(MainContract::CREATED_AT,'<=',date('Y-m-d',strtotime($end)))
+            ->groupBy(MainContract::DATE)
+            ->get();
+    }
+
     public function getByOrganizationId($organizationId): Collection
     {
         return DB::table(WebTrafficContract::TABLE)

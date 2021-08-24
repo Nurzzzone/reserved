@@ -108,10 +108,10 @@ return [
     'developer_name' => 'An-technology',
 
     // Developer website. Link in footer. Type false if you want to hide it.
-    'developer_link' => 'https://www.a-lux.kz/',
+    'developer_link' => '',
 
     // Show powered by Laravel Backpack in the footer? true/false
-    'show_powered_by' => true,
+    'show_powered_by' => false,
 
     // -------
     // SCRIPTS

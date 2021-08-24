@@ -12,6 +12,16 @@
     overflow: hidden;
     justify-content: space-between;
 }
+.entity-filter {
+    width: 32px;
+    height: 32px;
+    background: url('/img/logo/filter.png') rgba(87,162,131,.15) no-repeat center;
+    background-size: 60%;
+    box-shadow: 0 0 0 5px rgba(87,162,131,.15);
+    margin-right: 25px;
+    border-radius: 30px;
+    cursor: pointer;
+}
 .entity-single {
     padding: 20px;
     align-items: baseline;

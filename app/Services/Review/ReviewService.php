@@ -44,4 +44,10 @@ class ReviewService extends BaseService
     public function getByUserId(int $id,$paginate) {
         return $this->reviewRepository->getByUserId($id,$paginate);
     }
+
+    public function getGroupByOrganizationId($organizationId)
+    {
+        return $this->reviewRepository->getGroupByOrganizationId($organizationId);
+    }
+
 }

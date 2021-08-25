@@ -5,8 +5,11 @@ namespace App\Domain\Repositories\Booking;
 use App\Events\BookingNotification;
 use App\Jobs\TelegramNotification;
 use App\Domain\Contracts\MainContract;
+use App\Domain\Contracts\BookingContract;
 use App\Helpers\Time\Time;
 use App\Models\Booking;
+use Illuminate\Support\Collection;
+use Illuminate\Support\Facades\DB;
 
 class BookingRepositoryEloquent implements BookingRepositoryInterface
 {
@@ -56,6 +59,20 @@ class BookingRepositoryEloquent implements BookingRepositoryInterface
                 [MainContract::COMMENT, MainContract::ON]
             ])
             ->orderBy(MainContract::ID, MainContract::DESC)
+            ->get();
+    }
+
+    public function getByBetweenDateAndOrganizationId($start,$end,$organizationId): Collection
+    {
+        return DB::table(BookingContract::TABLE)
+            ->select(MainContract::DATE,DB::raw('count(*) as total'))
+            ->where([
+                [MainContract::ORGANIZATION_ID,$organizationId],
+                [MainContract::STATUS,MainContract::COMPLETED]
+            ])
+            ->whereDate(MainContract::DATE,'>=',date('Y-m-d',strtotime($start)))
+            ->whereDate(MainContract::DATE,'<=',date('Y-m-d',strtotime($end)))
+            ->groupBy(MainContract::DATE)
             ->get();
     }
 

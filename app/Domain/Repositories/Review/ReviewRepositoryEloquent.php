@@ -3,8 +3,10 @@
 
 namespace App\Domain\Repositories\Review;
 
+use App\Domain\Contracts\MainContract;
 use App\Models\Review;
 use App\Domain\Contracts\ReviewContract;
+use Illuminate\Support\Facades\DB;
 
 class ReviewRepositoryEloquent implements ReviewRepositoryInterface
 {
@@ -51,6 +53,15 @@ class ReviewRepositoryEloquent implements ReviewRepositoryInterface
     {
         return Review::with('organization','user')
             ->where(ReviewContract::USER_ID,$id)->skip(--$paginate * $this->take)->take($this->take)->get();
+    }
+
+    public function getGroupByOrganizationId($organizationId)
+    {
+        return DB::table(ReviewContract::TABLE)
+            ->select(MainContract::RATING,DB::raw('count(*) as total'))
+            ->where(MainContract::ORGANIZATION_ID,$organizationId)
+            ->groupBy(MainContract::RATING)
+            ->get();
     }
 
     public function getById($id)

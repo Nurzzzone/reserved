@@ -35,7 +35,7 @@ class WebTrafficRepositoryEloquent implements WebTrafficRepositoryInterface
             ])
             ->whereDate(MainContract::CREATED_AT,'>=',date('Y-m-d',strtotime($start)))
             ->whereDate(MainContract::CREATED_AT,'<=',date('Y-m-d',strtotime($end)))
-            ->groupBy(MainContract::DATE)
+            ->groupBy([MainContract::WEBSITE,MainContract::DATE])
             ->get();
     }
 

@@ -44,6 +44,11 @@ class BookingController extends Controller
         return new BookingCollection($this->bookingService->getCompletedByUserId($userId));
     }
 
+    public function getByBetweenDateAndOrganizationId($start,$end,$organizationId)
+    {
+        return $this->bookingService->getByBetweenDateAndOrganizationId($start,$end,$organizationId);
+    }
+
     /**
      * @throws ValidationException
      */

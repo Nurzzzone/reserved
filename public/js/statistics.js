@@ -8,7 +8,15 @@ let app = new Vue({
             showModal: false,
             colors: [
                 {bg: 'rgba(87,162,131,.2)',ln: 'rgba(87,162,131,.7)'},
-                {bg: 'rgba(255,128,8,.2)',ln: 'rgba(255,128,8,.7)'}
+                {bg: 'rgba(255,128,8,.2)',ln: 'rgba(255,128,8,.7)'},
+                {bg: 'rgba(30, 144, 255,.2)',ln: 'rgba(30, 144, 255,.7)'},
+                {bg: 'rgba(255, 69, 0,.2)',ln: 'rgba(255, 69, 0,.7)'},
+                {bg: 'rgba(238, 130, 238,.2)',ln: 'rgba(238, 130, 238,.7)'},
+                {bg: 'rgba(139, 69, 19,.2)',ln: 'rgba(139, 69, 19,.7)'},
+                {bg: 'rgba(25, 25, 112,.2)',ln: 'rgba(25, 25, 112,.7)'},
+                {bg: 'rgba(255, 160, 122,.2)',ln: 'rgba(255, 160, 122,.7)'},
+                {bg: 'rgba(255, 215, 0,.2)',ln: 'rgba(255, 215, 0,.7)'},
+                {bg: 'rgba(128, 128, 128,.2)',ln: 'rgba(128, 128, 128,.7)'},
             ],
             selectedDate: {
                 start: new Date(),
@@ -17,7 +25,18 @@ let app = new Vue({
             web: {
                 labels: [],
                 list: [],
-            }
+            },
+            booking: {
+                labels: [],
+                list: []
+            },
+            review: {
+                labels: [1,2,3,4,5],
+                list: []
+            },
+            barChart: '<canvas id="barChart"></canvas>',
+            pieChart: '<canvas id="pieChart"></canvas>',
+            lineChart: '<canvas id="lineChart"></canvas>',
         }
     },
     created() {
@@ -27,92 +46,16 @@ let app = new Vue({
     mounted() {
         this.setWeb();
         this.getWeb();
-
-        //bar
-        var ctxB = document.getElementById("barChart").getContext('2d');
-        var myBarChart = new Chart(ctxB, {
-            type: 'bar',
-            data: {
-                labels: ["Red", "Blue", "Yellow", "Green", "Purple", "Orange"],
-                datasets: [{
-                    label: '# of Votes',
-                    data: [12, 19, 3, 5, 2, 3],
-                    backgroundColor: [
-                        'rgba(255, 99, 132, 0.2)',
-                        'rgba(54, 162, 235, 0.2)',
-                        'rgba(255, 206, 86, 0.2)',
-                        'rgba(75, 192, 192, 0.2)',
-                        'rgba(153, 102, 255, 0.2)',
-                        'rgba(255, 159, 64, 0.2)'
-                    ],
-                    borderColor: [
-                        'rgba(255,99,132,1)',
-                        'rgba(54, 162, 235, 1)',
-                        'rgba(255, 206, 86, 1)',
-                        'rgba(75, 192, 192, 1)',
-                        'rgba(153, 102, 255, 1)',
-                        'rgba(255, 159, 64, 1)'
-                    ],
-                    borderWidth: 1
-                }]
-            },
-            options: {
-                scales: {
-                    yAxes: [{
-                        ticks: {
-                            beginAtZero: true
-                        }
-                    }]
-                }
-            }
-        });
-        new Chart(document.getElementById("horizontalBar"), {
-            "type": "horizontalBar",
-            "data": {
-                "labels": ["Red", "Orange", "Yellow", "Green", "Blue", "Purple", "Grey"],
-                "datasets": [{
-                    "label": "My First Dataset",
-                    "data": [22, 33, 55, 12, 86, 23, 14],
-                    "fill": false,
-                    "backgroundColor": ["rgba(255, 99, 132, 0.2)", "rgba(255, 159, 64, 0.2)",
-                        "rgba(255, 205, 86, 0.2)", "rgba(75, 192, 192, 0.2)", "rgba(54, 162, 235, 0.2)",
-                        "rgba(153, 102, 255, 0.2)", "rgba(201, 203, 207, 0.2)"
-                    ],
-                    "borderColor": ["rgb(255, 99, 132)", "rgb(255, 159, 64)", "rgb(255, 205, 86)",
-                        "rgb(75, 192, 192)", "rgb(54, 162, 235)", "rgb(153, 102, 255)", "rgb(201, 203, 207)"
-                    ],
-                    "borderWidth": 1
-                }]
-            },
-            "options": {
-                "scales": {
-                    "xAxes": [{
-                        "ticks": {
-                            "beginAtZero": true
-                        }
-                    }]
-                }
-            }
-        });
-        var ctxP = document.getElementById("pieChart").getContext('2d');
-        var myPieChart = new Chart(ctxP, {
-            type: 'pie',
-            data: {
-                labels: ["Red", "Green", "Yellow", "Grey", "Dark Grey"],
-                datasets: [{
-                    data: [300, 50, 100, 40, 120],
-                    backgroundColor: ["#F7464A", "#46BFBD", "#FDB45C", "#949FB1", "#4D5360"],
-                    hoverBackgroundColor: ["#FF5A5E", "#5AD3D1", "#FFC870", "#A8B3C5", "#616774"]
-                }]
-            },
-            options: {
-                responsive: true
-            }
-        });
+        this.setBooking();
+        this.getBooking();
+        this.setReview();
+        this.getReview();
     },
     methods: {
         readyFilter: function() {
             this.showModal  =   false;
+            this.getWeb();
+            this.getBooking();
         },
         getStartDate: function() {
             return this.selectedDate.start.getFullYear()+'-'+(this.selectedDate.start.getMonth()+1)+'-'+this.selectedDate.start.getDate();
@@ -120,8 +63,122 @@ let app = new Vue({
         getEndDate: function() {
             return this.selectedDate.end.getFullYear()+'-'+(this.selectedDate.end.getMonth()+1)+'-'+this.selectedDate.end.getDate();
         },
+        getReview: function() {
+            axios.get('/api/review/group/'+this.id)
+                .then(response => {
+                    let data    =   response.data;
+                    let arr     =   [];
+                    this.review.labels.forEach(label => {
+                        let total   =   0;
+                        data.forEach(item => {
+                            if (label === item.rating) {
+                                total   =   item.total;
+                            }
+                        });
+                        arr.push(total);
+                    });
+                    this.pieChart   =   '<canvas id="pieChart"></canvas>';
+                    new Chart(document.getElementById('pieChart'), {
+                        type: 'pie',
+                        data: {
+                            labels: this.review.labels,
+                            datasets: [{
+                                data: arr,
+                                backgroundColor: [
+                                    'rgba(87,162,131,1,)',
+                                    'rgba(255,128,8,1)',
+                                    'rgba(30, 144, 255,1)',
+                                    'rgba(255, 69, 0,1)',
+                                    'rgba(238, 130, 238,1)'
+                                ],
+                                hoverBackgroundColor: [
+                                    'rgba(87,162,131,1)',
+                                    'rgba(255,128,8,1)',
+                                    'rgba(30, 144, 255,1)',
+                                    'rgba(255, 69, 0,1)',
+                                    'rgba(238, 130, 238,1)'
+                                ]
+                            }]
+                        },
+                        options: {
+                            responsive: true
+                        }
+                    });
+                });
+        },
+        setReview: function() {
+            new Chart(document.getElementById('pieChart'), {
+                type: 'pie',
+                data: {
+                    labels: this.review.labels,
+                    datasets: this.review.list
+                },
+                options: {
+                    responsive: true
+                }
+            });
+        },
+        setBooking: function() {
+            new Chart(document.getElementById('barChart'), {
+                type: 'bar',
+                data: {
+                    labels: this.booking.labels,
+                    datasets: this.booking.list
+                },
+                options: {
+                    scales: {
+                        yAxes: [{
+                            ticks: {
+                                beginAtZero: true
+                            }
+                        }]
+                    }
+                }
+            });
+        },
+        getBooking: function() {
+            axios.get('/api/booking/dateBetween/'+this.getStartDate()+'/'+this.getEndDate()+'/'+this.id)
+                .then(response => {
+                    let data    =   response.data;
+                    let labels  =   [];
+                    let list    =   [];
+                    let bg      =   [];
+                    let ln      =   [];
+                    data.forEach(item => {
+                        labels.push(item.date);
+                        list.push(item.total);
+                        bg.push(this.colors[0].bg);
+                        ln.push(this.colors[0].ln);
+                    });
+                    this.barChart  =   '<canvas id="barChart"></canvas>';
+                    new Chart(document.getElementById('barChart'), {
+                        type: 'bar',
+                        data: {
+                            labels: labels,
+                            datasets: [
+                                {
+                                    label: 'Статистика бронирвовании',
+                                    data: list,
+                                    backgroundColor: bg,
+                                    borderColor: ln,
+                                    borderWidth: 1
+                                }
+                            ]
+                        },
+                        options: {
+                            scales: {
+                                yAxes: [{
+                                    ticks: {
+                                        beginAtZero: true
+                                    }
+                                }]
+                            }
+                        }
+                    });
+                });
+        },
         setWeb: function() {
-            new Chart(this.$refs.lineChart, {
+            new Chart(document.getElementById('lineChart'), {
                 type: 'line',
                 data: {
                     labels: this.web.labels,
@@ -141,9 +198,12 @@ let app = new Vue({
                     let data    =   response.data;
                     let labels  =   [];
                     let list    =   [];
-                    let i       =   0;
                     data.forEach(item => {
                         labels.push(item.date);
+                    });
+                    labels  =   labels.filter(this.onlyUnique);
+                    let i = 0;
+                    data.forEach(item => {
                         if (!(item.website in list)) {
                             list[item.website]  =   {
                                 label: item.website,
@@ -153,20 +213,33 @@ let app = new Vue({
                                 borderWidth: 2
                             };
                         }
-                        list[item.website].data.push(item.total);
+                        labels.forEach(label => {
+                            if (item.date === label) {
+                                list[item.website].data[label]  =   item.total;
+                            } else if (list[item.website].data[label] === undefined) {
+                                list[item.website].data[label]  =   0;
+                            }
+                        });
                         i++;
+                        if (i > 9) {
+                            i = 0;
+                        }
                     });
-
                     let arr =   [];
-
-                    for (i in list) {
+                    for (let i in list) {
                         arr.push(list[i]);
                     }
-
+                    arr.forEach(item => {
+                        list    =   [];
+                        for (let i in item.data) {
+                            list.push(item.data[i]);
+                        }
+                        item.data   =   list;
+                    })
                     this.web.labels =   labels.filter(this.onlyUnique);
                     this.web.list   =   arr;
-
-                    new Chart(this.$refs.lineChart, {
+                    this.lineChart  =   '<canvas id="lineChart"></canvas>';
+                    new Chart(document.getElementById('lineChart'), {
                         type: 'line',
                         data: {
                             labels: this.web.labels,
@@ -176,32 +249,7 @@ let app = new Vue({
                             responsive: true
                         }
                     });
-
                 });
-            /*
-           {
-                                   label: "2gis.com",
-                                   data: [65, 59, 80, 81, 56, 55, 40],
-                                   backgroundColor: [
-                                       'rgba(105, 0, 132, .2)',
-                                   ],
-                                   borderColor: [
-                                       'rgba(200, 99, 132, .7)',
-                                   ],
-                                   borderWidth: 2
-                               },
-                               {
-                                   label: "vk.com",
-                                   data: [28, 48, 40, 19, 86, 27, 90],
-                                   backgroundColor: [
-                                       'rgba(0, 137, 132, .2)',
-                                   ],
-                                   borderColor: [
-                                       'rgba(0, 10, 130, .7)',
-                                   ],
-                                   borderWidth: 2
-                               }
-            */
         },
         setTime: function() {
             let start   =   new Date();

@@ -85,4 +85,9 @@ class ReviewController extends Controller
         }
         return new ReviewCollection($this->reviewService->getByUserId($id,$this->paginate));
     }
+
+    public function getGroupByOrganizationId($organizationId)
+    {
+        return $this->reviewService->getGroupByOrganizationId($organizationId);
+    }
 }

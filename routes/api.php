@@ -118,6 +118,7 @@ Route::prefix('booking')->group(function() {
     Route::get('table/{tableId}',[BookingController::class,'getByTableId'])->name('booking.table');
     Route::get('date/{date}',[BookingController::class,'getByDate'])->name('booking.date');
     Route::get('completed/{userId}',[BookingController::class,'getCompletedByUserId'])->name('booking.status.user');
+    Route::get('dateBetween/{start}/{end}/{organizationId}',[BookingController::class,'getByBetweenDateAndOrganizationId'])->name('booking.organizationBetweenDate');
 
 });
 
@@ -145,6 +146,7 @@ Route::prefix('review')->group(function () {
     Route::get('count/organization/{organizationId}',[ReviewController::class,'getCountByOrganizationId']);
     Route::get('list/organization/{id}',[ReviewController::class,'getByOrganizationId']);
     Route::get('list/user/{id}',[ReviewController::class,'getByUserId']);
+    Route::get('group/{organizationId}',[ReviewController::class,'getGroupByOrganizationId'])->name('group.organizationId');
 
 });
 

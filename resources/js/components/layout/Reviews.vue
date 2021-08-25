@@ -98,7 +98,6 @@ export default {
                     .then(response => {
                         this.status =   false;
                         this.ajaxStatus =   false;
-                        console.log(response.data);
                         let reviews =   response.data.data;
 
                         if (reviews.length === 15) {

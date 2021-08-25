@@ -19115,8 +19115,8 @@ __webpack_require__.r(__webpack_exports__);
         axios.get('/api/review/list/organization/' + this.id + '?paginate=' + this.paginate++).then(function (response) {
           _this2.status = false;
           _this2.ajaxStatus = false;
+          console.log(response.data);
           var reviews = response.data.data;
-          console.log(reviews);
 
           if (reviews.length === 15) {
             _this2.statusContinue = true;

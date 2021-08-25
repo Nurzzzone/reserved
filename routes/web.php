@@ -18,11 +18,9 @@ use App\Http\Controllers\Admin\OrganizationTablesCrudController;
 use App\Http\Controllers\Admin\OrganizationTableListCrudController;
 use App\Http\Controllers\Admin\BookingCrudController;
 
-
 header('Access-Control-Allow-Origin: *');
 header('Access-Control-Allow-Methods: POST, GET, OPTIONS, PUT, DELETE');
 header('Access-Control-Allow-Headers: Content-Type, X-Auth-Token, Origin, Authorization,X-localization,X-No-Cache');
-
 
 Route::get('/',function() {
     return redirect('/home');

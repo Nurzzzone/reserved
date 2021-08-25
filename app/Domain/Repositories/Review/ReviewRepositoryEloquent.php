@@ -46,13 +46,17 @@ class ReviewRepositoryEloquent implements ReviewRepositoryInterface
     public function getByOrganizationId($id,$paginate)
     {
         return Review::with('organization','user')
-            ->where(ReviewContract::ORGANIZATION_ID,$id)->skip(--$paginate * $this->take)->take($this->take)->get();
+            ->where(MainContract::ORGANIZATION_ID,$id)
+            ->orderBy(MainContract::ID,MainContract::DESC)
+            ->skip(--$paginate * $this->take)
+            ->take($this->take)
+            ->get();
     }
 
     public function getByUserId($id,$paginate)
     {
         return Review::with('organization','user')
-            ->where(ReviewContract::USER_ID,$id)->skip(--$paginate * $this->take)->take($this->take)->get();
+            ->where(MainContract::USER_ID,$id)->skip(--$paginate * $this->take)->take($this->take)->get();
     }
 
     public function getGroupByOrganizationId($organizationId)

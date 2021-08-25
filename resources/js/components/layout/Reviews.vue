@@ -44,6 +44,9 @@
                                 </div>
                             </div>
                         </div>
+                        <div v-if="statusContinue">
+                            <button class="btn-scroll" @click="getReviews()">Показать ещё</button>
+                        </div>
                     </template>
                     <NotFound v-else :params="empty"></NotFound>
                 </div>
@@ -70,8 +73,11 @@ export default {
                 description: 'Еще никто не оставлял комментарий'
             },
             reviewCount: 0,
+            paginate: 1,
             status: true,
-            reviews: []
+            reviews: [],
+            statusContinue: false,
+            ajaxStatus: true,
         }
     },
     mounted() {
@@ -86,18 +92,48 @@ export default {
                 });
         },
         getReviews: function() {
-            axios.get('/api/review/list/organization/'+this.id)
-                .then(response => {
-                    this.status     =   false;
-                    this.reviews    =   response.data.data;
-                }).catch(error => {
-                    this.status     =   false;
-                });
+            if (this.ajaxStatus) {
+                this.ajaxStatus =   false;
+                axios.get('/api/review/list/organization/'+this.id+'?paginate='+this.paginate++)
+                    .then(response => {
+                        this.status =   false;
+                        this.ajaxStatus =   false;
+                        let reviews =   response.data.data;
+                        if (reviews.length === 15) {
+                            this.statusContinue =   true;
+                            this.ajaxStatus =   true;
+                        } else {
+                            this.statusContinue =   false;
+                        }
+                        this.reviews    =   this.reviews.concat(reviews);
+                    }).catch(error => {
+                        this.status     =   false;
+                    });
+            }
         }
     }
 }
 </script>
 
-<style scoped>
-
+<style lang="scss">
+    .btn-scroll {
+        margin: 0 auto 0 auto;
+        display: block;
+        height: 40px;
+        background: #00a082;
+        border: none;
+        color: #fff;
+        padding: 0 20px 0 20px;
+        border-radius: 30px;
+        font-size: 14px;
+        outline: none !important;
+        box-shadow: none !important;
+    }
+    @media only screen and (max-width: 768px) {
+        .btn-scroll {
+            font-size: 11px;
+            height: 30px;
+            padding: 0 10px 0 10px;
+        }
+    }
 </style>

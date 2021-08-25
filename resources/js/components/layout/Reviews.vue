@@ -94,7 +94,7 @@ export default {
         getReviews: function() {
             if (this.ajaxStatus) {
                 this.ajaxStatus =   false;
-                axios.get('/api/review/list/organization/'+this.id+'?paginate='+this.paginate++)
+                axios.get('/api/review/list/organization/'+this.id+'/'+this.paginate++)
                     .then(response => {
                         this.status =   false;
                         this.ajaxStatus =   false;

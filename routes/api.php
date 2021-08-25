@@ -144,7 +144,7 @@ Route::prefix('review')->group(function () {
 
     Route::get('delete/{id}',[ReviewController::class,'delete']);
     Route::get('count/organization/{organizationId}',[ReviewController::class,'getCountByOrganizationId']);
-    Route::get('list/organization/{id}',[ReviewController::class,'getByOrganizationId']);
+    Route::get('list/organization/{id}/{paginate}',[ReviewController::class,'getByOrganizationId']);
     Route::get('list/user/{id}',[ReviewController::class,'getByUserId']);
     Route::get('group/{organizationId}',[ReviewController::class,'getGroupByOrganizationId'])->name('group.organizationId');
 

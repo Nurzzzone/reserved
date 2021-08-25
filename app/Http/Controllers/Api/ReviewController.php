@@ -70,13 +70,9 @@ class ReviewController extends Controller
         return $this->reviewService->getCountByOrganizationId($organizationId);
     }
 
-    public function getByOrganizationId(int $id, Request $request): ReviewCollection
+    public function getByOrganizationId(int $id, $paginate): ReviewCollection
     {
-        if ($request->has('paginate')) {
-            $this->paginate =   $request->input('paginate');
-            exit($this->paginate.'|');
-        }
-
+        $this->paginate =   (int)$paginate;
         return new ReviewCollection($this->reviewService->getByOrganizationId($id,$this->paginate));
     }
 

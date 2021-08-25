@@ -19112,7 +19112,7 @@ __webpack_require__.r(__webpack_exports__);
 
       if (this.ajaxStatus) {
         this.ajaxStatus = false;
-        axios.get('/api/review/list/organization/' + this.id + '?paginate=' + this.paginate++).then(function (response) {
+        axios.get('/api/review/list/organization/' + this.id + '/' + this.paginate++).then(function (response) {
           _this2.status = false;
           _this2.ajaxStatus = false;
           console.log(response.data);

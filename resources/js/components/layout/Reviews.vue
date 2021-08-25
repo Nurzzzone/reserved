@@ -99,7 +99,9 @@ export default {
                         this.status =   false;
                         this.ajaxStatus =   false;
                         let reviews =   response.data.data;
+                        console.log(reviews);
                         if (reviews.length === 15) {
+
                             this.statusContinue =   true;
                             this.ajaxStatus =   true;
                         } else {

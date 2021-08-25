@@ -19116,6 +19116,7 @@ __webpack_require__.r(__webpack_exports__);
           _this2.status = false;
           _this2.ajaxStatus = false;
           var reviews = response.data.data;
+          console.log(reviews);
 
           if (reviews.length === 15) {
             _this2.statusContinue = true;

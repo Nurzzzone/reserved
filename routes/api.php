@@ -111,6 +111,7 @@ Route::prefix('booking')->group(function() {
     Route::post('create',[BookingController::class,'create'])->name('booking.create');
     Route::post('update/{id}',[BookingController::class,'update'])->name('booking.update');
     Route::post('card',[BookingController::class,'card'])->name('booking.card');
+    Route::post('ids/{date}',[BookingController::class,'ids'])->name('booking.ids');
 
     Route::get('id/{id}',[BookingController::class,'getById'])->name('booking.id');
     Route::get('user/{userId}',[BookingController::class,'getByUserId'])->name('booking.user');
@@ -164,7 +165,7 @@ Route::prefix('organization')->group(function() {
 Route::prefix('user')->group(function() {
     Route::post('update/{id}',[UserController::class,'update'])->name('user.update');
     Route::post('password/{id}',[UserController::class,'updatePassword'])->name('user.update.password');
-    Route::get('/{id}',[UserController::class,'getById'])->name('user.id');
+    Route::get('{id}',[UserController::class,'getById'])->name('user.id');
     Route::get('phone/{phone}',[UserController::class,'getByPhone'])->name('user.phone');
     Route::post('booking',[UserController::class,'booking'])->name('user.booking');
     Route::post('new',[UserController::class,'guest'])->name('user.guest');

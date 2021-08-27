@@ -2,7 +2,9 @@
 
 namespace App\Domain\Repositories\Booking;
 
+use App\Domain\Contracts\UserContract;
 use App\Events\BookingNotification;
+use App\Events\BookingOrganizationNotification;
 use App\Jobs\TelegramNotification;
 use App\Domain\Contracts\MainContract;
 use App\Domain\Contracts\BookingContract;
@@ -35,9 +37,36 @@ class BookingRepositoryEloquent implements BookingRepositoryInterface
             TelegramNotification::dispatch($booking);
         }
         if ($booking->{MainContract::STATUS} != MainContract::OFF) {
-            event(new BookingNotification($this->getById($booking->id)));
+            $booking    =   $this->getById($booking->id);
+            event(new BookingNotification($booking));
+            event(new BookingOrganizationNotification($booking));
         }
         return $booking;
+    }
+
+    public function ids($date, $ids): array
+    {
+        $data   =   [];
+        foreach ($ids as &$id) {
+            $data[] =   Booking::with('user')
+                ->where([
+                    [MainContract::ORGANIZATION_TABLE_LIST_ID,$id],
+                    [MainContract::DATE,$date],
+                    [MainContract::STATUS, MainContract::ON],
+                ])->orWhere([
+                    [MainContract::ORGANIZATION_TABLE_LIST_ID,$id],
+                    [MainContract::DATE,$date],
+                    [MainContract::STATUS, MainContract::CAME],
+                ])->orWhere([
+                    [MainContract::ORGANIZATION_TABLE_LIST_ID,$id],
+                    [MainContract::DATE,$date],
+                    [MainContract::STATUS, MainContract::CHECKING],
+                    [MainContract::CREATED_AT,'>=',$this->date]
+                ])
+                ->orderBy(MainContract::ID, MainContract::DESC)
+                ->first();
+        }
+        return $data;
     }
 
     public function update($id, array $data):void
@@ -47,12 +76,13 @@ class BookingRepositoryEloquent implements BookingRepositoryInterface
             TelegramNotification::dispatch($booking);
         }
         event(new BookingNotification($booking));
+        event(new BookingOrganizationNotification($booking));
         Booking::where(MainContract::ID,$id)->update($data);
     }
 
     public function getCompletedByUserId($userId):object
     {
-        return Booking::with('organization','organizationTables')
+        return Booking::with('user','organization','organizationTables')
             ->where([
                 [MainContract::USER_ID,$userId],
                 [MainContract::STATUS, MainContract::COMPLETED],
@@ -80,9 +110,10 @@ class BookingRepositoryEloquent implements BookingRepositoryInterface
     {
         return $this->getOneMultiple([MainContract::ORGANIZATION_TABLE_LIST_ID,$id],[MainContract::DATE,$date]);
     }
+
     public function getOneMultiple($query, $query2)
     {
-        return Booking::with('organization','organizationTables')
+        return Booking::with('user','organization','organizationTables')
             ->where([
                 $query,
                 $query2,
@@ -102,6 +133,7 @@ class BookingRepositoryEloquent implements BookingRepositoryInterface
                 $query,
                 $query2,
                 [MainContract::STATUS, MainContract::CHECKING],
+                [MainContract::CREATED_AT,'>=',$this->date]
             ])
             ->orderBy(MainContract::ID, MainContract::DESC)
             ->first();
@@ -114,7 +146,7 @@ class BookingRepositoryEloquent implements BookingRepositoryInterface
 
     public function getOne($query)
     {
-        return Booking::with('organization','organizationTables')
+        return Booking::with('user','organization','organizationTables')
             ->where([
                 $query,
                 [MainContract::STATUS, MainContract::ON]
@@ -152,7 +184,7 @@ class BookingRepositoryEloquent implements BookingRepositoryInterface
     }
     public function get($query, $paginate):object
     {
-        return Booking::with('organization','organizationTables')
+        return Booking::with('user','organization','organizationTables')
             ->where([
                 $query,
                 [MainContract::STATUS, MainContract::ON]

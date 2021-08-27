@@ -21,6 +21,10 @@ Broadcast::channel('private-booking.notification.{id}', function ($user,$booking
     return true;
 });
 
+Broadcast::channel('private-booking.notification.organization.{id}', function ($user,$booking) {
+    return true;
+});
+
 Broadcast::channel('private-new.card.{id}', function($user, $booking) {
     return true;
 });

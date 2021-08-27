@@ -10,7 +10,7 @@ use App\Http\Resources\OrganizationTableList\OrganizationTableListCollection;
 class OrganizationTablesResource extends JsonResource
 {
 
-    public function toArray($request)
+    public function toArray($request): array
     {
         return [
             MainContract::ID  =>  $this->{MainContract::ID},

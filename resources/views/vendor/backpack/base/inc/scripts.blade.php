@@ -77,7 +77,6 @@
             let name    =   $("#name");
             let date    =   $("#date");
             let time    =   $("#time");
-
             if (phone.val().trim() === '') {
                 return phone.focus();
             } else if (name.val().trim() === '') {
@@ -87,7 +86,6 @@
             } else if (time.val().trim() === '') {
                 return time.focus();
             }
-
             let data    =   {
                 timezone: Intl.DateTimeFormat().resolvedOptions().timeZone,
                 user_id: $("#booking-modal").attr('data-user'),
@@ -98,9 +96,7 @@
                 date:  date.val().trim(),
                 time:  time.val().trim(),
             };
-
             status = false;
-
             $.ajax({
                 url: '/api/user/booking',
                 type: 'POST',
@@ -112,9 +108,7 @@
                     $("#name").val('');
                     $("#time").val('');
                     $(".close-booking").click();
-
                     status = true;
-
                 },
                 error: function(data) {
                     $.notify('Произошла ошибка', 'error');

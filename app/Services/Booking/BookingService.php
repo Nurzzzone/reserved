@@ -66,6 +66,11 @@ class BookingService extends BaseService
         return $this->bookingRepository->create($data);
     }
 
+    public function ids($date, $ids): array
+    {
+        return $this->bookingRepository->ids($date, $ids);
+    }
+
     public function update($id, array $data):void
     {
         $this->bookingRepository->update($id, $data);

@@ -28,7 +28,8 @@ class BookingResource extends JsonResource
             MainContract::PG_SIG =>  PaymentService::paySignature($this->{MainContract::PAYMENT_ID}),
             MainContract::ORGANIZATION   =>  new OrganizationResource($this->{MainContract::ORGANIZATION}),
             MainContract::ORGANIZATION_TABLES    =>  new OrganizationTableListResource($this->{MainContract::ORGANIZATION__TABLES}),
-            MainContract::STATUS =>  $this->{MainContract::STATUS}
+            MainContract::STATUS    =>  $this->{MainContract::STATUS},
+            MainContract::USER  =>  $this->{MainContract::USER}
         ];
     }
 }

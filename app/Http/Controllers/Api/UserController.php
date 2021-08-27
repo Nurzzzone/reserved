@@ -22,6 +22,7 @@ use App\Services\Booking\BookingService;
 use App\Services\OrganizationTableList\OrganizationTableListService;
 
 use App\Http\Resources\UserResource;
+use App\Http\Resources\Booking\BookingResource;
 
 use App\Jobs\BookingPayment;
 use App\Jobs\UserPassword;
@@ -34,6 +35,7 @@ use App\Http\Requests\User\UserCreateRequest;
 use App\Http\Requests\User\UserGuestRequest;
 use App\Http\Requests\User\UserUpdateRequest;
 use App\Http\Requests\User\UserPasswordRequest;
+use Illuminate\Validation\ValidationException;
 use Pusher\Pusher;
 
 class UserController extends Controller
@@ -108,6 +110,8 @@ class UserController extends Controller
 
         if ($price < 1) {
             $booking[MainContract::STATUS]   =   MainContract::ON;
+        } else {
+            $booking[MainContract::STATUS]  =   MainContract::CHECKING;
         }
 
         $booking    =   $this->bookingService->create($booking);
@@ -118,8 +122,8 @@ class UserController extends Controller
                 MainContract::USER_ID    =>  $user->{MainContract::ID}
             ]);
         }
-
-        return $booking;
+        $booking->{MainContract::USER}  =   $user;
+        return new BookingResource($booking);
     }
 
     public function getByPhone($phone)
@@ -131,7 +135,10 @@ class UserController extends Controller
         return response(['message'  =>  'Пользователь не найден'],404);
     }
 
-    public function update($id, UserUpdateRequest $userUpdateRequest)
+    /**
+     * @throws ValidationException
+     */
+    public function update($id, UserUpdateRequest $userUpdateRequest): UserResource
     {
         return new UserResource($this->userService->update($id,$userUpdateRequest->validated()));
     }

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Domain\Contracts\BookingContract;
+use App\Domain\Contracts\MainContract;
 use App\Domain\Contracts\OrganizationContract;
 use App\Domain\Contracts\OrganizationTableListContract;
 use App\Domain\Contracts\OrganizationTablesContract;
@@ -200,7 +201,7 @@ class BookingCrudController extends CrudController
 
     public function cancel($id) {
         $booking    =   $this->bookingService->getById($id);
-        $this->bookingService->update($id,[BookingContract::STATUS =>  BookingContract::OFF]);
+        $this->bookingService->update($id,[MainContract::STATUS =>  MainContract::OFF]);
         BookingPaymentRevoke::dispatch($booking);
     }
 

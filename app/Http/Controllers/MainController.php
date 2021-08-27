@@ -35,6 +35,11 @@ class MainController extends Controller
     }
 
     public function dashboard() {
+        if (!backpack_auth()->user()->id) {
+            redirect('/home/login');
+        }
+        $organization   =   $this->organizationService->getByUserId(backpack_auth()->user()->id);
+        return view('backpack.dashboard.dashboard',['organization' => $organization]);
         return view('vendor.backpack.base.dashboard',[
             'userService'    =>  $this->userService,
             'organizationService'   =>  $this->organizationService,

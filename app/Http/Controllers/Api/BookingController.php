@@ -19,9 +19,11 @@ use App\Http\Requests\Booking\BookingPaginateRequest;
 use App\Http\Requests\Booking\BookingGuestRequest;
 use App\Http\Requests\Booking\BookingUpdateRequest;
 use App\Http\Requests\Booking\BookingPaymentCardRequest;
+use App\Http\Requests\Booking\BookingIdsRequest;
 
 use App\Domain\Contracts\BookingContract;
 use App\Domain\Contracts\MainContract;
+use Illuminate\Support\Collection;
 use Illuminate\Validation\ValidationException;
 
 class BookingController extends Controller
@@ -44,7 +46,7 @@ class BookingController extends Controller
         return new BookingCollection($this->bookingService->getCompletedByUserId($userId));
     }
 
-    public function getByBetweenDateAndOrganizationId($start,$end,$organizationId)
+    public function getByBetweenDateAndOrganizationId($start,$end,$organizationId): Collection
     {
         return $this->bookingService->getByBetweenDateAndOrganizationId($start,$end,$organizationId);
     }
@@ -73,6 +75,14 @@ class BookingController extends Controller
             return $card;
         }
         return response(['message'  =>  'Произошла ошибка'],400);
+    }
+
+    /**
+     * @throws ValidationException
+     */
+    public function ids($date, BookingIdsRequest $bookingIdsRequest): array
+    {
+        return $this->bookingService->ids($date, $bookingIdsRequest->validated()[MainContract::IDS]);
     }
 
     /**

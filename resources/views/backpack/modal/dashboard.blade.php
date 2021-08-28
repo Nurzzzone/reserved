@@ -25,10 +25,9 @@
                             <div class="modal-inputs">
                                 <div class="modal-input">
                                     <div class="font-weight-bold">Время</div>
-                                    <input type="text" class="modal-text" v-model="booking.time" v-mask="'##:##'" ref="time" placeholder="00:00">
+                                    <input type="text" class="modal-text" v-mask="'##:##'" v-model="booking.time" ref="time" placeholder="00:00" minlength="5" maxlength="5">
                                 </div>
                                 <div class="modal-input">
-
                                     <div class="font-weight-bold">Номер телефона</div>
                                     <input type="text" class="modal-text" v-model="booking.phone" v-mask="'+7 (###) ###-##-##'" @blur="phoneCheck()" ref="phone">
                                     <div class="font-weight-bold">Имя</div>

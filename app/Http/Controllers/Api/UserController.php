@@ -97,7 +97,7 @@ class UserController extends Controller
         $organization   =   $this->organizationService->getById($request->input(MainContract::ORGANIZATION_ID));
         $table          =   $this->organizationTableListService->getById($request->input(MainContract::ORGANIZATION_TABLE_ID));
 
-        $price          =   $table->{MainContract::PRICE} > 0?$table->{MainContract::PRICE}:$organization->{MainContract::PRICE};
+        $price          =   $table->{MainContract::PRICE}>0?$table->{MainContract::PRICE}:$organization->{MainContract::PRICE};
 
         $booking    =   [
             MainContract::USER_ID    =>  $user->{MainContract::ID},
@@ -119,7 +119,8 @@ class UserController extends Controller
             BookingPayment::dispatch([
                 MainContract::ID =>  $booking->id,
                 MainContract::ORGANIZATION_ID    =>  $request->input(MainContract::ORGANIZATION_ID),
-                MainContract::USER_ID    =>  $user->{MainContract::ID}
+                MainContract::USER_ID   =>  $user->{MainContract::ID},
+                MainContract::PRICE     =>  $price
             ]);
         }
         $booking->{MainContract::USER}  =   $user;

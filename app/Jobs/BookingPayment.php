@@ -3,6 +3,7 @@
 namespace App\Jobs;
 
 use App\Domain\Contracts\BookingContract;
+use App\Domain\Contracts\MainContract;
 use App\Domain\Contracts\PaymentContract;
 use App\Services\Organization\OrganizationService;
 use Illuminate\Bus\Queueable;
@@ -27,15 +28,15 @@ class BookingPayment implements ShouldQueue
     }
 
     public function handle(OrganizationService $organizationService, SmsService $smsService, UserService $userService, PaymentService $paymentService, BookingService $bookingService) {
-        $organization   =   $organizationService->getById($this->data[BookingContract::ORGANIZATION_ID]);
-        $user           =   $userService->getById($this->data[BookingContract::USER_ID]);
-        $payment        =   $paymentService->urlAdmin($this->data[BookingContract::ID],$organization->price,$organization->title,$user->phone);
-        if (array_key_exists(PaymentContract::PG_REDIRECT_URL,$payment)) {
-            $bookingService->update($this->data[BookingContract::ID],[
-                BookingContract::PAYMENT_ID     =>  $payment[PaymentContract::PG_PAYMENT_ID],
-                BookingContract::PAYMENT_URL    =>  $payment[PaymentContract::PG_REDIRECT_URL]
+        $organization   =   $organizationService->getById($this->data[MainContract::ORGANIZATION_ID]);
+        $user           =   $userService->getById($this->data[MainContract::USER_ID]);
+        $payment        =   $paymentService->urlAdmin($this->data[MainContract::ID],$this->data[MainContract::PRICE],$organization->title,$user->phone);
+        if (array_key_exists(MainContract::PG_REDIRECT_URL,$payment)) {
+            $bookingService->update($this->data[MainContract::ID],[
+                MainContract::PAYMENT_ID     =>  $payment[MainContract::PG_PAYMENT_ID],
+                MainContract::PAYMENT_URL    =>  $payment[MainContract::PG_REDIRECT_URL]
             ]);
-            $smsService->sendBooking($user->phone,$organization->title,$payment[PaymentContract::PG_REDIRECT_URL]);
+            $smsService->sendBooking($user->phone,$organization->title,$payment[MainContract::PG_REDIRECT_URL]);
         }
     }
 }

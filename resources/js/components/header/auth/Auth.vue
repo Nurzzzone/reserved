@@ -17,7 +17,7 @@
                             </div>
                             <div class="form-row mx-md-3">
                                 <div class="col-12 mt-md-3 auth-row">
-                                    <input type="text" class="form-control p-3 auth-input" v-maska="'######'" v-model="sms.code" placeholder="код смс" ref="phone_code" v-on:keyup.enter="sms_btn">
+                                    <input type="number" class="form-control p-3 auth-input" v-maska="'######'" v-model="sms.code" placeholder="код смс" ref="phone_code" v-on:keyup.enter="sms_btn">
                                 </div>
                                 <div class="col-12 mt-md-4 auth-row">
                                     <button class="btn btn-block auth-btn text-white" @click="sms_btn">
@@ -41,7 +41,7 @@
                             <div class="form-row mx-md-3">
                                 <div class="col-12 mt-md-3 auth-row">
                                     <div class="auth-phone-prefix">+7</div>
-                                    <input type="text" class="form-control p-3 auth-input auth-phone" v-maska="'##########'" v-model="login.phone" ref="phone" v-on:keyup.enter="login_btn">
+                                    <input type="number" class="form-control p-3 auth-input auth-phone" v-maska="'##########'" v-model="login.phone" ref="phone" v-on:keyup.enter="login_btn">
                                 </div>
                                 <div class="col-12 mt-md-3 auth-row">
                                     <input type="password" class="form-control p-3 auth-input" v-model="login.password" placeholder="Пароль" ref="password" v-on:keyup.enter="login_btn">
@@ -71,7 +71,7 @@
                                 </div>
                                 <div class="col-12 mt-md-3 auth-row">
                                     <div class="auth-phone-prefix">+7</div>
-                                    <input type="text" class="form-control p-3 auth-input auth-phone" v-maska="'##########'" v-model="register.phone" ref="phone_register" v-on:keyup.enter="register_btn">
+                                    <input type="number" class="form-control p-3 auth-input auth-phone" v-maska="'##########'" v-model="register.phone" ref="phone_register" v-on:keyup.enter="register_btn">
                                 </div>
                                 <div class="col-12 mt-md-3 auth-row">
                                     <input type="password" class="form-control p-3 auth-input" v-model="register.password" placeholder="Пароль" ref="password_register" v-on:keyup.enter="register_btn">

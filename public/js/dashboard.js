@@ -13,6 +13,7 @@ let app = new Vue({
             status: true,
             showModal: false,
             booking: {
+                time: '',
                 phone: '',
                 name: '',
                 table: false,
@@ -101,7 +102,9 @@ let app = new Vue({
         },
         newBooking: function() {
             if (this.booking.status) {
-                if (this.booking.phone.trim().length !== 11) {
+                if (this.booking.time.trim().length !== 5) {
+                    return this.$refs.time.focus();
+                } else if (this.booking.phone.trim().length !== 18) {
                     return this.$refs.phone.focus();
                 } else if (this.booking.name.trim() === '') {
                     return this.$refs.name.focus();
@@ -112,10 +115,10 @@ let app = new Vue({
                     user_id: this.user_id,
                     organization_id: this.booking.table.organization_id,
                     organization_table_id: this.booking.table.id,
-                    phone: this.booking.phone,
+                    phone: this.booking.phone.replace(/[^0-9]/g, ''),
                     name: this.booking.name,
                     date: this.date.getFullYear()+'-'+(this.date.getMonth()+1)+'-'+this.date.getDate(),
-                    time: this.date.getHours()+':'+this.date.getMinutes()
+                    time: this.booking.time
                 }).then(response => {
                     this.booking.status =   true;
                     this.showModal      =   false;
@@ -124,13 +127,13 @@ let app = new Vue({
                     this.updateStatus(response.data.data);
                 }).catch(error => {
                     this.booking.status =   true;
-                    console.log(error.response.data);
                 });
             }
         },
         phoneCheck: function() {
-            if (this.booking.phone.trim().length === 11) {
-                axios.get('/api/user/phone/'+this.booking.phone).then(response => {
+            if (this.booking.phone.trim().length === 18) {
+                let phone   =   this.booking.phone.replace(/[^0-9]/g, '');
+                axios.get('/api/user/phone/'+phone).then(response => {
                     let data    =   response.data.data;
                     this.booking.name   =   data.name;
                 });

@@ -13,19 +13,25 @@
                     <div class="modal-body" data-provide="datepicker-inline">
                         <slot name="body">
                             <div class="modal-inputs">
-                                <div class="modal-input">
-                                    <v-date-picker mode='dateTime' v-model='date' columns="1" class="modal-calendar modal-calendar-bg" show-caps color="green" is24hr="true"></v-date-picker>
-                                </div>
-                                <div class="modal-input">
+                                <div class="modal-input w-100">
                                     <div class="modal-table">
                                         <div class="modal-table-title">@{{ booking.table.title }}</div>
                                         <div class="modal-table-price">@{{ booking.table.limit }} человек</div>
                                         <div class="modal-table-price" v-if="booking.table.price > 0">@{{ booking.table.price }} KZT</div>
                                         <div class="modal-table-price" v-else>Без депозита</div>
                                     </div>
-                                    <div>Номер телефона</div>
-                                    <input type="text" class="modal-text" v-model="booking.phone" v-mask="'7##########'" @blur="phoneCheck()" ref="phone">
-                                    <div>Имя</div>
+                                </div>
+                            </div>
+                            <div class="modal-inputs">
+                                <div class="modal-input">
+                                    <div class="font-weight-bold">Время</div>
+                                    <input type="text" class="modal-text" v-model="booking.time" v-mask="'##:##'" ref="time" placeholder="00:00">
+                                </div>
+                                <div class="modal-input">
+
+                                    <div class="font-weight-bold">Номер телефона</div>
+                                    <input type="text" class="modal-text" v-model="booking.phone" v-mask="'+7 (###) ###-##-##'" @blur="phoneCheck()" ref="phone">
+                                    <div class="font-weight-bold">Имя</div>
                                     <input type="text" class="modal-text" v-model="booking.name" ref="name">
                                     <button class="modal-default-button" @click="newBooking()">
                                         Готово

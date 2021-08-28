@@ -199,3 +199,45 @@
 .dashboard-tables {
 
 }
+@media only screen and (max-width: 768px) {
+    .dashboard-main {
+        padding: 10px 0 10px 10px;
+    }
+    .dashboard-title {
+        font-size: 14px;
+    }
+    .dashboard-block-title {
+        font-size: 11px;
+        margin: 10px 10px 0 10px;
+    }
+    .dashboard-block-description {
+        font-size: 11px;
+        margin: 0 10px 0 10px;
+    }
+    .dashboard-block-body {
+        margin: 5px;
+    }
+    .dashboard-table {
+        width: 50%;
+        padding: 5px;
+    }
+    .dashboard-table-title {
+        font-size: 11px;
+        padding: 10px;
+        margin: 0;
+    }
+    .dashboard-table-forms {
+        margin: 10px;
+        gap: 0;
+    }
+    .dashboard-table-form {
+        font-size: 8px;
+    }
+    .dashboard-table-value {
+        font-size: 8px;
+    }
+    .dashboard-table-button {
+        height: 26px;
+        font-size: 9px;
+    }
+}

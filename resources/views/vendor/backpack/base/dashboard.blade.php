@@ -2780,26 +2780,6 @@
             }
         });
 
-        let stat    =   true;
-        $(document).ready(function() {
-            function load() {
-                if (stat) {
-                    stat  =   false;
-                    setTimeout(function () {
-                        $.ajax({
-                            url: 'booking/status_date/'+$("#datepicker").val(),
-                            type: "GET",
-                            success: function (result) {
-                                $("#sections").html(result);
-                                stat    =   true;
-                            },
-                            complete: load
-                        });
-                    }, 2000);
-                }
-            }
-            load();
-        });
     </script>
     <style>
         .card-toggle-btn {

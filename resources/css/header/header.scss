@@ -30,8 +30,18 @@
         border-radius: 30px;
         cursor: pointer;
     }
+    &-reserved {
+        background: url('/favicon/favicon.ico') no-repeat center whitesmoke;
+        background-size: cover;
+        width: 40px;
+        height: 40px;
+        position: absolute;
+        left: 12px;
+        border-radius: 30px;
+        cursor: pointer;
+    }
     &-location {
-        background-image: url(/img/logo/location-pin-green.svg);
+        background-image: url('/img/logo/location-pin-green.svg');
         left: 12px;
     }
     &-text {
@@ -104,8 +114,8 @@
 @media only screen and (max-width: 768px) {
     .header {
         &-text {
-            font-size: 18px;
-            margin: 0 auto 0 auto;
+            font-size: 14px;
+            margin: 3px auto 3px auto;
             padding: 0;
         }
     }

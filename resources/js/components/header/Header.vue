@@ -3,9 +3,10 @@
         <nav class="navbar navbar-expand-lg fixed-top py-3">
             <div class="container-fluid">
                 <div class="container p-0">
-                    <div class="header-location d-sm-block d-md-none" data-toggle="modal" data-target="#location"></div>
-                    <a class="navbar-brand text-uppercase font-weight-bold header-text px-0" href="/">
-                        Reserved
+                    <div class="header-reserved d-sm-block d-md-none"></div>
+                    <a class="navbar-brand text-uppercase font-weight-bold header-text px-0" data-toggle="modal" data-target="#location">
+                        <span v-if="storage.city">{{storage.city.title}}</span>
+                        <span v-else>Не выбрано</span>
                     </a>
                     <div class="header-sign-out d-sm-block d-md-none" v-if="!login" @click="exit"></div>
                     <div id="navbarSupportedContent" class="collapse navbar-collapse">
@@ -85,14 +86,39 @@ export default {
         return {
             notification: false,
             login: false,
-            user: false
+            user: false,
+            countries: [],
         }
     },
     created() {
         this.notificationView();
         this.auth();
+        this.getCountry();
     },
     methods: {
+        getCountry: function() {
+            if (!sessionStorage.countries) {
+                axios.get('/api/countries')
+                    .then(response => {
+                        let data    =   response.data;
+                        if (data.hasOwnProperty('data')) {
+                            data    =   data.data;
+                            this.countries  =   data;
+                            sessionStorage.countries    =   JSON.stringify(data);
+                            if (this.storage.city === '') {
+                                this.storage.city   =   this.countries[0].city_id[0];
+                            }
+                        }
+                    }).catch(error => {
+                    console.log(error.response);
+                });
+            } else {
+                this.countries  =   JSON.parse(sessionStorage.countries);
+                if (this.storage.city === '') {
+                    this.storage.city   =   this.countries[0].city_id[0];
+                }
+            }
+        },
         notificationView: function() {
             if (window.location.pathname !== '/profile/history') {
                 this.notification   =   true;

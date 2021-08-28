@@ -10,6 +10,13 @@
                 <div class="dashboard-header">
                     <div class="dashboard-title">{{ $organization->{\App\Domain\Contracts\MainContract::TITLE} }}</div>
                 </div>
+                <div class="dashboard-calendar">
+                    <v-date-picker v-model="date" :input-debounce="500">
+                        <template v-slot="{ inputValue, inputEvents }">
+                            <input class="rounded dashboard-calendar-input" readonly :value="inputValue" v-on="inputEvents" />
+                        </template>
+                    </v-date-picker>
+                </div>
             </div>
         </div>
         <div class="dashboard-blocks" v-if="status">

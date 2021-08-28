@@ -4,9 +4,12 @@
             <div class="container-fluid">
                 <div class="container p-0">
                     <div class="header-reserved d-sm-block d-md-none"></div>
-                    <a class="navbar-brand text-uppercase font-weight-bold header-text px-0" data-toggle="modal" data-target="#location">
+                    <a class="navbar-brand text-uppercase font-weight-bold header-text px-0 d-sm-block d-md-none" data-toggle="modal" data-target="#location">
                         <span v-if="storage.city">{{storage.city.title}}</span>
                         <span v-else>Не выбрано</span>
+                    </a>
+                    <a class="navbar-brand text-uppercase font-weight-bold header-text px-0 d-none d-md-block">
+                        RESERVED
                     </a>
                     <div class="header-sign-out d-sm-block d-md-none" v-if="!login" @click="exit"></div>
                     <div id="navbarSupportedContent" class="collapse navbar-collapse">

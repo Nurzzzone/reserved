@@ -20,13 +20,17 @@ let app = new Vue({
             }
         }
     },
+    watch: {
+        date: function() {
+            this.getBookingStatuses();
+        }
+    },
     created() {
         this.setOrganizationId();
         this.getUser();
     },
     mounted() {
         this.getSections();
-
     },
     methods: {
         getUser: function() {
@@ -42,6 +46,7 @@ let app = new Vue({
                     window.Echo.private('booking.notification.organization.'+this.id)
                         .listen('.booking.organization.completed', (e) => {
                             this.updateStatus(e.booking);
+                            this.play(e.booking.status);
                         });
                 });
         },
@@ -173,22 +178,26 @@ let app = new Vue({
         },
         updateStatus: function(booking) {
             let list        =   JSON.parse(JSON.stringify(this.sections));
-            list.forEach(section => {
-                section.organization_tables.forEach(table => {
-                    if (booking.organization_table_list_id === table.id) {
-                        if (booking.status === 'on' || booking.status === 'came' || booking.status === 'CHECKING') {
-                            table.booking  =   booking;
-                            if (this.booking.table && this.booking.table.id === table.id) {
-                                this.showModal  =   false;
+            let currentDate =   new Date(this.date.getFullYear(),this.date.getMonth(),this.date.getDate());
+            let split       =   booking.date.split('-');
+            let bookingDate =   new Date(split[0],(split[1]-1),split[2]);
+            if (currentDate.getTime() === bookingDate.getTime()) {
+                list.forEach(section => {
+                    section.organization_tables.forEach(table => {
+                        if (booking.organization_table_list_id === table.id) {
+                            if (booking.status === 'on' || booking.status === 'came' || booking.status === 'CHECKING') {
+                                table.booking  =   booking;
+                                if (this.booking.table && this.booking.table.id === table.id) {
+                                    this.showModal  =   false;
+                                }
+                            } else {
+                                table.booking  =   null;
                             }
-                            this.play(booking.status);
-                        } else {
-                            table.booking  =   null;
                         }
-                    }
+                    });
                 });
-            });
-            this.sections   =   list;
+                this.sections   =   list;
+            }
         },
         play: function(status) {
             if (status === 'on' || status === 'CHECKING') {

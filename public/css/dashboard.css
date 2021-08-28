@@ -9,7 +9,6 @@
     display: flex;
     align-items: center;
     position: relative;
-    overflow: hidden;
     justify-content: space-between;
 }
 .dashboard-blocks {
@@ -181,6 +180,21 @@
 
 .dashboard-main {
     padding: 20px;
+    display: flex;
+    width: 100%;
+    align-items: center;
+    justify-content: space-between;
+}
+.dashboard-calendar-input {
+    outline: none;
+    border: none !important;
+    background: rgba(87,162,131,.15) !important;
+    cursor: pointer;
+    width: 84px;
+    font-size: 14px;
+    padding: 5px;
+    color: grey;
+    text-align: center;
 }
 .dashboard-header {
     display: flex;
@@ -199,7 +213,23 @@
 .dashboard-tables {
 
 }
+@media only screen and (max-width: 1200px) {
+    .dashboard-table {
+        width: 25%;
+    }
+}
+@media only screen and (max-width: 992px) {
+    .dashboard-table {
+        width: 33.3%;
+    }
+}
 @media only screen and (max-width: 768px) {
+    .dashboard-calendar-input {
+        width: 60px;
+        font-size: 11px;
+        margin-right: 10px;
+        padding: 2px;
+    }
     .dashboard-main {
         padding: 10px 0 10px 10px;
     }

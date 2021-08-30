@@ -38,7 +38,10 @@
     }
     &-input {
         height: 44px;
-        border: 2px solid gainsboro;
+        border: 2px solid gainsboro !important;
+        border-radius: 30px;
+        outline: none !important;
+        box-shadow: none !important;
     }
     &-title {
         font-family: 'Lobster', cursive;

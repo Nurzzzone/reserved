@@ -35,7 +35,7 @@ class MainController extends Controller
     }
 
     public function dashboard() {
-        if (!backpack_auth()->user()->id) {
+        if (!backpack_auth()->user()) {
             redirect('/home/login');
         }
         $organization   =   $this->organizationService->getByUserId(backpack_auth()->user()->id);
@@ -51,7 +51,7 @@ class MainController extends Controller
 
     public function entity()
     {
-        if (!backpack_auth()->user()->id) {
+        if (!backpack_auth()->user()) {
             redirect('/home/login');
         }
         $organization   =   $this->organizationService->getByUserId(backpack_auth()->user()->id);

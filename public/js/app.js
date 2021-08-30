@@ -22512,7 +22512,7 @@ var _hoisted_33 = {
   "class": "col-12 mt-md-3 auth-row"
 };
 var _hoisted_34 = {
-  "class": "col-12 mt-md-4 auth-row"
+  "class": "col-12 mt-md-3 auth-row"
 };
 var _hoisted_35 = {
   key: 0
@@ -22522,10 +22522,18 @@ var _hoisted_36 = {
   "class": "spinner"
 };
 var _hoisted_37 = {
-  "class": "col-12 mt-md-4 auth-row"
+  "class": "col-12 mt-md-3 auth-row"
 };
 
 var _hoisted_38 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", {
+  "class": "col-12 mt-md-3 auth-row"
+}, [/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("button", {
+  "class": "btn btn-block text-secondary"
+}, "Забыли пароль")], -1
+/* HOISTED */
+);
+
+var _hoisted_39 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", {
   "class": "form-row mt-2 mt-md-4"
 }, [/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", {
   "class": "col-12"
@@ -22659,9 +22667,9 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
     onClick: _cache[18] || (_cache[18] = function ($event) {
       return _ctx.storage.auth = true;
     })
-  }, "Войти")])])], 64
+  }, "Войти")]), _hoisted_38])], 64
   /* STABLE_FRAGMENT */
-  )), _hoisted_38])])])])]);
+  )), _hoisted_39])])])])]);
 }
 
 /***/ }),
@@ -23276,17 +23284,27 @@ var _hoisted_4 = {
   "class": "col-12"
 };
 var _hoisted_5 = {
+  "class": "row justify-content-center mt-md-3"
+};
+var _hoisted_6 = {
+  "class": "col-12 col-md-6 col-lg-4 p-0"
+};
+var _hoisted_7 = {
+  "class": "form-group organization-date",
+  onselectstart: "return false;"
+};
+var _hoisted_8 = {
   key: 0,
   "class": "locked"
 };
 
-var _hoisted_6 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", {
+var _hoisted_9 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", {
   "class": "locked-icon"
 }, null, -1
 /* HOISTED */
 );
 
-var _hoisted_7 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", {
+var _hoisted_10 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", {
   "class": "locked-info"
 }, [/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", {
   "class": "locked-title"
@@ -23296,16 +23314,6 @@ var _hoisted_7 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("
 /* HOISTED */
 );
 
-var _hoisted_8 = {
-  "class": "row justify-content-center mt-md-3"
-};
-var _hoisted_9 = {
-  "class": "col-12 col-md-6 col-lg-4 p-0"
-};
-var _hoisted_10 = {
-  "class": "form-group organization-date",
-  onselectstart: "return false;"
-};
 var _hoisted_11 = {
   "class": "row justify-content-center mt-3"
 };
@@ -23387,9 +23395,7 @@ var _hoisted_30 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(
 function render(_ctx, _cache, $props, $setup, $data, $options) {
   var _component_Booking = (0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveComponent)("Booking");
 
-  return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)(vue__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, [$props.organization ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)("div", _hoisted_1, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_2, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_3, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_4, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", null, [!$data.isWorking ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)("div", _hoisted_5, [_hoisted_6, _hoisted_7])) : ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)(vue__WEBPACK_IMPORTED_MODULE_0__.Fragment, {
-    key: 1
-  }, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_8, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_9, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_10, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("a", {
+  return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)(vue__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, [$props.organization ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)("div", _hoisted_1, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_2, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_3, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_4, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", null, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_5, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_6, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_7, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("a", {
     "class": ["text-decoration-none cursor-pointer", {
       'organization-arr-btn': $data.date.before
     }],
@@ -23415,7 +23421,9 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
     })
   }, "›", 2
   /* CLASS */
-  )])])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_11, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", null, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_12, [((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)(vue__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.renderList)($data.sections || [], function (item, key) {
+  )])])]), !$data.isWorking ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)("div", _hoisted_8, [_hoisted_9, _hoisted_10])) : ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)(vue__WEBPACK_IMPORTED_MODULE_0__.Fragment, {
+    key: 1
+  }, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_11, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", null, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_12, [((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)(vue__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.renderList)($data.sections || [], function (item, key) {
     return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)("button", {
       type: "button",
       "class": ["btn organization-btn font-weight-bold mx-2", {
@@ -23463,14 +23471,13 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
   /* KEYED_FRAGMENT */
   ))], 64
   /* STABLE_FRAGMENT */
-  ))])])])])])) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true), $data.table ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)(_component_Booking, {
-    key: 1,
+  ))])])])])])) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_Booking, {
     organization: $props.organization,
     table: $data.table,
     date: $data.date
   }, null, 8
   /* PROPS */
-  , ["organization", "table", "date"])) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true)], 64
+  , ["organization", "table", "date"])], 64
   /* STABLE_FRAGMENT */
   );
 }
@@ -23612,6 +23619,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.esm-bundler.js");
 
 var _hoisted_1 = {
+  key: 0,
   "class": "modal fade",
   id: "booking_modal",
   tabindex: "-1",
@@ -23836,7 +23844,7 @@ var _hoisted_57 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createStaticV
 function render(_ctx, _cache, $props, $setup, $data, $options) {
   var _directive_maska = (0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveDirective)("maska");
 
-  return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)("div", _hoisted_1, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_2, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_3, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_4, [_hoisted_5, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_6, [_hoisted_7, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("h6", _hoisted_8, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($props.table.title), 1
+  return $props.table ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)("div", _hoisted_1, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_2, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_3, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_4, [_hoisted_5, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_6, [_hoisted_7, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("h6", _hoisted_8, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($props.table.title), 1
   /* TEXT */
   )]), $props.table.status === 'ENABLED' && ($props.table.bookingStatus === null || $props.table.bookingStatus.status === 'COMPLETED') ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)(vue__WEBPACK_IMPORTED_MODULE_0__.Fragment, {
     key: 0
@@ -24034,7 +24042,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
     key: 1
   }, [_hoisted_57], 64
   /* STABLE_FRAGMENT */
-  ))])])])]);
+  ))])])])])) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true);
 }
 
 /***/ }),
@@ -25186,7 +25194,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, ".spinner {\n  width: 25px;\n  height: 25px;\n  border: 4px transparent solid;\n  border-top: 4px #fff solid;\n  border-bottom: 4px #fff solid;\n  border-radius: 50%;\n  -webkit-animation: sp-anime 0.5s infinite linear;\n          animation: sp-anime 0.5s infinite linear;\n  margin: 0 auto 0 auto;\n}\n@-webkit-keyframes sp-anime {\n100% {\n    transform: rotate(360deg);\n}\n}\n@keyframes sp-anime {\n100% {\n    transform: rotate(360deg);\n}\n}\n.auth-error {\n  color: red;\n}\n.auth-phone {\n  padding-left: 34px !important;\n}\n.auth-phone-prefix {\n  position: absolute;\n  margin: 10px 0 0 18px;\n  font-size: 1rem;\n}\n.auth-txt {\n  font-size: 13px;\n}\n.auth-btn, .auth-register {\n  height: 44px;\n  background: #FF8008;\n  border-radius: 40px;\n}\n.auth-register {\n  background: #00a082;\n}\n.auth-input {\n  height: 44px;\n  border: 2px solid gainsboro;\n}\n.auth-title {\n  font-family: 'Lobster', cursive;\n}\n.auth-modal {\n  border-radius: 20px;\n}\n.auth-btn-close {\n  width: 40px;\n  height: 40px;\n  background: gainsboro;\n  outline: none;\n  border: none;\n  border-radius: 40px;\n  position: relative;\n  display: grid !important;\n}\n.auth-btn-close:before, .auth-btn-close:after {\n  content: '';\n  position: absolute;\n  width: 20px;\n  height: 1px;\n  background: #000;\n  top: 50%;\n  left: 50%;\n  transform: translate(-50%, -50%) rotate(45deg);\n}\n.auth-btn-close:after {\n  transform: translate(-50%, -50%) rotate(-45deg);\n}\n@media only screen and (max-width: 768px) {\n.auth-input {\n    font-size: 12px;\n    height: 36px;\n    border-radius: 36px;\n    background: #fff !important;\n    box-shadow: none !important;\n}\n.auth-phone {\n    padding-left: 30px !important;\n}\n.auth-phone-prefix {\n    margin: 9px 0 0 18px;\n    font-size: 12px;\n}\n.auth-title {\n    font-size: 16px;\n}\n.auth-description {\n    font-size: 13px;\n}\n.auth-error {\n    font-size: 13px;\n    margin-bottom: 10px;\n}\n.auth-row {\n    margin: 5px 0 5px 0;\n}\n.auth-btn, .auth-register {\n    font-size: 13px;\n    height: 36px;\n}\n.auth-footer-title {\n    font-size: 10px;\n}\n}\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, ".spinner {\n  width: 25px;\n  height: 25px;\n  border: 4px transparent solid;\n  border-top: 4px #fff solid;\n  border-bottom: 4px #fff solid;\n  border-radius: 50%;\n  -webkit-animation: sp-anime 0.5s infinite linear;\n          animation: sp-anime 0.5s infinite linear;\n  margin: 0 auto 0 auto;\n}\n@-webkit-keyframes sp-anime {\n100% {\n    transform: rotate(360deg);\n}\n}\n@keyframes sp-anime {\n100% {\n    transform: rotate(360deg);\n}\n}\n.auth-error {\n  color: red;\n}\n.auth-phone {\n  padding-left: 34px !important;\n}\n.auth-phone-prefix {\n  position: absolute;\n  margin: 10px 0 0 18px;\n  font-size: 1rem;\n}\n.auth-txt {\n  font-size: 13px;\n}\n.auth-btn, .auth-register {\n  height: 44px;\n  background: #FF8008;\n  border-radius: 40px;\n}\n.auth-register {\n  background: #00a082;\n}\n.auth-input {\n  height: 44px;\n  border: 2px solid gainsboro !important;\n  border-radius: 30px;\n  outline: none !important;\n  box-shadow: none !important;\n}\n.auth-title {\n  font-family: 'Lobster', cursive;\n}\n.auth-modal {\n  border-radius: 20px;\n}\n.auth-btn-close {\n  width: 40px;\n  height: 40px;\n  background: gainsboro;\n  outline: none;\n  border: none;\n  border-radius: 40px;\n  position: relative;\n  display: grid !important;\n}\n.auth-btn-close:before, .auth-btn-close:after {\n  content: '';\n  position: absolute;\n  width: 20px;\n  height: 1px;\n  background: #000;\n  top: 50%;\n  left: 50%;\n  transform: translate(-50%, -50%) rotate(45deg);\n}\n.auth-btn-close:after {\n  transform: translate(-50%, -50%) rotate(-45deg);\n}\n@media only screen and (max-width: 768px) {\n.auth-input {\n    font-size: 12px;\n    height: 36px;\n    border-radius: 36px;\n    background: #fff !important;\n    box-shadow: none !important;\n}\n.auth-phone {\n    padding-left: 30px !important;\n}\n.auth-phone-prefix {\n    margin: 9px 0 0 18px;\n    font-size: 12px;\n}\n.auth-title {\n    font-size: 16px;\n}\n.auth-description {\n    font-size: 13px;\n}\n.auth-error {\n    font-size: 13px;\n    margin-bottom: 10px;\n}\n.auth-row {\n    margin: 5px 0 5px 0;\n}\n.auth-btn, .auth-register {\n    font-size: 13px;\n    height: 36px;\n}\n.auth-footer-title {\n    font-size: 10px;\n}\n}\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 

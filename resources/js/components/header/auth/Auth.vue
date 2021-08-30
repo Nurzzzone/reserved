@@ -76,14 +76,17 @@
                                 <div class="col-12 mt-md-3 auth-row">
                                     <input type="password" class="form-control p-3 auth-input" v-model="register.password" placeholder="Пароль" ref="password_register" v-on:keyup.enter="register_btn">
                                 </div>
-                                <div class="col-12 mt-md-4 auth-row">
+                                <div class="col-12 mt-md-3 auth-row">
                                     <button class="btn btn-block auth-btn text-white" @click="register_btn">
                                         <div v-if="register.status">Регистрация</div>
                                         <div class="spinner" v-else></div>
                                     </button>
                                 </div>
-                                <div class="col-12 mt-md-4 auth-row">
+                                <div class="col-12 mt-md-3 auth-row">
                                     <button class="btn btn-block auth-register text-white" @click="storage.auth = true">Войти</button>
+                                </div>
+                                <div class="col-12 mt-md-3 auth-row">
+                                    <button class="btn btn-block text-secondary">Забыли пароль</button>
                                 </div>
                             </div>
                         </template>

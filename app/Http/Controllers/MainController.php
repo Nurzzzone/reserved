@@ -36,23 +36,16 @@ class MainController extends Controller
 
     public function dashboard() {
         if (!backpack_auth()->user()) {
-            redirect('/home/login');
+            return redirect('/admin/login');
         }
         $organization   =   $this->organizationService->getByUserId(backpack_auth()->user()->id);
         return view('backpack.dashboard.dashboard',['organization' => $organization]);
-        return view('vendor.backpack.base.dashboard',[
-            'userService'    =>  $this->userService,
-            'organizationService'   =>  $this->organizationService,
-            'organizationTableService'  =>  $this->organizationTableService,
-            'organizationTableListService'  =>  $this->organizationTableListService,
-            'bookingService'    =>  $this->bookingService
-        ]);
     }
 
     public function entity()
     {
         if (!backpack_auth()->user()) {
-            redirect('/home/login');
+            return redirect('/admin/login');
         }
         $organization   =   $this->organizationService->getByUserId(backpack_auth()->user()->id);
         return view('backpack.entity.entity',['id'=>$organization->id]);
@@ -61,7 +54,7 @@ class MainController extends Controller
     public function menus()
     {
         if (!backpack_auth()->user()) {
-            redirect('/home/login');
+            return redirect('/admin/login');
         }
         $organization   =   $this->organizationService->getByUserId(backpack_auth()->user()->id);
         return view('backpack.menus.menus',['id'=>$organization->id]);
@@ -70,7 +63,7 @@ class MainController extends Controller
     public function statistics()
     {
         if (!backpack_auth()->user()) {
-            redirect('/home/login');
+            return redirect('/admin/login');
         }
         $organization   =   $this->organizationService->getByUserId(backpack_auth()->user()->id);
         return view('backpack.statistics.statistics',['id'=>$organization->id]);
@@ -79,7 +72,7 @@ class MainController extends Controller
     public function photos()
     {
         if (!backpack_auth()->user()) {
-            redirect('/home/login');
+            return redirect('/admin/login');
         }
         $organization   =   $this->organizationService->getByUserId(backpack_auth()->user()->id);
         return view('backpack.photos.photos',['id'=>$organization->id]);
@@ -88,7 +81,7 @@ class MainController extends Controller
     public function room()
     {
         if (!backpack_auth()->user()) {
-            redirect('/home/login');
+            return redirect('/admin/login');
         }
         $organization   =   $this->organizationService->getByUserId(backpack_auth()->user()->id);
         return view('backpack.room.room',['id'=>$organization->id]);

@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Domain\Contracts\MainContract;
 use App\Domain\Contracts\UserContract;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -20,36 +21,41 @@ class User extends Authenticatable
 
     public function setPasswordAttribute($value)
     {
-        $this->attributes[UserContract::PASSWORD] = bcrypt($value);
+        $this->attributes[MainContract::PASSWORD] = bcrypt($value);
     }
 
-    public function getStatusAttribute($value)
+    public function setNameAttribute($value)
     {
-        return UserContract::TRANSLATE[$value];
+        $this->attributes[MainContract::NAME] = ucfirst(strtolower($value));
+    }
+
+    public function getStatusAttribute($value): string
+    {
+        return MainContract::TRANSLATE[$value];
     }
 
     public function getCreatedAtAttribute($value)
     {
-        return UserContract::dateCheck($value);
+        return MainContract::dateCheck($value);
     }
 
     public function getEmailVerifiedAtAttribute($value)
     {
-        return UserContract::verifiedCheck($value);
+        return MainContract::verifiedCheck($value);
     }
 
     public function getPhoneVerifiedAtAttribute($value)
     {
-        return UserContract::verifiedCheck($value);
+        return MainContract::verifiedCheck($value);
     }
 
     public function getRoleAttribute($value)
     {
-        return UserContract::getCheck($value);
+        return MainContract::getCheck($value);
     }
 
     public function getBlockedAttribute($value)
     {
-        return UserContract::getCheck($value);
+        return MainContract::getCheck($value);
     }
 }

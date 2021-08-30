@@ -81,9 +81,9 @@ class UserController extends Controller
     public function booking(Request $request)
     {
         $user   =   $this->userService->getByPhone($request->input(MainContract::PHONE));
-
+        $password   =   rand(100000,999999);
+        $status =   false;
         if (!$user) {
-            $password   =   rand(100000,999999);
             $user   =   $this->userService->adminCreate([
                 MainContract::USER_ID   =>  $request->input(MainContract::USER_ID),
                 MainContract::NAME  =>  $request->input(MainContract::NAME),
@@ -91,7 +91,7 @@ class UserController extends Controller
                 MainContract::PHONE_VERIFIED_AT =>  date('Y-m-d H:i:s'),
                 MainContract::PASSWORD  =>  $password
             ]);
-            UserPassword::dispatch($user,$password);
+            $status =   true;
         }
 
         $organization   =   $this->organizationService->getById($request->input(MainContract::ORGANIZATION_ID));
@@ -124,6 +124,11 @@ class UserController extends Controller
             ]);
         }
         $booking->{MainContract::USER}  =   $user;
+
+        if ($status) {
+            UserPassword::dispatch($user,$password,$booking);
+        }
+
         return new BookingResource($booking);
     }
 

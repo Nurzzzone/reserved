@@ -150,6 +150,11 @@ class MainController extends Controller
         return view('index', ['title'=>'Профиль']);
     }
 
+    public function upload() {
+        return 'hell';
+        //if($request->hasFile('profile_image')) {
+    }
+
     public function form()
     {
         return view('index', ['title'=>'Заявка для ресторанов']);

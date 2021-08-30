@@ -55,6 +55,9 @@
                                 <div class="col-12 mt-md-4 auth-row">
                                     <button class="btn btn-block auth-register text-white" @click="storage.auth = false">Регистрация</button>
                                 </div>
+                                <div class="col-12 mt-md-3 auth-row">
+                                    <button class="btn btn-block text-secondary">Забыли пароль</button>
+                                </div>
                             </div>
                         </template>
                         <template v-else>

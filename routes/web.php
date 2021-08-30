@@ -17,6 +17,7 @@ use App\Http\Controllers\Admin\UserCrudController;
 use App\Http\Controllers\Admin\OrganizationTablesCrudController;
 use App\Http\Controllers\Admin\OrganizationTableListCrudController;
 use App\Http\Controllers\Admin\BookingCrudController;
+use Illuminate\Support\Facades\Storage;
 
 header('Access-Control-Allow-Origin: *');
 header('Access-Control-Allow-Methods: POST, GET, OPTIONS, PUT, DELETE');
@@ -29,6 +30,28 @@ Route::get('/',function() {
 
 Route::prefix('form')->group(function() {
     Route::get('/',[MainController::class,'form'])->name('form');
+});
+
+Route::post('/file',function(Illuminate\Http\Request $request) {
+    if ($request->hasFile('profile_image')) {
+        Storage::disk('s3')->put('Hello.txt', 'Hello World!');
+        //Storage::disk('s3')->put('/pdf/filename', file_get_contents($request->file('profile_image')));
+        //$request->file('profile_image')->store('images','s3');
+        /*$filenamewithextension = $request->file('profile_image')->getClientOriginalName();
+
+        //get filename without extension
+        $filename = pathinfo($filenamewithextension, PATHINFO_FILENAME);
+
+        //get file extension
+        $extension = $request->file('profile_image')->getClientOriginalExtension();
+
+        //filename to store
+        $filenametostore = $filename.'_'.time().'.'.$extension;
+
+        //Upload File to s3
+        Storage::disk('s3')->put($filenametostore, fopen($request->file('profile_image'), 'r+'), 'public');*/
+    }
+    //return $filenametostore;
 });
 
 Route::prefix('profile')->group(function() {

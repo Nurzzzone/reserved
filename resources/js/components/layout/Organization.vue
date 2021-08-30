@@ -69,6 +69,7 @@ export default {
 </script>
 
 <style lang="scss">
+@media only screen and (max-width: 768px) {
     .list-group-flush>.list-group-item {
         padding: 10px;
     }
@@ -90,4 +91,5 @@ export default {
         font-size: 11px !important;
         height: 26px;
     }
+}
 </style>

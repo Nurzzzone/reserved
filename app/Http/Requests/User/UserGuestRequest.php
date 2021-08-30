@@ -2,34 +2,45 @@
 
 namespace App\Http\Requests\User;
 
+use App\Domain\Contracts\MainContract;
 use Illuminate\Contracts\Validation\Validator;
 use Illuminate\Foundation\Http\FormRequest;
 
-use App\Domain\Contracts\UserContract;
 use Illuminate\Http\Exceptions\HttpResponseException;
 
 use App\Helpers\Random\Random;
+use Illuminate\Validation\ValidationException;
 
 class UserGuestRequest extends FormRequest
 {
 
-    public function authorize()
+    public function authorize(): bool
     {
         return true;
     }
 
-    public function rules()
+    public function rules(): array
     {
         return [
-            UserContract::NAME  =>  'required|min:2|max:255',
-            UserContract::PHONE =>  'required|max:255',
+            MainContract::NAME  =>  'required|min:2|max:255',
+            MainContract::PHONE =>  'required|max:255',
         ];
     }
 
+    public function messages(): array
+    {
+        return [
+            MainContract::NAME.'.min'  =>  'Укажите ваше имя',
+        ];
+    }
+
+    /**
+     * @throws ValidationException
+     */
     public function validated(): array
     {
         $request    =   $this->validator->validated();
-        $request[UserContract::PASSWORD]    =   Random::generate(8);
+        $request[MainContract::PASSWORD]    =   Random::generate(8);
         return $request;
     }
 

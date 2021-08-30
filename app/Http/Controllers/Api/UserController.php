@@ -206,7 +206,10 @@ class UserController extends Controller
         return response(['message'  =>  'incorrect phone or password'],401);
     }
 
-    public function register(UserCreateRequest $request)
+    /**
+     * @throws ValidationException
+     */
+    public function register(UserCreateRequest $request): UserResource
     {
         $user   =   $this->userService->create($request->validated());
         $this->smsService->sendCode($user->phone,$user->code);

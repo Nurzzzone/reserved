@@ -2,31 +2,34 @@
 
 namespace App\Http\Requests\User;
 
-use App\Domain\Contracts\UserContract;
+use App\Domain\Contracts\MainContract;
 use Illuminate\Contracts\Validation\Validator;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Http\Exceptions\HttpResponseException;
+use Illuminate\Validation\ValidationException;
 
 class UserPasswordRequest extends FormRequest
 {
 
-    public function authorize()
+    public function authorize(): bool
     {
         return true;
     }
 
-    public function rules()
+    public function rules(): array
     {
         return [
-            UserContract::NEW   =>  'required',
-            UserContract::OLD   =>  'required',
+            MainContract::NEW   =>  'required',
+            MainContract::OLD   =>  'required',
         ];
     }
 
+    /**
+     * @throws ValidationException
+     */
     public function validated(): array
     {
-        $request    =   $this->validator->validated();
-        return $request;
+        return $this->validator->validated();
     }
 
     protected function failedValidation(Validator $validator)

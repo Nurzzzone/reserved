@@ -2,6 +2,7 @@
 
 namespace App\Http\Requests\User;
 
+use App\Domain\Contracts\MainContract;
 use App\Domain\Contracts\UserContract;
 use Illuminate\Contracts\Validation\Validator;
 use Illuminate\Foundation\Http\FormRequest;
@@ -11,19 +12,27 @@ use Illuminate\Validation\ValidationException;
 class UserUpdateRequest extends FormRequest
 {
 
-    public function authorize()
+    public function authorize(): bool
     {
         return true;
     }
 
-    public function rules()
+    public function rules(): array
     {
         return [
-            UserContract::NAME  =>  'nullable|min:2|max:255',
-            UserContract::EMAIL =>  'nullable|unique:'.UserContract::TABLE.','.UserContract::EMAIL.','.$this->id,
-            UserContract::LANGUAGE_ID   =>  'nullable|exists:languages,id',
-            UserContract::EMAIL_NOTIFICATION    =>  'nullable',
-            UserContract::PUSH_NOTIFICATION     =>  'nullable',
+            MainContract::NAME  =>  'nullable|min:2|max:255',
+            MainContract::EMAIL =>  'nullable|unique:'.UserContract::TABLE.','.MainContract::EMAIL.','.$this->id,
+            MainContract::LANGUAGE_ID   =>  'nullable|exists:languages,id',
+            MainContract::EMAIL_NOTIFICATION    =>  'nullable',
+            MainContract::PUSH_NOTIFICATION     =>  'nullable',
+        ];
+    }
+
+    public function messages(): array
+    {
+        return [
+            MainContract::NAME.'.min'  =>  'Укажите ваше имя',
+            MainContract::EMAIL.'.unique'   =>  'Эл.почта уже занят другим пользователям',
         ];
     }
 

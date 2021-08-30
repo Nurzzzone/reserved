@@ -2,11 +2,11 @@
 
 namespace App\Http\Requests\User;
 
+use App\Domain\Contracts\MainContract;
 use Illuminate\Contracts\Validation\Validator;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Http\Exceptions\HttpResponseException;
 
-use App\Domain\Contracts\UserContract;
 use Illuminate\Validation\ValidationException;
 
 class UserCreateRequest extends FormRequest
@@ -20,9 +20,18 @@ class UserCreateRequest extends FormRequest
     public function rules(): array
     {
         return [
-            UserContract::NAME  =>  'required|min:2|max:255',
-            UserContract::PHONE =>  'required|max:255|unique:users,phone',
-            UserContract::PASSWORD  =>  'required|min:8',
+            MainContract::NAME  =>  'required|min:2|max:255',
+            MainContract::PHONE =>  'required|max:255|unique:users,phone',
+            MainContract::PASSWORD  =>  'required|min:8',
+        ];
+    }
+
+    public function messages(): array
+    {
+        return [
+            MainContract::NAME.'.min'  =>  'Укажите ваше имя',
+            MainContract::PHONE.'.unique'   =>  'Номер уже зарегистрирован',
+            MainContract::PASSWORD.'.min'   =>  'Минимальное количество символов 8'
         ];
     }
 

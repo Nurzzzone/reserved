@@ -70,13 +70,19 @@ export default {
 
 <style lang="scss">
     .list-group-flush>.list-group-item {
-        border-width: 0 0 1px;
         padding: 10px;
     }
     .organization {
         &-item {
             &-detail {
-
+                & > div {
+                    font-size: 9px !important;
+                }
+                & > .text-font {
+                    text-overflow: ellipsis;
+                    overflow: hidden;
+                    white-space: nowrap;
+                }
             }
         }
     }

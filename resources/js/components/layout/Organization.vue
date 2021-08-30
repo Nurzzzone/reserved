@@ -86,4 +86,8 @@ export default {
             }
         }
     }
+    .item-title {
+        font-size: 11px !important;
+        height: 26px;
+    }
 </style>

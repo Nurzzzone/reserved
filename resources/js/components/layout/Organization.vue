@@ -26,7 +26,7 @@
                                 </a>
                                 <p class="item-description text-secondary mx-3 my-0" v-if="organization.description">{{organization.description}}</p>
                             </li>
-                            <li class="list-group-item text-center bg-light">
+                            <li class="list-group-item text-center bg-light organization-item-detail">
                                 <div class="h6 text-secondary text-font" v-if="organization.timeTitle">{{organization.timeTitle}}</div>
                                 <div class="text-center mb-0 mt-2 h6 text-secondary text-font">{{organization.address}}</div>
                             </li>
@@ -69,5 +69,15 @@ export default {
 </script>
 
 <style lang="scss">
+    .list-group-flush>.list-group-item {
+        border-width: 0 0 1px;
+        padding: 10px;
+    }
+    .organization {
+        &-item {
+            &-detail {
 
+            }
+        }
+    }
 </style>

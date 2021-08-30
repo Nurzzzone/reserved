@@ -161,7 +161,7 @@ return [
         Illuminate\Translation\TranslationServiceProvider::class,
         Illuminate\Validation\ValidationServiceProvider::class,
         Illuminate\View\ViewServiceProvider::class,
-
+        Aws\Laravel\AwsServiceProvider::class,
         /*
          * Package Service Providers...
          */
@@ -199,7 +199,6 @@ return [
         App\Providers\Repositories\OrganizationRequestRepositoryProvider::class,
         App\Providers\Repositories\OrganizationImageRepositoryProvider::class,
         App\Providers\Repositories\WebTrafficRepositoryProvider::class,
-
     ],
 
     /*
@@ -253,6 +252,7 @@ return [
         'Validator' => Illuminate\Support\Facades\Validator::class,
         'View' => Illuminate\Support\Facades\View::class,
         'Curl'  =>  App\Helpers\Curl\Curl::class,
+        'AWS' => Aws\Laravel\AwsFacade::class,
     ],
 
 ];

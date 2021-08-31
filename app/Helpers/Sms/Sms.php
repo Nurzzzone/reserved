@@ -30,7 +30,7 @@ class Sms
         $user   =   $this->userService->getById($booking->{MainContract::USER_ID});
         $this->curl->get($this->url.'?'.$this->parameters([
             'phones'    =>  $user->{MainContract::PHONE},
-            'mes'       =>  'Здравствуйте '.$user->{MainContract::NAME}.', вам забронирован столик в '.$booking->organization->{MainContract::TITLE}.' на '.$booking->{MainContract::TIME}.'. c уважением reserved-app'
+            'mes'       =>  'Здравствуйте '.$user->{MainContract::NAME}.', вам забронирован столик в '.$booking->organization->{MainContract::TITLE}.' на '.$booking->{MainContract::TIME}.'. c уважением reserved-app.kz'
         ]));
     }
 

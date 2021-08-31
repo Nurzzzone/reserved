@@ -229,11 +229,11 @@ class Organization extends Model
         if (Str::startsWith($value, 'data:image')) {
             $image      =   Image::make($value)->encode('jpg', 100);
             $filename   =   md5($value.time()).'.jpg';
-            //https://reserved-app-image.s3.eu-central-1.amazonaws.com/
+            /*//https://reserved-app-image.s3.eu-central-1.amazonaws.com/
             Storage::disk('s3')->put('Hello.txt', 'Hello World!');
             Storage::disk('s3')->put('/'.$filename, $image->stream()->__toString());
             echo Storage::disk('s3')->url($filename);;
-            exit();
+            exit();*/
             Storage::disk($disk)->put($destination_path.'/'.$filename, $image->stream());
             Storage::disk($disk)->delete($this->{MainContract::IMAGE});
             $public_destination_path = Str::replaceFirst('public/', '', $destination_path);

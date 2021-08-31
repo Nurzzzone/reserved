@@ -6,6 +6,7 @@ use App\Domain\Contracts\UserContract;
 use App\Events\BookingNotification;
 use App\Events\BookingOrganizationNotification;
 use App\Jobs\TelegramNotification;
+use App\Jobs\BookingNewNotification;
 use App\Domain\Contracts\MainContract;
 use App\Domain\Contracts\BookingContract;
 use App\Helpers\Time\Time;
@@ -35,6 +36,7 @@ class BookingRepositoryEloquent implements BookingRepositoryInterface
         $booking    =   Booking::create($data);
         if ($booking->{MainContract::STATUS} == MainContract::ON) {
             TelegramNotification::dispatch($booking);
+            BookingNewNotification::dispatch($booking);
         }
         if ($booking->{MainContract::STATUS} != MainContract::OFF) {
             $booking    =   $this->getById($booking->id);
@@ -74,6 +76,7 @@ class BookingRepositoryEloquent implements BookingRepositoryInterface
         $booking    =   $this->getById($id);
         if (array_key_exists(MainContract::STATUS,$data) && $data[MainContract::STATUS] === MainContract::ON) {
             TelegramNotification::dispatch($booking);
+            BookingNewNotification::dispatch($booking);
         }
         event(new BookingNotification($booking));
         event(new BookingOrganizationNotification($booking));

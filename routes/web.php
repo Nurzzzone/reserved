@@ -34,6 +34,7 @@ Route::prefix('form')->group(function() {
 
 Route::post('/file',function(Illuminate\Http\Request $request) {
     if ($request->hasFile('profile_image')) {
+        //$request->file('profile_image')->store('/','s3');;
         Storage::disk('s3')->put('Hello.txt', 'Hello World!');
         //Storage::disk('s3')->put('/pdf/filename', file_get_contents($request->file('profile_image')));
         //$request->file('profile_image')->store('images','s3');

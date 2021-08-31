@@ -7,6 +7,7 @@ use App\Domain\Contracts\MainContract;
 use App\Domain\Contracts\UserContract;
 use App\Models\User;
 use App\Helpers\Curl\Curl;
+use App\Services\User\UserService;
 use Illuminate\Support\Facades\Log;
 
 class Sms
@@ -16,10 +17,21 @@ class Sms
     protected $password =   'ygABGazD55XJ4NcesmBo';
     protected $url      =   'https://smsc.kz/sys/send.php';
     protected $curl;
+    protected $userService;
 
-    public function __construct(Curl $curl)
+    public function __construct(Curl $curl, UserService $userService)
     {
         $this->curl =   $curl;
+        $this->userService  =   $userService;
+    }
+
+    public function booking($booking)
+    {
+        $user   =   $this->userService->getById($booking->{MainContract::USER_ID});
+        $this->curl->get($this->url.'?'.$this->parameters([
+            'phones'    =>  $user->{MainContract::PHONE},
+            'mes'       =>  'Здравствуйте '.$user->{MainContract::NAME}.', вам забронирован столик в '.$booking->organization->{MainContract::TITLE}.' на '.$booking->{MainContract::TIME}.'. c уважением reserved-app'
+        ]));
     }
 
     public function code(User $user):void
